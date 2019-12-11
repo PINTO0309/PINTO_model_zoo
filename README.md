@@ -55,7 +55,7 @@ networks_map = {
     'nas_hnasnet': nas_network.hnasnet,
 }
 ```
-### 2-1. mobilenet_v3_small_seg
+### 2-1. "mobilenet_v3_small_seg" Float32 regular training
 ```bash
 $ python3 deeplab/train.py \
     --logtostderr \
