@@ -74,6 +74,25 @@ $ python3 deeplab/train.py \
     --dataset_dir=${PATH_TO_DATASET}
 ```
 
+### 2-2. "mobilenet_v3_large_seg" Float32 regular training
+```bash
+$ python3 deeplab/train.py \
+    --logtostderr \
+    --training_number_of_steps=500000 \
+    --train_split="train" \
+    --model_variant="mobilenet_v3_large_seg" \
+    --decoder_output_stride=16 \
+    --train_crop_size="513,513" \
+    --train_batch_size=8 \
+    --dataset="pascal_voc_seg" \
+    --save_interval_secs=300 \
+    --save_summaries_secs=300 \
+    --save_summaries_images=True \
+    --log_steps=100 \
+    --train_logdir=${PATH_TO_TRAIN_DIR} \
+    --dataset_dir=${PATH_TO_DATASET}
+```
+
 ## 3. Visualize training status
 ```bash
 $ tensorboard --logdir ${HOME}/deeplab/models/research/deeplab/datasets/pascal_voc_seg/exp/train_on_train_set/train
