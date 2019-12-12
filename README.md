@@ -78,7 +78,7 @@ $ python3 deeplab/train.py \
 ```bash
 $ python3 deeplab/train.py \
     --logtostderr \
-    --training_number_of_steps=500000 \
+    --training_number_of_steps=1000000 \
     --train_split="train" \
     --model_variant="mobilenet_v3_large_seg" \
     --decoder_output_stride=16 \
