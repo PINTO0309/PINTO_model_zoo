@@ -62,7 +62,7 @@ $ python3 deeplab/train.py \
     --training_number_of_steps=500000 \
     --train_split="train" \
     --model_variant="mobilenet_v3_small_seg" \
-    --decoder_output_stride=8 \
+    --decoder_output_stride=16 \
     --train_crop_size="513,513" \
     --train_batch_size=8 \
     --dataset="pascal_voc_seg" \
