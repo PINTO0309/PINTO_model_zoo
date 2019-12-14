@@ -100,5 +100,6 @@ $ tensorboard --logdir ${HOME}/deeplab/models/research/deeplab/datasets/pascal_v
 
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
-2. **[Running DeepLab on PASCAL VOC 2012 Semantic Segmentation Dataset](https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/pascal.md)**  
-3. **[Quantize DeepLab model for faster on-device inference](https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/quantize.md)**  
+2. **[[deeplab] Training deeplab model with ADE20K dataset](https://github.com/tensorflow/models/issues/3730)**  
+3. **[Running DeepLab on PASCAL VOC 2012 Semantic Segmentation Dataset](https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/pascal.md)**  
+4. **[Quantize DeepLab model for faster on-device inference](https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/quantize.md)**  
