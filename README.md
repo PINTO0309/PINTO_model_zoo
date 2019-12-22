@@ -161,6 +161,7 @@ $ cp deeplab_mnv3_large_cityscapes_trainfine/frozen_inference_graph.pb deeplab_m
 
 $ sed -i -e "s/tf.placeholder(tf.uint8, \[1, None, None, 3\], name=_INPUT_NAME)/tf.placeholder(tf.float32, \[1, 769, 769, 3\], name=_INPUT_NAME)/g" deeplab/export_model.py
 ```
+#### 2-2-2. Parameter sheet
 ```bash
 # crop_size and image_pooling_crop_size are multiples of --decoder_output_stride + 1
 # 769 = 8 * 96 + 1
@@ -239,6 +240,7 @@ networks_map = {
     'nas_hnasnet': nas_network.hnasnet,
 }
 ```
+#### 2-2-3. "mobilenet_v3_small_seg" Export Model
 ```bash
 $ python3 deeplab/export_model.py \
     --checkpoint_path=./deeplab_mnv3_small_cityscapes_trainfine/model.ckpt \
@@ -259,6 +261,7 @@ $ python3 deeplab/export_model.py \
     --image_pyramid=1 \
     --decoder_output_stride=8
 ```
+#### 2-2-4. "mobilenet_v3_large_seg" Export Model
 ```bash
 $ python3 deeplab/export_model.py \
     --checkpoint_path=./deeplab_mnv3_large_cityscapes_trainfine/model.ckpt \
@@ -281,6 +284,14 @@ $ python3 deeplab/export_model.py \
 ```
 ![001](99_media/001.png)  
 ![002](99_media/002.png)  
+
+#### 2-2-5. Google Colaboratory - Post-training quantization - post_training_integer_quant.ipynb
+- Weight Quantization
+- Integer Quantization
+- Full Integer QUantization  
+
+https://colab.research.google.com/drive/1TtCJ-uMNTArpZxrf5DCNbZdn08DsiW8F  
+
 
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
