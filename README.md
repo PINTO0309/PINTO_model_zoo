@@ -419,12 +419,15 @@ The blue line is "deeplab_mnv3_large_cityscapes_trainfine" loss.
 $ sudo apt-get install python-future
 $ git clone -b v1.15.0 --depth 1 https://github.com/tensorflow/tensorflow.git
 $ cd tensorflow
+
 $ bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model -- \
   --graph=${HOME}/Downloads/deeplab_mnv3_small_weight_quant_769.tflite \
   --num_threads=4 \
   --warmup_runs=1 \
   --enable_op_profiling=true
 ```
+
+<details><summary>deeplab_mnv3_small_weight_quant_769.tflite Benchmark</summary><div>
 
 ```console
 Min num runs: [50]
@@ -669,6 +672,8 @@ Timings (microseconds): count=52 first=224 curr=1869070 min=224 max=2089397 avg=
 Memory (bytes): count=0
 171 nodes observed
 ```
+
+</div></details>
 
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
