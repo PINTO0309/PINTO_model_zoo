@@ -692,3 +692,4 @@ Memory (bytes): count=0
 18. **[TensorFlow で学習したモデルのグラフを `tf.train.import_meta_graph` でロードする](https://qiita.com/cfiken/items/bcdd7eb945c5c3b2bb5f)**
 19. **[Tensorflowのグラフ操作 Part1](http://docs.fabo.io/tensorflow/building_graph/tensorflow_graph_part1.html)**
 20. **[Configure input_map when importing a tensorflow model from metagraph file](https://stackoverflow.com/questions/42306484/configure-input-map-when-importing-a-tensorflow-model-from-metagraph-file)**
+21. **[TFLite Model Benchmark Tool](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)**
