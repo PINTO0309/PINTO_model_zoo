@@ -133,7 +133,6 @@ $ wget --load-cookies cookies.txt \
   --content-disposition https://www.cityscapes-dataset.com/file-handling/?packageID=1
 $ wget --load-cookies cookies.txt \
   --content-disposition https://www.cityscapes-dataset.com/file-handling/?packageID=3
-
 $ unzip gtFine_trainvaltest.zip && rm gtFine_trainvaltest.zip
 $ rm README && rm license.txt
 $ unzip leftImg8bit_trainvaltest.zip && rm leftImg8bit_trainvaltest.zip
@@ -278,6 +277,7 @@ networks_map = {
 }
 ```
 #### 2-2-3. "mobilenet_v3_small_seg" Export Model
+Generate Freeze Graph (.pb) with INPUT Placeholder changed from checkpoint file (.ckpt).
 ```bash
 $ python3 deeplab/export_model.py \
     --checkpoint_path=./deeplab_mnv3_small_cityscapes_trainfine/model.ckpt \
@@ -299,6 +299,7 @@ $ python3 deeplab/export_model.py \
     --decoder_output_stride=8
 ```
 #### 2-2-4. "mobilenet_v3_large_seg" Export Model
+Generate Freeze Graph (.pb) with INPUT Placeholder changed from checkpoint file (.ckpt).
 ```bash
 $ python3 deeplab/export_model.py \
     --checkpoint_path=./deeplab_mnv3_large_cityscapes_trainfine/model.ckpt \
