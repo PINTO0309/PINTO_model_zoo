@@ -436,7 +436,7 @@ Benchmark name: []
 Output prefix: []
 Min warmup runs: [1]
 Min warmup runs duration (seconds): [0.5]
-Graph: [/home/b920405/Downloads/deeplab_mnv3_small_weight_quant_769.tflite]
+Graph: [${HOME}/Downloads/deeplab_mnv3_small_weight_quant_769.tflite]
 Input layers: []
 Input shapes: []
 Input value ranges: []
@@ -445,7 +445,7 @@ Allow fp16 : [0]
 Require full delegation : [0]
 Enable op profiling: [1]
 Max profiling buffer entries: [1024]
-Loaded model /home/b920405/Downloads/deeplab_mnv3_small_weight_quant_769.tflite
+Loaded model ${HOME}/Downloads/deeplab_mnv3_small_weight_quant_769.tflite
 resolved reporter
 Initialized session in 0.656ms
 [Init Phase] - Memory usage: max resident set size = 0 MB, total malloc-ed size = 0.210434 MB
