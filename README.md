@@ -384,7 +384,7 @@ $ python3 deeplab/train.py \
     --logtostderr \
     --training_number_of_steps=4350 \
     --train_split="train" \
-    --model_variant="mobilenet_v3_small_seg" \
+    --model_variant="mobilenet_v3_large_seg" \
     --train_crop_size="769,769" \
     --train_batch_size=8 \
     --dataset="cityscapes" \
