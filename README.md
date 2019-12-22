@@ -279,7 +279,8 @@ $ python3 deeplab/export_model.py \
     --image_pyramid=1 \
     --decoder_output_stride=8
 ```
-
+![001](99_media/001.png)  
+![002](99_media/002.png)  
 
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
