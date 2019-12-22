@@ -108,7 +108,7 @@ $ tensorboard \
 ```
 　  
 　  
-### 2-2. MobileNetV3+DeeplabV3+Cityscaps
+### 2-2. MobileNetV3+DeeplabV3+Cityscaps - Post-training quantization
 #### 2-2-1. Preparation
 ```bash
 $ cd ~
@@ -331,6 +331,83 @@ If you follow the Google Colaboratory sample procedure, copy the "deeplab_mnv3_s
 
 https://colab.research.google.com/drive/1TtCJ-uMNTArpZxrf5DCNbZdn08DsiW8F  
 
+### 2-3. MobileNetV3+DeeplabV3+Cityscaps - Quantization-aware training
+#### 2-3-1. "mobilenet_v3_small_seg" Quantization-aware training
+```bash
+$ cd ${HOME}/git/deeplab/models/research
+$ export PATH_TO_TRAINED_FLOAT_MODEL=${HOME}/git/deeplab/models/research/deeplab_mnv3_small_cityscapes_trainfine/model.ckpt
+$ export PATH_TO_TRAIN_DIR=${HOME}/git/deeplab/models/research/deeplab/datasets/cityscapes/exp/train_on_train_set/train
+$ export PATH_TO_DATASET=${HOME}/git/deeplab/models/research/deeplab/datasets/cityscapes/tfrecord
+
+# deeplab_mnv3_small_cityscapes_trainfine
+$ python3 deeplab/train.py \
+    --logtostderr \
+    --training_number_of_steps=5000 \
+    --train_split="train" \
+    --model_variant="mobilenet_v3_small_seg" \
+    --train_crop_size="769,769" \
+    --train_batch_size=8 \
+    --dataset="cityscapes" \
+    --initialize_last_layer=False \
+    --base_learning_rate=3e-5 \
+    --quantize_delay_step=0 \
+    --image_pooling_crop_size="769,769" \
+    --image_pooling_stride=4,5 \
+    --aspp_convs_filters=128 \
+    --aspp_with_concat_projection=0 \
+    --aspp_with_squeeze_and_excitation=1 \
+    --decoder_use_sum_merge=1 \
+    --decoder_filters=19 \
+    --decoder_output_is_logits=1 \
+    --image_se_uses_qsigmoid=1 \
+    --image_pyramid=1 \
+    --decoder_output_stride=8 \
+    --save_interval_secs=300 \
+    --save_summaries_secs=300 \
+    --save_summaries_images=True \
+    --log_steps=100 \
+    --tf_initial_checkpoint=${PATH_TO_TRAINED_FLOAT_MODEL} \
+    --train_logdir=${PATH_TO_TRAIN_DIR} \
+    --dataset_dir=${PATH_TO_DATASET}
+```
+#### 2-3-2. "mobilenet_v3_large_seg" Quantization-aware training
+```bash
+$ cd ${HOME}/git/deeplab/models/research
+$ export PATH_TO_TRAINED_FLOAT_MODEL=${HOME}/git/deeplab/models/research/deeplab_mnv3_large_cityscapes_trainfine/model.ckpt
+$ export PATH_TO_TRAIN_DIR=${HOME}/git/deeplab/models/research/deeplab/datasets/cityscapes/exp/train_on_train_set/train
+$ export PATH_TO_DATASET=${HOME}/git/deeplab/models/research/deeplab/datasets/cityscapes/tfrecord
+
+# deeplab_mnv3_large_cityscapes_trainfine
+$ python3 deeplab/train.py \
+    --logtostderr \
+    --training_number_of_steps=4350 \
+    --train_split="train" \
+    --model_variant="mobilenet_v3_small_seg" \
+    --train_crop_size="769,769" \
+    --train_batch_size=8 \
+    --dataset="cityscapes" \
+    --initialize_last_layer=False \
+    --base_learning_rate=3e-5 \
+    --quantize_delay_step=0 \
+    --image_pooling_crop_size="769,769" \
+    --image_pooling_stride=4,5 \
+    --aspp_convs_filters=128 \
+    --aspp_with_concat_projection=0 \
+    --aspp_with_squeeze_and_excitation=1 \
+    --decoder_use_sum_merge=1 \
+    --decoder_filters=19 \
+    --decoder_output_is_logits=1 \
+    --image_se_uses_qsigmoid=1 \
+    --image_pyramid=1 \
+    --decoder_output_stride=8 \
+    --save_interval_secs=300 \
+    --save_summaries_secs=300 \
+    --save_summaries_images=True \
+    --log_steps=100 \
+    --tf_initial_checkpoint=${PATH_TO_TRAINED_FLOAT_MODEL} \
+    --train_logdir=${PATH_TO_TRAIN_DIR} \
+    --dataset_dir=${PATH_TO_DATASET}
+```
 
 ## 3. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
