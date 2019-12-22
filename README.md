@@ -417,6 +417,23 @@ The blue line is "deeplab_mnv3_large_cityscapes_trainfine" loss.
 ## 3. TFLite Model Benchmark
 ```bash
 $ sudo apt-get install python-future
+
+## Bazel for Ubuntu18.04 install
+$ wget https://github.com/PINTO0309/Bazel_bin/raw/master/0.29.1/Ubuntu1804_x86-64/openjdk-8-jdk/install.sh
+$ ./install.sh
+$ sudo apt-get install -y openjdk-8-jdk
+
+## Bazel for RaspberryPi3/4 Raspbian Buster install
+$ wget https://github.com/PINTO0309/Bazel_bin/raw/master/0.29.1/Raspbian_Debian_Buster_armhf/openjdk-8-jdk/install.sh
+$ ./install.sh
+$ curl -sc /tmp/cookie \
+  "https://drive.google.com/uc?export=download&id=1LQUSal55R6fmawZS9zZuk6-5ZFOdUqRK" > /dev/null
+$ CODE="$(awk '/_warning_/ {print $NF}' /tmp/cookie)"
+$ curl -Lb /tmp/cookie \
+  "https://drive.google.com/uc?export=download&confirm=${CODE}&id=1LQUSal55R6fmawZS9zZuk6-5ZFOdUqRK" \
+  -o adoptopenjdk-8-hotspot_8u222-b10-2_armhf.deb
+$ sudo apt-get install -y ./adoptopenjdk-8-hotspot_8u222-b10-2_armhf.deb
+
 $ git clone -b v1.15.0 --depth 1 https://github.com/tensorflow/tensorflow.git
 $ cd tensorflow
 
