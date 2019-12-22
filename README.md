@@ -10,7 +10,7 @@
 
 ## 2. Procedure
 ### 2-1. MobileNetV3+DeeplabV3+PascalVOC
-### 2-1-1. Preparation
+#### 2-1-1. Preparation
 ```bash
 $ cd ~
 $ mkdir deeplab;cd deeplab
@@ -59,7 +59,7 @@ networks_map = {
     'nas_hnasnet': nas_network.hnasnet,
 }
 ```
-### 2-1-2. "mobilenet_v3_small_seg" Float32 regular training
+#### 2-1-2. "mobilenet_v3_small_seg" Float32 regular training
 ```bash
 $ python3 deeplab/train.py \
     --logtostderr \
@@ -78,7 +78,7 @@ $ python3 deeplab/train.py \
     --dataset_dir=${PATH_TO_DATASET}
 ```
 
-### 2-1-3. "mobilenet_v3_large_seg" Float32 regular training
+#### 2-1-3. "mobilenet_v3_large_seg" Float32 regular training
 ```bash
 $ python3 deeplab/train.py \
     --logtostderr \
@@ -97,10 +97,16 @@ $ python3 deeplab/train.py \
     --dataset_dir=${PATH_TO_DATASET}
 ```
 
-### 2-1-4. Visualize training status
+#### 2-1-4. Visualize training status
 ```bash
 $ tensorboard --logdir ${HOME}/deeplab/models/research/deeplab/datasets/pascal_voc_seg/exp/train_on_train_set/train
 ```
+
+### 2-2. MobileNetV3+DeeplabV3+Cityscaps
+#### 2-2-1. Preparation
+
+
+
 
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
