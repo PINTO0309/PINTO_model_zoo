@@ -320,7 +320,7 @@ $ python3 deeplab/export_model.py \
     --image_pyramid=1 \
     --decoder_output_stride=8
 ```
-If you follow the Google Colaboratory sample procedure, copy the "deeplab_mnv3_small_cityscapes_trainfine" folder and "deeplab_mnv3_large_cityscapes_trainfine" to your Google Drive "My Drive".
+If you follow the Google Colaboratory sample procedure, copy the "deeplab_mnv3_small_cityscapes_trainfine" folder and "deeplab_mnv3_large_cityscapes_trainfine" to your Google Drive "My Drive". It is not necessary if all procedures described in Google Colaboratory are performed in a PC environment.
 ![001](99_media/001.png)  
 ![002](99_media/002.png)  
 
