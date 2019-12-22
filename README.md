@@ -117,11 +117,13 @@ $ git clone --depth 1 https://github.com/tensorflow/models.git
 $ cd models/research/deeplab/datasets
 $ mkdir cityscapes && cd cityscapes
 
+# Clone the script to generate Cityscapes Dataset.
 $ git clone --depth 1 https://github.com/mcordts/cityscapesScripts.git
 $ mv cityscapesScripts cityscapesScripts_ && \
   mv cityscapesScripts_/cityscapesscripts . && \
   rm -rf cityscapesScripts_
 
+# Download Cityscapes Dataset.
 # https://www.cityscapes-dataset.com/
 # You will need to sign up and issue a userID and password to download the data set.
 $ wget --keep-session-cookies --save-cookies=cookies.txt \
@@ -137,16 +139,20 @@ $ rm README && rm license.txt
 $ unzip leftImg8bit_trainvaltest.zip && rm leftImg8bit_trainvaltest.zip
 $ rm README && rm license.txt
 
+# Convert Cityscapes Dataset to TFRecords format.
 $ cd ..
 $ sed -i -e "s/python/python3/g" convert_cityscapes.sh
 $ export PYTHONPATH=${HOME}/git/deeplab/models/research/deeplab/datasets/cityscapes:${PYTHONPATH}
 $ sh convert_cityscapes.sh
 
+# Create a checkpoint storage folder for training. If training is not required,
+# there is no need to carry out.
 $ cd ../..
 $ mkdir -p deeplab/datasets/cityscapes/exp/train_on_train_set/train && \
   mkdir -p deeplab/datasets/cityscapes/exp/train_on_train_set/eval && \
   mkdir -p deeplab/datasets/cityscapes/exp/train_on_train_set/vis
 
+# Download the DeepLabV3 trained model of the MobileNetV3 backbone.
 $ curl -sc /tmp/cookie \
   "https://drive.google.com/uc?export=download&id=1f5ccaJmJBYwBmHvRQ77yGIUcXnqQIRY_" > /dev/null
 $ CODE="$(awk '/_warning_/ {print $NF}' /tmp/cookie)"
@@ -169,10 +175,12 @@ $ export PATH_TO_INITIAL_CHECKPOINT=${HOME}/git/deeplab/models/research/deeplab_
 $ export PATH_TO_DATASET=${HOME}/git/deeplab/models/research/deeplab/datasets/cityscapes/tfrecord
 $ export PYTHONPATH=${HOME}/git/deeplab/models/research:${HOME}/git/deeplab/models/research/deeplab:${HOME}/git/deeplab/models/research/slim:${PYTHONPATH}
 
+# Fix a bug in the data generator.
 $ sed -i -e \
   "s/splits_to_sizes={'train_fine': 2975,/splits_to_sizes={'train': 2975,/g" \
   deeplab/datasets/data_generator.py
 
+# Back up the trained model.
 $ cd ${HOME}/git/deeplab/models/research
 $ cp deeplab/export_model.py deeplab/export_model.py_org
 $ cp deeplab_mnv3_small_cityscapes_trainfine/frozen_inference_graph.pb \
