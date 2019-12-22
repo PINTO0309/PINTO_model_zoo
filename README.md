@@ -169,7 +169,8 @@ $ sed -i -e "s/tf.placeholder(tf.uint8, \[1, None, None, 3\], name=_INPUT_NAME)/
 # 512 = 8 * 64 + 1
 # 320 = 8 * 40 + 1
 
-# --initialize_last_layer=True initializes the final layer with the weight of tf_initial_checkpoint (inherits the weight)
+# --initialize_last_layer=True initializes the final layer with the weight of  
+# tf_initial_checkpoint (inherits the weight)
 
 # Named tuple to describe the dataset properties.
 # deeplab/datasets/data_generator.py
