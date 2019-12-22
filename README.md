@@ -122,6 +122,8 @@ $ mv cityscapesScripts cityscapesScripts_ && \
   mv cityscapesScripts_/cityscapesscripts . && \
   rm -rf cityscapesScripts_
 
+# https://www.cityscapes-dataset.com/
+# You will need to sign up and issue a userID and password to download the data set.
 $ wget --keep-session-cookies --save-cookies=cookies.txt \
   --post-data 'username=(userid)&password=(password)&submit=Login' \
   https://www.cityscapes-dataset.com/login/
