@@ -171,7 +171,6 @@ $ sed -i -e "s/tf.placeholder(tf.uint8, \[1, None, None, 3\], name=_INPUT_NAME)/
 
 # Named tuple to describe the dataset properties.
 # deeplab/datasets/data_generator.py
-
 DatasetDescriptor = collections.namedtuple(
     'DatasetDescriptor',
     [
@@ -219,6 +218,25 @@ _DATASETS_INFORMATION = {
     'cityscapes': _CITYSCAPES_INFORMATION,
     'pascal_voc_seg': _PASCAL_VOC_SEG_INFORMATION,
     'ade20k': _ADE20K_INFORMATION,
+}
+
+# A map from network name to network function. model_variant.
+# deeplab/core/feature_extractor.py
+networks_map = {
+    'mobilenet_v2': _mobilenet_v2,
+    'mobilenet_v3_large_seg': mobilenet_v3_large_seg,
+    'mobilenet_v3_small_seg': mobilenet_v3_small_seg,
+    'resnet_v1_18': resnet_v1_beta.resnet_v1_18,
+    'resnet_v1_18_beta': resnet_v1_beta.resnet_v1_18_beta,
+    'resnet_v1_50': resnet_v1_beta.resnet_v1_50,
+    'resnet_v1_50_beta': resnet_v1_beta.resnet_v1_50_beta,
+    'resnet_v1_101': resnet_v1_beta.resnet_v1_101,
+    'resnet_v1_101_beta': resnet_v1_beta.resnet_v1_101_beta,
+    'xception_41': xception.xception_41,
+    'xception_65': xception.xception_65,
+    'xception_71': xception.xception_71,
+    'nas_pnasnet': nas_network.pnasnet,
+    'nas_hnasnet': nas_network.hnasnet,
 }
 ```
 ```bash
