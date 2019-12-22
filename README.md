@@ -5,8 +5,12 @@
 - Ubuntu 18.04
 - Tensorflow-GPU v1.15.0
 - Python 3.6.8
+- PascalVOC Dataset
+- Cityscapes Dataset
 
 ## 2. Procedure
+### 2-1. MobileNetV3+DeeplabV3+PascalVOC
+### 2-1-1. Preparation
 ```bash
 $ cd ~
 $ mkdir deeplab;cd deeplab
@@ -55,7 +59,7 @@ networks_map = {
     'nas_hnasnet': nas_network.hnasnet,
 }
 ```
-### 2-1. "mobilenet_v3_small_seg" Float32 regular training
+### 2-1-2. "mobilenet_v3_small_seg" Float32 regular training
 ```bash
 $ python3 deeplab/train.py \
     --logtostderr \
@@ -74,7 +78,7 @@ $ python3 deeplab/train.py \
     --dataset_dir=${PATH_TO_DATASET}
 ```
 
-### 2-2. "mobilenet_v3_large_seg" Float32 regular training
+### 2-1-3. "mobilenet_v3_large_seg" Float32 regular training
 ```bash
 $ python3 deeplab/train.py \
     --logtostderr \
@@ -93,7 +97,7 @@ $ python3 deeplab/train.py \
     --dataset_dir=${PATH_TO_DATASET}
 ```
 
-## 3. Visualize training status
+### 2-1-4. Visualize training status
 ```bash
 $ tensorboard --logdir ${HOME}/deeplab/models/research/deeplab/datasets/pascal_voc_seg/exp/train_on_train_set/train
 ```
