@@ -331,7 +331,8 @@ If you follow the Google Colaboratory sample procedure, copy the "deeplab_mnv3_s
 - Full Integer Quantization  
 
 https://colab.research.google.com/drive/1TtCJ-uMNTArpZxrf5DCNbZdn08DsiW8F  
-
+　  
+　  
 ### 2-3. MobileNetV3+DeeplabV3+Cityscaps - Quantization-aware training
 #### 2-3-1. "mobilenet_v3_small_seg" Quantization-aware training
 ```bash
