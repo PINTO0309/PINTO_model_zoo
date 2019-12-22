@@ -101,7 +101,8 @@ $ python3 deeplab/train.py \
 ```bash
 $ tensorboard --logdir ${HOME}/deeplab/models/research/deeplab/datasets/pascal_voc_seg/exp/train_on_train_set/train
 ```
-
+　  
+　  
 ### 2-2. MobileNetV3+DeeplabV3+Cityscaps
 #### 2-2-1. Preparation
 ```bash
