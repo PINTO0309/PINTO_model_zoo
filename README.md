@@ -173,8 +173,10 @@ $ sed -i -e \
 
 $ cd ${HOME}/git/deeplab/models/research
 $ cp deeplab/export_model.py deeplab/export_model.py_org
-$ cp deeplab_mnv3_small_cityscapes_trainfine/frozen_inference_graph.pb deeplab_mnv3_small_cityscapes_trainfine/frozen_inference_graph_org.pb
-$ cp deeplab_mnv3_large_cityscapes_trainfine/frozen_inference_graph.pb deeplab_mnv3_large_cityscapes_trainfine/frozen_inference_graph_org.pb
+$ cp deeplab_mnv3_small_cityscapes_trainfine/frozen_inference_graph.pb \
+  deeplab_mnv3_small_cityscapes_trainfine/frozen_inference_graph_org.pb
+$ cp deeplab_mnv3_large_cityscapes_trainfine/frozen_inference_graph.pb \
+  deeplab_mnv3_large_cityscapes_trainfine/frozen_inference_graph_org.pb
 
 $ sed -i -e \
   "s/tf.placeholder(tf.uint8, \[1, None, None, 3\], name=_INPUT_NAME)/tf.placeholder(tf.float32, \[1, 769, 769, 3\], name=_INPUT_NAME)/g" \
