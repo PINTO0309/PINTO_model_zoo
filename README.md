@@ -288,7 +288,7 @@ $ python3 deeplab/export_model.py \
 #### 2-2-5. Google Colaboratory - Post-training quantization - post_training_integer_quant.ipynb
 - Weight Quantization
 - Integer Quantization
-- Full Integer QUantization  
+- Full Integer Quantization  
 
 https://colab.research.google.com/drive/1TtCJ-uMNTArpZxrf5DCNbZdn08DsiW8F  
 
