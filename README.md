@@ -19,9 +19,12 @@ $ git clone --depth 1 https://github.com/tensorflow/models.git
 $ cd models/research/deeplab/datasets
 $ mkdir pascal_voc_seg
 
-$ curl -sc /tmp/cookie "https://drive.google.com/uc?export=download&id=1rATNHizJdVHnaJtt-hW9MOgjxoaajzdh" > /dev/null
+$ curl -sc /tmp/cookie \
+  "https://drive.google.com/uc?export=download&id=1rATNHizJdVHnaJtt-hW9MOgjxoaajzdh" > /dev/null
 $ CODE="$(awk '/_warning_/ {print $NF}' /tmp/cookie)"
-$ curl -Lb /tmp/cookie "https://drive.google.com/uc?export=download&confirm=${CODE}&id=1rATNHizJdVHnaJtt-hW9MOgjxoaajzdh" -o pascal_voc_seg/VOCtrainval_11-May-2012.tar
+$ curl -Lb /tmp/cookie \
+  "https://drive.google.com/uc?export=download&confirm=${CODE}&id=1rATNHizJdVHnaJtt-hW9MOgjxoaajzdh" \
+  -o pascal_voc_seg/VOCtrainval_11-May-2012.tar
 
 $ sed -i -e "s/python .\/remove_gt_colormap.py/python3 .\/remove_gt_colormap.py/g" \
       -i -e "s/python .\/build_voc2012_data.py/python3 .\/build_voc2012_data.py/g" \
@@ -100,7 +103,8 @@ $ python3 deeplab/train.py \
 
 #### 2-1-4. Visualize training status
 ```bash
-$ tensorboard --logdir ${HOME}/deeplab/models/research/deeplab/datasets/pascal_voc_seg/exp/train_on_train_set/train
+$ tensorboard \
+  --logdir ${HOME}/deeplab/models/research/deeplab/datasets/pascal_voc_seg/exp/train_on_train_set/train
 ```
 　  
 　  
@@ -118,9 +122,12 @@ $ mv cityscapesScripts cityscapesScripts_ && \
   mv cityscapesScripts_/cityscapesscripts . && \
   rm -rf cityscapesScripts_
 
-$ wget --keep-session-cookies --save-cookies=cookies.txt --post-data 'username=(userid)&password=(password)&submit=Login' https://www.cityscapes-dataset.com/login/
-$ wget --load-cookies cookies.txt --content-disposition https://www.cityscapes-dataset.com/file-handling/?packageID=1
-$ wget --load-cookies cookies.txt --content-disposition https://www.cityscapes-dataset.com/file-handling/?packageID=3
+$ wget --keep-session-cookies --save-cookies=cookies.txt \
+  --post-data 'username=(userid)&password=(password)&submit=Login' https://www.cityscapes-dataset.com/login/
+$ wget --load-cookies cookies.txt \
+  --content-disposition https://www.cityscapes-dataset.com/file-handling/?packageID=1
+$ wget --load-cookies cookies.txt \
+  --content-disposition https://www.cityscapes-dataset.com/file-handling/?packageID=3
 
 $ unzip gtFine_trainvaltest.zip && rm gtFine_trainvaltest.zip
 $ rm README && rm license.txt
@@ -137,15 +144,21 @@ $ mkdir -p deeplab/datasets/cityscapes/exp/train_on_train_set/train && \
   mkdir -p deeplab/datasets/cityscapes/exp/train_on_train_set/eval && \
   mkdir -p deeplab/datasets/cityscapes/exp/train_on_train_set/vis
 
-$ curl -sc /tmp/cookie "https://drive.google.com/uc?export=download&id=1f5ccaJmJBYwBmHvRQ77yGIUcXnqQIRY_" > /dev/null
+$ curl -sc /tmp/cookie \
+  "https://drive.google.com/uc?export=download&id=1f5ccaJmJBYwBmHvRQ77yGIUcXnqQIRY_" > /dev/null
 $ CODE="$(awk '/_warning_/ {print $NF}' /tmp/cookie)"
-$ curl -Lb /tmp/cookie "https://drive.google.com/uc?export=download&confirm=${CODE}&id=1f5ccaJmJBYwBmHvRQ77yGIUcXnqQIRY_" -o deeplab_mnv3_small_cityscapes_trainfine_2019_11_15.tar.gz
+$ curl -Lb /tmp/cookie \
+  "https://drive.google.com/uc?export=download&confirm=${CODE}&id=1f5ccaJmJBYwBmHvRQ77yGIUcXnqQIRY_" \
+  -o deeplab_mnv3_small_cityscapes_trainfine_2019_11_15.tar.gz
 $ tar -zxvf deeplab_mnv3_small_cityscapes_trainfine_2019_11_15.tar.gz
 $ rm deeplab_mnv3_small_cityscapes_trainfine_2019_11_15.tar.gz
 
-$ curl -sc /tmp/cookie "https://drive.google.com/uc?export=download&id=1QxS3G55rUQvuiBF-hztQv5zCkfPfwlVU" > /dev/null
+$ curl -sc /tmp/cookie \
+  "https://drive.google.com/uc?export=download&id=1QxS3G55rUQvuiBF-hztQv5zCkfPfwlVU" > /dev/null
 $ CODE="$(awk '/_warning_/ {print $NF}' /tmp/cookie)"
-$ curl -Lb /tmp/cookie "https://drive.google.com/uc?export=download&confirm=${CODE}&id=1QxS3G55rUQvuiBF-hztQv5zCkfPfwlVU" -o deeplab_mnv3_large_cityscapes_trainfine_2019_11_15.tar.gz
+$ curl -Lb /tmp/cookie \
+  "https://drive.google.com/uc?export=download&confirm=${CODE}&id=1QxS3G55rUQvuiBF-hztQv5zCkfPfwlVU" \
+  -o deeplab_mnv3_large_cityscapes_trainfine_2019_11_15.tar.gz
 $ tar -zxvf deeplab_mnv3_large_cityscapes_trainfine_2019_11_15.tar.gz
 $ rm deeplab_mnv3_large_cityscapes_trainfine_2019_11_15.tar.gz
 
@@ -153,14 +166,18 @@ $ export PATH_TO_INITIAL_CHECKPOINT=${HOME}/git/deeplab/models/research/deeplab_
 $ export PATH_TO_DATASET=${HOME}/git/deeplab/models/research/deeplab/datasets/cityscapes/tfrecord
 $ export PYTHONPATH=${HOME}/git/deeplab/models/research:${HOME}/git/deeplab/models/research/deeplab:${HOME}/git/deeplab/models/research/slim:${PYTHONPATH}
 
-$ sed -i -e "s/splits_to_sizes={'train_fine': 2975,/splits_to_sizes={'train': 2975,/g" deeplab/datasets/data_generator.py
+$ sed -i -e \
+  "s/splits_to_sizes={'train_fine': 2975,/splits_to_sizes={'train': 2975,/g" \
+  deeplab/datasets/data_generator.py
 
 $ cd ${HOME}/git/deeplab/models/research
 $ cp deeplab/export_model.py deeplab/export_model.py_org
 $ cp deeplab_mnv3_small_cityscapes_trainfine/frozen_inference_graph.pb deeplab_mnv3_small_cityscapes_trainfine/frozen_inference_graph_org.pb
 $ cp deeplab_mnv3_large_cityscapes_trainfine/frozen_inference_graph.pb deeplab_mnv3_large_cityscapes_trainfine/frozen_inference_graph_org.pb
 
-$ sed -i -e "s/tf.placeholder(tf.uint8, \[1, None, None, 3\], name=_INPUT_NAME)/tf.placeholder(tf.float32, \[1, 769, 769, 3\], name=_INPUT_NAME)/g" deeplab/export_model.py
+$ sed -i -e \
+  "s/tf.placeholder(tf.uint8, \[1, None, None, 3\], name=_INPUT_NAME)/tf.placeholder(tf.float32, \[1, 769, 769, 3\], name=_INPUT_NAME)/g" \
+  deeplab/export_model.py
 ```
 #### 2-2-2. Parameter sheet
 ```bash
