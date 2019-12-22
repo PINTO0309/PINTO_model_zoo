@@ -299,3 +299,19 @@ https://colab.research.google.com/drive/1TtCJ-uMNTArpZxrf5DCNbZdn08DsiW8F
 3. **[[deeplab] Training deeplab model with ADE20K dataset](https://github.com/tensorflow/models/issues/3730)**  
 4. **[Running DeepLab on PASCAL VOC 2012 Semantic Segmentation Dataset](https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/pascal.md)**  
 5. **[Quantize DeepLab model for faster on-device inference](https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/quantize.md)**  
+6. **https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/model_zoo.md**
+7. **https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/quantize.md**
+8. **[the quantized form of Shape operation is not yet implemented](https://github.com/tensorflow/tensorflow/issues/20955)**
+9. **[Post-training quantization](https://www.tensorflow.org/lite/performance/post_training_quantization)**
+10. **[Converter command line reference](https://www.tensorflow.org/lite/convert/cmdline_reference)**
+11. **[Quantization-aware training](https://github.com/tensorflow/tensorflow/tree/v1.15.0/tensorflow/contrib/quantize)**
+12. **[Converting a .pb file to .meta in TF 1.3](https://github.com/tensorflow/tensorflow/issues/15292)**
+13. **[Minimal code to load a trained TensorFlow model from a checkpoint and export it with SavedModelBuilder](https://gist.github.com/zhanwenchen/d628ef70e9f76525fd47d6213c30730d)**
+14. **[How to restore Tensorflow model from .pb file in python?](https://stackoverflow.com/questions/50632258/how-to-restore-tensorflow-model-from-pb-file-in-python)**
+15. **[Error with tag-sets when serving model using tensorflow_model_server tool
+](https://github.com/tensorflow/models/issues/3530)**
+16. **[ValueError: No 'serving_default' in the SavedModel's SignatureDefs. Possible values are 'name_of_my_model'](https://stackoverflow.com/questions/55901234/valueerror-no-serving-default-in-the-savedmodels-signaturedefs-possible-val)**
+17. **[kerasのモデルをデプロイする手順 - Signature作成方法解説](http://developers.goalist.co.jp/entry/keras-to-production)**
+18. **[TensorFlow で学習したモデルのグラフを `tf.train.import_meta_graph` でロードする](https://qiita.com/cfiken/items/bcdd7eb945c5c3b2bb5f)**
+19. **[Tensorflowのグラフ操作 Part1](http://docs.fabo.io/tensorflow/building_graph/tensorflow_graph_part1.html)**
+20. **[Configure input_map when importing a tensorflow model from metagraph file](https://stackoverflow.com/questions/42306484/configure-input-map-when-importing-a-tensorflow-model-from-metagraph-file)**
