@@ -189,9 +189,10 @@ $ cp deeplab_mnv3_large_cityscapes_trainfine/frozen_inference_graph.pb \
   deeplab_mnv3_large_cityscapes_trainfine/frozen_inference_graph_org.pb
 
 # Customize "export_model.py" according to the input resolution. Must be (multiple of 8 + 1).
-# (example.1) 769 = 8 * 96 + 1
-# (example.2) 512 = 8 * 64 + 1
-# (example.3) 320 = 8 * 40 + 1
+#   (example.1) 769 = 8 * 96 + 1
+#   (example.2) 512 = 8 * 64 + 1
+#   (example.3) 320 = 8 * 40 + 1
+# And it is necessary to change from tf.uint8 type to tf.float32 type.
 $ sed -i -e \
   "s/tf.placeholder(tf.uint8, \[1, None, None, 3\], name=_INPUT_NAME)/tf.placeholder(tf.float32, \[1, 769, 769, 3\], name=_INPUT_NAME)/g" \
   deeplab/export_model.py
