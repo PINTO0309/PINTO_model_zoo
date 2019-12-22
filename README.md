@@ -694,6 +694,277 @@ Memory (bytes): count=0
 
 </div></details>
 
+<details><summary>deeplab_mnv3_large_weight_quant_769.tflite Benchmark</summary><div>
+
+```console
+Min num runs: [50]
+Min runs duration (seconds): [1]
+Max runs duration (seconds): [150]
+Inter-run delay (seconds): [-1]
+Num threads: [4]
+Benchmark name: []
+Output prefix: []
+Min warmup runs: [1]
+Min warmup runs duration (seconds): [0.5]
+Graph: [/home/b920405/Downloads/deeplab_mnv3_large_weight_quant_769.tflite]
+Input layers: []
+Input shapes: []
+Input value ranges: []
+Use gpu : [0]
+Allow fp16 : [0]
+Require full delegation : [0]
+Enable op profiling: [1]
+Max profiling buffer entries: [1024]
+Loaded model /home/b920405/Downloads/deeplab_mnv3_large_weight_quant_769.tflite
+resolved reporter
+Initialized session in 0.533ms
+[Init Phase] - Memory usage: max resident set size = 0 MB, total malloc-ed size = 0.230408 MB
+Running benchmark for at least 1 iterations and at least 0.5 seconds but terminate if exceeding 150 seconds.
+count=1 curr=5240095
+
+Running benchmark for at least 50 iterations and at least 1 seconds but terminate if exceeding 150 seconds.
+count=29 first=5290585 curr=5276618 min=5242983 max=5454672 avg=5.33528e+06 std=56085
+
+[Overall] - Memory usage: max resident set size = 104.855 MB, total malloc-ed size = 0.337357 MB
+Average inference timings in us: Warmup: 5.2401e+06, Init: 533, no stats: 5.33528e+06
+============================== Run Order ==============================
+	             [node type]	          [start]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB][times called]	[Name]
+	        Misc Runtime Ops	            0.000	    0.193	    0.193	  0.000%	  0.000%	    38.304        0	AllocateTensors/0
+	                 RESHAPE	            0.000	    0.623	    0.660	  0.012%	  0.013%	     0.000        0	[Squeeze]:0
+	                     SUB	            0.661	    3.072	    3.222	  0.060%	  0.073%	     0.000        0	[pad_to_bounding_box/sub]:1
+	                 RESHAPE	            3.882	    0.525	    0.563	  0.011%	  0.084%	     0.000        0	[pad_to_bounding_box/ExpandDims]:2
+	                     PAD	            4.446	    0.676	    0.675	  0.013%	  0.096%	     0.000        0	[pad_to_bounding_box/Pad]:3
+	                 RESHAPE	            5.121	    0.385	    0.410	  0.008%	  0.104%	     0.000        0	[pad_to_bounding_box/Squeeze]:4
+	                     ADD	            5.532	    2.617	    2.707	  0.051%	  0.155%	     0.000        0	[pad_to_bounding_box/add]:5
+	                     MUL	            8.239	    0.595	    0.671	  0.013%	  0.167%	     0.000        0	[ExpandDims]:6
+	                     SUB	            8.909	    3.123	    3.081	  0.058%	  0.225%	     0.000        0	[mul]:7
+	                 RESHAPE	           11.990	    0.451	    0.471	  0.009%	  0.234%	     0.000        0	[sub_2]:8
+	                 CONV_2D	           12.462	    7.828	    7.866	  0.147%	  0.381%	     0.000        0	[MobilenetV3/Conv/BatchNorm/FusedBatchNormV3]:9
+	              HARD_SWISH	           20.327	    3.716	    3.694	  0.069%	  0.450%	     0.000        0	[MobilenetV3/Conv/hard_swish/mul_1]:10
+	       DEPTHWISE_CONV_2D	           24.022	   22.756	   23.220	  0.435%	  0.886%	     0.000        0	[MobilenetV3/expanded_conv/depthwise/Relu]:11
+	                 CONV_2D	           47.242	    2.283	    2.379	  0.045%	  0.930%	     0.000        0	[MobilenetV3/expanded_conv/project/BatchNorm/FusedBatchNormV3]:12
+	                     ADD	           49.622	    1.306	    1.403	  0.026%	  0.957%	     0.000        0	[MobilenetV3/expanded_conv/add]:13
+	                 CONV_2D	           51.025	  120.709	  121.379	  2.275%	  3.232%	     0.000        0	[MobilenetV3/expanded_conv_1/expand/Relu]:14
+	       DEPTHWISE_CONV_2D	          172.404	   23.518	   24.037	  0.451%	  3.682%	     0.000        0	[MobilenetV3/expanded_conv_1/depthwise/Relu]:15
+	                 CONV_2D	          196.442	   47.290	   48.873	  0.916%	  4.598%	     0.000        0	[MobilenetV3/expanded_conv_1/project/BatchNorm/FusedBatchNormV3]:16
+	                 CONV_2D	          245.315	   44.298	   44.586	  0.836%	  5.434%	     0.000        0	[MobilenetV3/expanded_conv_2/expand/Relu]:17
+	       DEPTHWISE_CONV_2D	          289.901	   25.953	   26.783	  0.502%	  5.936%	     0.000        0	[MobilenetV3/expanded_conv_2/depthwise/Relu]:18
+	                 CONV_2D	          316.684	   52.514	   54.104	  1.014%	  6.950%	     0.000        0	[MobilenetV3/expanded_conv_2/project/BatchNorm/FusedBatchNormV3]:19
+	                     ADD	          370.788	    0.414	    0.498	  0.009%	  6.959%	     0.000        0	[MobilenetV3/expanded_conv_2/add]:20
+	                 CONV_2D	          371.287	   44.287	   45.632	  0.855%	  7.815%	     0.000        0	[MobilenetV3/expanded_conv_3/expand/Relu]:21
+	              DEQUANTIZE	          416.919	    0.001	    0.001	  0.000%	  7.815%	     0.000        0	[MobilenetV3/expanded_conv_3/depthwise/depthwise_weights_dequantize]:22
+	       DEPTHWISE_CONV_2D	          416.920	   17.926	   18.323	  0.343%	  8.158%	     0.000        0	[MobilenetV3/expanded_conv_3/depthwise/Relu]:23
+	         AVERAGE_POOL_2D	          435.243	    0.253	    0.269	  0.005%	  8.163%	     0.000        0	[MobilenetV3/expanded_conv_3/squeeze_excite/AvgPool]:24
+	                 CONV_2D	          435.512	    0.003	    0.004	  0.000%	  8.163%	     0.000        0	[MobilenetV3/expanded_conv_3/squeeze_excite/Conv/Relu]:25
+	                 CONV_2D	          435.516	    0.002	    0.002	  0.000%	  8.163%	     0.000        0	[MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/Relu6]:26
+	                     MUL	          435.518	    0.001	    0.001	  0.000%	  8.163%	     0.000        0	[MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/mul]:27
+	                     MUL	          435.519	    0.273	    0.289	  0.005%	  8.169%	     0.000        0	[MobilenetV3/expanded_conv_3/squeeze_excite/mul]:28
+	                 CONV_2D	          435.808	   17.710	   18.198	  0.341%	  8.510%	     0.000        0	[MobilenetV3/expanded_conv_3/project/BatchNorm/FusedBatchNormV3]:29
+	                 CONV_2D	          454.007	   32.436	   33.130	  0.621%	  9.131%	     0.000        0	[MobilenetV3/expanded_conv_4/expand/Relu]:30
+	              DEQUANTIZE	          487.137	    0.001	    0.000	  0.000%	  9.131%	     0.000        0	[MobilenetV3/expanded_conv_4/depthwise/depthwise_weights_dequantize]:31
+	       DEPTHWISE_CONV_2D	          487.137	   28.799	   29.707	  0.557%	  9.687%	     0.000        0	[MobilenetV3/expanded_conv_4/depthwise/Relu]:32
+	         AVERAGE_POOL_2D	          516.844	    0.370	    0.398	  0.007%	  9.695%	     0.000        0	[MobilenetV3/expanded_conv_4/squeeze_excite/AvgPool]:33
+	                 CONV_2D	          517.243	    0.004	    0.005	  0.000%	  9.695%	     0.000        0	[MobilenetV3/expanded_conv_4/squeeze_excite/Conv/Relu]:34
+	                 CONV_2D	          517.248	    0.003	    0.003	  0.000%	  9.695%	     0.000        0	[MobilenetV3/expanded_conv_4/squeeze_excite/Conv_1/Relu6]:35
+	                     MUL	          517.251	    0.001	    0.001	  0.000%	  9.695%	     0.000        0	[MobilenetV3/expanded_conv_4/squeeze_excite/Conv_1/mul]:36
+	                     MUL	          517.253	    0.382	    0.455	  0.009%	  9.704%	     0.000        0	[MobilenetV3/expanded_conv_4/squeeze_excite/mul]:37
+	                 CONV_2D	          517.707	   32.779	   34.079	  0.639%	 10.342%	     0.000        0	[MobilenetV3/expanded_conv_4/project/BatchNorm/FusedBatchNormV3]:38
+	                     ADD	          551.787	    0.148	    0.171	  0.003%	 10.346%	     0.000        0	[MobilenetV3/expanded_conv_4/add]:39
+	                 CONV_2D	          551.958	   32.350	   33.315	  0.624%	 10.970%	     0.000        0	[MobilenetV3/expanded_conv_5/expand/Relu]:40
+	              DEQUANTIZE	          585.274	    0.000	    0.001	  0.000%	 10.970%	     0.000        0	[MobilenetV3/expanded_conv_5/depthwise/depthwise_weights_dequantize]:41
+	       DEPTHWISE_CONV_2D	          585.274	   28.755	   29.742	  0.557%	 11.528%	     0.000        0	[MobilenetV3/expanded_conv_5/depthwise/Relu]:42
+	         AVERAGE_POOL_2D	          615.017	    0.364	    0.377	  0.007%	 11.535%	     0.000        0	[MobilenetV3/expanded_conv_5/squeeze_excite/AvgPool]:43
+	                 CONV_2D	          615.394	    0.004	    0.005	  0.000%	 11.535%	     0.000        0	[MobilenetV3/expanded_conv_5/squeeze_excite/Conv/Relu]:44
+	                 CONV_2D	          615.400	    0.003	    0.003	  0.000%	 11.535%	     0.000        0	[MobilenetV3/expanded_conv_5/squeeze_excite/Conv_1/Relu6]:45
+	                     MUL	          615.403	    0.001	    0.001	  0.000%	 11.535%	     0.000        0	[MobilenetV3/expanded_conv_5/squeeze_excite/Conv_1/mul]:46
+	                     MUL	          615.404	    0.362	    0.417	  0.008%	 11.543%	     0.000        0	[MobilenetV3/expanded_conv_5/squeeze_excite/mul]:47
+	                 CONV_2D	          615.821	   30.980	   32.151	  0.603%	 12.145%	     0.000        0	[MobilenetV3/expanded_conv_5/project/BatchNorm/FusedBatchNormV3]:48
+	                     ADD	          647.972	    0.155	    0.167	  0.003%	 12.148%	     0.000        0	[MobilenetV3/expanded_conv_5/add]:49
+	                 CONV_2D	          648.140	   63.926	   65.474	  1.227%	 13.376%	     0.000        0	[MobilenetV3/expanded_conv_6/expand/BatchNorm/FusedBatchNormV3]:50
+	                     ADD	          713.614	    1.000	    1.034	  0.019%	 13.395%	     0.000        0	[MobilenetV3/expanded_conv_6/expand/hard_swish/Relu6]:51
+	                     MUL	          714.648	    1.319	    1.365	  0.026%	 13.421%	     0.000        0	[MobilenetV3/expanded_conv_6/expand/hard_swish/mul]:52
+	              DEQUANTIZE	          716.013	    0.001	    0.001	  0.000%	 13.421%	     0.000        0	[MobilenetV3/expanded_conv_6/depthwise/depthwise_weights_dequantize]:53
+	       DEPTHWISE_CONV_2D	          716.014	   20.840	   21.455	  0.402%	 13.823%	     0.000        0	[MobilenetV3/expanded_conv_6/depthwise/BatchNorm/FusedBatchNormV3]:54
+	                     ADD	          737.469	    0.963	    1.054	  0.020%	 13.842%	     0.000        0	[MobilenetV3/expanded_conv_6/depthwise/hard_swish/Relu6]:55
+	                     MUL	          738.523	    1.196	    1.306	  0.024%	 13.867%	     0.000        0	[MobilenetV3/expanded_conv_6/depthwise/hard_swish/mul]:56
+	                 CONV_2D	          739.829	  110.383	  110.670	  2.074%	 15.941%	     0.000        0	[MobilenetV3/expanded_conv_6/project/BatchNorm/FusedBatchNormV3]:57
+	                 CONV_2D	          850.500	   97.112	   97.757	  1.832%	 17.773%	     0.000        0	[MobilenetV3/expanded_conv_7/expand/BatchNorm/FusedBatchNormV3]:58
+	              HARD_SWISH	          948.257	    3.154	    3.246	  0.061%	 17.834%	     0.000        0	[MobilenetV3/expanded_conv_7/expand/hard_swish/mul_1]:59
+	       SPACE_TO_BATCH_ND	          951.503	    1.212	    1.257	  0.024%	 17.858%	     0.000        0	[MobilenetV3/expanded_conv_7/depthwise/depthwise/SpaceToBatchND]:60
+	              DEQUANTIZE	          952.760	    0.001	    0.001	  0.000%	 17.858%	     0.000        0	[MobilenetV3/expanded_conv_7/depthwise/depthwise_weights_dequantize]:61
+	       DEPTHWISE_CONV_2D	          952.761	   17.941	   18.372	  0.344%	 18.202%	     0.000        0	[MobilenetV3/expanded_conv_7/depthwise/depthwise]:62
+	       BATCH_TO_SPACE_ND	          971.133	    0.999	    1.066	  0.020%	 18.222%	     0.000        0	[MobilenetV3/expanded_conv_7/depthwise/depthwise/BatchToSpaceND]:63
+	                     MUL	          972.199	    0.760	    0.819	  0.015%	 18.238%	     0.000        0	[MobilenetV3/expanded_conv_7/depthwise/BatchNorm/FusedBatchNormV3_mul_0]:64
+	                     ADD	          973.019	    0.721	    0.745	  0.014%	 18.252%	     0.000        0	[MobilenetV3/expanded_conv_7/depthwise/BatchNorm/FusedBatchNormV3]:65
+	                     ADD	          973.764	    0.656	    0.700	  0.013%	 18.265%	     0.000        0	[MobilenetV3/expanded_conv_7/depthwise/hard_swish/Relu6]:66
+	                     MUL	          974.463	    0.984	    1.044	  0.020%	 18.284%	     0.000        0	[MobilenetV3/expanded_conv_7/depthwise/hard_swish/mul]:67
+	                 CONV_2D	          975.507	   94.649	   95.476	  1.790%	 20.074%	     0.000        0	[MobilenetV3/expanded_conv_7/project/BatchNorm/FusedBatchNormV3]:68
+	                     ADD	         1070.983	    0.393	    0.409	  0.008%	 20.081%	     0.000        0	[MobilenetV3/expanded_conv_7/add]:69
+	                 CONV_2D	         1071.393	   90.938	   90.162	  1.690%	 21.771%	     0.000        0	[MobilenetV3/expanded_conv_8/expand/BatchNorm/FusedBatchNormV3]:70
+	              HARD_SWISH	         1161.556	    2.877	    2.871	  0.054%	 21.825%	     0.000        0	[MobilenetV3/expanded_conv_8/expand/hard_swish/mul_1]:71
+	       SPACE_TO_BATCH_ND	         1164.427	    1.036	    1.011	  0.019%	 21.844%	     0.000        0	[MobilenetV3/expanded_conv_8/depthwise/depthwise/SpaceToBatchND]:72
+	              DEQUANTIZE	         1165.438	    0.001	    0.001	  0.000%	 21.844%	     0.000        0	[MobilenetV3/expanded_conv_8/depthwise/depthwise_weights_dequantize]:73
+	       DEPTHWISE_CONV_2D	         1165.439	   16.878	   16.947	  0.318%	 22.162%	     0.000        0	[MobilenetV3/expanded_conv_8/depthwise/depthwise]:74
+	       BATCH_TO_SPACE_ND	         1182.386	    0.865	    0.907	  0.017%	 22.179%	     0.000        0	[MobilenetV3/expanded_conv_8/depthwise/depthwise/BatchToSpaceND]:75
+	                     MUL	         1183.294	    0.667	    0.741	  0.014%	 22.193%	     0.000        0	[MobilenetV3/expanded_conv_8/depthwise/BatchNorm/FusedBatchNormV3_mul_0]:76
+	                     ADD	         1184.035	    0.633	    0.660	  0.012%	 22.205%	     0.000        0	[MobilenetV3/expanded_conv_8/depthwise/BatchNorm/FusedBatchNormV3]:77
+	                     ADD	         1184.695	    0.589	    0.637	  0.012%	 22.217%	     0.000        0	[MobilenetV3/expanded_conv_8/depthwise/hard_swish/Relu6]:78
+	                     MUL	         1185.332	    0.935	    0.932	  0.017%	 22.234%	     0.000        0	[MobilenetV3/expanded_conv_8/depthwise/hard_swish/mul]:79
+	                 CONV_2D	         1186.264	   89.134	   89.174	  1.671%	 23.906%	     0.000        0	[MobilenetV3/expanded_conv_8/project/BatchNorm/FusedBatchNormV3]:80
+	                     ADD	         1275.438	    0.358	    0.424	  0.008%	 23.914%	     0.000        0	[MobilenetV3/expanded_conv_8/add]:81
+	                 CONV_2D	         1275.862	   89.276	   90.277	  1.692%	 25.606%	     0.000        0	[MobilenetV3/expanded_conv_9/expand/BatchNorm/FusedBatchNormV3]:82
+	              HARD_SWISH	         1366.140	    2.757	    2.875	  0.054%	 25.660%	     0.000        0	[MobilenetV3/expanded_conv_9/expand/hard_swish/mul_1]:83
+	       SPACE_TO_BATCH_ND	         1369.015	    0.992	    1.048	  0.020%	 25.679%	     0.000        0	[MobilenetV3/expanded_conv_9/depthwise/depthwise/SpaceToBatchND]:84
+	              DEQUANTIZE	         1370.063	    0.001	    0.001	  0.000%	 25.679%	     0.000        0	[MobilenetV3/expanded_conv_9/depthwise/depthwise_weights_dequantize]:85
+	       DEPTHWISE_CONV_2D	         1370.064	   16.517	   16.978	  0.318%	 25.998%	     0.000        0	[MobilenetV3/expanded_conv_9/depthwise/depthwise]:86
+	       BATCH_TO_SPACE_ND	         1387.043	    0.779	    0.856	  0.016%	 26.014%	     0.000        0	[MobilenetV3/expanded_conv_9/depthwise/depthwise/BatchToSpaceND]:87
+	                     MUL	         1387.899	    0.663	    0.710	  0.013%	 26.027%	     0.000        0	[MobilenetV3/expanded_conv_9/depthwise/BatchNorm/FusedBatchNormV3_mul_0]:88
+	                     ADD	         1388.610	    0.617	    0.644	  0.012%	 26.039%	     0.000        0	[MobilenetV3/expanded_conv_9/depthwise/BatchNorm/FusedBatchNormV3]:89
+	                     ADD	         1389.254	    0.583	    0.606	  0.011%	 26.050%	     0.000        0	[MobilenetV3/expanded_conv_9/depthwise/hard_swish/Relu6]:90
+	                     MUL	         1389.860	    0.873	    0.907	  0.017%	 26.067%	     0.000        0	[MobilenetV3/expanded_conv_9/depthwise/hard_swish/mul]:91
+	                 CONV_2D	         1390.767	   85.714	   87.605	  1.642%	 27.709%	     0.000        0	[MobilenetV3/expanded_conv_9/project/BatchNorm/FusedBatchNormV3]:92
+	                     ADD	         1478.373	    0.340	    0.399	  0.007%	 27.717%	     0.000        0	[MobilenetV3/expanded_conv_9/add]:93
+	                 CONV_2D	         1478.772	  222.849	  226.291	  4.241%	 31.958%	     0.000        0	[MobilenetV3/expanded_conv_10/expand/BatchNorm/FusedBatchNormV3]:94
+	              HARD_SWISH	         1705.063	    7.350	    7.544	  0.141%	 32.100%	     0.000        0	[MobilenetV3/expanded_conv_10/expand/hard_swish/mul_1]:95
+	       SPACE_TO_BATCH_ND	         1712.607	    3.076	    3.168	  0.059%	 32.159%	     0.000        0	[MobilenetV3/expanded_conv_10/depthwise/depthwise/SpaceToBatchND]:96
+	              DEQUANTIZE	         1715.775	    0.001	    0.001	  0.000%	 32.159%	     0.000        0	[MobilenetV3/expanded_conv_10/depthwise/depthwise_weights_dequantize]:97
+	       DEPTHWISE_CONV_2D	         1715.776	   42.503	   43.983	  0.824%	 32.984%	     0.000        0	[MobilenetV3/expanded_conv_10/depthwise/depthwise]:98
+	       BATCH_TO_SPACE_ND	         1759.760	    2.678	    2.762	  0.052%	 33.035%	     0.000        0	[MobilenetV3/expanded_conv_10/depthwise/depthwise/BatchToSpaceND]:99
+	                     MUL	         1762.522	    2.098	    2.190	  0.041%	 33.076%	     0.000        0	[MobilenetV3/expanded_conv_10/depthwise/BatchNorm/FusedBatchNormV3_mul_0]:100
+	                     ADD	         1764.712	    2.040	    2.100	  0.039%	 33.116%	     0.000        0	[MobilenetV3/expanded_conv_10/depthwise/BatchNorm/FusedBatchNormV3]:101
+	              HARD_SWISH	         1766.812	    7.349	    7.651	  0.143%	 33.259%	     0.000        0	[MobilenetV3/expanded_conv_10/depthwise/hard_swish/mul_1]:102
+	         AVERAGE_POOL_2D	         1774.463	    1.143	    1.249	  0.023%	 33.283%	     0.000        0	[MobilenetV3/expanded_conv_10/squeeze_excite/AvgPool]:103
+	                 CONV_2D	         1775.712	    0.036	    0.038	  0.001%	 33.283%	     0.000        0	[MobilenetV3/expanded_conv_10/squeeze_excite/Conv/Relu]:104
+	                 CONV_2D	         1775.750	    0.036	    0.038	  0.001%	 33.284%	     0.000        0	[MobilenetV3/expanded_conv_10/squeeze_excite/Conv_1/Relu6]:105
+	                     MUL	         1775.787	    0.000	    0.001	  0.000%	 33.284%	     0.000        0	[MobilenetV3/expanded_conv_10/squeeze_excite/Conv_1/mul]:106
+	                     MUL	         1775.789	    1.833	    1.953	  0.037%	 33.321%	     0.000        0	[MobilenetV3/expanded_conv_10/squeeze_excite/mul]:107
+	                 CONV_2D	         1777.741	  290.645	  295.421	  5.537%	 38.858%	     0.000        0	[MobilenetV3/expanded_conv_10/project/BatchNorm/FusedBatchNormV3]:108
+	                 CONV_2D	         2073.163	  418.111	  415.791	  7.793%	 46.651%	     0.000        0	[MobilenetV3/expanded_conv_11/expand/BatchNorm/FusedBatchNormV3]:109
+	              HARD_SWISH	         2488.955	   10.495	   10.277	  0.193%	 46.844%	     0.000        0	[MobilenetV3/expanded_conv_11/expand/hard_swish/mul_1]:110
+	       SPACE_TO_BATCH_ND	         2499.232	    3.878	    3.960	  0.074%	 46.918%	     0.000        0	[MobilenetV3/expanded_conv_11/depthwise/depthwise/SpaceToBatchND]:111
+	              DEQUANTIZE	         2503.192	    0.001	    0.001	  0.000%	 46.918%	     0.000        0	[MobilenetV3/expanded_conv_11/depthwise/depthwise_weights_dequantize]:112
+	       DEPTHWISE_CONV_2D	         2503.193	   60.370	   61.456	  1.152%	 48.070%	     0.000        0	[MobilenetV3/expanded_conv_11/depthwise/depthwise]:113
+	       BATCH_TO_SPACE_ND	         2564.649	    3.920	    3.678	  0.069%	 48.139%	     0.000        0	[MobilenetV3/expanded_conv_11/depthwise/depthwise/BatchToSpaceND]:114
+	                     MUL	         2568.327	    3.028	    2.949	  0.055%	 48.194%	     0.000        0	[MobilenetV3/expanded_conv_11/depthwise/BatchNorm/FusedBatchNormV3_mul_0]:115
+	                     ADD	         2571.276	    2.960	    2.896	  0.054%	 48.248%	     0.000        0	[MobilenetV3/expanded_conv_11/depthwise/BatchNorm/FusedBatchNormV3]:116
+	              HARD_SWISH	         2574.172	   10.200	   10.192	  0.191%	 48.439%	     0.000        0	[MobilenetV3/expanded_conv_11/depthwise/hard_swish/mul_1]:117
+	         AVERAGE_POOL_2D	         2584.364	    1.560	    1.583	  0.030%	 48.469%	     0.000        0	[MobilenetV3/expanded_conv_11/squeeze_excite/AvgPool]:118
+	                 CONV_2D	         2585.948	    0.067	    0.067	  0.001%	 48.470%	     0.000        0	[MobilenetV3/expanded_conv_11/squeeze_excite/Conv/Relu]:119
+	                 CONV_2D	         2586.015	    0.066	    0.066	  0.001%	 48.471%	     0.000        0	[MobilenetV3/expanded_conv_11/squeeze_excite/Conv_1/Relu6]:120
+	                     MUL	         2586.081	    0.001	    0.001	  0.000%	 48.471%	     0.000        0	[MobilenetV3/expanded_conv_11/squeeze_excite/Conv_1/mul]:121
+	                     MUL	         2586.082	    3.146	    2.810	  0.053%	 48.524%	     0.000        0	[MobilenetV3/expanded_conv_11/squeeze_excite/mul]:122
+	                 CONV_2D	         2588.892	  408.204	  408.559	  7.658%	 56.182%	     0.000        0	[MobilenetV3/expanded_conv_11/project/BatchNorm/FusedBatchNormV3]:123
+	                     ADD	         2997.452	    0.649	    0.677	  0.013%	 56.195%	     0.000        0	[MobilenetV3/expanded_conv_11/add]:124
+	                 CONV_2D	         2998.129	  206.118	  211.125	  3.957%	 60.152%	     0.000        0	[MobilenetV3/expanded_conv_12/expand/BatchNorm/FusedBatchNormV3]:125
+	              HARD_SWISH	         3209.255	    4.984	    5.116	  0.096%	 60.248%	     0.000        0	[MobilenetV3/expanded_conv_12/expand/hard_swish/mul_1]:126
+	       SPACE_TO_BATCH_ND	         3214.371	    2.271	    2.345	  0.044%	 60.292%	     0.000        0	[MobilenetV3/expanded_conv_12/depthwise/depthwise/SpaceToBatchND]:127
+	              DEQUANTIZE	         3216.717	    0.002	    0.001	  0.000%	 60.292%	     0.000        0	[MobilenetV3/expanded_conv_12/depthwise/depthwise_weights_dequantize]:128
+	       DEPTHWISE_CONV_2D	         3216.718	   82.209	   84.871	  1.591%	 61.882%	     0.000        0	[MobilenetV3/expanded_conv_12/depthwise/depthwise]:129
+	       BATCH_TO_SPACE_ND	         3301.589	    1.855	    1.890	  0.035%	 61.918%	     0.000        0	[MobilenetV3/expanded_conv_12/depthwise/depthwise/BatchToSpaceND]:130
+	                     MUL	         3303.480	    1.301	    1.361	  0.026%	 61.943%	     0.000        0	[MobilenetV3/expanded_conv_12/depthwise/BatchNorm/FusedBatchNormV3_mul_0]:131
+	                     ADD	         3304.841	    1.340	    1.395	  0.026%	 61.969%	     0.000        0	[MobilenetV3/expanded_conv_12/depthwise/BatchNorm/FusedBatchNormV3]:132
+	              HARD_SWISH	         3306.236	    5.702	    5.299	  0.099%	 62.069%	     0.000        0	[MobilenetV3/expanded_conv_12/depthwise/hard_swish/mul_1]:133
+	         AVERAGE_POOL_2D	         3311.535	    0.843	    0.884	  0.017%	 62.085%	     0.000        0	[MobilenetV3/expanded_conv_12/squeeze_excite/AvgPool]:134
+	                 CONV_2D	         3312.420	    0.020	    0.021	  0.000%	 62.086%	     0.000        0	[MobilenetV3/expanded_conv_12/squeeze_excite/Conv/Relu]:135
+	                 CONV_2D	         3312.441	    0.019	    0.020	  0.000%	 62.086%	     0.000        0	[MobilenetV3/expanded_conv_12/squeeze_excite/Conv_1/Relu6]:136
+	                     MUL	         3312.461	    0.002	    0.001	  0.000%	 62.086%	     0.000        0	[MobilenetV3/expanded_conv_12/squeeze_excite/Conv_1/mul]:137
+	                     MUL	         3312.462	    1.251	    1.281	  0.024%	 62.110%	     0.000        0	[MobilenetV3/expanded_conv_12/squeeze_excite/mul]:138
+	                 CONV_2D	         3313.743	  148.906	  152.341	  2.855%	 64.965%	     0.000        0	[MobilenetV3/expanded_conv_12/project/BatchNorm/FusedBatchNormV3]:139
+	                 CONV_2D	         3466.084	  221.658	  226.606	  4.247%	 69.213%	     0.000        0	[MobilenetV3/expanded_conv_13/expand/BatchNorm/FusedBatchNormV3]:140
+	              HARD_SWISH	         3692.690	    7.026	    7.192	  0.135%	 69.348%	     0.000        0	[MobilenetV3/expanded_conv_13/expand/hard_swish/mul_1]:141
+	       SPACE_TO_BATCH_ND	         3699.882	    3.498	    3.506	  0.066%	 69.413%	     0.000        0	[MobilenetV3/expanded_conv_13/depthwise/depthwise/SpaceToBatchND]:142
+	              DEQUANTIZE	         3703.389	    0.002	    0.001	  0.000%	 69.413%	     0.000        0	[MobilenetV3/expanded_conv_13/depthwise/depthwise_weights_dequantize]:143
+	       DEPTHWISE_CONV_2D	         3703.390	  122.741	  126.570	  2.372%	 71.786%	     0.000        0	[MobilenetV3/expanded_conv_13/depthwise/depthwise]:144
+	       BATCH_TO_SPACE_ND	         3829.961	    2.599	    2.721	  0.051%	 71.837%	     0.000        0	[MobilenetV3/expanded_conv_13/depthwise/depthwise/BatchToSpaceND]:145
+	                     MUL	         3832.682	    2.066	    2.287	  0.043%	 71.880%	     0.000        0	[MobilenetV3/expanded_conv_13/depthwise/BatchNorm/FusedBatchNormV3_mul_0]:146
+	                     ADD	         3834.969	    1.842	    1.993	  0.037%	 71.917%	     0.000        0	[MobilenetV3/expanded_conv_13/depthwise/BatchNorm/FusedBatchNormV3]:147
+	              HARD_SWISH	         3836.963	    7.158	    7.408	  0.139%	 72.056%	     0.000        0	[MobilenetV3/expanded_conv_13/depthwise/hard_swish/mul_1]:148
+	         AVERAGE_POOL_2D	         3844.371	    1.138	    1.195	  0.022%	 72.078%	     0.000        0	[MobilenetV3/expanded_conv_13/squeeze_excite/AvgPool]:149
+	                 CONV_2D	         3845.567	    0.036	    0.039	  0.001%	 72.079%	     0.000        0	[MobilenetV3/expanded_conv_13/squeeze_excite/Conv/Relu]:150
+	                 CONV_2D	         3845.606	    0.035	    0.037	  0.001%	 72.080%	     0.000        0	[MobilenetV3/expanded_conv_13/squeeze_excite/Conv_1/Relu6]:151
+	                     MUL	         3845.642	    0.001	    0.001	  0.000%	 72.080%	     0.000        0	[MobilenetV3/expanded_conv_13/squeeze_excite/Conv_1/mul]:152
+	                     MUL	         3845.644	    1.807	    1.963	  0.037%	 72.116%	     0.000        0	[MobilenetV3/expanded_conv_13/squeeze_excite/mul]:153
+	                 CONV_2D	         3847.606	  216.384	  219.162	  4.108%	 76.224%	     0.000        0	[MobilenetV3/expanded_conv_13/project/BatchNorm/FusedBatchNormV3]:154
+	                     ADD	         4066.769	    0.415	    0.438	  0.008%	 76.232%	     0.000        0	[MobilenetV3/expanded_conv_13/add]:155
+	                 CONV_2D	         4067.207	  222.861	  227.479	  4.264%	 80.496%	     0.000        0	[MobilenetV3/expanded_conv_14/expand/BatchNorm/FusedBatchNormV3]:156
+	              HARD_SWISH	         4294.686	    6.952	    7.103	  0.133%	 80.629%	     0.000        0	[MobilenetV3/expanded_conv_14/expand/hard_swish/mul_1]:157
+	       SPACE_TO_BATCH_ND	         4301.789	    3.476	    3.505	  0.066%	 80.695%	     0.000        0	[MobilenetV3/expanded_conv_14/depthwise/depthwise/SpaceToBatchND]:158
+	              DEQUANTIZE	         4305.294	    0.000	    0.001	  0.000%	 80.695%	     0.000        0	[MobilenetV3/expanded_conv_14/depthwise/depthwise_weights_dequantize]:159
+	       DEPTHWISE_CONV_2D	         4305.295	  124.416	  129.022	  2.418%	 83.113%	     0.000        0	[MobilenetV3/expanded_conv_14/depthwise/depthwise]:160
+	       BATCH_TO_SPACE_ND	         4434.318	    2.610	    2.717	  0.051%	 83.164%	     0.000        0	[MobilenetV3/expanded_conv_14/depthwise/depthwise/BatchToSpaceND]:161
+	                     MUL	         4437.035	    2.083	    2.195	  0.041%	 83.205%	     0.000        0	[MobilenetV3/expanded_conv_14/depthwise/BatchNorm/FusedBatchNormV3_mul_0]:162
+	                     ADD	         4439.230	    2.027	    2.178	  0.041%	 83.246%	     0.000        0	[MobilenetV3/expanded_conv_14/depthwise/BatchNorm/FusedBatchNormV3]:163
+	              HARD_SWISH	         4441.409	    7.470	    7.769	  0.146%	 83.392%	     0.000        0	[MobilenetV3/expanded_conv_14/depthwise/hard_swish/mul_1]:164
+	         AVERAGE_POOL_2D	         4449.177	    1.134	    1.229	  0.023%	 83.415%	     0.000        0	[MobilenetV3/expanded_conv_14/squeeze_excite/AvgPool]:165
+	                 CONV_2D	         4450.406	    0.035	    0.038	  0.001%	 83.415%	     0.000        0	[MobilenetV3/expanded_conv_14/squeeze_excite/Conv/Relu]:166
+	                 CONV_2D	         4450.444	    0.035	    0.036	  0.001%	 83.416%	     0.000        0	[MobilenetV3/expanded_conv_14/squeeze_excite/Conv_1/Relu6]:167
+	                     MUL	         4450.481	    0.001	    0.001	  0.000%	 83.416%	     0.000        0	[MobilenetV3/expanded_conv_14/squeeze_excite/Conv_1/mul]:168
+	                     MUL	         4450.482	    1.794	    2.048	  0.038%	 83.455%	     0.000        0	[MobilenetV3/expanded_conv_14/squeeze_excite/mul]:169
+	                 CONV_2D	         4452.530	  211.701	  220.954	  4.141%	 87.596%	     0.000        0	[MobilenetV3/expanded_conv_14/project/BatchNorm/FusedBatchNormV3]:170
+	                     ADD	         4673.484	    0.423	    0.447	  0.008%	 87.604%	     0.000        0	[MobilenetV3/expanded_conv_14/add]:171
+	                 CONV_2D	         4673.931	  265.449	  230.039	  4.312%	 91.916%	     0.000        0	[MobilenetV3/Conv_1/BatchNorm/FusedBatchNormV3]:172
+	              HARD_SWISH	         4903.971	   10.213	    8.455	  0.158%	 92.074%	     0.000        0	[MobilenetV3/Conv_1/hard_swish/mul_1]:173
+	         AVERAGE_POOL_2D	         4912.427	    1.333	    1.216	  0.023%	 92.097%	     0.000        0	[AvgPool2D/AvgPool]:174
+	                 CONV_2D	         4913.643	    0.038	    0.038	  0.001%	 92.098%	     0.000        0	[image_pooling/Relu6]:175
+	                     MUL	         4913.682	    0.001	    0.001	  0.000%	 92.098%	     0.000        0	[image_pooling/mul]:176
+	         RESIZE_BILINEAR	         4913.683	    0.922	    0.956	  0.018%	 92.116%	     0.000        0	[ResizeBilinear]:177
+	                 CONV_2D	         4914.639	  324.407	  331.288	  6.209%	 98.325%	     0.000        0	[aspp0/Relu]:178
+	                     MUL	         5245.928	    0.674	    0.731	  0.014%	 98.339%	     0.000        0	[mul_1]:179
+	                 CONV_2D	         5246.659	   18.381	   18.474	  0.346%	 98.685%	     0.000        0	[decoder/feature_projection0/BiasAdd]:180
+	         RESIZE_BILINEAR	         5265.134	    1.113	    1.117	  0.021%	 98.706%	     0.000        0	[decoder/ResizeBilinear]:181
+	         RESIZE_BILINEAR	         5266.251	    0.328	    0.334	  0.006%	 98.713%	     0.000        0	[decoder/ResizeBilinear_1]:182
+	                 CONV_2D	         5266.586	   21.808	   21.461	  0.402%	 99.115%	     0.000        0	[decoder/decoder_conv0/BiasAdd]:183
+	                     ADD	         5288.047	    0.070	    0.069	  0.001%	 99.116%	     0.000        0	[decoder/add]:184
+	         RESIZE_BILINEAR	         5288.116	    0.318	    0.331	  0.006%	 99.122%	     0.000        0	[ResizeBilinear_1]:185
+	         RESIZE_BILINEAR	         5288.448	   22.078	   21.311	  0.399%	 99.522%	     0.000        0	[ResizeBilinear_2]:186
+	                 ARG_MAX	         5309.759	   24.561	   24.444	  0.458%	 99.980%	     0.000        0	[ArgMax]:187
+	                    CAST	         5334.203	    0.455	    0.446	  0.008%	 99.988%	     0.000        0	[Cast]:188
+	           STRIDED_SLICE	         5334.649	    0.305	    0.279	  0.005%	 99.993%	     0.000        0	[strided_slice_7]:189
+	                    CAST	         5334.927	    0.157	    0.171	  0.003%	 99.997%	     0.000        0	[Cast_1]:190
+	                 RESHAPE	         5335.098	    0.081	    0.094	  0.002%	 99.998%	     0.000        0	[ExpandDims_1]:191
+	                 RESHAPE	         5335.192	    0.071	    0.085	  0.002%	100.000%	     0.000        0	[SemanticPredictions]:192
+
+============================== Top by Computation Time ==============================
+	             [node type]	          [start]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB][times called]	[Name]
+	                 CONV_2D	         2073.163	  418.111	  415.791	  7.793%	  7.793%	     0.000        0	[MobilenetV3/expanded_conv_11/expand/BatchNorm/FusedBatchNormV3]:109
+	                 CONV_2D	         2588.892	  408.204	  408.559	  7.658%	 15.451%	     0.000        0	[MobilenetV3/expanded_conv_11/project/BatchNorm/FusedBatchNormV3]:123
+	                 CONV_2D	         4914.639	  324.407	  331.288	  6.209%	 21.660%	     0.000        0	[aspp0/Relu]:178
+	                 CONV_2D	         1777.741	  290.645	  295.421	  5.537%	 27.198%	     0.000        0	[MobilenetV3/expanded_conv_10/project/BatchNorm/FusedBatchNormV3]:108
+	                 CONV_2D	         4673.931	  265.449	  230.039	  4.312%	 31.509%	     0.000        0	[MobilenetV3/Conv_1/BatchNorm/FusedBatchNormV3]:172
+	                 CONV_2D	         4067.207	  222.861	  227.479	  4.264%	 35.773%	     0.000        0	[MobilenetV3/expanded_conv_14/expand/BatchNorm/FusedBatchNormV3]:156
+	                 CONV_2D	         3466.084	  221.658	  226.606	  4.247%	 40.020%	     0.000        0	[MobilenetV3/expanded_conv_13/expand/BatchNorm/FusedBatchNormV3]:140
+	                 CONV_2D	         1478.772	  222.849	  226.291	  4.241%	 44.262%	     0.000        0	[MobilenetV3/expanded_conv_10/expand/BatchNorm/FusedBatchNormV3]:94
+	                 CONV_2D	         4452.530	  211.701	  220.954	  4.141%	 48.403%	     0.000        0	[MobilenetV3/expanded_conv_14/project/BatchNorm/FusedBatchNormV3]:170
+	                 CONV_2D	         3847.606	  216.384	  219.162	  4.108%	 52.511%	     0.000        0	[MobilenetV3/expanded_conv_13/project/BatchNorm/FusedBatchNormV3]:154
+
+Number of nodes executed: 194
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                 CONV_2D	       51	  4123.348	    82.616%	    82.616%	     0.000	        0
+	       DEPTHWISE_CONV_2D	       15	   628.139	    12.586%	    95.202%	     0.000	        0
+	              HARD_SWISH	       15	    90.448	     1.812%	    97.014%	     0.000	        0
+	                     MUL	       32	    29.393	     0.589%	    97.603%	     0.000	        0
+	                 ARG_MAX	        1	    22.866	     0.458%	    98.061%	     0.000	        0
+	                     ADD	       25	    22.860	     0.458%	    98.519%	     0.000	        0
+	         RESIZE_BILINEAR	        5	    22.494	     0.451%	    98.970%	     0.000	        0
+	       SPACE_TO_BATCH_ND	        8	    18.518	     0.371%	    99.341%	     0.000	        0
+	       BATCH_TO_SPACE_ND	        8	    15.522	     0.311%	    99.652%	     0.000	        0
+	         AVERAGE_POOL_2D	        9	     7.855	     0.157%	    99.809%	     0.000	        0
+	                     SUB	        2	     5.896	     0.118%	    99.928%	     0.000	        0
+	                 RESHAPE	        6	     2.133	     0.043%	    99.970%	     0.000	        0
+	                     PAD	        1	     0.631	     0.013%	    99.983%	     0.000	        0
+	                    CAST	        2	     0.575	     0.012%	    99.994%	     0.000	        0
+	           STRIDED_SLICE	        1	     0.260	     0.005%	   100.000%	     0.000	        0
+	        Misc Runtime Ops	        1	     0.012	     0.000%	   100.000%	    38.304	        0
+	              DEQUANTIZE	       12	     0.003	     0.000%	   100.000%	     0.000	        0
+
+Timings (microseconds): count=31 first=193 curr=5276579 min=193 max=5454605 avg=4.99104e+06 std=1311782
+Memory (bytes): count=0
+194 nodes observed
+```
+
+</div></details>
+
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
 2. **[When you want to fine-tune DeepLab on other datasets, there are a few cases](https://github.com/tensorflow/models/issues/3730#issuecomment-380168917)**  
