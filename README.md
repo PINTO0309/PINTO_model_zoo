@@ -408,6 +408,9 @@ $ python3 deeplab/train.py \
     --train_logdir=${PATH_TO_TRAIN_DIR} \
     --dataset_dir=${PATH_TO_DATASET}
 ```
+The orange line is "deeplab_mnv3_small_cityscapes_trainfine" loss.  
+The blue line is "deeplab_mnv3_large_cityscapes_trainfine" loss.  
+![003](99_media/003.png)  
 
 ## 3. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
