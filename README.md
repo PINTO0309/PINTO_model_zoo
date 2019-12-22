@@ -434,9 +434,11 @@ $ curl -Lb /tmp/cookie \
   -o adoptopenjdk-8-hotspot_8u222-b10-2_armhf.deb
 $ sudo apt-get install -y ./adoptopenjdk-8-hotspot_8u222-b10-2_armhf.deb
 
+## Clone Tensorflow v1.15.0
 $ git clone -b v1.15.0 --depth 1 https://github.com/tensorflow/tensorflow.git
 $ cd tensorflow
 
+## Build and run TFLite Model Benchmark Tool
 $ bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model -- \
   --graph=${HOME}/Downloads/deeplab_mnv3_small_weight_quant_769.tflite \
   --num_threads=4 \
