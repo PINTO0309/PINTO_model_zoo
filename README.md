@@ -415,6 +415,53 @@ The orange line is "deeplab_mnv3_small_cityscapes_trainfine" loss.
 The blue line is "deeplab_mnv3_large_cityscapes_trainfine" loss.  
 ![003](99_media/003.png)  
 
+### 2-4. MobileNetV3+DeeplabV3+coco/voc - Post-training quantization
+#### 2-4-1. Preparation
+```bash
+$ cd ${HOME}/git/deeplab/models/research
+
+$ wget http://download.tensorflow.org/models/deeplabv3_mnv2_dm05_pascal_trainaug_2018_10_01.tar.gz
+$ tar -zxvf deeplabv3_mnv2_dm05_pascal_trainaug_2018_10_01.tar.gz
+$ rm deeplabv3_mnv2_dm05_pascal_trainaug_2018_10_01.tar.gz
+
+$ wget http://download.tensorflow.org/models/deeplabv3_mnv2_dm05_pascal_trainval_2018_10_01.tar.gz
+$ tar -zxvf deeplabv3_mnv2_dm05_pascal_trainval_2018_10_01.tar.gz
+$ rm deeplabv3_mnv2_dm05_pascal_trainval_2018_10_01.tar.gz
+
+$ wget http://download.tensorflow.org/models/deeplabv3_mnv2_pascal_train_aug_2018_01_29.tar.gz
+$ tar -zxvf deeplabv3_mnv2_pascal_train_aug_2018_01_29.tar.gz
+$ rm deeplabv3_mnv2_pascal_train_aug_2018_01_29.tar.gz
+
+$ sed -i -e \
+  "s/tf.placeholder(tf.uint8, \[1, None, None, 3\], name=_INPUT_NAME)/tf.placeholder(tf.float32, \[1, 257, 257, 3\], name=_INPUT_NAME)/g" \
+  deeplab/export_model.py
+
+$ export PYTHONPATH=${HOME}/git/deeplab/models/research:${HOME}/git/deeplab/models/research/deeplab:${HOME}/git/deeplab/models/research/slim:${PYTHONPATH}
+
+$ python3 deeplab/export_model.py \
+  --checkpoint_path=./deeplabv3_mnv2_dm05_pascal_trainaug/model.ckpt \
+  --export_path=./deeplabv3_mnv2_dm05_pascal_trainaug/frozen_inference_graph.pb \
+  --model_variant="mobilenet_v2" \
+  --crop_size=257 \
+  --crop_size=257 \
+  --depth_multiplier=0.5
+
+$ python3 deeplab/export_model.py \
+  --checkpoint_path=./deeplabv3_mnv2_dm05_pascal_trainval/model.ckpt \
+  --export_path=./deeplabv3_mnv2_dm05_pascal_trainval/frozen_inference_graph.pb \
+  --model_variant="mobilenet_v2" \
+  --crop_size=257 \
+  --crop_size=257 \
+  --depth_multiplier=0.5
+
+$ python3 deeplab/export_model.py \
+  --checkpoint_path=./deeplabv3_mnv2_pascal_train_aug/model.ckpt-30000 \
+  --export_path=./deeplabv3_mnv2_pascal_train_aug/frozen_inference_graph.pb \
+  --model_variant="mobilenet_v2" \
+  --crop_size=257 \
+  --crop_size=257
+```
+
 ## 3. TFLite Model Benchmark
 ```bash
 $ sudo apt-get install python-future
