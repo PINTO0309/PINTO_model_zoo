@@ -414,8 +414,9 @@ $ python3 deeplab/train.py \
 The orange line is "deeplab_mnv3_small_cityscapes_trainfine" loss.  
 The blue line is "deeplab_mnv3_large_cityscapes_trainfine" loss.  
 ![003](99_media/003.png)  
-
-### 2-4. MobileNetV3+DeeplabV3+coco/voc - Post-training quantization
+　  
+　  
+### 2-4. MobileNetV2+DeeplabV3+coco/voc - Post-training quantization
 #### 2-4-1. Preparation
 ```bash
 $ cd ${HOME}/git/deeplab/models/research
