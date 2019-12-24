@@ -495,7 +495,7 @@ $ bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model -- \
   --enable_op_profiling=true
 ```
 
-<details><summary>deeplab_mnv3_small_weight_quant_769.tflite Benchmark</summary><div>
+<details><summary>x86_64 deeplab_mnv3_small_weight_quant_769.tflite Benchmark</summary><div>
 
 ```console
 Min num runs: [50]
@@ -743,7 +743,7 @@ Memory (bytes): count=0
 
 </div></details>
 
-<details><summary>deeplab_mnv3_large_weight_quant_769.tflite Benchmark</summary><div>
+<details><summary>x86_64 deeplab_mnv3_large_weight_quant_769.tflite Benchmark</summary><div>
 
 ```console
 Min num runs: [50]
