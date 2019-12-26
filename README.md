@@ -1540,3 +1540,4 @@ Memory (bytes): count=0
 19. **[Tensorflowのグラフ操作 Part1](http://docs.fabo.io/tensorflow/building_graph/tensorflow_graph_part1.html)**
 20. **[Configure input_map when importing a tensorflow model from metagraph file](https://stackoverflow.com/questions/42306484/configure-input-map-when-importing-a-tensorflow-model-from-metagraph-file)**
 21. **[TFLite Model Benchmark Tool](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)**
+22. **[How to install Ubuntu 19.10 aarch64 (64bit) on RaspberryPi4](https://qiita.com/PINTO/items/adc5db7af7a5996c0f72)**
