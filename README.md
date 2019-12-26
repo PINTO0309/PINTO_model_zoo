@@ -1015,7 +1015,7 @@ Memory (bytes): count=0
 
 </div></details>
 
-<details><summary>Ubuntu19.10 aarch64+RaspberryPi4 mobilenet_v3_small_full_integer_quant.tflite Benchmark</summary><div>
+<details><summary>Ubuntu 19.10 aarch64 + RaspberryPi4 mobilenet_v3_small_full_integer_quant.tflite Benchmark</summary><div>
 
 ```console
 STARTING!
@@ -1261,7 +1261,7 @@ Memory (bytes): count=0
 
 </div></details>
 
-<details><summary>Ubuntu19.10 aarch64+RaspberryPi4 mobilenet_v3_small_weight_quant.tflite Benchmark</summary><div>
+<details><summary>Ubuntu 19.10 aarch64 + RaspberryPi4 mobilenet_v3_small_weight_quant.tflite Benchmark</summary><div>
 
 ```console
 STARTING!
