@@ -39,7 +39,7 @@ print("Integer Quantization complete! - model-mobilenet_v1_101_225_integer_quant
 ## Integer Quantization - Input/Output=float32
 #converter = tf.lite.TFLiteConverter.from_saved_model('./0')
 #converter.optimizations = [tf.lite.Optimize.DEFAULT]
-#converter.representative_dataset = representative_dataset_gen(image_size=257)
+#converter.representative_dataset = representative_dataset_gen
 #tflite_quant_model = converter.convert()
 #with open('./model-mobilenet_v1_101_257_integer_quant.tflite', 'wb') as w:
 #    w.write(tflite_quant_model)
@@ -48,7 +48,7 @@ print("Integer Quantization complete! - model-mobilenet_v1_101_225_integer_quant
 ## Integer Quantization - Input/Output=float32
 #converter = tf.lite.TFLiteConverter.from_saved_model('./0')
 #converter.optimizations = [tf.lite.Optimize.DEFAULT]
-#converter.representative_dataset = representative_dataset_gen(image_size=321)
+#converter.representative_dataset = representative_dataset_gen
 #tflite_quant_model = converter.convert()
 #with open('./model-mobilenet_v1_101_321_integer_quant.tflite', 'wb') as w:
 #    w.write(tflite_quant_model)
@@ -57,7 +57,7 @@ print("Integer Quantization complete! - model-mobilenet_v1_101_225_integer_quant
 ## Integer Quantization - Input/Output=float32
 #converter = tf.lite.TFLiteConverter.from_saved_model('./0')
 #converter.optimizations = [tf.lite.Optimize.DEFAULT]
-#converter.representative_dataset = representative_dataset_gen(image_size=385)
+#converter.representative_dataset = representative_dataset_gen
 #tflite_quant_model = converter.convert()
 #with open('./model-mobilenet_v1_101_385_integer_quant.tflite', 'wb') as w:
 #    w.write(tflite_quant_model)
@@ -66,7 +66,7 @@ print("Integer Quantization complete! - model-mobilenet_v1_101_225_integer_quant
 ## Integer Quantization - Input/Output=float32
 #converter = tf.lite.TFLiteConverter.from_saved_model('./0')
 #converter.optimizations = [tf.lite.Optimize.DEFAULT]
-#converter.representative_dataset = representative_dataset_gen(image_size=513)
+#converter.representative_dataset = representative_dataset_gen
 #tflite_quant_model = converter.convert()
 #with open('./model-mobilenet_v1_101_513_integer_quant.tflite', 'wb') as w:
 #    w.write(tflite_quant_model)
