@@ -62,25 +62,25 @@ def convert_graph_def_to_saved_model(export_dir, graph_filepath, input_name, out
 
 tf.compat.v1.enable_eager_execution()
 
-# Look up the name of the placeholder for the input node
-graph_def=get_graph_def_from_file('./model-mobilenet_v1_101_225.pb')
-input_name=""
-for node in graph_def.node:
-    if node.op=='Placeholder':
-        print("##### model-mobilenet_v1_101_225 - Input Node Name #####", node.name) # this will be the input node
-        input_name=node.name
+## Look up the name of the placeholder for the input node
+#graph_def=get_graph_def_from_file('./model-mobilenet_v1_101_225.pb')
+#input_name=""
+#for node in graph_def.node:
+#    if node.op=='Placeholder':
+#        print("##### model-mobilenet_v1_101_225 - Input Node Name #####", node.name) # this will be the input node
+#        input_name=node.name
 
-# model-mobilenet_v1_101_225 output names
-output_node_names = ['heatmap','offset_2','displacement_fwd_2','displacement_bwd_2']
-outputs = ['heatmap:0','offset_2:0','displacement_fwd_2:0','displacement_bwd_2:0']
+## model-mobilenet_v1_101_225 output names
+#output_node_names = ['heatmap','offset_2','displacement_fwd_2','displacement_bwd_2']
+#outputs = ['heatmap:0','offset_2:0','displacement_fwd_2:0','displacement_bwd_2:0']
 
-# Optimizing the graph via TensorFlow library
-transforms = []
-optimize_graph('./', 'model-mobilenet_v1_101_225.pb', transforms, input_name, output_node_names, outname='optimized_model-mobilenet_v1_101_225.pb')
+## Optimizing the graph via TensorFlow library
+#transforms = []
+#optimize_graph('./', 'model-mobilenet_v1_101_225.pb', transforms, input_name, output_node_names, outname='optimized_model-mobilenet_v1_101_225.pb')
 
-# convert this to a TF Serving compatible mode - model-mobilenet_v1_101_225
-shutil.rmtree('./0', ignore_errors=True)
-convert_graph_def_to_saved_model('./0', './optimized_model-mobilenet_v1_101_225.pb', input_name, outputs)
+## convert this to a TF Serving compatible mode - model-mobilenet_v1_101_225
+#shutil.rmtree('./0', ignore_errors=True)
+#convert_graph_def_to_saved_model('./0', './optimized_model-mobilenet_v1_101_225.pb', input_name, outputs)
 
 
 
@@ -150,22 +150,22 @@ convert_graph_def_to_saved_model('./0', './optimized_model-mobilenet_v1_101_225.
 
 
 
-## Look up the name of the placeholder for the input node
-#graph_def=get_graph_def_from_file('./model-mobilenet_v1_101_513.pb')
-#input_name=""
-#for node in graph_def.node:
-#    if node.op=='Placeholder':
-#        print("##### model-mobilenet_v1_101_513 - Input Node Name #####", node.name) # this will be the input node
-#        input_name=node.name
+# Look up the name of the placeholder for the input node
+graph_def=get_graph_def_from_file('./model-mobilenet_v1_101_513.pb')
+input_name=""
+for node in graph_def.node:
+    if node.op=='Placeholder':
+        print("##### model-mobilenet_v1_101_513 - Input Node Name #####", node.name) # this will be the input node
+        input_name=node.name
 
-## model-mobilenet_v1_101_513 output names
-#output_node_names = ['heatmap','offset_2','displacement_fwd_2','displacement_bwd_2']
-#outputs = ['heatmap:0','offset_2:0','displacement_fwd_2:0','displacement_bwd_2:0']
+# model-mobilenet_v1_101_513 output names
+output_node_names = ['heatmap','offset_2','displacement_fwd_2','displacement_bwd_2']
+outputs = ['heatmap:0','offset_2:0','displacement_fwd_2:0','displacement_bwd_2:0']
 
-## Optimizing the graph via TensorFlow library
-#transforms = []
-#optimize_graph('./', 'model-mobilenet_v1_101_513.pb', transforms, input_name, output_node_names, outname='optimized_model-mobilenet_v1_101_513.pb')
+# Optimizing the graph via TensorFlow library
+transforms = []
+optimize_graph('./', 'model-mobilenet_v1_101_513.pb', transforms, input_name, output_node_names, outname='optimized_model-mobilenet_v1_101_513.pb')
 
-## convert this to a TF Serving compatible mode - model-mobilenet_v1_101_513
-#shutil.rmtree('./0', ignore_errors=True)
-#convert_graph_def_to_saved_model('./0', './optimized_model-mobilenet_v1_101_513.pb', input_name, outputs)
+# convert this to a TF Serving compatible mode - model-mobilenet_v1_101_513
+shutil.rmtree('./0', ignore_errors=True)
+convert_graph_def_to_saved_model('./0', './optimized_model-mobilenet_v1_101_513.pb', input_name, outputs)
