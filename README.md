@@ -464,6 +464,298 @@ $ python3 deeplab/export_model.py \
   --crop_size=257
 ```
 
+### 2-5. MobileNetV3-SSD+coco - Post-training quantization
+#### 2-5-1. Preparation
+```bash
+$ cd ~
+$ sudo pip3 install tensorflow-gpu==1.15.0
+$ git clone --depth 1 https://github.com/tensorflow/models.git
+$ cd models/research
+
+$ git clone https://github.com/cocodataset/cocoapi.git
+$ cd cocoapi/PythonAPI
+$ make
+$ cp -r pycocotools ../..
+$ cd ../..
+$ wget -O protobuf.zip https://github.com/google/protobuf/releases/download/v3.0.0/protoc-3.0.0-linux-x86_64.zip
+$ unzip protobuf.zip
+$ ./bin/protoc object_detection/protos/*.proto --python_out=.
+
+$ sudo apt-get install -y protobuf-compiler python3-pil python3-lxml python3-tk
+$ sudo -H pip3 install Cython contextlib2 jupyter matplotlib
+
+$ export PYTHONPATH=${PWD}:${PWD}/object_detection:${PWD}/slim:${PYTHONPATH}
+
+$ mkdir -p ssd_mobilenet_v3_small_coco_2019_08_14 && cd ssd_mobilenet_v3_small_coco_2019_08_14
+$ curl -sc /tmp/cookie "https://drive.google.com/uc?export=download&id=1uqaC0Y-yRtzkpu1EuZ3BzOyh9-i_3Qgi" > /dev/null
+$ CODE="$(awk '/_warning_/ {print $NF}' /tmp/cookie)"
+$ curl -Lb /tmp/cookie "https://drive.google.com/uc?export=download&confirm=${CODE}&id=1uqaC0Y-yRtzkpu1EuZ3BzOyh9-i_3Qgi" -o ssd_mobilenet_v3_small_coco_2019_08_14.tar.gz
+$ tar -zxvf ssd_mobilenet_v3_small_coco_2019_08_14.tar.gz
+$ rm ssd_mobilenet_v3_small_coco_2019_08_14.tar.gz
+$ cd ..
+
+$ mkdir -p ssd_mobilenet_v3_large_coco_2019_08_14 && cd ssd_mobilenet_v3_large_coco_2019_08_14
+$ curl -sc /tmp/cookie "https://drive.google.com/uc?export=download&id=1NGLjKRWDQZ_kibQHlLZ7Eetuuz1waC7X" > /dev/null
+$ CODE="$(awk '/_warning_/ {print $NF}' /tmp/cookie)"
+$ curl -Lb /tmp/cookie "https://drive.google.com/uc?export=download&confirm=${CODE}&id=1NGLjKRWDQZ_kibQHlLZ7Eetuuz1waC7X" -o ssd_mobilenet_v3_large_coco_2019_08_14.tar.gz
+$ tar -zxvf ssd_mobilenet_v3_large_coco_2019_08_14.tar.gz
+$ rm ssd_mobilenet_v3_large_coco_2019_08_14.tar.gz
+$ cd ..
+```
+#### 2-5-2. Create a conversion script from checkpoint format to saved_model format
+```freeze_the_saved_model.py
+import tensorflow as tf
+import os
+import shutil
+from tensorflow.python.saved_model import tag_constants
+from tensorflow.python.tools import freeze_graph
+from tensorflow.python import ops
+from tensorflow.tools.graph_transforms import TransformGraph
+
+def freeze_model(saved_model_dir, output_node_names, output_filename):
+  output_graph_filename = os.path.join(saved_model_dir, output_filename)
+  initializer_nodes = ''
+  freeze_graph.freeze_graph(
+      input_saved_model_dir=saved_model_dir,
+      output_graph=output_graph_filename,
+      saved_model_tags = tag_constants.SERVING,
+      output_node_names=output_node_names,
+      initializer_nodes=initializer_nodes,
+      input_graph=None,
+      input_saver=False,
+      input_binary=False,
+      input_checkpoint=None,
+      restore_op_name=None,
+      filename_tensor_name=None,
+      clear_devices=True,
+      input_meta_graph=False,
+  )
+
+def get_graph_def_from_file(graph_filepath):
+  tf.reset_default_graph()
+  with ops.Graph().as_default():
+    with tf.gfile.GFile(graph_filepath, 'rb') as f:
+      graph_def = tf.GraphDef()
+      graph_def.ParseFromString(f.read())
+      return graph_def
+
+def optimize_graph(model_dir, graph_filename, transforms, input_name, output_names, outname='optimized_model.pb'):
+  input_names = [input_name] # change this as per how you have saved the model
+  graph_def = get_graph_def_from_file(os.path.join(model_dir, graph_filename))
+  optimized_graph_def = TransformGraph(
+      graph_def,
+      input_names,  
+      output_names,
+      transforms)
+  tf.train.write_graph(optimized_graph_def,
+                      logdir=model_dir,
+                      as_text=False,
+                      name=outname)
+  print('Graph optimized!')
+
+def convert_graph_def_to_saved_model(export_dir, graph_filepath, input_name, outputs):
+  graph_def = get_graph_def_from_file(graph_filepath)
+  with tf.Session(graph=tf.Graph()) as session:
+    tf.import_graph_def(graph_def, name='')
+    tf.compat.v1.saved_model.simple_save(
+        session,
+        export_dir,# change input_image to node.name if you know the name
+        inputs={input_name: session.graph.get_tensor_by_name('{}:0'.format(node.name))
+            for node in graph_def.node if node.op=='Placeholder'},
+        outputs={t.rstrip(":0"):session.graph.get_tensor_by_name(t) for t in outputs}
+    )
+    print('Optimized graph converted to SavedModel!')
+
+tf.compat.v1.enable_eager_execution()
+
+# Look up the name of the placeholder for the input node
+graph_def=get_graph_def_from_file('./ssd_mobilenet_v3_small_coco_2019_08_14/frozen_inference_graph.pb')
+input_name_small=""
+for node in graph_def.node:
+    if node.op=='Placeholder':
+        print("##### ssd_mobilenet_v3_small_coco_2019_08_14 - Input Node Name #####", node.name) # this will be the input node
+        input_name_small=node.name
+
+# Look up the name of the placeholder for the input node
+graph_def=get_graph_def_from_file('./ssd_mobilenet_v3_large_coco_2019_08_14/frozen_inference_graph.pb')
+input_name_large=""
+for node in graph_def.node:
+    if node.op=='Placeholder':
+        print("##### ssd_mobilenet_v3_large_coco_2019_08_14 - Input Node Name #####", node.name) # this will be the input node
+        input_name_large=node.name
+
+# ssd_mobilenet_v3 output names
+output_node_names = ['raw_outputs/class_predictions','raw_outputs/box_encodings']
+outputs = ['raw_outputs/class_predictions:0','raw_outputs/box_encodings:0']
+
+# Optimizing the graph via TensorFlow library
+transforms = []
+optimize_graph('./ssd_mobilenet_v3_small_coco_2019_08_14', 'frozen_inference_graph.pb', transforms, input_name_small, output_node_names, outname='optimized_model_small.pb')
+optimize_graph('./ssd_mobilenet_v3_large_coco_2019_08_14', 'frozen_inference_graph.pb', transforms, input_name_large, output_node_names, outname='optimized_model_large.pb')
+
+# convert this to a s TF Serving compatible mode - ssd_mobilenet_v3_small_coco_2019_08_14
+shutil.rmtree('./ssd_mobilenet_v3_small_coco_2019_08_14/0', ignore_errors=True)
+convert_graph_def_to_saved_model('./ssd_mobilenet_v3_small_coco_2019_08_14/0',
+                                 './ssd_mobilenet_v3_small_coco_2019_08_14/optimized_model_small.pb', input_name_small, outputs)
+
+# convert this to a s TF Serving compatible mode - ssd_mobilenet_v3_large_coco_2019_08_14
+shutil.rmtree('./ssd_mobilenet_v3_large_coco_2019_08_14/0', ignore_errors=True)
+convert_graph_def_to_saved_model('./ssd_mobilenet_v3_large_coco_2019_08_14/0',
+                                 './ssd_mobilenet_v3_large_coco_2019_08_14/optimized_model_large.pb', input_name_large, outputs)
+```
+#### 2-5-3. Confirm the structure of saved_model 【ssd_mobilenet_v3_small_coco_2019_08_14】
+```bash
+$ saved_model_cli show --dir ./ssd_mobilenet_v3_small_coco_2019_08_14/0 --all
+
+MetaGraphDef with tag-set: 'serve' contains the following SignatureDefs:
+
+signature_def['serving_default']:
+  The given SavedModel SignatureDef contains the following input(s):
+    inputs['normalized_input_image_tensor'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 320, 320, 3)
+        name: normalized_input_image_tensor:0
+  The given SavedModel SignatureDef contains the following output(s):
+    outputs['raw_outputs/box_encodings'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 2034, 4)
+        name: raw_outputs/box_encodings:0
+    outputs['raw_outputs/class_predictions'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 2034, 91)
+        name: raw_outputs/class_predictions:0
+  Method name is: tensorflow/serving/predict
+```
+#### 2-5-4. Confirm the structure of saved_model 【ssd_mobilenet_v3_large_coco_2019_08_14】
+```bash
+$ saved_model_cli show --dir ./ssd_mobilenet_v3_large_coco_2019_08_14/0 --all
+
+MetaGraphDef with tag-set: 'serve' contains the following SignatureDefs:
+
+signature_def['serving_default']:
+  The given SavedModel SignatureDef contains the following input(s):
+    inputs['normalized_input_image_tensor'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 320, 320, 3)
+        name: normalized_input_image_tensor:0
+  The given SavedModel SignatureDef contains the following output(s):
+    outputs['raw_outputs/box_encodings'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 2034, 4)
+        name: raw_outputs/box_encodings:0
+    outputs['raw_outputs/class_predictions'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 2034, 91)
+        name: raw_outputs/class_predictions:0
+  Method name is: tensorflow/serving/predict
+```
+#### 2-5-5. Creating the destination path for the calibration test dataset 6GB
+```bash
+$ curl -sc /tmp/cookie "https://drive.google.com/uc?export=download&id=1Uk9F4Tc-9UgnvARIVkloSoePUynyST6E" > /dev/null
+$ CODE="$(awk '/_warning_/ {print $NF}' /tmp/cookie)"
+$ curl -Lb /tmp/cookie "https://drive.google.com/uc?export=download&confirm=${CODE}&id=1Uk9F4Tc-9UgnvARIVkloSoePUynyST6E" -o TFDS.tar.gz
+$ tar -zxvf TFDS.tar.gz
+$ rm TFDS.tar.gz
+```
+#### 2-5-6. Quantization
+##### 2-5-6-1. ssd_mobilenet_v3_small_coco_2019_08_14
+```quantization_ssd_mobilenet_v3_small_coco_2019_08_14.py
+import tensorflow as tf
+import tensorflow_datasets as tfds
+import numpy as np
+
+def representative_dataset_gen():
+  for data in raw_test_data.take(100):
+    image = data['image'].numpy()
+    image = tf.image.resize(image, (320, 320))
+    image = image[np.newaxis,:,:,:]
+    yield [image]
+
+tf.compat.v1.enable_eager_execution()
+
+# Generating a calibration data set
+#raw_test_data, info = tfds.load(name="coco/2017", with_info=True, split="test", data_dir="./TFDS")
+raw_test_data, info = tfds.load(name="coco/2017", with_info=True, split="test", data_dir="./TFDS", download=False)
+print(info)
+
+# Weight Quantization - Input/Output=float32
+converter = tf.lite.TFLiteConverter.from_saved_model('./ssd_mobilenet_v3_small_coco_2019_08_14/0')
+converter.optimizations = [tf.lite.Optimize.OPTIMIZE_FOR_SIZE]
+tflite_quant_model = converter.convert()
+with open('./ssd_mobilenet_v3_small_coco_2019_08_14/mobilenet_v3_small_weight_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Weight Quantization complete! - mobilenet_v3_small_weight_quant.tflite")
+
+# Integer Quantization - Input/Output=float32
+converter = tf.lite.TFLiteConverter.from_saved_model('./ssd_mobilenet_v3_small_coco_2019_08_14/0')
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.representative_dataset = representative_dataset_gen
+tflite_quant_model = converter.convert()
+with open('./ssd_mobilenet_v3_small_coco_2019_08_14/mobilenet_v3_small_integer_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Integer Quantization complete! - mobilenet_v3_small_integer_quant.tflite")
+
+# Full Integer Quantization - Input/Output=int8
+converter = tf.lite.TFLiteConverter.from_saved_model('./ssd_mobilenet_v3_small_coco_2019_08_14/0')
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.representative_dataset = representative_dataset_gen
+converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+converter.inference_input_type = tf.uint8
+converter.inference_output_type = tf.uint8
+tflite_quant_model = converter.convert()
+with open('./ssd_mobilenet_v3_small_coco_2019_08_14/mobilenet_v3_small_full_integer_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Full Integer Quantization complete! - mobilenet_v3_small_full_integer_quant.tflite")
+```
+##### 2-5-6-2. ssd_mobilenet_v3_large_coco_2019_08_14
+```quantization_ssd_mobilenet_v3_large_coco_2019_08_14.py
+import tensorflow as tf
+import tensorflow_datasets as tfds
+import numpy as np
+
+def representative_dataset_gen():
+  for data in raw_test_data.take(100):
+    image = data['image'].numpy()
+    image = tf.image.resize(image, (320, 320))
+    image = image[np.newaxis,:,:,:]
+    yield [image]
+
+tf.compat.v1.enable_eager_execution()
+
+# Generating a calibration data set
+#raw_test_data, info = tfds.load(name="coco/2017", with_info=True, split="test", data_dir="./TFDS")
+raw_test_data, info = tfds.load(name="coco/2017", with_info=True, split="test", data_dir="./TFDS", download=False)
+
+# Weight Quantization - Input/Output=float32
+converter = tf.lite.TFLiteConverter.from_saved_model('./ssd_mobilenet_v3_large_coco_2019_08_14/0')
+converter.optimizations = [tf.lite.Optimize.OPTIMIZE_FOR_SIZE]
+tflite_quant_model = converter.convert()
+with open('./ssd_mobilenet_v3_large_coco_2019_08_14/mobilenet_v3_large_weight_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Weight Quantization complete! - mobilenet_v3_large_weight_quant.tflite")
+
+# Integer Quantization - Input/Output=float32
+converter = tf.lite.TFLiteConverter.from_saved_model('./ssd_mobilenet_v3_large_coco_2019_08_14/0')
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.representative_dataset = representative_dataset_gen
+tflite_quant_model = converter.convert()
+with open('./ssd_mobilenet_v3_large_coco_2019_08_14/mobilenet_v3_large_integer_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Integer Quantization complete! - mobilenet_v3_large_integer_quant.tflite")
+
+# Full Integer Quantization - Input/Output=int8
+converter = tf.lite.TFLiteConverter.from_saved_model('./ssd_mobilenet_v3_large_coco_2019_08_14/0')
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.representative_dataset = representative_dataset_gen
+converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+converter.inference_input_type = tf.uint8
+converter.inference_output_type = tf.uint8
+tflite_quant_model = converter.convert()
+with open('./ssd_mobilenet_v3_large_coco_2019_08_14/mobilenet_v3_large_full_integer_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Full Integer Quantization complete! - mobilenet_v3_large_full_integer_quant.tflite")
+```
+
 ## 3. TFLite Model Benchmark
 ```bash
 $ sudo apt-get install python-future
