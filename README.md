@@ -1809,6 +1809,111 @@ Memory (bytes): count=0
 
 </div></details>
 
+<details><summary>Ubuntu 19.10 aarch64 + RaspberryPi4 Posenet model-mobilenet_v1_101_257_integer_quant.tflite Benchmark</summary><div>
+
+```console
+STARTING!
+Min num runs: [50]
+Min runs duration (seconds): [1]
+Max runs duration (seconds): [150]
+Inter-run delay (seconds): [-1]
+Num threads: [4]
+Benchmark name: []
+Output prefix: []
+Min warmup runs: [1]
+Min warmup runs duration (seconds): [0.5]
+Graph: [/home/ubuntu/model-mobilenet_v1_101_257_integer_quant.tflite]
+Input layers: []
+Input shapes: []
+Input value ranges: []
+Use gpu : [0]
+Allow fp16 : [0]
+Require full delegation : [0]
+Enable op profiling: [1]
+Max profiling buffer entries: [1024]
+Loaded model /home/ubuntu/model-mobilenet_v1_101_257_integer_quant.tflite
+resolved reporter
+Initialized session in 1.8ms
+[Init Phase] - Memory usage: max resident set size = 0 MB, total malloc-ed size = 0.37999 MB
+Running benchmark for at least 1 iterations and at least 0.5 seconds but terminate if exceeding 150 seconds.
+count=10 first=57147 curr=53539 min=53353 max=57147 avg=53871.3 std=1102
+
+Running benchmark for at least 50 iterations and at least 1 seconds but terminate if exceeding 150 seconds.
+count=50 first=53348 curr=53381 min=53173 max=53922 avg=53421.1 std=136
+
+[Overall] - Memory usage: max resident set size = 7.07422 MB, total malloc-ed size = 0.416 MB
+Average inference timings in us: Warmup: 53871.3, Init: 1800, no stats: 53421.1
+============================== Run Order ==============================
+	             [node type]	          [start]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB]	[times called]	[Name]
+	                QUANTIZE	            0.000	    0.302	    0.313	  0.583%	  0.583%	     0.000	        0	[image_int8]:0
+	        Misc Runtime Ops	            0.000	    0.519	    0.519	  0.387%	  0.971%	    96.368	        0	AllocateTensors/0
+	                 CONV_2D	            0.313	    2.207	    2.161	  4.031%	  5.001%	     0.000	        0	[MobilenetV1/Relu6]:1
+	       DEPTHWISE_CONV_2D	            2.475	    2.340	    2.369	  4.419%	  9.421%	     0.000	        0	[MobilenetV1/Relu6_1]:2
+	                 CONV_2D	            4.844	    2.571	    2.573	  4.799%	 14.219%	     0.000	        0	[MobilenetV1/Relu6_2]:3
+	       DEPTHWISE_CONV_2D	            7.418	    0.921	    0.893	  1.665%	 15.885%	     0.000	        0	[MobilenetV1/Relu6_3]:4
+	                 CONV_2D	            8.311	    1.769	    1.792	  3.342%	 19.227%	     0.000	        0	[MobilenetV1/Relu6_4]:5
+	       DEPTHWISE_CONV_2D	           10.103	    0.911	    0.839	  1.564%	 20.791%	     0.000	        0	[MobilenetV1/Relu6_5]:6
+	                 CONV_2D	           10.942	    2.942	    2.961	  5.522%	 26.313%	     0.000	        0	[MobilenetV1/Relu6_6]:7
+	       DEPTHWISE_CONV_2D	           13.904	    0.432	    0.399	  0.743%	 27.056%	     0.000	        0	[MobilenetV1/Relu6_7]:8
+	                 CONV_2D	           14.302	    1.426	    1.453	  2.710%	 29.767%	     0.000	        0	[MobilenetV1/Relu6_8]:9
+	       DEPTHWISE_CONV_2D	           15.756	    0.461	    0.481	  0.897%	 30.664%	     0.000	        0	[MobilenetV1/Relu6_9]:10
+	                 CONV_2D	           16.237	    2.543	    2.544	  4.746%	 35.410%	     0.000	        0	[MobilenetV1/Relu6_10]:11
+	       DEPTHWISE_CONV_2D	           18.782	    0.231	    0.237	  0.442%	 35.851%	     0.000	        0	[MobilenetV1/Relu6_11]:12
+	                 CONV_2D	           19.019	    1.400	    1.419	  2.647%	 38.498%	     0.000	        0	[MobilenetV1/Relu6_12]:13
+	       DEPTHWISE_CONV_2D	           20.438	    0.302	    0.312	  0.582%	 39.081%	     0.000	        0	[MobilenetV1/Relu6_13]:14
+	                 CONV_2D	           20.751	    2.624	    2.595	  4.840%	 43.921%	     0.000	        0	[MobilenetV1/Relu6_14]:15
+	       DEPTHWISE_CONV_2D	           23.346	    0.321	    0.322	  0.600%	 44.521%	     0.000	        0	[MobilenetV1/Relu6_15]:16
+	                 CONV_2D	           23.668	    2.557	    2.549	  4.755%	 49.276%	     0.000	        0	[MobilenetV1/Relu6_16]:17
+	       DEPTHWISE_CONV_2D	           26.218	    0.314	    0.320	  0.596%	 49.872%	     0.000	        0	[MobilenetV1/Relu6_17]:18
+	                 CONV_2D	           26.537	    2.512	    2.540	  4.738%	 54.610%	     0.000	        0	[MobilenetV1/Relu6_18]:19
+	       DEPTHWISE_CONV_2D	           29.078	    0.305	    0.318	  0.593%	 55.203%	     0.000	        0	[MobilenetV1/Relu6_19]:20
+	                 CONV_2D	           29.396	    2.533	    2.538	  4.734%	 59.937%	     0.000	        0	[MobilenetV1/Relu6_20]:21
+	       DEPTHWISE_CONV_2D	           31.935	    0.323	    0.322	  0.601%	 60.538%	     0.000	        0	[MobilenetV1/Relu6_21]:22
+	                 CONV_2D	           32.257	    2.550	    2.551	  4.758%	 65.296%	     0.000	        0	[MobilenetV1/Relu6_22]:23
+	       DEPTHWISE_CONV_2D	           34.809	    0.317	    0.317	  0.590%	 65.887%	     0.000	        0	[MobilenetV1/Relu6_23]:24
+	                 CONV_2D	           35.126	    5.084	    5.080	  9.475%	 75.362%	     0.000	        0	[MobilenetV1/Relu6_24]:25
+	       DEPTHWISE_CONV_2D	           40.206	    1.216	    1.223	  2.282%	 77.644%	     0.000	        0	[MobilenetV1/Relu6_25]:26
+	                 CONV_2D	           41.430	   10.363	   10.409	 19.415%	 97.059%	     0.000	        0	[MobilenetV1/Relu6_26]:27
+	                 CONV_2D	           51.840	    0.359	    0.376	  0.701%	 97.760%	     0.000	        0	[heatmap_2]:28
+	                 CONV_2D	           52.216	    0.402	    0.418	  0.779%	 98.539%	     0.000	        0	[offset_2_int8]:29
+	                 CONV_2D	           52.634	    0.368	    0.364	  0.679%	 99.219%	     0.000	        0	[displacement_fwd_2_int8]:30
+	                 CONV_2D	           52.999	    0.370	    0.359	  0.670%	 99.889%	     0.000	        0	[displacement_bwd_2_int8]:31
+	                LOGISTIC	           53.359	    0.013	    0.013	  0.025%	 99.914%	     0.000	        0	[heatmap_int8]:32
+	              DEQUANTIZE	           53.372	    0.014	    0.013	  0.025%	 99.939%	     0.000	        0	[displacement_bwd_2]:33
+	              DEQUANTIZE	           53.385	    0.011	    0.012	  0.023%	 99.961%	     0.000	        0	[displacement_fwd_2]:34
+	              DEQUANTIZE	           53.398	    0.008	    0.007	  0.013%	 99.974%	     0.000	        0	[heatmap]:35
+	              DEQUANTIZE	           53.405	    0.014	    0.014	  0.026%	100.000%	     0.000	        0	[offset_2]:36
+
+============================== Top by Computation Time ==============================
+	             [node type]	          [start]	  [first]	 [avg ms]	     [%]	  [cdf%]	  [mem KB]	[times called]	[Name]
+	                 CONV_2D	           41.430	   10.363	   10.409	 19.415%	 19.415%	     0.000	        0	[MobilenetV1/Relu6_26]:27
+	                 CONV_2D	           35.126	    5.084	    5.080	  9.475%	 28.891%	     0.000	        0	[MobilenetV1/Relu6_24]:25
+	                 CONV_2D	           10.942	    2.942	    2.961	  5.522%	 34.413%	     0.000	        0	[MobilenetV1/Relu6_6]:7
+	                 CONV_2D	           20.751	    2.624	    2.595	  4.840%	 39.253%	     0.000	        0	[MobilenetV1/Relu6_14]:15
+	                 CONV_2D	            4.844	    2.571	    2.573	  4.799%	 44.052%	     0.000	        0	[MobilenetV1/Relu6_2]:3
+	                 CONV_2D	           32.257	    2.550	    2.551	  4.758%	 48.810%	     0.000	        0	[MobilenetV1/Relu6_22]:23
+	                 CONV_2D	           23.668	    2.557	    2.549	  4.755%	 53.564%	     0.000	        0	[MobilenetV1/Relu6_16]:17
+	                 CONV_2D	           16.237	    2.543	    2.544	  4.746%	 58.310%	     0.000	        0	[MobilenetV1/Relu6_10]:11
+	                 CONV_2D	           26.537	    2.512	    2.540	  4.738%	 63.048%	     0.000	        0	[MobilenetV1/Relu6_18]:19
+	                 CONV_2D	           29.396	    2.533	    2.538	  4.734%	 67.782%	     0.000	        0	[MobilenetV1/Relu6_20]:21
+
+Number of nodes executed: 38
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                 CONV_2D	       18	    31.906	    83.360%	    83.360%	     0.000	        0
+	       DEPTHWISE_CONV_2D	       13	     5.959	    15.569%	    98.929%	     0.000	        0
+	                QUANTIZE	        1	     0.223	     0.583%	    99.511%	     0.000	        0
+	        Misc Runtime Ops	        1	     0.148	     0.387%	    99.898%	    96.368	        0
+	              DEQUANTIZE	        4	     0.030	     0.078%	    99.976%	     0.000	        0
+	                LOGISTIC	        1	     0.009	     0.024%	   100.000%	     0.000	        0
+
+Timings (microseconds): count=70 first=519 curr=53370 min=519 max=53909 avg=38296 std=23892
+Memory (bytes): count=0
+38 nodes observed
+```
+
+</div></details>
+
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
 2. **[When you want to fine-tune DeepLab on other datasets, there are a few cases](https://github.com/tensorflow/models/issues/3730#issuecomment-380168917)**  
