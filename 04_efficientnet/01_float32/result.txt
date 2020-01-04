@@ -1,0 +1,1 @@
+{'loss': 2.010296, 'top_1_accuracy': 0.77564, 'top_5_accuracy': 0.93632}
