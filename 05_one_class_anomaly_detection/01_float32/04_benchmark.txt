@@ -1,0 +1,5 @@
+bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model -- \
+  --graph=${HOME}/weights_integer_quant.tflite \
+  --num_threads=4 \
+  --warmup_runs=1 \
+  --enable_op_profiling=true
