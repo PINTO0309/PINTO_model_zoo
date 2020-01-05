@@ -1,0 +1,4 @@
+http://download.tensorflow.org/models/object_detection/ssdlite_mobilenet_v2_coco_2018_05_09.tar.gz
+
+https://github.com/tensorflow/models/blob/fc4ce16b50e68bb15370d64d79021bd8578e8d86/research/object_detection/export_tflite_ssd_graph.py
+
