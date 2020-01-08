@@ -1,0 +1,7 @@
+$ bazel build tensorflow/python/tools:freeze_graph
+
+$ freeze_graph \
+  --input_graph=${HOME}/git/bts-fully-tf/models/bts_densenet161_480_640.pbtxt \
+  --input_checkpoint=${HOME}/git/bts-fully-tf/models/model \
+  --output_graph=${HOME}/git/bts-fully-tf/models/bts_densenet161_480_640_freeze_graph.pb \
+  --output_node_names=model/decoder/mul_16,model/decoder/truediv_3,model/decoder/truediv_9,model/decoder/truediv_15
