@@ -6,22 +6,12 @@ import glob
 
 ## Generating a calibration data set
 def representative_dataset_gen():
-    folder = ["images"]
-    image_size = 224
-    raw_test_data = []
-    for name in folder:
-        dir = "./" + name
-        files = glob.glob(dir + "/*.JPEG")
-        for file in files:
-            image = Image.open(file)
-            image = image.convert("RGB")
-            image = image.resize((image_size, image_size))
-            image = np.asarray(image).astype(np.float32)
-            image = image[np.newaxis,:,:,:]
-            raw_test_data.append(image)
-
+    raw_test_data = np.load('calibration_data_desktop_sounds.npy')
+    print("raw_test_data.shape=", raw_test_data.shape)
     for data in raw_test_data:
-        yield [data]
+        calibration_data = data[np.newaxis, :, :, :]
+        #print("calibration_data.shape=", calibration_data.shape)
+        yield [calibration_data]
 
 tf.compat.v1.enable_eager_execution()
 
@@ -33,23 +23,23 @@ with open('./mobilenetv2_fsd2018_41cls_weight_quant.tflite', 'wb') as w:
     w.write(tflite_quant_model)
 print("Weight Quantization complete! - mobilenetv2_fsd2018_41cls_weight_quant.tflite")
 
-## Integer Quantization - Input/Output=float32
-#converter = tf.lite.TFLiteConverter.from_saved_model('./saved_model')
-#converter.optimizations = [tf.lite.Optimize.DEFAULT]
-#converter.representative_dataset = representative_dataset_gen
-#tflite_quant_model = converter.convert()
-#with open('./mobilenetv2_fsd2018_41cls_integer_quant.tflite', 'wb') as w:
-#    w.write(tflite_quant_model)
-#print("Integer Quantization complete! - mobilenetv2_fsd2018_41cls_integer_quant.tflite")
+# Integer Quantization - Input/Output=float32
+converter = tf.lite.TFLiteConverter.from_saved_model('./saved_model')
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.representative_dataset = representative_dataset_gen
+tflite_quant_model = converter.convert()
+with open('./mobilenetv2_fsd2018_41cls_integer_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Integer Quantization complete! - mobilenetv2_fsd2018_41cls_integer_quant.tflite")
 
-## Full Integer Quantization - Input/Output=int8
-#converter = tf.lite.TFLiteConverter.from_saved_model('./saved_model')
-#converter.optimizations = [tf.lite.Optimize.DEFAULT]
-#converter.representative_dataset = representative_dataset_gen
-#converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
-#converter.inference_input_type = tf.uint8
-#converter.inference_output_type = tf.uint8
-#tflite_quant_model = converter.convert()
-#with open('./mobilenetv2_fsd2018_41cls_full_integer_quant.tflite', 'wb') as w:
-#    w.write(tflite_quant_model)
-#print("Full Integer Quantization complete! - mobilenetv2_fsd2018_41cls_full_integer_quant.tflite")
+# Full Integer Quantization - Input/Output=int8
+converter = tf.lite.TFLiteConverter.from_saved_model('./saved_model')
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.representative_dataset = representative_dataset_gen
+converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+converter.inference_input_type = tf.uint8
+converter.inference_output_type = tf.uint8
+tflite_quant_model = converter.convert()
+with open('./mobilenetv2_fsd2018_41cls_full_integer_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Full Integer Quantization complete! - mobilenetv2_fsd2018_41cls_full_integer_quant.tflite")

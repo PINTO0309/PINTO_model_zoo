@@ -70,7 +70,7 @@ for node in graph_def.node:
         print("##### mobilenetv2_fsd2018_41cls - Input Node Name #####", node.name) # this will be the input node
         input_name=node.name
 
-# ssdlite_mobilenet_v2_coco output names
+# mobilenetv2_fsd2018_41cls output names
 output_node_names = ['output0']
 outputs = ['output0:0']
 
@@ -78,6 +78,6 @@ outputs = ['output0:0']
 transforms = []
 optimize_graph('./', 'mobilenetv2_fsd2018_41cls.pb', transforms, input_name, output_node_names, outname='optimized_mobilenetv2_fsd2018_41cls.pb')
 
-# convert this to a TF Serving compatible mode - model-mobilenet_v1_101_225
+# convert this to a TF Serving compatible mode - mobilenetv2_fsd2018_41cls
 shutil.rmtree('./saved_model', ignore_errors=True)
 convert_graph_def_to_saved_model('./saved_model', './optimized_mobilenetv2_fsd2018_41cls.pb', input_name, outputs)
