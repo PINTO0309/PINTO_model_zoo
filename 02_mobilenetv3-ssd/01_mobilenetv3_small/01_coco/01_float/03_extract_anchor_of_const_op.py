@@ -3,7 +3,7 @@ from tensorflow.python.platform import gfile
 from tensorflow.python.framework import tensor_util
 import numpy as np
 
-GRAPH_PB_PATH = './mobilenet_v3_small.pb' #path to your .pb file
+GRAPH_PB_PATH = './tflite_graph.pb' #path to your .pb file
 
 with tf.Session() as sess:
   with gfile.FastGFile(GRAPH_PB_PATH,'rb') as f:
