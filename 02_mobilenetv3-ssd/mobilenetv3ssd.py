@@ -93,14 +93,10 @@ class ObjectDetectorLite():
         return None
 
 if __name__ == '__main__':
-    #detector = ObjectDetectorLite('01_mobilenetv3_small/01_coco/02_weight_quantization/mobilenet_v3_small_weight_quant.tflite')
-    #detector = ObjectDetectorLite('01_mobilenetv3_small/01_coco/03_integer_quantization/mobilenet_v3_small_integer_quant.tflite')
-    #detector = ObjectDetectorLite('/home/b920405/git/TensorflowLite-bin/models/mobilenet_ssd_v2_coco_quant_postprocess.tflite')
-    #detector = ObjectDetectorLite('/home/b920405/models/research/ssd_mobilenet_v3_small_coco_2019_08_14/mobilenet_v3_small_integer_quant.tflite')
-    #detector = ObjectDetectorLite('/home/b920405/models/research/ssd_mobilenet_v3_small_coco_2019_08_14/mobilenet_v3_small_full_integer_quant.tflite')
-    detector = ObjectDetectorLite('/home/b920405/models/research/ssd_mobilenet_v3_small_coco_2019_08_14/mobilenet_v3_small_weight_quant.tflite')
-
-
+    detector = ObjectDetectorLite('/home/b920405/Downloads/ssd_mobilenet_v3_small_coco_2020_01_14/ssd_mobilenet_v3_small_coco_weight_quant.tflite')
+    #detector = ObjectDetectorLite('/home/b920405/Downloads/ssd_mobilenet_v3_small_coco_2020_01_14/ssd_mobilenet_v3_small_coco_integer_quant.tflite')
+    #detector = ObjectDetectorLite('/home/b920405/Downloads/ssd_mobilenet_v3_large_coco_2020_01_14/ssd_mobilenet_v3_large_coco_weight_quant.tflite')
+    #detector = ObjectDetectorLite('/home/b920405/Downloads/ssd_mobilenet_v3_large_coco_2020_01_14/ssd_mobilenet_v3_large_coco_integer_quant.tflite')
     image = cv2.cvtColor(cv2.imread('dog.jpg'), cv2.COLOR_BGR2RGB)
 
     result = detector.detect(image, 0.4)
