@@ -1,5 +1,6 @@
 import numpy as np
 import time
+import math
 try:
     from tflite_runtime.interpreter import Interpreter
 except:
@@ -18,13 +19,34 @@ LABELS = [
 'toaster','sink','refrigerator','???','book','clock','vase','scissors','teddy bear','hair drier',
 'toothbrush']
 
+y_scale = 10.0
+x_scale = 10.0
+h_scale = 5.0
+w_scale = 5.0
+
 class ObjectDetectorLite():
     def __init__(self, model_path='detect.tflite'):
         self.interpreter = Interpreter(model_path=model_path)
-        #self.interpreter.set_num_threads(4)
+        try:
+            self.interpreter.set_num_threads(4)
+        except:
+            pass
         self.interpreter.allocate_tensors()
         self.input_details = self.interpreter.get_input_details()
         self.output_details = self.interpreter.get_output_details()
+
+    def decode_box_encodings(self, box_encoding, anchors, num_boxes):
+        decoded_boxes = np.zeros((1, num_boxes, 4), dtype=np.float32)
+        for i in range(num_boxes):
+            ycenter = box_encoding[0][i][0] / y_scale * anchors[i][2] + anchors[i][0]
+            xcenter = box_encoding[0][i][1] / x_scale * anchors[i][3] + anchors[i][1]
+            half_h = 0.5 * math.exp((box_encoding[0][i][2] / h_scale)) * anchors[i][2]
+            half_w = 0.5 * math.exp((box_encoding[0][i][3] / w_scale)) * anchors[i][3]
+            decoded_boxes[0][i][0] = (ycenter - half_h) # ymin
+            decoded_boxes[0][i][1] = (xcenter - half_w) # xmin
+            decoded_boxes[0][i][2] = (ycenter + half_h) # ymax
+            decoded_boxes[0][i][3] = (xcenter + half_w) # xmax
+        return decoded_boxes
 
     #def _boxes_coordinates(self,
     #                        image,
@@ -78,6 +100,11 @@ class ObjectDetectorLite():
         print("classes=", classes[0])
         print("classes.shape=", classes[0].shape)
         np.savetxt('./classes.csv', classes[0], delimiter=',')
+
+        box_classe = np.argmax(classes[0], axis=1)
+        print("box_classe=", box_classe)
+        print("box_classe.shape=", box_classe.shape)
+        np.savetxt('./box_classe.csv', box_classe, delimiter=',')
 
         #print("scores=", scores[0])
         #print("scores.shape=", scores[0].shape)

@@ -1,0 +1,7 @@
+$ freeze_graph \
+--input_graph=./model.latest/graph.pbtxt \
+--input_checkpoint=./model.latest/model.latest \
+--output_node_names=monodepth2_model/strided_slice,monodepth2_model/ResizeBilinear \
+--output_graph=./model.latest/frozen_model.pb \
+--input_binary=False \
+--clear_devices
