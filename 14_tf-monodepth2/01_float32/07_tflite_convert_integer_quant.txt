@@ -1,0 +1,15 @@
+sudo bazel run \
+--define=with_select_tf_ops=true \
+tflite_convert -- \
+--graph_def_file=${HOME}/git/PINTO_model_zoo/14_tf-monodepth2/01_float32/frozen_model_uint8.pb \
+--output_file=${HOME}/work/monodepth2_flexdelegate_integer_quant.tflite \
+--input_arrays=data_loading/input \
+--output_arrays=monodepth2_model/Cast,monodepth2_model/Cast_1 \
+--target_ops=TFLITE_BUILTINS,SELECT_TF_OPS \
+--enable_select_tf_ops \
+--inference_type=QUANTIZED_UINT8 \
+--inference_input_type=QUANTIZED_UINT8 \
+--std_dev_values=127 \
+--mean_values=127 \
+--default_ranges_min=0 \
+--default_ranges_max=6
