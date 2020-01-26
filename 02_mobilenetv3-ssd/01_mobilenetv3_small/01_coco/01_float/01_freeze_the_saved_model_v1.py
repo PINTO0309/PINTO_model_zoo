@@ -32,7 +32,7 @@ def convert_graph_def_to_saved_model(export_dir, graph_filepath, input_name, out
 tf.compat.v1.enable_eager_execution()
 
 # Look up the name of the placeholder for the input node
-graph_def=get_graph_def_from_file('./frozen_inference_graph.pb')
+graph_def=get_graph_def_from_file('./tflite_graph.pb')
 input_name=""
 for node in graph_def.node:
     if node.op=='Placeholder':

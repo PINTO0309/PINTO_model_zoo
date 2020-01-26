@@ -2,7 +2,14 @@ $ cd ${HOME}/models/research
 $ export PYTHONPATH=`pwd`:`pwd`/slim:$PYTHONPATH
 
 $ python3 object_detection/export_tflite_ssd_graph.py \
-    --pipeline_config_path=${HOME}/Downloads/ssd_mobilenet_v3_large_coco_2020_01_14/pipeline.config \
-    --trained_checkpoint_prefix=${HOME}/Downloads/ssd_mobilenet_v3_large_coco_2020_01_14/model.ckpt \
-    --output_directory=${HOME}/Downloads/ssd_mobilenet_v3_large_coco_2020_01_14 \
+    --pipeline_config_path=${HOME}/Downloads/ssd_mobilenet_v3_small_coco_2020_01_14/pipeline.config \
+    --trained_checkpoint_prefix=${HOME}/Downloads/ssd_mobilenet_v3_small_coco_2020_01_14/model.ckpt \
+    --output_directory=${HOME}/Downloads/ssd_mobilenet_v3_small_coco_2020_01_14 \
     --add_postprocessing_op=False
+
+
+$ python3 object_detection/export_tflite_ssd_graph.py \
+    --pipeline_config_path=${HOME}/Downloads/ssd_mobilenet_v3_small_coco_2020_01_14/pipeline.config \
+    --trained_checkpoint_prefix=${HOME}/Downloads/ssd_mobilenet_v3_small_coco_2020_01_14/model.ckpt \
+    --output_directory=${HOME}/Downloads/ssd_mobilenet_v3_small_coco_2020_01_14 \
+    --add_postprocessing_op=True
