@@ -929,21 +929,22 @@ Memory (bytes): count=0
 <details><summary>Ubuntu 19.10 aarch64 + RaspberryPi4 MobileNetV2-SSDLite ssdlite_mobilenet_v2_coco_300_integer_quant.tflite Benchmark</summary><div>
 
 ```bash
-Number of nodes executed: 127
+Number of nodes executed: 128
 ============================== Summary by node type ==============================
 	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
-	                 CONV_2D	       55	    40.425	    72.871%	    72.871%	     0.000	       55
-	       DEPTHWISE_CONV_2D	       33	    11.313	    20.393%	    93.264%	     0.000	       33
-	                     ADD	       10	     2.189	     3.946%	    97.210%	     0.000	       10
-	                QUANTIZE	       11	     0.766	     1.381%	    98.590%	     0.000	       11
-	                LOGISTIC	        1	     0.357	     0.644%	    99.234%	     0.000	        1
-	              DEQUANTIZE	        2	     0.238	     0.429%	    99.663%	     0.000	        2
-	           CONCATENATION	        2	     0.129	     0.233%	    99.895%	     0.000	        2
-	                 RESHAPE	       13	     0.058	     0.105%	   100.000%	     0.000	       13
+	                 CONV_2D	       55	    27.253	    71.185%	    71.185%	     0.000	        0
+	       DEPTHWISE_CONV_2D	       33	     8.024	    20.959%	    92.143%	     0.000	        0
+	                     ADD	       10	     1.565	     4.088%	    96.231%	     0.000	        0
+	                QUANTIZE	       11	     0.546	     1.426%	    97.657%	     0.000	        0
+	        Misc Runtime Ops	        1	     0.368	     0.961%	    98.618%	   250.288	        0
+	                LOGISTIC	        1	     0.253	     0.661%	    99.279%	     0.000	        0
+	              DEQUANTIZE	        2	     0.168	     0.439%	    99.718%	     0.000	        0
+	           CONCATENATION	        2	     0.077	     0.201%	    99.919%	     0.000	        0
+	                 RESHAPE	       13	     0.031	     0.081%	   100.000%	     0.000	        0
 
-Timings (microseconds): count=50 first=55413 curr=55416 min=55124 max=58760 avg=55532.5 std=598
+Timings (microseconds): count=70 first=1289 curr=53049 min=1289 max=53590 avg=38345.2 std=23436
 Memory (bytes): count=0
-127 nodes observed
+128 nodes observed
 ```
 
 </div></details>
