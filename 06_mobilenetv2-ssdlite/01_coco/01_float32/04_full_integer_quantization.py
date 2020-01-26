@@ -10,12 +10,13 @@ def representative_dataset_gen():
     yield [image]
 
 
-tf.compat.v1.enable_eager_execution()
+#tf.compat.v1.enable_eager_execution()
 
 raw_test_data, info = tfds.load(name="coco/2017", with_info=True, split="test", data_dir="~/TFDS", download=False)
 
 # Integer Quantization - Input/Output=float32
 converter = tf.lite.TFLiteConverter.from_saved_model('./saved_model')
+converter.experimental_new_converter = True
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
 converter.representative_dataset = representative_dataset_gen
 converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
