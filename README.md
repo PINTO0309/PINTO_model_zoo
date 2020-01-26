@@ -971,6 +971,31 @@ Memory (bytes): count=0
 
 </div></details>
 
+<details><summary>Ubuntu 19.10 aarch64 + RaspberryPi4 ml-sound-classifier mobilenetv2_fsd2018_41cls_integer_quant.tflite Benchmark</summary><div>
+
+
+```bash
+Number of nodes executed: 173
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                QUANTIZE	       70	     1.117	    23.281%	    23.281%	     0.000	        0
+	                 MINIMUM	       35	     1.104	    23.010%	    46.290%	     0.000	        0
+	                 CONV_2D	       34	     0.866	    18.049%	    64.339%	     0.000	        0
+	                    MEAN	        1	     0.662	    13.797%	    78.137%	     0.000	        0
+	       DEPTHWISE_CONV_2D	       18	     0.476	     9.921%	    88.058%	     0.000	        0
+	         FULLY_CONNECTED	        2	     0.251	     5.231%	    93.289%	     0.000	        0
+	        Misc Runtime Ops	        1	     0.250	     5.211%	    98.499%	    71.600	        0
+	                     ADD	       10	     0.071	     1.480%	    99.979%	     0.000	        0
+	                 SOFTMAX	        1	     0.001	     0.021%	   100.000%	     0.000	        0
+	              DEQUANTIZE	        1	     0.000	     0.000%	   100.000%	     0.000	        0
+
+Timings (microseconds): count=198 first=477 curr=9759 min=477 max=10847 avg=4876.6 std=4629
+Memory (bytes): count=0
+173 nodes observed
+```
+
+</div></details>
+
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
 2. **[When you want to fine-tune DeepLab on other datasets, there are a few cases](https://github.com/tensorflow/models/issues/3730#issuecomment-380168917)**  
