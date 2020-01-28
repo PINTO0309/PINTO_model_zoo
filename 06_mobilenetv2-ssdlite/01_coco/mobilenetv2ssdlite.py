@@ -52,7 +52,7 @@ class ObjectDetectorLite():
         return decoded_boxes
 
 
-    def Non_Maximum_Suprression(self, box_encoding, class_predictions):
+    def non_maximum_suprression(self, box_encoding, class_predictions):
         val, idx = class_predictions[:,1:].max(axis=1), \
                    class_predictions[:,1:].argmax(axis=1)
         thresh_val, thresh_idx = np.array(val)[val>=self.non_max_suppression_score_threshold], \
@@ -83,7 +83,7 @@ class ObjectDetectorLite():
             # thresh_box_stack = [ymin, xmin, ymax, xmax, class_idx, prob]
             for j in range(i + 1, num_boxes_kept):
                 if (thresh_box_stack[j, 6] == 1):
-                    intersection_over_union = self.ComputeIntersectionOverUnion(thresh_box_stack[i], thresh_box_stack[j])
+                    intersection_over_union = self.compute_intersection_over_union(thresh_box_stack[i], thresh_box_stack[j])
                     if (intersection_over_union > self.intersection_over_union_threshold):
                         thresh_box_stack[j, 6] = 0
                         num_active_candidate -= 1
@@ -91,7 +91,7 @@ class ObjectDetectorLite():
         return thresh_box_stack[thresh_box_stack[:, 7] == 1, :5] #[ymin, xmin, ymax, xmax, class_idx, prob]
 
 
-    def ComputeIntersectionOverUnion(self, box_i, box_j):
+    def compute_intersection_over_union(self, box_i, box_j):
         area_i = (box_i[2] - box_i[0]) * (box_i[3] - box_i[1])
         area_j = (box_j[2] - box_j[0]) * (box_j[3] - box_j[1])
         if (area_i <= 0 or area_j <= 0):
@@ -122,7 +122,7 @@ class ObjectDetectorLite():
         boxes = self.interpreter.get_tensor(self.output_details[0]['index'])[0]
         classes = self.interpreter.get_tensor(self.output_details[1]['index'])[0]
         decoded_boxes = self.decode_box_encodings(boxes, self.anchors, boxes.shape[0])
-        detected_boxes = self.Non_Maximum_Suprression(decoded_boxes, classes)
+        detected_boxes = self.non_maximum_suprression(decoded_boxes, classes)
 
         return detected_boxes
 
