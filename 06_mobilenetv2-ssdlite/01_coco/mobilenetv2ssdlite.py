@@ -54,15 +54,18 @@ class ObjectDetectorLite():
 
     def Non_Maximum_Suprression(self, box_encoding, class_predictions):
         val, idx = class_predictions[:,1:].max(axis=1), \
-                  class_predictions[:,1:].argmax(axis=1)
+                   class_predictions[:,1:].argmax(axis=1)
         thresh_val, thresh_idx = np.array(val)[val>=self.non_max_suppression_score_threshold], \
                                  np.array(idx)[val>=self.non_max_suppression_score_threshold]
         thresh_box = np.array(box_encoding)[val>=self.non_max_suppression_score_threshold]
+        anchor_count = thresh_box.shape[0]
         thresh_box_stack = np.hstack((thresh_box, thresh_idx[:, np.newaxis], thresh_val[:, np.newaxis]))
         thresh_box_desc = thresh_box_stack[np.argsort(thresh_box_stack[:, 5])[::-1]]
-        active_box_candidate = np.ones((thresh_box_desc.shape[0], 1))
+        active_box_candidate = np.ones((anchor_count, 1))
         thresh_box_stack = np.hstack((thresh_box_stack, active_box_candidate))
-        num_boxes_kept, num_active_candidate = thresh_box_stack.shape[0]
+        box_detected_flg = np.zeros((anchor_count, 1))
+        thresh_box_stack = np.hstack((thresh_box_stack, box_detected_flg))
+        num_boxes_kept, num_active_candidate = anchor_count
         output_size = min(num_active_candidate, self.max_detections)
         num_selected_count = 0
 
@@ -71,6 +74,7 @@ class ObjectDetectorLite():
                 break
             if (thresh_box_stack[i, 6] == 1):
                 thresh_box_stack[i, 6] = 0
+                thresh_box_stack[i, 7] = 1
                 num_active_candidate -= 1
                 num_selected_count += 1
             else:
@@ -81,11 +85,10 @@ class ObjectDetectorLite():
                 if (thresh_box_stack[j, 6] == 1):
                     intersection_over_union = self.ComputeIntersectionOverUnion(thresh_box_stack[i], thresh_box_stack[j])
                     if (intersection_over_union > self.intersection_over_union_threshold):
-                        thresh_box_stack[i, 6] = 0
+                        thresh_box_stack[j, 6] = 0
                         num_active_candidate -= 1
-                        num_selected_count += 1
 
-        return thresh_box_stack[thresh_box_stack[:, 6] == 1, :5] #[ymin, xmin, ymax, xmax, class_idx, prob]
+        return thresh_box_stack[thresh_box_stack[:, 7] == 1, :5] #[ymin, xmin, ymax, xmax, class_idx, prob]
 
 
     def ComputeIntersectionOverUnion(self, box_i, box_j):
