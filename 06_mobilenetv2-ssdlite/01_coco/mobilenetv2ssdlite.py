@@ -38,8 +38,8 @@ class ObjectDetectorLite():
         self.anchors = np.load('./anchors.npy')
 
 
-    def decode_box_encodings(self, box_encoding, anchors, num_boxes):
-        decoded_boxes = np.zeros((num_boxes, 4), dtype=np.float32)
+    def decode_box_encodings(self, box_encoding, anchors):
+        decoded_boxes = np.zeros((box_encoding.shape[0], 4), dtype=np.float32)
         for i in range(num_boxes):
             ycenter = box_encoding[i][0] / self.y_scale * anchors[i][2] + anchors[i][0]
             xcenter = box_encoding[i][1] / self.x_scale * anchors[i][3] + anchors[i][1]
@@ -121,10 +121,10 @@ class ObjectDetectorLite():
         # get results
         boxes = self.interpreter.get_tensor(self.output_details[0]['index'])[0]
         classes = self.interpreter.get_tensor(self.output_details[1]['index'])[0]
-        decoded_boxes = self.decode_box_encodings(boxes, self.anchors, boxes.shape[0])
+        decoded_boxes = self.decode_box_encodings(boxes, self.anchors)
         detected_boxes = self.non_maximum_suprression(decoded_boxes, classes)
 
-        return detected_boxes
+        return detected_boxes #[ymin, xmin, ymax, xmax, class_idx, prob]
 
 
 if __name__ == '__main__':
