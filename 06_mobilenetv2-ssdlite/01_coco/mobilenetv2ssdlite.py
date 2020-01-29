@@ -124,8 +124,8 @@ class ObjectDetectorLite():
         boxes = self.interpreter.get_tensor(self.output_details[0]['index'])[0]
         classes = self.interpreter.get_tensor(self.output_details[1]['index'])[0]
 
-        print(classes)
-        np.savetxt('test.csv', classes, delimiter=',')
+        #print(classes)
+        #np.savetxt('test.csv', classes, delimiter=',')
 
         decoded_boxes = self.decode_box_encodings(boxes, self.anchors)
         detected_boxes = self.non_maximum_suprression(decoded_boxes, classes)
