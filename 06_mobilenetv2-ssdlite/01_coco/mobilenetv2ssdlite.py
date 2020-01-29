@@ -135,7 +135,8 @@ class ObjectDetectorLite():
 
 if __name__ == '__main__':
     #detector = ObjectDetectorLite('/home/b920405/Downloads/ssdlite_mobilenet_v2_coco_2018_05_09/export/ssdlite_mobilenet_v2_coco_300_integer_quant.tflite')
-    detector = ObjectDetectorLite('/home/b920405/Downloads/ssdlite_mobilenet_v2_coco_2018_05_09/export/ssdlite_mobilenet_v2_coco_300_weight_quant.tflite')
+    detector = ObjectDetectorLite('/home/b920405/Downloads/ssdlite_mobilenet_v2_coco_2018_05_09/export/ssdlite_mobilenet_v2_coco_300_integer_quant_org.tflite')
+    #detector = ObjectDetectorLite('/home/b920405/Downloads/ssdlite_mobilenet_v2_coco_2018_05_09/export/ssdlite_mobilenet_v2_coco_300_weight_quant.tflite')
     image = cv2.cvtColor(cv2.imread('dog.jpg'), cv2.COLOR_BGR2RGB)
     image_height = image.shape[0]
     image_width  = image.shape[1]
