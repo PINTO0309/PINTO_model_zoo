@@ -47,15 +47,15 @@ class ObjectDetectorLite():
             half_h = 0.5 * math.exp((box_encoding[i, 2] / self.h_scale)) * anchors[i, 2]
             half_w = 0.5 * math.exp((box_encoding[i, 3] / self.w_scale)) * anchors[i, 3]
             decoded_boxes[i, 0] = (ycenter - half_h) # ymin
-            decoded_boxes[i, [1] = (xcenter - half_w) # xmin
+            decoded_boxes[i, 1] = (xcenter - half_w) # xmin
             decoded_boxes[i, 2] = (ycenter + half_h) # ymax
             decoded_boxes[i, 3] = (xcenter + half_w) # xmax
         return decoded_boxes
 
 
     def non_maximum_suprression(self, box_encoding, class_predictions):
-        val, idx = class_predictions[:,1:].max(axis=1), \
-                   class_predictions[:,1:].argmax(axis=1)
+        val, idx = class_predictions[:, 1:].max(axis=1), \
+                   class_predictions[:, 1:].argmax(axis=1)
         thresh_val, thresh_idx = np.array(val)[val>=self.non_max_suppression_score_threshold], \
                                  np.array(idx)[val>=self.non_max_suppression_score_threshold]
         thresh_box = np.array(box_encoding)[val>=self.non_max_suppression_score_threshold]
