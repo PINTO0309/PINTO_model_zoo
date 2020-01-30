@@ -46,10 +46,10 @@ class ObjectDetectorLite():
             xcenter = box_encoding[i, 1] / self.x_scale * anchors[i, 3] + anchors[i, 1]
             half_h = 0.5 * math.exp((box_encoding[i, 2] / self.h_scale)) * anchors[i, 2]
             half_w = 0.5 * math.exp((box_encoding[i, 3] / self.w_scale)) * anchors[i, 3]
-            decoded_boxes[i][0] = (ycenter - half_h) # ymin
-            decoded_boxes[i][1] = (xcenter - half_w) # xmin
-            decoded_boxes[i][2] = (ycenter + half_h) # ymax
-            decoded_boxes[i][3] = (xcenter + half_w) # xmax
+            decoded_boxes[i, 0] = (ycenter - half_h) # ymin
+            decoded_boxes[i, [1] = (xcenter - half_w) # xmin
+            decoded_boxes[i, 2] = (ycenter + half_h) # ymax
+            decoded_boxes[i, 3] = (xcenter + half_w) # xmax
         return decoded_boxes
 
 
