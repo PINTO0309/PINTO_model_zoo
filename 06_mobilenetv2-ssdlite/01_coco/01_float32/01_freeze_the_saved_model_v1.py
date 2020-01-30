@@ -29,4 +29,4 @@ tf.compat.v1.enable_eager_execution()
 
 # convert this to a TF Serving compatible mode
 shutil.rmtree('./saved_model', ignore_errors=True)
-convert_graph_def_to_saved_model('./saved_model', './tflite_graph_300.pb', 'normalized_input_image_tensor', ['raw_outputs/class_predictions:0','raw_outputs/box_encodings:0'])
+convert_graph_def_to_saved_model('./saved_model', './tflite_graph.pb', 'normalized_input_image_tensor', ['raw_outputs/class_predictions:0','raw_outputs/box_encodings:0'])
