@@ -29,7 +29,7 @@ class ObjectDetectorLite():
         self.input_details = self.interpreter.get_input_details()
         self.output_details = self.interpreter.get_output_details()
         self.max_detections = 10
-        self.non_max_suppression_score_threshold = 0.3
+        self.non_max_suppression_score_threshold = 0.7
         self.intersection_over_union_threshold = 0.6
         self.y_scale = 10.0
         self.x_scale = 10.0
@@ -116,10 +116,8 @@ class ObjectDetectorLite():
 
         # run model
         self.interpreter.set_tensor(self.input_details[0]['index'], frame)
-        start_time = time.perf_counter()
         self.interpreter.invoke()
-        stop_time = time.perf_counter()
-        print("time: ", stop_time - start_time)
+
         # get results
         boxes = self.interpreter.get_tensor(self.output_details[0]['index'])[0]
         classes = self.interpreter.get_tensor(self.output_details[1]['index'])[0]
@@ -131,6 +129,8 @@ class ObjectDetectorLite():
 
 
 if __name__ == '__main__':
+    start_time = time.perf_counter()
+
     detector = ObjectDetectorLite('/home/b920405/Downloads/ssdlite_mobilenet_v2_coco_2018_05_09/export/ssdlite_mobilenet_v2_coco_300_integer_quant.tflite')
     #detector = ObjectDetectorLite('/home/b920405/Downloads/ssdlite_mobilenet_v2_coco_2018_05_09/export/ssdlite_mobilenet_v2_coco_300_weight_quant.tflite')
     image = cv2.cvtColor(cv2.imread('dog.jpg'), cv2.COLOR_BGR2RGB)
@@ -148,7 +148,10 @@ if __name__ == '__main__':
         probability = box[5]
         print('coordinates: ({}, {})-({}, {}). class: "{}". probability: {:.2f}'.format(xmin, ymin, xmax, ymax, classnum, probability))
         cv2.rectangle(image, (xmin, ymin), (xmax, ymax), (0, 255, 0), 2)
-        #cv2.putText(image, '{}: {:.2f}'.format(obj[3], obj[2]), (obj[0][0], obj[0][1] - 5), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 2)
+        cv2.putText(image, '{}: {:.2f}'.format(LABELS[classnum],probability), (xmin, ymin - 5), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 0), 2)
+
+    stop_time = time.perf_counter()
+    print("time: ", stop_time - start_time)
 
     cv2.imwrite('result.jpg', cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
 
