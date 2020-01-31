@@ -1,6 +1,8 @@
 import numpy as np
+from numba import jit
 import math
 import time
+import sys
 try:
     from tflite_runtime.interpreter import Interpreter
 except:
@@ -121,23 +123,31 @@ class ObjectDetectorLite():
         # get results
         boxes = self.interpreter.get_tensor(self.output_details[0]['index'])[0]
         classes = self.interpreter.get_tensor(self.output_details[1]['index'])[0]
+        scores = self.interpreter.get_tensor(self.output_details[2]['index'])[0]
+        count = self.interpreter.get_tensor(self.output_details[3]['index'])[0]
 
-        decoded_boxes = self.decode_box_encodings(boxes, self.anchors)
-        detected_boxes = self.non_maximum_suprression(decoded_boxes, classes)
+        #decoded_boxes = self.decode_box_encodings(boxes, self.anchors)
+        #detected_boxes = self.non_maximum_suprression(decoded_boxes, classes)
 
-        return detected_boxes #[ymin, xmin, ymax, xmax, class_idx, prob]
+        #return detected_boxes #[ymin, xmin, ymax, xmax, class_idx, prob]
+        return boxes, classes, scores, count
 
 
 if __name__ == '__main__':
     start_time = time.perf_counter()
 
-    detector = ObjectDetectorLite('03_integer_quantization/ssdlite_mobilenet_v2_coco_300_integer_quant.tflite')
+    detector = ObjectDetectorLite('03_integer_quantization/ssdlite_mobilenet_v2_coco_300_integer_quant_with_postprocess.tflite')
+    #detector = ObjectDetectorLite('03_integer_quantization/ssdlite_mobilenet_v2_coco_300_integer_quant.tflite')
     #detector = ObjectDetectorLite('02_weight_quantization/ssdlite_mobilenet_v2_coco_300_weight_quant.tflite')
     image = cv2.cvtColor(cv2.imread('dog.jpg'), cv2.COLOR_BGR2RGB)
     image_height = image.shape[0]
     image_width  = image.shape[1]
     results = detector.detect(image)
     print(results)
+
+    stop_time = time.perf_counter()
+    print("time: ", stop_time - start_time)
+    sys.exit(0)
 
     for box in results:
         ymin = int(box[0] * image_height)

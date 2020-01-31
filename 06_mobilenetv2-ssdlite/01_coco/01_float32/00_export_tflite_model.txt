@@ -7,3 +7,13 @@ $ python3 object_detection/export_tflite_ssd_graph.py \
     --trained_checkpoint_prefix=${HOME}/Downloads/ssdlite_mobilenet_v2_coco_2018_05_09/model.ckpt \
     --output_directory=${HOME}/Downloads/ssdlite_mobilenet_v2_coco_2018_05_09/export \
     --add_postprocessing_op=False
+
+
+$ python3 object_detection/export_tflite_ssd_graph.py \
+    --pipeline_config_path=${HOME}/Downloads/ssdlite_mobilenet_v2_coco_2018_05_09/pipeline.config \
+    --trained_checkpoint_prefix=${HOME}/Downloads/ssdlite_mobilenet_v2_coco_2018_05_09/model.ckpt \
+    --output_directory=${HOME}/Downloads/ssdlite_mobilenet_v2_coco_2018_05_09/export \
+    --add_postprocessing_op=True
+
+
+
