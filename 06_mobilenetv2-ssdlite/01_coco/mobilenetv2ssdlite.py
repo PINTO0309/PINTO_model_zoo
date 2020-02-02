@@ -62,26 +62,24 @@ if __name__ == '__main__':
     scores = interpreter.get_tensor(output_details[2]['index'])[0]
     count = interpreter.get_tensor(output_details[3]['index'])[0]
 
-    #print(boxes, classes, scores, count)
+    for box, classidx, score in zip(boxes, classes, scores):
+        probability = score
+        if probability >= 0.6:
+            ymin = int(box[0] * image_height)
+            xmin = int(box[1] * image_width)
+            ymax = int(box[2] * image_height)
+            xmax = int(box[3] * image_width)
+            classnum = int(classidx)
+            probability = score
+            print('coordinates: ({}, {})-({}, {}). class: "{}". probability: {:.2f}'.format(xmin, ymin, xmax, ymax, classnum, probability))
+            cv2.rectangle(image, (xmin, ymin), (xmax, ymax), (0, 255, 0), 2)
+            cv2.putText(image, '{}: {:.2f}'.format(LABELS[classnum],probability), (xmin, ymin - 5), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 0), 2)
+
 
     stop_time = time.perf_counter()
     print("TOTAL time: ", stop_time - start_time)
+
     print(boxes, classes, scores, count)
-    sys.exit(0)
-
-    #for box in results:
-    #    ymin = int(box[0] * image_height)
-    #    xmin = int(box[1] * image_width)
-    #    ymax = int(box[2] * image_height)
-    #    xmax = int(box[3] * image_width)
-    #    classnum = int(box[4])
-    #    probability = box[5]
-    #    print('coordinates: ({}, {})-({}, {}). class: "{}". probability: {:.2f}'.format(xmin, ymin, xmax, ymax, classnum, probability))
-    #    cv2.rectangle(image, (xmin, ymin), (xmax, ymax), (0, 255, 0), 2)
-    #    cv2.putText(image, '{}: {:.2f}'.format(LABELS[classnum],probability), (xmin, ymin - 5), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 0), 2)
-
-    stop_time = time.perf_counter()
-    print("time: ", stop_time - start_time)
 
     cv2.imwrite('result.jpg', cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
 
