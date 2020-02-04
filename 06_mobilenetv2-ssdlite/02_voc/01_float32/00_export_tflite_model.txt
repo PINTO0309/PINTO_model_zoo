@@ -1,0 +1,19 @@
+$ cd ${HOME}/models/research
+$ export PYTHONPATH=`pwd`:`pwd`/slim:$PYTHONPATH
+$ mkdir -p ${HOME}/44548/export
+
+$ python3 object_detection/export_tflite_ssd_graph.py \
+    --pipeline_config_path=${HOME}/44548/pipeline.config \
+    --trained_checkpoint_prefix=${HOME}/44548/model.ckpt-44548 \
+    --output_directory=${HOME}/44548/export \
+    --add_postprocessing_op=False
+
+
+$ python3 object_detection/export_tflite_ssd_graph.py \
+    --pipeline_config_path=${HOME}/44548/pipeline.config \
+    --trained_checkpoint_prefix=${HOME}/44548/model.ckpt-44548 \
+    --output_directory=${HOME}/44548/export \
+    --add_postprocessing_op=True
+
+
+
