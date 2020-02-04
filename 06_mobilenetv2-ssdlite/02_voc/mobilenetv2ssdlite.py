@@ -9,8 +9,8 @@ except:
     from tensorflow.lite.python.interpreter import Interpreter
 
 LABELS = [
-'background','aeroplane','bicycle','bird','boat','bottle','bus','car','cat','chair',
-'cow','diningtable','dog','horse','motorbike','person','pottedplant','sheep','sofa','train','tvmonitor']
+'aeroplane','bicycle','bird','boat','bottle','bus','car','cat','chair','cow',
+'diningtable','dog','horse','motorbike','person','pottedplant','sheep','sofa','train','tvmonitor']
 
 if __name__ == '__main__':
     image = cv2.imread('dog.jpg')
