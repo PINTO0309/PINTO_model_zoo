@@ -52,7 +52,7 @@ if __name__ == '__main__':
     scores = interpreter.get_tensor(output_details[2]['index'])[0]
     count = interpreter.get_tensor(output_details[3]['index'])[0]
 
-    for i, box, classidx, score in enumerate(zip(boxes, classes, scores)):
+    for i, (box, classidx, score) in enumerate(zip(boxes, classes, scores)):
         probability = score
         if probability >= 0.6:
             ymin = int(box[0] * image_height)
