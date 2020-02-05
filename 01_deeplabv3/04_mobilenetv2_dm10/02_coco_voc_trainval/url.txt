@@ -1,0 +1,1 @@
+https://github.com/tensorflow/models/blob/5d36f19bd3556606e6d294d5690cc7e96679b929/research/deeplab/g3doc/model_zoo.md#deeplab-models-trained-on-pascal-voc-2012
