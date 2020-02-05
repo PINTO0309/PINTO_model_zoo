@@ -16,7 +16,7 @@ raw_test_data, info = tfds.load(name="voc/2007", with_info=True, split="validati
 
 graph_def_file="frozen_inference_graph.pb"
 input_arrays=["ImageTensor"]
-output_arrays=['ResizeBilinear_2','SemanticProbabilities']
+output_arrays=['ArgMax']
 input_tensor={"ImageTensor":[1,513,513,3]}
 
 # Integer Quantization - Input/Output=float32
