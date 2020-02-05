@@ -52,7 +52,7 @@ if __name__ == '__main__':
     scores = interpreter.get_tensor(output_details[2]['index'])[0]
     count = interpreter.get_tensor(output_details[3]['index'])[0]
 
-    for box, classidx, score in zip(boxes, classes, scores):
+    for i, box, classidx, score in enumerate(zip(boxes, classes, scores)):
         probability = score
         if probability >= 0.6:
             ymin = int(box[0] * image_height)
@@ -64,7 +64,8 @@ if __name__ == '__main__':
             print('coordinates: ({}, {})-({}, {}). class: "{}". probability: {:.2f}'.format(xmin, ymin, xmax, ymax, classnum, probability))
             cv2.rectangle(image, (xmin, ymin), (xmax, ymax), (0, 255, 0), 2)
             cv2.putText(image, '{}: {:.2f}'.format(LABELS[classnum],probability), (xmin, ymin - 5), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 255, 0), 2)
-
+        if i >= (count - 1):
+            break
 
     stop_time = time.perf_counter()
     print("TOTAL time: ", stop_time - start_time)
