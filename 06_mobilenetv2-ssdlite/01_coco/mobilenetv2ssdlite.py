@@ -31,10 +31,6 @@ if __name__ == '__main__':
     output_details = interpreter.get_output_details()
 
     start_time = time.perf_counter()
-    t1 = time.perf_counter()
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    t2 = time.perf_counter()
-    print("BGR2RGB time: ", t2 - t1)
 
     image_height = image.shape[0]
     image_width  = image.shape[1]
@@ -42,6 +38,7 @@ if __name__ == '__main__':
     # Resize and normalize image for network input
     t3 = time.perf_counter()
     frame = cv2.resize(image, (300, 300))
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     frame = np.expand_dims(frame, axis=0)
     frame = frame.astype(np.float32)
     frame = frame - 127.5
