@@ -32,9 +32,9 @@ if __name__ == '__main__':
     t3 = time.perf_counter()
     frame = cv2.resize(image, (300, 300))
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    cv2.normalize(frame, frame, -1, 1, cv2.NORM_MINMAX)
     frame = np.expand_dims(frame, axis=0)
     frame = frame.astype(np.float32)
+    cv2.normalize(frame, frame, -1, 1, cv2.NORM_MINMAX)
     t4 = time.perf_counter()
     print("resize and normalize time: ", t4 - t3)
 
