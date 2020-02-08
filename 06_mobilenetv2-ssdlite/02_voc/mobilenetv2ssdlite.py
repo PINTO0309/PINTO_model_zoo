@@ -52,6 +52,11 @@ if __name__ == '__main__':
     count = interpreter.get_tensor(output_details[3]['index'])[0]
 
     for i, (box, classidx, score) in enumerate(zip(boxes, classes, scores)):
+        if (not np.isfinite(box[0]) or
+            not np.isfinite(box[1]) or
+            not np.isfinite(box[2]) or
+            not np.isfinite(box[3])):
+            continue
         probability = score
         if probability >= 0.6:
             ymin = int(box[0] * image_height)
