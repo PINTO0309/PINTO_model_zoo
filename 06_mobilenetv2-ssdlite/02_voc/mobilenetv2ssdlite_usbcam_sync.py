@@ -80,17 +80,16 @@ if __name__ == '__main__':
 
         # draw boxes
         for i, (box, classidx, score) in enumerate(zip(boxes, classes, scores)):
-            if (not np.isfinite(box[0]) or
-                not np.isfinite(box[1]) or
-                not np.isfinite(box[2]) or
-                not np.isfinite(box[3])):
-                continue
             probability = score
             if probability >= 0.6:
                 ymin = int(box[0] * image_height)
                 xmin = int(box[1] * image_width)
                 ymax = int(box[2] * image_height)
                 xmax = int(box[3] * image_width)
+                if ymin > ymax:
+                    continue
+                if xmin > xmax:
+                    continue
                 classnum = int(classidx)
                 #print('coordinates: ({}, {})-({}, {}). class: "{}". probability: {:.2f}'.format(xmin, ymin, xmax, ymax, classnum, score))
                 cv2.rectangle(image, (xmin, ymin), (xmax, ymax), (0, 255, 0), 2)
