@@ -1,0 +1,2 @@
+https://github.com/rwightman/posenet-python.git
+https://github.com/google-coral/project-posenet.git
