@@ -764,6 +764,16 @@ with open('./ssd_mobilenet_v3_large_coco_2019_08_14/mobilenet_v3_large_full_inte
 print("Full Integer Quantization complete! - mobilenet_v3_large_full_integer_quant.tflite")
 ```
 
+### 2-6. MobileNetV2-SSDLite+VOC - Training -> Integer Quantization
+#### 2-6-1. Training
+**[Learning with the MobileNetV2-SSDLite Pascal-VOC dataset [Remake of Docker version]](https://qiita.com/PINTO/items/107dd6a4e16cb128230b)**  
+
+#### 2-6-2. Export model (--add_postprocessing_op=True)
+**[06_mobilenetv2-ssdlite/02_voc/01_float32/00_export_tflite_model.txt](06_mobilenetv2-ssdlite/02_voc/01_float32/00_export_tflite_model.txt)**  
+
+#### 2-6-3. Integer Quantization
+**[06_mobilenetv2-ssdlite/02_voc/01_float32/03_integer_quantization_with_postprocess.py](06_mobilenetv2-ssdlite/02_voc/01_float32/03_integer_quantization_with_postprocess.py)**  
+
 ## 3. TFLite Model Benchmark
 ```bash
 $ sudo apt-get install python-future
