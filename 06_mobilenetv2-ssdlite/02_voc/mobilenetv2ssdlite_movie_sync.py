@@ -28,7 +28,6 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     model        = args.model
-    usbcamno     = args.usbcamno
     num_threads  = args.num_threads
 
     interpreter = Interpreter(model_path=model)
