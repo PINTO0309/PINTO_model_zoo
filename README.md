@@ -1015,6 +1015,34 @@ Memory (bytes): count=0
 
 </div></details>
 
+<details><summary>Raspbian Buster aarch64 + RaspberryPi4 deeplabv3_mnv2_pascal_trainval_257_integer_quant.tflite Benchmark</summary><div>
+
+
+```bash
+Number of nodes executed: 82
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                 CONV_2D	       38	   103.576	    56.077%	    56.077%	     0.000	       38
+	       DEPTHWISE_CONV_2D	       17	    33.151	    17.948%	    74.026%	     0.000	       17
+	         RESIZE_BILINEAR	        3	    15.143	     8.199%	    82.224%	     0.000	        3
+	                     SUB	        2	    10.908	     5.906%	    88.130%	     0.000	        2
+	                     ADD	       11	     9.821	     5.317%	    93.447%	     0.000	       11
+	                 ARG_MAX	        1	     8.824	     4.777%	    98.225%	     0.000	        1
+	                     PAD	        1	     1.024	     0.554%	    98.779%	     0.000	        1
+	                QUANTIZE	        2	     0.941	     0.509%	    99.289%	     0.000	        2
+	                     MUL	        1	     0.542	     0.293%	    99.582%	     0.000	        1
+	           CONCATENATION	        1	     0.365	     0.198%	    99.780%	     0.000	        1
+	         AVERAGE_POOL_2D	        1	     0.150	     0.081%	    99.861%	     0.000	        1
+	                 RESHAPE	        2	     0.129	     0.070%	    99.931%	     0.000	        2
+	             EXPAND_DIMS	        2	     0.128	     0.069%	   100.000%	     0.000	        2
+
+Timings (microseconds): count=50 first=201226 curr=176476 min=176476 max=201226 avg=184741 std=4791
+Memory (bytes): count=0
+82 nodes observed
+```
+
+</div></details>
+
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
 2. **[When you want to fine-tune DeepLab on other datasets, there are a few cases](https://github.com/tensorflow/models/issues/3730#issuecomment-380168917)**  
