@@ -91,7 +91,7 @@ if __name__ == '__main__':
             if i >= (count - 1):
                 break
 
-        cv2.imshow('USB Camera', image)
+        cv2.imshow('Movie', image)
 
         if cv2.waitKey(1)&0xFF == ord('q'):
             break
