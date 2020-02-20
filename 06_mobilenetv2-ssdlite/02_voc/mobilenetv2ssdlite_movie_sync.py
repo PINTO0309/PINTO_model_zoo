@@ -91,7 +91,7 @@ if __name__ == '__main__':
             if i >= (count - 1):
                 break
 
-        cv2.imshow('Movie', image)
+        cv2.imshow(window_name, image)
 
         if cv2.waitKey(1)&0xFF == ord('q'):
             break
