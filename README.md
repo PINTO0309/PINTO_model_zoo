@@ -1064,6 +1064,50 @@ Memory (bytes): count=0
 
 </div></details>
 
+<details><summary>Ubuntu 18.04 x86_64 + XNNPACK enabled + 10 Threads deeplabv3_257_mv_gpu.tflite Benchmark</summary><div>
+
+```bash
+Number of nodes executed: 8
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                DELEGATE	        3	     6.716	    61.328%	    61.328%	     0.000	        3
+	         RESIZE_BILINEAR	        3	     3.965	    36.207%	    97.534%	     0.000	        3
+	           CONCATENATION	        1	     0.184	     1.680%	    99.215%	     0.000	        1
+	         AVERAGE_POOL_2D	        1	     0.086	     0.785%	   100.000%	     0.000	        1
+
+Timings (microseconds): count=91 first=11051 curr=10745 min=10521 max=12552 avg=10955.4 std=352
+Memory (bytes): count=0
+8 nodes observed
+
+Note: as the benchmark tool itself affects memory footprint, the following is only APPROXIMATE to the actual memory footprint of the model at runtime. Take the information at your discretion.
+Peak memory footprint (MB): init=3.58203 overall=56.0703
+```
+
+</div></details>
+
+<details><summary>Ubuntu 18.04 x86_64 + XNNPACK disabled + 10 Threads deeplabv3_257_mv_gpu.tflite Benchmark</summary><div>
+
+```bash
+Number of nodes executed: 70
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	       DEPTHWISE_CONV_2D	       17	    41.704	    68.372%	    68.372%	     0.000	       17
+	                 CONV_2D	       38	    15.932	    26.120%	    94.491%	     0.000	       38
+	         RESIZE_BILINEAR	        3	     3.060	     5.017%	    99.508%	     0.000	        3
+	                     ADD	       10	     0.149	     0.244%	    99.752%	     0.000	       10
+	           CONCATENATION	        1	     0.109	     0.179%	    99.931%	     0.000	        1
+	         AVERAGE_POOL_2D	        1	     0.042	     0.069%	   100.000%	     0.000	        1
+
+Timings (microseconds): count=50 first=59929 curr=60534 min=59374 max=63695 avg=61031.6 std=1182
+Memory (bytes): count=0
+70 nodes observed
+
+Note: as the benchmark tool itself affects memory footprint, the following is only APPROXIMATE to the actual memory footprint of the model at runtime. Take the information at your discretion.
+Peak memory footprint (MB): init=0 overall=13.7109
+```
+
+</div></details>
+
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
 2. **[When you want to fine-tune DeepLab on other datasets, there are a few cases](https://github.com/tensorflow/models/issues/3730#issuecomment-380168917)**  
