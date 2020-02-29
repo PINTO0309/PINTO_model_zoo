@@ -802,8 +802,8 @@ $ curl -Lb /tmp/cookie \
   -o adoptopenjdk-8-hotspot_8u222-b10-2_armhf.deb
 $ sudo apt-get install -y ./adoptopenjdk-8-hotspot_8u222-b10-2_armhf.deb
 
-## Clone Tensorflow v1.15.0
-$ git clone -b v1.15.0 --depth 1 https://github.com/tensorflow/tensorflow.git
+## Clone Tensorflow v2.1.0+
+$ git clone --depth 1 https://github.com/tensorflow/tensorflow.git
 $ cd tensorflow
 
 ## Build and run TFLite Model Benchmark Tool
