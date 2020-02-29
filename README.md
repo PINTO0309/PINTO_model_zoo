@@ -809,26 +809,26 @@ $ cd tensorflow
 
 ## Build and run TFLite Model Benchmark Tool
 $ bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model -- \
-  --graph=${HOME}/Downloads/deeplab_mnv3_small_weight_quant_769.tflite \
+  --graph=${HOME}/Downloads/deeplabv3_257_mv_gpu.tflite \
   --num_threads=4 \
   --warmup_runs=1 \
   --enable_op_profiling=true
 
 $ bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model -- \
-  --graph=${HOME}/Downloads/deeplab_mnv3_small_weight_quant_769.tflite \
+  --graph=${HOME}/Downloads/deeplabv3_257_mv_gpu.tflite \
   --num_threads=10 \
   --warmup_runs=1 \
   --use_xnnpack=true \
   --enable_op_profiling=true
 
 $ bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model_plus_flex -- \
-  --graph=${HOME}/git/tf-monodepth2/monodepth2_weight_quant.tflite \
+  --graph=${HOME}/git/tf-monodepth2/deeplabv3_257_mv_gpu.tflite \
   --num_threads=4 \
   --warmup_runs=1 \
   --enable_op_profiling=true
 
 $ bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model_plus_flex -- \
-  --graph=${HOME}/git/tf-monodepth2/monodepth2_weight_quant.tflite \
+  --graph=${HOME}/git/tf-monodepth2/deeplabv3_257_mv_gpu.tflite \
   --num_threads=10 \
   --warmup_runs=1 \
   --use_xnnpack=true \
