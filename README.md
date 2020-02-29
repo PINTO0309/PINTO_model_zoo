@@ -787,8 +787,9 @@ print("Full Integer Quantization complete! - mobilenet_v3_large_full_integer_qua
 $ sudo apt-get install python-future
 
 ## Bazel for Ubuntu18.04 install
-$ wget https://github.com/PINTO0309/Bazel_bin/raw/master/0.29.1/Ubuntu1804_x86-64/openjdk-8-jdk/install.sh
-$ ./install.sh
+$ wget https://github.com/bazelbuild/bazel/releases/download/2.0.0/bazel-2.0.0-installer-linux-x86_64.sh
+$ sudo chmod +x bazel-2.0.0-installer-linux-x86_64.sh
+$ ./bazel-2.0.0-installer-linux-x86_64.sh
 $ sudo apt-get install -y openjdk-8-jdk
 
 ## Bazel for RaspberryPi3/4 Raspbian Buster install
