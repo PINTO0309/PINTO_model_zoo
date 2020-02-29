@@ -84,5 +84,5 @@ if __name__ == '__main__':
     stop_time = time.perf_counter()
     print("time: ", stop_time - start_time)
 
-    cv2.imwrite('result.jpg', cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
+    cv2.imwrite('result.jpg', image)
 
