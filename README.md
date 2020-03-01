@@ -786,14 +786,14 @@ print("Full Integer Quantization complete! - mobilenet_v3_large_full_integer_qua
 ```bash
 $ sudo apt-get install python-future
 
-## Bazel for Ubuntu18.04 install
+## Bazel for Ubuntu18.04 x86_64 install
 $ wget https://github.com/bazelbuild/bazel/releases/download/2.0.0/bazel-2.0.0-installer-linux-x86_64.sh
 $ sudo chmod +x bazel-2.0.0-installer-linux-x86_64.sh
 $ ./bazel-2.0.0-installer-linux-x86_64.sh
 $ sudo apt-get install -y openjdk-8-jdk
 
-## Bazel for RaspberryPi3/4 Raspbian Buster install
-$ wget https://github.com/PINTO0309/Bazel_bin/raw/master/0.29.1/Raspbian_Debian_Buster_armhf/openjdk-8-jdk/install.sh
+## Bazel for RaspberryPi3/4 Raspbian Buster armhf install
+$ wget https://github.com/PINTO0309/Bazel_bin/raw/master/2.0.0/Raspbian_Debian_Buster_armhf/openjdk-8-jdk/install.sh
 $ ./install.sh
 $ curl -sc /tmp/cookie \
   "https://drive.google.com/uc?export=download&id=1LQUSal55R6fmawZS9zZuk6-5ZFOdUqRK" > /dev/null
@@ -802,6 +802,17 @@ $ curl -Lb /tmp/cookie \
   "https://drive.google.com/uc?export=download&confirm=${CODE}&id=1LQUSal55R6fmawZS9zZuk6-5ZFOdUqRK" \
   -o adoptopenjdk-8-hotspot_8u222-b10-2_armhf.deb
 $ sudo apt-get install -y ./adoptopenjdk-8-hotspot_8u222-b10-2_armhf.deb
+
+## Bazel for RaspberryPi3/4 Raspbian/Debian Buster aarch64 install
+$ wget https://github.com/PINTO0309/Bazel_bin/raw/master/2.0.0/Raspbian_Debian_Buster_aarch64/openjdk-8-jdk/install.sh
+$ ./install.sh
+$ curl -sc /tmp/cookie \
+  "https://drive.google.com/uc?export=download&id=1VwLxzT3EOTbhSzwvRF2H4ChTQyTQBt3x" > /dev/null
+$ CODE="$(awk '/_warning_/ {print $NF}' /tmp/cookie)"
+$ curl -Lb /tmp/cookie \
+  "https://drive.google.com/uc?export=download&confirm=${CODE}&id=1VwLxzT3EOTbhSzwvRF2H4ChTQyTQBt3x" \
+  -o adoptopenjdk-8-hotspot_8u222-b10-2_arm64.deb
+$ sudo apt-get install -y ./adoptopenjdk-8-hotspot_8u222-b10-2_arm64.deb
 
 ## Clone Tensorflow v2.1.0+
 $ git clone --depth 1 https://github.com/tensorflow/tensorflow.git
