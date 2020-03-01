@@ -816,7 +816,7 @@ $ bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model -- \
 
 $ bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model -- \
   --graph=${HOME}/Downloads/deeplabv3_257_mv_gpu.tflite \
-  --num_threads=10 \
+  --num_threads=4 \
   --warmup_runs=1 \
   --use_xnnpack=true \
   --enable_op_profiling=true
@@ -829,7 +829,7 @@ $ bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model_plus_flex -- 
 
 $ bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model_plus_flex -- \
   --graph=${HOME}/git/tf-monodepth2/deeplabv3_257_mv_gpu.tflite \
-  --num_threads=10 \
+  --num_threads=4 \
   --warmup_runs=1 \
   --use_xnnpack=true \
   --enable_op_profiling=true
