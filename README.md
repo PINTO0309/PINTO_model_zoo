@@ -792,7 +792,7 @@ $ sudo chmod +x bazel-2.0.0-installer-linux-x86_64.sh
 $ ./bazel-2.0.0-installer-linux-x86_64.sh
 $ sudo apt-get install -y openjdk-8-jdk
 
-## Bazel for RaspberryPi3/4 Raspbian Buster armhf install
+## Bazel for RaspberryPi3/4 Raspbian/Debian Buster armhf install
 $ wget https://github.com/PINTO0309/Bazel_bin/raw/master/2.0.0/Raspbian_Debian_Buster_armhf/openjdk-8-jdk/install.sh
 $ ./install.sh
 $ curl -sc /tmp/cookie \
