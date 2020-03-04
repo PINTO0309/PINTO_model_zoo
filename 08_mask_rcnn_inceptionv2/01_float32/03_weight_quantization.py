@@ -7,7 +7,7 @@ converter = tf.lite.TFLiteConverter.from_saved_model('./saved_model')
 converter.optimizations = [tf.lite.Optimize.OPTIMIZE_FOR_SIZE]
 converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
 tflite_quant_model = converter.convert()
-with open('./mask_rcnn_inception_v2_coco_256_weight_quant.tflite', 'wb') as w:
+with open('./mask_rcnn_inception_v2_coco_800_weight_quant.tflite', 'wb') as w:
     w.write(tflite_quant_model)
-print("Weight Quantization complete! - mask_rcnn_inception_v2_coco_256_weight_quant.tflite")
+print("Weight Quantization complete! - mask_rcnn_inception_v2_coco_800_weight_quant.tflite")
 
