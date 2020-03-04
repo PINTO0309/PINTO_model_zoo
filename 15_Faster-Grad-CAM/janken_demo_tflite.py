@@ -4,7 +4,6 @@ import os
 import numpy as np
 from sklearn.cluster import KMeans
 from sklearn.externals import joblib
-from keras import backend as K
 
 try:
     from tflite_runtime.interpreter import Interpreter
