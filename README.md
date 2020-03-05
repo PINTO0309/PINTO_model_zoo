@@ -1139,6 +1139,28 @@ Memory (bytes): count=0
 
 </div></details>
 
+<details><summary>RaspberryPi4 + Ubuntu 19.10 aarch64 + 4 Threads Faster-Grad-CAM weights_integer_quant.tflite Benchmark</summary><div>
+
+```bash
+Number of nodes executed: 72
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                 CONV_2D	       35	     0.753	    34.958%	    34.958%	     0.000	        0
+	                     PAD	        5	     0.395	    18.338%	    53.296%	     0.000	        0
+	                    MEAN	        1	     0.392	    18.199%	    71.495%	     0.000	        0
+	        Misc Runtime Ops	        1	     0.282	    13.092%	    84.587%	    89.232	        0
+	       DEPTHWISE_CONV_2D	       17	     0.251	    11.653%	    96.240%	     0.000	        0
+	                     ADD	       10	     0.054	     2.507%	    98.747%	     0.000	        0
+	                QUANTIZE	        1	     0.024	     1.114%	    99.861%	     0.000	        0
+	              DEQUANTIZE	        2	     0.003	     0.139%	   100.000%	     0.000	        0
+
+Timings (microseconds): count=472 first=564 curr=3809 min=564 max=3950 avg=2188.51 std=1625
+Memory (bytes): count=0
+72 nodes observed
+```
+
+</div></details>
+
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
 2. **[When you want to fine-tune DeepLab on other datasets, there are a few cases](https://github.com/tensorflow/models/issues/3730#issuecomment-380168917)**  
