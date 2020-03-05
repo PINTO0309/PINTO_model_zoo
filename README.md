@@ -1119,6 +1119,26 @@ Peak memory footprint (MB): init=0 overall=13.7109
 
 </div></details>
 
+<details><summary>Ubuntu 18.04 x86_64 + XNNPACK enabled + 4 Threads Faster-Grad-CAM weights_weight_quant.tflite Benchmark</summary><div>
+
+```bash
+umber of nodes executed: 74
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                 CONV_2D	       31	     4.947	    77.588%	    77.588%	     0.000	       31
+	                DELEGATE	       17	     0.689	    10.806%	    88.394%	     0.000	       17
+	       DEPTHWISE_CONV_2D	       10	     0.591	     9.269%	    97.663%	     0.000	       10
+	                    MEAN	        1	     0.110	     1.725%	    99.388%	     0.000	        1
+	                     PAD	        5	     0.039	     0.612%	   100.000%	     0.000	        5
+	              DEQUANTIZE	       10	     0.000	     0.000%	   100.000%	     0.000	       10
+
+Timings (microseconds): count=155 first=6415 curr=6443 min=6105 max=6863 avg=6409.22 std=69
+Memory (bytes): count=0
+74 nodes observed
+```
+
+</div></details>
+
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
 2. **[When you want to fine-tune DeepLab on other datasets, there are a few cases](https://github.com/tensorflow/models/issues/3730#issuecomment-380168917)**  
