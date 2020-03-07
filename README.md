@@ -1161,6 +1161,42 @@ Memory (bytes): count=0
 
 </div></details>
 
+<details><summary>Ubuntu 18.04 x86_64 + XNNPACK enabled + 4 Threads EfficientNet-lite efficientnet-lite0-fp32.tflite Benchmark</summary><div>
+
+```bash
+Number of nodes executed: 5
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                DELEGATE	        2	     5.639	    95.706%	    95.706%	     0.000	        2
+	         FULLY_CONNECTED	        1	     0.239	     4.056%	    99.762%	     0.000	        1
+	         AVERAGE_POOL_2D	        1	     0.014	     0.238%	   100.000%	     0.000	        1
+	                 RESHAPE	        1	     0.000	     0.000%	   100.000%	     0.000	        1
+
+Timings (microseconds): count=168 first=5842 curr=5910 min=5749 max=6317 avg=5894.55 std=100
+Memory (bytes): count=0
+5 nodes observed
+```
+
+</div></details>
+
+<details><summary>Ubuntu 18.04 x86_64 + XNNPACK enabled + 4 Threads EfficientNet-lite efficientnet-lite4-fp32.tflite Benchmark</summary><div>
+
+```bash
+Number of nodes executed: 5
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                DELEGATE	        2	    33.720	    99.235%	    99.235%	     0.000	        2
+	         FULLY_CONNECTED	        1	     0.231	     0.680%	    99.915%	     0.000	        1
+	         AVERAGE_POOL_2D	        1	     0.029	     0.085%	   100.000%	     0.000	        1
+	                 RESHAPE	        1	     0.000	     0.000%	   100.000%	     0.000	        1
+
+Timings (microseconds): count=50 first=32459 curr=34867 min=31328 max=35730 avg=33983.5 std=1426
+Memory (bytes): count=0
+5 nodes observed
+```
+
+</div></details>
+
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
 2. **[When you want to fine-tune DeepLab on other datasets, there are a few cases](https://github.com/tensorflow/models/issues/3730#issuecomment-380168917)**  
