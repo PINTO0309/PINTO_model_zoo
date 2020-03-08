@@ -82,8 +82,13 @@ if __name__ == '__main__':
         for i, (box, classidx, score) in enumerate(zip(boxes, classes, scores)):
             probability = score
             if probability >= 0.6:
-                if not box[0] or not box[1] or not box[2] or not box[3]:
-                    continue
+                if (not math.isnan(box[0]) and
+                   not math.isnan(box[1]) and
+                   not math.isnan(box[2]) and
+                   not math.isnan(box[3])):
+                   pass
+                else:
+                   continue
                 ymin = int(box[0] * image_height)
                 xmin = int(box[1] * image_width)
                 ymax = int(box[2] * image_height)
