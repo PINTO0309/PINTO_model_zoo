@@ -62,10 +62,16 @@ if __name__ == '__main__':
     for box, classidx, score in zip(boxes, classes, scores):
         probability = score
         if probability >= 0.6:
+            if not box[0] or not box[1] or not box[2] or not box[3]:
+                continue
             ymin = int(box[0] * image_height)
             xmin = int(box[1] * image_width)
             ymax = int(box[2] * image_height)
             xmax = int(box[3] * image_width)
+            if ymin > ymax:
+                continue
+            if xmin > xmax:
+                continue
             classnum = int(classidx)
             probability = score
             print('coordinates: ({}, {})-({}, {}). class: "{}". probability: {:.2f}'.format(xmin, ymin, xmax, ymax, classnum, probability))
