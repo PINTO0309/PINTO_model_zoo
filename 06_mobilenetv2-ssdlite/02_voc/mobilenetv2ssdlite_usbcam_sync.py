@@ -25,8 +25,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", default="03_integer_quantization/ssdlite_mobilenet_v2_voc_300_integer_quant_with_postprocess.tflite", help="Path of the detection model.")
     parser.add_argument("--usbcamno", type=int, default=0, help="USB Camera number.")
-    parser.add_argument("--camera_width", type=int, default=320, help="width.")
-    parser.add_argument("--camera_height", type=int, default=240, help="height.")
+    parser.add_argument("--camera_width", type=int, default=640, help="width.")
+    parser.add_argument("--camera_height", type=int, default=480, help="height.")
     parser.add_argument("--vidfps", type=int, default=30, help="Frame rate.")
     parser.add_argument("--num_threads", type=int, default=4, help="Threads.")
     args = parser.parse_args()
@@ -82,6 +82,8 @@ if __name__ == '__main__':
         for i, (box, classidx, score) in enumerate(zip(boxes, classes, scores)):
             probability = score
             if probability >= 0.6:
+                if not box[0] or not box[1] or not box[2] or not box[3]:
+                    continue
                 ymin = int(box[0] * image_height)
                 xmin = int(box[1] * image_width)
                 ymax = int(box[2] * image_height)
