@@ -1,2 +1,3 @@
 https://github.com/google/automl.git
 https://github.com/xuannianz/EfficientDet.git
+https://github.com/tensorflow/tensorflow/issues/37745
