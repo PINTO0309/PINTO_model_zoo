@@ -1,0 +1,53 @@
+$ saved_model_cli show --dir ./saved_model --all
+
+MetaGraphDef with tag-set: 'serve' contains the following SignatureDefs:
+
+signature_def['serving_default']:
+  The given SavedModel SignatureDef contains the following input(s):
+    inputs['input'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 512, 512, 3)
+        name: input:0
+  The given SavedModel SignatureDef contains the following output(s):
+    outputs['box_net/box-predict/BiasAdd'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 64, 64, 36)
+        name: box_net/box-predict/BiasAdd:0
+    outputs['box_net/box-predict_1/BiasAdd'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 32, 32, 36)
+        name: box_net/box-predict_1/BiasAdd:0
+    outputs['box_net/box-predict_2/BiasAdd'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 16, 16, 36)
+        name: box_net/box-predict_2/BiasAdd:0
+    outputs['box_net/box-predict_3/BiasAdd'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 8, 8, 36)
+        name: box_net/box-predict_3/BiasAdd:0
+    outputs['box_net/box-predict_4/BiasAdd'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 4, 4, 36)
+        name: box_net/box-predict_4/BiasAdd:0
+    outputs['class_net/class-predict/BiasAdd'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 64, 64, 810)
+        name: class_net/class-predict/BiasAdd:0
+    outputs['class_net/class-predict_1/BiasAdd'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 32, 32, 810)
+        name: class_net/class-predict_1/BiasAdd:0
+    outputs['class_net/class-predict_2/BiasAdd'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 16, 16, 810)
+        name: class_net/class-predict_2/BiasAdd:0
+    outputs['class_net/class-predict_3/BiasAdd'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 8, 8, 810)
+        name: class_net/class-predict_3/BiasAdd:0
+    outputs['class_net/class-predict_4/BiasAdd'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 4, 4, 810)
+        name: class_net/class-predict_4/BiasAdd:0
+  Method name is: tensorflow/serving/predict
+

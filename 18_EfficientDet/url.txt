@@ -1,0 +1,2 @@
+https://github.com/google/automl.git
+https://github.com/xuannianz/EfficientDet.git
