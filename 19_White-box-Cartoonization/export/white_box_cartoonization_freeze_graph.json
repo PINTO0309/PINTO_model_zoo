@@ -1,0 +1,623 @@
+{
+    "import/input": [
+        "Tensor(\"import/input:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/generator/Conv/weights": [
+        "Tensor(\"import/generator/Conv/weights:0\", shape=(7, 7, 3, 32), dtype=float32)"
+    ],
+    "import/generator/Conv/weights/read": [
+        "Tensor(\"import/generator/Conv/weights/read:0\", shape=(7, 7, 3, 32), dtype=float32)"
+    ],
+    "import/generator/Conv/biases": [
+        "Tensor(\"import/generator/Conv/biases:0\", shape=(32,), dtype=float32)"
+    ],
+    "import/generator/Conv/biases/read": [
+        "Tensor(\"import/generator/Conv/biases/read:0\", shape=(32,), dtype=float32)"
+    ],
+    "import/generator/Conv/Conv2D": [
+        "Tensor(\"import/generator/Conv/Conv2D:0\", shape=(1, 720, 720, 32), dtype=float32)"
+    ],
+    "import/generator/Conv/BiasAdd": [
+        "Tensor(\"import/generator/Conv/BiasAdd:0\", shape=(1, 720, 720, 32), dtype=float32)"
+    ],
+    "import/generator/LeakyRelu": [
+        "Tensor(\"import/generator/LeakyRelu:0\", shape=(1, 720, 720, 32), dtype=float32)"
+    ],
+    "import/generator/Conv_1/weights": [
+        "Tensor(\"import/generator/Conv_1/weights:0\", shape=(3, 3, 32, 32), dtype=float32)"
+    ],
+    "import/generator/Conv_1/weights/read": [
+        "Tensor(\"import/generator/Conv_1/weights/read:0\", shape=(3, 3, 32, 32), dtype=float32)"
+    ],
+    "import/generator/Conv_1/biases": [
+        "Tensor(\"import/generator/Conv_1/biases:0\", shape=(32,), dtype=float32)"
+    ],
+    "import/generator/Conv_1/biases/read": [
+        "Tensor(\"import/generator/Conv_1/biases/read:0\", shape=(32,), dtype=float32)"
+    ],
+    "import/generator/Conv_1/Conv2D": [
+        "Tensor(\"import/generator/Conv_1/Conv2D:0\", shape=(1, 360, 360, 32), dtype=float32)"
+    ],
+    "import/generator/Conv_1/BiasAdd": [
+        "Tensor(\"import/generator/Conv_1/BiasAdd:0\", shape=(1, 360, 360, 32), dtype=float32)"
+    ],
+    "import/generator/LeakyRelu_1": [
+        "Tensor(\"import/generator/LeakyRelu_1:0\", shape=(1, 360, 360, 32), dtype=float32)"
+    ],
+    "import/generator/Conv_2/weights": [
+        "Tensor(\"import/generator/Conv_2/weights:0\", shape=(3, 3, 32, 64), dtype=float32)"
+    ],
+    "import/generator/Conv_2/weights/read": [
+        "Tensor(\"import/generator/Conv_2/weights/read:0\", shape=(3, 3, 32, 64), dtype=float32)"
+    ],
+    "import/generator/Conv_2/biases": [
+        "Tensor(\"import/generator/Conv_2/biases:0\", shape=(64,), dtype=float32)"
+    ],
+    "import/generator/Conv_2/biases/read": [
+        "Tensor(\"import/generator/Conv_2/biases/read:0\", shape=(64,), dtype=float32)"
+    ],
+    "import/generator/Conv_2/Conv2D": [
+        "Tensor(\"import/generator/Conv_2/Conv2D:0\", shape=(1, 360, 360, 64), dtype=float32)"
+    ],
+    "import/generator/Conv_2/BiasAdd": [
+        "Tensor(\"import/generator/Conv_2/BiasAdd:0\", shape=(1, 360, 360, 64), dtype=float32)"
+    ],
+    "import/generator/LeakyRelu_2": [
+        "Tensor(\"import/generator/LeakyRelu_2:0\", shape=(1, 360, 360, 64), dtype=float32)"
+    ],
+    "import/generator/Conv_3/weights": [
+        "Tensor(\"import/generator/Conv_3/weights:0\", shape=(3, 3, 64, 64), dtype=float32)"
+    ],
+    "import/generator/Conv_3/weights/read": [
+        "Tensor(\"import/generator/Conv_3/weights/read:0\", shape=(3, 3, 64, 64), dtype=float32)"
+    ],
+    "import/generator/Conv_3/biases": [
+        "Tensor(\"import/generator/Conv_3/biases:0\", shape=(64,), dtype=float32)"
+    ],
+    "import/generator/Conv_3/biases/read": [
+        "Tensor(\"import/generator/Conv_3/biases/read:0\", shape=(64,), dtype=float32)"
+    ],
+    "import/generator/Conv_3/Conv2D": [
+        "Tensor(\"import/generator/Conv_3/Conv2D:0\", shape=(1, 180, 180, 64), dtype=float32)"
+    ],
+    "import/generator/Conv_3/BiasAdd": [
+        "Tensor(\"import/generator/Conv_3/BiasAdd:0\", shape=(1, 180, 180, 64), dtype=float32)"
+    ],
+    "import/generator/LeakyRelu_3": [
+        "Tensor(\"import/generator/LeakyRelu_3:0\", shape=(1, 180, 180, 64), dtype=float32)"
+    ],
+    "import/generator/Conv_4/weights": [
+        "Tensor(\"import/generator/Conv_4/weights:0\", shape=(3, 3, 64, 128), dtype=float32)"
+    ],
+    "import/generator/Conv_4/weights/read": [
+        "Tensor(\"import/generator/Conv_4/weights/read:0\", shape=(3, 3, 64, 128), dtype=float32)"
+    ],
+    "import/generator/Conv_4/biases": [
+        "Tensor(\"import/generator/Conv_4/biases:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/Conv_4/biases/read": [
+        "Tensor(\"import/generator/Conv_4/biases/read:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/Conv_4/Conv2D": [
+        "Tensor(\"import/generator/Conv_4/Conv2D:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/Conv_4/BiasAdd": [
+        "Tensor(\"import/generator/Conv_4/BiasAdd:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/LeakyRelu_4": [
+        "Tensor(\"import/generator/LeakyRelu_4:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_0/conv1/weights": [
+        "Tensor(\"import/generator/block_0/conv1/weights:0\", shape=(3, 3, 128, 128), dtype=float32)"
+    ],
+    "import/generator/block_0/conv1/weights/read": [
+        "Tensor(\"import/generator/block_0/conv1/weights/read:0\", shape=(3, 3, 128, 128), dtype=float32)"
+    ],
+    "import/generator/block_0/conv1/biases": [
+        "Tensor(\"import/generator/block_0/conv1/biases:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/block_0/conv1/biases/read": [
+        "Tensor(\"import/generator/block_0/conv1/biases/read:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/block_0/conv1/Conv2D": [
+        "Tensor(\"import/generator/block_0/conv1/Conv2D:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_0/conv1/BiasAdd": [
+        "Tensor(\"import/generator/block_0/conv1/BiasAdd:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_0/LeakyRelu": [
+        "Tensor(\"import/generator/block_0/LeakyRelu:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_0/conv2/weights": [
+        "Tensor(\"import/generator/block_0/conv2/weights:0\", shape=(3, 3, 128, 128), dtype=float32)"
+    ],
+    "import/generator/block_0/conv2/weights/read": [
+        "Tensor(\"import/generator/block_0/conv2/weights/read:0\", shape=(3, 3, 128, 128), dtype=float32)"
+    ],
+    "import/generator/block_0/conv2/biases": [
+        "Tensor(\"import/generator/block_0/conv2/biases:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/block_0/conv2/biases/read": [
+        "Tensor(\"import/generator/block_0/conv2/biases/read:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/block_0/conv2/Conv2D": [
+        "Tensor(\"import/generator/block_0/conv2/Conv2D:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_0/conv2/BiasAdd": [
+        "Tensor(\"import/generator/block_0/conv2/BiasAdd:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_0/add": [
+        "Tensor(\"import/generator/block_0/add:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_1/conv1/weights": [
+        "Tensor(\"import/generator/block_1/conv1/weights:0\", shape=(3, 3, 128, 128), dtype=float32)"
+    ],
+    "import/generator/block_1/conv1/weights/read": [
+        "Tensor(\"import/generator/block_1/conv1/weights/read:0\", shape=(3, 3, 128, 128), dtype=float32)"
+    ],
+    "import/generator/block_1/conv1/biases": [
+        "Tensor(\"import/generator/block_1/conv1/biases:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/block_1/conv1/biases/read": [
+        "Tensor(\"import/generator/block_1/conv1/biases/read:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/block_1/conv1/Conv2D": [
+        "Tensor(\"import/generator/block_1/conv1/Conv2D:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_1/conv1/BiasAdd": [
+        "Tensor(\"import/generator/block_1/conv1/BiasAdd:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_1/LeakyRelu": [
+        "Tensor(\"import/generator/block_1/LeakyRelu:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_1/conv2/weights": [
+        "Tensor(\"import/generator/block_1/conv2/weights:0\", shape=(3, 3, 128, 128), dtype=float32)"
+    ],
+    "import/generator/block_1/conv2/weights/read": [
+        "Tensor(\"import/generator/block_1/conv2/weights/read:0\", shape=(3, 3, 128, 128), dtype=float32)"
+    ],
+    "import/generator/block_1/conv2/biases": [
+        "Tensor(\"import/generator/block_1/conv2/biases:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/block_1/conv2/biases/read": [
+        "Tensor(\"import/generator/block_1/conv2/biases/read:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/block_1/conv2/Conv2D": [
+        "Tensor(\"import/generator/block_1/conv2/Conv2D:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_1/conv2/BiasAdd": [
+        "Tensor(\"import/generator/block_1/conv2/BiasAdd:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_1/add": [
+        "Tensor(\"import/generator/block_1/add:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_2/conv1/weights": [
+        "Tensor(\"import/generator/block_2/conv1/weights:0\", shape=(3, 3, 128, 128), dtype=float32)"
+    ],
+    "import/generator/block_2/conv1/weights/read": [
+        "Tensor(\"import/generator/block_2/conv1/weights/read:0\", shape=(3, 3, 128, 128), dtype=float32)"
+    ],
+    "import/generator/block_2/conv1/biases": [
+        "Tensor(\"import/generator/block_2/conv1/biases:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/block_2/conv1/biases/read": [
+        "Tensor(\"import/generator/block_2/conv1/biases/read:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/block_2/conv1/Conv2D": [
+        "Tensor(\"import/generator/block_2/conv1/Conv2D:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_2/conv1/BiasAdd": [
+        "Tensor(\"import/generator/block_2/conv1/BiasAdd:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_2/LeakyRelu": [
+        "Tensor(\"import/generator/block_2/LeakyRelu:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_2/conv2/weights": [
+        "Tensor(\"import/generator/block_2/conv2/weights:0\", shape=(3, 3, 128, 128), dtype=float32)"
+    ],
+    "import/generator/block_2/conv2/weights/read": [
+        "Tensor(\"import/generator/block_2/conv2/weights/read:0\", shape=(3, 3, 128, 128), dtype=float32)"
+    ],
+    "import/generator/block_2/conv2/biases": [
+        "Tensor(\"import/generator/block_2/conv2/biases:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/block_2/conv2/biases/read": [
+        "Tensor(\"import/generator/block_2/conv2/biases/read:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/block_2/conv2/Conv2D": [
+        "Tensor(\"import/generator/block_2/conv2/Conv2D:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_2/conv2/BiasAdd": [
+        "Tensor(\"import/generator/block_2/conv2/BiasAdd:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_2/add": [
+        "Tensor(\"import/generator/block_2/add:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_3/conv1/weights": [
+        "Tensor(\"import/generator/block_3/conv1/weights:0\", shape=(3, 3, 128, 128), dtype=float32)"
+    ],
+    "import/generator/block_3/conv1/weights/read": [
+        "Tensor(\"import/generator/block_3/conv1/weights/read:0\", shape=(3, 3, 128, 128), dtype=float32)"
+    ],
+    "import/generator/block_3/conv1/biases": [
+        "Tensor(\"import/generator/block_3/conv1/biases:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/block_3/conv1/biases/read": [
+        "Tensor(\"import/generator/block_3/conv1/biases/read:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/block_3/conv1/Conv2D": [
+        "Tensor(\"import/generator/block_3/conv1/Conv2D:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_3/conv1/BiasAdd": [
+        "Tensor(\"import/generator/block_3/conv1/BiasAdd:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_3/LeakyRelu": [
+        "Tensor(\"import/generator/block_3/LeakyRelu:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_3/conv2/weights": [
+        "Tensor(\"import/generator/block_3/conv2/weights:0\", shape=(3, 3, 128, 128), dtype=float32)"
+    ],
+    "import/generator/block_3/conv2/weights/read": [
+        "Tensor(\"import/generator/block_3/conv2/weights/read:0\", shape=(3, 3, 128, 128), dtype=float32)"
+    ],
+    "import/generator/block_3/conv2/biases": [
+        "Tensor(\"import/generator/block_3/conv2/biases:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/block_3/conv2/biases/read": [
+        "Tensor(\"import/generator/block_3/conv2/biases/read:0\", shape=(128,), dtype=float32)"
+    ],
+    "import/generator/block_3/conv2/Conv2D": [
+        "Tensor(\"import/generator/block_3/conv2/Conv2D:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_3/conv2/BiasAdd": [
+        "Tensor(\"import/generator/block_3/conv2/BiasAdd:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/block_3/add": [
+        "Tensor(\"import/generator/block_3/add:0\", shape=(1, 180, 180, 128), dtype=float32)"
+    ],
+    "import/generator/Conv_5/weights": [
+        "Tensor(\"import/generator/Conv_5/weights:0\", shape=(3, 3, 128, 64), dtype=float32)"
+    ],
+    "import/generator/Conv_5/weights/read": [
+        "Tensor(\"import/generator/Conv_5/weights/read:0\", shape=(3, 3, 128, 64), dtype=float32)"
+    ],
+    "import/generator/Conv_5/biases": [
+        "Tensor(\"import/generator/Conv_5/biases:0\", shape=(64,), dtype=float32)"
+    ],
+    "import/generator/Conv_5/biases/read": [
+        "Tensor(\"import/generator/Conv_5/biases/read:0\", shape=(64,), dtype=float32)"
+    ],
+    "import/generator/Conv_5/Conv2D": [
+        "Tensor(\"import/generator/Conv_5/Conv2D:0\", shape=(1, 180, 180, 64), dtype=float32)"
+    ],
+    "import/generator/Conv_5/BiasAdd": [
+        "Tensor(\"import/generator/Conv_5/BiasAdd:0\", shape=(1, 180, 180, 64), dtype=float32)"
+    ],
+    "import/generator/LeakyRelu_5": [
+        "Tensor(\"import/generator/LeakyRelu_5:0\", shape=(1, 180, 180, 64), dtype=float32)"
+    ],
+    "import/generator/Shape": [
+        "Tensor(\"import/generator/Shape:0\", shape=(4,), dtype=int32)"
+    ],
+    "import/generator/strided_slice/stack": [
+        "Tensor(\"import/generator/strided_slice/stack:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/generator/strided_slice/stack_1": [
+        "Tensor(\"import/generator/strided_slice/stack_1:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/generator/strided_slice/stack_2": [
+        "Tensor(\"import/generator/strided_slice/stack_2:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/generator/strided_slice": [
+        "Tensor(\"import/generator/strided_slice:0\", shape=(), dtype=int32)"
+    ],
+    "import/generator/Shape_1": [
+        "Tensor(\"import/generator/Shape_1:0\", shape=(4,), dtype=int32)"
+    ],
+    "import/generator/strided_slice_1/stack": [
+        "Tensor(\"import/generator/strided_slice_1/stack:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/generator/strided_slice_1/stack_1": [
+        "Tensor(\"import/generator/strided_slice_1/stack_1:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/generator/strided_slice_1/stack_2": [
+        "Tensor(\"import/generator/strided_slice_1/stack_2:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/generator/strided_slice_1": [
+        "Tensor(\"import/generator/strided_slice_1:0\", shape=(), dtype=int32)"
+    ],
+    "import/generator/mul/y": [
+        "Tensor(\"import/generator/mul/y:0\", shape=(), dtype=int32)"
+    ],
+    "import/generator/mul": [
+        "Tensor(\"import/generator/mul:0\", shape=(), dtype=int32)"
+    ],
+    "import/generator/mul_1/y": [
+        "Tensor(\"import/generator/mul_1/y:0\", shape=(), dtype=int32)"
+    ],
+    "import/generator/mul_1": [
+        "Tensor(\"import/generator/mul_1:0\", shape=(), dtype=int32)"
+    ],
+    "import/generator/ResizeBilinear/size": [
+        "Tensor(\"import/generator/ResizeBilinear/size:0\", shape=(2,), dtype=int32)"
+    ],
+    "import/generator/ResizeBilinear": [
+        "Tensor(\"import/generator/ResizeBilinear:0\", shape=(1, 360, 360, 64), dtype=float32)"
+    ],
+    "import/generator/add": [
+        "Tensor(\"import/generator/add:0\", shape=(1, 360, 360, 64), dtype=float32)"
+    ],
+    "import/generator/Conv_6/weights": [
+        "Tensor(\"import/generator/Conv_6/weights:0\", shape=(3, 3, 64, 64), dtype=float32)"
+    ],
+    "import/generator/Conv_6/weights/read": [
+        "Tensor(\"import/generator/Conv_6/weights/read:0\", shape=(3, 3, 64, 64), dtype=float32)"
+    ],
+    "import/generator/Conv_6/biases": [
+        "Tensor(\"import/generator/Conv_6/biases:0\", shape=(64,), dtype=float32)"
+    ],
+    "import/generator/Conv_6/biases/read": [
+        "Tensor(\"import/generator/Conv_6/biases/read:0\", shape=(64,), dtype=float32)"
+    ],
+    "import/generator/Conv_6/Conv2D": [
+        "Tensor(\"import/generator/Conv_6/Conv2D:0\", shape=(1, 360, 360, 64), dtype=float32)"
+    ],
+    "import/generator/Conv_6/BiasAdd": [
+        "Tensor(\"import/generator/Conv_6/BiasAdd:0\", shape=(1, 360, 360, 64), dtype=float32)"
+    ],
+    "import/generator/LeakyRelu_6": [
+        "Tensor(\"import/generator/LeakyRelu_6:0\", shape=(1, 360, 360, 64), dtype=float32)"
+    ],
+    "import/generator/Conv_7/weights": [
+        "Tensor(\"import/generator/Conv_7/weights:0\", shape=(3, 3, 64, 32), dtype=float32)"
+    ],
+    "import/generator/Conv_7/weights/read": [
+        "Tensor(\"import/generator/Conv_7/weights/read:0\", shape=(3, 3, 64, 32), dtype=float32)"
+    ],
+    "import/generator/Conv_7/biases": [
+        "Tensor(\"import/generator/Conv_7/biases:0\", shape=(32,), dtype=float32)"
+    ],
+    "import/generator/Conv_7/biases/read": [
+        "Tensor(\"import/generator/Conv_7/biases/read:0\", shape=(32,), dtype=float32)"
+    ],
+    "import/generator/Conv_7/Conv2D": [
+        "Tensor(\"import/generator/Conv_7/Conv2D:0\", shape=(1, 360, 360, 32), dtype=float32)"
+    ],
+    "import/generator/Conv_7/BiasAdd": [
+        "Tensor(\"import/generator/Conv_7/BiasAdd:0\", shape=(1, 360, 360, 32), dtype=float32)"
+    ],
+    "import/generator/LeakyRelu_7": [
+        "Tensor(\"import/generator/LeakyRelu_7:0\", shape=(1, 360, 360, 32), dtype=float32)"
+    ],
+    "import/generator/Shape_2": [
+        "Tensor(\"import/generator/Shape_2:0\", shape=(4,), dtype=int32)"
+    ],
+    "import/generator/strided_slice_2/stack": [
+        "Tensor(\"import/generator/strided_slice_2/stack:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/generator/strided_slice_2/stack_1": [
+        "Tensor(\"import/generator/strided_slice_2/stack_1:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/generator/strided_slice_2/stack_2": [
+        "Tensor(\"import/generator/strided_slice_2/stack_2:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/generator/strided_slice_2": [
+        "Tensor(\"import/generator/strided_slice_2:0\", shape=(), dtype=int32)"
+    ],
+    "import/generator/Shape_3": [
+        "Tensor(\"import/generator/Shape_3:0\", shape=(4,), dtype=int32)"
+    ],
+    "import/generator/strided_slice_3/stack": [
+        "Tensor(\"import/generator/strided_slice_3/stack:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/generator/strided_slice_3/stack_1": [
+        "Tensor(\"import/generator/strided_slice_3/stack_1:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/generator/strided_slice_3/stack_2": [
+        "Tensor(\"import/generator/strided_slice_3/stack_2:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/generator/strided_slice_3": [
+        "Tensor(\"import/generator/strided_slice_3:0\", shape=(), dtype=int32)"
+    ],
+    "import/generator/mul_2/y": [
+        "Tensor(\"import/generator/mul_2/y:0\", shape=(), dtype=int32)"
+    ],
+    "import/generator/mul_2": [
+        "Tensor(\"import/generator/mul_2:0\", shape=(), dtype=int32)"
+    ],
+    "import/generator/mul_3/y": [
+        "Tensor(\"import/generator/mul_3/y:0\", shape=(), dtype=int32)"
+    ],
+    "import/generator/mul_3": [
+        "Tensor(\"import/generator/mul_3:0\", shape=(), dtype=int32)"
+    ],
+    "import/generator/ResizeBilinear_1/size": [
+        "Tensor(\"import/generator/ResizeBilinear_1/size:0\", shape=(2,), dtype=int32)"
+    ],
+    "import/generator/ResizeBilinear_1": [
+        "Tensor(\"import/generator/ResizeBilinear_1:0\", shape=(1, 720, 720, 32), dtype=float32)"
+    ],
+    "import/generator/add_1": [
+        "Tensor(\"import/generator/add_1:0\", shape=(1, 720, 720, 32), dtype=float32)"
+    ],
+    "import/generator/Conv_8/weights": [
+        "Tensor(\"import/generator/Conv_8/weights:0\", shape=(3, 3, 32, 32), dtype=float32)"
+    ],
+    "import/generator/Conv_8/weights/read": [
+        "Tensor(\"import/generator/Conv_8/weights/read:0\", shape=(3, 3, 32, 32), dtype=float32)"
+    ],
+    "import/generator/Conv_8/biases": [
+        "Tensor(\"import/generator/Conv_8/biases:0\", shape=(32,), dtype=float32)"
+    ],
+    "import/generator/Conv_8/biases/read": [
+        "Tensor(\"import/generator/Conv_8/biases/read:0\", shape=(32,), dtype=float32)"
+    ],
+    "import/generator/Conv_8/Conv2D": [
+        "Tensor(\"import/generator/Conv_8/Conv2D:0\", shape=(1, 720, 720, 32), dtype=float32)"
+    ],
+    "import/generator/Conv_8/BiasAdd": [
+        "Tensor(\"import/generator/Conv_8/BiasAdd:0\", shape=(1, 720, 720, 32), dtype=float32)"
+    ],
+    "import/generator/LeakyRelu_8": [
+        "Tensor(\"import/generator/LeakyRelu_8:0\", shape=(1, 720, 720, 32), dtype=float32)"
+    ],
+    "import/generator/Conv_9/weights": [
+        "Tensor(\"import/generator/Conv_9/weights:0\", shape=(7, 7, 32, 3), dtype=float32)"
+    ],
+    "import/generator/Conv_9/weights/read": [
+        "Tensor(\"import/generator/Conv_9/weights/read:0\", shape=(7, 7, 32, 3), dtype=float32)"
+    ],
+    "import/generator/Conv_9/biases": [
+        "Tensor(\"import/generator/Conv_9/biases:0\", shape=(3,), dtype=float32)"
+    ],
+    "import/generator/Conv_9/biases/read": [
+        "Tensor(\"import/generator/Conv_9/biases/read:0\", shape=(3,), dtype=float32)"
+    ],
+    "import/generator/Conv_9/Conv2D": [
+        "Tensor(\"import/generator/Conv_9/Conv2D:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/generator/Conv_9/BiasAdd": [
+        "Tensor(\"import/generator/Conv_9/BiasAdd:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/Shape": [
+        "Tensor(\"import/Shape:0\", shape=(4,), dtype=int32)"
+    ],
+    "import/strided_slice/stack": [
+        "Tensor(\"import/strided_slice/stack:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/strided_slice/stack_1": [
+        "Tensor(\"import/strided_slice/stack_1:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/strided_slice/stack_2": [
+        "Tensor(\"import/strided_slice/stack_2:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/strided_slice": [
+        "Tensor(\"import/strided_slice:0\", shape=(), dtype=int32)"
+    ],
+    "import/strided_slice_1/stack": [
+        "Tensor(\"import/strided_slice_1/stack:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/strided_slice_1/stack_1": [
+        "Tensor(\"import/strided_slice_1/stack_1:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/strided_slice_1/stack_2": [
+        "Tensor(\"import/strided_slice_1/stack_2:0\", shape=(1,), dtype=int32)"
+    ],
+    "import/strided_slice_1": [
+        "Tensor(\"import/strided_slice_1:0\", shape=(), dtype=int32)"
+    ],
+    "import/ones/packed/0": [
+        "Tensor(\"import/ones/packed/0:0\", shape=(), dtype=int32)"
+    ],
+    "import/ones/packed/3": [
+        "Tensor(\"import/ones/packed/3:0\", shape=(), dtype=int32)"
+    ],
+    "import/ones/packed": [
+        "Tensor(\"import/ones/packed:0\", shape=(4,), dtype=int32)"
+    ],
+    "import/ones/Const": [
+        "Tensor(\"import/ones/Const:0\", shape=(), dtype=float32)"
+    ],
+    "import/ones": [
+        "Tensor(\"import/ones:0\", shape=(1, 720, 720, 1), dtype=float32)"
+    ],
+    "import/depthwise/filter_in": [
+        "Tensor(\"import/depthwise/filter_in:0\", shape=(3, 3, 1, 1), dtype=float32)"
+    ],
+    "import/depthwise": [
+        "Tensor(\"import/depthwise:0\", shape=(1, 720, 720, 1), dtype=float32)"
+    ],
+    "import/depthwise_1/filter_in": [
+        "Tensor(\"import/depthwise_1/filter_in:0\", shape=(3, 3, 3, 1), dtype=float32)"
+    ],
+    "import/depthwise_1": [
+        "Tensor(\"import/depthwise_1:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/truediv": [
+        "Tensor(\"import/truediv:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/depthwise_2/filter_in": [
+        "Tensor(\"import/depthwise_2/filter_in:0\", shape=(3, 3, 3, 1), dtype=float32)"
+    ],
+    "import/depthwise_2": [
+        "Tensor(\"import/depthwise_2:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/truediv_1": [
+        "Tensor(\"import/truediv_1:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/mul": [
+        "Tensor(\"import/mul:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/depthwise_3/filter_in": [
+        "Tensor(\"import/depthwise_3/filter_in:0\", shape=(3, 3, 3, 1), dtype=float32)"
+    ],
+    "import/depthwise_3": [
+        "Tensor(\"import/depthwise_3:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/truediv_2": [
+        "Tensor(\"import/truediv_2:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/mul_1": [
+        "Tensor(\"import/mul_1:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/sub": [
+        "Tensor(\"import/sub:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/mul_2": [
+        "Tensor(\"import/mul_2:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/depthwise_4/filter_in": [
+        "Tensor(\"import/depthwise_4/filter_in:0\", shape=(3, 3, 3, 1), dtype=float32)"
+    ],
+    "import/depthwise_4": [
+        "Tensor(\"import/depthwise_4:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/truediv_3": [
+        "Tensor(\"import/truediv_3:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/mul_3": [
+        "Tensor(\"import/mul_3:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/sub_1": [
+        "Tensor(\"import/sub_1:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/add/y": [
+        "Tensor(\"import/add/y:0\", shape=(), dtype=float32)"
+    ],
+    "import/add": [
+        "Tensor(\"import/add:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/truediv_4": [
+        "Tensor(\"import/truediv_4:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/mul_4": [
+        "Tensor(\"import/mul_4:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/sub_2": [
+        "Tensor(\"import/sub_2:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/depthwise_5/filter_in": [
+        "Tensor(\"import/depthwise_5/filter_in:0\", shape=(3, 3, 3, 1), dtype=float32)"
+    ],
+    "import/depthwise_5": [
+        "Tensor(\"import/depthwise_5:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/truediv_5": [
+        "Tensor(\"import/truediv_5:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/depthwise_6/filter_in": [
+        "Tensor(\"import/depthwise_6/filter_in:0\", shape=(3, 3, 3, 1), dtype=float32)"
+    ],
+    "import/depthwise_6": [
+        "Tensor(\"import/depthwise_6:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/truediv_6": [
+        "Tensor(\"import/truediv_6:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/mul_5": [
+        "Tensor(\"import/mul_5:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ],
+    "import/add_1": [
+        "Tensor(\"import/add_1:0\", shape=(1, 720, 720, 3), dtype=float32)"
+    ]
+}

@@ -1,0 +1,4 @@
+input_photo.name = input:0
+input_photo.shape = (1, 720, 720, 3)
+final_out.name = add_1:0
+final_out.shape = (1, 720, 720, 3)

@@ -1,0 +1,21 @@
+freeze_graph \
+  --input_graph=./frozen.pb \
+  --input_checkpoint=./model.ckpt \
+  --output_graph=./white_box_cartoonization_freeze_graph.pb \
+  --output_node_names=add_1 \
+  --input_binary=True
+
+$ freeze_graph \
+  --input_graph=./frozen.pb \
+  --input_checkpoint=./model.ckpt \
+  --output_graph=./white_box_cartoonization_freeze_graph.pb \
+  --output_node_names=add_1 \
+  --input_binary=True
+
+saved_model_cli show --dir ./saved_model --all
+
+freeze_graph \
+  --input_saved_model=./saved_model \
+  --output_graph=./export/white_box_cartoonization_freeze_graph.pb \
+  --output_node_names=add_1
+

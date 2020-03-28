@@ -1,0 +1,17 @@
+bazel build tensorflow/tools/graph_transforms:summarize_graph
+
+bazel-bin/tensorflow/tools/graph_transforms/summarize_graph \
+--in_graph=${HOME}/git/White-box-Cartoonization/test_code/export/white_box_cartoonization_freeze_graph.pb
+
+Found 1 possible inputs: (name=input, type=float(1), shape=[1,720,720,3]) 
+No variables spotted.
+Found 1 possible outputs: (name=add_1, op=AddV2) 
+Found 1467292 (1.47M) const parameters, 0 (0) variable parameters, and 0 control_edges
+Op types used: 74 Const, 36 Identity, 18 BiasAdd, 18 Conv2D, 13 LeakyRelu, 10 Mul, 8 AddV2, 7 DepthwiseConv2dNative, 7 RealDiv, 6 StridedSlice, 3 Pack, 3 Sub, 2 ResizeBilinear, 1 Fill, 1 Placeholder
+To use with tensorflow/tools/benchmark:benchmark_model try these arguments:
+bazel run tensorflow/tools/benchmark:benchmark_model -- \
+--graph=/home/b920405/git/White-box-Cartoonization/test_code/export/white_box_cartoonization_freeze_graph.pb \
+--show_flops --input_layer=input \
+--input_layer_type=float \
+--input_layer_shape=1,720,720,3 \
+--output_layer=add_1
