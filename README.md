@@ -1206,6 +1206,26 @@ Memory (bytes): count=0
 
 </div></details>
 
+<details><summary>Ubuntu 18.04 x86_64 + XNNPACK enabled + 4 Threads White-box-Cartoonization white_box_cartoonization_weight_quant.tflite Benchmark</summary><div>
+
+```bash
+Number of nodes executed: 47
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                 CONV_2D	       18	 10731.842	    97.293%	    97.293%	     0.000	       18
+	              LEAKY_RELU	       13	   236.792	     2.147%	    99.440%	     0.000	       13
+	   TfLiteXNNPackDelegate	       10	    45.534	     0.413%	    99.853%	     0.000	       10
+	         RESIZE_BILINEAR	        2	    11.237	     0.102%	    99.954%	     0.000	        2
+	                     SUB	        3	     4.053	     0.037%	    99.991%	     0.000	        3
+	                     DIV	        1	     0.977	     0.009%	   100.000%	     0.000	        1
+
+Timings (microseconds): count=14 first=10866837 curr=11292015 min=10697744 max=12289882 avg=1.10305e+07 std=406791
+Memory (bytes): count=0
+47 nodes observed
+```
+
+</div></details>
+
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
 2. **[When you want to fine-tune DeepLab on other datasets, there are a few cases](https://github.com/tensorflow/models/issues/3730#issuecomment-380168917)**  
