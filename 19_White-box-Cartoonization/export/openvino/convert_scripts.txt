@@ -34,5 +34,5 @@ cd ${HOME}/inference_engine_cpp_samples_build/intel64/Release
 ./benchmark_app \
   -m ${HOME}/git/PINTO_model_zoo/19_White-box-Cartoonization/export/openvino/FP16/white_box_cartoonization_freeze_graph.xml \
   -i ${HOME}/Pictures \
-  -d CPU \
+  -d GPU \
   -nthreads 8
