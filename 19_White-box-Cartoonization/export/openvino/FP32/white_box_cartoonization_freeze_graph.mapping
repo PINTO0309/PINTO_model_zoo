@@ -1,0 +1,351 @@
+<?xml version="1.0" ?>
+<mapping>
+	<map>
+		<framework name="truediv_6:0" out_port_id="truediv_6:0"/>
+		<IR id="170" name="truediv_6/mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="const_fold_opt__111" out_port_id="const_fold_opt__111"/>
+		<IR id="145" name="47004703_const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="Conv__82:0" out_port_id="Conv__82:0"/>
+		<IR id="47" name="Conv__82" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="Conv__100:0" out_port_id="Conv__100:0"/>
+		<IR id="103" name="Conv__100" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/LeakyRelu_2:0" out_port_id="generator/LeakyRelu_2:0"/>
+		<IR id="43" name="generator/LeakyRelu_23720" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="truediv:0" out_port_id="truediv:0"/>
+		<IR id="18" name="truediv/mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="Conv__83:0" out_port_id="Conv__83:0"/>
+		<IR id="53" name="Conv__83" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/LeakyRelu_7:0" out_port_id="generator/LeakyRelu_7:0"/>
+		<IR id="120" name="generator/LeakyRelu_73736" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/LeakyRelu_3:0" out_port_id="generator/LeakyRelu_3:0"/>
+		<IR id="49" name="generator/LeakyRelu_33744" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="const_fold_opt__111" out_port_id="const_fold_opt__111"/>
+		<IR id="166" name="47044707_const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="generator/block_3/conv1/weights/read/_36__cf__36:0" out_port_id="generator/block_3/conv1/weights/read/_36__cf__36:0"/>
+		<IR id="89" name="onnx_initializer_node_generator/block_3/conv1/weights/read/_36__cf__36:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="generator/block_3/add:0" out_port_id="generator/block_3/add:0"/>
+		<IR id="99" name="generator/block_3/add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="const_fold_opt__111" out_port_id="const_fold_opt__111"/>
+		<IR id="14" name="47124715_const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="Conv__79:0" out_port_id="Conv__79:0"/>
+		<IR id="41" name="Conv__79" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="depthwise_6__65:0" out_port_id="depthwise_6__65:0"/>
+		<IR id="165" name="depthwise_6__65" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="Conv__98:0" out_port_id="Conv__98:0"/>
+		<IR id="92" name="Conv__98" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="truediv_1:0" out_port_id="truediv_1:0"/>
+		<IR id="149" name="truediv_1/mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="Conv__101:0" out_port_id="Conv__101:0"/>
+		<IR id="112" name="Conv__101" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="depthwise_4__45:0" out_port_id="depthwise_4__45:0"/>
+		<IR id="5" name="depthwise_4__45" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/Conv_6/weights/read/_14__cf__14:0" out_port_id="generator/Conv_6/weights/read/_14__cf__14:0"/>
+		<IR id="109" name="onnx_initializer_node_generator/Conv_6/weights/read/_14__cf__14:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="generator/LeakyRelu_6:0" out_port_id="generator/LeakyRelu_6:0"/>
+		<IR id="114" name="generator/LeakyRelu_63716" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="const_fold_opt__111" out_port_id="const_fold_opt__111"/>
+		<IR id="6" name="46964699_const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="generator/block_1/conv2/weights/read/_30__cf__30:0" out_port_id="generator/block_1/conv2/weights/read/_30__cf__30:0"/>
+		<IR id="73" name="onnx_initializer_node_generator/block_1/conv2/weights/read/_30__cf__30:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="Transpose__105:0" out_port_id="Transpose__105:0"/>
+		<IR id="135" name="Transpose__105" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="mul:0" out_port_id="mul:0"/>
+		<IR id="136" name="mul" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="add_1" out_port_id="0"/>
+		<IR id="171" name="add_1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="depthwise_1:0" out_port_id="depthwise_1:0"/>
+		<IR id="15" name="depthwise_1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/ResizeBilinear:0" out_port_id="generator/ResizeBilinear:0"/>
+		<IR id="107" name="Interpolate/generator/ResizeBilinear" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="depthwise_3__50:0" out_port_id="depthwise_3__50:0"/>
+		<IR id="138" name="depthwise_3__50" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/Conv_2/weights/read/_6__cf__6:0" out_port_id="generator/Conv_2/weights/read/_6__cf__6:0"/>
+		<IR id="38" name="onnx_initializer_node_generator/Conv_2/weights/read/_6__cf__6:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="Conv__87:0" out_port_id="Conv__87:0"/>
+		<IR id="65" name="Conv__87" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="depthwise_5__70:0" out_port_id="depthwise_5__70:0"/>
+		<IR id="154" name="depthwise_5__70" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="Conv__90:0" out_port_id="Conv__90:0"/>
+		<IR id="70" name="Conv__90" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/block_0/conv2/weights/read/_26__cf__26:0" out_port_id="generator/block_0/conv2/weights/read/_26__cf__26:0"/>
+		<IR id="62" name="onnx_initializer_node_generator/block_0/conv2/weights/read/_26__cf__26:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="truediv_4:0" out_port_id="truediv_4:0"/>
+		<IR id="152" name="truediv_4/mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="sub_2:0" out_port_id="sub_2:0"/>
+		<IR id="163" name="sub_2/add_/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="Conv__75:0" out_port_id="Conv__75:0"/>
+		<IR id="29" name="Conv__75" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="Conv__103:0" out_port_id="Conv__103:0"/>
+		<IR id="127" name="Conv__103" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="Conv__95:0" out_port_id="Conv__95:0"/>
+		<IR id="87" name="Conv__95" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/Conv_5/weights/read/_12__cf__12:0" out_port_id="generator/Conv_5/weights/read/_12__cf__12:0"/>
+		<IR id="100" name="onnx_initializer_node_generator/Conv_5/weights/read/_12__cf__12:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="Conv__91:0" out_port_id="Conv__91:0"/>
+		<IR id="76" name="Conv__91" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="sub_1:0" out_port_id="sub_1:0"/>
+		<IR id="20" name="sub_1/add_/sub" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/block_2/add:0" out_port_id="generator/block_2/add:0"/>
+		<IR id="88" name="generator/block_2/add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/block_0/conv1/weights/read/_24__cf__24:0" out_port_id="generator/block_0/conv1/weights/read/_24__cf__24:0"/>
+		<IR id="56" name="onnx_initializer_node_generator/block_0/conv1/weights/read/_24__cf__24:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="generator/add_1:0" out_port_id="generator/add_1:0"/>
+		<IR id="123" name="generator/add_1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="Conv__78:0" out_port_id="Conv__78:0"/>
+		<IR id="35" name="Conv__78" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="Conv__99:0" out_port_id="Conv__99:0"/>
+		<IR id="98" name="Conv__99" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="const_fold_opt__111" out_port_id="const_fold_opt__111"/>
+		<IR id="139" name="46924695_const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="generator/Conv_9/weights/read/_20__cf__20:0" out_port_id="generator/Conv_9/weights/read/_20__cf__20:0"/>
+		<IR id="130" name="onnx_initializer_node_generator/Conv_9/weights/read/_20__cf__20:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="generator/add:0" out_port_id="generator/add:0"/>
+		<IR id="108" name="generator/add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/block_1/conv1/weights/read/_28__cf__28:0" out_port_id="generator/block_1/conv1/weights/read/_28__cf__28:0"/>
+		<IR id="67" name="onnx_initializer_node_generator/block_1/conv1/weights/read/_28__cf__28:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="generator/Conv/Conv2D__5:0" out_port_id="generator/Conv/Conv2D__5:0"/>
+		<IR id="13" name="generator/Conv/Conv2D__5" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/block_0/add:0" out_port_id="generator/block_0/add:0"/>
+		<IR id="66" name="generator/block_0/add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/block_3/LeakyRelu:0" out_port_id="generator/block_3/LeakyRelu:0"/>
+		<IR id="94" name="generator/block_3/LeakyRelu3740" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/LeakyRelu:0" out_port_id="generator/LeakyRelu:0"/>
+		<IR id="31" name="generator/LeakyRelu3708" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="depthwise_3:0" out_port_id="depthwise_3:0"/>
+		<IR id="140" name="depthwise_3" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/Conv_3/weights/read/_8__cf__8:0" out_port_id="generator/Conv_3/weights/read/_8__cf__8:0"/>
+		<IR id="44" name="onnx_initializer_node_generator/Conv_3/weights/read/_8__cf__8:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="generator/block_3/conv2/weights/read/_38__cf__38:0" out_port_id="generator/block_3/conv2/weights/read/_38__cf__38:0"/>
+		<IR id="95" name="onnx_initializer_node_generator/block_3/conv2/weights/read/_38__cf__38:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="generator/block_0/LeakyRelu:0" out_port_id="generator/block_0/LeakyRelu:0"/>
+		<IR id="61" name="generator/block_0/LeakyRelu3732" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="input:0" out_port_id="input:0"/>
+		<IR id="2" name="input:0" out_port_id="0"/>
+	</map>
+	<map>
+		<framework name="generator/block_1/LeakyRelu:0" out_port_id="generator/block_1/LeakyRelu:0"/>
+		<IR id="72" name="generator/block_1/LeakyRelu3728" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="Conv__94:0" out_port_id="Conv__94:0"/>
+		<IR id="81" name="Conv__94" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/block_1/add:0" out_port_id="generator/block_1/add:0"/>
+		<IR id="77" name="generator/block_1/add" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/Conv_1/weights/read/_4__cf__4:0" out_port_id="generator/Conv_1/weights/read/_4__cf__4:0"/>
+		<IR id="32" name="onnx_initializer_node_generator/Conv_1/weights/read/_4__cf__4:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="generator/ResizeBilinear_1:0" out_port_id="generator/ResizeBilinear_1:0"/>
+		<IR id="122" name="Interpolate/generator/ResizeBilinear_1" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="truediv_5:0" out_port_id="truediv_5:0"/>
+		<IR id="159" name="truediv_5/mul_" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="Conv__86:0" out_port_id="Conv__86:0"/>
+		<IR id="59" name="Conv__86" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/Conv_7/weights/read/_16__cf__16:0" out_port_id="generator/Conv_7/weights/read/_16__cf__16:0"/>
+		<IR id="115" name="onnx_initializer_node_generator/Conv_7/weights/read/_16__cf__16:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="generator/Conv_8/weights/read/_18__cf__18:0" out_port_id="generator/Conv_8/weights/read/_18__cf__18:0"/>
+		<IR id="124" name="onnx_initializer_node_generator/Conv_8/weights/read/_18__cf__18:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="generator/Conv_4/weights/read/_10__cf__10:0" out_port_id="generator/Conv_4/weights/read/_10__cf__10:0"/>
+		<IR id="50" name="onnx_initializer_node_generator/Conv_4/weights/read/_10__cf__10:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="mul_2:0" out_port_id="mul_2:0"/>
+		<IR id="3" name="mul_2" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/block_2/LeakyRelu:0" out_port_id="generator/block_2/LeakyRelu:0"/>
+		<IR id="83" name="generator/block_2/LeakyRelu3748" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/LeakyRelu_1:0" out_port_id="generator/LeakyRelu_1:0"/>
+		<IR id="37" name="generator/LeakyRelu_13712" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/Conv/weights/read/_2__cf__2:0" out_port_id="generator/Conv/weights/read/_2__cf__2:0"/>
+		<IR id="26" name="onnx_initializer_node_generator/Conv/weights/read/_2__cf__2:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="generator/LeakyRelu_8:0" out_port_id="generator/LeakyRelu_8:0"/>
+		<IR id="129" name="generator/LeakyRelu_83724" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="depthwise_6:0" out_port_id="depthwise_6:0"/>
+		<IR id="167" name="depthwise_6" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="depthwise_5:0" out_port_id="depthwise_5:0"/>
+		<IR id="156" name="depthwise_5" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/LeakyRelu_4:0" out_port_id="generator/LeakyRelu_4:0"/>
+		<IR id="55" name="generator/LeakyRelu_43704" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="const_fold_opt__111" out_port_id="const_fold_opt__111"/>
+		<IR id="155" name="47084711_const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="generator/block_2/conv1/weights/read/_32__cf__32:0" out_port_id="generator/block_2/conv1/weights/read/_32__cf__32:0"/>
+		<IR id="78" name="onnx_initializer_node_generator/block_2/conv1/weights/read/_32__cf__32:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+	<map>
+		<framework name="depthwise_4:0" out_port_id="depthwise_4:0"/>
+		<IR id="7" name="depthwise_4" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="depthwise_2:0" out_port_id="depthwise_2:0"/>
+		<IR id="146" name="depthwise_2" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="mul_5:0" out_port_id="mul_5:0"/>
+		<IR id="160" name="mul_5" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/LeakyRelu_5:0" out_port_id="generator/LeakyRelu_5:0"/>
+		<IR id="105" name="generator/LeakyRelu_53752" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="Conv__104:0" out_port_id="Conv__104:0"/>
+		<IR id="133" name="Conv__104" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="Conv__102:0" out_port_id="Conv__102:0"/>
+		<IR id="118" name="Conv__102" out_port_id="2"/>
+	</map>
+	<map>
+		<framework name="generator/block_2/conv2/weights/read/_34__cf__34:0" out_port_id="generator/block_2/conv2/weights/read/_34__cf__34:0"/>
+		<IR id="84" name="onnx_initializer_node_generator/block_2/conv2/weights/read/_34__cf__34:0/Output_0/Data__const" out_port_id="1"/>
+	</map>
+</mapping>

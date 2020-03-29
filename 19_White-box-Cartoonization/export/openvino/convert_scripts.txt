@@ -1,0 +1,38 @@
+sudo pip3 install -U tf2onnx
+
+python3 -m tf2onnx.convert \
+  --saved-model ${HOME}/git/PINTO_model_zoo/19_White-box-Cartoonization/saved_model \
+  --output ${HOME}/git/PINTO_model_zoo/19_White-box-Cartoonization/export/openvino/white_box_cartoonization_freeze_graph.onnx \
+  --inputs input:0 \
+  --outputs add_1:0 \
+  --fold_const
+
+
+
+cd /opt/intel/openvino/deployment_tools/model_optimizer/
+
+python3 mo.py \
+  --input_model ${HOME}/git/PINTO_model_zoo/19_White-box-Cartoonization/export/openvino/white_box_cartoonization_freeze_graph.onnx \
+  --output_dir ${HOME}/git/PINTO_model_zoo/19_White-box-Cartoonization/export/openvino \
+  --data_type FP32
+
+python3 mo.py \
+  --input_model ${HOME}/git/PINTO_model_zoo/19_White-box-Cartoonization/export/openvino/white_box_cartoonization_freeze_graph.onnx \
+  --output_dir ${HOME}/git/PINTO_model_zoo/19_White-box-Cartoonization/export/openvino \
+  --data_type FP16
+
+
+
+cd ${HOME}/inference_engine_cpp_samples_build/intel64/Release
+
+./benchmark_app \
+  -m ${HOME}/git/PINTO_model_zoo/19_White-box-Cartoonization/export/openvino/FP32/white_box_cartoonization_freeze_graph.xml \
+  -i ${HOME}/Pictures \
+  -d CPU \
+  -nthreads 8
+
+./benchmark_app \
+  -m ${HOME}/git/PINTO_model_zoo/19_White-box-Cartoonization/export/openvino/FP16/white_box_cartoonization_freeze_graph.xml \
+  -i ${HOME}/Pictures \
+  -d CPU \
+  -nthreads 8
