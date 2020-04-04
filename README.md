@@ -228,8 +228,8 @@ $ sed -i -e \
 ```bash
 # crop_size and image_pooling_crop_size are multiples of --decoder_output_stride + 1
 # 769 = 8 * 96 + 1
-# 512 = 8 * 64 + 1
-# 320 = 8 * 40 + 1
+# 513 = 8 * 64 + 1
+# 321 = 8 * 40 + 1
 
 # --initialize_last_layer=True initializes the final layer with the weight of  
 # tf_initial_checkpoint (inherits the weight)
