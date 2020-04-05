@@ -1,0 +1,139 @@
+### tensorflow-gpu==1.15.2
+
+export PYTHONPATH=${PYTHONPATH}:${HOME}/models/research:${HOME}/models/research/slim
+
+nano ${HOME}/models/research/deeplab/export_model.py
+
+  #input_image = tf.placeholder(tf.uint8, [1, None, None, 3], name=_INPUT_NAME)
+  input_image = tf.placeholder(tf.float32, [1, FLAGS.crop_size[0], FLAGS.crop_size[1], 3], name=_INPUT_NAME)
+
+nano ${HOME}/models/research/deeplab/core/feature_extractor.py
+
+    net, end_points = mobilenet_v3.mobilenet_base(
+        net,
+        depth_multiplier=depth_multiplier,
+        conv_defs=conv_defs,
+        output_stride=output_stride,
+        final_endpoint=final_endpoint,
+        scope=scope)
+
+↓
+
+    net, end_points = mobilenet_v3.mobilenet_base(
+        net,
+        depth_multiplier=depth_multiplier,
+        conv_defs=conv_defs,
+        output_stride=output_stride,
+        finegrain_classification_mode=True, # For 'MobilenetEdgeTPU'
+        final_endpoint=final_endpoint,
+        scope=scope)
+
+
+python3 ${HOME}/models/research/deeplab/export_model.py \
+  --checkpoint_path=./model.ckpt \
+  --export_path=./frozen_inference_graph_257_os32.pb \
+  --num_classes=19 \
+  --crop_size=257 \
+  --crop_size=257 \
+  --model_variant=mobilenet_edgetpu \
+  --decoder_output_stride='' \
+  --depth_multiplier=0.75 \
+  --aspp_convs_filters=128 \
+  --output_stride=32
+
+python3 ${HOME}/models/research/deeplab/export_model.py \
+  --checkpoint_path=./model.ckpt \
+  --export_path=./frozen_inference_graph_257_os16.pb \
+  --num_classes=19 \
+  --crop_size=257 \
+  --crop_size=257 \
+  --image_pooling_crop_size="257,257" \
+  --model_variant=mobilenet_edgetpu \
+  --decoder_output_stride='' \
+  --depth_multiplier=0.75 \
+  --aspp_convs_filters=128 \
+  --output_stride=16
+
+
+
+python3 ${HOME}/models/research/deeplab/export_model.py \
+  --checkpoint_path=./model.ckpt \
+  --export_path=./frozen_inference_graph_321_os32.pb \
+  --num_classes=19 \
+  --crop_size=321 \
+  --crop_size=321 \
+  --image_pooling_crop_size="321,321" \
+  --model_variant=mobilenet_edgetpu \
+  --decoder_output_stride='' \
+  --depth_multiplier=0.75 \
+  --aspp_convs_filters=128 \
+  --output_stride=32
+
+python3 ${HOME}/models/research/deeplab/export_model.py \
+  --checkpoint_path=./model.ckpt \
+  --export_path=./frozen_inference_graph_321_os16.pb \
+  --num_classes=19 \
+  --crop_size=321 \
+  --crop_size=321 \
+  --image_pooling_crop_size="321,321" \
+  --model_variant=mobilenet_edgetpu \
+  --decoder_output_stride='' \
+  --depth_multiplier=0.75 \
+  --aspp_convs_filters=128 \
+  --output_stride=16
+
+
+
+python3 ${HOME}/models/research/deeplab/export_model.py \
+  --checkpoint_path=./model.ckpt \
+  --export_path=./frozen_inference_graph_513_os32.pb \
+  --num_classes=19 \
+  --crop_size=513 \
+  --crop_size=513 \
+  --image_pooling_crop_size="513,513" \
+  --model_variant=mobilenet_edgetpu \
+  --decoder_output_stride='' \
+  --depth_multiplier=0.75 \
+  --aspp_convs_filters=128 \
+  --output_stride=32
+
+python3 ${HOME}/models/research/deeplab/export_model.py \
+  --checkpoint_path=./model.ckpt \
+  --export_path=./frozen_inference_graph_513_os16.pb \
+  --num_classes=19 \
+  --crop_size=513 \
+  --crop_size=513 \
+  --image_pooling_crop_size="513,513" \
+  --model_variant=mobilenet_edgetpu \
+  --decoder_output_stride='' \
+  --depth_multiplier=0.75 \
+  --aspp_convs_filters=128 \
+  --output_stride=16
+
+
+
+python3 ${HOME}/models/research/deeplab/export_model.py \
+  --checkpoint_path=./model.ckpt \
+  --export_path=./frozen_inference_graph_769_os32.pb \
+  --num_classes=19 \
+  --crop_size=769 \
+  --crop_size=769 \
+  --image_pooling_crop_size="769,769" \
+  --model_variant=mobilenet_edgetpu \
+  --decoder_output_stride='' \
+  --depth_multiplier=0.75 \
+  --aspp_convs_filters=128 \
+  --output_stride=32 
+
+python3 ${HOME}/models/research/deeplab/export_model.py \
+  --checkpoint_path=./model.ckpt \
+  --export_path=./frozen_inference_graph_769_os16.pb \
+  --num_classes=19 \
+  --crop_size=769 \
+  --crop_size=769 \
+  --image_pooling_crop_size="769,769" \
+  --model_variant=mobilenet_edgetpu \
+  --decoder_output_stride='' \
+  --depth_multiplier=0.75 \
+  --aspp_convs_filters=128 \
+  --output_stride=16

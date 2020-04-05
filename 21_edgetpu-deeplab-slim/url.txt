@@ -1,0 +1,1 @@
+https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/model_zoo.md#edgetpu-deeplab-models-on-cityscapes
