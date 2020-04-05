@@ -1251,6 +1251,31 @@ Memory (bytes): count=0
 
 </div></details>
 
+<details><summary>RaspberryPi4 + Ubuntu 19.10 aarch64 + 4 Threads edgetpu_deeplab_257_os32_integer_quant.tflite Benchmark</summary><div>
+
+```bash
+Number of nodes executed: 91
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                 CONV_2D	       49	    39.890	    52.335%	    52.335%	     0.000	       49
+	                     SUB	        2	    11.043	    14.488%	    66.823%	     0.000	        2
+	                     ADD	       16	     8.064	    10.580%	    77.403%	     0.000	       16
+	                 ARG_MAX	        1	     7.011	     9.198%	    86.601%	     0.000	        1
+	         RESIZE_BILINEAR	        3	     6.623	     8.689%	    95.290%	     0.000	        3
+	       DEPTHWISE_CONV_2D	       13	     2.503	     3.284%	    98.574%	     0.000	       13
+	                     MUL	        1	     0.544	     0.714%	    99.288%	     0.000	        1
+	                QUANTIZE	        2	     0.313	     0.411%	    99.698%	     0.000	        2
+	                 RESHAPE	        2	     0.178	     0.234%	    99.932%	     0.000	        2
+	         AVERAGE_POOL_2D	        1	     0.041	     0.054%	    99.986%	     0.000	        1
+	           CONCATENATION	        1	     0.011	     0.014%	   100.000%	     0.000	        1
+
+Timings (microseconds): count=50 first=75517 curr=75558 min=75517 max=97776 avg=76262.5 std=3087
+Memory (bytes): count=0
+91 nodes observed
+```
+
+</div></details>
+
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
 2. **[When you want to fine-tune DeepLab on other datasets, there are a few cases](https://github.com/tensorflow/models/issues/3730#issuecomment-380168917)**  
