@@ -72,6 +72,7 @@ def animation(load_folder, save_folder, model_path):
     #### STEP3: Conversion from freeze_graph to saved_model ##########################################################
 
     #### STEP4: Investigate final INPUT/OUTPUT names after conversion ##############################################
+    #### Reference article : https://qiita.com/iwatake2222/items/80fc73ff23d8f51650f5
     # with tf.Session() as sess:
     #     with tf.gfile.GFile('./export/white_box_cartoonization_freeze_graph.pb', 'rb') as f:
     #         graph_def = tf.GraphDef()
