@@ -13,7 +13,9 @@ import json
 import time
 
 def animation(load_folder, save_folder, model_path):
-    #input_photo = tf.placeholder(tf.float32, [1, 360, 360, 3], name='input')
+
+    #### STEP1: Replace placeholder and output .meta file ############################################################
+    #input_photo = tf.placeholder(tf.float32, [1, 720, 720, 3], name='input')
     #network_out = network.unet_generator(input_photo)
     #final_out = guided_filter.guided_filter(input_photo, network_out, r=1, eps=5e-3)
     #print("input_photo.name =", input_photo.name)
@@ -28,18 +30,21 @@ def animation(load_folder, save_folder, model_path):
     #sess = tf.Session(config=config)
     #sess.run(tf.global_variables_initializer())
     #saver.restore(sess, tf.train.latest_checkpoint(model_path))
-    #saver.save(sess, './export/model_360.ckpt')
+    #saver.save(sess, './export/model.ckpt')
     #sys.exit(0)
+    #### STEP1: Replace placeholder and output .meta file ############################################################
 
+    #### STEP2: Convert checkpoint to freeze_graph ###################################################################
     #graph = tf.get_default_graph()
     #sess = tf.Session()
-    #saver = tf.train.import_meta_graph('./export/model_360.ckpt.meta')
-    #saver.restore(sess, './export/model_360.ckpt')
-    #tf.train.write_graph(sess.graph_def, './export', 'white_box_cartoonization_freeze_graph_360.pbtxt', as_text=True)
-    #tf.train.write_graph(sess.graph_def, './export', 'white_box_cartoonization_freeze_graph_360.pb', as_text=False)
+    #saver = tf.train.import_meta_graph('./export/model.ckpt.meta')
+    #saver.restore(sess, './export/model.ckpt')
+    #tf.train.write_graph(sess.graph_def, './export', 'white_box_cartoonization_freeze_graph.pbtxt', as_text=True)
+    #tf.train.write_graph(sess.graph_def, './export', 'white_box_cartoonization_freeze_graph.pb', as_text=False)
     #sys.exit(0)
+    #### STEP2: Convert checkpoint to freeze_graph ###################################################################
 
-
+    #### STEP3: Conversion from freeze_graph to saved_model ##########################################################
     #def get_graph_def_from_file(graph_filepath):
     #    tf.compat.v1.reset_default_graph()
     #    with ops.Graph().as_default():
@@ -62,11 +67,27 @@ def animation(load_folder, save_folder, model_path):
     #        print('Optimized graph converted to SavedModel!')
     
     #shutil.rmtree('./saved_model', ignore_errors=True)
-    #convert_graph_def_to_saved_model('./saved_model', './export/white_box_cartoonization_freeze_graph_360.pb', 'input', ['add_1:0'])
+    #convert_graph_def_to_saved_model('./saved_model', './export/white_box_cartoonization_freeze_graph.pb', 'input', ['add_1:0'])
     #sys.exit(0)
+    #### STEP3: Conversion from freeze_graph to saved_model ##########################################################
+
+    #### STEP4: Investigate final INPUT/OUTPUT names after conversion ##############################################
+    # with tf.Session() as sess:
+    #     with tf.gfile.GFile('./export/white_box_cartoonization_freeze_graph.pb', 'rb') as f:
+    #         graph_def = tf.GraphDef()
+    #         graph_def.ParseFromString(f.read())
+    #         sess.graph.as_default()
+    #         _ = tf.import_graph_def(graph_def)
+    #         ops = {}
+    #         for op in tf.get_default_graph().get_operations():
+    #             ops[op.name] = [str(output) for output in op.outputs]
+    #         with open('./export/white_box_cartoonization_freeze_graph.json', 'w') as f:
+    #             f.write(json.dumps(ops))
+    #         sys.exit(0)
+    #### STEP4: Investigate final INPUT/OUTPUT names after conversion ##############################################
 
     with tf.Session() as sess:
-        with tf.gfile.GFile('./export/white_box_cartoonization_freeze_graph_720.pb', 'rb') as f:
+        with tf.gfile.GFile('./export/white_box_cartoonization_freeze_graph.pb', 'rb') as f:
             graph_def = tf.GraphDef()
             graph_def.ParseFromString(f.read())
             sess.graph.as_default()
@@ -75,13 +96,6 @@ def animation(load_folder, save_folder, model_path):
             tensor_input = sess.graph.get_tensor_by_name('import/input:0')
             tensor_output = sess.graph.get_tensor_by_name('import/add_1:0')
             
-            #ops = {}
-            #for op in tf.get_default_graph().get_operations():
-            #    ops[op.name] = [str(output) for output in op.outputs]
-            #with open('./export/white_box_cartoonization_freeze_graph_360.json', 'w') as f:
-            #    f.write(json.dumps(ops))
-            #sys.exit(0)
-
             cam = cv2.VideoCapture(0)
             cam.set(cv2.CAP_PROP_FPS, 30)
             cam.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
