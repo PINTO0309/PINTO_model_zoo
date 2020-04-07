@@ -1,4 +1,4 @@
-### tensorflow==2.1.0 v1-API
+### tf-nightly-2.2.0.dev20200406
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
@@ -23,8 +23,8 @@ output_arrays=['add_1']
 size = 720
 graph_def_file="export/white_box_cartoonization_freeze_graph.pb"
 input_tensor={"input":[1,size,size,3]}
-#converter = tf.lite.TFLiteConverter.from_saved_model('./saved_model')
-converter = tf.lite.TFLiteConverter.from_frozen_graph(graph_def_file, input_arrays, output_arrays,input_tensor)
+converter = tf.lite.TFLiteConverter.from_saved_model('./saved_model')
+#converter = tf.lite.TFLiteConverter.from_frozen_graph(graph_def_file, input_arrays, output_arrays,input_tensor)
 converter.experimental_new_converter = True
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
 converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
