@@ -1,0 +1,4 @@
+bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model_plus_flex -- \
+  --graph=${HOME}/Downloads/mask_rcnn_inception_v2_coco_2018_01_28/test/mask_rcnn_inception_v2_coco_weight_quant.tflite \
+  --num_threads=4 \
+  --warmup_runs=1
