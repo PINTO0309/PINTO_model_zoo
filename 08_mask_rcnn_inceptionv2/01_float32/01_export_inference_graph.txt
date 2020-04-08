@@ -7,31 +7,19 @@ $ export PYTHONPATH=`pwd`:`pwd`/slim:$PYTHONPATH
 $ mkdir -p ${HOME}/Downloads/mask_rcnn_inception_v2_coco_2018_01_28/export
 
 $ python3 object_detection/export_inference_graph.py \
-    --input_type=image_tensor \
-    --pipeline_config_path=${HOME}/Downloads/mask_rcnn_inception_v2_coco_2018_01_28/pipeline.config \
-    --trained_checkpoint_prefix=${HOME}/Downloads/mask_rcnn_inception_v2_coco_2018_01_28/model.ckpt \
-    --output_directory=${HOME}/Downloads/mask_rcnn_inception_v2_coco_2018_01_28/export \
-    --input_shape=1,256,256,3
+  --input_type=image_tensor \
+  --pipeline_config_path=${HOME}/Downloads/mask_rcnn_inception_v2_coco_2018_01_28/pipeline.config \
+  --trained_checkpoint_prefix=${HOME}/Downloads/mask_rcnn_inception_v2_coco_2018_01_28/model.ckpt \
+  --output_directory=${HOME}/Downloads/mask_rcnn_inception_v2_coco_2018_01_28/test \
+  --input_shape=1,256,256,3 \
+  --write_inference_graph=True
 
-
-### Tensorflow v1.15.0
-
-$ cd ~/tensorflow/tensorflow/lite/python
-
-$ sudo bazel run \
---define=with_select_tf_ops=true \
-tflite_convert -- \
---saved_model_dir=${HOME}/Downloads/mask_rcnn_inception_v2_coco_2018_01_28/export/saved_model \
---output_file=${HOME}/Downloads/mask_rcnn_inception_v2_coco_2018_01_28/export/mask_rcnn_inception.tflite \
---input_arrays=image_tensor \
---output_arrays=detection_masks,detection_classes,detection_boxes,detection_scores,num_detections \
---target_ops=TFLITE_BUILTINS,SELECT_TF_OPS \
---input_shapes=1,256,256,3 \
---output_format=TFLITE \
---inference_input_type=FLOAT \
---inference_type=QUANTIZED_UINT8 \
---post_training_quantize \
---allow_custom_ops
-
+$ python3 object_detection/export_inference_graph.py \
+  --input_type=image_tensor \
+  --pipeline_config_path=${HOME}/Downloads/mask_rcnn_inception_v2_coco_2018_01_28/pipeline.config \
+  --trained_checkpoint_prefix=${HOME}/Downloads/mask_rcnn_inception_v2_coco_2018_01_28/model.ckpt \
+  --output_directory=${HOME}/Downloads/mask_rcnn_inception_v2_coco_2018_01_28/test \
+  --input_shape=1,512,512,3 \
+  --write_inference_graph=True
 
 
