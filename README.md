@@ -1226,7 +1226,7 @@ Memory (bytes): count=0
 
 </div></details>
 
-<details><summary>RaspberryPi4 + Ubuntu 19.10 aarch64 + 4 Threads edgetpu_deeplab_257_os32_integer_quant.tflite Benchmark</summary><div>
+<details><summary>RaspberryPi4 + Ubuntu 19.10 aarch64 + 4 Threads edgetpu_deeplab_257_os16_integer_quant.tflite Benchmark</summary><div>
 
 ```bash
 Number of nodes executed: 91
