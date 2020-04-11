@@ -1,3 +1,5 @@
+### tf-nightly==2.2.0.dev20200410
+
 import tensorflow as tf
 import numpy as np
 from PIL import Image
@@ -21,13 +23,13 @@ def representative_dataset_gen():
         yield [calibration_data]
 
 
-tf.compat.v1.enable_eager_execution()
+#tf.compat.v1.enable_eager_execution()
 
 # Weight Quantization - Input/Output=float32
 converter = tf.lite.TFLiteConverter.from_saved_model('./saved_model')
 converter.optimizations = [tf.lite.Optimize.OPTIMIZE_FOR_SIZE]
-converter.experimental_new_converter = True
-converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
+#converter.experimental_new_converter = True
+#converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
 tflite_quant_model = converter.convert()
 with open('./monodepth2_weight_quant.tflite', 'wb') as w:
     w.write(tflite_quant_model)
@@ -36,23 +38,23 @@ print("Weight Quantization complete! - monodepth2_weight_quant.tflite")
 # Integer Quantization - Input/Output=float32
 converter = tf.lite.TFLiteConverter.from_saved_model('./saved_model')
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
-converter.experimental_new_converter = True
-converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
+#converter.experimental_new_converter = True
+#converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
 converter.representative_dataset = representative_dataset_gen
 tflite_quant_model = converter.convert()
 with open('./monodepth2_integer_quant.tflite', 'wb') as w:
-    w.write(tflite_quant_model)
+   w.write(tflite_quant_model)
 print("Integer Quantization complete! - monodepth2_integer_quant.tflite")
 
-# Full Integer Quantization - Input/Output=int8
-converter = tf.lite.TFLiteConverter.from_saved_model('./saved_model')
-converter.optimizations = [tf.lite.Optimize.DEFAULT]
-converter.experimental_new_converter = True
-converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8, tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
-converter.representative_dataset = representative_dataset_gen
-converter.inference_input_type = tf.uint8
-converter.inference_output_type = tf.uint8
-tflite_quant_model = converter.convert()
-with open('./monodepth2_full_integer_quant.tflite', 'wb') as w:
-    w.write(tflite_quant_model)
-print("Full Integer Quantization complete! - monodepth2_full_integer_quant.tflite")
+# # Full Integer Quantization - Input/Output=int8
+# converter = tf.lite.TFLiteConverter.from_saved_model('./saved_model')
+# converter.optimizations = [tf.lite.Optimize.DEFAULT]
+# #converter.experimental_new_converter = True
+# converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+# converter.representative_dataset = representative_dataset_gen
+# converter.inference_input_type = tf.uint8
+# converter.inference_output_type = tf.uint8
+# tflite_quant_model = converter.convert()
+# with open('./monodepth2_full_integer_quant.tflite', 'wb') as w:
+#    w.write(tflite_quant_model)
+# print("Full Integer Quantization complete! - monodepth2_full_integer_quant.tflite")
