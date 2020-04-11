@@ -1,17 +1,18 @@
 $ sudo python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
---input_model 1_checkpoint/16_bit_HE_to_HE_gt/lsmod_256.pb \
---output_dir 1_checkpoint/16_bit_HE_to_HE_gt/FP16 \
---input input \
---output output \
---data_type FP16
-
-
-$ sudo python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
---input_model 1_checkpoint/16_bit_HE_to_HE_gt/lsmod_256.pb \
---output_dir 1_checkpoint/16_bit_HE_to_HE_gt/FP32 \
+--input_model lsmod_256.pb \
+--output_dir FP32 \
+--input_shape [1,16,256,256,4] \
 --input input \
 --output output \
 --data_type FP32
+
+$ sudo python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+--input_model lsmod_256.pb \
+--output_dir FP16 \
+--input_shape [1,16,256,256,4] \
+--input input \
+--output output \
+--data_type FP16
 
 
 
