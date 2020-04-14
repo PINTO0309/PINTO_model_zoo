@@ -8,7 +8,7 @@ $ freeze_graph \
 
 
 $ freeze_graph \
---input_graph=./model.latest/graph_uint8.pbtxt \
+--input_graph=./model.latest/graph.pbtxt \
 --input_checkpoint=./model.latest/model.latest \
 --output_node_names=monodepth2_model/Cast,monodepth2_model/Cast_1 \
 --output_graph=./model.latest/frozen_model_uint8.pb \
