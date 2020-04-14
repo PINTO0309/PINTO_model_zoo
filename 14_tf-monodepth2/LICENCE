@@ -7,5 +7,5 @@ This means that you must attribute the work in the manner specified by the autho
 you may not use this work for commercial purposes and if you alter, transform,  
 or build upon this work, you may distribute the resulting work only under the same license.
 
-PINTO_model_zoo/14_tf-monodepth2/01_float32/calibration_data_img.npy
+PINTO_model_zoo/14_tf-monodepth2/01_no_imagenet_pre-trained/01_float32/calibration_data_img.npy
 
