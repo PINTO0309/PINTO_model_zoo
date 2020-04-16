@@ -5,6 +5,7 @@ TARGETS=(
   "*.tflite"
   "*.pb"
   "*.pbtxt"
+  "*.npy"
 )
 
 target=$(printf " %s" "${TARGETS[@]}")
