@@ -6,6 +6,10 @@ TARGETS=(
   "*.pb"
   "*.pbtxt"
   "*.npy"
+  "checkpoint"
+  "*.data-00000-of-00001"
+  "*.index"
+  "*.meta"
 )
 
 target=$(printf " %s" "${TARGETS[@]}")
