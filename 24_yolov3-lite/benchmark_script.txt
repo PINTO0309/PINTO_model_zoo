@@ -1,0 +1,21 @@
+
+bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model_plus_flex -- \
+  --graph=${HOME}/git/Stronger-yolo/v3/weights/yolov3_lite_voc_256_weight_quant.tflite \
+  --num_threads=4 \
+  --warmup_runs=1 \
+  --use_xnnpack=true \
+  --enable_op_profiling=true
+
+bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model_plus_flex -- \
+  --graph=${HOME}git/PINTO_model_zoo/24_yolov3-lite/03_integer_quantization/yolov3_lite_voc_256_integer_quant.tflite \
+  --num_threads=4 \
+  --warmup_runs=1 \
+  --enable_op_profiling=true
+
+https://qiita.com/PINTO/items/b101b5f2b3f02b0d69ef#%EF%BC%93%EF%BC%91%EF%BC%91model-benchmark
+
+./benchmark_app \
+  -m ${HOME}/git/Stronger-yolo/v3/FP32/yolov3_lite_freeze_graph_256.xml \
+  -i ${HOME}/Pictures \
+  -d CPU \
+  -nthreads 10
