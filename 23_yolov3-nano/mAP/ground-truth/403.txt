@@ -1,3 +1,0 @@
-car 3 19 33 32
-pottedplant 41 168 118 315
-pottedplant 24 52 240 231

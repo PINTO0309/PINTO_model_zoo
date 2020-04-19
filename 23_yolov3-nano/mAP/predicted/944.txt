@@ -1,2 +1,0 @@
-tvmonitor 0.6523 89 32 340 288
-pottedplant 0.5173 3 202 61 279

@@ -1,2 +1,0 @@
-aeroplane 21 69 472 242
-aeroplane 321 201 371 217

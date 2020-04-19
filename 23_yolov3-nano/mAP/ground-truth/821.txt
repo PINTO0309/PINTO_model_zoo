@@ -1,2 +1,0 @@
-bottle 76 6 201 498
-pottedplant 4 3 373 446

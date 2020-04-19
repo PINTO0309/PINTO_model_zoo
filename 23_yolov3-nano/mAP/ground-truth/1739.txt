@@ -1,2 +1,0 @@
-tvmonitor 122 178 223 256
-tvmonitor 450 99 500 243

@@ -1,3 +1,0 @@
-tvmonitor 198 105 248 151
-tvmonitor 329 131 383 202
-tvmonitor 384 135 443 192

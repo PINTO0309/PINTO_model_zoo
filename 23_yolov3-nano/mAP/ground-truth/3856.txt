@@ -1,3 +1,0 @@
-motorbike 1 2 489 375
-bottle 470 206 496 279
-person 295 1 353 103

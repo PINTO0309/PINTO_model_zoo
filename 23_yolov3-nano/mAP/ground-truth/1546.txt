@@ -1,3 +1,0 @@
-pottedplant 288 4 497 213
-pottedplant 302 19 335 67
-tvmonitor 59 96 246 251

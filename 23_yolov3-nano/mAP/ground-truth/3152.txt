@@ -1,4 +1,0 @@
-bottle 193 43 217 129
-bottle 221 45 244 127
-pottedplant 82 142 186 230
-chair 167 40 500 272

@@ -1,9 +1,0 @@
-bottle 316 173 351 299
-person 291 41 500 375
-person 1 30 295 375
-person 321 81 366 128
-person 1 64 61 193
-person 47 75 99 146
-person 85 78 132 141
-person 137 77 171 133
-person 298 68 331 121

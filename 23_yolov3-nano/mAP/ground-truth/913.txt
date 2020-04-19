@@ -1,3 +1,0 @@
-pottedplant 466 273 500 339
-pottedplant 269 239 362 353
-person 238 124 323 296

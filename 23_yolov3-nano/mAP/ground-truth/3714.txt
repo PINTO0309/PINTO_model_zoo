@@ -1,2 +1,0 @@
-pottedplant 54 108 292 373
-pottedplant 141 3 412 347

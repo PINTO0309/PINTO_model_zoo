@@ -1,2 +1,0 @@
-motorbike 246 109 449 315
-motorbike 72 150 245 288

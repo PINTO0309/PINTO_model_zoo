@@ -1,2 +1,0 @@
-tvmonitor 1 32 259 276
-tvmonitor 261 53 500 317

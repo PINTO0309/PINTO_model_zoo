@@ -1,6 +1,0 @@
-bottle 53 152 73 206
-bottle 71 152 89 206
-bottle 88 152 109 206
-bottle 57 223 76 256
-bottle 75 220 95 255
-bottle 93 220 111 254

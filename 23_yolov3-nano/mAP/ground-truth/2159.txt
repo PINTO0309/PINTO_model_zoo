@@ -1,1 +1,0 @@
-diningtable 1 48 500 380

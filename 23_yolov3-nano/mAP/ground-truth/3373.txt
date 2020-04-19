@@ -1,2 +1,0 @@
-tvmonitor 237 217 304 292
-pottedplant 1 309 95 499

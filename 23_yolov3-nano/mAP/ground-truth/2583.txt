@@ -1,2 +1,0 @@
-chair 349 186 500 375
-diningtable 3 128 471 375
