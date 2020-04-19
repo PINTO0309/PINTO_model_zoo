@@ -1,0 +1,5 @@
+('input_data.name=', u'input/input_data:0')
+('pred_sbbox=', u'YoloV3/pred_sbbox/concat_2:0')
+('pred_mbbox=', u'YoloV3/pred_mbbox/concat_2:0')
+('pred_lbbox=', u'YoloV3/pred_lbbox/concat_2:0')
+
