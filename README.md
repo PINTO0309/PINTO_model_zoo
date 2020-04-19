@@ -841,13 +841,23 @@ $ bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model -- \
   --use_xnnpack=true \
   --enable_op_profiling=true
 
-$ bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model_plus_flex -- \
+$ bazel run \
+  -c opt \
+  --config=noaws \
+  --config=nohdfs \
+  --config=nonccl \
+  tensorflow/lite/tools/benchmark:benchmark_model_plus_flex -- \
   --graph=${HOME}/git/tf-monodepth2/monodepth2_flexdelegate_weight_quant.tflite \
   --num_threads=4 \
   --warmup_runs=1 \
   --enable_op_profiling=true
 
-$ bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model_plus_flex -- \
+$ bazel run \
+  -c opt \
+  --config=noaws \
+  --config=nohdfs \
+  --config=nonccl \
+  tensorflow/lite/tools/benchmark:benchmark_model_plus_flex -- \
   --graph=${HOME}/git/tf-monodepth2/monodepth2_flexdelegate_weight_quant.tflite \
   --num_threads=4 \
   --warmup_runs=1 \
