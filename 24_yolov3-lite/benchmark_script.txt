@@ -7,7 +7,7 @@ bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model_plus_flex -- \
   --enable_op_profiling=true
 
 bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model_plus_flex -- \
-  --graph=${HOME}git/PINTO_model_zoo/24_yolov3-lite/03_integer_quantization/yolov3_lite_voc_256_integer_quant.tflite \
+  --graph=${HOME}/git/Stronger-yolo/v3/weights/yolov3_lite_voc_256_integer_quant.tflite \
   --num_threads=4 \
   --warmup_runs=1 \
   --enable_op_profiling=true
