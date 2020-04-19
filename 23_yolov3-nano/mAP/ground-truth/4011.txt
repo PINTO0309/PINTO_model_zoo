@@ -1,0 +1,9 @@
+cow 64 123 299 287
+person 399 30 442 175
+person 443 39 483 173
+person 55 1 117 128
+person 114 1 167 126
+person 323 15 361 68
+person 378 15 414 137
+person 429 6 475 131
+person 298 7 329 54

@@ -1,0 +1,5 @@
+tvmonitor 174 189 282 298
+tvmonitor 92 207 146 278
+tvmonitor 222 285 345 398
+tvmonitor 300 132 330 170
+tvmonitor 264 130 288 156

@@ -1,0 +1,6 @@
+dog 97 90 315 218
+pottedplant 101 2 313 154
+pottedplant 285 2 392 175
+pottedplant 374 58 480 159
+pottedplant 443 2 500 127
+pottedplant 367 2 445 69

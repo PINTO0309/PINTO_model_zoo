@@ -1,0 +1,4 @@
+person 104 33 359 208
+dog 127 193 472 332
+pottedplant 127 2 315 95
+chair 1 2 497 334

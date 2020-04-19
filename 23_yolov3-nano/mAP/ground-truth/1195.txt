@@ -1,0 +1,6 @@
+tvmonitor 150 214 281 369
+person 71 35 108 65
+person 32 31 50 105
+person 4 31 27 105
+person 15 29 33 105
+cat 92 147 117 172

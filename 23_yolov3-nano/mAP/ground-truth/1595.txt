@@ -1,0 +1,5 @@
+sofa 143 241 385 340
+pottedplant 299 268 352 315
+chair 417 247 500 349
+pottedplant 213 230 232 254
+pottedplant 196 229 216 254

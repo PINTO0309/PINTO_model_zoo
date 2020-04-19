@@ -1,0 +1,9 @@
+person 310 99 406 264
+bicycle 392 110 500 197
+bicycle 258 119 416 233
+person 117 1 189 104
+person 1 11 40 128
+person 22 1 135 298
+person 98 151 261 331
+person 1 152 107 331
+person 70 45 188 313

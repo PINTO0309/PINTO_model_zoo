@@ -1,0 +1,9 @@
+aeroplane 423 141 446 160
+aeroplane 435 160 454 177
+aeroplane 445 178 465 198
+aeroplane 434 199 453 216
+aeroplane 456 200 475 216
+aeroplane 475 199 496 215
+aeroplane 440 218 459 235
+aeroplane 426 237 444 254
+aeroplane 414 257 433 273

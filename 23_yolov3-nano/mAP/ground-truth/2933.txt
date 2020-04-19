@@ -1,0 +1,7 @@
+chair 258 141 322 237
+person 115 48 289 395
+person 227 1 500 395
+person 8 39 144 194
+person 36 48 87 147
+person 64 62 102 111
+person 89 67 142 116

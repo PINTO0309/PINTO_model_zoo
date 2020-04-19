@@ -1,0 +1,3 @@
+cat 50 129 294 400
+tvmonitor 1 61 118 329
+tvmonitor 172 47 500 398

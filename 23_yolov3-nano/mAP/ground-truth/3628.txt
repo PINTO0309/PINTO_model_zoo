@@ -1,0 +1,7 @@
+tvmonitor 2 126 57 202
+person 22 202 204 369
+person 165 152 256 328
+person 265 135 383 340
+person 280 2 500 227
+cat 166 296 234 375
+pottedplant 66 103 159 192

@@ -1,0 +1,3 @@
+person 11 1 116 111
+chair 36 1 136 125
+pottedplant 61 41 292 451

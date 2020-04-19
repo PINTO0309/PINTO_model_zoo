@@ -1,0 +1,5 @@
+person 101 106 380 375
+bottle 15 156 43 214
+bottle 2 146 32 209
+chair 164 114 229 224
+pottedplant 406 62 500 269

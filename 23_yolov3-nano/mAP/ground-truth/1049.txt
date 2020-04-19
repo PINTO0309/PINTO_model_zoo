@@ -1,0 +1,4 @@
+tvmonitor 79 89 190 178
+person 207 92 291 268
+pottedplant 284 146 440 294
+person 100 104 177 160

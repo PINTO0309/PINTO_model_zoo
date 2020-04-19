@@ -1,0 +1,14 @@
+motorbike 77 114 361 273
+motorbike 426 53 500 116
+motorbike 93 59 184 131
+person 157 63 364 272
+person 383 24 406 121
+person 407 12 445 120
+person 251 20 292 79
+person 196 57 238 122
+car 264 7 427 85
+car 114 13 284 76
+person 475 17 500 52
+person 47 30 94 145
+motorbike 48 62 97 145
+motorbike 103 65 179 131

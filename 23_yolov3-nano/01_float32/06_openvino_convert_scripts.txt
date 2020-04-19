@@ -1,0 +1,16 @@
+$ sudo python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+--input_model yolov3_nano_256.pb \
+--output_dir FP32 \
+--input_shape [1,256,256,3] \
+--input input/input_data \
+--output pred_sbbox/concat_2,pred_mbbox/concat_2,pred_lbbox/concat_2 \
+--data_type FP32
+
+$ sudo python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+--input_model yolov3_nano_256.pb \
+--output_dir FP16 \
+--input_shape [1,256,256,3] \
+--input input/input_data \
+--output pred_sbbox/concat_2,pred_mbbox/concat_2,pred_lbbox/concat_2 \
+--data_type FP16
+

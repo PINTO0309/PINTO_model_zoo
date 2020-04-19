@@ -1,0 +1,8 @@
+bottle 119 240 137 287
+person 99 99 211 262
+person 190 70 288 297
+person 263 126 411 375
+person 328 65 424 244
+person 365 170 500 375
+pottedplant 303 1 352 50
+diningtable 1 233 258 375

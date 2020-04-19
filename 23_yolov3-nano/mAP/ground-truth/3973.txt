@@ -1,0 +1,6 @@
+horse 217 83 387 220
+person 245 63 338 195
+pottedplant 320 100 404 319
+pottedplant 426 137 500 301
+pottedplant 87 124 124 248
+pottedplant 1 82 37 265

@@ -1,0 +1,1 @@
+diningtable 5 25 500 375

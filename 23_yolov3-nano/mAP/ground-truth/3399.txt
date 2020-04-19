@@ -1,0 +1,4 @@
+bicycle 1 214 379 335
+person 342 2 500 335
+pottedplant 263 189 326 274
+pottedplant 171 147 267 276

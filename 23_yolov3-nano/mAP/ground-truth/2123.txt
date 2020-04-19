@@ -1,0 +1,6 @@
+sofa 54 100 291 256
+person 265 85 375 351
+person 109 157 248 382
+person 80 98 138 238
+pottedplant 22 79 39 107
+pottedplant 9 77 26 107

@@ -1,0 +1,6 @@
+bottle 451 195 475 276
+tvmonitor 96 124 224 253
+tvmonitor 224 120 356 256
+person 351 43 378 93
+person 132 143 196 209
+person 122 153 186 213

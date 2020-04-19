@@ -1,0 +1,6 @@
+bottle 329 63 346 107
+bottle 181 161 205 241
+bottle 156 181 176 247
+bottle 128 181 161 261
+diningtable 1 88 491 333
+chair 5 1 82 84

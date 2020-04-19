@@ -1,0 +1,6 @@
+chair 175 224 298 375
+tvmonitor 172 153 213 199
+tvmonitor 224 156 270 203
+tvmonitor 295 153 355 205
+tvmonitor 380 159 435 223
+tvmonitor 173 75 209 117

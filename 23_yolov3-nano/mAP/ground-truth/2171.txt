@@ -1,0 +1,4 @@
+aeroplane 200 175 220 201
+aeroplane 201 207 217 228
+aeroplane 193 260 211 283
+aeroplane 186 285 202 310

@@ -1,0 +1,3 @@
+person 2 89 152 256
+person 164 18 500 333
+pottedplant 193 35 269 214

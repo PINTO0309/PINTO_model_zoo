@@ -1,0 +1,2 @@
+https://github.com/Abraham-M97/YOLOV3-NANO.git
+https://github.com/YunYang1994/tensorflow-yolov3.git

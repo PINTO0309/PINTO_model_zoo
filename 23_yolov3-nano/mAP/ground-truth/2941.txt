@@ -1,0 +1,3 @@
+person 28 27 314 500
+bottle 8 259 28 306
+pottedplant 263 210 314 265

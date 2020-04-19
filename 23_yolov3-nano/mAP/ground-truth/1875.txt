@@ -1,0 +1,4 @@
+cat 38 67 443 466
+pottedplant 55 75 221 256
+pottedplant 380 94 496 270
+pottedplant 432 54 500 289

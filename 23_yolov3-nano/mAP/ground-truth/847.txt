@@ -1,0 +1,1 @@
+diningtable 90 319 360 375

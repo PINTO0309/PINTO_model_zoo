@@ -1,0 +1,4 @@
+bottle 253 166 271 204
+bottle 271 158 284 202
+pottedplant 281 115 355 196
+person 71 44 221 487

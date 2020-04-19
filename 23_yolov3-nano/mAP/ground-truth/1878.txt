@@ -1,0 +1,5 @@
+pottedplant 199 179 309 282
+pottedplant 312 134 415 281
+pottedplant 304 41 500 254
+pottedplant 16 1 200 269
+bird 157 183 203 222

@@ -1,0 +1,8 @@
+person 3 81 193 333
+person 212 68 298 192
+person 353 70 426 184
+person 374 111 500 332
+person 421 2 498 150
+person 115 67 213 213
+diningtable 114 163 429 330
+tvmonitor 279 53 332 117

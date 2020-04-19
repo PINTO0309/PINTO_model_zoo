@@ -1,0 +1,9 @@
+E:\tensorflow-yolov3/dock_devkit/VOC_dock/JPEGImages/noised-233.jpg 101,315,179,391,0
+E:\tensorflow-yolov3/dock_devkit/VOC_dock/JPEGImages/noised-34.jpg 519,24,640,153,0
+E:\tensorflow-yolov3/dock_devkit/VOC_dock/JPEGImages/noised-371.jpg 409,16,488,92,0
+E:\tensorflow-yolov3/dock_devkit/VOC_dock/JPEGImages/noised-530.jpg 1,151,67,239,0
+E:\tensorflow-yolov3/dock_devkit/VOC_dock/JPEGImages/noised-555.jpg 230,166,356,283,0
+E:\tensorflow-yolov3/dock_devkit/VOC_dock/JPEGImages/noised-624.jpg 120,33,210,123,0
+E:\tensorflow-yolov3/dock_devkit/VOC_dock/JPEGImages/noised-751.jpg 130,1,640,168,0
+E:\tensorflow-yolov3/dock_devkit/VOC_dock/JPEGImages/noised-791.jpg 189,420,268,480,0
+E:\tensorflow-yolov3/dock_devkit/VOC_dock/JPEGImages/noised-800.jpg 568,249,640,323,0

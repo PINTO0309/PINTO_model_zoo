@@ -1,0 +1,4 @@
+motorbike 2 168 292 500
+person 200 125 269 366
+person 147 114 267 463
+person 2 157 30 206

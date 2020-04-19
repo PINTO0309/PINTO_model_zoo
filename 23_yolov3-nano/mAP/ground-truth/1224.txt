@@ -1,0 +1,5 @@
+boat 275 213 338 234
+chair 247 294 424 375
+chair 161 255 224 307
+diningtable 308 267 500 374
+diningtable 1 254 183 319

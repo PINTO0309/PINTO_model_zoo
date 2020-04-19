@@ -1,0 +1,6 @@
+bottle 450 88 496 216
+pottedplant 358 114 409 223
+pottedplant 160 8 444 229
+pottedplant 122 94 261 223
+bottle 96 216 162 344
+pottedplant 26 93 189 229

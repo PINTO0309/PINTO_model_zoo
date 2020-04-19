@@ -1,0 +1,7 @@
+pottedplant 1 272 17 325
+pottedplant 42 232 92 285
+pottedplant 97 201 138 247
+pottedplant 143 153 206 209
+pottedplant 227 120 268 173
+pottedplant 274 77 331 136
+bottle 30 235 46 286

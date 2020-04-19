@@ -1,0 +1,2 @@
+diningtable 3 136 489 330
+bottle 246 117 266 180

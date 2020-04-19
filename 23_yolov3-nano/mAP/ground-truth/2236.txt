@@ -1,0 +1,5 @@
+pottedplant 217 126 275 241
+pottedplant 152 168 227 247
+pottedplant 92 93 138 152
+pottedplant 146 117 221 173
+chair 31 62 159 222

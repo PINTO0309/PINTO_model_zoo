@@ -1,0 +1,6 @@
+cat 338 159 404 308
+pottedplant 295 95 331 142
+pottedplant 331 103 362 142
+pottedplant 370 92 419 147
+bottle 47 145 73 213
+bottle 20 156 47 216

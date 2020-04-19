@@ -1,0 +1,4 @@
+bicycle 29 148 241 284
+bicycle 253 122 479 259
+bicycle 235 142 465 273
+bicycle 156 121 380 254

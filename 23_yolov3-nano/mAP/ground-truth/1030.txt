@@ -1,0 +1,6 @@
+sofa 181 147 500 374
+pottedplant 266 54 406 180
+pottedplant 89 102 128 162
+pottedplant 14 1 104 132
+pottedplant 130 103 182 146
+pottedplant 146 38 183 107

@@ -1,0 +1,2 @@
+aeroplane 129 153 320 224
+aeroplane 398 177 492 214
