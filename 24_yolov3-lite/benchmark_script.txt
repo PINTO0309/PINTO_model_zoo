@@ -1,5 +1,11 @@
+### tensorflow==2.2.0-rc3
 
-bazel run -c opt tensorflow/lite/tools/benchmark:benchmark_model_plus_flex -- \
+bazel run \
+-c opt \
+--config=noaws \
+--config=nohdfs \
+--config=nonccl \
+tensorflow/lite/tools/benchmark:benchmark_model_plus_flex -- \
   --graph=${HOME}/git/Stronger-yolo/v3/weights/yolov3_lite_voc_256_weight_quant.tflite \
   --num_threads=4 \
   --warmup_runs=1 \
@@ -16,6 +22,9 @@ tensorflow/lite/tools/benchmark:benchmark_model_plus_flex -- \
   --num_threads=4 \
   --warmup_runs=1 \
   --enable_op_profiling=true
+
+
+### OpenVINO 2020.2
 
 https://qiita.com/PINTO/items/b101b5f2b3f02b0d69ef#%EF%BC%93%EF%BC%91%EF%BC%91model-benchmark
 
