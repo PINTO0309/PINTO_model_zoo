@@ -1,0 +1,55 @@
+### tensorflow-gpu==1.15.2
+### Model Optimizer version: 2020.2.0-60-g0bc66e26ff
+
+$ sudo python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+--input_model weights/yolov3_lite_freeze_graph_256.pb \
+--output_dir FP32 \
+--input_shape [1,256,256,3] \
+--input input/input_data \
+--output YoloV3/pred_sbbox/concat_2,YoloV3/pred_mbbox/concat_2,YoloV3/pred_lbbox/concat_2 \
+--data_type FP32
+
+$ sudo python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+--input_model weights/yolov3_lite_freeze_graph_256.pb \
+--output_dir FP16 \
+--input_shape [1,256,256,3] \
+--input input/input_data \
+--output YoloV3/pred_sbbox/concat_2,YoloV3/pred_mbbox/concat_2,YoloV3/pred_lbbox/concat_2 \
+--data_type FP16
+
+
+$ sudo python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+--input_model weights/yolov3_lite_freeze_graph_320.pb \
+--output_dir FP32 \
+--input_shape [1,320,320,3] \
+--input input/input_data \
+--output YoloV3/pred_sbbox/concat_2,YoloV3/pred_mbbox/concat_2,YoloV3/pred_lbbox/concat_2 \
+--data_type FP32
+
+$ sudo python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+--input_model weights/yolov3_lite_freeze_graph_320.pb \
+--output_dir FP16 \
+--input_shape [1,320,320,3] \
+--input input/input_data \
+--output YoloV3/pred_sbbox/concat_2,YoloV3/pred_mbbox/concat_2,YoloV3/pred_lbbox/concat_2 \
+--data_type FP16
+
+
+$ sudo python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+--input_model weights/yolov3_lite_freeze_graph_416.pb \
+--output_dir FP32 \
+--input_shape [1,416,416,3] \
+--input input/input_data \
+--output YoloV3/pred_sbbox/concat_2,YoloV3/pred_mbbox/concat_2,YoloV3/pred_lbbox/concat_2 \
+--data_type FP32
+
+$ sudo python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+--input_model weights/yolov3_lite_freeze_graph_416.pb \
+--output_dir FP16 \
+--input_shape [1,416,416,3] \
+--input input/input_data \
+--output YoloV3/pred_sbbox/concat_2,YoloV3/pred_mbbox/concat_2,YoloV3/pred_lbbox/concat_2 \
+--data_type FP16
+
+
+
