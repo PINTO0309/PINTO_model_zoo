@@ -1,2 +1,6 @@
+### Posenet v1
 https://github.com/rwightman/posenet-python.git
 https://github.com/google-coral/project-posenet.git
+
+### Posenet v2
+https://github.com/atomicbits/posenet-python.git
