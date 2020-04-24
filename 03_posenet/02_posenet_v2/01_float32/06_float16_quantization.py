@@ -5,49 +5,95 @@ from PIL import Image
 import os
 import glob
 
-tf.compat.v1.enable_eager_execution()
 
-# Float16 Quantization - Input/Output=float32
-converter = tf.lite.TFLiteConverter.from_saved_model('./0')
+# Integer Quantization - Input/Output=float32
+converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_16_225')
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
-converter.target_spec.supported_types = [tf.lite.constants.FLOAT16]
+converter.target_spec.supported_types = [tf.float16]
 tflite_quant_model = converter.convert()
-with open('./model-mobilenet_v1_101_225_float16_quant.tflite', 'wb') as w:
+with open('posenet_resnet50_16_225_float16_quant.tflite', 'wb') as w:
     w.write(tflite_quant_model)
-print("Integer Quantization complete! - model-mobilenet_v1_101_225_float16_quant.tflite")
+print("Integer Quantization complete! - posenet_resnet50_16_225_float16_quant.tflite")
 
-## Float16 Quantization - Input/Output=float32
-#converter = tf.lite.TFLiteConverter.from_saved_model('./0')
-#converter.optimizations = [tf.lite.Optimize.DEFAULT]
-#converter.target_spec.supported_types = [tf.lite.constants.FLOAT16]
-#tflite_quant_model = converter.convert()
-#with open('./model-mobilenet_v1_101_257_float16_quant.tflite', 'wb') as w:
-#    w.write(tflite_quant_model)
-#print("Integer Quantization complete! - model-mobilenet_v1_101_257_float16_quant.tflite")
+# Integer Quantization - Input/Output=float32
+converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_16_257')
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.target_spec.supported_types = [tf.float16]
+tflite_quant_model = converter.convert()
+with open('posenet_resnet50_16_257_float16_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Integer Quantization complete! - posenet_resnet50_16_257_float16_quant.tflite")
 
-## Float16 Quantization - Input/Output=float32
-#converter = tf.lite.TFLiteConverter.from_saved_model('./0')
-#converter.optimizations = [tf.lite.Optimize.DEFAULT]
-#converter.target_spec.supported_types = [tf.lite.constants.FLOAT16]
-#tflite_quant_model = converter.convert()
-#with open('./model-mobilenet_v1_101_321_float16_quant.tflite', 'wb') as w:
-#    w.write(tflite_quant_model)
-#print("Integer Quantization complete! - model-mobilenet_v1_101_321_float16_quant.tflite")
+# Integer Quantization - Input/Output=float32
+converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_16_321')
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.target_spec.supported_types = [tf.float16]
+tflite_quant_model = converter.convert()
+with open('posenet_resnet50_16_321_float16_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Integer Quantization complete! - posenet_resnet50_16_321_float16_quant.tflite")
 
-## Float16 Quantization - Input/Output=float32
-#converter = tf.lite.TFLiteConverter.from_saved_model('./0')
-#converter.optimizations = [tf.lite.Optimize.DEFAULT]
-#converter.target_spec.supported_types = [tf.lite.constants.FLOAT16]
-#tflite_quant_model = converter.convert()
-#with open('./model-mobilenet_v1_101_385_float16_quant.tflite', 'wb') as w:
-#    w.write(tflite_quant_model)
-#print("Integer Quantization complete! - model-mobilenet_v1_101_385_float16_quant.tflite")
+# Integer Quantization - Input/Output=float32
+converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_16_385')
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.target_spec.supported_types = [tf.float16]
+tflite_quant_model = converter.convert()
+with open('posenet_resnet50_16_385_float16_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Integer Quantization complete! - posenet_resnet50_16_385_float16_quant.tflite")
 
-## Float16 Quantization - Input/Output=float32
-#converter = tf.lite.TFLiteConverter.from_saved_model('./0')
-#converter.optimizations = [tf.lite.Optimize.DEFAULT]
-#converter.target_spec.supported_types = [tf.lite.constants.FLOAT16]
-#tflite_quant_model = converter.convert()
-#with open('./model-mobilenet_v1_101_513_float16_quant.tflite', 'wb') as w:
-#    w.write(tflite_quant_model)
-#print("Integer Quantization complete! - model-mobilenet_v1_101_513_float16_quant.tflite")
+# Integer Quantization - Input/Output=float32
+converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_16_513')
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.target_spec.supported_types = [tf.float16]
+tflite_quant_model = converter.convert()
+with open('posenet_resnet50_16_513_float16_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Integer Quantization complete! - posenet_resnet50_16_513_float16_quant.tflite")
+
+
+
+# Integer Quantization - Input/Output=float32
+converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_32_225')
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.target_spec.supported_types = [tf.float16]
+tflite_quant_model = converter.convert()
+with open('posenet_resnet50_32_225_float16_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Integer Quantization complete! - posenet_resnet50_32_225_float16_quant.tflite")
+
+# Integer Quantization - Input/Output=float32
+converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_32_257')
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.target_spec.supported_types = [tf.float16]
+tflite_quant_model = converter.convert()
+with open('posenet_resnet50_32_257_float16_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Integer Quantization complete! - posenet_resnet50_32_257_float16_quant.tflite")
+
+# Integer Quantization - Input/Output=float32
+converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_32_321')
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.target_spec.supported_types = [tf.float16]
+tflite_quant_model = converter.convert()
+with open('posenet_resnet50_32_321_float16_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Integer Quantization complete! - posenet_resnet50_32_321_float16_quant.tflite")
+
+# Integer Quantization - Input/Output=float32
+converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_32_385')
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.target_spec.supported_types = [tf.float16]
+tflite_quant_model = converter.convert()
+with open('posenet_resnet50_32_385_float16_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Integer Quantization complete! - posenet_resnet50_32_385_float16_quant.tflite")
+
+# Integer Quantization - Input/Output=float32
+converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_32_513')
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.target_spec.supported_types = [tf.float16]
+tflite_quant_model = converter.convert()
+with open('posenet_resnet50_32_513_float16_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Integer Quantization complete! - posenet_resnet50_32_513_float16_quant.tflite")

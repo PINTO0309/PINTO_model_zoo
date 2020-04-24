@@ -1,29 +1,11 @@
+### tensorflow==2.2.0-rc3
+
 import tensorflow as tf
 import os
 import shutil
-from tensorflow.python.saved_model import tag_constants
-from tensorflow.python.tools import freeze_graph
+# from tensorflow.python.saved_model import tag_constants
+# from tensorflow.python.tools import freeze_graph
 from tensorflow.python import ops
-#from tensorflow.tools.graph_transforms import TransformGraph
-
-def freeze_model(saved_model_dir, output_node_names, output_filename):
-  output_graph_filename = os.path.join(saved_model_dir, output_filename)
-  initializer_nodes = ''
-  freeze_graph.freeze_graph(
-      input_saved_model_dir=saved_model_dir,
-      output_graph=output_graph_filename,
-      saved_model_tags = tag_constants.SERVING,
-      output_node_names=output_node_names,
-      initializer_nodes=initializer_nodes,
-      input_graph=None,
-      input_saver=False,
-      input_binary=False,
-      input_checkpoint=None,
-      restore_op_name=None,
-      filename_tensor_name=None,
-      clear_devices=True,
-      input_meta_graph=False,
-  )
 
 def get_graph_def_from_file(graph_filepath):
   tf.compat.v1.reset_default_graph()
@@ -46,92 +28,90 @@ def convert_graph_def_to_saved_model(export_dir, graph_filepath, input_name, out
     )
     print('Optimized graph converted to SavedModel!')
 
-tf.compat.v1.enable_eager_execution()
-
-# Look up the name of the placeholder for the input node
-graph_def=get_graph_def_from_file('./model-mobilenet_v1_101_225.pb')
-input_name=""
-for node in graph_def.node:
-    if node.op=='Placeholder':
-        print("##### model-mobilenet_v1_101_225 - Input Node Name #####", node.name) # this will be the input node
-        input_name=node.name
-
-# model-mobilenet_v1_101_225 output names
-output_node_names = ['heatmap','offset_2','displacement_fwd_2','displacement_bwd_2']
-outputs = ['heatmap:0','offset_2:0','displacement_fwd_2:0','displacement_bwd_2:0']
-
-# convert this to a TF Serving compatible mode - model-mobilenet_v1_101_225
-shutil.rmtree('./0', ignore_errors=True)
-convert_graph_def_to_saved_model('./0', './model-mobilenet_v1_101_225.pb', input_name, outputs)
 
 
+input_name="image"
+outputs = ['float_heatmaps:0','float_short_offsets:0','resnet_v1_50/displacement_bwd_2/BiasAdd:0','resnet_v1_50/displacement_fwd_2/BiasAdd:0']
 
-## Look up the name of the placeholder for the input node
-#graph_def=get_graph_def_from_file('./model-mobilenet_v1_101_257.pb')
-#input_name=""
-#for node in graph_def.node:
-#    if node.op=='Placeholder':
-#        print("##### model-mobilenet_v1_101_257 - Input Node Name #####", node.name) # this will be the input node
-#        input_name=node.name
+# convert this to a TF Serving compatible mode - posenet_resnet50_16_225
+graph_def=get_graph_def_from_file('./posenet_resnet50_16_225.pb')
+shutil.rmtree('./saved_model_posenet_resnet50_16_225', ignore_errors=True)
+convert_graph_def_to_saved_model('./saved_model_posenet_resnet50_16_225', './posenet_resnet50_16_225.pb', input_name, outputs)
 
-## model-mobilenet_v1_101_257 output names
-#output_node_names = ['heatmap','offset_2','displacement_fwd_2','displacement_bwd_2']
-#outputs = ['heatmap:0','offset_2:0','displacement_fwd_2:0','displacement_bwd_2:0']
+"""
+$ saved_model_cli show --dir saved_model_posenet_resnet50_16_225 --all
 
-## convert this to a TF Serving compatible mode - model-mobilenet_v1_101_257
-#shutil.rmtree('./0', ignore_errors=True)
-#convert_graph_def_to_saved_model('./0', './model-mobilenet_v1_101_257.pb', input_name, outputs)
+MetaGraphDef with tag-set: 'serve' contains the following SignatureDefs:
 
+signature_def['serving_default']:
+  The given SavedModel SignatureDef contains the following input(s):
+    inputs['image'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 225, 225, 3)
+        name: image:0
+  The given SavedModel SignatureDef contains the following output(s):
+    outputs['float_heatmaps'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 15, 15, 17)
+        name: float_heatmaps:0
+    outputs['float_short_offsets'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 15, 15, 34)
+        name: float_short_offsets:0
+    outputs['resnet_v1_50/displacement_bwd_2/BiasAdd'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 15, 15, 32)
+        name: resnet_v1_50/displacement_bwd_2/BiasAdd:0
+    outputs['resnet_v1_50/displacement_fwd_2/BiasAdd'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 15, 15, 32)
+        name: resnet_v1_50/displacement_fwd_2/BiasAdd:0
+  Method name is: tensorflow/serving/predict
+"""
 
+# convert this to a TF Serving compatible mode - saved_model_posenet_resnet50_16_257
+graph_def=get_graph_def_from_file('./posenet_resnet50_16_257.pb')
+shutil.rmtree('./saved_model_posenet_resnet50_16_257', ignore_errors=True)
+convert_graph_def_to_saved_model('./saved_model_posenet_resnet50_16_257', './posenet_resnet50_16_257.pb', input_name, outputs)
 
-## Look up the name of the placeholder for the input node
-#graph_def=get_graph_def_from_file('./model-mobilenet_v1_101_321.pb')
-#input_name=""
-#for node in graph_def.node:
-#    if node.op=='Placeholder':
-#        print("##### model-mobilenet_v1_101_321 - Input Node Name #####", node.name) # this will be the input node
-#        input_name=node.name
+# convert this to a TF Serving compatible mode - saved_model_posenet_resnet50_16_321
+graph_def=get_graph_def_from_file('./posenet_resnet50_16_321.pb')
+shutil.rmtree('./saved_model_posenet_resnet50_16_321', ignore_errors=True)
+convert_graph_def_to_saved_model('./saved_model_posenet_resnet50_16_321', './posenet_resnet50_16_321.pb', input_name, outputs)
 
-## model-mobilenet_v1_101_321 output names
-#output_node_names = ['heatmap','offset_2','displacement_fwd_2','displacement_bwd_2']
-#outputs = ['heatmap:0','offset_2:0','displacement_fwd_2:0','displacement_bwd_2:0']
+# convert this to a TF Serving compatible mode - saved_model_posenet_resnet50_16_385
+graph_def=get_graph_def_from_file('./posenet_resnet50_16_385.pb')
+shutil.rmtree('./saved_model_posenet_resnet50_16_385', ignore_errors=True)
+convert_graph_def_to_saved_model('./saved_model_posenet_resnet50_16_385', './posenet_resnet50_16_385.pb', input_name, outputs)
 
-## convert this to a TF Serving compatible mode - model-mobilenet_v1_101_321
-#shutil.rmtree('./0', ignore_errors=True)
-#convert_graph_def_to_saved_model('./0', './model-mobilenet_v1_101_321.pb', input_name, outputs)
-
-
-
-## Look up the name of the placeholder for the input node
-#graph_def=get_graph_def_from_file('./model-mobilenet_v1_101_385.pb')
-#input_name=""
-#for node in graph_def.node:
-#    if node.op=='Placeholder':
-#        print("##### model-mobilenet_v1_101_385 - Input Node Name #####", node.name) # this will be the input node
-#        input_name=node.name
-
-## model-mobilenet_v1_101_385 output names
-#output_node_names = ['heatmap','offset_2','displacement_fwd_2','displacement_bwd_2']
-#outputs = ['heatmap:0','offset_2:0','displacement_fwd_2:0','displacement_bwd_2:0']
-
-## convert this to a TF Serving compatible mode - model-mobilenet_v1_101_385
-#shutil.rmtree('./0', ignore_errors=True)
-#convert_graph_def_to_saved_model('./0', './model-mobilenet_v1_101_385.pb', input_name, outputs)
+# convert this to a TF Serving compatible mode - saved_model_posenet_resnet50_16_513
+graph_def=get_graph_def_from_file('./posenet_resnet50_16_513.pb')
+shutil.rmtree('./saved_model_posenet_resnet50_16_513', ignore_errors=True)
+convert_graph_def_to_saved_model('./saved_model_posenet_resnet50_16_513', './posenet_resnet50_16_513.pb', input_name, outputs)
 
 
 
-## Look up the name of the placeholder for the input node
-#graph_def=get_graph_def_from_file('./model-mobilenet_v1_101_513.pb')
-#input_name=""
-#for node in graph_def.node:
-#    if node.op=='Placeholder':
-#        print("##### model-mobilenet_v1_101_513 - Input Node Name #####", node.name) # this will be the input node
-#        input_name=node.name
+# convert this to a TF Serving compatible mode - posenet_resnet50_32_225
+graph_def=get_graph_def_from_file('./posenet_resnet50_32_225.pb')
+shutil.rmtree('./saved_model_posenet_resnet50_32_225', ignore_errors=True)
+convert_graph_def_to_saved_model('./saved_model_posenet_resnet50_32_225', './posenet_resnet50_32_225.pb', input_name, outputs)
 
-## model-mobilenet_v1_101_513 output names
-#output_node_names = ['heatmap','offset_2','displacement_fwd_2','displacement_bwd_2']
-#outputs = ['heatmap:0','offset_2:0','displacement_fwd_2:0','displacement_bwd_2:0']
+# convert this to a TF Serving compatible mode - posenet_resnet50_32_257
+graph_def=get_graph_def_from_file('./posenet_resnet50_32_257.pb')
+shutil.rmtree('./saved_model_posenet_resnet50_32_257', ignore_errors=True)
+convert_graph_def_to_saved_model('./saved_model_posenet_resnet50_32_257', './posenet_resnet50_32_257.pb', input_name, outputs)
 
-## convert this to a TF Serving compatible mode - model-mobilenet_v1_101_513
-#shutil.rmtree('./0', ignore_errors=True)
-#convert_graph_def_to_saved_model('./0', './model-mobilenet_v1_101_513.pb', input_name, outputs)
+# convert this to a TF Serving compatible mode - posenet_resnet50_32_321
+graph_def=get_graph_def_from_file('./posenet_resnet50_32_321.pb')
+shutil.rmtree('./saved_model_posenet_resnet50_32_321', ignore_errors=True)
+convert_graph_def_to_saved_model('./saved_model_posenet_resnet50_32_321', './posenet_resnet50_32_321.pb', input_name, outputs)
+
+# convert this to a TF Serving compatible mode - posenet_resnet50_32_385
+graph_def=get_graph_def_from_file('./posenet_resnet50_32_385.pb')
+shutil.rmtree('./saved_model_posenet_resnet50_32_385', ignore_errors=True)
+convert_graph_def_to_saved_model('./saved_model_posenet_resnet50_32_385', './posenet_resnet50_32_385.pb', input_name, outputs)
+
+# convert this to a TF Serving compatible mode - posenet_resnet50_32_513
+graph_def=get_graph_def_from_file('./posenet_resnet50_32_513.pb')
+shutil.rmtree('./saved_model_posenet_resnet50_32_513', ignore_errors=True)
+convert_graph_def_to_saved_model('./saved_model_posenet_resnet50_32_513', './posenet_resnet50_32_513.pb', input_name, outputs)

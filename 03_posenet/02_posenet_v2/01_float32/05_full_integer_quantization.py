@@ -24,65 +24,125 @@ def representative_dataset_gen():
     for data in raw_test_data:
         yield [data]
 
-
-tf.compat.v1.enable_eager_execution()
-
 # Integer Quantization - Input/Output=uint8
-converter = tf.lite.TFLiteConverter.from_saved_model('./0')
+converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_16_225')
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
 converter.representative_dataset = representative_dataset_gen
 converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
 converter.inference_input_type = tf.uint8
 converter.inference_output_type = tf.uint8
 tflite_quant_model = converter.convert()
-with open('./model-mobilenet_v1_101_225_full_integer_quant.tflite', 'wb') as w:
+with open('posenet_resnet50_16_225_full_integer_quant.tflite', 'wb') as w:
     w.write(tflite_quant_model)
-print("Full Integer Quantization complete! - model-mobilenet_v1_101_225_full_integer_quant.tflite")
+print("Integer Quantization complete! - posenet_resnet50_16_225_full_integer_quant.tflite")
 
-## Integer Quantization - Input/Output=uint8
-#converter = tf.lite.TFLiteConverter.from_saved_model('./0')
-#converter.optimizations = [tf.lite.Optimize.DEFAULT]
-#converter.representative_dataset = representative_dataset_gen
-#converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
-#converter.inference_input_type = tf.uint8
-#converter.inference_output_type = tf.uint8
-#tflite_quant_model = converter.convert()
-#with open('./model-mobilenet_v1_101_257_full_integer_quant.tflite', 'wb') as w:
-#    w.write(tflite_quant_model)
-#print("Integer Quantization complete! - model-mobilenet_v1_101_257_full_integer_quant.tflite")
+# # Integer Quantization - Input/Output=uint8
+# converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_16_257')
+# converter.optimizations = [tf.lite.Optimize.DEFAULT]
+# converter.representative_dataset = representative_dataset_gen
+# converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+# converter.inference_input_type = tf.uint8
+# converter.inference_output_type = tf.uint8
+# tflite_quant_model = converter.convert()
+# with open('posenet_resnet50_16_257_full_integer_quant.tflite', 'wb') as w:
+#     w.write(tflite_quant_model)
+# print("Integer Quantization complete! - posenet_resnet50_16_257_full_integer_quant.tflite")
 
-## Integer Quantization - Input/Output=uint8
-#converter = tf.lite.TFLiteConverter.from_saved_model('./0')
-#converter.optimizations = [tf.lite.Optimize.DEFAULT]
-#converter.representative_dataset = representative_dataset_gen
-#converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
-#converter.inference_input_type = tf.uint8
-#converter.inference_output_type = tf.uint8
-#tflite_quant_model = converter.convert()
-#with open('./model-mobilenet_v1_101_321_full_integer_quant.tflite', 'wb') as w:
-#    w.write(tflite_quant_model)
-#print("Integer Quantization complete! - model-mobilenet_v1_101_321_full_integer_quant.tflite")
+# # Integer Quantization - Input/Output=uint8
+# converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_16_321')
+# converter.optimizations = [tf.lite.Optimize.DEFAULT]
+# converter.representative_dataset = representative_dataset_gen
+# converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+# converter.inference_input_type = tf.uint8
+# converter.inference_output_type = tf.uint8
+# tflite_quant_model = converter.convert()
+# with open('posenet_resnet50_16_321_full_integer_quant.tflite', 'wb') as w:
+#     w.write(tflite_quant_model)
+# print("Integer Quantization complete! - posenet_resnet50_16_321_full_integer_quant.tflite")
 
-## Integer Quantization - Input/Output=uint8
-#converter = tf.lite.TFLiteConverter.from_saved_model('./0')
-#converter.optimizations = [tf.lite.Optimize.DEFAULT]
-#converter.representative_dataset = representative_dataset_gen
-#converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
-#converter.inference_input_type = tf.uint8
-#converter.inference_output_type = tf.uint8
-#tflite_quant_model = converter.convert()
-#with open('./model-mobilenet_v1_101_385_full_integer_quant.tflite', 'wb') as w:
-#    w.write(tflite_quant_model)
-#print("Integer Quantization complete! - model-mobilenet_v1_101_385_full_integer_quant.tflite")
+# # Integer Quantization - Input/Output=uint8
+# converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_16_385')
+# converter.optimizations = [tf.lite.Optimize.DEFAULT]
+# converter.representative_dataset = representative_dataset_gen
+# converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+# converter.inference_input_type = tf.uint8
+# converter.inference_output_type = tf.uint8
+# tflite_quant_model = converter.convert()
+# with open('posenet_resnet50_16_385_full_integer_quant.tflite', 'wb') as w:
+#     w.write(tflite_quant_model)
+# print("Integer Quantization complete! - posenet_resnet50_16_385_full_integer_quant.tflite")
 
-## Integer Quantization - Input/Output=uint8
-#converter = tf.lite.TFLiteConverter.from_saved_model('./0')
-#converter.optimizations = [tf.lite.Optimize.DEFAULT]
-#converter.representative_dataset = representative_dataset_gen
-#converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
-#converter.inference_input_type = tf.uint8
-#converter.inference_output_type = tf.uint8
-#tflite_quant_model = converter.convert()
-#with open('./model-mobilenet_v1_101_513_full_integer_quant.tflite', 'wb') as w:
-#    w.write(tflite_quant_model)
-#print("Integer Quantization complete! - model-mobilenet_v1_101_513_full_integer_quant.tflite")
+# # Integer Quantization - Input/Output=uint8
+# converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_16_513')
+# converter.optimizations = [tf.lite.Optimize.DEFAULT]
+# converter.representative_dataset = representative_dataset_gen
+# converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+# converter.inference_input_type = tf.uint8
+# converter.inference_output_type = tf.uint8
+# tflite_quant_model = converter.convert()
+# with open('posenet_resnet50_16_513_full_integer_quant.tflite', 'wb') as w:
+#     w.write(tflite_quant_model)
+# print("Integer Quantization complete! - posenet_resnet50_16_513_full_integer_quant.tflite")
+
+
+
+# Integer Quantization - Input/Output=uint8
+converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_32_225')
+converter.experimental_new_converter = True
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.representative_dataset = representative_dataset_gen
+converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+converter.inference_input_type = tf.uint8
+converter.inference_output_type = tf.uint8
+tflite_quant_model = converter.convert()
+with open('posenet_resnet50_32_225_full_integer_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Integer Quantization complete! - posenet_resnet50_32_225_full_integer_quant.tflite")
+
+# # Integer Quantization - Input/Output=uint8
+# converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_32_257')
+# converter.optimizations = [tf.lite.Optimize.DEFAULT]
+# converter.representative_dataset = representative_dataset_gen
+# converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+# converter.inference_input_type = tf.uint8
+# converter.inference_output_type = tf.uint8
+# tflite_quant_model = converter.convert()
+# with open('posenet_resnet50_32_257_full_integer_quant.tflite', 'wb') as w:
+#     w.write(tflite_quant_model)
+# print("Integer Quantization complete! - posenet_resnet50_32_257_full_integer_quant.tflite")
+
+# # Integer Quantization - Input/Output=uint8
+# converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_32_321')
+# converter.optimizations = [tf.lite.Optimize.DEFAULT]
+# converter.representative_dataset = representative_dataset_gen
+# converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+# converter.inference_input_type = tf.uint8
+# converter.inference_output_type = tf.uint8
+# tflite_quant_model = converter.convert()
+# with open('posenet_resnet50_32_321_full_integer_quant.tflite', 'wb') as w:
+#     w.write(tflite_quant_model)
+# print("Integer Quantization complete! - posenet_resnet50_32_321_full_integer_quant.tflite")
+
+# # Integer Quantization - Input/Output=uint8
+# converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_32_385')
+# converter.optimizations = [tf.lite.Optimize.DEFAULT]
+# converter.representative_dataset = representative_dataset_gen
+# converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+# converter.inference_input_type = tf.uint8
+# converter.inference_output_type = tf.uint8
+# tflite_quant_model = converter.convert()
+# with open('posenet_resnet50_32_385_full_integer_quant.tflite', 'wb') as w:
+#     w.write(tflite_quant_model)
+# print("Integer Quantization complete! - posenet_resnet50_32_385_full_integer_quant.tflite")
+
+# # Integer Quantization - Input/Output=uint8
+# converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_posenet_resnet50_32_513')
+# converter.optimizations = [tf.lite.Optimize.DEFAULT]
+# converter.representative_dataset = representative_dataset_gen
+# converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+# converter.inference_input_type = tf.uint8
+# converter.inference_output_type = tf.uint8
+# tflite_quant_model = converter.convert()
+# with open('posenet_resnet50_32_513_full_integer_quant.tflite', 'wb') as w:
+#     w.write(tflite_quant_model)
+# print("Integer Quantization complete! - posenet_resnet50_32_513_full_integer_quant.tflite")

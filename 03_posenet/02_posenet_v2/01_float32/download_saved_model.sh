@@ -1,8 +1,8 @@
 #!/bin/bash
 
-curl -sc /tmp/cookie "https://drive.google.com/uc?export=download&id=10C1PVihC8PUJUu6yffLiR6ni-5I94gdP" > /dev/null
+curl -sc /tmp/cookie "https://drive.google.com/uc?export=download&id=1-z9Ivwwab6subn5eE7cIlfJeOTi7vzhP" > /dev/null
 CODE="$(awk '/_warning_/ {print $NF}' /tmp/cookie)"
-curl -Lb /tmp/cookie "https://drive.google.com/uc?export=download&confirm=${CODE}&id=10C1PVihC8PUJUu6yffLiR6ni-5I94gdP" -o resources.tar.gz
+curl -Lb /tmp/cookie "https://drive.google.com/uc?export=download&confirm=${CODE}&id=1-z9Ivwwab6subn5eE7cIlfJeOTi7vzhP" -o resources.tar.gz
 tar -zxvf resources.tar.gz
 rm resources.tar.gz
 
