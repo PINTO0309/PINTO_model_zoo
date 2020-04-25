@@ -1,1 +1,2 @@
 https://github.com/yinguobing/head-pose-estimation.git
+https://github.com/google/mediapipe/tree/master/mediapipe/models
