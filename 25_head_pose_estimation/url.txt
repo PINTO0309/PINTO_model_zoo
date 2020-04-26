@@ -2,6 +2,7 @@ https://github.com/yinguobing/head-pose-estimation.git
 https://github.com/google/mediapipe/tree/master/mediapipe/models
 https://github.com/google/mediapipe/tree/master/mediapipe/examples/coral/models
 https://github.com/google/mediapipe/blob/master/mediapipe/examples/coral/demo_run_graph_main.cc
-
 https://www.kaggle.com/unkownhihi/mobilenet-face-extractor-helper-code
 
+https://github.com/iitzco/widerface-to-tfrecord.git
+https://github.com/karaage0703/object_detection_tools.git
