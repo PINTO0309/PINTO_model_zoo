@@ -1,0 +1,6 @@
+mkdir -p ${HOME}/git/object_detection_tools/ckpt_bk/loss=0.5101-mAP=0.249/export && \
+python3 object_detection/export_tflite_ssd_graph.py \
+  --pipeline_config_path=${HOME}/git/object_detection_tools/ckpt_bk/loss=0.5101-mAP=0.249/ssdlite_mobilenet_v2_coco.config \
+  --trained_checkpoint_prefix=${HOME}/git/object_detection_tools/ckpt_bk/loss=0.5101-mAP=0.249/model.ckpt \
+  --output_directory=${HOME}/git/object_detection_tools/ckpt_bk/loss=0.5101-mAP=0.249/export \
+  --add_postprocessing_op=True
