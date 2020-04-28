@@ -938,6 +938,55 @@ Memory (bytes): count=0
 
 </div></details>
 
+<details><summary>Ubuntu 19.10 aarch64 + RaspberryPi4 deeplab_v3_plus_mnv3_decoder_256_integer_quant.tflite Benchmark</summary><div>
+
+```console
+Number of nodes executed: 180
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                 CONV_2D	       38	    37.595	    45.330%	    45.330%	     0.000	       38
+	                     ADD	       37	    12.319	    14.854%	    60.184%	     0.000	       37
+	       DEPTHWISE_CONV_2D	       17	    11.424	    13.774%	    73.958%	     0.000	       17
+	         RESIZE_BILINEAR	        4	     7.336	     8.845%	    82.804%	     0.000	        4
+	                     MUL	        9	     4.204	     5.069%	    87.873%	     0.000	        9
+	                QUANTIZE	       13	     3.976	     4.794%	    92.667%	     0.000	       13
+	         AVERAGE_POOL_2D	        9	     1.809	     2.181%	    94.848%	     0.000	        9
+	                     DIV	        9	     1.167	     1.407%	    96.255%	     0.000	        9
+	                 ARG_MAX	        1	     1.137	     1.371%	    97.626%	     0.000	        1
+	           CONCATENATION	        2	     0.780	     0.940%	    98.566%	     0.000	        2
+	         FULLY_CONNECTED	       16	     0.715	     0.862%	    99.428%	     0.000	       16
+	              DEQUANTIZE	        9	     0.473	     0.570%	    99.999%	     0.000	        9
+	                 RESHAPE	       16	     0.001	     0.001%	   100.000%	     0.000	       16
+
+Timings (microseconds): count=50 first=83065 curr=82874 min=82675 max=85743 avg=83036 std=499
+Memory (bytes): count=0
+180 nodes observed
+```
+
+</div></details>
+
+<details><summary>Ubuntu 19.10 aarch64 + RaspberryPi4 deeplab_v3_plus_mnv2_decoder_256_integer_quant.tflite Benchmark</summary><div>
+
+```console
+Number of nodes executed: 81
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                 CONV_2D	       41	    47.427	    65.530%	    65.530%	     0.000	       41
+	       DEPTHWISE_CONV_2D	       19	    11.114	    15.356%	    80.887%	     0.000	       19
+	         RESIZE_BILINEAR	        4	     7.342	    10.145%	    91.031%	     0.000	        4
+	                QUANTIZE	        3	     2.953	     4.080%	    95.112%	     0.000	        3
+	                     ADD	       10	     1.633	     2.256%	    97.368%	     0.000	       10
+	                 ARG_MAX	        1	     1.137	     1.571%	    98.939%	     0.000	        1
+	           CONCATENATION	        2	     0.736	     1.017%	    99.956%	     0.000	        2
+	         AVERAGE_POOL_2D	        1	     0.032	     0.044%	   100.000%	     0.000	        1
+
+Timings (microseconds): count=50 first=72544 curr=72425 min=72157 max=72745 avg=72412.9 std=137
+Memory (bytes): count=0
+81 nodes observed
+```
+
+</div></details>
+
 <details><summary>Ubuntu 19.10 aarch64 + RaspberryPi4 mobilenet_v3_small_full_integer_quant.tflite Benchmark</summary><div>
 
 ```console
