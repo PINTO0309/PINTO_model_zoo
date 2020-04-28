@@ -1,0 +1,2 @@
+edgetpu_compiler -s deeplab_v3_plus_mnv2_decoder_513_full_integer_quant.tflite
+edgetpu_compiler -s deeplab_v3_plus_mnv2_decoder_256_full_integer_quant.tflite
