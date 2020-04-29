@@ -28,7 +28,7 @@ with tf.compat.v1.Session() as sess:
             print('More than one graph found. Not sure which to write')
             sys.exit(1)
 
-    # 'image:0' specifies the placeholder name of the model before conversion
+    # 'sub_2:0' specifies the placeholder name of the model before conversion
     tf.graph_util.import_graph_def(sm.meta_graphs[0].graph_def, input_map={'sub_2:0': inputs}, name='')
     print([n for n in tf.compat.v1.get_default_graph().as_graph_def().node if n.name == 'image'])
 
