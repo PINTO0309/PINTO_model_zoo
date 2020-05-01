@@ -20,7 +20,7 @@ raw_test_data = np.load('person_dataset.npy', allow_pickle=True)
 converter = tf.lite.TFLiteConverter.from_saved_model('saved_model')
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
 converter.representative_dataset = representative_dataset_gen
-converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8,tf.lite.OpsSet.SELECT_TF_OPS]
 converter.inference_input_type = tf.uint8
 converter.inference_output_type = tf.uint8
 tflite_quant_model = converter.convert()
