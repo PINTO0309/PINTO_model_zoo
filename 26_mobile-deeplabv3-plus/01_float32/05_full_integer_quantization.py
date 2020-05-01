@@ -9,6 +9,8 @@ def representative_dataset_gen():
     for image in raw_test_data:
         image = tf.image.resize(image, (256, 256))
         image = image[np.newaxis,:,:,:]
+        image = image - 127.5
+        image = image * 0.007843
         yield [image]
 
 
