@@ -31,7 +31,7 @@ tf.compat.v1.enable_eager_execution()
 input_name="Input"
 outputs = ['ArgMax:0']
 shutil.rmtree('./saved_model', ignore_errors=True)
-convert_graph_def_to_saved_model('./saved_model', './deeplab_v3_plus_mnv3_decoder_256.pb', input_name, outputs)
+convert_graph_def_to_saved_model('./saved_model', './deeplab_v3_plus_mnv2_decoder_256.pb', input_name, outputs)
 
 """
 $ saved_model_cli show --dir saved_model --all

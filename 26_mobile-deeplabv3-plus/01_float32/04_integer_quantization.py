@@ -21,7 +21,7 @@ converter = tf.lite.TFLiteConverter.from_saved_model('saved_model')
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
 converter.representative_dataset = representative_dataset_gen
 tflite_quant_model = converter.convert()
-with open('deeplab_v3_plus_mnv3_decoder_256_integer_quant.tflite', 'wb') as w:
+with open('deeplab_v3_plus_mnv2_decoder_256_integer_quant.tflite', 'wb') as w:
     w.write(tflite_quant_model)
-print("Integer Quantization complete! - deeplab_v3_plus_mnv3_decoder_256_integer_quant.tflite")
+print("Integer Quantization complete! - deeplab_v3_plus_mnv2_decoder_256_integer_quant.tflite")
 
