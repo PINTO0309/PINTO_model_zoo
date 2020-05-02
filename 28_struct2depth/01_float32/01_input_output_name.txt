@@ -1,0 +1,27 @@
+Depth:
+    self.input_image.name = depth_prediction/raw_input:0
+    self.est_depth.name = truediv:0
+
+Egomotion:
+    self.input_image_stack.name = truediv_1:0
+    self.est_egomotion.name = egomotion_prediction/pose_exp_net/pose/concat:0
+
+Objectmotion:
+
+
+
+export PYTHONPATH=$PYTHONPATH:${HOME}/models/research:${HOME}/models/research/slim
+input_dir="${HOME}/Windows/datasets/2011_09_29/2011_09_29_drive_0071_sync/image_02/data/"
+output_dir="${HOME}/git/models/research/struct2depth/output/"
+model_checkpoint="${HOME}/git/models/research/struct2depth/struct2depth_model_kitti/model-199160"
+
+python3 inference.py \
+  --logtostderr \
+  --file_extension png \
+  --depth \
+  --egomotion true \
+  --input_dir $input_dir \
+  --output_dir $output_dir \
+  --model_ckpt $model_checkpoint
+
+
