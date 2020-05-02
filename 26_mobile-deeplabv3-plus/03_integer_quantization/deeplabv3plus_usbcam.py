@@ -66,18 +66,18 @@ if __name__ == '__main__':
         if not ret:
             continue
 
-        # Run inference.
+        # Normalization
         prepimg_deep = cv2.resize(color_image, (256, 256))
         prepimg_deep = cv2.cvtColor(prepimg_deep, cv2.COLOR_BGR2RGB)
         prepimg_deep = np.expand_dims(prepimg_deep, axis=0)
         prepimg_deep = prepimg_deep.astype(np.float32)
         cv2.normalize(prepimg_deep, prepimg_deep, -1, 1, cv2.NORM_MINMAX)
 
-        # run model - DeeplabV3-plus
+        # Run model - DeeplabV3-plus
         interpreter.set_tensor(input_details, prepimg_deep)
         interpreter.invoke()
 
-        # get results
+        # Get results
         predictions = interpreter.get_tensor(deeplabv3_predictions)[0]
 
         # Segmentation
