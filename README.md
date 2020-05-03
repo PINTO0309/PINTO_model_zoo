@@ -1379,6 +1379,28 @@ Memory (bytes): count=0
 
 </div></details>
 
+<details><summary>RaspberryPi4 + Ubuntu 19.10 aarch64 + 4 Threads human_pose_estimation_3d_0001_256x448_integer_quant.tflite Benchmark</summary><div>
+
+```bash
+Number of nodes executed: 165
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                 CONV_2D	       69	   343.433	    78.638%	    78.638%	     0.000	       69
+	                     PAD	       38	    51.637	    11.824%	    90.462%	     0.000	       38
+	       DEPTHWISE_CONV_2D	       14	    15.306	     3.505%	    93.967%	     0.000	       14
+	                     ADD	       15	    14.535	     3.328%	    97.295%	     0.000	       15
+	                     ELU	        6	     5.071	     1.161%	    98.456%	     0.000	        6
+	                QUANTIZE	       11	     4.481	     1.026%	    99.482%	     0.000	       11
+	              DEQUANTIZE	        9	     1.851	     0.424%	    99.906%	     0.000	        9
+	           CONCATENATION	        3	     0.410	     0.094%	   100.000%	     0.000	        3
+
+Timings (microseconds): count=50 first=425038 curr=423469 min=421348 max=969226 avg=436808 std=77255
+Memory (bytes): count=0
+165 nodes observed
+```
+
+</div></details>
+
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
 2. **[When you want to fine-tune DeepLab on other datasets, there are a few cases](https://github.com/tensorflow/models/issues/3730#issuecomment-380168917)**  
