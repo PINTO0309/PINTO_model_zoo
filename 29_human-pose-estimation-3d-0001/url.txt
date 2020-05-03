@@ -1,0 +1,3 @@
+https://github.com/opencv/open_model_zoo/tree/master/models/public/human-pose-estimation-3d-0001
+https://youtu.be/DgKw0Ty22PE
+https://qiita.com/PINTO/items/e1bf5ef24ed6ad6f6a05
