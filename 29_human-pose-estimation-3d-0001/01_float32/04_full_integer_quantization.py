@@ -11,8 +11,6 @@ def representative_dataset_gen():
         image = image * 0.007843
         yield [image]
 
-tf.compat.v1.enable_eager_execution()
-
 raw_test_data = np.load('calibration_data_img.npy', allow_pickle=True)
 
 # Full Integer Quantization - Input/Output=float32
