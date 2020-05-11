@@ -16,7 +16,7 @@ def representative_dataset_gen():
 
 raw_test_data, info = tfds.load(name="the300w_lp", with_info=True, split="train", data_dir="~/TFDS", download=False)
 
-# Integer Quantization - Input/Output=uint8
+# Full Integer Quantization - Input/Output=uint8
 converter = tf.lite.TFLiteConverter.from_saved_model('saved_model')
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
 converter.representative_dataset = representative_dataset_gen
