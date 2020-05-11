@@ -1406,6 +1406,29 @@ Memory (bytes): count=0
 
 </div></details>
 
+<details><summary>RaspberryPi4 + Ubuntu 19.10 aarch64 + 4 Threads + BlazeFace face_detection_front_128_integer_quant.tflite.tflite Benchmark</summary><div>
+
+```bash
+Number of nodes executed: 79
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                     ADD	       16	     2.155	    34.120%	    34.120%	     0.000	       16
+	                 CONV_2D	       21	     2.017	    31.935%	    66.054%	     0.000	       21
+	                     PAD	       11	     1.014	    16.054%	    82.109%	     0.000	       11
+	       DEPTHWISE_CONV_2D	       16	     0.765	    12.112%	    94.221%	     0.000	       16
+	                QUANTIZE	        4	     0.186	     2.945%	    97.166%	     0.000	        4
+	             MAX_POOL_2D	        3	     0.153	     2.422%	    99.588%	     0.000	        3
+	              DEQUANTIZE	        2	     0.017	     0.269%	    99.857%	     0.000	        2
+	           CONCATENATION	        2	     0.006	     0.095%	    99.952%	     0.000	        2
+	                 RESHAPE	        4	     0.003	     0.047%	   100.000%	     0.000	        4
+
+Timings (microseconds): count=144 first=6415 curr=6319 min=6245 max=6826 avg=6359.12 std=69
+Memory (bytes): count=0
+79 nodes observed
+```
+
+</div></details>
+
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
 2. **[When you want to fine-tune DeepLab on other datasets, there are a few cases](https://github.com/tensorflow/models/issues/3730#issuecomment-380168917)**  
