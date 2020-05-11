@@ -8,10 +8,12 @@ import numpy as np
 import json
 import tensorflow as tf
 import shutil
+from pathlib import Path
+home = str(Path.home())
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 schema = "schema.fbs"
-binary = "${HOME}/work/tensorflow/bazel-out/host/bin/external/flatbuffers/flatc"
+binary = home + "/work/tensorflow/bazel-out/host/bin/external/flatbuffers/flatc"
 model_path = "face_detection_front.tflite"
 output_pb_path = "face_detection_front.pb"
 output_savedmodel_path = "saved_model"
