@@ -11,7 +11,7 @@ import shutil
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 schema = "schema.fbs"
-binary = "/home/b920405/work/tensorflow/bazel-out/host/bin/external/flatbuffers/flatc"
+binary = "${HOME}/work/tensorflow/bazel-out/host/bin/external/flatbuffers/flatc"
 model_path = "face_detection_front.tflite"
 output_pb_path = "face_detection_front.pb"
 output_savedmodel_path = "saved_model"
