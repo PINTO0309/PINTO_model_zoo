@@ -12,11 +12,13 @@ def representative_dataset_gen():
     image = data['image'].numpy()
     image = tf.image.resize(image, (128, 128))
     image = image[np.newaxis,:,:,:]
+    image = image - 127.5
+    image = image * 0.007843
     yield [image]
 
 raw_test_data, info = tfds.load(name="the300w_lp", with_info=True, split="train", data_dir="~/TFDS", download=False)
 
-# Full Integer Quantization - Input/Output=uint8
+# Integer Quantization - Input/Output=uint8
 converter = tf.lite.TFLiteConverter.from_saved_model('saved_model')
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
 converter.representative_dataset = representative_dataset_gen
