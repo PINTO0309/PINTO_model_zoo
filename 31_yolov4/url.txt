@@ -1,1 +1,2 @@
 https://github.com/hunglc007/tensorflow-yolov4-tflite.git
+https://medium.com/@nobilearn/yolov4-%E3%82%92-tflite-%E3%81%AB-convert-%E3%81%99%E3%82%8B-264be244e7af
