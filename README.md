@@ -1446,7 +1446,7 @@ Number of nodes executed: 588
 	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
 	                 CONV_2D	      119	   109.253	    52.671%	    52.671%	     0.000	      119
 	       DEPTHWISE_CONV_2D	       61	    33.838	    16.313%	    68.984%	     0.000	       61
-	TFLite_Detection_PostProcess	    1	    22.711	    10.949%	    79.933%	     0.000	        1
+	TFLite_Detection_PostProcess	        1	    22.711	    10.949%	    79.933%	     0.000	        1
 	                LOGISTIC	        1	    17.696	     8.531%	    88.465%	     0.000	        1
 	                     ADD	       59	    12.300	     5.930%	    94.395%	     0.000	       59
 	                 RESHAPE	        8	     4.175	     2.013%	    96.407%	     0.000	        8
