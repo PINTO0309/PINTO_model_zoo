@@ -2,3 +2,6 @@ https://github.com/google/mediapipe/tree/master/mediapipe/models#hand-detection-
 https://github.com/wolterlw/hand_tracking.git
 https://github.com/metalwhale/hand_tracking.git
 https://github.com/terryky/tflite_gles_app.git
+
+- Sample Movie -  
+https://twitter.com/PINTO03091/status/1262036329736503297?s=20
