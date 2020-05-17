@@ -75,6 +75,7 @@ $ python3 deeplabv3plus_usbcam.py
 - C/C++
 - OpenGL
 - USB Camera, 640x480
+- **`$ v4l2-ctl --set-fmt-video=width=640,height=480,pixelformat=YUYV`**
 - **[Test Code - tflite_gles_app - gl2facemesh - @terryky](https://github.com/terryky/tflite_gles_app.git)**
 ![008](99_media/008.gif)  
 
