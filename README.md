@@ -1415,7 +1415,7 @@ Memory (bytes): count=0
 
 </div></details>
 
-<details><summary>RaspberryPi4 + Ubuntu 19.10 aarch64 + 4 Threads + BlazeFace face_detection_front_128_integer_quant.tflite.tflite Benchmark</summary><div>
+<details><summary>RaspberryPi4 + Ubuntu 19.10 aarch64 + 4 Threads + BlazeFace face_detection_front_128_integer_quant.tflite Benchmark</summary><div>
 
 ```bash
 Number of nodes executed: 79
@@ -1434,6 +1434,31 @@ Number of nodes executed: 79
 Timings (microseconds): count=144 first=6415 curr=6319 min=6245 max=6826 avg=6359.12 std=69
 Memory (bytes): count=0
 79 nodes observed
+```
+
+</div></details>
+
+<details><summary>RaspberryPi4 + Ubuntu 19.10 aarch64 + 4 Threads + ssd_mobilenet_v2_mnasfpn_shared_box_predictor_320_coco_integer_quant.tflite Benchmark</summary><div>
+
+```bash
+Number of nodes executed: 588
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                 CONV_2D	      119	   109.253	    52.671%	    52.671%	     0.000	      119
+	       DEPTHWISE_CONV_2D	       61	    33.838	    16.313%	    68.984%	     0.000	       61
+	TFLite_Detection_PostProcess	    1	    22.711	    10.949%	    79.933%	     0.000	        1
+	                LOGISTIC	        1	    17.696	     8.531%	    88.465%	     0.000	        1
+	                     ADD	       59	    12.300	     5.930%	    94.395%	     0.000	       59
+	                 RESHAPE	        8	     4.175	     2.013%	    96.407%	     0.000	        8
+	           CONCATENATION	        2	     3.416	     1.647%	    98.054%	     0.000	        2
+	 RESIZE_NEAREST_NEIGHBOR	       12	     1.873	     0.903%	    98.957%	     0.000	       12
+	             MAX_POOL_2D	       13	     1.363	     0.657%	    99.614%	     0.000	       13
+	                     MUL	       16	     0.737	     0.355%	    99.970%	     0.000	       16
+	              DEQUANTIZE	      296	     0.063	     0.030%	   100.000%	     0.000	      296
+
+Timings (microseconds): count=50 first=346007 curr=196005 min=192539 max=715157 avg=207709 std=75605
+Memory (bytes): count=0
+588 nodes observed
 ```
 
 </div></details>
