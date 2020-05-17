@@ -1,0 +1,1 @@
+edgetpu_compiler -s ssd_mobilenet_v2_mnasfpn_shared_box_predictor_320_coco_full_integer_quant.tflite
