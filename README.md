@@ -69,6 +69,14 @@ $ ./download.sh
 $ python3 deeplabv3plus_usbcam.py
 ```
 ![007](99_media/007.gif)  
+## Sample.5 - Face Mesh, face_detection_front_128_weight_quant, face_landmark_192_weight_quant
+- Ubuntu 18.04 x86_64
+- Tensorflow Lite
+- C/C++
+- OpenGL
+- USB Camera, 640x480
+- **[Test Code - tflite_gles_app - gl2facemesh - @terryky](https://github.com/terryky/tflite_gles_app.git)**
+![008](99_media/008.gif)  
 
 ## 1. Environment
 
