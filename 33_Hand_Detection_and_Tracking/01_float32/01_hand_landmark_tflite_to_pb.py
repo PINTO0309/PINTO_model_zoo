@@ -1,5 +1,4 @@
 ### tensorflow-gpu==1.15.2
-### tensorflow-probability==0.7.0
 
 ### https://stackoverflow.com/questions/39975676/how-to-implement-prelu-activation-in-tensorflow
 ### https://www.tensorflow.org/lite/guide/ops_compatibility
