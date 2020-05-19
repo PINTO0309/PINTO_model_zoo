@@ -209,7 +209,6 @@ def make_graph(ops, op_types, interpreter):
             # print('shape_detail: ', output_shape_detail)
             # print('output_detail: ', output_detail)
             weights_array = interpreter.get_tensor(weights_detail['index'])
-            # weights_array = np.transpose(weights_array, (1, 2, 3, 0))
             weights_array = np.transpose(weights_array, (1, 2, 0, 3))
             # print('weights_array.shape:', weights_array.shape)
             output_shape_array = interpreter.get_tensor(output_shape_detail['index'])
