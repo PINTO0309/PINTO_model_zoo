@@ -1,4 +1,5 @@
 ### tensorflow-gpu==1.15.2
+### tensorflow-probability==0.7.0
 
 ### https://stackoverflow.com/questions/39975676/how-to-implement-prelu-activation-in-tensorflow
 ### https://www.tensorflow.org/lite/guide/ops_compatibility
@@ -147,6 +148,9 @@ def make_graph(ops, op_types, interpreter):
             alpha_array = interpreter.get_tensor(alpha_detail['index'])
             with tf.compat.v1.variable_scope(name_or_scope=output_detail['name']):
                 alphas = tf.Variable(alpha_array, name=alpha_detail['name'])
+                # pos = tf.nn.relu(input_tensor)
+                # neg = alphas * (input_tensor - abs(input_tensor)) * 0.5
+                # output_tensor = pos + neg
                 output_tensor = tf.maximum(alphas * input_tensor, input_tensor)
             #print("PRELU.output_tensor=", output_tensor)
             tensors[output_detail['index']] = output_tensor

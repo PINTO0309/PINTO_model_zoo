@@ -35,3 +35,12 @@ tflite_quant_model = converter.convert()
 with open('hand_landmark_3d_256_integer_quant.tflite', 'wb') as w:
     w.write(tflite_quant_model)
 print("Integer Quantization complete! - hand_landmark_3d_256_integer_quant.tflite")
+
+# Integer Quantization - Input/Output=float32
+converter = tf.lite.TFLiteConverter.from_saved_model('saved_model_palm_detection_builtin')
+converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.representative_dataset = representative_dataset_gen
+tflite_quant_model = converter.convert()
+with open('palm_detection_builtin_256_integer_quant.tflite', 'wb') as w:
+    w.write(tflite_quant_model)
+print("Integer Quantization complete! - palm_detection_builtin_256_integer_quant.tflite")

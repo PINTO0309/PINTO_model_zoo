@@ -3,6 +3,7 @@
 ### https://stackoverflow.com/questions/39975676/how-to-implement-prelu-activation-in-tensorflow
 ### https://www.tensorflow.org/lite/guide/ops_compatibility
 ### https://www.tensorflow.org/api_docs/python/tf/nn/conv2d_transpose
+### https://github.com/google/mediapipe/issues/245#issuecomment-555352386
 
 #!/usr/bin/env python
 # coding: utf-8
@@ -18,12 +19,12 @@ home = str(Path.home())
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 schema = "schema.fbs"
 binary = home + "/flatc"
-model_path = "palm_detection_without_custom_op.tflite"
-output_pb_path = "palm_detection_without_custom_op.pb"
-output_savedmodel_path = "saved_model_palm_detection_without_custom_op"
-model_json_path = "palm_detection_without_custom_op.json"
-num_tensors = 308
-output_node_names = ['regressors/concat', 'classificators/concat']
+model_path = "palm_detection_builtin.tflite"
+output_pb_path = "palm_detection_builtin.pb"
+output_savedmodel_path = "saved_model_palm_detection_builtin"
+model_json_path = "palm_detection_builtin.json"
+num_tensors = 383
+output_node_names = ['regressors', 'classificators']
 
 def gen_model_json():
     if not os.path.exists(model_json_path):
@@ -81,6 +82,10 @@ def make_graph(ops, op_types, interpreter):
                 name=output_detail['name'] + '/conv2d')
             output_tensor = tf.add(
                 output_tensor, bias, name=output_detail['name'])
+
+            # if output_detail['name'].split('/')[1] == 'Relu':
+            #     output_tensor = tf.nn.relu(output_tensor, name=output_detail['name'])
+
             tensors[output_detail['index']] = output_tensor
         elif op_type == 'DEPTHWISE_CONV_2D':
             input_tensor = tensors[op['inputs'][0]]
@@ -148,9 +153,6 @@ def make_graph(ops, op_types, interpreter):
             alpha_array = interpreter.get_tensor(alpha_detail['index'])
             with tf.compat.v1.variable_scope(name_or_scope=output_detail['name']):
                 alphas = tf.Variable(alpha_array, name=alpha_detail['name'])
-                # pos = tf.nn.relu(input_tensor)
-                # neg = alphas * (input_tensor - abs(input_tensor)) * 0.5
-                # output_tensor = pos + neg
                 output_tensor = tf.maximum(alphas * input_tensor, input_tensor)
             #print("PRELU.output_tensor=", output_tensor)
             tensors[output_detail['index']] = output_tensor
@@ -170,18 +172,23 @@ def make_graph(ops, op_types, interpreter):
                 bias_detail = interpreter._get_tensor_details(op['inputs'][1])
                 bias_array = interpreter.get_tensor(bias_detail['index'])
                 input_tensor_1 = tf.Variable(bias_array, name=bias_detail['name'])
-
             output_tensor = tf.add(input_tensor_0, input_tensor_1, name=output_detail['name'])
-
             tensors[output_detail['index']] = output_tensor
         elif op_type == 'CONCATENATION':
             output_detail = interpreter._get_tensor_details(op['outputs'][0])
             input_tensor_0 = tensors[op['inputs'][0]]
             input_tensor_1 = tensors[op['inputs'][1]]
-            options = op['builtin_options']
-            output_tensor = tf.concat([input_tensor_0, input_tensor_1],
-                                      options['axis'],
-                                      name=output_detail['name'])
+            try:
+                input_tensor_2 = tensors[op['inputs'][2]]
+                options = op['builtin_options']
+                output_tensor = tf.concat([input_tensor_0, input_tensor_1, input_tensor_2],
+                                        options['axis'],
+                                        name=output_detail['name'])
+            except:
+                options = op['builtin_options']
+                output_tensor = tf.concat([input_tensor_0, input_tensor_1],
+                                        options['axis'],
+                                        name=output_detail['name'])
             tensors[output_detail['index']] = output_tensor
         elif op_type == 'LOGISTIC':
             output_detail = interpreter._get_tensor_details(op['outputs'][0])
@@ -195,18 +202,20 @@ def make_graph(ops, op_types, interpreter):
         elif op_type == 'TRANSPOSE_CONV':
             input_tensor = tensors[op['inputs'][2]]
             weights_detail = interpreter._get_tensor_details(op['inputs'][1])
-            shape_detail = interpreter._get_tensor_details(op['inputs'][0])
+            output_shape_detail = interpreter._get_tensor_details(op['inputs'][0])
             output_detail = interpreter._get_tensor_details(op['outputs'][0])
-            # print('input_tensor: ', input_tensor)
+            # print('********************* input_tensor: ', input_tensor)
             # print('weights_detail: ', weights_detail)
-            # print('shape_detail: ', shape_detail)
+            # print('shape_detail: ', output_shape_detail)
             # print('output_detail: ', output_detail)
             weights_array = interpreter.get_tensor(weights_detail['index'])
-            # print('weights_array:', weights_array)
             # weights_array = np.transpose(weights_array, (1, 2, 3, 0))
-            shape_array = interpreter.get_tensor(shape_detail['index'])
+            weights_array = np.transpose(weights_array, (1, 2, 0, 3))
+            # print('weights_array.shape:', weights_array.shape)
+            output_shape_array = interpreter.get_tensor(output_shape_detail['index'])
+            # print('shape_array.shape:', output_shape_array.shape)
             weights = tf.Variable(weights_array, name=weights_detail['name'])
-            shape = tf.Variable(shape_array, name=shape_detail['name'])
+            shape = tf.Variable(output_shape_array, name=output_shape_detail['name'])
             options = op['builtin_options']
             output_tensor = tf.nn.conv2d_transpose(input_tensor,
                                                    weights,
@@ -214,6 +223,7 @@ def make_graph(ops, op_types, interpreter):
                                                    [1, options['stride_h'], options['stride_w'], 1],
                                                    padding=options['padding'],
                                                    name=output_detail['name'] + '/conv2d_transpose')
+            # print('********************* output_tensor:', output_tensor)
             tensors[output_detail['index']] = output_tensor
 
         else:
@@ -256,21 +266,21 @@ def main():
         with tf.io.gfile.GFile(output_pb_path, 'wb') as f:
             f.write(graph_def.SerializeToString())
 
-        shutil.rmtree('saved_model_palm_detection_without_custom_op', ignore_errors=True)
+        shutil.rmtree(output_savedmodel_path, ignore_errors=True)
         tf.compat.v1.saved_model.simple_save(
             sess,
             output_savedmodel_path,
-            inputs={'input': graph.get_tensor_by_name('input_1:0')},
+            inputs={'input': graph.get_tensor_by_name('input:0')},
             outputs={
-                'regressors/concat': graph.get_tensor_by_name('regressors/concat:0'),
-                'classificators/concat': graph.get_tensor_by_name('classificators/concat:0')
+                'regressors': graph.get_tensor_by_name('regressors:0'),
+                'classificators': graph.get_tensor_by_name('classificators:0')
             })
 
 if __name__ == '__main__':
     main()
 
 """
-$ saved_model_cli show --dir saved_model_palm_detection_without_custom_op --all
+$ saved_model_cli show --dir saved_model_palm_detection_builtin --all
 
 MetaGraphDef with tag-set: 'serve' contains the following SignatureDefs:
 
@@ -279,15 +289,15 @@ signature_def['serving_default']:
     inputs['input'] tensor_info:
         dtype: DT_FLOAT
         shape: (1, 256, 256, 3)
-        name: input_1:0
+        name: input:0
   The given SavedModel SignatureDef contains the following output(s):
-    outputs['ld_21_3d'] tensor_info:
+    outputs['classificators'] tensor_info:
         dtype: DT_FLOAT
-        shape: (1, -1)
-        name: ld_21_3d:0
-    outputs['output_handflag'] tensor_info:
+        shape: (1, -1, 1)
+        name: classificators:0
+    outputs['regressors'] tensor_info:
         dtype: DT_FLOAT
-        shape: (1, -1)
-        name: output_handflag:0
+        shape: (1, -1, 18)
+        name: regressors:0
   Method name is: tensorflow/serving/predict
 """
