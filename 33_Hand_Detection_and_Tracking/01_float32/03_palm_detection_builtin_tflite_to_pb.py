@@ -212,7 +212,7 @@ def make_graph(ops, op_types, interpreter):
             weights_array = np.transpose(weights_array, (1, 2, 0, 3))
             # print('weights_array.shape:', weights_array.shape)
             output_shape_array = interpreter.get_tensor(output_shape_detail['index'])
-            # print('shape_array.shape:', output_shape_array.shape)
+            # print('output_shape_array.shape:', output_shape_array.shape)
             weights = tf.Variable(weights_array, name=weights_detail['name'])
             shape = tf.Variable(output_shape_array, name=output_shape_detail['name'])
             options = op['builtin_options']
