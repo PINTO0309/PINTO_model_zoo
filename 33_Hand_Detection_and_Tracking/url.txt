@@ -1,4 +1,5 @@
 https://github.com/google/mediapipe/tree/master/mediapipe/models#hand-detection-and-tracking
+https://gist.github.com/tworuler/bd7bd4c6cd9a8fbbeb060e7b64cfa008
 https://github.com/wolterlw/hand_tracking.git
 https://github.com/metalwhale/hand_tracking.git
 https://github.com/terryky/tflite_gles_app.git
