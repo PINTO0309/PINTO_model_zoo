@@ -1,0 +1,16 @@
+tfjs_graph_converter \
+  ${HOME}/Downloads/bodypix_025_1_default_1 \
+  ${HOME}/Downloads/bodypix_025_1_default_1/bodypix_025.pb
+
+tfjs_graph_converter \
+  ${HOME}/Downloads/bodypix_050_1_default_1 \
+  ${HOME}/Downloads/bodypix_050_1_default_1/bodypix_050.pb
+
+tfjs_graph_converter \
+  ${HOME}/Downloads/bodypix_075_1_default_1 \
+  ${HOME}/Downloads/bodypix_075_1_default_1/bodypix_075.pb
+
+tfjs_graph_converter \
+  ${HOME}/Downloads/bodypix_100_1_default_1 \
+  ${HOME}/Downloads/bodypix_100_1_default_1/bodypix_100.pb
+  
