@@ -1,0 +1,4 @@
+https://github.com/google/mediapipe/blob/master/mediapipe/docs/objectron_mobile_gpu.md
+https://github.com/google/mediapipe/tree/master/mediapipe/models
+https://ai.googleblog.com/2020/03/real-time-3d-object-detection-on-mobile.html
+
