@@ -80,6 +80,10 @@ def make_graph(ops, op_types, interpreter):
                 name=output_detail['name'] + '/conv2d')
             output_tensor = tf.add(
                 output_tensor, bias, name=output_detail['name'])
+
+            if output_detail['name'].split('/')[-1]=='Relu6':
+                output_tensor = tf.nn.relu6(output_tensor)
+
             tensors[output_detail['index']] = output_tensor
         elif op_type == 'DEPTHWISE_CONV_2D':
             input_tensor = tensors[op['inputs'][0]]
@@ -107,6 +111,10 @@ def make_graph(ops, op_types, interpreter):
                 name=output_detail['name'] + '/depthwise_conv2d')
             output_tensor = tf.add(
                 output_tensor, bias, name=output_detail['name'])
+
+            if output_detail['name'].split('/')[-1]=='Relu6':
+                output_tensor = tf.nn.relu6(output_tensor)
+
             tensors[output_detail['index']] = output_tensor
         elif op_type == 'MAX_POOL_2D':
             input_tensor = tensors[op['inputs'][0]]
@@ -166,6 +174,10 @@ def make_graph(ops, op_types, interpreter):
                 param = interpreter._get_tensor_details(op['inputs'][1])
                 input_tensor_1 = interpreter.get_tensor(param['index'])
             output_tensor = tf.add(input_tensor_0, input_tensor_1, name=output_detail['name'])
+
+            if output_detail['name'].split('/')[-1]=='Relu6':
+                output_tensor = tf.nn.relu6(output_tensor)
+                            
             tensors[output_detail['index']] = output_tensor
         elif op_type == 'CONCATENATION':
             output_detail = interpreter._get_tensor_details(op['outputs'][0])
@@ -221,7 +233,7 @@ def make_graph(ops, op_types, interpreter):
             input_tensor_0 = tensors[op['inputs'][0]]
             param = interpreter._get_tensor_details(op['inputs'][1])
             input_tensor_1 = interpreter.get_tensor(param['index'])
-            output_tensor = tf.add(input_tensor_0, input_tensor_1, name=output_detail['name'])
+            output_tensor = tf.multiply(input_tensor_0, input_tensor_1, name=output_detail['name'])
             tensors[output_detail['index']] = output_tensor
         else:
             raise ValueError(op_type)
