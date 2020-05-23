@@ -22,7 +22,8 @@ output_pb_path = "object_detection_3d_sneakers.pb"
 output_savedmodel_path = "saved_model_object_detection_3d_sneakers"
 model_json_path = "object_detection_3d_sneakers.json"
 num_tensors = 304
-output_node_names = ['Identity', 'Identity_1', 'Identity_2']
+# output_node_names = ['Identity', 'Identity_1', 'Identity_2']
+output_node_names = ['model/belief/Conv2D/conv2d', 'Identity_1', 'Identity_2']
 
 def gen_model_json():
     if not os.path.exists(model_json_path):
@@ -281,7 +282,8 @@ def main():
             output_savedmodel_path,
             inputs={'input': graph.get_tensor_by_name('input:0')},
             outputs={
-                'Identity': graph.get_tensor_by_name('Identity:0'),
+                # 'Identity': graph.get_tensor_by_name('Identity:0'),
+                'Identity': graph.get_tensor_by_name('model/belief/Conv2D/conv2d:0'),
                 'Identity_1': graph.get_tensor_by_name('Identity_1:0'),
                 'Identity_2': graph.get_tensor_by_name('Identity_2:0')
             })
@@ -290,7 +292,7 @@ if __name__ == '__main__':
     main()
 
 """
-$ saved_model_cli show --dir saved_model_hand_landmark_3d --all
+$ saved_model_cli show --dir saved_model_object_detection_3d_sneakers --all
 
 MetaGraphDef with tag-set: 'serve' contains the following SignatureDefs:
 
@@ -304,7 +306,7 @@ signature_def['serving_default']:
     outputs['Identity'] tensor_info:
         dtype: DT_FLOAT
         shape: (1, 40, 30, 1)
-        name: Identity:0
+        name: model/belief/Conv2D/conv2d:0
     outputs['Identity_1'] tensor_info:
         dtype: DT_FLOAT
         shape: (1, 40, 30, 16)
