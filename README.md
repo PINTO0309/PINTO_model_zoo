@@ -69,7 +69,7 @@ $ ./download.sh
 $ python3 deeplabv3plus_usbcam.py
 ```
 ![007](99_media/007.gif)  
-## Sample.5 - Face Mesh, face_detection_front_128_weight_quant, face_landmark_192_weight_quant
+## Sample.5 - MediaPipe/FaceMesh, face_detection_front_128_weight_quant, face_landmark_192_weight_quant
 - Ubuntu 18.04 x86_64
 - Tensorflow Lite
 - C/C++
@@ -78,6 +78,15 @@ $ python3 deeplabv3plus_usbcam.py
 - **`$ v4l2-ctl --set-fmt-video=width=640,height=480,pixelformat=YUYV`**
 - **[Test Code - tflite_gles_app - gl2facemesh - @terryky](https://github.com/terryky/tflite_gles_app.git)**
 ![008](99_media/008.gif)  
+## Sample.6 - MediaPipe/Objectron, object_detection_3d_chair_640x480_weight_quant
+- Ubuntu 18.04 x86_64
+- Tensorflow Lite
+- C/C++
+- OpenGL
+- USB Camera, 640x480
+- **`$ v4l2-ctl --set-fmt-video=width=640,height=480,pixelformat=YUYV`**
+- **[Test Code - tflite_gles_app - gl2objectron - @terryky](https://github.com/terryky/tflite_gles_app.git)**  
+![009](99_media/009.gif)  
 
 ## 1. Environment
 
