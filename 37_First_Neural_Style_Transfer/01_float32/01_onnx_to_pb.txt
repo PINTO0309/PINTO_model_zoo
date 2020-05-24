@@ -1,0 +1,6 @@
+https://github.com/onnx/onnx-tensorflow.git
+
+CUDA_VISIBLE_DEVICES= \
+onnx-tf convert \
+  -i mosaic.onnx \
+  -o mosaic.pb
