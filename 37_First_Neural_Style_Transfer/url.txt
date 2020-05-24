@@ -2,3 +2,5 @@ https://github.com/onnx/models/tree/master/vision/style_transfer/fast_neural_sty
 https://github.com/onnx/onnx-tensorflow/issues/614
 https://github.com/onnx/onnx-tensorflow.git
 https://github.com/nerox8664/onnx2keras.git
+
+https://github.com/paulbauriegel/tensorflow-tools/blob/master/convert-model-to-NHWC.py
