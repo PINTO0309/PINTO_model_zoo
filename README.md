@@ -87,6 +87,16 @@ $ python3 deeplabv3plus_usbcam.py
 - **`$ v4l2-ctl --set-fmt-video=width=640,height=480,pixelformat=YUYV`**
 - **[Test Code - tflite_gles_app - gl2objectron - @terryky](https://github.com/terryky/tflite_gles_app.git)**  
 ![009](99_media/009.gif)  
+## Sample.7 - MediaPipe/BlazeFace, face_detection_front_128_integer_quant
+- RaspberryPi4
+- Ubuntu 19.10 aarch64
+- Tensorflow Lite
+- C/C++
+- OpenGL
+- USB Camera, 640x480
+- **`$ v4l2-ctl --set-fmt-video=width=640,height=480,pixelformat=YUYV`**
+- **[Test Code - tflite_gles_app - gl2blazeface - @terryky](https://github.com/terryky/tflite_gles_app.git)**  
+![010](99_media/010.gif)  
 
 ## 1. Environment
 
