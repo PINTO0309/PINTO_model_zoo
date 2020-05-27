@@ -1505,7 +1505,7 @@ Memory (bytes): count=0
 
 </div></details>
 
-<details><summary>RaspberryPi4 + Ubuntu 19.10 aarch64 + 4 Threads + object_detection_3d_chair_640x480_integer_quant.tflite Benchmark</summary><div>
+<details><summary>RaspberryPi4 + Ubuntu 19.10 aarch64 + 4 Threads + ssdlite_mobiledet_cpu_320x320_coco_integer_quant.tflite Benchmark</summary><div>
 
 ```bash
 Number of nodes executed: 288
