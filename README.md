@@ -1505,6 +1505,32 @@ Memory (bytes): count=0
 
 </div></details>
 
+<details><summary>RaspberryPi4 + Ubuntu 19.10 aarch64 + 4 Threads + object_detection_3d_chair_640x480_integer_quant.tflite Benchmark</summary><div>
+
+```bash
+Number of nodes executed: 288
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                 CONV_2D	       96	    22.996	    33.342%	    33.342%	     0.000	       96
+	              HARD_SWISH	       57	    11.452	    16.604%	    49.946%	     0.000	       57
+	                     MUL	       19	     9.423	    13.662%	    63.608%	     0.000	       19
+	         AVERAGE_POOL_2D	       19	     8.439	    12.236%	    75.843%	     0.000	       19
+	       DEPTHWISE_CONV_2D	       35	     7.810	    11.324%	    87.167%	     0.000	       35
+	TFLite_Detection_PostProcess	        1	     5.650	     8.192%	    95.359%	     0.000	        1
+	                     ADD	       12	     1.690	     2.450%	    97.809%	     0.000	       12
+	                QUANTIZE	       12	     0.879	     1.274%	    99.084%	     0.000	       12
+	                LOGISTIC	       20	     0.277	     0.402%	    99.485%	     0.000	       20
+	              DEQUANTIZE	        2	     0.234	     0.339%	    99.825%	     0.000	        2
+	           CONCATENATION	        2	     0.079	     0.115%	    99.939%	     0.000	        2
+	                 RESHAPE	       13	     0.042	     0.061%	   100.000%	     0.000	       13
+
+Timings (microseconds): count=50 first=69091 curr=68590 min=68478 max=83971 avg=69105.3 std=2147
+Memory (bytes): count=0
+288 nodes observed
+```
+
+</div></details>
+
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
 2. **[When you want to fine-tune DeepLab on other datasets, there are a few cases](https://github.com/tensorflow/models/issues/3730#issuecomment-380168917)**  
