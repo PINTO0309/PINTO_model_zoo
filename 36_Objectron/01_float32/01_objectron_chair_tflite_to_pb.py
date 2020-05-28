@@ -22,8 +22,8 @@ output_pb_path = "object_detection_3d_chair.pb"
 output_savedmodel_path = "saved_model_object_detection_3d_chair"
 model_json_path = "object_detection_3d_chair.json"
 num_tensors = 304
-# output_node_names = ['Identity', 'Identity_1', 'Identity_2']
-output_node_names = ['model/belief/Conv2D/conv2d', 'Identity_1', 'Identity_2']
+output_node_names = ['Identity', 'Identity_1', 'Identity_2']
+# output_node_names = ['model/belief/Conv2D/conv2d', 'Identity_1', 'Identity_2']
 
 def gen_model_json():
     if not os.path.exists(model_json_path):
@@ -202,7 +202,7 @@ def make_graph(ops, op_types, interpreter):
             #print('LOGISTIC op', op)
             #print('LOGISTIC output_detail:', output_detail)
             #print('LOGISTIC input_tensor:', input_tensor)
-            output_tensor = 1 / (1 + tf.math.exp(-input_tensor, name=output_detail['name']))
+            output_tensor = tf.math.sigmoid(input_tensor, name=output_detail['name'])
             tensors[output_detail['index']] = output_tensor
         elif op_type == 'TRANSPOSE_CONV':
             input_tensor = tensors[op['inputs'][2]]
@@ -282,8 +282,8 @@ def main():
             output_savedmodel_path,
             inputs={'input': graph.get_tensor_by_name('input:0')},
             outputs={
-                # 'Identity': graph.get_tensor_by_name('Identity:0'),
-                'Identity': graph.get_tensor_by_name('model/belief/Conv2D/conv2d:0'),
+                'Identity': graph.get_tensor_by_name('Identity:0'),
+                #'Identity': graph.get_tensor_by_name('model/belief/Conv2D/conv2d:0'),
                 'Identity_1': graph.get_tensor_by_name('Identity_1:0'),
                 'Identity_2': graph.get_tensor_by_name('Identity_2:0')
             })
