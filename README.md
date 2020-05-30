@@ -97,6 +97,13 @@ $ python3 deeplabv3plus_usbcam.py
 - **`$ v4l2-ctl --set-fmt-video=width=640,height=480,pixelformat=YUYV`**
 - **[Test Code - tflite_gles_app - gl2blazeface - @terryky](https://github.com/terryky/tflite_gles_app.git)**  
 ![010](99_media/010.gif)  
+## Sample.8 - MediaPipe/3D Hand Pose, hand_landmark_3d_256_integer_quant.tflite + palm_detection_builtin_256_integer_quant.tflite
+- RaspberryPi4
+- Tensorflow Lite
+- C/C++
+- OpenGL
+- **[Test Code - tflite_gles_app - gl2handpose - @terryky](https://github.com/terryky/tflite_gles_app.git)**  
+![gl2handpose_mov](https://github.com/terryky/tflite_gles_app/blob/master/gl2handpose/gl2handpose_mov.gif)
 
 ## 1. Environment
 
