@@ -1,3 +1,5 @@
+### tensorflow==2.2.0
+
 import tensorflow as tf
 import os
 import shutil
