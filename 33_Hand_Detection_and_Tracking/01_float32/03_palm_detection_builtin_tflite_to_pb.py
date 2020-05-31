@@ -196,7 +196,7 @@ def make_graph(ops, op_types, interpreter):
             #print('LOGISTIC op', op)
             #print('LOGISTIC output_detail:', output_detail)
             #print('LOGISTIC input_tensor:', input_tensor)
-            output_tensor = 1 / (1 + tf.math.exp(-input_tensor, name=output_detail['name']))
+            output_tensor = tf.math.sigmoid(input_tensor, name=output_detail['name'])
             tensors[output_detail['index']] = output_tensor
 
         elif op_type == 'TRANSPOSE_CONV':
