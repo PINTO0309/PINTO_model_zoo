@@ -143,6 +143,7 @@ cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
 
 # interpreter = Interpreter(model_path="mobilenet_v2_pose_256_256_dm100_weight_quant.tflite")
 interpreter = Interpreter(model_path="mobilenet_v2_pose_256_256_dm100_integer_quant.tflite")
+# interpreter = Interpreter(model_path="mobilenet_v2_pose_368_432_dm100_integer_quant.tflite")
 interpreter.allocate_tensors()
 try:
     interpreter.set_num_threads(int(num_threads))
