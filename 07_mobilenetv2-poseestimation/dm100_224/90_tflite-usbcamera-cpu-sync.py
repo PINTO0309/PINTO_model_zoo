@@ -157,8 +157,8 @@ input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()
 input_shape = input_details[0]['shape']
 
-h = input_details[0]['shape'][1] #368
-w = input_details[0]['shape'][2] #432
+h = input_details[0]['shape'][1] #256
+w = input_details[0]['shape'][2] #256
 
 threshold = 0.25
 nPoints = 18
@@ -185,8 +185,8 @@ try:
         prepimg = prepimg[np.newaxis, :, :, :]     # Batch size axis add
         interpreter.set_tensor(input_details[0]['index'], prepimg)
         interpreter.invoke()
-        outputs = interpreter.get_tensor(output_details[0]['index']) #(1, 46, 54, 57)
-        outputs = outputs.transpose((0, 3, 1, 2))  # NHWC to NCHW, (1, 57, 46, 54)
+        outputs = interpreter.get_tensor(output_details[0]['index']) #(1, 32, 32, 57)
+        outputs = outputs.transpose((0, 3, 1, 2))  # NHWC to NCHW, (1, 57, 32, 32)
 
         detected_keypoints = []
         keypoints_list = np.zeros((0, 3))
@@ -194,7 +194,7 @@ try:
 
         for part in range(nPoints):
             probMap = outputs[0, part, :, :]
-            probMap = cv2.resize(probMap, (canvas.shape[1], canvas.shape[0])) # (432, 368)
+            probMap = cv2.resize(probMap, (canvas.shape[1], canvas.shape[0])) # (256, 256)
             keypoints = getKeypoints(probMap, threshold)
             keypoints_with_id = []
 
