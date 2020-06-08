@@ -30,5 +30,6 @@ def convert_graph_def_to_saved_model(export_dir, graph_filepath, input_name, out
 tf.compat.v1.enable_eager_execution()
 
 # convert this to a TF Serving compatible mode
-shutil.rmtree('./saved_model', ignore_errors=True)
-convert_graph_def_to_saved_model('./saved_model', './frozen-model.pb', 'image', ['Openpose/concat_stage7:0'])
+shutil.rmtree('saved_model', ignore_errors=True)
+#convert_graph_def_to_saved_model('saved_model', 'model-final.pb', 'image', ['Openpose/concat_stage7:0'])
+convert_graph_def_to_saved_model('saved_model', 'frozen_graph_opt.pb', 'image', ['Openpose/concat_stage7:0'])
