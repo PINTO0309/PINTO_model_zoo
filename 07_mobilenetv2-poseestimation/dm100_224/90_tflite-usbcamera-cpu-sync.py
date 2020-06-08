@@ -117,8 +117,8 @@ def getPersonwiseKeypoints(valid_pairs, invalid_pairs):
     return personwiseKeypoints
 
 
-width  = 320
-height = 240
+width  = 640
+height = 480
 fps = ""
 framecount = 0
 time1 = 0
@@ -223,6 +223,7 @@ try:
                 cv2.line(frameClone, (B[0], A[0]), (B[1], A[1]), colors[i], 3, cv2.LINE_AA)
 
         cv2.putText(frameClone, fps, (w-170,15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (38,0,255), 1, cv2.LINE_AA)
+        frameClone = cv2.resize(frameClone, (colw, colw))
 
         cv2.namedWindow("USB Camera", cv2.WINDOW_AUTOSIZE)
         cv2.imshow("USB Camera" , frameClone)
