@@ -1580,6 +1580,48 @@ Memory (bytes): count=0
 
 </div></details>
 
+<details><summary>RaspberryPi4 + Ubuntu 19.10 aarch64 + 4 Threads + mobilenet_v2_pose_256_256_dm050_integer_quant.tflite Benchmark</summary><div>
+
+```bash
+Number of nodes executed: 189
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                 CONV_2D	       86	    40.952	    71.786%	    71.786%	     0.000	       86
+	       DEPTHWISE_CONV_2D	       73	    13.508	    23.679%	    95.465%	     0.000	       73
+	                QUANTIZE	       13	     1.123	     1.969%	    97.434%	     0.000	       13
+	                     ADD	        8	     0.710	     1.245%	    98.678%	     0.000	        8
+	           CONCATENATION	        7	     0.498	     0.873%	    99.551%	     0.000	        7
+	         RESIZE_BILINEAR	        1	     0.193	     0.338%	    99.890%	     0.000	        1
+	              DEQUANTIZE	        1	     0.063	     0.110%	   100.000%	     0.000	        1
+
+Timings (microseconds): count=50 first=57027 curr=57048 min=56773 max=58042 avg=57135 std=229
+Memory (bytes): count=0
+189 nodes observed
+```
+
+</div></details>
+
+<details><summary>RaspberryPi4 + Ubuntu 19.10 aarch64 + 4 Threads + mobilenet_v2_pose_368_432_dm050_integer_quant.tflite Benchmark</summary><div>
+
+```bash
+Number of nodes executed: 189
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                 CONV_2D	       86	   104.618	    71.523%	    71.523%	     0.000	       86
+	       DEPTHWISE_CONV_2D	       73	    34.527	    23.605%	    95.128%	     0.000	       73
+	                QUANTIZE	       13	     2.572	     1.758%	    96.886%	     0.000	       13
+	           CONCATENATION	        7	     2.257	     1.543%	    98.429%	     0.000	        7
+	                     ADD	        8	     1.683	     1.151%	    99.580%	     0.000	        8
+	         RESIZE_BILINEAR	        1	     0.460	     0.314%	    99.894%	     0.000	        1
+	              DEQUANTIZE	        1	     0.155	     0.106%	   100.000%	     0.000	        1
+
+Timings (microseconds): count=50 first=172545 curr=146065 min=145260 max=172545 avg=146362 std=3756
+Memory (bytes): count=0
+189 nodes observed
+```
+
+</div></details>
+
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
 2. **[When you want to fine-tune DeepLab on other datasets, there are a few cases](https://github.com/tensorflow/models/issues/3730#issuecomment-380168917)**  
