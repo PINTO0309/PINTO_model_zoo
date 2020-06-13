@@ -35,7 +35,7 @@ def getValidPairs(outputs, w, h):
     valid_pairs = []
     invalid_pairs = []
     n_interp_samples = 10
-    paf_score_th = 0.1
+    paf_score_th = 0.15
     conf_th = 0.7
 
     for k in range(len(mapIdx)):
@@ -160,7 +160,7 @@ input_shape = input_details[0]['shape']
 h = input_details[0]['shape'][1] #368
 w = input_details[0]['shape'][2] #432
 
-threshold = 0.25
+threshold = 0.15
 nPoints = 18
 
 try:
