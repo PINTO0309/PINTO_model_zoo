@@ -117,8 +117,8 @@ def getPersonwiseKeypoints(valid_pairs, invalid_pairs):
     return personwiseKeypoints
 
 
-width  = 320
-height = 240
+width  = 640
+height = 480
 fps = ""
 framecount = 0
 time1 = 0
