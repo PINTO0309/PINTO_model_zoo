@@ -25,5 +25,5 @@ def convert_graph_def_to_saved_model(export_dir, graph_filepath, input_name, out
         )
         print('Optimized graph converted to SavedModel!')
 
-shutil.rmtree('saved_model_nhwc', ignore_errors=True)
-convert_graph_def_to_saved_model('saved_model_nhwc', 'dbface_nhwc.pb', 'x', ['Identity:0','Identity_1:0','Identity_2:0'])
+shutil.rmtree('saved_model', ignore_errors=True)
+convert_graph_def_to_saved_model('saved_model_nhwc', 'dbface.pb', 'x', ['Identity:0','Identity_1:0','Identity_2:0'])
