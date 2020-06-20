@@ -1,0 +1,7 @@
+python3 model_inspect.py \
+  --runmode=saved_model \
+  --model_name=efficientdet-d0 \
+  --ckpt_path=efficientdet-d0 \
+  --saved_model_dir=saved_model \
+  --tflite_path=efficientdet-d0.tflite \
+  --max_boxes_to_draw=10
