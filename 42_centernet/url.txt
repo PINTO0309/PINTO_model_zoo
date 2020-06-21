@@ -3,3 +3,5 @@ https://github.com/opencv/open_model_zoo/blob/master/models/public/ctdet_coco_dl
 https://github.com/opencv/open_model_zoo/blob/master/models/public/ctdet_coco_dlav0_384/model.yml
 https://github.com/opencv/open_model_zoo/blob/master/models/public/ctdet_coco_dlav0_512/ctdet_coco_dlav0_512.md
 https://github.com/opencv/open_model_zoo/blob/master/models/public/ctdet_coco_dlav0_512/model.yml
+
+https://github.com/xingyizhou/CenterNet/blob/master/readme/MODEL_ZOO.md
