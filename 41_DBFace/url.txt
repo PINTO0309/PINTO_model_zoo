@@ -6,3 +6,5 @@ https://docs.openvinotoolkit.org/latest/_docs_MO_DG_prepare_model_convert_model_
 
 https://github.com/nerox8664/onnx2keras/issues/29
 
+PyTorch Free
+https://github.com/yas-sim/DBFace-on-OpenVINO.git
