@@ -11,3 +11,6 @@ https://github.com/yas-sim/DBFace-on-OpenVINO.git
 
 Sample Movie
 https://youtu.be/dGEUm2pAAHo
+
+NCHW to NHWC
+https://memo.sugyan.com/entry/2020/02/06/005441
