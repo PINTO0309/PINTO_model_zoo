@@ -127,7 +127,8 @@ $ python3 deeplabv3plus_usbcam.py
 
 - Ubuntu 18.04 x86_64
 - RaspberryPi4 Raspbian Buster 32bit / **[Raspbian Buster 64bit](https://github.com/sakaki-/raspbian-nspawn-64.git)** / **[Ubuntu 19.10 aarch64](https://qiita.com/PINTO/items/adc5db7af7a5996c0f72)**
-- Tensorflow-GPU v1.15.0 or Tensorflow v2.1.0 or Tensorflow v2.2.0-dev (tf-nightly)
+- Tensorflow-GPU v1.15.2 or Tensorflow v2.2.0+
+- OpenVINO 2020.2+
 - Python 3.6.8
 - PascalVOC Dataset
 - COCO Dataset
