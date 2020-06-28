@@ -89,7 +89,15 @@ $ python3 deeplabv3plus_usbcam.py
 - **`$ v4l2-ctl --set-fmt-video=width=640,height=480,pixelformat=YUYV`**
 - **[Test Code - tflite_gles_app - gl2objectron - @terryky](https://github.com/terryky/tflite_gles_app.git)**  
 ![009](99_media/009.gif)  
-## Sample.7 - MediaPipe/BlazeFace, face_detection_front_128_integer_quant
+## Sample.7 - MediaPipe/Objectron, object_detection_3d_chair_640x480_openvino_FP32
+- Ubuntu 18.04 x86_64
+- OpenVINO 2020.2
+- Python
+- Core i7 (CPU only)
+- USB Camera, 640x480
+- **[Test Code - objectron-3d-object-detection-openvino - @yas-sim](https://github.com/yas-sim/objectron-3d-object-detection-openvino.git)**  
+![011](99_media/011.gif)  
+## Sample.8 - MediaPipe/BlazeFace, face_detection_front_128_integer_quant
 - RaspberryPi4
 - Ubuntu 19.10 aarch64
 - Tensorflow Lite
@@ -99,7 +107,7 @@ $ python3 deeplabv3plus_usbcam.py
 - **`$ v4l2-ctl --set-fmt-video=width=640,height=480,pixelformat=YUYV`**
 - **[Test Code - tflite_gles_app - gl2blazeface - @terryky](https://github.com/terryky/tflite_gles_app.git)**  
 ![010](99_media/010.gif)  
-## Sample.8 - MediaPipe/Hand_Detection_and_Tracking(3D Hand Pose), hand_landmark_3d_256_integer_quant.tflite + palm_detection_builtin_256_integer_quant.tflite
+## Sample.9 - MediaPipe/Hand_Detection_and_Tracking(3D Hand Pose), hand_landmark_3d_256_integer_quant.tflite + palm_detection_builtin_256_integer_quant.tflite
 - RaspberryPi4
 - Tensorflow Lite
 - C/C++
