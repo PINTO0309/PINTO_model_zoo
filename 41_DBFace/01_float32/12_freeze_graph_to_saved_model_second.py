@@ -25,5 +25,5 @@ def convert_graph_def_to_saved_model(export_dir, graph_filepath, input_name, out
         )
         print('Optimized graph converted to SavedModel!')
 
-shutil.rmtree('saved_model_tf', ignore_errors=True)
-convert_graph_def_to_saved_model('saved_model_tf', 'dbface_tf.pb', 'x', ['sigmoid_hm:0','tlrb:0','landmark:0'])
+shutil.rmtree('saved_model', ignore_errors=True)
+convert_graph_def_to_saved_model('saved_model', 'dbface.pb', 'x', ['Identity:0','Identity_1:0','Identity_2:0'])

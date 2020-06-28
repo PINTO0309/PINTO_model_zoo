@@ -72,3 +72,42 @@ def convert_upsample(node, params, layers, lambda_func, node_name, keras_name):
         raise AssertionError('Cannot convert non-linear/non-nearest upsampling')
 
     layers[node_name] = upsampling(layers[node.input[0]])
+
+
+
+
+
+### /usr/local/lib/python3.6/dist-packages/onnx2keras/reshape_layers.py
+
+def convert_slice(node, params, layers, lambda_func, node_name, keras_name):
+    """
+    Convert slice.
+    :param node: current operation node
+    :param params: operation attributes
+    :param layers: available keras layers
+    :param lambda_func: function for keras Lambda layer
+    :param node_name: internal converter name
+    :param keras_name: resulting layer name
+    :return: None
+    """
+    logger = logging.getLogger('onnx2keras:slice')
+
+    if is_numpy(layers[node.input[0]]):
+        #if params['change_ordering']:
+        #    raise NotImplementedError("change_ordering for Slice is not implemented")
+        logger.debug('Slice numpy constants')
+        if 'axes' in params:
+            if len(params["axes"]) != 1:
+                raise NotImplementedError("Multiple axes in Slice is not implemented")
+            axes = params["axes"][0]
+            ends = params["ends"][0]
+            starts = params["starts"][0]
+        else:
+            raise AttributeError('Not implemented')
+
+                    :
+                    :
+
+        if isinstance(axes, list) or isinstance(axes, np.ndarray):
+            #if params['change_ordering']:
+            #    raise NotImplementedError("change_ordering for Slice is not implemented")
