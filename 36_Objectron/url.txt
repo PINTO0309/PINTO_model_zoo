@@ -2,3 +2,6 @@ https://github.com/google/mediapipe/blob/master/mediapipe/docs/objectron_mobile_
 https://github.com/google/mediapipe/tree/master/mediapipe/models
 https://ai.googleblog.com/2020/03/real-time-3d-object-detection-on-mobile.html
 https://github.com/tensorflow/tensorflow/blob/a4c2fcf05b831c726346d78b4b3dddfd823d93c0/tensorflow/lite/kernels/internal/reference/logistic.h#L30-L57
+
+test code
+https://github.com/yas-sim/objectron-3d-object-detection-openvino.git
