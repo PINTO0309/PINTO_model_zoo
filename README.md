@@ -114,6 +114,14 @@ $ python3 deeplabv3plus_usbcam.py
 - OpenGL
 - **[Test Code - tflite_gles_app - gl2handpose - @terryky](https://github.com/terryky/tflite_gles_app.git)**  
 ![gl2handpose_mov](https://github.com/terryky/tflite_gles_app/blob/master/gl2handpose/gl2handpose_mov.gif)
+## Sample.10 - DBFace, 640x480_openvino_FP32
+- Ubuntu 18.04 x86_64
+- OpenVINO 2020.2
+- Python
+- Core i7 (CPU only)
+- USB Camera, 640x480
+- **[Test Code - DBFace-on-OpenVINO - @yas-sim](https://github.com/yas-sim/DBFace-on-OpenVINO.git)**  
+![012](99_media/012.gif)  
 
 ## 1. Environment
 
