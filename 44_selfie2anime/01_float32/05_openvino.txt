@@ -1,0 +1,17 @@
+sudo pip3 install git+https://github.com/onnx/tensorflow-onnx
+
+
+python3 -m tf2onnx.convert \
+  --saved-model ${HOME}/git/selfie2anime-e2e-tutorial/ml/saved_model \
+  --output ${HOME}/git/selfie2anime-e2e-tutorial/ml/selfie2anime.onnx \
+  --inputs-as-nchw test_domain_A:0
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_onnx.py \
+  --input_model ${HOME}/git/selfie2anime-e2e-tutorial/ml/selfie2anime.onnx \
+  --output_dir ${HOME}/git/selfie2anime-e2e-tutorial/ml/openvino/FP32 \
+  --data_type FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_onnx.py \
+  --input_model ${HOME}/git/selfie2anime-e2e-tutorial/ml/selfie2anime.onnx \
+  --output_dir ${HOME}/git/selfie2anime-e2e-tutorial/ml/openvino/FP16 \
+  --data_type FP16
