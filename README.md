@@ -1727,6 +1727,32 @@ Memory (bytes): count=0
 
 </div></details>
 
+<details><summary>RaspberryPi4 + Ubuntu 19.10 aarch64 + 4 Threads + yolov4_tiny_voc_416x416_integer_quant.tflite Benchmark</summary><div>
+
+```bash
+Number of nodes executed: 71
+============================== Summary by node type ==============================
+	             [Node type]	  [count]	  [avg ms]	    [avg %]	    [cdf %]	  [mem KB]	[times called]
+	                 CONV_2D	       21	   149.092	    61.232%	    61.232%	     0.000	       21
+	              LEAKY_RELU	       19	    77.644	    31.888%	    93.121%	     0.000	       19
+	                     PAD	        2	     8.036	     3.300%	    96.421%	     0.000	        2
+	                QUANTIZE	       10	     4.580	     1.881%	    98.302%	     0.000	       10
+	           CONCATENATION	        7	     2.415	     0.992%	    99.294%	     0.000	        7
+	             MAX_POOL_2D	        3	     0.982	     0.403%	    99.697%	     0.000	        3
+	                   SPLIT	        3	     0.615	     0.253%	    99.950%	     0.000	        3
+	              DEQUANTIZE	        2	     0.082	     0.034%	    99.984%	     0.000	        2
+	 RESIZE_NEAREST_NEIGHBOR	        1	     0.032	     0.013%	    99.997%	     0.000	        1
+	           STRIDED_SLICE	        1	     0.004	     0.002%	    99.998%	     0.000	        1
+	                     MUL	        1	     0.004	     0.002%	   100.000%	     0.000	        1
+	                   SHAPE	        1	     0.000	     0.000%	   100.000%	     0.000	        1
+
+Timings (microseconds): count=50 first=233307 curr=233318 min=232446 max=364068 avg=243522 std=33354
+Memory (bytes): count=0
+71 nodes observed
+```
+
+</div></details>
+
 ## 4. Reference articles
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**  
 2. **[When you want to fine-tune DeepLab on other datasets, there are a few cases](https://github.com/tensorflow/models/issues/3730#issuecomment-380168917)**  
