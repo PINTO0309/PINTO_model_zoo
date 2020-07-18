@@ -1,0 +1,1 @@
+edgetpu_compiler -s mobilenet_v2_pose_368x432_dm075_full_integer_quant.tflite
