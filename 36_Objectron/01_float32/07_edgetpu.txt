@@ -1,0 +1,2 @@
+edgetpu_compiler -s object_detection_3d_chair_640x480_full_integer_quant.tflite
+edgetpu_compiler -s object_detection_3d_sneakers_640x480_full_integer_quant.tflite
