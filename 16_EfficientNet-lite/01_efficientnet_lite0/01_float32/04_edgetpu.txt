@@ -1,0 +1,1 @@
+edgetpu_compiler -s efficientnet-lite0-int8.tflite

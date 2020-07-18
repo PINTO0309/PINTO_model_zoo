@@ -1,0 +1,7 @@
+MODEL=efficientnet-lite1
+python3 export_model.py \
+  --model_name=${MODEL} \
+  --ckpt_dir=${HOME}/Downloads/${MODEL} \
+  --output_saved_model_dir=${HOME}/Downloads/${MODEL}/saved_model \
+  --output_tflite=${HOME}/Downloads/${MODEL}/${MODEL}_float.tflite \
+  --quantize=False
