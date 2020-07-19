@@ -1,0 +1,29 @@
+export PYTHONPATH=$PYTHONPATH:${HOME}/git/tpu/models/:${HOME}/git/tpu/models/official/efficientnet
+
+python3 export_saved_model.py \
+  --model=retinanet \
+  --export_dir=${HOME}/Downloads/detection_retinanet_spinenetmbconv-49-best/saved_model \
+  --checkpoint_path=${HOME}/Downloads/detection_retinanet_spinenetmbconv-49-best/model.ckpt \
+  --config_file=${HOME}/Downloads/detection_retinanet_spinenetmbconv-49-best/spinenet-mbconv49_retinanet.yaml \
+  --batch_size=1 \
+  --input_type='image_tensor' \
+  --input_name='input' \
+  --input_image_size='384,384' \
+  --output_image_info=False \
+  --cast_num_detections_to_float=True \
+  --cast_detection_classes_to_float=True
+
+
+
+python3 export_inference_graph.py \
+  --model=retinanet \
+  --export_dir=${HOME}/Downloads/detection_retinanet_spinenetmbconv-49-best/export \
+  --config_file=${HOME}/Downloads/detection_retinanet_spinenetmbconv-49-best/spinenet-mbconv49_retinanet.yaml \
+  --batch_size=1 \
+  --input_type='image_tensor' \
+  --input_name='input' \
+  --input_image_size='384,384' \
+  --optimize_graph=True \
+  --output_image_info=False \
+  --cast_num_detections_to_float=True \
+  --cast_detection_classes_to_float=True
