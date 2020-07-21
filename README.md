@@ -992,7 +992,7 @@ $ ./bazel-2.0.0-installer-linux-x86_64.sh
 $ sudo apt-get install -y openjdk-8-jdk
 
 ## Bazel for RaspberryPi3/4 Raspbian/Debian Buster armhf install
-$ wget https://github.com/PINTO0309/Bazel_bin/raw/master/2.0.0/Raspbian_Debian_Buster_armhf/openjdk-8-jdk/install.sh
+$ wget https://github.com/PINTO0309/Bazel_bin/raw/master/3.1.0/Raspbian_Debian_Buster_armhf/openjdk-8-jdk/install.sh
 $ ./install.sh
 $ curl -sc /tmp/cookie \
   "https://drive.google.com/uc?export=download&id=1LQUSal55R6fmawZS9zZuk6-5ZFOdUqRK" > /dev/null
@@ -1003,7 +1003,7 @@ $ curl -Lb /tmp/cookie \
 $ sudo apt-get install -y ./adoptopenjdk-8-hotspot_8u222-b10-2_armhf.deb
 
 ## Bazel for RaspberryPi3/4 Raspbian/Debian Buster aarch64 install
-$ wget https://github.com/PINTO0309/Bazel_bin/raw/master/2.0.0/Raspbian_Debian_Buster_aarch64/openjdk-8-jdk/install.sh
+$ wget https://github.com/PINTO0309/Bazel_bin/raw/master/3.1.0/Raspbian_Debian_Buster_aarch64/openjdk-8-jdk/install.sh
 $ ./install.sh
 $ curl -sc /tmp/cookie \
   "https://drive.google.com/uc?export=download&id=1VwLxzT3EOTbhSzwvRF2H4ChTQyTQBt3x" > /dev/null
