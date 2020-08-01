@@ -1,0 +1,3 @@
+https://github.com/timbereye/mobilebert.git
+https://github.com/nate-parrott/squad/tree/master/data
+https://github.com/chrischute/squad/tree/master/data
