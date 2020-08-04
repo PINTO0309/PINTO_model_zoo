@@ -1,0 +1,118 @@
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model bodypix_100.pb \
+  --model_name bodypix_100 \
+  --input_shape [1,240,320,3] \
+  --data_type FP32 \
+  --output_dir openvino/320x240/FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model bodypix_100.pb \
+  --model_name bodypix_100 \
+  --input_shape [1,240,320,3] \
+  --data_type FP16 \
+  --output_dir openvino/320x240/FP16
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model bodypix_075.pb \
+  --model_name bodypix_075 \
+  --input_shape [1,240,320,3] \
+  --data_type FP32 \
+  --output_dir openvino/320x240/FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model bodypix_075.pb \
+  --model_name bodypix_075 \
+  --input_shape [1,240,320,3] \
+  --data_type FP16 \
+  --output_dir openvino/320x240/FP16
+
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model bodypix_050.pb \
+  --model_name bodypix_050 \
+  --input_shape [1,240,320,3] \
+  --data_type FP32 \
+  --output_dir openvino/320x240/FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model bodypix_050.pb \
+  --model_name bodypix_050 \
+  --input_shape [1,240,320,3] \
+  --data_type FP16 \
+  --output_dir openvino/320x240/FP16
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model bodypix_025.pb \
+  --model_name bodypix_025 \
+  --input_shape [1,240,320,3] \
+  --data_type FP32 \
+  --output_dir openvino/320x240/FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model bodypix_025.pb \
+  --model_name bodypix_025 \
+  --input_shape [1,240,320,3] \
+  --data_type FP16 \
+  --output_dir openvino/320x240/FP16
+
+
+./benchmark_app \
+  -m ${HOME}/work/35_BodyPix/01_float32/openvino/640x480/FP16/bodypix_100.xml \
+  -i ${HOME}/Pictures \
+  -d CPU \
+  -nthreads 8
+
+./benchmark_app \
+  -m ${HOME}/work/35_BodyPix/01_float32/openvino/640x480/FP16/bodypix_100.xml \
+  -i ${HOME}/Pictures \
+  -d MYRIAD \
+  -nthreads 8
+
+./benchmark_app \
+  -m ${HOME}/work/35_BodyPix/01_float32/openvino/640x480/FP16/bodypix_075.xml \
+  -i ${HOME}/Pictures \
+  -d MYRIAD \
+  -nthreads 8
+
+./benchmark_app \
+  -m ${HOME}/work/35_BodyPix/01_float32/openvino/640x480/FP16/bodypix_050.xml \
+  -i ${HOME}/Pictures \
+  -d MYRIAD \
+  -nthreads 8
+
+./benchmark_app \
+  -m ${HOME}/work/35_BodyPix/01_float32/openvino/640x480/FP16/bodypix_025.xml \
+  -i ${HOME}/Pictures \
+  -d MYRIAD \
+  -nthreads 8
+
+
+./benchmark_app \
+  -m ${HOME}/work/35_BodyPix/01_float32/openvino/320x240/FP16/bodypix_100.xml \
+  -i ${HOME}/Pictures \
+  -d CPU \
+  -nthreads 8
+
+./benchmark_app \
+  -m ${HOME}/work/35_BodyPix/01_float32/openvino/320x240/FP16/bodypix_100.xml \
+  -i ${HOME}/Pictures \
+  -d MYRIAD \
+  -nthreads 8
+
+./benchmark_app \
+  -m ${HOME}/work/35_BodyPix/01_float32/openvino/320x240/FP16/bodypix_075.xml \
+  -i ${HOME}/Pictures \
+  -d MYRIAD \
+  -nthreads 8
+
+./benchmark_app \
+  -m ${HOME}/work/35_BodyPix/01_float32/openvino/320x240/FP16/bodypix_050.xml \
+  -i ${HOME}/Pictures \
+  -d MYRIAD \
+  -nthreads 8
+
+./benchmark_app \
+  -m ${HOME}/work/35_BodyPix/01_float32/openvino/320x240/FP16/bodypix_025.xml \
+  -i ${HOME}/Pictures \
+  -d MYRIAD \
+  -nthreads 8
