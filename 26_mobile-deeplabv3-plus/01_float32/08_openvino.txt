@@ -1,0 +1,75 @@
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model deeplab_v3_plus_mnv2_aspp_decoder_256.pb \
+  --model_name deeplab_v3_plus_mnv2_aspp_decoder_256 \
+  --input_shape [1,256,256,3] \
+  --data_type FP32 \
+  --output_dir openvino/256x256/FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model deeplab_v3_plus_mnv2_aspp_decoder_256.pb \
+  --model_name deeplab_v3_plus_mnv2_aspp_decoder_256 \
+  --input_shape [1,256,256,3] \
+  --data_type FP16 \
+  --output_dir openvino/256x256/FP16
+
+
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model deeplab_v3_plus_mnv2_decoder_256.pb \
+  --model_name deeplab_v3_plus_mnv2_decoder_256 \
+  --input_shape [1,256,256,3] \
+  --data_type FP32 \
+  --output_dir openvino/256x256/FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model deeplab_v3_plus_mnv2_decoder_256.pb \
+  --model_name deeplab_v3_plus_mnv2_decoder_256 \
+  --input_shape [1,256,256,3] \
+  --data_type FP16 \
+  --output_dir openvino/256x256/FP16
+
+
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model deeplab_v3_plus_mnv2_decoder_513.pb \
+  --model_name deeplab_v3_plus_mnv2_decoder_513 \
+  --input_shape [1,513,513,3] \
+  --data_type FP32 \
+  --output_dir openvino/513x513/FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model deeplab_v3_plus_mnv2_decoder_513.pb \
+  --model_name deeplab_v3_plus_mnv2_decoder_513 \
+  --input_shape [1,513,513,3] \
+  --data_type FP16 \
+  --output_dir openvino/513x513/FP16
+
+
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model deeplab_v3_plus_mnv3_decoder_256.pb \
+  --model_name deeplab_v3_plus_mnv3_decoder_256 \
+  --input_shape [1,256,256,3] \
+  --data_type FP32 \
+  --output_dir openvino/256x256/FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model deeplab_v3_plus_mnv3_decoder_256.pb \
+  --model_name deeplab_v3_plus_mnv3_decoder_256 \
+  --input_shape [1,256,256,3] \
+  --data_type FP16 \
+  --output_dir openvino/256x256/FP16
+
+
+./benchmark_app \
+  -m ${HOME}/work/26_mobile-deeplabv3-plus/01_float32/openvino/256x256/FP16/deeplab_v3_plus_mnv2_aspp_decoder_256.xml \
+  -i ${HOME}/Pictures \
+  -d MYRIAD \
+  -nthreads 4
+
+./benchmark_app \
+  -m ${HOME}/work/26_mobile-deeplabv3-plus/01_float32/openvino/256x256/FP16/deeplab_v3_plus_mnv3_decoder_256.xml \
+  -i ${HOME}/Pictures \
+  -d MYRIAD \
+  -nthreads 4
+
