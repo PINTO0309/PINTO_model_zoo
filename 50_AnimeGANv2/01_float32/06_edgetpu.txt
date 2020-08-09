@@ -1,0 +1,2 @@
+edgetpu_compiler -s animeganv2_hayao_256x256_full_integer_quant.tflite
+edgetpu_compiler -s animeganv2_paprika_256x256_full_integer_quant.tflite
