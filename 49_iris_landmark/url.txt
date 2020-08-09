@@ -1,0 +1,2 @@
+https://ai.googleblog.com/2020/08/mediapipe-iris-real-time-iris-tracking.html
+https://google.github.io/mediapipe/solutions/iris
