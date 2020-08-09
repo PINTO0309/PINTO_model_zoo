@@ -7,3 +7,6 @@ https://github.com/atomicbits/posenet-python.git
 
 ### Posenet
 https://www.tensorflow.org/lite/models/pose_estimation/overview
+
+### Sample Code
+https://github.com/PINTO0309/TPU-Posenet
