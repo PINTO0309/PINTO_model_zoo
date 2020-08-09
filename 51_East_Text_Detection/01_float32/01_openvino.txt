@@ -1,0 +1,65 @@
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model frozen_east_text_detection.pb \
+  --model_name frozen_east_text_detection \
+  --input_shape [1,256,256,3] \
+  --mean_values [123.68,116.779,103.939] \
+  --data_type FP32 \
+  --output_dir openvino/256x256/FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model frozen_east_text_detection.pb \
+  --model_name frozen_east_text_detection \
+  --input_shape [1,256,256,3] \
+  --mean_values [123.68,116.779,103.939] \
+  --data_type FP16 \
+  --output_dir openvino/256x256/FP16
+
+
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model frozen_east_text_detection.pb \
+  --model_name frozen_east_text_detection \
+  --input_shape [1,320,320,3] \
+  --mean_values [123.68,116.779,103.939] \
+  --data_type FP32 \
+  --output_dir openvino/320x320/FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --input_model frozen_east_text_detection.pb \
+  --model_name frozen_east_text_detection \
+  --input_shape [1,320,320,3] \
+  --mean_values [123.68,116.779,103.939] \
+  --data_type FP16 \
+  --output_dir openvino/320x320/FP16
+
+
+
+
+./benchmark_app \
+  -m ${HOME}/work/text_detection/opencv-text-detection/openvino/320x320/FP16/frozen_east_text_detection.xml \
+  -i ${HOME}/Pictures \
+  -d MYRIAD \
+  -nthreads 4
+
+./benchmark_app \
+  -m ${HOME}/work/text_detection/opencv-text-detection/openvino/256x256/FP16/frozen_east_text_detection.xml \
+  -i ${HOME}/Pictures \
+  -d MYRIAD \
+  -nthreads 4
+
+
+
+./benchmark_app \
+  -m ${HOME}/work/text_detection/opencv-text-detection/openvino/320x320/FP16/frozen_east_text_detection.xml \
+  -i ${HOME}/Pictures \
+  -d CPU \
+  -nthreads 4
+
+./benchmark_app \
+  -m ${HOME}/work/text_detection/opencv-text-detection/openvino/256x256/FP16/frozen_east_text_detection.xml \
+  -i ${HOME}/Pictures \
+  -d CPU \
+  -nthreads 4
+
+
+

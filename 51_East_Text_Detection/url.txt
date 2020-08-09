@@ -1,0 +1,2 @@
+https://tfhub.dev/sayakpaul/lite-model/east-text-detector/dr/1
+https://www.pyimagesearch.com/2018/08/20/opencv-text-detection-east-text-detector/
