@@ -11,6 +11,10 @@ try:
 except:
     from tensorflow.lite.python.interpreter import Interpreter
 
+fpsstr = ""
+framecount = 0
+time1 = 0
+
 def decode_predictions(scores, geometry):
     # grab the number of rows and columns from the scores volume, then
     # initialize our set of bounding box rectangles and corresponding
@@ -114,6 +118,8 @@ fps = FPS().start()
 
 # loop over frames from the video stream
 while True:
+    t1 = time.perf_counter()
+
     # grab the current frame, then handle if we are using a
     # VideoStream or VideoCapture object
     frame = vs.read()
@@ -167,6 +173,7 @@ while True:
 
         # draw the bounding box on the frame
         cv2.rectangle(orig, (startX, startY), (endX, endY), (0, 255, 0), 2)
+        cv2.putText(orig, fpsstr, (args["camera_width"]-170,15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (38,0,255), 1, cv2.LINE_AA)
 
     # update the FPS counter
     fps.update()
@@ -175,6 +182,16 @@ while True:
     cv2.imshow("Text Detection", orig)
     if cv2.waitKey(1)&0xFF == ord('q'):
         break
+
+    # FPS calculation
+    framecount += 1
+    if framecount >= 10:
+        fpsstr = "(Playback) {:.1f} FPS".format(time1/10)
+        framecount = 0
+        time1 = 0
+    t2 = time.perf_counter()
+    elapsedTime = t2-t1
+    time1 += 1/elapsedTime
 
 # stop the timer and display FPS information
 fps.stop()
