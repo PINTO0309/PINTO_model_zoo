@@ -6,10 +6,8 @@ import argparse
 import imutils
 import time
 import cv2
-try:
-    from tflite_runtime.interpreter import Interpreter
-except:
-    from tensorflow.lite.python.interpreter import Interpreter
+from edgetpu.basic.basic_engine import BasicEngine
+from edgetpu.basic import edgetpu_utils
 
 fpsstr = ""
 framecount = 0
@@ -74,11 +72,11 @@ def decode_predictions(scores, geometry):
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
-ap.add_argument("-east", "--east", type=str, default="east_text_detection_256x256_integer_quant.tflite", help="path to input EAST text detector")
+ap.add_argument("-east", "--east", type=str, default="east_text_detection_320x320_full_integer_quant_edgetpu.tflite", help="path to input EAST text detector")
 ap.add_argument("-v", "--video", type=str, help="path to optinal input video file")
 ap.add_argument("-c", "--min-confidence", type=float, default=0.5, help="minimum probability required to inspect a region")
-ap.add_argument("-w", "--width", type=int, default=256,	help="resized image width (should be multiple of 32)")
-ap.add_argument("-e", "--height", type=int, default=256, help="resized image height (should be multiple of 32)")
+ap.add_argument("-w", "--width", type=int, default=320,	help="resized image width (should be multiple of 32)")
+ap.add_argument("-e", "--height", type=int, default=320, help="resized image height (should be multiple of 32)")
 ap.add_argument("-cw", "--camera_width", type=int, default=640, help='USB Camera resolution (width). (Default=640)')
 ap.add_argument("-ch", "--camera_height", type=int, default=480, help='USB Camera resolution (height). (Default=480)')
 args = vars(ap.parse_args())
@@ -89,8 +87,6 @@ args = vars(ap.parse_args())
 (newW, newH) = (args["width"], args["height"])
 (rW, rH) = (None, None)
 
-mean = np.array([123.68, 116.779, 103.939][::-1], dtype="float32")
-
 # define the two output layer names for the EAST detector model that
 # we are interested -- the first is the output probabilities and the
 # second can be used to derive the bounding box coordinates of text
@@ -100,10 +96,13 @@ mean = np.array([123.68, 116.779, 103.939][::-1], dtype="float32")
 
 # load the pre-trained EAST text detector
 print("[INFO] loading EAST text detector...")
-interpreter = Interpreter(model_path=args["east"], num_threads=4)
-interpreter.allocate_tensors()
-input_details = interpreter.get_input_details()
-output_details = interpreter.get_output_details()
+devices = edgetpu_utils.ListEdgeTpuPaths(edgetpu_utils.EDGE_TPU_STATE_UNASSIGNED)
+engine = BasicEngine(model_path=args["east"], device_path=devices[0])
+offset = 0
+output_offsets = [0]
+for size in engine.get_all_output_tensors_sizes():
+    offset += int(size)
+    output_offsets.append(offset)
 
 # if a video path was not supplied, grab the reference to the web cam
 if not args.get("video", False):
@@ -147,15 +146,14 @@ while True:
 
     # construct a blob from the frame and then perform a forward pass
     # of the model to obtain the two output layer sets
-    frame = frame.astype(np.float32)
-    frame -= mean
+    # frame = frame.astype(np.float32)
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     frame = np.expand_dims(frame, axis=0)
-    interpreter.set_tensor(input_details[0]['index'], frame)
-    interpreter.invoke()
-
-    scores = interpreter.get_tensor(output_details[0]['index'])
-    geometry = interpreter.get_tensor(output_details[1]['index'])
+    frame = frame.astype(np.uint8)
+    inference_time, output = engine.run_inference(frame.flatten())
+    outputs = [output[i:j] for i, j in zip(output_offsets, output_offsets[1:])]
+    scores = outputs[0].reshape(1, int(args["height"]/4), int(args["width"]/4), 1)
+    geometry = outputs[1].reshape(1, int(args["height"]/4), int(args["width"]/4), 5)
     scores = np.transpose(scores, [0, 3, 1, 2])
     geometry = np.transpose(geometry, [0, 3, 1, 2])
 
