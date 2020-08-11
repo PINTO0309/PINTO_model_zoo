@@ -2,17 +2,22 @@
 
 import tensorflow.compat.v1 as tf
 import numpy as np
+import cv2
 
-# def representative_dataset_gen():
-#   for count, image in enumerate(raw_test_data):
-#     print('image.shape:', count, image.shape)
-#     image = tf.image.resize(image, (256, 256))
-#     image = image[np.newaxis,:,:,:]
-#     image = image / 127.5 - 1.0
-#     yield [image]
+def representative_dataset_gen():
+  for count, image in enumerate(raw_test_data):
+    print('image.shape:', count, image.shape)
+    (m, s) = cv2.meanStdDev(image)
+    m = m[0][0]
+    s = s[0][0]
+    image = image - m
+    image = image / s if s>0 else image
+    image = tf.image.resize(image, (128, 32))
+    image = image[np.newaxis,:,:,:]
+    yield [image]
 
 # Full Integer Quantization - Input/Output=float32
-# raw_test_data = np.load('animeganv2_dataset_hayao_256x256.npy', allow_pickle=True)
+raw_test_data = np.load('handwritten_dataset.npy', allow_pickle=True)
 graph_def_file="simpleHTR_freeze_graph_opt.pb"
 input_arrays=["input"]
 output_arrays=['CTCGreedyDecoder','CTCGreedyDecoder:1','CTCGreedyDecoder:2','CTCGreedyDecoder:3']
