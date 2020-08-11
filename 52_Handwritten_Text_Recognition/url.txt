@@ -1,0 +1,2 @@
+https://github.com/githubharald/SimpleHTR.git
+http://www.fki.inf.unibe.ch/databases/iam-handwriting-database

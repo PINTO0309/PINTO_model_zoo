@@ -1,0 +1,24 @@
+Get IAM dataset
+1. Register at: http://www.fki.inf.unibe.ch/databases/iam-handwriting-database
+2. Download words.tgz 
+3. Download words.txt
+4. Put words.txt into this dir
+5. Create subdir words
+6. Put content (directories a01, a02, ...) of words.tgz into subdir words
+7. Run checkDirs.py for a rough check on the files
+
+
+Check if dir structure looks like this:
+data
+--test.png
+--words.txt
+--words
+----a01
+------a01-000u
+--------a01-000u-00-00.png
+--------...
+------...
+----a02
+----...
+	
+

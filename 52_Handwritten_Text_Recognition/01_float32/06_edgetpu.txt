@@ -1,0 +1,1 @@
+edgetpu_compiler -s simpleHTR_128x32_full_integer_quant.tflite
