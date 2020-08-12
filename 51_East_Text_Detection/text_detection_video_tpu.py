@@ -13,7 +13,7 @@ fpsstr = ""
 framecount = 0
 time1 = 0
 
-def rotatedRectangle(img, rotatedRect, color, thickness=1, lineType=cv2.LINE_4, shift=0):
+def rotated_Rectangle(img, rotatedRect, color, thickness=1, lineType=cv2.LINE_8, shift=0):
     (x, y), (width, height), angle = rotatedRect
  
     pt1_1 = (int(x + width / 2), int(y + height / 2))
@@ -261,8 +261,8 @@ while True:
         centerY = int(startY + height / 2)
 
         rotatedRect = ((centerX, centerY), ((endX - startX), (endY - startY)), -angle)
-        points = rotatedRectangle(orig, rotatedRect, color=(0, 255, 0), thickness=2)
-        cv2.polylines(orig, [points], isClosed=True, color=(0, 255, 0), thickness=2, lineType=cv2.LINE_4, shift=0)
+        points = rotated_Rectangle(orig, rotatedRect, color=(0, 255, 0), thickness=2)
+        cv2.polylines(orig, [points], isClosed=True, color=(0, 255, 0), thickness=2, lineType=cv2.LINE_8, shift=0)
         cv2.putText(orig, fpsstr, (args["camera_width"]-170,15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (38,0,255), 1, cv2.LINE_AA)
 
     # update the FPS counter
