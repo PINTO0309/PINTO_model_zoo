@@ -1,6 +1,5 @@
 from imutils.video import VideoStream
 from imutils.video import FPS
-from imutils.object_detection import non_max_suppression
 import numpy as np
 import argparse
 import imutils
@@ -8,18 +7,110 @@ import time
 import cv2
 from edgetpu.basic.basic_engine import BasicEngine
 from edgetpu.basic import edgetpu_utils
+import math
 
 fpsstr = ""
 framecount = 0
 time1 = 0
 
-def decode_predictions(scores, geometry):
+def rotatedRectangle(img, rotatedRect, color, thickness=1, lineType=cv2.LINE_4, shift=0):
+    (x, y), (width, height), angle = rotatedRect
+ 
+    pt1_1 = (int(x + width / 2), int(y + height / 2))
+    pt2_1 = (int(x + width / 2), int(y - height / 2))
+    pt3_1 = (int(x - width / 2), int(y - height / 2))
+    pt4_1 = (int(x - width / 2), int(y + height / 2))
+ 
+    t = np.array([[np.cos(angle),   -np.sin(angle), x-x*np.cos(angle)+y*np.sin(angle)],
+                    [np.sin(angle), np.cos(angle),  y-x*np.sin(angle)-y*np.cos(angle)],
+                    [0,             0,              1]])
+ 
+    tmp_pt1_1 = np.array([[pt1_1[0]], [pt1_1[1]], [1]])
+    tmp_pt1_2 = np.dot(t, tmp_pt1_1)
+    pt1_2 = (int(tmp_pt1_2[0][0]), int(tmp_pt1_2[1][0]))
+ 
+    tmp_pt2_1 = np.array([[pt2_1[0]], [pt2_1[1]], [1]])
+    tmp_pt2_2 = np.dot(t, tmp_pt2_1)
+    pt2_2 = (int(tmp_pt2_2[0][0]), int(tmp_pt2_2[1][0]))
+ 
+    tmp_pt3_1 = np.array([[pt3_1[0]], [pt3_1[1]], [1]])
+    tmp_pt3_2 = np.dot(t, tmp_pt3_1)
+    pt3_2 = (int(tmp_pt3_2[0][0]), int(tmp_pt3_2[1][0]))
+ 
+    tmp_pt4_1 = np.array([[pt4_1[0]], [pt4_1[1]], [1]])
+    tmp_pt4_2 = np.dot(t, tmp_pt4_1)
+    pt4_2 = (int(tmp_pt4_2[0][0]), int(tmp_pt4_2[1][0]))
+ 
+    points = np.array([pt1_2, pt2_2, pt3_2, pt4_2])
+
+    return points
+ 
+
+def non_max_suppression(boxes, probs=None, angles=None, overlapThresh=0.3):
+    # if there are no boxes, return an empty list
+    if len(boxes) == 0:
+        return [], []
+
+    # if the bounding boxes are integers, convert them to floats -- this
+    # is important since we'll be doing a bunch of divisions
+    if boxes.dtype.kind == "i":
+        boxes = boxes.astype("float")
+
+    # initialize the list of picked indexes
+    pick = []
+
+    # grab the coordinates of the bounding boxes
+    x1 = boxes[:, 0]
+    y1 = boxes[:, 1]
+    x2 = boxes[:, 2]
+    y2 = boxes[:, 3]
+
+    # compute the area of the bounding boxes and grab the indexes to sort
+    # (in the case that no probabilities are provided, simply sort on the bottom-left y-coordinate)
+    area = (x2 - x1 + 1) * (y2 - y1 + 1)
+    idxs = y2
+
+    # if probabilities are provided, sort on them instead
+    if probs is not None:
+        idxs = probs
+
+    # sort the indexes
+    idxs = np.argsort(idxs)
+
+    # keep looping while some indexes still remain in the indexes list
+    while len(idxs) > 0:
+        # grab the last index in the indexes list and add the index value to the list of picked indexes
+        last = len(idxs) - 1
+        i = idxs[last]
+        pick.append(i)
+
+        # find the largest (x, y) coordinates for the start of the bounding box and the smallest (x, y) coordinates for the end of the bounding box
+        xx1 = np.maximum(x1[i], x1[idxs[:last]])
+        yy1 = np.maximum(y1[i], y1[idxs[:last]])
+        xx2 = np.minimum(x2[i], x2[idxs[:last]])
+        yy2 = np.minimum(y2[i], y2[idxs[:last]])
+
+        # compute the width and height of the bounding box
+        w = np.maximum(0, xx2 - xx1 + 1)
+        h = np.maximum(0, yy2 - yy1 + 1)
+
+        # compute the ratio of overlap
+        overlap = (w * h) / area[idxs[:last]]
+
+        # delete all indexes from the index list that have overlap greater than the provided overlap threshold
+        idxs = np.delete(idxs, np.concatenate(([last], np.where(overlap > overlapThresh)[0])))
+
+    # return only the bounding boxes that were picked
+    return boxes[pick].astype("int"), angles[pick]
+
+def decode_predictions(scores, geometry1, geometry2):
     # grab the number of rows and columns from the scores volume, then
     # initialize our set of bounding box rectangles and corresponding
     # confidence scores
     (numRows, numCols) = scores.shape[2:4]
     rects = []
     confidences = []
+    angles = []
 
     # loop over the number of rows
     for y in range(0, numRows):
@@ -27,48 +118,43 @@ def decode_predictions(scores, geometry):
         # geometrical data used to derive potential bounding box
         # coordinates that surround text
         scoresData = scores[0, 0, y]
-        xData0 = geometry[0, 0, y]
-        xData1 = geometry[0, 1, y]
-        xData2 = geometry[0, 2, y]
-        xData3 = geometry[0, 3, y]
-        anglesData = geometry[0, 4, y]
+        xData0 = geometry1[0, 0, y]
+        xData1 = geometry1[0, 1, y]
+        xData2 = geometry1[0, 2, y]
+        xData3 = geometry1[0, 3, y]
+        anglesData = geometry2[0, 0, y]
 
         # loop over the number of columns
         for x in range(0, numCols):
-            # if our score does not have sufficient probability,
-            # ignore it
+            # if our score does not have sufficient probability, ignore it
             if scoresData[x] < args["min_confidence"]:
                 continue
 
-            # compute the offset factor as our resulting feature
-            # maps will be 4x smaller than the input image
+            # compute the offset factor as our resulting feature maps will be 4x smaller than the input image
             (offsetX, offsetY) = (x * 4.0, y * 4.0)
 
-            # extract the rotation angle for the prediction and
-            # then compute the sin and cosine
+            # extract the rotation angle for the prediction and then compute the sin and cosine
             angle = anglesData[x]
             cos = np.cos(angle)
             sin = np.sin(angle)
 
-            # use the geometry volume to derive the width and height
-            # of the bounding box
-            h = xData0[x] + xData2[x]
-            w = xData1[x] + xData3[x]
-
-            # compute both the starting and ending (x, y)-coordinates
-            # for the text prediction bounding box
-            endX = int(offsetX + (cos * xData1[x]) + (sin * xData2[x]))
-            endY = int(offsetY - (sin * xData1[x]) + (cos * xData2[x]))
+            # use the geometry volume to derive the width and height of the bounding box
+            h = (xData0[x] + xData2[x])
+            w = (xData1[x] + xData3[x])
+  
+            # compute both the starting and ending (x, y)-coordinates for the text prediction bounding box
+            endX = int(offsetX + cos * xData1[x] + sin * xData2[x])
+            endY = int(offsetY - sin * xData1[x] + cos * xData2[x])
             startX = int(endX - w)
             startY = int(endY - h)
 
-            # add the bounding box coordinates and probability score
-            # to our respective lists
+            # add the bounding box coordinates and probability score to our respective lists
             rects.append((startX, startY, endX, endY))
             confidences.append(scoresData[x])
+            angles.append(angle)
 
 	# return a tuple of the bounding boxes and associated confidences
-    return (rects, confidences)
+    return (rects, confidences, angles)
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -90,9 +176,6 @@ args = vars(ap.parse_args())
 # define the two output layer names for the EAST detector model that
 # we are interested -- the first is the output probabilities and the
 # second can be used to derive the bounding box coordinates of text
-# layerNames = [
-# 	"feature_fusion/Conv_7/Sigmoid",
-# 	"feature_fusion/concat_3"]
 
 # load the pre-trained EAST text detector
 print("[INFO] loading EAST text detector...")
@@ -146,33 +229,40 @@ while True:
 
     # construct a blob from the frame and then perform a forward pass
     # of the model to obtain the two output layer sets
-    # frame = frame.astype(np.float32)
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     frame = np.expand_dims(frame, axis=0)
     frame = frame.astype(np.uint8)
     inference_time, output = engine.run_inference(frame.flatten())
     outputs = [output[i:j] for i, j in zip(output_offsets, output_offsets[1:])]
     scores = outputs[0].reshape(1, int(args["height"]/4), int(args["width"]/4), 1)
-    geometry = outputs[1].reshape(1, int(args["height"]/4), int(args["width"]/4), 5)
+    geometry1 = outputs[1].reshape(1, int(args["height"]/4), int(args["width"]/4), 4)
+    geometry2 = outputs[2].reshape(1, int(args["height"]/4), int(args["width"]/4), 1)
     scores = np.transpose(scores, [0, 3, 1, 2])
-    geometry = np.transpose(geometry, [0, 3, 1, 2])
+    geometry1 = np.transpose(geometry1, [0, 3, 1, 2])
+    geometry2 = np.transpose(geometry2, [0, 3, 1, 2])
 
     # decode the predictions, then  apply non-maxima suppression to
     # suppress weak, overlapping bounding boxes
-    (rects, confidences) = decode_predictions(scores, geometry)
-    boxes = non_max_suppression(np.array(rects), probs=confidences)
+    (rects, confidences, angles) = decode_predictions(scores, geometry1, geometry2)
+    boxes, angles = non_max_suppression(np.array(rects), probs=confidences, angles=np.array(angles))
 
     # loop over the bounding boxes
-    for (startX, startY, endX, endY) in boxes:
-        # scale the bounding box coordinates based on the respective
-        # ratios
+    for ((startX, startY, endX, endY), angle) in zip(boxes, angles):
+        # scale the bounding box coordinates based on the respective ratios
         startX = int(startX * rW)
         startY = int(startY * rH)
         endX = int(endX * rW)
         endY = int(endY * rH)
 
         # draw the bounding box on the frame
-        cv2.rectangle(orig, (startX, startY), (endX, endY), (0, 255, 0), 2)
+        width   = abs(endX - startX)
+        height  = abs(endY - startY)
+        centerX = int(startX + width / 2)
+        centerY = int(startY + height / 2)
+
+        rotatedRect = ((centerX, centerY), ((endX - startX), (endY - startY)), -angle)
+        points = rotatedRectangle(orig, rotatedRect, color=(0, 255, 0), thickness=2)
+        cv2.polylines(orig, [points], isClosed=True, color=(0, 255, 0), thickness=2, lineType=cv2.LINE_4, shift=0)
         cv2.putText(orig, fpsstr, (args["camera_width"]-170,15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (38,0,255), 1, cv2.LINE_AA)
 
     # update the FPS counter
