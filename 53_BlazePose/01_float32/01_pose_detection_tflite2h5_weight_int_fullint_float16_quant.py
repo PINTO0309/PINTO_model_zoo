@@ -39,7 +39,7 @@ import sys
 
 inputs = Input(shape=(128, 128, 3), name='input')
 
-# Bolock_01
+# Block_01
 conv1_1 = Conv2D(filters=48, kernel_size=[5, 5], strides=[1, 1], padding="same", dilation_rate=[1, 1], activation='relu',
                  kernel_initializer=Constant(np.load('weights/conv2d_Kernel').transpose(1,2,3,0)),
                  bias_initializer=Constant(np.load('weights/conv2d_Bias')))(inputs)
@@ -52,7 +52,7 @@ conv1_2 = Conv2D(filters=48, kernel_size=[1, 1], strides=[1, 1], padding="valid"
 add1_1 = Add()([conv1_1, conv1_2])
 relu1_1 = ReLU()(add1_1)
 
-# Bolock_02
+# Block_02
 depthconv2_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_1_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_1_Bias')))(relu1_1)
@@ -62,7 +62,7 @@ conv2_1 = Conv2D(filters=48, kernel_size=[1, 1], strides=[1, 1], padding="valid"
 add2_1 = Add()([relu1_1, conv2_1])
 relu2_1 = ReLU()(add2_1)
 
-# Bolock_03
+# Block_03
 depthconv3_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_2_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_2_Bias')))(relu2_1)
@@ -72,7 +72,7 @@ conv3_1 = Conv2D(filters=48, kernel_size=[1, 1], strides=[1, 1], padding="valid"
 add3_1 = Add()([relu2_1, conv3_1])
 relu3_1 = ReLU()(add3_1)
 
-# Bolock_04
+# Block_04
 depthconv4_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[2, 2], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_3_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_3_Bias')))(relu3_1)
@@ -86,7 +86,7 @@ conv4_2 = Conv2D(filters=64, kernel_size=[1, 1], strides=[1, 1], padding="valid"
 add4_1 = Add()([conv4_2, conv4_1])
 relu4_1 = ReLU()(add4_1)
 
-# Bolock_05
+# Block_05
 depthconv5_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_4_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_4_Bias')))(relu4_1)
@@ -96,7 +96,7 @@ conv5_1 = Conv2D(filters=64, kernel_size=[1, 1], strides=[1, 1], padding="valid"
 add5_1 = Add()([relu4_1, conv5_1])
 relu5_1 = ReLU()(add5_1)
 
-# Bolock_06
+# Block_06
 depthconv6_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_5_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_5_Bias')))(relu5_1)
@@ -106,7 +106,7 @@ conv6_1 = Conv2D(filters=64, kernel_size=[1, 1], strides=[1, 1], padding="valid"
 add6_1 = Add()([relu5_1, conv6_1])
 relu6_1 = ReLU()(add6_1)
 
-# Bolock_07
+# Block_07
 depthconv7_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_6_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_6_Bias')))(relu6_1)
@@ -116,7 +116,7 @@ conv7_1 = Conv2D(filters=64, kernel_size=[1, 1], strides=[1, 1], padding="valid"
 add7_1 = Add()([relu6_1, conv7_1])
 relu7_1 = ReLU()(add7_1)
 
-# Bolock_08
+# Block_08
 depthconv8_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[2, 2], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_7_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_7_Bias')))(relu7_1)
@@ -130,7 +130,7 @@ conv8_2 = Conv2D(filters=96, kernel_size=[1, 1], strides=[1, 1], padding="valid"
 add8_1 = Add()([conv8_2, conv8_1])
 relu8_1 = ReLU()(add8_1)
 
-# Bolock_09
+# Block_09
 depthconv9_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_8_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_8_Bias')))(relu8_1)
@@ -140,7 +140,7 @@ conv9_1 = Conv2D(filters=96, kernel_size=[1, 1], strides=[1, 1], padding="valid"
 add9_1 = Add()([relu8_1, conv9_1])
 relu9_1 = ReLU()(add9_1)
 
-# Bolock_10
+# Block_10
 depthconv10_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_9_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_9_Bias')))(relu9_1)
@@ -150,7 +150,7 @@ conv10_1 = Conv2D(filters=96, kernel_size=[1, 1], strides=[1, 1], padding="valid
 add10_1 = Add()([relu9_1, conv10_1])
 relu10_1 = ReLU()(add10_1)
 
-# Bolock_11
+# Block_11
 depthconv11_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_10_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_10_Bias')))(relu10_1)
@@ -160,7 +160,7 @@ conv11_1 = Conv2D(filters=96, kernel_size=[1, 1], strides=[1, 1], padding="valid
 add11_1 = Add()([relu10_1, conv11_1])
 relu11_1 = ReLU()(add11_1)
 
-# Bolock_12
+# Block_12
 depthconv12_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_11_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_11_Bias')))(relu11_1)
@@ -170,7 +170,7 @@ conv12_1 = Conv2D(filters=96, kernel_size=[1, 1], strides=[1, 1], padding="valid
 add12_1 = Add()([relu11_1, conv12_1])
 relu12_1 = ReLU()(add12_1)
 
-# Bolock_13
+# Block_13
 depthconv13_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_12_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_12_Bias')))(relu12_1)
@@ -180,7 +180,7 @@ conv13_1 = Conv2D(filters=96, kernel_size=[1, 1], strides=[1, 1], padding="valid
 add13_1 = Add()([relu12_1, conv13_1])
 relu13_1 = ReLU()(add13_1)
 
-# Bolock_14
+# Block_14
 depthconv14_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_13_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_13_Bias')))(relu13_1)
@@ -190,7 +190,7 @@ conv14_1 = Conv2D(filters=96, kernel_size=[1, 1], strides=[1, 1], padding="valid
 add14_1 = Add()([relu13_1, conv14_1])
 relu14_1 = ReLU()(add14_1)
 
-# Bolock_15
+# Block_15
 depthconv15_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[2, 2], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_14_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_14_Bias')))(relu14_1)
@@ -204,7 +204,7 @@ conv15_2 = Conv2D(filters=128, kernel_size=[1, 1], strides=[1, 1], padding="vali
 add15_1 = Add()([conv15_2, conv15_1])
 relu15_1 = ReLU()(add15_1)
 
-# Bolock_16
+# Block_16
 depthconv16_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_15_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_15_Bias')))(relu15_1)
@@ -214,7 +214,7 @@ conv16_1 = Conv2D(filters=128, kernel_size=[1, 1], strides=[1, 1], padding="vali
 add16_1 = Add()([relu15_1, conv16_1])
 relu16_1 = ReLU()(add16_1)
 
-# Bolock_17
+# Block_17
 depthconv17_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_16_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_16_Bias')))(relu16_1)
@@ -224,7 +224,7 @@ conv17_1 = Conv2D(filters=128, kernel_size=[1, 1], strides=[1, 1], padding="vali
 add17_1 = Add()([relu16_1, conv17_1])
 relu17_1 = ReLU()(add17_1)
 
-# Bolock_18
+# Block_18
 depthconv18_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_17_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_17_Bias')))(relu17_1)
@@ -234,7 +234,7 @@ conv18_1 = Conv2D(filters=128, kernel_size=[1, 1], strides=[1, 1], padding="vali
 add18_1 = Add()([relu17_1, conv18_1])
 relu18_1 = ReLU()(add18_1)
 
-# Bolock_19
+# Block_19
 depthconv19_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_18_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_18_Bias')))(relu18_1)
@@ -244,7 +244,7 @@ conv19_1 = Conv2D(filters=128, kernel_size=[1, 1], strides=[1, 1], padding="vali
 add19_1 = Add()([relu18_1, conv19_1])
 relu19_1 = ReLU()(add19_1)
 
-# Bolock_20
+# Block_20
 depthconv20_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_19_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_19_Bias')))(relu19_1)
@@ -254,7 +254,7 @@ conv20_1 = Conv2D(filters=128, kernel_size=[1, 1], strides=[1, 1], padding="vali
 add20_1 = Add()([relu19_1, conv20_1])
 relu20_1 = ReLU()(add20_1)
 
-# Bolock_21
+# Block_21
 depthconv21_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_20_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_20_Bias')))(relu20_1)
@@ -264,7 +264,7 @@ conv21_1 = Conv2D(filters=128, kernel_size=[1, 1], strides=[1, 1], padding="vali
 add21_1 = Add()([relu20_1, conv21_1])
 relu21_1 = ReLU()(add21_1)
 
-# Bolock_22
+# Block_22
 depthconv22_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_21_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_21_Bias')))(relu21_1)
@@ -274,7 +274,7 @@ conv22_1 = Conv2D(filters=128, kernel_size=[1, 1], strides=[1, 1], padding="vali
 add22_1 = Add()([relu21_1, conv22_1])
 relu22_1 = ReLU()(add22_1)
 
-# Bolock_23
+# Block_23
 depthconv23_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[2, 2], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_22_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_22_Bias')))(relu22_1)
@@ -288,7 +288,7 @@ conv23_2 = Conv2D(filters=256, kernel_size=[1, 1], strides=[1, 1], padding="vali
 add23_1 = Add()([conv23_2, conv23_1])
 relu23_1 = ReLU()(add23_1)
 
-# Bolock_24
+# Block_24
 depthconv24_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_23_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_23_Bias')))(relu23_1)
@@ -298,7 +298,7 @@ conv24_1 = Conv2D(filters=256, kernel_size=[1, 1], strides=[1, 1], padding="vali
 add24_1 = Add()([relu23_1, conv24_1])
 relu24_1 = ReLU()(add24_1)
 
-# Bolock_25
+# Block_25
 depthconv25_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_24_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_24_Bias')))(relu24_1)
@@ -308,7 +308,7 @@ conv25_1 = Conv2D(filters=256, kernel_size=[1, 1], strides=[1, 1], padding="vali
 add25_1 = Add()([relu24_1, conv25_1])
 relu25_1 = ReLU()(add25_1)
 
-# Bolock_26
+# Block_26
 depthconv26_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_25_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_25_Bias')))(relu25_1)
@@ -318,7 +318,7 @@ conv26_1 = Conv2D(filters=256, kernel_size=[1, 1], strides=[1, 1], padding="vali
 add26_1 = Add()([relu25_1, conv26_1])
 relu26_1 = ReLU()(add26_1)
 
-# Bolock_27
+# Block_27
 depthconv27_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_26_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_26_Bias')))(relu26_1)
@@ -328,7 +328,7 @@ conv27_1 = Conv2D(filters=256, kernel_size=[1, 1], strides=[1, 1], padding="vali
 add27_1 = Add()([relu26_1, conv27_1])
 relu27_1 = ReLU()(add27_1)
 
-# Bolock_28
+# Block_28
 depthconv28_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_27_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_27_Bias')))(relu27_1)
@@ -338,7 +338,7 @@ conv28_1 = Conv2D(filters=256, kernel_size=[1, 1], strides=[1, 1], padding="vali
 add28_1 = Add()([relu27_1, conv28_1])
 relu28_1 = ReLU()(add28_1)
 
-# Bolock_29
+# Block_29
 depthconv29_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights/depthwise_conv2d_28_Kernel')),
                  bias_initializer=Constant(np.load('weights/depthwise_conv2d_28_Bias')))(relu28_1)
@@ -348,7 +348,7 @@ conv29_1 = Conv2D(filters=256, kernel_size=[1, 1], strides=[1, 1], padding="vali
 add29_1 = Add()([relu28_1, conv29_1])
 relu29_1 = ReLU()(add29_1)
 
-# Bolock_30
+# Block_30
 conv30_1 = Conv2D(filters=2, kernel_size=[1, 1], strides=[1, 1], padding="same", dilation_rate=[1, 1],
                  kernel_initializer=Constant(np.load('weights/classificator_8_Kernel').transpose(1,2,3,0)),
                  bias_initializer=Constant(np.load('weights/classificator_8_Bias')))(relu22_1)
