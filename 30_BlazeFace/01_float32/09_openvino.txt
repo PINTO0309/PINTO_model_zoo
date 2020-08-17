@@ -14,6 +14,22 @@ python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
 
 
 
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --saved_model_dir saved_model_face_detection_back \
+  --model_name face_detection_back \
+  --input_shape [1,256,256,3] \
+  --data_type FP32 \
+  --output_dir openvino/face_detection_back/256x256/FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --saved_model_dir saved_model_face_detection_back \
+  --model_name face_detection_back \
+  --input_shape [1,256,256,3] \
+  --data_type FP16 \
+  --output_dir openvino/face_detection_back/256x256/FP16
+
+
+
 
 ./benchmark_app \
   -m ${HOME}/work/30_BlazeFace/01_float32/openvino/face_detection_front/128x128/FP16/face_detection_front.xml \
