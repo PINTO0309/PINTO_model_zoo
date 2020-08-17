@@ -17,7 +17,7 @@
 
 ### How to initialize a convolution layer with an arbitrary kernel in Keras? https://stackoverrun.com/ja/q/12269118
 
-###  saved_model_cli show --dir saved_model_face_detection_front/ --tag_set serve --signature_def serving_default
+###  saved_model_cli show --dir saved_model_face_detection_back/ --tag_set serve --signature_def serving_default
 
 import tensorflow as tf
 from tensorflow.keras import Model, Input
