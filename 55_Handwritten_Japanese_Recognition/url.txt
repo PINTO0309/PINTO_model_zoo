@@ -1,0 +1,2 @@
+https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/intel/handwritten-japanese-recognition-0001
+https://github.com/yas-sim/handwritten-japanese-ocr
