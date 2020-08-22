@@ -20,8 +20,8 @@ from utils.bboxes import rbox3_to_polygon, polygon_to_rbox3
 from utils.training import Logger
 from utils.vis import plot_box
 
-height = 416
-width  = 416
+height = 512
+width  = 512
 
 # TextBoxes++ with dense blocks and separable convolution
 model = TBPP512_dense_separable(input_shape=(height, width, 3), softmax=False)
