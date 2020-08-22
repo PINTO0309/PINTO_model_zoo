@@ -1,0 +1,2 @@
+TextBoxes++ with dense blocks, separable convolution and Focal Loss
+https://github.com/mvoelk/ssd_detectors
