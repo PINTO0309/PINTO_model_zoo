@@ -126,7 +126,7 @@ $ cd 06_mobilenetv2-ssdlite/02_voc/03_integer_quantization
 $ ./download.sh && cd ..
 $ python3 mobilenetv2ssdlite_movie_sync.py
 ```
-![004](99_media/004.gif)  
+![004](099_media/004.gif)  
 ## Sample.2 - Object detection by USB Camera
 - RaspberryPi4 (CPU only)  
 - **[Ubuntu 19.10 64bit](https://qiita.com/PINTO/items/adc5db7af7a5996c0f72)**
@@ -141,7 +141,7 @@ $ cd 06_mobilenetv2-ssdlite/02_voc/03_integer_quantization
 $ ./download.sh && cd ..
 $ python3 mobilenetv2ssdlite_usbcam_sync.py
 ```
-![005](99_media/005.gif)  
+![005](099_media/005.gif)  
 ## Sample.3 - Head Pose Estimation, Multi-stage inference with multi-model
 - RaspberryPi4 (CPU only)  
 - **[Ubuntu 19.10 64bit](https://qiita.com/PINTO/items/adc5db7af7a5996c0f72)**
@@ -157,7 +157,7 @@ $ cd 25_head_pose_estimation/03_integer_quantization
 $ ./download.sh
 $ python3 head_pose_estimation.py
 ```
-![006](99_media/006.gif)  
+![006](099_media/006.gif)  
 ## Sample.4 - Semantic Segmentation, DeeplabV3-plus 256x256
 - RaspberryPi4 (CPU only)  
 - **[Ubuntu 19.10 64bit](https://qiita.com/PINTO/items/adc5db7af7a5996c0f72)**
@@ -171,7 +171,7 @@ $ cd 26_mobile-deeplabv3-plus/03_integer_quantization
 $ ./download.sh
 $ python3 deeplabv3plus_usbcam.py
 ```
-![007](99_media/007.gif)  
+![007](099_media/007.gif)  
 ## Sample.5 - MediaPipe/FaceMesh, face_detection_front_128_weight_quant, face_landmark_192_weight_quant
 - Ubuntu 18.04 x86_64
 - Tensorflow Lite
@@ -180,7 +180,7 @@ $ python3 deeplabv3plus_usbcam.py
 - USB Camera, 640x480
 - **`$ v4l2-ctl --set-fmt-video=width=640,height=480,pixelformat=YUYV`**
 - **[Test Code - tflite_gles_app - gl2facemesh - @terryky](https://github.com/terryky/tflite_gles_app.git)**
-![008](99_media/008.gif)  
+![008](099_media/008.gif)  
 ## Sample.6 - MediaPipe/Objectron, object_detection_3d_chair_640x480_weight_quant
 - Ubuntu 18.04 x86_64
 - Tensorflow Lite
@@ -189,7 +189,7 @@ $ python3 deeplabv3plus_usbcam.py
 - USB Camera, 640x480
 - **`$ v4l2-ctl --set-fmt-video=width=640,height=480,pixelformat=YUYV`**
 - **[Test Code - tflite_gles_app - gl2objectron - @terryky](https://github.com/terryky/tflite_gles_app.git)**  
-![009](99_media/009.gif)  
+![009](099_media/009.gif)  
 ## Sample.7 - MediaPipe/Objectron, object_detection_3d_chair_640x480_openvino_FP32
 - Ubuntu 18.04 x86_64
 - OpenVINO 2020.2
@@ -197,7 +197,7 @@ $ python3 deeplabv3plus_usbcam.py
 - Core i7 (CPU only)
 - USB Camera, 640x480
 - **[Test Code - objectron-3d-object-detection-openvino - @yas-sim](https://github.com/yas-sim/objectron-3d-object-detection-openvino.git)**  
-![011](99_media/011.gif)  
+![011](099_media/011.gif)  
 ## Sample.8 - MediaPipe/BlazeFace, face_detection_front_128_integer_quant
 - RaspberryPi4
 - Ubuntu 19.10 aarch64
@@ -207,7 +207,7 @@ $ python3 deeplabv3plus_usbcam.py
 - USB Camera, 640x480
 - **`$ v4l2-ctl --set-fmt-video=width=640,height=480,pixelformat=YUYV`**
 - **[Test Code - tflite_gles_app - gl2blazeface - @terryky](https://github.com/terryky/tflite_gles_app.git)**  
-![010](99_media/010.gif)  
+![010](099_media/010.gif)  
 ## Sample.9 - MediaPipe/Hand_Detection_and_Tracking(3D Hand Pose), hand_landmark_3d_256_integer_quant.tflite + palm_detection_builtin_256_integer_quant.tflite
 - RaspberryPi4
 - Tensorflow Lite
@@ -222,7 +222,7 @@ $ python3 deeplabv3plus_usbcam.py
 - Core i7 (CPU only)
 - USB Camera, 640x480
 - **[Test Code - DBFace-on-OpenVINO - @yas-sim](https://github.com/yas-sim/DBFace-on-OpenVINO.git)**  
-![012](99_media/012.gif)  
+![012](099_media/012.gif)  
 
 ## 1. Environment
 
@@ -553,8 +553,8 @@ $ python3 deeplab/export_model.py \
     --decoder_output_stride=8
 ```
 If you follow the Google Colaboratory sample procedure, copy the "deeplab_mnv3_small_cityscapes_trainfine" folder and "deeplab_mnv3_large_cityscapes_trainfine" to your Google Drive "My Drive". It is not necessary if all procedures described in Google Colaboratory are performed in a PC environment.
-![001](99_media/001.png)  
-![002](99_media/002.png)  
+![001](099_media/001.png)  
+![002](099_media/002.png)  
 
 #### 2-2-5. Google Colaboratory - Post-training quantization - post_training_integer_quant.ipynb
 - Weight Quantization
@@ -643,7 +643,7 @@ $ python3 deeplab/train.py \
 ```
 The orange line is "deeplab_mnv3_small_cityscapes_trainfine" loss.  
 The blue line is "deeplab_mnv3_large_cityscapes_trainfine" loss.  
-![003](99_media/003.png)  
+![003](099_media/003.png)  
 　  
 　  
 ### 2-4. MobileNetV2+DeeplabV3+coco/voc - Post-training quantization
