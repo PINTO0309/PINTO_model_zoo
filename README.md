@@ -115,7 +115,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |052|Handwritten_Text_Recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/052_Handwritten_Text_Recognition)|⚫|⚫|||⚫||||
-|055|Handwritten_Japanese_Recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/055_Handwritten_Japanese_Recognition)|⚫|⚫|||⚫|⚫|||
+|055|Handwritten_Japanese_Recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/055_Handwritten_Japanese_Recognition)|⚫|⚫|||⚫|⚫|⚫||
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)  
 - **[Raspbian Buster 64bit](https://github.com/sakaki-/raspbian-nspawn-64.git)**
