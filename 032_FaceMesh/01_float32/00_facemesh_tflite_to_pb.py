@@ -1,4 +1,4 @@
-### tensorflow-gpu==1.15.2
+### tensorflow-gpu==2.3.0
 ### https://stackoverflow.com/questions/39975676/how-to-implement-prelu-activation-in-tensorflow
 
 #!/usr/bin/env python
@@ -7,7 +7,7 @@
 import os
 import numpy as np
 import json
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import shutil
 from pathlib import Path
 home = str(Path.home())
@@ -127,10 +127,11 @@ def make_graph(ops, op_types, interpreter):
             #print('output_detail:', output_detail)
             #print('paddings_detail:', paddings_detail)
             paddings_array = interpreter.get_tensor(paddings_detail['index'])
-            paddings = tf.Variable(
-                paddings_array, name=paddings_detail['name'])
-            output_tensor = tf.pad(
-                input_tensor, paddings, name=output_detail['name'])
+            #paddings = tf.Variable(
+            #    paddings_array, name=paddings_detail['name'])
+            #output_tensor = tf.pad(
+            #    input_tensor, paddings, name=output_detail['name'])
+            output_tensor = tf.pad(input_tensor, paddings_array, name=output_detail['name'])
             tensors[output_detail['index']] = output_tensor
         elif op_type == 'RELU':
             output_detail = interpreter._get_tensor_details(op['outputs'][0])
