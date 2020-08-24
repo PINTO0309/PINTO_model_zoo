@@ -44,7 +44,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |047|SpineNetMB_49|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/047_SpineNetMB_49)|⚫|⚫|⚫||⚫|||unstable|
 |051|East_Text_Detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/051_East_Text_Detection)|⚫|⚫|⚫|⚫|⚫|⚫|||
 |054|KNIFT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/054_KNIFT)|⚫|⚫|⚫||⚫|⚫||MediaPipe|
-|056|TextBoxes++ with dense blocks, separable convolution and Focal Loss|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/056_TextBoxes%2B%2B)|⚫|⚫|⚫||⚫|⚫|||
+|056|TextBoxes++ with dense blocks, separable convolution and Focal Loss|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/056_TextBoxes%2B%2B)|⚫|⚫|⚫||⚫|⚫|⚫||
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
