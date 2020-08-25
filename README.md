@@ -96,7 +96,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |017|Artistic-Style-Transfer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/017_Artistic-Style-Transfer)|||⚫||||||
 |019|White-box-Cartoonization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/019_White-box-Cartoonization)|⚫|⚫|⚫||⚫|⚫|||
 |037|First_Neural_Style_Transfer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/037_First_Neural_Style_Transfer)|⚫||||⚫||||
-|044|Selfie2Anime|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/044_selfie2anime)|⚫|⚫|⚫||⚫|⚫|||
+|044|Selfie2Anime|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/044_selfie2anime)|⚫|⚫|⚫||⚫|⚫|⚫||
 |050|AnimeGANv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/050_AnimeGANv2)|⚫|⚫|⚫||⚫|⚫|⚫||
 ### 11. Super Resolution
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|Remarks|
