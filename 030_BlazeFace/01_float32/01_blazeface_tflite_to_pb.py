@@ -1,4 +1,4 @@
-### tensorflow-gpu==1.15.2
+### tensorflow-gpu==2.3.0
 
 #!/usr/bin/env python
 # coding: utf-8
@@ -125,10 +125,10 @@ def make_graph(ops, op_types, interpreter):
             # print('output_detail:', output_detail)
             # print('paddings_detail:', paddings_detail)
             paddings_array = interpreter.get_tensor(paddings_detail['index'])
-            paddings = tf.Variable(
-                paddings_array, name=paddings_detail['name'])
+            #paddings = tf.Variable(
+            #    paddings_array, name=paddings_detail['name'])
             output_tensor = tf.pad(
-                input_tensor, paddings, name=output_detail['name'])
+                input_tensor, paddings_array, name=output_detail['name'])
             tensors[output_detail['index']] = output_tensor
         elif op_type == 'RELU':
             output_detail = interpreter._get_tensor_details(op['outputs'][0])
