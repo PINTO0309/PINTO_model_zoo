@@ -84,7 +84,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |015|Faster-Grad-CAM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/015_Faster-Grad-CAM)|⚫||⚫||⚫|||||
 |020|EdgeTPU-Deeplab|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/020_edgetpu-deeplab)|⚫|⚫|⚫||⚫|||||
 |021|EdgeTPU-Deeplab-slim|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/021_edgetpu-deeplab-slim)|⚫|⚫|⚫||⚫|||||
-|026|Mobile-Deeplabv3-plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/026_mobile-deeplabv3-plus)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|||
+|026|Mobile-Deeplabv3-plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/026_mobile-deeplabv3-plus)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 |035|BodyPix|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/035_BodyPix)|⚫|⚫|⚫||⚫|⚫|||MediaPipe|
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
