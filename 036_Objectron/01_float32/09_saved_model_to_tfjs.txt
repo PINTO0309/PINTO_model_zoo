@@ -1,0 +1,15 @@
+tensorflowjs_converter \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_object_detection_3d_chair \
+  tfjs_model_object_detection_3d_chair
+
+tensorflowjs_converter \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_object_detection_3d_sneakers \
+  tfjs_model_object_detection_3d_sneakers
