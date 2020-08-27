@@ -1,0 +1,36 @@
+tensorflowjs_converter \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_deeplab_v3_plus_mnv2_aspp_decoder_256 \
+  tfjs_model_deeplab_v3_plus_mnv2_aspp_decoder_256
+
+
+tensorflowjs_converter \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_deeplab_v3_plus_mnv2_decoder_256 \
+  tfjs_model_deeplab_v3_plus_mnv2_decoder_256
+
+
+tensorflowjs_converter \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_deeplab_v3_plus_mnv2_decoder_513 \
+  tfjs_model_deeplab_v3_plus_mnv2_decoder_513
+
+
+tensorflowjs_converter \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_deeplab_v3_plus_mnv3_decoder_256 \
+  tfjs_model_deeplab_v3_plus_mnv3_decoder_256
+
+
