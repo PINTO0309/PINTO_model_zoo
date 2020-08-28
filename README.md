@@ -53,7 +53,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |025|Head_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/025_head_pose_estimation)|⚫|⚫|⚫|⚫|⚫||⚫|⚫||
-|030|BlazeFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/030_BlazeFace)|⚫|⚫|⚫|⚫|⚫|⚫|⚫||MediaPipe|
+|030|BlazeFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/030_BlazeFace)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
 |032|FaceMesh|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/032_FaceMesh)|⚫|⚫|⚫|⚫|⚫||⚫||MediaPipe|
 |040|DSFD_vgg|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/040_DSFD_vgg)|⚫|⚫|||⚫|||||
 |041|DBFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/041_DBFace)|⚫|⚫|⚫||⚫|⚫||||
