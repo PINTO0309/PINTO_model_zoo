@@ -1,0 +1,31 @@
+tensorflowjs_converter \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_bodypix_025 \
+  tfjs_model_bodypix_025
+
+tensorflowjs_converter \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_bodypix_050 \
+  tfjs_model_bodypix_050
+
+tensorflowjs_converter \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_bodypix_075 \
+  tfjs_model_bodypix_075
+
+tensorflowjs_converter \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_bodypix_100 \
+  tfjs_model_bodypix_100
