@@ -63,7 +63,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |027|Minimal-Hand|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/027_minimal-hand)|⚫|⚫|⚫||⚫|||||
-|033|Hand_Detection_and_Tracking|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/033_Hand_Detection_and_Tracking)|⚫|⚫|⚫||⚫||⚫||MediaPipe|
+|033|Hand_Detection_and_Tracking|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/033_Hand_Detection_and_Tracking)|⚫|⚫|⚫||⚫||⚫|⚫|MediaPipe|
 ### 6. 2D/3D Human Pose Estimation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
