@@ -1,7 +1,8 @@
 import numpy as np
 import tensorflow as tf
 
-interpreter = tf.lite.Interpreter(model_path="efficientdet_d0_256x256_weight_quant.tflite")
+# interpreter = tf.lite.Interpreter(model_path="efficientdet_d0_512x512_weight_quant.tflite")
+interpreter = tf.lite.Interpreter(model_path="efficientdet_d0_512x512_integer_quant.tflite")
 interpreter.allocate_tensors()
 input_details = interpreter.get_input_details()
 output_details = interpreter.get_output_details()

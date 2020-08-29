@@ -1,0 +1,1 @@
+edgetpu_compiler -s efficientdet_d0_512x512_full_integer_quant.tflite
