@@ -40,7 +40,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |039|SSDlite_MobileDet_cpu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/039_ssdlite_mobiledet_cpu)|⚫|⚫|⚫||⚫|||||
 |042|Centernet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/042_centernet)|⚫|||||⚫||||
 |045|SSD_Mobilenetv2_oid_v4|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/045_ssd_mobilenet_v2_oid_v4)|⚫|⚫|⚫|⚫|⚫|||||
-|046|Yolov4-tiny|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/046_yolov4-tiny)|⚫|⚫|⚫||⚫|⚫|⚫|||
+|046|Yolov4-tiny|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/046_yolov4-tiny)|⚫|⚫|⚫||⚫|⚫|⚫|⚫||
 |047|SpineNetMB_49|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/047_SpineNetMB_49)|⚫|⚫|⚫||⚫||||unstable|
 |051|East_Text_Detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/051_East_Text_Detection)|⚫|⚫|⚫|⚫|⚫|⚫||||
 |054|KNIFT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/054_KNIFT)|⚫|⚫|⚫||⚫|⚫|||MediaPipe|
