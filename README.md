@@ -24,7 +24,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |004|Efficientnet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/004_efficientnet)|⚫||⚫||⚫|||||
 |010|Mobilenetv3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/010_mobilenetv3)|⚫||⚫||⚫|||||
 |011|Mobilenetv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/011_mobilenetv2)|⚫||⚫|⚫|⚫|||||
-|016|Efficientnet-lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/016_EfficientNet-lite)|⚫|⚫|⚫|⚫|⚫|⚫||||
+|016|Efficientnet-lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/016_EfficientNet-lite)|⚫|⚫|⚫|⚫|⚫|⚫||⚫||
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
