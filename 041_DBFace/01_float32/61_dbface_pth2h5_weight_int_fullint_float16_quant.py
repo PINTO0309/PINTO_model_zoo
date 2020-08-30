@@ -40,7 +40,10 @@ import sys
 # print('pd:', pd.shape)
 # print('pd:', pd)
 
-inputs = Input(shape=(512, 512, 3), batch_size=1, name='input')
+height = 512
+width  = 512
+
+inputs = Input(shape=(height, width, 3), batch_size=1, name='input')
 
 # Block_01
 pad1_1 = tf.pad(inputs, paddings=np.load('weights/model_989_pad_Pad_paddings')[[0,2,3,1], :])
@@ -581,7 +584,7 @@ div32_1 = tf.math.divide(mul32_1, 6)
 # Block_33
 stride33_1 = tf.strided_slice(div32_1,
                               begin=[0,0,0,12],
-                              end=[1,120,160,24],
+                              end=[1,height//4,width//4,24],
                               strides=[1,1,1,1],
                               begin_mask=0,
                               end_mask=0,
@@ -608,7 +611,7 @@ div33_2 = tf.math.divide(mul33_2, 6)
 
 stride33_2 = tf.strided_slice(div32_1,
                               begin=[0,0,0,0],
-                              end=[1,120,160,12],
+                              end=[1,height//4,width//4,12],
                               strides=[1,1,1,1],
                               begin_mask=0,
                               end_mask=0,
@@ -657,8 +660,8 @@ model = Model(inputs=inputs, outputs=[exp34_1, sigm34_1, conv34_3])
 
 model.summary()
 
-tf.saved_model.save(model, 'saved_model_keras_480x640')
-model.save('dbface_keras_480x640.h5')
+tf.saved_model.save(model, 'saved_model_keras_{}x{}'.format(height, width))
+model.save('dbface_keras_{}x{}.h5'.format(height, width))
 
 full_model = tf.function(lambda inputs: model(inputs))
 full_model = full_model.get_concrete_function(inputs = (tf.TensorSpec(model.inputs[0].shape, model.inputs[0].dtype)))
@@ -666,31 +669,31 @@ frozen_func = convert_variables_to_constants_v2(full_model, lower_control_flow=F
 frozen_func.graph.as_graph_def()
 tf.io.write_graph(graph_or_graph_def=frozen_func.graph,
                     logdir=".",
-                    name="dbface_keras_480x640_float32_nhwc.pb",
+                    name="dbface_keras_{}x{}_float32_nhwc.pb".format(height, width),
                     as_text=False)
 
 
 # No Quantization - Input/Output=float32
 converter = tf.lite.TFLiteConverter.from_keras_model(model)
 tflite_model = converter.convert()
-with open('dbface_keras_480x640_float32_nhwc.tflite', 'wb') as w:
+with open('dbface_keras_{}x{}_float32_nhwc.tflite'.format(height, width), 'wb') as w:
     w.write(tflite_model)
-print("tflite convert complete! - dbface_keras_480x640_float32_nhwc.tflite")
+print("tflite convert complete! - dbface_keras_{}x{}_float32_nhwc.tflite".format(height, width))
 
 
 # Weight Quantization - Input/Output=float32
 converter = tf.lite.TFLiteConverter.from_keras_model(model)
 converter.optimizations = [tf.lite.Optimize.OPTIMIZE_FOR_SIZE]
 tflite_model = converter.convert()
-with open('dbface_keras_480x640_weight_quant_nhwc.tflite', 'wb') as w:
+with open('dbface_keras_{}x{}_weight_quant_nhwc.tflite'.format(height, width), 'wb') as w:
     w.write(tflite_model)
-print("Weight Quantization complete! - dbface_keras_480x640_weight_quant_nhwc.tflite")
+print("Weight Quantization complete! - dbface_keras_{}x{}_weight_quant_nhwc.tflite".format(height, width))
 
 
 def representative_dataset_gen():
   for data in raw_test_data.take(100):
     image = data['image'].numpy()
-    image = tf.image.resize(image, (480, 640))
+    image = tf.image.resize(image, (height, width))
     image = image[np.newaxis,:,:,:]
     image = image - 127.5
     image = image * 0.007843
@@ -704,9 +707,9 @@ converter = tf.lite.TFLiteConverter.from_keras_model(model)
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
 converter.representative_dataset = representative_dataset_gen
 tflite_quant_model = converter.convert()
-with open('dbface_keras_480x640_integer_quant_nhwc.tflite', 'wb') as w:
+with open('dbface_keras_{}x{}_integer_quant_nhwc.tflite'.format(height, width), 'wb') as w:
     w.write(tflite_quant_model)
-print("Integer Quantization complete! - dbface_keras_480x640_integer_quant_nhwc.tflite")
+print("Integer Quantization complete! - dbface_keras_{}x{}_integer_quant_nhwc.tflite".format(height, width))
 
 
 # # Full Integer Quantization - Input/Output=int8
@@ -717,9 +720,9 @@ print("Integer Quantization complete! - dbface_keras_480x640_integer_quant_nhwc.
 # converter.inference_output_type = tf.uint8
 # converter.representative_dataset = representative_dataset_gen
 # tflite_quant_model = converter.convert()
-# with open('dbface_keras_480x640_full_integer_quant_nhwc.tflite', 'wb') as w:
+# with open('dbface_keras_{}x{}_full_integer_quant_nhwc.tflite'.format(height, width), 'wb') as w:
 #     w.write(tflite_quant_model)
-# print("Full Integer Quantization complete! - dbface_keras_480x640_full_integer_quant_nhwc.tflite")
+# print("Full Integer Quantization complete! - dbface_keras_{}x{}_full_integer_quant_nhwc.tflite".format(height, width))
 
 
 # Float16 Quantization - Input/Output=float32
@@ -727,12 +730,12 @@ converter = tf.lite.TFLiteConverter.from_keras_model(model)
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
 converter.target_spec.supported_types = [tf.float16]
 tflite_quant_model = converter.convert()
-with open('dbface_keras_480x640_float16_quant_nhwc.tflite', 'wb') as w:
+with open('dbface_keras_{}x{}_float16_quant_nhwc.tflite'.format(height, width), 'wb') as w:
     w.write(tflite_quant_model)
-print("Float16 Quantization complete! - dbface_keras_480x640_float16_quant_nhwc.tflite")
+print("Float16 Quantization complete! - dbface_keras_{}x{}_float16_quant_nhwc.tflite".format(height, width))
 
 
 # # EdgeTPU
 # import subprocess
-# result = subprocess.check_output(["edgetpu_compiler", "-s", "dbface_keras_480x640_full_integer_quant_nhwc.tflite"])
+# result = subprocess.check_output(["edgetpu_compiler", "-s", "dbface_keras_{}x{}_full_integer_quant_nhwc.tflite".format(height, width)])
 # print(result)
