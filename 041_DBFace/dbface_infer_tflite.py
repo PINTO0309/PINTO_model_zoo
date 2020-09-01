@@ -79,37 +79,37 @@ def max_pooling(x, kernel_size, stride=1, padding=1):
 
 
 def detect(hm, box, landmark, threshold=0.4, nms_iou=0.5):
-    hm_pool = max_pooling(hm[0,0,:,:], 3, 1, 1)                # 1,1,240,320
+    hm_pool = max_pooling(hm[0,0,:,:], 3, 1, 1)        # 1,1,64,64
     interest_points = ((hm==hm_pool) * hm)             # screen out low-conf pixels
     flat            = interest_points.ravel()          # flatten
     indices         = np.argsort(flat)[::-1]           # index sort
     scores          = np.array([ flat[idx] for idx in indices ])
 
-    hm_height, hm_width = hm.shape[2:]
+    hm_height, hm_width = hm.shape[1:3]
     ys = indices // hm_width
     xs = indices %  hm_width
-    box      = box.reshape(box.shape[1:])           # 4,240,320
-    landmark = landmark.reshape(landmark.shape[1:]) # 10,240,,320
+    box      = box.reshape(box.shape[1:])           # 64,64,4
+    landmark = landmark.reshape(landmark.shape[1:]) # 64,64,10
 
     stride = 4
     objs = []
     for cx, cy, score in zip(xs, ys, scores):
         if score < threshold: 
             break
-        x, y, r, b = box[:, cy, cx]
+        x, y, r, b = box[cy, cx, :]
         xyrb = (np.array([cx, cy, cx, cy]) + [-x, -y, r, b]) * stride
-        x5y5 = landmark[:, cy, cx]
+        x5y5 = landmark[cy, cx, :]
         x5y5 = (_exp(x5y5 * 4) + ([cx]*5 + [cy]*5)) * stride
         box_landmark = list(zip(x5y5[:5], x5y5[5:]))
         objs.append([xyrb, score, box_landmark])
     return NMS(objs, iou=nms_iou)
 
 
-def drawBBox(image, bbox, color=(0,255,0), thickness=2, textcolor=(0, 0, 0), landmarkcolor=(0, 0, 255)):
+def drawBBox(image, bbox, scale_w, scale_h, color=(0,255,0), thickness=2, textcolor=(0, 0, 0), landmarkcolor=(0, 0, 255)):
 
     text = f"{bbox[1]:.2f}"
     xyrb = bbox[0]
-    x, y, r, b = int(xyrb[0]), int(xyrb[1]), int(xyrb[2]), int(xyrb[3])
+    x, y, r, b = int(xyrb[0] * scale_w), int(xyrb[1] * scale_h), int(xyrb[2] * scale_w), int(xyrb[3] * scale_h)
     w = r - x + 1
     h = b - y + 1
 
@@ -124,7 +124,7 @@ def drawBBox(image, bbox, color=(0,255,0), thickness=2, textcolor=(0, 0, 0), lan
     if len(landmark)>0:
         for i in range(len(landmark)):
             x, y = landmark[i][:2]
-            cv2.circle(image, (int(x), int(y)), 3, landmarkcolor, -1, 16)
+            cv2.circle(image, (int(x * scale_w), int(y * scale_h)), 3, landmarkcolor, -1, 16)
 
 
 def main(args):
@@ -158,8 +158,11 @@ def main(args):
         else:
             image = cv2.imread(args.input)
 
-        image = cv2.resize(image, (inblobs[0]['shape'][2], inblobs[0]['shape'][1]))
-        img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        scale_w = image.shape[1] / inblobs[0]['shape'][2]
+        scale_h = image.shape[0] / inblobs[0]['shape'][1]
+
+        img = cv2.resize(image, (inblobs[0]['shape'][2], inblobs[0]['shape'][1]))
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img = img.astype(np.float32)
         img = ((img / 255.0 - mean) / std).astype(np.float32)
         img = img[np.newaxis,:,:,:]
@@ -167,14 +170,14 @@ def main(args):
         interpreter.set_tensor(inblobs[0]['index'], img)
         interpreter.invoke()
 
-        lm = interpreter.get_tensor(outblobs[lm_idx]['index'])[0][np.newaxis,:,:,:].transpose((0,3,1,2))     # 1,10,h,w
-        box = interpreter.get_tensor(outblobs[box_idx]['index'])[0][np.newaxis,:,:,:].transpose((0,3,1,2))   # 1,4,h,w
+        lm = interpreter.get_tensor(outblobs[lm_idx]['index'])[0][np.newaxis,:,:,:]                          # 1,h,w,10
+        box = interpreter.get_tensor(outblobs[box_idx]['index'])[0][np.newaxis,:,:,:]                        # 1,h,w,4
         hm = interpreter.get_tensor(outblobs[hm_idx]['index'])[0][np.newaxis,:,:,:].transpose((0,3,1,2))     # 1,1,h,w
         
         objs = detect(hm=hm, box=box, landmark=lm, threshold=0.4, nms_iou=0.5)
 
         for obj in objs:
-            drawBBox(image, obj)
+            drawBBox(image, obj, scale_w, scale_h)
 
         cv2.imshow('output', image)
         if args.input == 'cam':
