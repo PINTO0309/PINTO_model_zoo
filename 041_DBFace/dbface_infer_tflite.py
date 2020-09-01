@@ -65,7 +65,6 @@ def NMS(objs, iou=0.5):
         for j in range(index + 1, len(objs)):
             if flags[j] == 0 and IOU(obj[0], objs[j][0]) > iou:
                 flags[j] = 1
-    nmse = time.perf_counter() - nmss
     return keep
 
 
