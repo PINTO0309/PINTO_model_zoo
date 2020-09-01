@@ -1,6 +1,7 @@
 import os
 import sys
 import math
+import time
 
 import numpy as np
 from numpy.lib.stride_tricks import as_strided
@@ -64,6 +65,7 @@ def NMS(objs, iou=0.5):
         for j in range(index + 1, len(objs)):
             if flags[j] == 0 and IOU(obj[0], objs[j][0]) > iou:
                 flags[j] = 1
+    nmse = time.perf_counter() - nmss
     return keep
 
 
@@ -146,6 +148,12 @@ def main(args):
     box_idx = 1
     hm_idx  = 2
 
+    fps = ""
+    detectfps = ""
+    framecount = 0
+    detectframecount = 0
+    time1 = 0
+
     mean = np.array([0.408, 0.447, 0.47], dtype="float32")
     std = np.array([0.289, 0.274, 0.278], dtype="float32")
 
@@ -153,6 +161,7 @@ def main(args):
         cap = cv2.VideoCapture(0)
 
     while True:
+        start_time = time.perf_counter()
         if args.input == 'cam':
             ret, image = cap.read()
         else:
@@ -179,6 +188,8 @@ def main(args):
         for obj in objs:
             drawBBox(image, obj, scale_w, scale_h)
 
+        cv2.putText(image, fps, (image.shape[1] - 170, 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (38, 0, 255), 1, cv2.LINE_AA)
+
         cv2.imshow('output', image)
         if args.input == 'cam':
             if cv2.waitKey(1) == 27:  # ESC key
@@ -189,10 +200,20 @@ def main(args):
             print('"output.jpg" is generated')
             return
 
+        # FPS calculation
+        framecount += 1
+        if framecount >= 10:
+            fps = "(Playback) {:.1f} FPS".format(time1 / 10)
+            framecount = 0
+            time1 = 0
+        end_time = time.perf_counter()
+        elapsedTime = end_time - start_time
+        time1 += 1 / elapsedTime
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--input', type=str, default='cam', help='input image file name (\'cam\' for webCam input)')
-    parser.add_argument('-m', '--model', type=str, default='dbface_keras_256x256_weight_quant_nhwc.tflite', help='DBFace model file name (*.tflite)')
+    parser.add_argument('-m', '--model', type=str, default='dbface_keras_256x256_integer_quant_nhwc.tflite', help='DBFace model file name (*.tflite)')
     args = parser.parse_args()
 
     main(args)
