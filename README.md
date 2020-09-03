@@ -19,103 +19,103 @@ I have been working on quantization of various models as a hobby, but I have ski
 \** OV = OpenVINO IR  
 \*** CM = CoreML
 ### 1. Image Classification
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|004|Efficientnet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/004_efficientnet)|⚫||⚫||⚫|||||
-|010|Mobilenetv3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/010_mobilenetv3)|⚫||⚫||⚫|||||
-|011|Mobilenetv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/011_mobilenetv2)|⚫||⚫|⚫|⚫|||||
-|016|Efficientnet-lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/016_EfficientNet-lite)|⚫|⚫|⚫|⚫|⚫|⚫||⚫||
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|004|Efficientnet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/004_efficientnet)|⚫||⚫||⚫||||||
+|010|Mobilenetv3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/010_mobilenetv3)|⚫||⚫||⚫||||||
+|011|Mobilenetv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/011_mobilenetv2)|⚫||⚫|⚫|⚫||||||
+|016|Efficientnet-lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/016_EfficientNet-lite)|⚫|⚫|⚫|⚫|⚫|⚫||⚫|||
 ### 2. 2D Object Detection
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|002|Mobilenetv3-SSD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/002_mobilenetv3-ssd)|⚫||⚫||⚫|||||
-|006|Mobilenetv2-SSDlite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/006_mobilenetv2-ssdlite)|⚫||⚫|⚫|⚫|||||
-|008|Mask_RCNN_Inceptionv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/008_mask_rcnn_inceptionv2)|⚫|⚫|||⚫|||||
-|018|EfficientDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/018_EfficientDet)|⚫|⚫|⚫||⚫|||⚫||
-|023|Yolov3-nano|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/023_yolov3-nano)|⚫|⚫|||⚫|||||
-|024|Yolov3-lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/024_yolov3-lite)|⚫|⚫|⚫||⚫|⚫||||
-|031|Yolov4|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/031_yolov4)|⚫|⚫|⚫|⚫|⚫|||||
-|034|SSD_Mobilenetv2_mnasfpn|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/034_ssd_mobilenet_v2_mnasfpn_shared_box_predictor)|⚫|⚫|⚫|⚫|⚫|||||
-|038|SSDlite_MobileDet_edgetpu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/038_ssdlite_mobiledet_edgetpu)|⚫|⚫|⚫|⚫|⚫|||||
-|039|SSDlite_MobileDet_cpu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/039_ssdlite_mobiledet_cpu)|⚫|⚫|⚫||⚫|||||
-|042|Centernet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/042_centernet)|⚫|||||⚫||||
-|045|SSD_Mobilenetv2_oid_v4|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/045_ssd_mobilenet_v2_oid_v4)|⚫|⚫|⚫|⚫|⚫|||⚫||
-|046|Yolov4-tiny|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/046_yolov4-tiny)|⚫|⚫|⚫||⚫|⚫|⚫|⚫||
-|047|SpineNetMB_49|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/047_SpineNetMB_49)|⚫|⚫|⚫||⚫||||unstable|
-|051|East_Text_Detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/051_East_Text_Detection)|⚫|⚫|⚫|⚫|⚫|⚫||⚫||
-|054|KNIFT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/054_KNIFT)|⚫|⚫|⚫||⚫|⚫|||MediaPipe|
-|056|TextBoxes++ with dense blocks, separable convolution and Focal Loss|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/056_TextBoxes%2B%2B)|⚫|⚫|⚫||⚫|⚫|⚫|||
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|002|Mobilenetv3-SSD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/002_mobilenetv3-ssd)|⚫||⚫||⚫||||||
+|006|Mobilenetv2-SSDlite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/006_mobilenetv2-ssdlite)|⚫||⚫|⚫|⚫||||||
+|008|Mask_RCNN_Inceptionv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/008_mask_rcnn_inceptionv2)|⚫|⚫|||⚫||||||
+|018|EfficientDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/018_EfficientDet)|⚫|⚫|⚫||⚫|||⚫|||
+|023|Yolov3-nano|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/023_yolov3-nano)|⚫|⚫|||⚫||||||
+|024|Yolov3-lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/024_yolov3-lite)|⚫|⚫|⚫||⚫|⚫|||||
+|031|Yolov4|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/031_yolov4)|⚫|⚫|⚫|⚫|⚫||||||
+|034|SSD_Mobilenetv2_mnasfpn|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/034_ssd_mobilenet_v2_mnasfpn_shared_box_predictor)|⚫|⚫|⚫|⚫|⚫||||||
+|038|SSDlite_MobileDet_edgetpu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/038_ssdlite_mobiledet_edgetpu)|⚫|⚫|⚫|⚫|⚫||||||
+|039|SSDlite_MobileDet_cpu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/039_ssdlite_mobiledet_cpu)|⚫|⚫|⚫||⚫||||||
+|042|Centernet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/042_centernet)|⚫|||||⚫|||||
+|045|SSD_Mobilenetv2_oid_v4|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/045_ssd_mobilenet_v2_oid_v4)|⚫|⚫|⚫|⚫|⚫|||⚫|||
+|046|Yolov4-tiny|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/046_yolov4-tiny)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|||
+|047|SpineNetMB_49|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/047_SpineNetMB_49)|⚫|⚫|⚫||⚫|||||unstable|
+|051|East_Text_Detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/051_East_Text_Detection)|⚫|⚫|⚫|⚫|⚫|⚫||⚫|||
+|054|KNIFT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/054_KNIFT)|⚫|⚫|⚫||⚫|⚫||||MediaPipe|
+|056|TextBoxes++ with dense blocks, separable convolution and Focal Loss|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/056_TextBoxes%2B%2B)|⚫|⚫|⚫||⚫|⚫|⚫||||
 ### 3. 3D Object Detection
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|036|Objectron|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/036_Objectron)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|036|Objectron|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/036_Objectron)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||MediaPipe|
 ### 4. 2D/3D Face Detection
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|025|Head_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/025_head_pose_estimation)|⚫|⚫|⚫|⚫|⚫||⚫|⚫||
-|030|BlazeFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/030_BlazeFace)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
-|032|FaceMesh|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/032_FaceMesh)|⚫|⚫|⚫|⚫|⚫||⚫|⚫|MediaPipe|
-|040|DSFD_vgg|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/040_DSFD_vgg)|⚫|⚫|||⚫|||||
-|041|DBFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/041_DBFace)|⚫|⚫|⚫||⚫|⚫||⚫||
-|043|Face_Landmark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/043_face_landmark)|⚫|⚫|⚫||⚫|||||
-|049|Iris_Landmark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/049_iris_landmark)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|025|Head_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/025_head_pose_estimation)|⚫|⚫|⚫|⚫|⚫||⚫|⚫|||
+|030|BlazeFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/030_BlazeFace)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||MediaPipe|
+|032|FaceMesh|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/032_FaceMesh)|⚫|⚫|⚫|⚫|⚫||⚫|⚫||MediaPipe|
+|040|DSFD_vgg|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/040_DSFD_vgg)|⚫|⚫|||⚫||||||
+|041|DBFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/041_DBFace)|⚫|⚫|⚫||⚫|⚫||⚫|⚫||
+|043|Face_Landmark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/043_face_landmark)|⚫|⚫|⚫||⚫||||||
+|049|Iris_Landmark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/049_iris_landmark)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||MediaPipe|
 ### 5. 2D/3D Hand Detection
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|027|Minimal-Hand|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/027_minimal-hand)|⚫|⚫|⚫||⚫||⚫|⚫||
-|033|Hand_Detection_and_Tracking|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/033_Hand_Detection_and_Tracking)|⚫|⚫|⚫||⚫||⚫|⚫|MediaPipe|
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|027|Minimal-Hand|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/027_minimal-hand)|⚫|⚫|⚫||⚫||⚫|⚫|||
+|033|Hand_Detection_and_Tracking|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/033_Hand_Detection_and_Tracking)|⚫|⚫|⚫||⚫||⚫|⚫||MediaPipe|
 ### 6. 2D/3D Human Pose Estimation
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|003|Posenet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/003_posenet)|⚫|⚫|⚫|⚫|⚫|⚫||||
-|007|Mobilenetv2_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/007_mobilenetv2-poseestimation)|⚫|⚫|⚫|⚫|⚫|⚫||⚫||
-|029|Human_Pose_Estimation_3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/029_human-pose-estimation-3d-0001)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|053|BlazePose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/053_BlazePose)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|003|Posenet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/003_posenet)|⚫|⚫|⚫|⚫|⚫|⚫|||||
+|007|Mobilenetv2_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/007_mobilenetv2-poseestimation)|⚫|⚫|⚫|⚫|⚫|⚫||⚫|||
+|029|Human_Pose_Estimation_3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/029_human-pose-estimation-3d-0001)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|||
+|053|BlazePose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/053_BlazePose)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||MediaPipe|
 ### 7. Depth Estimation from Monocular Images
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|009|MSLPG_for_Monocular_Depth_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/009_multi-scale_local_planar_guidance_for_monocular_depth_estimation)|⚫|||||||||
-|014|tf-monodepth2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/014_tf-monodepth2)|⚫|⚫|⚫||⚫|||||
-|028|struct2depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/028_struct2depth)|⚫|⚫|||⚫|||||
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|009|MSLPG_for_Monocular_Depth_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/009_multi-scale_local_planar_guidance_for_monocular_depth_estimation)|⚫||||||||||
+|014|tf-monodepth2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/014_tf-monodepth2)|⚫|⚫|⚫||⚫||||||
+|028|struct2depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/028_struct2depth)|⚫|⚫|||⚫||||||
 ### 8. Semantic Segmentation
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|001|deeplabv3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/001_deeplabv3)|⚫||||⚫|||||
-|015|Faster-Grad-CAM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/015_Faster-Grad-CAM)|⚫||⚫||⚫|||||
-|020|EdgeTPU-Deeplab|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/020_edgetpu-deeplab)|⚫|⚫|⚫||⚫|||||
-|021|EdgeTPU-Deeplab-slim|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/021_edgetpu-deeplab-slim)|⚫|⚫|⚫||⚫|||||
-|026|Mobile-Deeplabv3-plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/026_mobile-deeplabv3-plus)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|035|BodyPix|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/035_BodyPix)|⚫|⚫|⚫||⚫|⚫||⚫|MediaPipe|
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|001|deeplabv3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/001_deeplabv3)|⚫||||⚫||||||
+|015|Faster-Grad-CAM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/015_Faster-Grad-CAM)|⚫||⚫||⚫||||||
+|020|EdgeTPU-Deeplab|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/020_edgetpu-deeplab)|⚫|⚫|⚫||⚫||||||
+|021|EdgeTPU-Deeplab-slim|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/021_edgetpu-deeplab-slim)|⚫|⚫|⚫||⚫||||||
+|026|Mobile-Deeplabv3-plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/026_mobile-deeplabv3-plus)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|||
+|035|BodyPix|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/035_BodyPix)|⚫|⚫|⚫||⚫|⚫||⚫||MediaPipe|
 ### 9. Anomaly Detection
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|005|One_Class_Anomaly_Detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/005_one_class_anomaly_detection)|⚫||⚫|⚫|⚫|||||
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|005|One_Class_Anomaly_Detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/005_one_class_anomaly_detection)|⚫||⚫|⚫|⚫||||||
 ### 10. Artistic
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|017|Artistic-Style-Transfer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/017_Artistic-Style-Transfer)|||⚫|||||||
-|019|White-box-Cartoonization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/019_White-box-Cartoonization)|⚫|⚫|⚫||⚫|⚫|⚫|⚫||
-|037|First_Neural_Style_Transfer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/037_First_Neural_Style_Transfer)|⚫||||⚫|||||
-|044|Selfie2Anime|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/044_selfie2anime)|⚫|⚫|⚫||⚫|⚫|⚫|||
-|050|AnimeGANv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/050_AnimeGANv2)|⚫|⚫|⚫||⚫|⚫|⚫|||
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|017|Artistic-Style-Transfer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/017_Artistic-Style-Transfer)|||⚫||||||||
+|019|White-box-Cartoonization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/019_White-box-Cartoonization)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|||
+|037|First_Neural_Style_Transfer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/037_First_Neural_Style_Transfer)|⚫||||⚫||||||
+|044|Selfie2Anime|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/044_selfie2anime)|⚫|⚫|⚫||⚫|⚫|⚫||||
+|050|AnimeGANv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/050_AnimeGANv2)|⚫|⚫|⚫||⚫|⚫|⚫||||
 ### 11. Super Resolution
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|012|Fast_Accurate_and_Lightweight_Super-Resolution|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/012_Fast_Accurate_and_Lightweight_Super-Resolution)|⚫||⚫||⚫|||||
-|022|Learning_to_See_Moving_Objects_in_the_Dark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/022_Learning_to_See_Moving_Objects_in_the_Dark)|⚫|⚫|||⚫|||||
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|012|Fast_Accurate_and_Lightweight_Super-Resolution|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/012_Fast_Accurate_and_Lightweight_Super-Resolution)|⚫||⚫||⚫||||||
+|022|Learning_to_See_Moving_Objects_in_the_Dark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/022_Learning_to_See_Moving_Objects_in_the_Dark)|⚫|⚫|||⚫||||||
 ### 12. Sound Classifier
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|013|ml-sound-classifier|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/013_ml-sound-classifier)|⚫||⚫||⚫|||||
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|013|ml-sound-classifier|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/013_ml-sound-classifier)|⚫||⚫||⚫||||||
 ### 13. Natural Language Processing
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|048|Mobile_BERT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/048_mobile_bert)|⚫|⚫|||⚫|||||
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|048|Mobile_BERT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/048_mobile_bert)|⚫|⚫|||⚫||||||
 ### 14. Text Recognition
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|052|Handwritten_Text_Recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/052_Handwritten_Text_Recognition)|⚫|⚫|||⚫|||||
-|055|Handwritten_Japanese_Recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/055_Handwritten_Japanese_Recognition)|⚫|⚫|||⚫|⚫|⚫|||
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|052|Handwritten_Text_Recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/052_Handwritten_Text_Recognition)|⚫|⚫|||⚫||||||
+|055|Handwritten_Japanese_Recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/055_Handwritten_Japanese_Recognition)|⚫|⚫|||⚫|⚫|⚫||||
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)  
 - **[Raspbian Buster 64bit](https://github.com/sakaki-/raspbian-nspawn-64.git)**
