@@ -1,3 +1,4 @@
 https://github.com/google/automl.git
 https://github.com/xuannianz/EfficientDet.git
 https://github.com/tensorflow/tensorflow/issues/37745
+https://github.com/gouthamvgk/coreml_conversion_hub
