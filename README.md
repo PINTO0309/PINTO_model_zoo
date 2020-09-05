@@ -245,6 +245,9 @@ $ python3 deeplabv3plus_usbcam.py
 
 
 ## 2. Procedure
+
+<details><summary>Procedure examples</summary><div>
+  
 ### 2-1. MobileNetV3+DeeplabV3+PascalVOC
 #### 2-1-1. Preparation
 ```bash
@@ -997,6 +1000,8 @@ print("Full Integer Quantization complete! - mobilenet_v3_large_full_integer_qua
 
 #### 2-6-3. Integer Quantization
 **[06_mobilenetv2-ssdlite/02_voc/01_float32/03_integer_quantization_with_postprocess.py](06_mobilenetv2-ssdlite/02_voc/01_float32/03_integer_quantization_with_postprocess.py)**  
+
+</div></details>
 
 ## 3. TFLite Model Benchmark
 ```bash
