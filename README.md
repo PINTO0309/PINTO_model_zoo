@@ -28,7 +28,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|002|Mobilenetv3-SSD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/002_mobilenetv3-ssd)|⚫||⚫||⚫||||||
+|002|Mobilenetv3-SSD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/002_mobilenetv3-ssd)|⚫||⚫||⚫||⚫||||
 |006|Mobilenetv2-SSDlite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/006_mobilenetv2-ssdlite)|⚫||⚫|⚫|⚫||||||
 |008|Mask_RCNN_Inceptionv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/008_mask_rcnn_inceptionv2)|⚫|⚫|||⚫||||||
 |018|EfficientDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/018_EfficientDet)|⚫|⚫|⚫||⚫||⚫|⚫|||
