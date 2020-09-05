@@ -110,7 +110,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 ### 13. Natural Language Processing
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|048|Mobile_BERT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/048_mobile_bert)|⚫|⚫|||⚫||||||
+|048|Mobile_BERT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/048_mobile_bert)|⚫|⚫|||⚫|||⚫|||
 ### 14. Text Recognition
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
