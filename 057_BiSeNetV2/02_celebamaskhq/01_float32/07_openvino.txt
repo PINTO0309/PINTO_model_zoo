@@ -1,0 +1,66 @@
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --saved_model_dir saved_model_256x256 \
+  --model_name bisenetv2_celebamaskhq_256x256 \
+  --input_shape [1,256,256,3] \
+  --data_type FP32 \
+  --disable_fusing \
+  --output_dir openvino/bisenetv2_celebamaskhq_256x256/FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --saved_model_dir saved_model_256x256 \
+  --model_name bisenetv2_celebamaskhq_256x256 \
+  --input_shape [1,256,256,3] \
+  --data_type FP16 \
+  --disable_fusing \
+  --output_dir openvino/bisenetv2_celebamaskhq_256x256/FP16
+
+
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --saved_model_dir saved_model_448x448 \
+  --model_name bisenetv2_celebamaskhq_448x448 \
+  --input_shape [1,448,448,3] \
+  --data_type FP32 \
+  --disable_fusing \
+  --output_dir openvino/bisenetv2_celebamaskhq_448x448/FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --saved_model_dir saved_model_448x448 \
+  --model_name bisenetv2_celebamaskhq_448x448 \
+  --input_shape [1,448,448,3] \
+  --data_type FP16 \
+  --disable_fusing \
+  --output_dir openvino/bisenetv2_celebamaskhq_448x448/FP16
+
+
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --saved_model_dir saved_model_480x640 \
+  --model_name bisenetv2_celebamaskhq_480x640 \
+  --input_shape [1,480,640,3] \
+  --data_type FP32 \
+  --disable_fusing \
+  --output_dir openvino/bisenetv2_celebamaskhq_480x640/FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --saved_model_dir saved_model_480x640 \
+  --model_name bisenetv2_celebamaskhq_480x640 \
+  --input_shape [1,480,640,3] \
+  --data_type FP16 \
+  --disable_fusing \
+  --output_dir openvino/bisenetv2_celebamaskhq_480x640/FP16
+
+
+
+./benchmark_app \
+  -m ${HOME}/git/bisenetv2-tensorflow/model2/openvino/bisenetv2_celebamaskhq_480x640/FP16/bisenetv2_celebamaskhq_480x640.xml \
+  -i ${HOME}/Pictures \
+  -d MYRIAD \
+  -nthreads 4
+
+./benchmark_app \
+  -m ${HOME}/git/bisenetv2-tensorflow/model2/openvino/bisenetv2_celebamaskhq_480x640/FP16/bisenetv2_celebamaskhq_480x640.xml \
+  -i ${HOME}/Pictures \
+  -d CPU \
+  -nthreads 4
+
