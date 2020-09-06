@@ -1,0 +1,3 @@
+edgetpu_compiler -s bisenetv2_cityscapes_256x256_full_integer_quant.tflite
+edgetpu_compiler -s bisenetv2_cityscapes_480x640_full_integer_quant.tflite
+edgetpu_compiler -s bisenetv2_cityscapes_512x1024_full_integer_quant.tflite

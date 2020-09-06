@@ -1,0 +1,5 @@
+python3 tools/cityscapes/freeze_cityscapes_bisenetv2_model.py \
+  --weights_path BiseNetV2_CityScapes/cityscapes.ckpt \
+  --frozen_pb_file_path model/bisenetv2_cityscapes_frozen.pb \
+  --optimized_pb_file_path model/bisenetv2_cityscapes_optimized.pb
+
