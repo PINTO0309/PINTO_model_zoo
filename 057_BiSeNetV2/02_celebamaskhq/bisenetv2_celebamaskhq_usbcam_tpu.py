@@ -52,11 +52,6 @@ if __name__ == '__main__':
     engine = BasicEngine(model_path=deep_model, device_path=devices[0])
     model_height = engine.get_input_tensor_shape()[1]
     model_width  = engine.get_input_tensor_shape()[2]
-    offset = 0
-    output_offsets = [0]
-    for size in engine.get_all_output_tensors_sizes():
-        offset += int(size)
-        output_offsets.append(offset)
 
     cam = cv2.VideoCapture(usbcamno)
     cam.set(cv2.CAP_PROP_FPS, vidfps)
