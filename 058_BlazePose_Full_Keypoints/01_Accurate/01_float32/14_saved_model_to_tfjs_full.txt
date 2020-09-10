@@ -1,0 +1,39 @@
+tensorflowjs_converter \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_full_pose_detection \
+  tfjs_model_full_pose_detection_float32
+
+
+tensorflowjs_converter \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_full_pose_landmark_39kp \
+  tfjs_model_full_pose_landmark_39kp_float32
+
+
+
+tensorflowjs_converter \
+  --quantize_float16 \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_full_pose_detection \
+  tfjs_model_full_pose_detection_float16
+
+
+tensorflowjs_converter \
+  --quantize_float16 \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_full_pose_landmark_39kp \
+  tfjs_model_full_pose_landmark_39kp_float16
+
+

@@ -1,0 +1,18 @@
+### https://ai.googleblog.com/2020/08/on-device-real-time-body-pose-tracking.html
+### https://google.github.io/mediapipe/solutions/pose
+
+### https://www.tensorflow.org/api_docs/python/tf/keras/Model
+### op types: ['CONV_2D', 'RELU', 'DEPTHWISE_CONV_2D', 'ADD', 'MAX_POOL_2D', 'RESHAPE', 'CONCATENATION']
+
+### https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2D
+### https://www.tensorflow.org/api_docs/python/tf/keras/layers/DepthwiseConv2D
+### https://www.tensorflow.org/api_docs/python/tf/keras/layers/Add
+### https://www.tensorflow.org/api_docs/python/tf/keras/layers/ReLU
+### https://www.tensorflow.org/api_docs/python/tf/keras/layers/MaxPool2D
+### https://www.tensorflow.org/api_docs/python/tf/keras/layers/Reshape
+### https://www.tensorflow.org/api_docs/python/tf/keras/layers/Concatenate
+### https://www.tensorflow.org/api_docs/python/tf/keras/layers/Layer
+
+### How to initialize a convolution layer with an arbitrary kernel in Keras? https://stackoverrun.com/ja/q/12269118
+
+###  saved_model_cli show --dir saved_model_pose_detection/ --tag_set serve --signature_def serving_default
