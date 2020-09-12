@@ -1,0 +1,32 @@
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --saved_model_dir saved_model_lite_pose_detection \
+  --model_name pose_detection_lite \
+  --input_shape [1,128,128,3] \
+  --data_type FP32 \
+  --output_dir openvino/pose_detection_lite/128x128/FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --saved_model_dir saved_model_lite_pose_detection \
+  --model_name pose_detection_lite \
+  --input_shape [1,128,128,3] \
+  --data_type FP16 \
+  --output_dir openvino/pose_detection_lite/128x128/FP16
+
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --saved_model_dir saved_model_lite_pose_landmark_39kp \
+  --model_name pose_landmark_lite_body \
+  --input_shape [1,256,256,3] \
+  --data_type FP32 \
+  --output_dir openvino/pose_landmark_lite_body/256x256/FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --saved_model_dir saved_model_lite_pose_landmark_39kp \
+  --model_name pose_landmark_lite_body \
+  --input_shape [1,256,256,3] \
+  --data_type FP16 \
+  --output_dir openvino/pose_landmark_lite_body/256x256/FP16
+
+
+
+
