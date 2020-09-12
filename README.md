@@ -71,7 +71,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |007|Mobilenetv2_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/007_mobilenetv2-poseestimation)|⚫|⚫|⚫|⚫|⚫|⚫||⚫|⚫||
 |029|Human_Pose_Estimation_3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/029_human-pose-estimation-3d-0001)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 |053|BlazePose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/053_BlazePose)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
-|058|BlazePose (Full Keypoints)|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/058_BlazePose_Full_Keypoints)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe, WIP|
+|058|BlazePose (Full Keypoints)|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/058_BlazePose_Full_Keypoints)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
 ### 7. Depth Estimation from Monocular Images
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
