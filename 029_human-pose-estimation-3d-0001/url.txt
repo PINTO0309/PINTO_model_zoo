@@ -3,3 +3,4 @@ https://github.com/opencv/open_model_zoo/tree/master/models/public/human-pose-es
 https://youtu.be/DgKw0Ty22PE
 https://qiita.com/PINTO/items/e1bf5ef24ed6ad6f6a05
 https://github.com/Daniil-Osokin/lightweight-human-pose-estimation-3d-demo.pytorch.git
+https://github.com/terryky/tfjs_webgl_app.git
