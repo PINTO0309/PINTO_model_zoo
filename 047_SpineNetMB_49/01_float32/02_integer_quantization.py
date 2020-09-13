@@ -1,4 +1,4 @@
-### tensorflow==2.3.0-rc2
+### tf-nightly==2.4.0-dev20200912
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
@@ -19,6 +19,7 @@ raw_test_data, info = tfds.load(name="coco/2017", with_info=True, split="test", 
 # Integer Quantization - Input/Output=float32
 converter = tf.lite.TFLiteConverter.from_saved_model('saved_model')
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
+converter.allow_custom_ops = True
 converter.representative_dataset = representative_dataset_gen
 tflite_quant_model = converter.convert()
 with open('spinenetmb_49_384x384_integer_quant.tflite', 'wb') as w:
