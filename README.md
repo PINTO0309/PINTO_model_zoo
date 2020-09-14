@@ -110,7 +110,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|013|ml-sound-classifier|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/013_ml-sound-classifier)|⚫|⚫|⚫||⚫||||||
+|013|ml-sound-classifier|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/013_ml-sound-classifier)|⚫|⚫|⚫||⚫|⚫||⚫|⚫||
 ### 13. Natural Language Processing
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
