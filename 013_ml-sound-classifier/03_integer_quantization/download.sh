@@ -1,7 +1,9 @@
 #!/bin/bash
 
-curl -sc /tmp/cookie "https://drive.google.com/uc?export=download&id=1wyM4AbwFRITCcHl-FepQ6yUO2jEIKRbN" > /dev/null
+curl -sc /tmp/cookie "https://drive.google.com/uc?export=download&id=1qH_HCMjaw9r1FXMpc1_kFfwDmFNMtV8R" > /dev/null
 CODE="$(awk '/_warning_/ {print $NF}' /tmp/cookie)"
-curl -Lb /tmp/cookie "https://drive.google.com/uc?export=download&confirm=${CODE}&id=1wyM4AbwFRITCcHl-FepQ6yUO2jEIKRbN" -o mobilenetv2_fsd2018_41cls_integer_quant.tflite
+curl -Lb /tmp/cookie "https://drive.google.com/uc?export=download&confirm=${CODE}&id=1qH_HCMjaw9r1FXMpc1_kFfwDmFNMtV8R" -o resources.tar.gz
+tar -zxvf resources.tar.gz
+rm resources.tar.gz
 
 echo Download finished.
