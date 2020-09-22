@@ -477,17 +477,17 @@ depthconv38_1 = DepthwiseConv2D(kernel_size=[3, 3], strides=[1, 1], padding="sam
 conv38_1 = Conv2D(filters=192, kernel_size=[1, 1], strides=[1, 1], padding="valid", dilation_rate=[1, 1], activation='relu',
                  kernel_initializer=Constant(np.load('weights_lite_land/conv2d_41_Kernel').transpose(1,2,3,0)),
                  bias_initializer=Constant(np.load('weights_lite_land/conv2d_41_Bias')))(depthconv38_1)
-add37_1 = Add()([conv38_1, relu37_1])
+add38_1 = Add()([conv38_1, relu37_1])
 
 # Block_39
 depthconv39_1 = DepthwiseConv2D(kernel_size=[3, 3], strides=[2, 2], padding="same", depth_multiplier=1, dilation_rate=[1, 1],
                  depthwise_initializer=Constant(np.load('weights_lite_land/depthwise_conv2d_41_Kernel')),
-                 bias_initializer=Constant(np.load('weights_lite_land/depthwise_conv2d_41_Bias')))(add37_1)
+                 bias_initializer=Constant(np.load('weights_lite_land/depthwise_conv2d_41_Bias')))(add38_1)
 conv39_1 = Conv2D(filters=192, kernel_size=[1, 1], strides=[1, 1], padding="valid", dilation_rate=[1, 1],
                  kernel_initializer=Constant(np.load('weights_lite_land/conv2d_42_Kernel').transpose(1,2,3,0)),
                  bias_initializer=Constant(np.load('weights_lite_land/conv2d_42_Bias')))(depthconv39_1)
 
-maxpool39_1 = MaxPool2D(pool_size=[2, 2], strides=[2, 2], padding='valid')(add37_1)
+maxpool39_1 = MaxPool2D(pool_size=[2, 2], strides=[2, 2], padding='valid')(add38_1)
 
 add39_1 = Add()([conv39_1, maxpool39_1])
 relu39_1 = ReLU()(add39_1)
