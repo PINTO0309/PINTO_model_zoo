@@ -1,0 +1,1 @@
+python3 -m onnxsim yolov5s.onnx yolov5s_opt.onnx
