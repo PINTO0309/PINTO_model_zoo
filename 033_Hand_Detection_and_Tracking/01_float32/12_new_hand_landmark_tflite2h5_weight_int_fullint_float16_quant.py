@@ -383,7 +383,7 @@ depthconv32_1 = DepthwiseConv2D(kernel_size=[5, 5], strides=[1, 1], padding="sam
 conv32_1 = Conv2D(filters=288, kernel_size=[1, 1], strides=[1, 1], padding="valid", dilation_rate=[1, 1],
                  kernel_initializer=Constant(np.load('weights_new/conv2d_33_Kernel').transpose(1,2,3,0)),
                  bias_initializer=Constant(np.load('weights_new/conv2d_33_Bias')))(depthconv32_1)
-add32_1 = Add()([conv32_1, conv32_1])
+add32_1 = Add()([conv32_1, relu31_1])
 relu32_1 = ReLU()(add32_1)
 
 # Block_33
@@ -519,6 +519,7 @@ reshape99_3 = tf.reshape(conv99_3, (1, 63), name='ld_21_3d')
 
 
 model = Model(inputs=inputs, outputs=[sigm99_1, sigm99_2, reshape99_3])
+# model = Model(inputs=inputs, outputs=[reshape99_1, reshape99_2, reshape99_3])
 
 model.summary()
 
@@ -573,17 +574,17 @@ with open('hand_landmark_new_256x256_integer_quant.tflite', 'wb') as w:
 print("Integer Quantization complete! - hand_landmark_new_256x256_integer_quant.tflite")
 
 
-# Full Integer Quantization - Input/Output=int8
-converter = tf.lite.TFLiteConverter.from_keras_model(model)
-converter.optimizations = [tf.lite.Optimize.DEFAULT]
-converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
-converter.inference_input_type = tf.uint8
-converter.inference_output_type = tf.uint8
-converter.representative_dataset = representative_dataset_gen
-tflite_quant_model = converter.convert()
-with open('hand_landmark_new_256x256_full_integer_quant.tflite', 'wb') as w:
-    w.write(tflite_quant_model)
-print("Full Integer Quantization complete! - hand_landmark_new_256x256_full_integer_quant.tflite")
+# # Full Integer Quantization - Input/Output=int8
+# converter = tf.lite.TFLiteConverter.from_keras_model(model)
+# converter.optimizations = [tf.lite.Optimize.DEFAULT]
+# converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
+# converter.inference_input_type = tf.uint8
+# converter.inference_output_type = tf.uint8
+# converter.representative_dataset = representative_dataset_gen
+# tflite_quant_model = converter.convert()
+# with open('hand_landmark_new_256x256_full_integer_quant.tflite', 'wb') as w:
+#     w.write(tflite_quant_model)
+# print("Full Integer Quantization complete! - hand_landmark_new_256x256_full_integer_quant.tflite")
 
 
 # Float16 Quantization - Input/Output=float32
@@ -596,7 +597,7 @@ with open('hand_landmark_new_256x256_float16_quant.tflite', 'wb') as w:
 print("Float16 Quantization complete! - hand_landmark_new_256x256_float16_quant.tflite")
 
 
-# EdgeTPU
-import subprocess
-result = subprocess.check_output(["edgetpu_compiler", "-s", "hand_landmark_new_256x256_full_integer_quant.tflite"])
-print(result)
+# # EdgeTPU
+# import subprocess
+# result = subprocess.check_output(["edgetpu_compiler", "-s", "hand_landmark_new_256x256_full_integer_quant.tflite"])
+# print(result)
