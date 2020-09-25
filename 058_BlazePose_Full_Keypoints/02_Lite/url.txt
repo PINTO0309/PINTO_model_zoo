@@ -1,3 +1,6 @@
+https://github.com/yas-sim/blazepose_openvino
+https://github.com/terryky/tfjs_webgl_app
+
 ### https://ai.googleblog.com/2020/08/on-device-real-time-body-pose-tracking.html
 ### https://google.github.io/mediapipe/solutions/pose
 
