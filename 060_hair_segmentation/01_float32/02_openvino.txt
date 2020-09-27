@@ -1,0 +1,16 @@
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --saved_model_dir saved_model \
+  --model_name hair_segmentation_512x512 \
+  --input_shape [1,512,512,4] \
+  --data_type FP32 \
+  --output_dir openvino/hair_segmentation/512x512/FP32
+
+python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
+  --saved_model_dir saved_model \
+  --model_name hair_segmentation_512x512 \
+  --input_shape [1,512,512,4] \
+  --data_type FP16 \
+  --output_dir openvino/hair_segmentation/512x512/FP16
+
+
+
