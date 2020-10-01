@@ -1,0 +1,2 @@
+https://github.com/SystemErrorWang/FacialCartoonization.git
+https://github.com/yas-sim/DBFace-on-OpenVINO

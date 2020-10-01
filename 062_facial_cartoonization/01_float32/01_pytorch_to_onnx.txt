@@ -1,0 +1,11 @@
+### https://github.com/SystemErrorWang/FacialCartoonization.git
+### https://github.com/yas-sim/DBFace-on-OpenVINO
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/tools/model_downloader/pytorch_to_onnx.py \
+--model-name SimpleGenerator \
+--weights weight.pth \
+--import-module inference \
+--input-shape 1,3,256,256 \
+--output-file facial_cartoonization_256x256.onnx \
+--input-names inputs \
+--output-names up4

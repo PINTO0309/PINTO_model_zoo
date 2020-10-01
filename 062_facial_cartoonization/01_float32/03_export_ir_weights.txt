@@ -1,0 +1,2 @@
+$ mkdir -p weights/256x256/FP32
+$ python3 90_ir_weight_extractor.py -m openvino/256x256/FP32/facial_cartoonization_256x256.xml -o weights/256x256/FP32
