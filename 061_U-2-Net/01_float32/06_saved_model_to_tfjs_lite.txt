@@ -1,0 +1,63 @@
+tensorflowjs_converter \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_256x256 \
+  tfjs_model_u2netp_256x256_float32
+
+
+tensorflowjs_converter \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_320x320 \
+  tfjs_model_u2netp_320x320_float32
+
+
+tensorflowjs_converter \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_480x640 \
+  tfjs_model_u2netp_480x640_float32
+
+
+
+
+tensorflowjs_converter \
+  --quantize_float16 \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_256x256 \
+  tfjs_model_u2netp_256x256_float16
+
+
+tensorflowjs_converter \
+  --quantize_float16 \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_320x320 \
+  tfjs_model_u2netp_320x320_float16
+
+
+tensorflowjs_converter \
+  --quantize_float16 \
+  --input_format=tf_saved_model \
+  --output_format=tfjs_graph_model \
+  --signature_name=serving_default \
+  --saved_model_tags=serve \
+  saved_model_480x640 \
+  tfjs_model_u2netp_480x640_float16
+
+
+
+
+
+
