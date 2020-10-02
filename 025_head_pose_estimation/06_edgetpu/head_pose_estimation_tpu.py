@@ -236,7 +236,6 @@ if __name__ == '__main__':
                 face_img = cv2.resize(face_img, (128, 128))
                 face_img = cv2.cvtColor(face_img, cv2.COLOR_BGR2RGB)
                 face_img = np.expand_dims(face_img, axis=0)
-                # face_img = face_img.astype(np.float32)
 
                 # run model - Head Pose
                 face_img = face_img.astype(np.uint8)
