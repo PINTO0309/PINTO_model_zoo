@@ -29,6 +29,7 @@ from tensorflow.keras import Model, Input
 from tensorflow.keras.layers import Conv2D, DepthwiseConv2D, Add, ReLU, MaxPool2D, Reshape, Concatenate, Layer
 from tensorflow.keras.initializers import Constant
 from tensorflow.keras.backend import resize_images
+from tensorflow.python.framework.convert_to_constants import convert_variables_to_constants_v2
 import numpy as np
 import sys
 import tensorflow_datasets as tfds
@@ -912,6 +913,14 @@ model.summary()
 tf.saved_model.save(model, 'saved_model_{}x{}'.format(height, width))
 model.save('u2netp_{}x{}_float32.h5'.format(height, width))
 
+full_model = tf.function(lambda inputs: model(inputs))
+full_model = full_model.get_concrete_function(inputs = (tf.TensorSpec(model.inputs[0].shape, model.inputs[0].dtype)))
+frozen_func = convert_variables_to_constants_v2(full_model, lower_control_flow=False)
+frozen_func.graph.as_graph_def()
+tf.io.write_graph(graph_or_graph_def=frozen_func.graph,
+                    logdir=".",
+                    name="u2netp_{}x{}_float32.pb".format(height, width),
+                    as_text=False)
 
 # No Quantization - Input/Output=float32
 converter = tf.lite.TFLiteConverter.from_keras_model(model)
