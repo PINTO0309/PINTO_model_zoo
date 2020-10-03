@@ -250,7 +250,7 @@ $ python3 deeplabv3plus_usbcam.py
 - Ubuntu 18.04 x86_64
 - OpenVINO 
 - USB Camera, 640x480
-- **[Test Code - tfjs_webgl_app - @terryky](https://github.com/terryky/tfjs_webgl_app.git)**  
+- **[Test Code](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/062_facial_cartoonization/01_float32)**  
 ![015](999_media/015.gif)  
 
 ## 1. Environment
