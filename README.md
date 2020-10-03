@@ -246,7 +246,13 @@ $ python3 deeplabv3plus_usbcam.py
 - USB Camera, 640x480
 - **[Test Code - tfjs_webgl_app - @terryky](https://github.com/terryky/tfjs_webgl_app.git)**  
 ![014](999_media/014.gif)  
-  
+## Sample.13 - Facial Cartoonization, 640x480, OpenVINO Corei7 CPU only
+- Ubuntu 18.04 x86_64
+- OpenVINO 
+- USB Camera, 640x480
+- **[Test Code - tfjs_webgl_app - @terryky](https://github.com/terryky/tfjs_webgl_app.git)**  
+![015](999_media/015.gif)  
+
 ## 1. Environment
 
 - Ubuntu 18.04 x86_64
