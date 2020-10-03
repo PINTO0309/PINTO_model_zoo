@@ -36,9 +36,12 @@ import numpy as np
 import sys
 import tensorflow_datasets as tfds
 
-# tmp = np.load('weights/256x256/FP32/depthwise_conv2d_Kernel')
+# tmp = np.load('weights_bk/256x256/FP32/131_mean_Fused_Mul_49904992_const.npy').transpose(1,2,3,0)
+# # tmp = np.load('weights/256x256/FP32/data_add_46134618_copy_const.npy').flatten()#.transpose(0,2,3,1)#.flatten()
 # print(tmp.shape)
 # print(tmp)
+# import sys
+# sys.exit(0)
 
 # def init_f(shape, dtype=None):
 #        ker = np.load('weights/256x256/FP32/depthwise_conv2d_Kernel')
@@ -54,114 +57,114 @@ inputs = Input(shape=(height, width, 3), batch_size=1, name='input')
 
 # Block_01
 conv1_1 = Conv2D(filters=32, kernel_size=[3, 3], strides=[2, 2], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/128_mean_Fused_Mul_49864988_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_4610_copy_const.npy').transpose(0,2,3,1).flatten()))(inputs)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/128_mean_Fused_Mul_49864988_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_4610_copy_const.npy').flatten()))(inputs)
 conv1_2 = Conv2D(filters=32, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/131_mean_Fused_Mul_49904992_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46134618_copy_const.npy').transpose(0,2,3,1).flatten()))(conv1_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/131_mean_Fused_Mul_49904992_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46134618_copy_const.npy').flatten()))(conv1_1)
 
 # Block_02
 conv2_1 = Conv2D(filters=64, kernel_size=[3, 3], strides=[2, 2], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/134_mean_Fused_Mul_49944996_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46214626_copy_const.npy').transpose(0,2,3,1).flatten()))(conv1_2)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/134_mean_Fused_Mul_49944996_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46214626_copy_const.npy').flatten()))(conv1_2)
 conv2_2 = Conv2D(filters=64, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/137_mean_Fused_Mul_49985000_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46294634_copy_const.npy').transpose(0,2,3,1).flatten()))(conv2_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/137_mean_Fused_Mul_49985000_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46294634_copy_const.npy').flatten()))(conv2_1)
 
 # Block_03
 conv3_1 = Conv2D(filters=96, kernel_size=[3, 3], strides=[2, 2], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/140_mean_Fused_Mul_50025004_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46374642_copy_const.npy').transpose(0,2,3,1).flatten()))(conv2_2)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/140_mean_Fused_Mul_50025004_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46374642_copy_const.npy').flatten()))(conv2_2)
 conv3_2 = Conv2D(filters=96, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/143_mean_Fused_Mul_50065008_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46454650_copy_const.npy').transpose(0,2,3,1).flatten()))(conv3_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/143_mean_Fused_Mul_50065008_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46454650_copy_const.npy').flatten()))(conv3_1)
 
 # Block_04
 conv4_1 = Conv2D(filters=128, kernel_size=[3, 3], strides=[2, 2], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/146_mean_Fused_Mul_50105012_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46534658_copy_const.npy').transpose(0,2,3,1).flatten()))(conv3_2)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/146_mean_Fused_Mul_50105012_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46534658_copy_const.npy').flatten()))(conv3_2)
 conv4_2 = Conv2D(filters=128, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/149_mean_Fused_Mul_50145016_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46614666_copy_const.npy').transpose(0,2,3,1).flatten()))(conv4_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/149_mean_Fused_Mul_50145016_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46614666_copy_const.npy').flatten()))(conv4_1)
 
 # Block_05
 conv5_1 = Conv2D(filters=128, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/152_mean_Fused_Mul_50185020_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46694674_copy_const.npy').transpose(0,2,3,1).flatten()))(conv4_2)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/152_mean_Fused_Mul_50185020_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46694674_copy_const.npy').flatten()))(conv4_2)
 conv5_2 = Conv2D(filters=128, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1],
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/155_mean_Fused_Mul_50225024_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46774682_copy_const.npy').transpose(0,2,3,1).flatten()))(conv5_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/155_mean_Fused_Mul_50225024_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46774682_copy_const.npy').flatten()))(conv5_1)
 add5_1 = Add()([conv4_2, conv5_2])
 relu5_1 = ReLU()(add5_1)
 
 # Block_06
 conv6_1 = Conv2D(filters=128, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/159_mean_Fused_Mul_50265028_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46854690_copy_const.npy').transpose(0,2,3,1).flatten()))(relu5_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/159_mean_Fused_Mul_50265028_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46854690_copy_const.npy').flatten()))(relu5_1)
 conv6_2 = Conv2D(filters=128, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1],
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/162_mean_Fused_Mul_50305032_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46934698_copy_const.npy').transpose(0,2,3,1).flatten()))(conv6_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/162_mean_Fused_Mul_50305032_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_46934698_copy_const.npy').flatten()))(conv6_1)
 add6_1 = Add()([relu5_1, conv6_2])
 relu6_1 = ReLU()(add6_1)
 
 # Block_07
 conv7_1 = Conv2D(filters=128, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/166_mean_Fused_Mul_50345036_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47014706_copy_const.npy').transpose(0,2,3,1).flatten()))(relu6_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/166_mean_Fused_Mul_50345036_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47014706_copy_const.npy').flatten()))(relu6_1)
 conv7_2 = Conv2D(filters=128, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1],
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/169_mean_Fused_Mul_50385040_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47094714_copy_const.npy').transpose(0,2,3,1).flatten()))(conv7_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/169_mean_Fused_Mul_50385040_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47094714_copy_const.npy').flatten()))(conv7_1)
 add7_1 = Add()([relu6_1, conv7_2])
 relu7_1 = ReLU()(add7_1)
 
 # Block_08
 conv8_1 = Conv2D(filters=128, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/173_mean_Fused_Mul_50425044_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47174722_copy_const.npy').transpose(0,2,3,1).flatten()))(relu7_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/173_mean_Fused_Mul_50425044_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47174722_copy_const.npy').flatten()))(relu7_1)
 conv8_2 = Conv2D(filters=128, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1],
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/176_mean_Fused_Mul_50465048_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47254730_copy_const.npy').transpose(0,2,3,1).flatten()))(conv8_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/176_mean_Fused_Mul_50465048_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47254730_copy_const.npy').flatten()))(conv8_1)
 add8_1 = Add()([relu7_1, conv8_2])
 relu8_1 = ReLU()(add8_1)
 
 # Block_09
 conv9_1 = Conv2D(filters=128, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/180_mean_Fused_Mul_50505052_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47334738_copy_const.npy').transpose(0,2,3,1).flatten()))(relu8_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/180_mean_Fused_Mul_50505052_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47334738_copy_const.npy').flatten()))(relu8_1)
 resize9_1 = resize_images(conv9_1, 2, 2, 'channels_last', interpolation='nearest')
 conv9_2 = Conv2D(filters=96, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/192_mean_Fused_Mul_50545056_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47414746_copy_const.npy').transpose(0,2,3,1).flatten()))(resize9_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/192_mean_Fused_Mul_50545056_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47414746_copy_const.npy').flatten()))(resize9_1)
 add9_1 = Add()([conv3_2, conv9_2])
 
 # Block_10
 conv10_1 = Conv2D(filters=96, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/196_mean_Fused_Mul_50585060_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47494754_copy_const.npy').transpose(0,2,3,1).flatten()))(add9_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/196_mean_Fused_Mul_50585060_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47494754_copy_const.npy').flatten()))(add9_1)
 resize10_1 = resize_images(conv10_1, 2, 2, 'channels_last', interpolation='nearest')
 conv10_2 = Conv2D(filters=64, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/208_mean_Fused_Mul_50625064_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47574762_copy_const.npy').transpose(0,2,3,1).flatten()))(resize10_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/208_mean_Fused_Mul_50625064_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47574762_copy_const.npy').flatten()))(resize10_1)
 add10_1 = Add()([conv2_2, conv10_2])
 
 # Block_11
 conv11_1 = Conv2D(filters=64, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/212_mean_Fused_Mul_50665068_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47654770_copy_const.npy').transpose(0,2,3,1).flatten()))(add10_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/212_mean_Fused_Mul_50665068_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47654770_copy_const.npy').flatten()))(add10_1)
 resize11_1 = resize_images(conv11_1, 2, 2, 'channels_last', interpolation='nearest')
 conv11_2 = Conv2D(filters=32, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/224_mean_Fused_Mul_50705072_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47734778_copy_const.npy').transpose(0,2,3,1).flatten()))(resize11_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/224_mean_Fused_Mul_50705072_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47734778_copy_const.npy').flatten()))(resize11_1)
 add11_1 = Add()([conv1_2, conv11_2])
 
 # Block_12
 conv12_1 = Conv2D(filters=32, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1], activation='relu',
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/228_mean_Fused_Mul_50745076_const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47814786_copy_const.npy').transpose(0,2,3,1).flatten()))(add11_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/228_mean_Fused_Mul_50745076_const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/data_add_47814786_copy_const.npy').flatten()))(add11_1)
 resize12_1 = resize_images(conv12_1, 2, 2, 'channels_last', interpolation='nearest')
 conv12_2 = Conv2D(filters=3, kernel_size=[3, 3], strides=[1, 1], padding="same", dilation_rate=[1, 1],
-                 kernel_initializer=Constant(np.load('weights/256x256/FP32/onnx_initializer_node_up4.conv_layer.4.weight_Output_0_Data__const.npy').transpose(1,2,3,0)),
-                 bias_initializer=Constant(np.load('weights/256x256/FP32/239_Dims2647_copy_const.npy').transpose(0,2,3,1).flatten()))(resize12_1)
+                 kernel_initializer=Constant(np.load('weights/256x256/FP32/onnx_initializer_node_up4.conv_layer.4.weight_Output_0_Data__const.npy').transpose(2,3,1,0)),
+                 bias_initializer=Constant(np.load('weights/256x256/FP32/239_Dims2647_copy_const.npy').flatten()))(resize12_1)
 tanh12_1 = tanh(conv12_2)
 
 
