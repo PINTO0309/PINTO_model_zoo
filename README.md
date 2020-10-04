@@ -80,7 +80,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |009|MSLPG_for_Monocular_Depth_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/009_multi-scale_local_planar_guidance_for_monocular_depth_estimation)|⚫||||||||||
-|014|tf-monodepth2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/014_tf-monodepth2)|⚫|⚫|⚫||⚫||||||
+|014|tf-monodepth2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/014_tf-monodepth2)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||
 |028|struct2depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/028_struct2depth)|⚫|⚫|||⚫||||||
 ### 8. Semantic Segmentation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
