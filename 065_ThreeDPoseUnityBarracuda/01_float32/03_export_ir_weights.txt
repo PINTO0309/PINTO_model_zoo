@@ -1,0 +1,5 @@
+mkdir -p weights/448x448/FP32
+
+python3 90_ir_weight_extractor.py \
+  -m openvino/448x448/FP32/Resnet34_3inputs_448x448_20200609.xml \
+  -o weights/448x448/FP32
