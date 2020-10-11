@@ -1,0 +1,47 @@
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+  --saved_model_dir saved_model_kitti_192x640 \
+  --model_name footprints_kitti_192x640 \
+  --input input \
+  --input_shape [1,192,640,3] \
+  --data_type FP32 \
+  --output_dir openvino_optimized/kitti_192x640/FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+  --saved_model_dir saved_model_kitti_192x640 \
+  --model_name footprints_kitti_192x640 \
+  --input input \
+  --input_shape [1,192,640,3] \
+  --data_type FP16 \
+  --output_dir openvino_optimized/kitti_192x640/FP16
+
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model saved_model_handheld_256x448.onnx \
+  --input input \
+  --input_shape [1,3,256,448] \
+  --data_type FP32 \
+  --output_dir openvino_optimized/handheld_256x448/FP32 \
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model saved_model_handheld_256x448.onnx \
+  --input input \
+  --input_shape [1,3,256,448] \
+  --data_type FP16 \
+  --output_dir openvino_optimized/handheld_256x448/FP16
+
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model saved_model_matterport_512x640.onnx \
+  --input input \
+  --input_shape [1,3,512,640] \
+  --data_type FP32 \
+  --output_dir openvino_optimized/matterport_512x640/FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model saved_model_matterport_512x640.onnx \
+  --input input \
+  --input_shape [1,3,512,640] \
+  --data_type FP16 \
+  --output_dir openvino_optimized/matterport_512x640/FP16
+
+
