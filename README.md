@@ -139,7 +139,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 - MP4 30FPS, 640x360
 - Approximately 14FPS ~ 15FPS for all processes from pre-processing, inference, post-processing, and display
 ```bash
-$ cd 06_mobilenetv2-ssdlite/02_voc/03_integer_quantization
+$ cd 006_mobilenetv2-ssdlite/02_voc/03_integer_quantization
 $ ./download.sh && cd ..
 $ python3 mobilenetv2ssdlite_movie_sync.py
 ```
@@ -154,7 +154,7 @@ $ python3 mobilenetv2ssdlite_movie_sync.py
 - IPS 1080p HDMI Display
 - Approximately 12FPS for all processes from pre-processing, inference, post-processing, and display
 ```bash
-$ cd 06_mobilenetv2-ssdlite/02_voc/03_integer_quantization
+$ cd 006_mobilenetv2-ssdlite/02_voc/03_integer_quantization
 $ ./download.sh && cd ..
 $ python3 mobilenetv2ssdlite_usbcam_sync.py
 ```
@@ -170,7 +170,7 @@ $ python3 mobilenetv2ssdlite_usbcam_sync.py
 - IPS 1080p HDMI Display
 - Approximately 13FPS for all processes from pre-processing, inference, post-processing, and display
 ```bash
-$ cd 25_head_pose_estimation/03_integer_quantization
+$ cd 025_head_pose_estimation/03_integer_quantization
 $ ./download.sh
 $ python3 head_pose_estimation.py
 ```
@@ -184,7 +184,7 @@ $ python3 head_pose_estimation.py
 - IPS 1080p HDMI Display
 - Approximately 8.5 FPS for all processes from pre-processing, inference, post-processing, and display
 ```bash
-$ cd 26_mobile-deeplabv3-plus/03_integer_quantization
+$ cd 026_mobile-deeplabv3-plus/03_integer_quantization
 $ ./download.sh
 $ python3 deeplabv3plus_usbcam.py
 ```
