@@ -18,6 +18,8 @@ I have been working on quantization of various models as a hobby, but I have ski
 
 - **[[English ver.] [Tensorflow Lite] Various Neural Network Model quantization methods for Tensorflow Lite (Weight Quantization, Integer Quantization, Full Integer Quantization, Float16 Quantization, EdgeTPU). As of May 05, 2020.](https://qiita.com/PINTO/items/865250ee23a15339d556)**
 
+- **[Conversion of PyTorch->ONNX->OpenVINO IR model to Tensorflow saved_model / h5 / tflite / pb](https://github.com/PINTO0309/openvino2tensorflow.git)**
+
 ## List of pre-quantized models
 \* WQ = Weight Quantization  
 \** OV = OpenVINO IR  
