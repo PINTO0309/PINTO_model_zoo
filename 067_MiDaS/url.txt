@@ -1,0 +1,3 @@
+https://github.com/openvinotoolkit/open_model_zoo/tree/master/tools/downloader
+https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/public/midasnet
+https://arxiv.org/abs/1907.01341

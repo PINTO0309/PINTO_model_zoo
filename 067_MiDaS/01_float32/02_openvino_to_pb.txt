@@ -1,0 +1,6 @@
+### https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/public/midasnet
+### https://github.com/PINTO0309/openvino2tensorflow.git
+
+python3 openvino2tensorflow.py \
+  --model_path=openvino/midasnet/FP32/midasnet.xml \
+  --output_pb=True
