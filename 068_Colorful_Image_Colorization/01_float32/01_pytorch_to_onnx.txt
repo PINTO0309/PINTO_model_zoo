@@ -1,0 +1,19 @@
+### https://github.com/richzhang/colorization.git
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/tools/model_downloader/pytorch_to_onnx.py \
+--model-name ECCVGenerator \
+--weights colorization_release_v2-9b330a0b.pth \
+--import-module colorizers.eccv16 \
+--input-shape 1,1,256,256 \
+--output-file colorization_release_v2_256x256.onnx \
+--input-names input_l \
+--output-names unnormalize_ab
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/tools/model_downloader/pytorch_to_onnx.py \
+--model-name SIGGRAPHGenerator \
+--weights siggraph17-df00044c.pth \
+--import-module colorizers.siggraph17 \
+--input-shape 1,1,256,256 \
+--output-file siggraph17_256x256.onnx \
+--input-names input_A \
+--output-names unnormalize_ab

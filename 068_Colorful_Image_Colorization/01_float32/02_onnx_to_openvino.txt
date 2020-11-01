@@ -1,0 +1,28 @@
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+ --input_model colorization_release_v2_256x256.onnx \
+  --output_dir openvino/colorization_release_v2_256x256/FP32 \
+ --data_type FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+ --input_model siggraph17_256x256.onnx \
+ --input input_A \
+ --input_shape [1,1,256,256] \
+ --output_dir openvino/siggraph17_256x256/FP32 \
+ --data_type FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+ --input_model colorization_release_v2_256x256.onnx \
+  --output_dir openvino/colorization_release_v2_256x256/FP16 \
+ --data_type FP16
+
+
+cd ${HOME}/inference_engine_cpp_samples_build/intel64/Release
+
+./benchmark_app \
+  -m ${HOME}/git/colorization/colorizers/openvino/colorization_release_v2_256x256/FP32/colorization_release_v2_256x256.xml \
+  -i ${HOME}/Pictures \
+  -d CPU \
+  -nthreads 12
+
+
+
