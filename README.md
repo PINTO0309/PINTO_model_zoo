@@ -20,6 +20,8 @@ I have been working on quantization of various models as a hobby, but I have ski
 
 - **[Conversion of PyTorch->ONNX->OpenVINO IR model to Tensorflow saved_model / h5 / tflite / pb](https://github.com/PINTO0309/openvino2tensorflow.git)**
 
+- **[[English] Converting PyTorch, ONNX, Caffe, and OpenVINO (NCHW) models to Tensorflow / TensorflowLite (NHWC) in a snap - Qiita](https://qiita.com/PINTO/items/ed06e03eb5c007c2e102)**
+
 ## List of pre-quantized models
 \* WQ = Weight Quantization  
 \** OV = OpenVINO IR  
