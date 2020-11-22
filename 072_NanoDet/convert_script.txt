@@ -1,0 +1,18 @@
+openvino2tensorflow \
+  --model_path onnx/openvino/nanodet_320x320/FP32/nanodet_320x320.xml \
+  --output_saved_model True \
+  --output_h5 True \
+  --output_pb True \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True
+
+
+openvino2tensorflow \
+  --model_path onnx/openvino/nanodet_416x416/FP32/nanodet_416x416.xml \
+  --output_saved_model True \
+  --output_h5 True \
+  --output_pb True \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True
