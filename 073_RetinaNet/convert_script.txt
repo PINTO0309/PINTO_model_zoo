@@ -1,0 +1,11 @@
+openvino2tensorflow \
+  --model_path onnx/openvino/retinanet-9_480x640/FP32/retinanet-9.xml \
+  --output_pb True \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True
+
+pb_to_saved_model \
+  --pb_file_path saved_model/model_float32.pb \
+  --inputs inputs:0 \
+  --outputs Identity:0,Identity_1:0,Identity_2:0,Identity_3:0,Identity_4:0,Identity_5:0,Identity_6:0,Identity_7:0,Identity_8:0,Identity_9:0
