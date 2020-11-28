@@ -22,6 +22,8 @@ I have been working on quantization of various models as a hobby, but I have ski
 
 - **[[English] Converting PyTorch, ONNX, Caffe, and OpenVINO (NCHW) models to Tensorflow / TensorflowLite (NHWC) in a snap - Qiita](https://qiita.com/PINTO/items/ed06e03eb5c007c2e102)**
 
+- **[[TF2 Object Detection] Converting SSD models into .tflite uint8 format #9371](https://github.com/tensorflow/models/issues/9371#issuecomment-735252080)**
+
 ## List of pre-quantized models
 \* WQ = Weight Quantization  
 \** OV = OpenVINO IR  
