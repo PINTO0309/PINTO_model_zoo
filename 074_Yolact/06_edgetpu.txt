@@ -1,0 +1,1 @@
+edgetpu_compiler -s yolact_550x550_opt_full_integer_quant.tflite
