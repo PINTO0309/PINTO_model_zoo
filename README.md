@@ -24,6 +24,8 @@ I have been working on quantization of various models as a hobby, but I have ski
 
 - **[[TF2 Object Detection] Converting SSD models into .tflite uint8 format #9371](https://github.com/tensorflow/models/issues/9371#issuecomment-735252080)**
 
+- **[tf.image.resizeを含むFull Integer Quantization (.tflite)モデルのEdgeTPUモデルへの変換後の推論時に発生する "main.ERROR - Only float32 and uint8 are supported currently, got -xxx.Node number n (op name) failed to invoke" エラーの回避方法](https://qiita.com/PINTO/items/6ff62da1d02089442c8c)**
+
 ## List of pre-quantized models
 \* WQ = Weight Quantization  
 \** OV = OpenVINO IR  
