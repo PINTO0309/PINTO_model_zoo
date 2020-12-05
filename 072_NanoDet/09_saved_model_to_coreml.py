@@ -1,4 +1,4 @@
-### tf_nightly-2.5.0.dev20201123
+### tensorflow==2.3.1
 
 import tensorflow as tf
 import coremltools as ct

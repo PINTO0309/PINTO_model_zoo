@@ -1,4 +1,4 @@
-### tf_nightly-2.5.0.dev20201123
+### tf_nightly==2.5.0-dev20201204
 
 import tensorflow as tf
 import tensorflow_datasets as tfds
