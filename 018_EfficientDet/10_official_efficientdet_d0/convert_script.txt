@@ -1,3 +1,12 @@
+'''
+sudo pip3 uninstall tensorboard-plugin-wit tb-nightly tensorboard \
+                      tf-estimator-nightly tensorflow-gpu \
+                      tensorflow tf-nightly tensorflow_estimator
+sudo pip3 install tf-nightly
+sudo pip3 install openvino2tensorflow --upgrade
+'''
+
+
 openvino2tensorflow \
   --model_path openvino/efficientdet_d0_512x512/FP32/saved_model.xml \
   --output_pb True
