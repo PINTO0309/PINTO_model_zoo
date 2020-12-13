@@ -137,6 +137,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |022|Learning_to_See_Moving_Objects_in_the_Dark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/022_Learning_to_See_Moving_Objects_in_the_Dark)|⚫|⚫|||⚫||||||
 |071|Noise2Noise|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/071_Noise2Noise)|⚫|⚫|⚫|⚫|⚫|||||srresnet/clear only|
 |076|Deep_White_Balance|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/076_Deep_White_Balance)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫||
+|077|ESRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/077_ESRGAN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
