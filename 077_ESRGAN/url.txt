@@ -1,2 +1,3 @@
 https://tfhub.dev/captain-pool/esrgan-tf2/1
 https://github.com/NobuoTsukamoto/edge_tpu/tree/master/super_resolution
+https://github.com/xinntao/ESRGAN.git
