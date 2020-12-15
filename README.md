@@ -116,6 +116,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |061|U^2-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/061_U-2-Net)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 |069|ENet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/069_ENet)|⚫|⚫|||⚫|||⚫|⚫|Cityscapes,512x1024|
 |075|ERFNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/075_ERFNet)|⚫|⚫|⚫|⚫|⚫|⚫||⚫|⚫|Cityscapes,256x512,384x786,512x1024|
+|078|MODNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/078_MODNet)|⚫|||||⚫|⚫|||ONNX 512x512,WIP|
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
