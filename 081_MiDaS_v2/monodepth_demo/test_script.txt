@@ -1,0 +1,10 @@
+python3 monodepth_demo.py \
+-m ../FP16/midasv2-small.xml \
+-i ../FP16/dog.jpg \
+-d MYRIAD
+
+python3 monodepth_demo.py \
+-m ../midasv2_small_256x256/FP16/midasv2-small.xml \
+-i ../midasv2_small_256x256/FP16/dog.jpg \
+-d CPU
+
