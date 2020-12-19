@@ -93,7 +93,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |053|BlazePose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/053_BlazePose)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
 |058|BlazePose (Full Keypoints)|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/058_BlazePose_Full_Keypoints)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
 |065|ThreeDPoseUnityBarracuda|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/065_ThreeDPoseUnityBarracuda)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|**[YouTube](https://www.youtube.com/watch?v=L0ieoaOD6Po)**|
-|080|tf_pose_estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/080_tf_pose_estimation)|⚫|⚫|||⚫|⚫|||||
+|080|tf_pose_estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/080_tf_pose_estimation)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 ### 7. Depth Estimation from Monocular Images
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
