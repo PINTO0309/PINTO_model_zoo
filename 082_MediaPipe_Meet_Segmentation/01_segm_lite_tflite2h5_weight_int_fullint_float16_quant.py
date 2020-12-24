@@ -17,13 +17,12 @@
 
 ### How to initialize a convolution layer with an arbitrary kernel in Keras? https://stackoverrun.com/ja/q/12269118
 
-###  saved_model_cli show --dir saved_model_hand_landmark_new/ --tag_set serve --signature_def serving_default
+###  saved_model_cli show --dir saved_model_128x128/ --tag_set serve --signature_def serving_default
 
 import tensorflow as tf
-import tf_slim as slim
 import tensorflow_datasets as tfds
 from tensorflow.keras import Model, Input
-from tensorflow.keras.layers import Conv2D, DepthwiseConv2D, Add, ReLU, MaxPool2D, Reshape, Concatenate, AveragePooling2D, Dense, Lambda, Conv2DTranspose
+from tensorflow.keras.layers import Conv2D, DepthwiseConv2D, Add, AveragePooling2D, Dense, Lambda, Conv2DTranspose
 from tensorflow.keras.initializers import Constant
 from tensorflow.python.framework.convert_to_constants import convert_variables_to_constants_v2
 import numpy as np
