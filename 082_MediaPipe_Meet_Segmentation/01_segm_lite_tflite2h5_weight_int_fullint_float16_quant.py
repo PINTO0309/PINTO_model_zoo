@@ -17,12 +17,13 @@
 
 ### How to initialize a convolution layer with an arbitrary kernel in Keras? https://stackoverrun.com/ja/q/12269118
 
-###  saved_model_cli show --dir saved_model_128x128/ --tag_set serve --signature_def serving_default
+###  saved_model_cli show --dir saved_model_hand_landmark_new/ --tag_set serve --signature_def serving_default
 
 import tensorflow as tf
+import tf_slim as slim
 import tensorflow_datasets as tfds
 from tensorflow.keras import Model, Input
-from tensorflow.keras.layers import Conv2D, DepthwiseConv2D, Add, AveragePooling2D, Dense, Lambda, Conv2DTranspose
+from tensorflow.keras.layers import Conv2D, DepthwiseConv2D, Add, ReLU, MaxPool2D, Reshape, Concatenate, AveragePooling2D, Dense, Lambda, Conv2DTranspose
 from tensorflow.keras.initializers import Constant
 from tensorflow.python.framework.convert_to_constants import convert_variables_to_constants_v2
 import numpy as np
@@ -53,12 +54,18 @@ def optimizing_hardswish_for_edgetp(input_op):
 def upsampling2d_bilinear(x, upsampling_factor_height, upsampling_factor_width):
     h = x.shape[1] * upsampling_factor_height
     w = x.shape[2] * upsampling_factor_width
-    return tf.compat.v1.image.resize_bilinear(x, (h, w))
+    if optimizing_hardswish_for_edgetpu_flg:
+        return tf.compat.v1.image.resize_bilinear(x, (h, w))
+    else:
+        return tf.image.resize(x, [h, w], method='bilinear')
 
 def upsampling2d_nearest(x, upsampling_factor_height, upsampling_factor_width):
     h = x.shape[1] * upsampling_factor_height
     w = x.shape[2] * upsampling_factor_width
-    return tf.compat.v1.image.resize_nearest_neighbor(x, (h, w))
+    if optimizing_hardswish_for_edgetpu_flg:
+        return tf.compat.v1.image.resize_nearest_neighbor(x, (h, w))
+    else:
+        return tf.image.resize(x, [h, w], method='nearest')
 
 
 # Input
@@ -784,71 +791,71 @@ print(result.decode('utf-8'))
 
 
 
-# TensorFlow.js convert
-import subprocess
-try:
-    result = subprocess.check_output(['tensorflowjs_converter',
-                                    '--input_format', 'tf_saved_model',
-                                    '--output_format', 'tfjs_graph_model',
-                                    '--signature_name', 'serving_default',
-                                    '--saved_model_tags', 'serve',
-                                    saved_model_path, f'{saved_model_path}/tfjs_model_float32'],
-                                    stderr=subprocess.PIPE).decode('utf-8')
-    print(result)
-    print(f'TensorFlow.js convertion complete! - {saved_model_path}/tfjs_model_float32')
-except subprocess.CalledProcessError as e:
-    print(f'ERROR:', e.stderr.decode('utf-8'))
-    import traceback
-    traceback.print_exc()
-try:
-    result = subprocess.check_output(['tensorflowjs_converter',
-                                    '--quantize_float16',
-                                    '--input_format', 'tf_saved_model',
-                                    '--output_format', 'tfjs_graph_model',
-                                    '--signature_name', 'serving_default',
-                                    '--saved_model_tags', 'serve',
-                                    saved_model_path, f'{saved_model_path}/tfjs_model_float16'],
-                                    stderr=subprocess.PIPE).decode('utf-8')
-    print(result)
-    print(f'TensorFlow.js convertion complete! - {saved_model_path}/tfjs_model_float16')
-except subprocess.CalledProcessError as e:
-    print(f'ERROR:', e.stderr.decode('utf-8'))
-    import traceback
-    traceback.print_exc()
+# # TensorFlow.js convert
+# import subprocess
+# try:
+#     result = subprocess.check_output(['tensorflowjs_converter',
+#                                     '--input_format', 'tf_saved_model',
+#                                     '--output_format', 'tfjs_graph_model',
+#                                     '--signature_name', 'serving_default',
+#                                     '--saved_model_tags', 'serve',
+#                                     saved_model_path, f'{saved_model_path}/tfjs_model_float32'],
+#                                     stderr=subprocess.PIPE).decode('utf-8')
+#     print(result)
+#     print(f'TensorFlow.js convertion complete! - {saved_model_path}/tfjs_model_float32')
+# except subprocess.CalledProcessError as e:
+#     print(f'ERROR:', e.stderr.decode('utf-8'))
+#     import traceback
+#     traceback.print_exc()
+# try:
+#     result = subprocess.check_output(['tensorflowjs_converter',
+#                                     '--quantize_float16',
+#                                     '--input_format', 'tf_saved_model',
+#                                     '--output_format', 'tfjs_graph_model',
+#                                     '--signature_name', 'serving_default',
+#                                     '--saved_model_tags', 'serve',
+#                                     saved_model_path, f'{saved_model_path}/tfjs_model_float16'],
+#                                     stderr=subprocess.PIPE).decode('utf-8')
+#     print(result)
+#     print(f'TensorFlow.js convertion complete! - {saved_model_path}/tfjs_model_float16')
+# except subprocess.CalledProcessError as e:
+#     print(f'ERROR:', e.stderr.decode('utf-8'))
+#     import traceback
+#     traceback.print_exc()
 
-# TF-TRT (TensorRT) convert
-try:
-    def input_fn():
-        input_shapes = []
-        for tf_input in model.inputs:
-            input_shapes.append(np.zeros(tf_input.shape).astype(np.float32))
-        yield input_shapes
+# # TF-TRT (TensorRT) convert
+# try:
+#     def input_fn():
+#         input_shapes = []
+#         for tf_input in model.inputs:
+#             input_shapes.append(np.zeros(tf_input.shape).astype(np.float32))
+#         yield input_shapes
 
-    params = tf.experimental.tensorrt.ConversionParams(precision_mode='FP32', maximum_cached_engines=10000)
-    converter = tf.experimental.tensorrt.Converter(input_saved_model_dir=saved_model_path, conversion_params=params)
-    converter.convert()
-    converter.build(input_fn=input_fn)
-    converter.save(f'{saved_model_path}/tensorrt_saved_model_float32')
-    print(f'TF-TRT (TensorRT) convertion complete! - {saved_model_path}/tensorrt_saved_model_float32')
-    params = tf.experimental.tensorrt.ConversionParams(precision_mode='FP16', maximum_cached_engines=10000)
-    converter = tf.experimental.tensorrt.Converter(input_saved_model_dir=saved_model_path, conversion_params=params)
-    converter.convert()
-    converter.build(input_fn=input_fn)
-    converter.save(f'{saved_model_path}/tensorrt_saved_model_float16')
-    print(f'TF-TRT (TensorRT) convertion complete! - {saved_model_path}/tensorrt_saved_model_float16')
-except Exception as e:
-    print(f'ERROR:', e)
-    import traceback
-    traceback.print_exc()
-    print(f'The binary versions of TensorFlow and TensorRT may not be compatible. Please check the version compatibility of each package.')
+#     params = tf.experimental.tensorrt.ConversionParams(precision_mode='FP32', maximum_cached_engines=10000)
+#     converter = tf.experimental.tensorrt.Converter(input_saved_model_dir=saved_model_path, conversion_params=params)
+#     converter.convert()
+#     converter.build(input_fn=input_fn)
+#     converter.save(f'{saved_model_path}/tensorrt_saved_model_float32')
+#     print(f'TF-TRT (TensorRT) convertion complete! - {saved_model_path}/tensorrt_saved_model_float32')
+#     params = tf.experimental.tensorrt.ConversionParams(precision_mode='FP16', maximum_cached_engines=10000)
+#     converter = tf.experimental.tensorrt.Converter(input_saved_model_dir=saved_model_path, conversion_params=params)
+#     converter.convert()
+#     converter.build(input_fn=input_fn)
+#     converter.save(f'{saved_model_path}/tensorrt_saved_model_float16')
+#     print(f'TF-TRT (TensorRT) convertion complete! - {saved_model_path}/tensorrt_saved_model_float16')
+# except Exception as e:
+#     print(f'ERROR:', e)
+#     import traceback
+#     traceback.print_exc()
+#     print(f'The binary versions of TensorFlow and TensorRT may not be compatible. Please check the version compatibility of each package.')
 
-# CoreML convert
-try:
-    import coremltools as ct 
-    mlmodel = ct.convert(saved_model_path, source='tensorflow')
-    mlmodel.save(f'{saved_model_path}/model_coreml_float32.mlmodel')
-    print(f'CoreML convertion complete! - {saved_model_path}/model_coreml_float32.mlmodel')
-except Exception as e:
-    print(f'ERROR:', e)
-    import traceback
-    traceback.print_exc()
+# # CoreML convert
+# try:
+#     import coremltools as ct 
+#     mlmodel = ct.convert(saved_model_path, source='tensorflow')
+#     mlmodel.save(f'{saved_model_path}/model_coreml_float32.mlmodel')
+#     print(f'CoreML convertion complete! - {saved_model_path}/model_coreml_float32.mlmodel')
+# except Exception as e:
+#     print(f'ERROR:', e)
+#     import traceback
+#     traceback.print_exc()
