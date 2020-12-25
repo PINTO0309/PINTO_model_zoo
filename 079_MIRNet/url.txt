@@ -1,0 +1,2 @@
+https://github.com/soumik12345/MIRNet.git
+https://github.com/sayakpaul/MIRNet-TFLite.git

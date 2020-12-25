@@ -1,0 +1,3 @@
+https://github.com/intel-isl/MiDaS.git
+https://docs.openvinotoolkit.org/2021.1/omz_demos_python_demos_monodepth_demo_README.html
+https://colab.research.google.com/drive/1JeL6KvU-Qqp8q6sQY30Sc0LvRMK-IV1_

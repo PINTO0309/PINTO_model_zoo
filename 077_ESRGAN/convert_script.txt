@@ -1,0 +1,65 @@
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,50,50,3] \
+--data_type FP32 \
+--output_dir openvino/esrgan/FP32/50x50
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,50,50,3] \
+--data_type FP16 \
+--output_dir openvino/esrgan/FP16/50x50
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,100,100,3] \
+--data_type FP32 \
+--output_dir openvino/esrgan/FP32/100x100
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,100,100,3] \
+--data_type FP16 \
+--output_dir openvino/esrgan/FP16/100x100
+
+
+### tensorflow==2.3.1
+openvino2tensorflow \
+  --model_path openvino/esrgan/FP32/50x50/saved_model.xml \
+  --output_saved_model True \
+  --output_pb True \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True
+
+### tf-nightly
+openvino2tensorflow \
+  --model_path openvino/esrgan/FP32/50x50/saved_model.xml \
+  --output_integer_quant_tflite True \
+  --output_full_integer_quant_tflite True \
+  --output_edgetpu True
+
+
+### tensorflow==2.3.1
+openvino2tensorflow \
+  --model_path openvino/esrgan/FP32/100x100/saved_model.xml \
+  --output_saved_model True \
+  --output_pb True \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True
+
+### tf-nightly
+openvino2tensorflow \
+  --model_path openvino/esrgan/FP32/100x100/saved_model.xml \
+  --output_integer_quant_tflite True \
+  --output_full_integer_quant_tflite True \
+  --output_edgetpu True
+
+

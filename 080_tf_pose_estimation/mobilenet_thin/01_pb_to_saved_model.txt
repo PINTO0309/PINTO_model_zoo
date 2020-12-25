@@ -1,0 +1,4 @@
+pb_to_saved_model \
+  --pb_file_path graph_opt.pb \
+  --inputs image:0 \
+  --outputs Openpose/concat_stage7:0

@@ -1,0 +1,5 @@
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+  --saved_model_dir saved_model_from_pb \
+  --input_shape [1,368,656,3] \
+  --data_type FP32 \
+  --output_dir openvino/FP32/368x656

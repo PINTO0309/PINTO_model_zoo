@@ -1,0 +1,4 @@
+edgetpu_compiler -s erfnet_256x512_cityscapes_full_integer_quant.tflite
+edgetpu_compiler -s erfnet_384x768_cityscapes_full_integer_quant.tflite
+
+edgetpu_compiler -s erfnet_512x1024_cityscapes_full_integer_quant.tflite
