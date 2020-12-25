@@ -698,7 +698,7 @@ convtrans_29_1 = tf.nn.conv2d_transpose(input=add_28_1,
 # add_29_1 = Add(name='BaiasAdd')([convtrans_29_1, np.load('weights/segment_Bias').reshape(1,1,1,2).astype(np.float32)])
 # add_29_1 = Add()([convtrans_29_1, np.load('weights/segment_Bias')[::-1].reshape(1,1,1,2).astype(np.float32)])
 # add_29_1 = Add(name='BaiasAdd')([id_29_1, np.load('weights/segment_Bias').astype(np.float32)])
-add_29_1 = tf.math.add(convtrans_29_1, np.load('weights/segment_Bias').astype(np.float32))
+add_29_1 = tf.math.add(convtrans_29_1, np.load('weights/segment_Bias')[::-1].astype(np.float32))
 
 model = Model(inputs=inputs, outputs=[add_29_1])
 model.summary()
@@ -708,154 +708,154 @@ model.summary()
 
 saved_model_path = f'saved_model_{height}x{width}'
 
-tf.saved_model.save(model, saved_model_path)
-model.save(f'{saved_model_path}/segm_lite_v509_{height}x{width}_float32.h5')
+# tf.saved_model.save(model, saved_model_path)
+# model.save(f'{saved_model_path}/segm_lite_v509_{height}x{width}_float32.h5')
 
-full_model = tf.function(lambda inputs: model(inputs))
-full_model = full_model.get_concrete_function(inputs = (tf.TensorSpec(model.inputs[0].shape, model.inputs[0].dtype)))
-frozen_func = convert_variables_to_constants_v2(full_model, lower_control_flow=False)
-frozen_func.graph.as_graph_def()
-tf.io.write_graph(graph_or_graph_def=frozen_func.graph,
-                    logdir='.',
-                    name=f'{saved_model_path}/segm_lite_v509_{height}x{width}_float32.pb',
-                    as_text=False)
+# full_model = tf.function(lambda inputs: model(inputs))
+# full_model = full_model.get_concrete_function(inputs = (tf.TensorSpec(model.inputs[0].shape, model.inputs[0].dtype)))
+# frozen_func = convert_variables_to_constants_v2(full_model, lower_control_flow=False)
+# frozen_func.graph.as_graph_def()
+# tf.io.write_graph(graph_or_graph_def=frozen_func.graph,
+#                     logdir='.',
+#                     name=f'{saved_model_path}/segm_lite_v509_{height}x{width}_float32.pb',
+#                     as_text=False)
 
-# No Quantization - Input/Output=float32
-converter = tf.lite.TFLiteConverter.from_keras_model(model)
-converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
-tflite_model = converter.convert()
-with open(f'{saved_model_path}/segm_lite_v509_{height}x{width}_float32.tflite', 'wb') as w:
-    w.write(tflite_model)
-print(f'tflite convert complete! - {saved_model_path}/segm_lite_v509_{height}x{width}_float32.tflite')
-
-
-# Weight Quantization - Input/Output=float32
-converter = tf.lite.TFLiteConverter.from_keras_model(model)
-converter.optimizations = [tf.lite.Optimize.OPTIMIZE_FOR_SIZE]
-converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
-tflite_model = converter.convert()
-with open(f'{saved_model_path}/segm_lite_v509_{height}x{width}_weight_quant.tflite', 'wb') as w:
-    w.write(tflite_model)
-print(f'Weight Quantization complete! - {saved_model_path}/segm_lite_v509_{height}x{width}_weight_quant.tflite')
-
-# Float16 Quantization - Input/Output=float32
-converter = tf.lite.TFLiteConverter.from_keras_model(model)
-converter.optimizations = [tf.lite.Optimize.DEFAULT]
-converter.target_spec.supported_types = [tf.float16]
-converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
-tflite_quant_model = converter.convert()
-with open(f'{saved_model_path}/segm_lite_v509_{height}x{width}_float16_quant.tflite', 'wb') as w:
-    w.write(tflite_quant_model)
-print(f'Float16 Quantization complete! - {saved_model_path}/segm_lite_v509_{height}x{width}_float16_quant.tflite')
-
-def representative_dataset_gen():
-  for data in raw_test_data.take(10):
-    image = data['image'].numpy()
-    image = tf.image.resize(image, (height, width))
-    image = image[np.newaxis,:,:,:]
-    image = image / 255
-    yield [image]
-
-raw_test_data, info = tfds.load(name="coco/2017", with_info=True, split="validation", data_dir="~/TFDS", download=True)
+# # No Quantization - Input/Output=float32
+# converter = tf.lite.TFLiteConverter.from_keras_model(model)
+# converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
+# tflite_model = converter.convert()
+# with open(f'{saved_model_path}/segm_lite_v509_{height}x{width}_float32.tflite', 'wb') as w:
+#     w.write(tflite_model)
+# print(f'tflite convert complete! - {saved_model_path}/segm_lite_v509_{height}x{width}_float32.tflite')
 
 
-# Integer Quantization - Input/Output=float32 - tf-nightly
-converter = tf.lite.TFLiteConverter.from_keras_model(model)
-converter.optimizations = [tf.lite.Optimize.DEFAULT]
-converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8, tf.lite.OpsSet.SELECT_TF_OPS]
-converter.representative_dataset = representative_dataset_gen
-tflite_quant_model = converter.convert()
-with open(f'{saved_model_path}/segm_lite_v509_{height}x{width}_integer_quant.tflite', 'wb') as w:
-    w.write(tflite_quant_model)
-print(f'Integer Quantization complete! - {saved_model_path}/segm_lite_v509_{height}x{width}_integer_quant.tflite')
+# # Weight Quantization - Input/Output=float32
+# converter = tf.lite.TFLiteConverter.from_keras_model(model)
+# converter.optimizations = [tf.lite.Optimize.OPTIMIZE_FOR_SIZE]
+# converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
+# tflite_model = converter.convert()
+# with open(f'{saved_model_path}/segm_lite_v509_{height}x{width}_weight_quant.tflite', 'wb') as w:
+#     w.write(tflite_model)
+# print(f'Weight Quantization complete! - {saved_model_path}/segm_lite_v509_{height}x{width}_weight_quant.tflite')
 
-# Full Integer Quantization - Input/Output=int8 - tf-nightly
-converter = tf.lite.TFLiteConverter.from_keras_model(model)
-converter.optimizations = [tf.lite.Optimize.DEFAULT]
-converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8, tf.lite.OpsSet.SELECT_TF_OPS]
-converter.inference_input_type = tf.int8
-converter.inference_output_type = tf.int8
-converter.representative_dataset = representative_dataset_gen
-tflite_quant_model = converter.convert()
-with open(f'{saved_model_path}/segm_lite_v509_{height}x{width}_full_integer_quant.tflite', 'wb') as w:
-    w.write(tflite_quant_model)
-print(f'Full Integer Quantization complete! - {saved_model_path}/segm_lite_v509_{height}x{width}_full_integer_quant.tflite')
+# # Float16 Quantization - Input/Output=float32
+# converter = tf.lite.TFLiteConverter.from_keras_model(model)
+# converter.optimizations = [tf.lite.Optimize.DEFAULT]
+# converter.target_spec.supported_types = [tf.float16]
+# converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
+# tflite_quant_model = converter.convert()
+# with open(f'{saved_model_path}/segm_lite_v509_{height}x{width}_float16_quant.tflite', 'wb') as w:
+#     w.write(tflite_quant_model)
+# print(f'Float16 Quantization complete! - {saved_model_path}/segm_lite_v509_{height}x{width}_float16_quant.tflite')
 
+# def representative_dataset_gen():
+#   for data in raw_test_data.take(10):
+#     image = data['image'].numpy()
+#     image = tf.image.resize(image, (height, width))
+#     image = image[np.newaxis,:,:,:]
+#     image = image / 255
+#     yield [image]
 
-# EdgeTPU - tf-nightly
-import subprocess
-result = subprocess.check_output(["edgetpu_compiler", "-s", f"{saved_model_path}/segm_lite_v509_{height}x{width}_full_integer_quant.tflite"])
-print(result.decode('utf-8'))
-
-
-
+# raw_test_data, info = tfds.load(name="coco/2017", with_info=True, split="validation", data_dir="~/TFDS", download=True)
 
 
-# # TensorFlow.js convert
+# # Integer Quantization - Input/Output=float32 - tf-nightly
+# converter = tf.lite.TFLiteConverter.from_keras_model(model)
+# converter.optimizations = [tf.lite.Optimize.DEFAULT]
+# converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8, tf.lite.OpsSet.SELECT_TF_OPS]
+# converter.representative_dataset = representative_dataset_gen
+# tflite_quant_model = converter.convert()
+# with open(f'{saved_model_path}/segm_lite_v509_{height}x{width}_integer_quant.tflite', 'wb') as w:
+#     w.write(tflite_quant_model)
+# print(f'Integer Quantization complete! - {saved_model_path}/segm_lite_v509_{height}x{width}_integer_quant.tflite')
+
+# # Full Integer Quantization - Input/Output=int8 - tf-nightly
+# converter = tf.lite.TFLiteConverter.from_keras_model(model)
+# converter.optimizations = [tf.lite.Optimize.DEFAULT]
+# converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8, tf.lite.OpsSet.SELECT_TF_OPS]
+# converter.inference_input_type = tf.int8
+# converter.inference_output_type = tf.int8
+# converter.representative_dataset = representative_dataset_gen
+# tflite_quant_model = converter.convert()
+# with open(f'{saved_model_path}/segm_lite_v509_{height}x{width}_full_integer_quant.tflite', 'wb') as w:
+#     w.write(tflite_quant_model)
+# print(f'Full Integer Quantization complete! - {saved_model_path}/segm_lite_v509_{height}x{width}_full_integer_quant.tflite')
+
+
+# # EdgeTPU - tf-nightly
 # import subprocess
-# try:
-#     result = subprocess.check_output(['tensorflowjs_converter',
-#                                     '--input_format', 'tf_saved_model',
-#                                     '--output_format', 'tfjs_graph_model',
-#                                     '--signature_name', 'serving_default',
-#                                     '--saved_model_tags', 'serve',
-#                                     saved_model_path, f'{saved_model_path}/tfjs_model_float32'],
-#                                     stderr=subprocess.PIPE).decode('utf-8')
-#     print(result)
-#     print(f'TensorFlow.js convertion complete! - {saved_model_path}/tfjs_model_float32')
-# except subprocess.CalledProcessError as e:
-#     print(f'ERROR:', e.stderr.decode('utf-8'))
-#     import traceback
-#     traceback.print_exc()
-# try:
-#     result = subprocess.check_output(['tensorflowjs_converter',
-#                                     '--quantize_float16',
-#                                     '--input_format', 'tf_saved_model',
-#                                     '--output_format', 'tfjs_graph_model',
-#                                     '--signature_name', 'serving_default',
-#                                     '--saved_model_tags', 'serve',
-#                                     saved_model_path, f'{saved_model_path}/tfjs_model_float16'],
-#                                     stderr=subprocess.PIPE).decode('utf-8')
-#     print(result)
-#     print(f'TensorFlow.js convertion complete! - {saved_model_path}/tfjs_model_float16')
-# except subprocess.CalledProcessError as e:
-#     print(f'ERROR:', e.stderr.decode('utf-8'))
-#     import traceback
-#     traceback.print_exc()
+# result = subprocess.check_output(["edgetpu_compiler", "-s", f"{saved_model_path}/segm_lite_v509_{height}x{width}_full_integer_quant.tflite"])
+# print(result.decode('utf-8'))
 
-# # TF-TRT (TensorRT) convert
-# try:
-#     def input_fn():
-#         input_shapes = []
-#         for tf_input in model.inputs:
-#             input_shapes.append(np.zeros(tf_input.shape).astype(np.float32))
-#         yield input_shapes
 
-#     params = tf.experimental.tensorrt.ConversionParams(precision_mode='FP32', maximum_cached_engines=10000)
-#     converter = tf.experimental.tensorrt.Converter(input_saved_model_dir=saved_model_path, conversion_params=params)
-#     converter.convert()
-#     converter.build(input_fn=input_fn)
-#     converter.save(f'{saved_model_path}/tensorrt_saved_model_float32')
-#     print(f'TF-TRT (TensorRT) convertion complete! - {saved_model_path}/tensorrt_saved_model_float32')
-#     params = tf.experimental.tensorrt.ConversionParams(precision_mode='FP16', maximum_cached_engines=10000)
-#     converter = tf.experimental.tensorrt.Converter(input_saved_model_dir=saved_model_path, conversion_params=params)
-#     converter.convert()
-#     converter.build(input_fn=input_fn)
-#     converter.save(f'{saved_model_path}/tensorrt_saved_model_float16')
-#     print(f'TF-TRT (TensorRT) convertion complete! - {saved_model_path}/tensorrt_saved_model_float16')
-# except Exception as e:
-#     print(f'ERROR:', e)
-#     import traceback
-#     traceback.print_exc()
-#     print(f'The binary versions of TensorFlow and TensorRT may not be compatible. Please check the version compatibility of each package.')
 
-# # CoreML convert
-# try:
-#     import coremltools as ct 
-#     mlmodel = ct.convert(saved_model_path, source='tensorflow')
-#     mlmodel.save(f'{saved_model_path}/model_coreml_float32.mlmodel')
-#     print(f'CoreML convertion complete! - {saved_model_path}/model_coreml_float32.mlmodel')
-# except Exception as e:
-#     print(f'ERROR:', e)
-#     import traceback
-#     traceback.print_exc()
+
+
+# TensorFlow.js convert
+import subprocess
+try:
+    result = subprocess.check_output(['tensorflowjs_converter',
+                                    '--input_format', 'tf_saved_model',
+                                    '--output_format', 'tfjs_graph_model',
+                                    '--signature_name', 'serving_default',
+                                    '--saved_model_tags', 'serve',
+                                    saved_model_path, f'{saved_model_path}/tfjs_model_float32'],
+                                    stderr=subprocess.PIPE).decode('utf-8')
+    print(result)
+    print(f'TensorFlow.js convertion complete! - {saved_model_path}/tfjs_model_float32')
+except subprocess.CalledProcessError as e:
+    print(f'ERROR:', e.stderr.decode('utf-8'))
+    import traceback
+    traceback.print_exc()
+try:
+    result = subprocess.check_output(['tensorflowjs_converter',
+                                    '--quantize_float16',
+                                    '--input_format', 'tf_saved_model',
+                                    '--output_format', 'tfjs_graph_model',
+                                    '--signature_name', 'serving_default',
+                                    '--saved_model_tags', 'serve',
+                                    saved_model_path, f'{saved_model_path}/tfjs_model_float16'],
+                                    stderr=subprocess.PIPE).decode('utf-8')
+    print(result)
+    print(f'TensorFlow.js convertion complete! - {saved_model_path}/tfjs_model_float16')
+except subprocess.CalledProcessError as e:
+    print(f'ERROR:', e.stderr.decode('utf-8'))
+    import traceback
+    traceback.print_exc()
+
+# TF-TRT (TensorRT) convert
+try:
+    def input_fn():
+        input_shapes = []
+        for tf_input in model.inputs:
+            input_shapes.append(np.zeros(tf_input.shape).astype(np.float32))
+        yield input_shapes
+
+    params = tf.experimental.tensorrt.ConversionParams(precision_mode='FP32', maximum_cached_engines=10000)
+    converter = tf.experimental.tensorrt.Converter(input_saved_model_dir=saved_model_path, conversion_params=params)
+    converter.convert()
+    converter.build(input_fn=input_fn)
+    converter.save(f'{saved_model_path}/tensorrt_saved_model_float32')
+    print(f'TF-TRT (TensorRT) convertion complete! - {saved_model_path}/tensorrt_saved_model_float32')
+    params = tf.experimental.tensorrt.ConversionParams(precision_mode='FP16', maximum_cached_engines=10000)
+    converter = tf.experimental.tensorrt.Converter(input_saved_model_dir=saved_model_path, conversion_params=params)
+    converter.convert()
+    converter.build(input_fn=input_fn)
+    converter.save(f'{saved_model_path}/tensorrt_saved_model_float16')
+    print(f'TF-TRT (TensorRT) convertion complete! - {saved_model_path}/tensorrt_saved_model_float16')
+except Exception as e:
+    print(f'ERROR:', e)
+    import traceback
+    traceback.print_exc()
+    print(f'The binary versions of TensorFlow and TensorRT may not be compatible. Please check the version compatibility of each package.')
+
+# CoreML convert
+try:
+    import coremltools as ct 
+    mlmodel = ct.convert(saved_model_path, source='tensorflow')
+    mlmodel.save(f'{saved_model_path}/model_coreml_float32.mlmodel')
+    print(f'CoreML convertion complete! - {saved_model_path}/model_coreml_float32.mlmodel')
+except Exception as e:
+    print(f'ERROR:', e)
+    import traceback
+    traceback.print_exc()
