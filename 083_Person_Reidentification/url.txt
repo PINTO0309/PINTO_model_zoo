@@ -1,0 +1,2 @@
+https://github.com/openvinotoolkit/open_model_zoo/blob/2020.2/models/intel/person-reidentification-retail-0248/description/person-reidentification-retail-0248.md
+https://github.com/PINTO0309/openvino2tensorflow.git
