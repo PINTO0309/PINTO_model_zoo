@@ -1,0 +1,286 @@
+python3 pb_to_saved_model.py \
+  --pb_file_path saved_model/EfficientPoseI.pb \
+  --inputs input_res1:0 \
+  --outputs pass1_skeleton_pafs/BiasAdd:0,pass2_detection1_confs/BiasAdd:0,upscaled_confs/BiasAdd:0
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,256,256,3] \
+--data_type FP32 \
+--output_dir saved_model/openvino/FP32/256x256
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,256,256,3] \
+--data_type FP16 \
+--output_dir saved_model/openvino/FP16/256x256
+
+
+### tf-nightly
+python3 saved_model_to_tflite.py \
+  --saved_model_dir_path saved_model \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True
+
+### tensorflow==2.4.0
+python3 saved_model_to_tflite.py \
+  --saved_model_dir_path saved_model \
+  --output_tfjs True
+
+
+
+python3 pb_to_saved_model.py \
+  --pb_file_path saved_model/EfficientPoseI_LITE.pb \
+  --inputs input_1_0:0 \
+  --outputs upscaled_confs/BiasAdd:0
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,256,256,3] \
+--data_type FP32 \
+--output_dir saved_model/openvino/FP32/256x256
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,256,256,3] \
+--data_type FP16 \
+--output_dir saved_model/openvino/FP16/256x256
+
+
+python3 openvino2tensorflow.py \
+  --model_path saved_model/openvino/FP32/256x256/saved_model.xml \
+  --output_saved_model True \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True
+
+### tf-nightly
+python3 saved_model_to_tflite.py \
+  --saved_model_dir_path saved_model \
+  --output_integer_quant_tflite True
+
+### tensorflow==2.4.0
+python3 saved_model_to_tflite.py \
+  --saved_model_dir_path saved_model \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True
+
+
+
+
+
+python3 pb_to_saved_model.py \
+  --pb_file_path saved_model/EfficientPoseII.pb \
+  --inputs input_res1:0 \
+  --outputs pass1_skeleton_pafs/BiasAdd:0,pass2_detection1_confs/BiasAdd:0,upscaled_confs/BiasAdd:0
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,368,368,3] \
+--data_type FP32 \
+--output_dir saved_model/openvino/FP32/368x368
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,368,368,3] \
+--data_type FP16 \
+--output_dir saved_model/openvino/FP16/368x368
+
+### tf-nightly
+python3 saved_model_to_tflite.py \
+  --saved_model_dir_path saved_model \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True
+
+### tensorflow==2.4.0
+python3 saved_model_to_tflite.py \
+  --saved_model_dir_path saved_model \
+  --output_tfjs True
+
+
+
+python3 pb_to_saved_model.py \
+  --pb_file_path saved_model/EfficientPoseII_LITE.pb \
+  --inputs input_1_0:0 \
+  --outputs upscaled_confs/BiasAdd:0
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,368,368,3] \
+--data_type FP32 \
+--output_dir saved_model/openvino/FP32/368x368
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,368,368,3] \
+--data_type FP16 \
+--output_dir saved_model/openvino/FP16/368x368
+
+
+python3 openvino2tensorflow.py \
+  --model_path saved_model/openvino/FP32/368x368/saved_model.xml \
+  --output_saved_model True \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True
+
+### tf-nightly
+python3 saved_model_to_tflite.py \
+  --saved_model_dir_path saved_model \
+  --output_integer_quant_tflite True
+
+### tensorflow==2.4.0
+python3 saved_model_to_tflite.py \
+  --saved_model_dir_path saved_model \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True
+
+
+
+
+
+
+python3 pb_to_saved_model.py \
+  --pb_file_path saved_model/EfficientPoseIII.pb \
+  --inputs input_res1:0 \
+  --outputs pass1_skeleton_pafs/BiasAdd:0,pass2_detection1_confs/BiasAdd:0,upscaled_confs/BiasAdd:0
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,480,480,3] \
+--data_type FP32 \
+--output_dir saved_model/openvino/FP32/480x480
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,480,480,3] \
+--data_type FP16 \
+--output_dir saved_model/openvino/FP16/480x480
+
+### tf-nightly
+python3 saved_model_to_tflite.py \
+  --saved_model_dir_path saved_model \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True
+
+### tensorflow==2.4.0
+python3 saved_model_to_tflite.py \
+  --saved_model_dir_path saved_model \
+  --output_tfjs True
+
+
+
+
+
+python3 pb_to_saved_model.py \
+  --pb_file_path saved_model/EfficientPoseIV.pb \
+  --inputs input_res1:0 \
+  --outputs pass1_skeleton_pafs/BiasAdd:0,pass2_detection1_confs/BiasAdd:0,upscaled_confs/BiasAdd:0
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,600,600,3] \
+--data_type FP32 \
+--output_dir saved_model/openvino/FP32/600x600
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,600,600,3] \
+--data_type FP16 \
+--output_dir saved_model/openvino/FP16/600x600
+
+### tf-nightly
+python3 saved_model_to_tflite.py \
+  --saved_model_dir_path saved_model \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True
+
+### tensorflow==2.4.0
+python3 saved_model_to_tflite.py \
+  --saved_model_dir_path saved_model \
+  --output_tfjs True
+
+
+
+
+
+python3 pb_to_saved_model.py \
+  --pb_file_path saved_model/EfficientPoseRT.pb \
+  --inputs input_res1:0 \
+  --outputs pass1_skeleton_pafs/BiasAdd:0,pass2_detection1_confs/BiasAdd:0,upscaled_confs/BiasAdd:0
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,224,224,3] \
+--data_type FP32 \
+--output_dir saved_model/openvino/FP32/224x224
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,224,224,3] \
+--data_type FP16 \
+--output_dir saved_model/openvino/FP16/224x224
+
+### tf-nightly
+python3 saved_model_to_tflite.py \
+  --saved_model_dir_path saved_model \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True
+
+### tensorflow==2.4.0
+python3 saved_model_to_tflite.py \
+  --saved_model_dir_path saved_model \
+  --output_tfjs True
+
+
+
+
+
+python3 pb_to_saved_model.py \
+  --pb_file_path saved_model/EfficientPoseRT_LITE.pb \
+  --inputs input_1_0:0 \
+  --outputs upscaled_confs/BiasAdd:0
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,224,224,3] \
+--data_type FP32 \
+--output_dir saved_model/openvino/FP32/224x224
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--input_shape [1,224,224,3] \
+--data_type FP16 \
+--output_dir saved_model/openvino/FP16/224x224
+
+
+python3 openvino2tensorflow.py \
+  --model_path saved_model/openvino/FP32/224x224/saved_model.xml \
+  --output_saved_model True \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True
+
+### tf-nightly
+python3 saved_model_to_tflite.py \
+  --saved_model_dir_path saved_model \
+  --output_integer_quant_tflite True
+
+### tensorflow==2.4.0
+python3 saved_model_to_tflite.py \
+  --saved_model_dir_path saved_model \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True
