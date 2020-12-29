@@ -1,4 +1,5 @@
 https://github.com/openvinotoolkit/open_model_zoo/blob/2020.2/models/intel/person-reidentification-retail-0248/description/person-reidentification-retail-0248.md
+https://github.com/openvinotoolkit/open_model_zoo/blob/2021.2/models/intel/person-reidentification-retail-0286/description/person-reidentification-retail-0286.md
 https://github.com/openvinotoolkit/open_model_zoo/blob/2021.2/models/intel/person-reidentification-retail-0287/description/person-reidentification-retail-0287.md
 https://github.com/openvinotoolkit/open_model_zoo/blob/2021.2/models/intel/person-reidentification-retail-0288/description/person-reidentification-retail-0288.md
 https://github.com/openvinotoolkit/open_model_zoo/blob/2020.2/models/intel/person-reidentification-retail-0300/description/person-reidentification-retail-0300.md
