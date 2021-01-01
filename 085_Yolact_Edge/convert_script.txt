@@ -1,0 +1,140 @@
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model yolact_edge_mobilenetv2_54_800000_256x256_opt.onnx \
+  --input input.1 \
+  --input_shape [1,3,256,256] \
+  --output_dir openvino/yolact_edge_mobilenetv2_54_800000_256x256_opt/FP32 \
+  --data_type FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model yolact_edge_mobilenetv2_54_800000_256x256_opt.onnx \
+  --input input.1 \
+  --input_shape [1,3,256,256] \
+  --output_dir openvino/yolact_edge_mobilenetv2_54_800000_256x256_opt/FP16 \
+  --data_type FP16
+
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model yolact_edge_mobilenetv2_54_800000_320x320_opt.onnx \
+  --input input.1 \
+  --input_shape [1,3,320,320] \
+  --output_dir openvino/yolact_edge_mobilenetv2_54_800000_320x320_opt/FP32 \
+  --data_type FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model yolact_edge_mobilenetv2_54_800000_320x320_opt.onnx \
+  --input input.1 \
+  --input_shape [1,3,320,320] \
+  --output_dir openvino/yolact_edge_mobilenetv2_54_800000_320x320_opt/FP16 \
+  --data_type FP16
+
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model yolact_edge_resnet50_54_800000_256x256.onnx \
+  --input input.1 \
+  --input_shape [1,3,256,256] \
+  --output_dir openvino/yolact_edge_resnet50_54_800000_256x256/FP32 \
+  --data_type FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model yolact_edge_resnet50_54_800000_256x256.onnx \
+  --input input.1 \
+  --input_shape [1,3,256,256] \
+  --output_dir openvino/yolact_edge_resnet50_54_800000_256x256/FP16 \
+  --data_type FP16
+
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model yolact_edge_resnet50_54_800000_320x320.onnx \
+  --input input.1 \
+  --input_shape [1,3,320,320] \
+  --output_dir openvino/yolact_edge_resnet50_54_800000_320x320/FP32 \
+  --data_type FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model yolact_edge_resnet50_54_800000_320x320.onnx \
+  --input input.1 \
+  --input_shape [1,3,320,320] \
+  --output_dir openvino/yolact_edge_resnet50_54_800000_320x320/FP16 \
+  --data_type FP16
+
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model yolact_edge_54_800000_256x256.onnx \
+  --input input.1 \
+  --input_shape [1,3,256,256] \
+  --output_dir openvino/yolact_edge_54_800000_256x256/FP32 \
+  --data_type FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model yolact_edge_54_800000_256x256.onnx \
+  --input input.1 \
+  --input_shape [1,3,256,256] \
+  --output_dir openvino/yolact_edge_54_800000_256x256/FP16 \
+  --data_type FP16
+
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model yolact_edge_54_800000_320x320.onnx \
+  --input input.1 \
+  --input_shape [1,3,320,320] \
+  --output_dir openvino/yolact_edge_54_800000_320x320/FP32 \
+  --data_type FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model yolact_edge_54_800000_320x320.onnx \
+  --input input.1 \
+  --input_shape [1,3,320,320] \
+  --output_dir openvino/yolact_edge_54_800000_320x320/FP16 \
+  --data_type FP16
+
+
+
+
+### tf-nightly
+openvino2tensorflow \
+  --model_path onnx/openvino/yolact_edge_mobilenetv2_54_800000_256x256_opt/FP32/yolact_edge_mobilenetv2_54_800000_256x256_opt.xml \
+  --output_saved_model True \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True
+
+### tf-nightly
+openvino2tensorflow \
+  --model_path onnx/openvino/yolact_edge_mobilenetv2_54_800000_256x256_opt/FP32/yolact_edge_mobilenetv2_54_800000_256x256_opt.xml \
+  --output_saved_model True \
+  --output_edgetpu True
+
+### tensorflow==2.4.0
+saved_model_to_tflite \
+  --saved_model_dir_path saved_model_mbnv2_256x256 \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True
+
+
+### tf-nightly
+openvino2tensorflow \
+  --model_path onnx/openvino/yolact_edge_mobilenetv2_54_800000_320x320_opt/FP32/yolact_edge_mobilenetv2_54_800000_320x320_opt.xml \
+  --output_saved_model True \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True
+
+### tf-nightly
+openvino2tensorflow \
+  --model_path onnx/openvino/yolact_edge_mobilenetv2_54_800000_320x320_opt/FP32/yolact_edge_mobilenetv2_54_800000_320x320_opt.xml \
+  --output_saved_model True \
+  --output_edgetpu True
+
+### tensorflow==2.4.0
+saved_model_to_tflite \
+  --saved_model_dir_path saved_model_mbnv2_320x320 \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True
+
+
+
+
