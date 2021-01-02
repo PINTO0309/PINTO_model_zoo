@@ -1,0 +1,17 @@
+### tf-nightly
+python3 02_saved_model_to_tflite_custom.py \
+  --saved_model_dir_path saved_model \
+  --input_shapes [1,512,512,6] \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True \
+  --output_edgetpu True
+
+### tensorflow==2.4.0
+python3 02_saved_model_to_tflite_custom.py \
+  --saved_model_dir_path saved_model \
+  --input_shapes [1,512,512,6] \
+  --output_tfjs True \
+  --output_coreml True \
+  --output_tftrt True
