@@ -1,0 +1,16 @@
+### tf-nightly
+openvino2tensorflow \
+  --model_path onnx/openvino/deepsort_128x64/FP32/deepsort_128x64.xml \
+  --output_saved_model True \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True \
+  --string_formulas_for_normalization '(data / 255.0 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]'
+
+### tensorflow==2.4.0
+saved_model_to_tflite \
+  --saved_model_dir_path saved_model \
+  --output_tfjs True \
+  --output_coreml True \
+  --output_tftrt True
