@@ -39,7 +39,7 @@ saved_model_to_tflite \
   --output_weight_quant_tflite True \
   --output_float16_quant_tflite True \
   --output_integer_quant_tflite True \
-  --string_formulas_for_normalization 'data * 1.0'
+  --string_formulas_for_normalization 'data / 255'
 
 ### tensorflow==2.4.0
 saved_model_to_tflite \
