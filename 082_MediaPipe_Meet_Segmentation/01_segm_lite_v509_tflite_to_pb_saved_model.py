@@ -353,12 +353,12 @@ signature_def['serving_default']:
   The given SavedModel SignatureDef contains the following input(s):
     inputs['input_1'] tensor_info:
         dtype: DT_FLOAT
-        shape: (1, 144, 256, 3)
+        shape: (1, 128, 128, 3)
         name: input_1:0
   The given SavedModel SignatureDef contains the following output(s):
     outputs['segment'] tensor_info:
         dtype: DT_FLOAT
-        shape: (1, 144, 256, 2)
+        shape: (1, 128, 128, 2)
         name: segment:0
   Method name is: tensorflow/serving/predict
 """
