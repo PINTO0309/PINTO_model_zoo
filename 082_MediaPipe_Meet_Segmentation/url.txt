@@ -2,3 +2,5 @@ MediaPipe_Meet_Segmentation
 https://drive.google.com/file/d/1WvHxUONoATFJ9JpSgAF7dU_F5V58HItS/view
 https://ai.googleblog.com/2020/10/background-features-in-google-meet.html?m=1
 https://github.com/tensorflow/tfjs/issues/4177
+
+https://meet.google.com/_/rtcvidproc/release_1wttl/345264209/segm_full_v679.tflite
