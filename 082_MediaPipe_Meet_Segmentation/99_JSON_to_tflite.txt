@@ -1,2 +1,3 @@
 ### JSON to tflite
 ./flatc -o work -b schema.fbs work/segm_full_v679.json
+./flatc -o work -b schema.fbs work/segm_lite_v509.json

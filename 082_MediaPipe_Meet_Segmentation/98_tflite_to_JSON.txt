@@ -1,4 +1,5 @@
 ### tflite to JSON
 ./flatc -t --strict-json --defaults-json -o work schema.fbs -- segm_full_v679.tflite
+./flatc -t --strict-json --defaults-json -o work schema.fbs -- segm_lite_v509.tflite
 
 ./flatc -t --strict-json --defaults-json -o work schema.fbs -- model_float32.tflite
