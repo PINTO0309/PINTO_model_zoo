@@ -7,3 +7,6 @@ https://github.com/google/mediapipe/issues/245
 
 - Sample Movie -  
 https://twitter.com/PINTO03091/status/1262036329736503297?s=20
+
+
+https://github.com/google/mediapipe/blob/master/mediapipe/modules/palm_detection/palm_detection.tflite
