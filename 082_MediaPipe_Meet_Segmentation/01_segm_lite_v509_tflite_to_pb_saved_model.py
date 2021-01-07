@@ -45,7 +45,7 @@ def parse_json():
     print('num of ops:', len(ops))
     return ops, op_types
 
-def optimizing_hardswish_for_edgetp(input_op, name=None):
+def optimizing_hardswish_for_edgetpu(input_op, name=None):
     ret_op = None
     if not optimizing_for_edgetpu_flg:
         ret_op = input_op * tf.nn.relu6(input_op + 3) * 0.16666667
@@ -224,7 +224,7 @@ def make_graph(ops, op_types, interpreter):
         elif op_type == 'HARD_SWISH':
             output_detail = interpreter._get_tensor_details(op['outputs'][0])
             input_tensor = tensors[op['inputs'][0]]
-            output_tensor = optimizing_hardswish_for_edgetp(input_tensor, name=output_detail['name'])
+            output_tensor = optimizing_hardswish_for_edgetpu(input_tensor, name=output_detail['name'])
             tensors[output_detail['index']] = output_tensor
         elif op_type == 'AVERAGE_POOL_2D':
             output_detail = interpreter._get_tensor_details(op['outputs'][0])
