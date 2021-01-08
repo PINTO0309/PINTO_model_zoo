@@ -13,7 +13,6 @@ import tensorflow as tfv2
 import shutil
 from pathlib import Path
 import pprint
-# home = str(Path.home())
 
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 schema = "schema.fbs"
@@ -22,7 +21,6 @@ model_path = "segm_lite_v681_opt.tflite"
 output_pb_path = "segm_lite_v681_opt.pb"
 output_savedmodel_path = "saved_model"
 model_json_path = "segm_lite_v681_opt.json"
-num_tensors = 500 #355
 output_node_names = ['segment']
 
 #################################################################
@@ -279,7 +277,6 @@ def make_graph(ops, op_types, interpreter):
     # Convolution2DTransposeBias
     input_tensor = tensors[241]
     weights = np.load('weights/segment_Kernel').transpose(1,2,0,3).astype(np.float32)
-    # bias = np.load('weights/segment_Bias')[::-1].astype(np.float32)
     bias = np.load('weights/segment_Bias').astype(np.float32)
     custom_trans = tf.nn.conv2d_transpose(input=input_tensor,
                                           filters=weights,
@@ -304,19 +301,12 @@ def main():
     output_details = interpreter.get_output_details()
     print(input_details)
     print(output_details)
-    # for i in range(num_tensors):
-    #     detail = interpreter._get_tensor_details(i)
-    #     print(detail)
 
     make_graph(ops, op_types, interpreter)
 
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True
     graph = tf.get_default_graph()
-    # writer = tf.summary.FileWriter(os.path.splitext(output_pb_path)[0])
-    # writer.add_graph(graph)
-    # writer.flush()
-    # writer.close()
     with tf.Session(config=config, graph=graph) as sess:
         sess.run(tf.global_variables_initializer())
         graph_def = tf.graph_util.convert_variables_to_constants(
