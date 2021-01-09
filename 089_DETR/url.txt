@@ -1,0 +1,2 @@
+https://github.com/Leonardo-Blanger/detr_tensorflow
+https://github.com/PINTO0309/openvino2tensorflow

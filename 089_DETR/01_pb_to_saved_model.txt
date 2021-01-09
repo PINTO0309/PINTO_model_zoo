@@ -1,0 +1,64 @@
+sudo pip3 install openvino2tensorflow --upgrade
+
+pb_to_saved_model \
+--pb_file_path saved_model/model_float32.pb \
+--inputs inputs:0 \
+--outputs Identity:0,Identity_1:0
+
+Identity:0 = logits [1, 100, 92]
+Identity_1:0 = boxes [1, 100, 4]
+
+
+
+### Post-Process
+### logits [1, 100, 92]
+### boxes [1, 100, 4]
+
+def cxcywh2xyxy(boxes):
+    cx, cy, w, h = [boxes[..., i] for i in range(4)]
+    xmin, ymin = cx - w*0.5, cy - h*0.5
+    xmax, ymax = cx + w*0.5, cy + h*0.5
+    boxes = tf.stack([xmin, ymin, xmax, ymax], axis=-1, name='boxes')
+    return boxes
+
+logits, boxes = [output[k] for k in ['pred_logits', 'pred_boxes']]
+probs = tf.nn.softmax(logits, axis=-1)[..., :-1]
+scores = tf.reduce_max(probs, axis=-1, name='scores')
+labels = tf.argmax(probs, axis=-1, name='labels')
+boxes = cxcywh2xyxy(boxes)
+
+
+
+
+saved_model_cli show --dir saved_model --all
+
+signature_def['serving_default']:
+  The given SavedModel SignatureDef contains the following input(s):
+    inputs['inputs'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 256, 256, 3)
+        name: inputs:0
+  The given SavedModel SignatureDef contains the following output(s):
+    outputs['Identity'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 100, 4)
+        name: Identity:0
+    outputs['Identity_1'] tensor_info:
+        dtype: DT_FLOAT
+        shape: (1, 100, 92)
+        name: Identity_1:0
+  Method name is: tensorflow/serving/predict
+
+
+### tf-nightly
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_no_quant_float32_tflite True \
+--output_weight_quant_tflite True \
+--output_float16_quant_tflite True \
+--output_integer_quant_tflite True \
+--string_formulas_for_normalization '(data / 255.0 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]'
+
+
+
+
