@@ -1,0 +1,5 @@
+python3 -m tf2onnx.convert \
+--saved-model saved_model \
+--output shadow_removal.onnx \
+--inputs-as-nchw Placeholder:0
+

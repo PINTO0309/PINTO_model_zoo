@@ -1,0 +1,4 @@
+pb_to_saved_model \
+--pb_file_path saved_model/shadow_removal.pb \
+--inputs Placeholder:0 \
+--outputs g_conv_img/BiasAdd:0,g_conv_mask/BiasAdd:0

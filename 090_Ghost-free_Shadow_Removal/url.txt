@@ -1,0 +1,2 @@
+https://github.com/vinthony/ghost-free-shadow-removal.git
+https://github.com/PINTO0309/openvino2tensorflow.git

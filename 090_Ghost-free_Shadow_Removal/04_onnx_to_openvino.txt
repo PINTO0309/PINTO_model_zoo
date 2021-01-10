@@ -1,0 +1,9 @@
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model shadow_removal.onnx \
+  --output_dir openvino/shadow_removal/FP32 \
+  --data_type FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model shadow_removal.onnx \
+  --output_dir openvino/shadow_removal/FP16 \
+  --data_type FP16
