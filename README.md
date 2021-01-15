@@ -69,7 +69,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |059|Yolov5|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/059_yolov5)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|||
 |072|NanoDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/072_NanoDet)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||[issue #274](https://github.com/google-coral/edgetpu/issues/274)|
 |073|RetinaNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/073_RetinaNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|||
-|074|Yolact|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/074_Yolact)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|||
+|074|Yolact|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/074_Yolact)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 |085|Yolact_Edge|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/085_Yolact_Edge)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|WIP, MobileNetV2(256/320)|
 |089|DETR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/089_DETR)|⚫|⚫|⚫||⚫|||||⚫|256x256|
 ### 3. 3D Object Detection
