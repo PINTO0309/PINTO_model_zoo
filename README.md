@@ -100,7 +100,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |029|Human_Pose_Estimation_3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/029_human-pose-estimation-3d-0001)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|||
 |053|BlazePose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/053_BlazePose)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||MediaPipe|
 |058|BlazePose (Full Keypoints)|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/058_BlazePose_Full_Keypoints)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||MediaPipe|
-|065|ThreeDPoseUnityBarracuda|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/065_ThreeDPoseUnityBarracuda)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||**[YouTube](https://www.youtube.com/watch?v=L0ieoaOD6Po)**|
+|065|ThreeDPoseUnityBarracuda|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/065_ThreeDPoseUnityBarracuda)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|**[YouTube](https://www.youtube.com/watch?v=L0ieoaOD6Po)**|
 |080|tf_pose_estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/080_tf_pose_estimation)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 |084|EfficientPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/084_EfficientPose)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|SinglePose|
 |088|Mobilenetv3_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/088_mobilenetv3-poseestimation)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
