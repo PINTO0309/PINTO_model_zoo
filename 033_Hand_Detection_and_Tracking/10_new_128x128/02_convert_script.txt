@@ -1,3 +1,5 @@
+sudo pip3 install openvino2tensorflow --upgrade
+
 ### tf-nightly
 saved_model_to_tflite \
   --saved_model_dir_path saved_model \
