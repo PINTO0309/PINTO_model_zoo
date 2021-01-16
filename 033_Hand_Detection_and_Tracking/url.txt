@@ -5,6 +5,8 @@ https://github.com/metalwhale/hand_tracking.git
 https://github.com/terryky/tflite_gles_app.git
 https://github.com/google/mediapipe/issues/245
 
+https://github.com/geaxgx/UniversalHandControl.git
+
 - Sample Movie -  
 https://twitter.com/PINTO03091/status/1262036329736503297?s=20
 
