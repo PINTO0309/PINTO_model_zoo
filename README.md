@@ -56,7 +56,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |023|Yolov3-nano|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/023_yolov3-nano)|⚫|⚫|||⚫|||||||
 |024|Yolov3-lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/024_yolov3-lite)|⚫|⚫|⚫||⚫|⚫||||||
 |031|Yolov4|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/031_yolov4)|⚫|⚫|⚫|⚫|⚫|||||||
-|034|SSD_Mobilenetv2_mnasfpn|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/034_ssd_mobilenet_v2_mnasfpn_shared_box_predictor)|⚫|⚫|⚫|⚫|⚫|||||||
+|034|SSD_Mobilenetv2_mnasfpn|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/034_ssd_mobilenet_v2_mnasfpn_shared_box_predictor)|⚫|⚫|⚫|⚫|⚫|||||⚫||
 |038|SSDlite_MobileDet_edgetpu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/038_ssdlite_mobiledet_edgetpu)|⚫|⚫|⚫|⚫|⚫|||||||
 |039|SSDlite_MobileDet_cpu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/039_ssdlite_mobiledet_cpu)|⚫|⚫|⚫||⚫|||||||
 |042|Centernet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/042_centernet)|⚫|||||⚫||||⚫||
