@@ -313,19 +313,13 @@ def main():
     output_details = interpreter.get_output_details()
     print(input_details)
     print(output_details)
-    # for i in range(num_tensors):
-    #     detail = interpreter._get_tensor_details(i)
-    #     print(detail)
 
     make_graph(ops, op_types, interpreter)
 
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True
     graph = tf.get_default_graph()
-    # writer = tf.summary.FileWriter(os.path.splitext(output_pb_path)[0])
-    # writer.add_graph(graph)
-    # writer.flush()
-    # writer.close()
+
     with tf.Session(config=config, graph=graph) as sess:
         sess.run(tf.global_variables_initializer())
         graph_def = tf.graph_util.convert_variables_to_constants(
