@@ -34,6 +34,8 @@ I have been working on quantization of various models as a hobby, but I have ski
 
 - **[[Japanese] Custom Operation入りのtfliteを逆コンバートしてJSON化し標準OPへ置き換えたうえでtfliteを再生成する方法](https://zenn.dev/pinto0309/articles/9d316860f8d418)**
 
+- **[Generate saved_model, tfjs, tf-trt, EdgeTPU, CoreML, quantized tflite and .pb from .tflite.](https://github.com/PINTO0309/tflite2tensorflow)**
+
 ## List of pre-quantized models
 \* WQ = Weight Quantization  
 \** OV = OpenVINO IR  
