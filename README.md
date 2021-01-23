@@ -36,6 +36,8 @@ I have been working on quantization of various models as a hobby, but I have ski
 
 - **[Generate saved_model, tfjs, tf-trt, EdgeTPU, CoreML, quantized tflite and .pb from .tflite.](https://github.com/PINTO0309/tflite2tensorflow)**
 
+- **[Add a custom OP to the TFLite runtime to build the whl installer (for Python)](https://zenn.dev/pinto0309/articles/a0e40c2817f2ee)**
+
 ## List of pre-quantized models
 \* WQ = Weight Quantization  
 \** OV = OpenVINO IR  
