@@ -16,3 +16,5 @@
 ### How to initialize a convolution layer with an arbitrary kernel in Keras? https://stackoverrun.com/ja/q/12269118
 
 ###  saved_model_cli show --dir saved_model_pose_detection/ --tag_set serve --signature_def serving_default
+
+https://github.com/google/mediapipe/blob/master/mediapipe/modules/pose_landmark/pose_landmark_upper_body.tflite
