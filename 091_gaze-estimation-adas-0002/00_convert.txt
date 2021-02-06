@@ -1,0 +1,25 @@
+### tf-nightly
+openvino2tensorflow \
+  --model_path openvino/gaze-estimation-adas-0002/gaze-estimation-adas-0002.xml \
+  --output_saved_model True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True \
+  --string_formulas_for_normalization 'data / 255.0'
+
+
+### tf-nightly
+openvino2tensorflow \
+  --model_path openvino/gaze-estimation-adas-0002/gaze-estimation-adas-0002.xml \
+  --output_saved_model_for_edgetpu True \
+  --output_edgetpu True \
+  --string_formulas_for_normalization 'data / 255.0'
+
+### tensorflow==2.4.1
+saved_model_to_tflite \
+  --saved_model_dir_path saved_model \
+  --output_tfjs True \
+  --output_coreml True \
+  --output_tftrt True
+
+python3 -m tf2onnx.convert --saved-model saved_model --output model_float32.onnx
