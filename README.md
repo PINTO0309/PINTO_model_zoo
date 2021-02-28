@@ -174,6 +174,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |052|Handwritten_Text_Recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/052_Handwritten_Text_Recognition)|⚫|⚫|||⚫|||||||
 |055|Handwritten_Japanese_Recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/055_Handwritten_Japanese_Recognition)|⚫|⚫|||⚫|⚫|⚫|||⚫||
+|093|ocr_japanese|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/093_ocr_japanese)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
 ### 15. Action Recognition
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
