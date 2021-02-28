@@ -1,0 +1,2 @@
+https://github.com/tanreinama/OCR_Japanease.git
+https://github.com/PINTO0309/openvino2tensorflow.git

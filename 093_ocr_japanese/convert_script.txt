@@ -1,0 +1,58 @@
+python3 -m onnxsim detectionnet_float32.onnx detectionnet_512x512_float32_opt.onnx
+python3 -m onnxsim classifiernet_float32.onnx classifiernet_256x256_float32_opt.onnx
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model detectionnet_512x512_float32_opt.onnx \
+  --output_dir openvino/ocr_japanese/detectionnet_512x512/FP32 \
+  --data_type FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model detectionnet_512x512_float32_opt.onnx \
+  --output_dir openvino/ocr_japanese/detectionnet_512x512/FP16 \
+  --data_type FP16
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model classifiernet_256x256_float32_opt.onnx \
+  --output_dir openvino/ocr_japanese/classifiernet_256x256/FP32 \
+  --data_type FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model classifiernet_256x256_float32_opt.onnx \
+  --output_dir openvino/ocr_japanese/classifiernet_256x256/FP16 \
+  --data_type FP16
+
+
+### tensorflow==2.4.1
+openvino2tensorflow \
+  --model_path onnx/openvino/ocr_japanese/detectionnet_512x512/FP32/detectionnet_512x512_float32_opt.xml \
+  --output_saved_model True \
+  --output_pb True \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_myriad True
+
+### tensorflow==2.4.1
+saved_model_to_tflite \
+  --saved_model_dir_path saved_model \
+  --output_tfjs True \
+  --output_coreml True \
+  --output_tftrt True
+
+### tensorflow==2.4.1
+openvino2tensorflow \
+  --model_path onnx/openvino/ocr_japanese/classifiernet_256x256/FP32/classifiernet_256x256_float32_opt.xml \
+  --output_saved_model True \
+  --output_pb True \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_myriad True
+
+### tensorflow==2.4.1
+saved_model_to_tflite \
+  --saved_model_dir_path saved_model \
+  --output_tfjs True \
+  --output_coreml True \
+  --output_tftrt True
+
