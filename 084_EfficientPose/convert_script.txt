@@ -1,244 +1,370 @@
-sudo pip3 install openvino2tensorflow --upgrade
+git clone https://github.com/PINTO0309/tflite2tensorflow.git
+cd tflite2tensorflow
 
-python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
---saved_model_dir saved_model_opt_EfficientPoseI \
---input_shape [1,256,256,3] \
---data_type FP32 \
---output_dir saved_model_opt_EfficientPoseI/openvino/FP32/256x256
+docker run --gpus all -it --rm \
+    -v `pwd`:/workspace/resources \
+    -e LOCAL_UID=$(id -u $USER) \
+    -e LOCAL_GID=$(id -g $USER) \
+    pinto0309/tflite2tensorflow:latest bash
 
-python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
---saved_model_dir saved_model_opt_EfficientPoseI \
---input_shape [1,256,256,3] \
---data_type FP16 \
---output_dir saved_model_opt_EfficientPoseI/openvino/FP16/256x256
+=====================================================================
+tflite2tensorflow \
+  --model_path EfficientPoseI.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True
 
-
-### tensorflow==2.4.0
-saved_model_to_tflite \
-  --saved_model_dir_path saved_model_opt_EfficientPoseI \
-  --output_tfjs True \
-  --output_tftrt True \
-  --output_coreml True
-
-
-
-pb_to_saved_model \
-  --pb_file_path saved_model/EfficientPoseI_LITE.pb \
-  --inputs input_1_0:0 \
-  --outputs upscaled_confs/BiasAdd:0
-
-python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
---saved_model_dir saved_model \
---input_shape [1,256,256,3] \
---data_type FP32 \
---output_dir saved_model/openvino/FP32/256x256
-
-python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
---saved_model_dir saved_model \
---input_shape [1,256,256,3] \
---data_type FP16 \
---output_dir saved_model/openvino/FP16/256x256
-
-
-openvino2tensorflow \
-  --model_path saved_model/openvino/FP32/256x256/saved_model.xml \
-  --output_saved_model True \
-  --output_no_quant_float32_tflite True \
-  --output_weight_quant_tflite True \
-  --output_float16_quant_tflite True
-
-### tf-nightly
-saved_model_to_tflite \
-  --saved_model_dir_path saved_model \
-  --output_integer_quant_tflite True
-
-### tensorflow==2.4.0
-saved_model_to_tflite \
-  --saved_model_dir_path saved_model \
-  --output_tfjs True \
-  --output_tftrt True \
-  --output_coreml True
-
-
-
-
-
-python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
---saved_model_dir saved_model_opt_EfficientPoseII \
---input_shape [1,368,368,3] \
---data_type FP32 \
---output_dir saved_model_opt_EfficientPoseII/openvino/FP32/368x368
-
-python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
---saved_model_dir saved_model_opt_EfficientPoseII \
---input_shape [1,368,368,3] \
---data_type FP16 \
---output_dir saved_model_opt_EfficientPoseII/openvino/FP16/368x368
-
-### tensorflow==2.4.0
-saved_model_to_tflite \
-  --saved_model_dir_path saved_model_opt_EfficientPoseII \
-  --output_tfjs True \
-  --output_tftrt True \
-  --output_coreml True
-
-
-
-pb_to_saved_model \
-  --pb_file_path saved_model/EfficientPoseII_LITE.pb \
-  --inputs input_1_0:0 \
-  --outputs upscaled_confs/BiasAdd:0
-
-python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
---saved_model_dir saved_model \
---input_shape [1,368,368,3] \
---data_type FP32 \
---output_dir saved_model/openvino/FP32/368x368
-
-python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
---saved_model_dir saved_model \
---input_shape [1,368,368,3] \
---data_type FP16 \
---output_dir saved_model/openvino/FP16/368x368
-
-
-openvino2tensorflow \
-  --model_path saved_model/openvino/FP32/368x368/saved_model.xml \
-  --output_saved_model True \
-  --output_no_quant_float32_tflite True \
-  --output_weight_quant_tflite True \
-  --output_float16_quant_tflite True
-
-### tf-nightly
-saved_model_to_tflite \
-  --saved_model_dir_path saved_model \
-  --output_integer_quant_tflite True
-
-### tensorflow==2.4.0
-saved_model_to_tflite \
-  --saved_model_dir_path saved_model \
-  --output_tfjs True \
-  --output_tftrt True \
-  --output_coreml True
-
-
-
-
-
-
-python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
---saved_model_dir saved_model_opt_EfficientPoseIII \
---input_shape [1,480,480,3] \
---data_type FP32 \
---output_dir saved_model_opt_EfficientPoseIII/openvino/FP32/480x480
-
-python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
---saved_model_dir saved_model_opt_EfficientPoseIII \
---input_shape [1,480,480,3] \
---data_type FP16 \
---output_dir saved_model_opt_EfficientPoseIII/openvino/FP16/480x480
-
-### tensorflow==2.4.0
-saved_model_to_tflite \
-  --saved_model_dir_path saved_model_opt_EfficientPoseIII \
-  --output_tfjs True \
-  --output_tftrt True \
-  --output_coreml True
-
-
-
-
-
-python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
---saved_model_dir saved_model_opt_EfficientPoseIV \
---input_shape [1,600,600,3] \
---data_type FP32 \
---output_dir saved_model_opt_EfficientPoseIV/openvino/FP32/600x600
-
-python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
---saved_model_dir saved_model_opt_EfficientPoseIV \
---input_shape [1,600,600,3] \
---data_type FP16 \
---output_dir saved_model_opt_EfficientPoseIV/openvino/FP16/600x600
-
-### tensorflow==2.4.0
-saved_model_to_tflite \
-  --saved_model_dir_path saved_model_opt_EfficientPoseIV \
-  --output_tfjs True \
-  --output_tftrt True \
-  --output_coreml True
-
-
-
-
-
-pb_to_saved_model \
-  --pb_file_path saved_model/EfficientPoseRT.pb \
-  --inputs input_res1:0 \
-  --outputs pass1_skeleton_pafs/BiasAdd:0,pass2_detection1_confs/BiasAdd:0,upscaled_confs/BiasAdd:0
-
-python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
---saved_model_dir saved_model \
---input_shape [1,224,224,3] \
---data_type FP32 \
---output_dir saved_model/openvino/FP32/224x224
-
-python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
---saved_model_dir saved_model \
---input_shape [1,224,224,3] \
---data_type FP16 \
---output_dir saved_model/openvino/FP16/224x224
-
-### tf-nightly
-saved_model_to_tflite \
-  --saved_model_dir_path saved_model \
+tflite2tensorflow \
+  --model_path EfficientPoseI.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
   --output_no_quant_float32_tflite True \
   --output_weight_quant_tflite True \
   --output_float16_quant_tflite True \
-  --output_integer_quant_tflite True
-
-### tensorflow==2.4.0
-saved_model_to_tflite \
-  --saved_model_dir_path saved_model \
-  --output_tfjs True
-
-
-
-
-
-pb_to_saved_model \
-  --pb_file_path saved_model/EfficientPoseRT_LITE.pb \
-  --inputs input_1_0:0 \
-  --outputs upscaled_confs/BiasAdd:0
-
-python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
---saved_model_dir saved_model \
---input_shape [1,224,224,3] \
---data_type FP32 \
---output_dir saved_model/openvino/FP32/224x224
-
-python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
---saved_model_dir saved_model \
---input_shape [1,224,224,3] \
---data_type FP16 \
---output_dir saved_model/openvino/FP16/224x224
-
-
-openvino2tensorflow \
-  --model_path saved_model/openvino/FP32/224x224/saved_model.xml \
-  --output_saved_model True \
-  --output_no_quant_float32_tflite True \
-  --output_weight_quant_tflite True \
-  --output_float16_quant_tflite True
-
-### tf-nightly
-saved_model_to_tflite \
-  --saved_model_dir_path saved_model \
-  --output_integer_quant_tflite True
-
-### tensorflow==2.4.0
-saved_model_to_tflite \
-  --saved_model_dir_path saved_model \
+  --output_integer_quant_tflite True \
+  --string_formulas_for_normalization '(data / 255 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]' \
   --output_tfjs True \
   --output_tftrt True \
-  --output_coreml True
+  --output_coreml True \
+  --output_onnx True \
+  --onnx_opset 13
+
+
+tflite2tensorflow \
+  --model_path EfficientPoseI.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True \
+  --optimizing_for_openvino_and_myriad True
+
+tflite2tensorflow \
+  --model_path EfficientPoseI.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_openvino_and_myriad True
+
+
+=====================================================================
+tflite2tensorflow \
+  --model_path EfficientPoseI_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True
+
+tflite2tensorflow \
+  --model_path EfficientPoseI_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True \
+  --string_formulas_for_normalization '(data / 255 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]' \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True \
+  --output_onnx True \
+  --onnx_opset 13
+
+
+tflite2tensorflow \
+  --model_path EfficientPoseI_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True \
+  --optimizing_for_openvino_and_myriad True
+
+tflite2tensorflow \
+  --model_path EfficientPoseI_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_openvino_and_myriad True
+
+
+tflite2tensorflow \
+  --model_path EfficientPoseI_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True \
+  --optimizing_hardswish_for_edgetpu True
+
+tflite2tensorflow \
+  --model_path EfficientPoseI_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_edgetpu True \
+  --string_formulas_for_normalization '(data / 255 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]'
+
+
+=====================================================================
+tflite2tensorflow \
+  --model_path EfficientPoseII.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True
+
+tflite2tensorflow \
+  --model_path EfficientPoseII.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True \
+  --string_formulas_for_normalization '(data / 255 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]' \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True \
+  --output_onnx True \
+  --onnx_opset 13
+
+
+
+tflite2tensorflow \
+  --model_path EfficientPoseII.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True \
+  --optimizing_for_openvino_and_myriad True
+
+tflite2tensorflow \
+  --model_path EfficientPoseII.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_openvino_and_myriad True
+
+
+=====================================================================
+tflite2tensorflow \
+  --model_path EfficientPoseII_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True
+
+tflite2tensorflow \
+  --model_path EfficientPoseII_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True \
+  --string_formulas_for_normalization '(data / 255 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]' \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True \
+  --output_onnx True \
+  --onnx_opset 13
+
+
+tflite2tensorflow \
+  --model_path EfficientPoseII_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True \
+  --optimizing_for_openvino_and_myriad True
+
+tflite2tensorflow \
+  --model_path EfficientPoseII_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_openvino_and_myriad True
+
+
+tflite2tensorflow \
+  --model_path EfficientPoseII_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True \
+  --optimizing_hardswish_for_edgetpu True
+
+tflite2tensorflow \
+  --model_path EfficientPoseII_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_edgetpu True \
+  --string_formulas_for_normalization '(data / 255 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]'
+
+
+
+=====================================================================
+tflite2tensorflow \
+  --model_path EfficientPoseIII.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True
+
+tflite2tensorflow \
+  --model_path EfficientPoseIII.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True \
+  --string_formulas_for_normalization '(data / 255 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]' \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True \
+  --output_onnx True \
+  --onnx_opset 13
+
+
+tflite2tensorflow \
+  --model_path EfficientPoseIII.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True \
+  --optimizing_for_openvino_and_myriad True
+
+tflite2tensorflow \
+  --model_path EfficientPoseIII.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_openvino_and_myriad True
+
+
+
+=====================================================================
+tflite2tensorflow \
+  --model_path EfficientPoseIV.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True
+
+tflite2tensorflow \
+  --model_path EfficientPoseIV.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True \
+  --string_formulas_for_normalization '(data / 255 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]' \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True \
+  --output_onnx True \
+  --onnx_opset 13
+
+
+tflite2tensorflow \
+  --model_path EfficientPoseIV.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True \
+  --optimizing_for_openvino_and_myriad True
+
+tflite2tensorflow \
+  --model_path EfficientPoseIV.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_openvino_and_myriad True
+
+
+
+
+=====================================================================
+tflite2tensorflow \
+  --model_path EfficientPoseRT.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True
+
+tflite2tensorflow \
+  --model_path EfficientPoseRT.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True \
+  --string_formulas_for_normalization '(data / 255 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]' \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True \
+  --output_onnx True \
+  --onnx_opset 13
+
+
+tflite2tensorflow \
+  --model_path EfficientPoseRT.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True \
+  --optimizing_for_openvino_and_myriad True
+
+tflite2tensorflow \
+  --model_path EfficientPoseRT.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_openvino_and_myriad True
+
+
+tflite2tensorflow \
+  --model_path EfficientPoseRT.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True \
+  --optimizing_hardswish_for_edgetpu True
+
+tflite2tensorflow \
+  --model_path EfficientPoseRT.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_edgetpu True \
+  --string_formulas_for_normalization '(data / 255 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]'
+
+
+
+=====================================================================
+tflite2tensorflow \
+  --model_path EfficientPoseRT_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True
+
+tflite2tensorflow \
+  --model_path EfficientPoseRT_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True \
+  --string_formulas_for_normalization '(data / 255 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]' \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True \
+  --output_onnx True \
+  --onnx_opset 13
+
+
+tflite2tensorflow \
+  --model_path EfficientPoseRT_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True \
+  --optimizing_for_openvino_and_myriad True
+
+tflite2tensorflow \
+  --model_path EfficientPoseRT_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_openvino_and_myriad True
+
+
+tflite2tensorflow \
+  --model_path EfficientPoseRT_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True \
+  --optimizing_hardswish_for_edgetpu True
+
+tflite2tensorflow \
+  --model_path EfficientPoseRT_LITE.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_edgetpu True \
+  --string_formulas_for_normalization '(data / 255 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]'
+
