@@ -1,0 +1,62 @@
+git clone https://github.com/PINTO0309/tflite2tensorflow.git
+cd tflite2tensorflow
+
+docker run --gpus all -it --rm \
+    -v `pwd`:/workspace/resources \
+    -e LOCAL_UID=$(id -u $USER) \
+    -e LOCAL_GID=$(id -g $USER) \
+    pinto0309/tflite2tensorflow:latest bash
+
+=====================================================================
+
+tflite2tensorflow \
+  --model_path hand_recrop.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True
+
+tflite2tensorflow \
+  --model_path hand_recrop.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True \
+  --string_formulas_for_normalization '(data / 255)' \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True \
+  --output_onnx True \
+  --onnx_opset 13
+
+
+tflite2tensorflow \
+  --model_path hand_recrop.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True \
+  --optimizing_for_openvino_and_myriad True
+
+tflite2tensorflow \
+  --model_path hand_recrop.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_openvino_and_myriad True
+
+
+tflite2tensorflow \
+  --model_path hand_recrop.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_pb True \
+  --optimizing_hardswish_for_edgetpu True
+
+tflite2tensorflow \
+  --model_path hand_recrop.tflite \
+  --flatc_path ./flatc \
+  --schema_path schema.fbs \
+  --output_edgetpu True \
+  --string_formulas_for_normalization '(data / 255)'
+
+
