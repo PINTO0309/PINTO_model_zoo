@@ -1,0 +1,43 @@
+docker run --gpus all -it --rm \
+    -v `pwd`:/workspace/resources \
+    -e LOCAL_UID=$(id -u $USER) \
+    -e LOCAL_GID=$(id -g $USER) \
+    pinto0309/openvino2tensorflow:latest bash
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+ --input_model onnx/centerface.onnx \
+ --input input.1 \
+ --input_shape [1,3,32,32] \
+ --output_dir openvino/centerface/FP32 \
+ --data_type FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+ --input_model onnx/centerface.onnx \
+ --input input.1 \
+ --input_shape [1,3,32,32] \
+ --output_dir openvino/centerface/FP16 \
+ --data_type FP16
+ 
+mkdir -p openvino/centerface/myriad
+ 
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+ -m openvino/centerface/FP16/centerface.xml \
+ -VPU_NUMBER_OF_SHAVES 4 \
+ -VPU_NUMBER_OF_CMX_SLICES 4 \
+ -o openvino/centerface/myriad/centerface.blob
+
+openvino2tensorflow \
+--model_path openvino/centerface/FP32/centerface.xml \
+--output_saved_model True \
+--output_pb True \
+--output_no_quant_float32_tflite True \
+--output_weight_quant_tflite True \
+--output_float16_quant_tflite True \
+--output_integer_quant_tflite True \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs True \
+--output_tftrt True \
+--output_coreml True \
+--output_onnx True \
+--onnx_opset 13
+
