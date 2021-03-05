@@ -4,6 +4,8 @@ docker run --gpus all -it --rm \
     -e LOCAL_GID=$(id -g $USER) \
     pinto0309/openvino2tensorflow:latest bash
 
+source /opt/intel/openvino_2021/bin/setupvars.sh
+
 python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
  --input_model onnx/centerface.onnx \
  --input input.1 \
