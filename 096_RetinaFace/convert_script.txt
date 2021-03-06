@@ -1,0 +1,43 @@
+docker run --gpus all -it --rm \
+    -v `pwd`:/workspace/resources \
+    -e LOCAL_UID=$(id -u $USER) \
+    -e LOCAL_GID=$(id -g $USER) \
+    pinto0309/openvino2tensorflow:latest bash
+
+source /opt/intel/openvino_2021/bin/setupvars.sh
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_mxnet.py \
+ --input_model mxnet/retinaface/R50-0000.params \
+ --input_shape [1,3,512,512] \
+ --output_dir openvino/retinaface/FP32 \
+ --data_type FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_mxnet.py \
+ --input_model mxnet/retinaface/R50-0000.params \
+ --input_shape [1,3,512,512] \
+ --output_dir openvino/retinaface/FP16 \
+ --data_type FP16
+ 
+mkdir -p openvino/retinaface/myriad
+ 
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+ -m openvino/retinaface/FP16/R50-0000.xml \
+ -VPU_NUMBER_OF_SHAVES 4 \
+ -VPU_NUMBER_OF_CMX_SLICES 4 \
+ -o openvino/retinaface/myriad/R50-0000.blob
+ 
+openvino2tensorflow \
+--model_path openvino/retinaface/FP32/R50-0000.xml \
+--output_saved_model True \
+--output_pb True \
+--output_no_quant_float32_tflite True \
+--output_weight_quant_tflite True \
+--output_float16_quant_tflite True \
+--output_integer_quant_tflite True \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs True \
+--output_tftrt True \
+--output_coreml True \
+--output_onnx True \
+--onnx_opset 13
+

@@ -1,0 +1,2 @@
+https://github.com/deepinsight/insightface/tree/master/detection/RetinaFace
+https://github.com/PINTO0309/openvino2tensorflow
