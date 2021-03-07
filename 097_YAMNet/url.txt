@@ -1,0 +1,3 @@
+https://www.tensorflow.org/hub/tutorials/yamnet
+https://tfhub.dev/google/yamnet/1
+https://github.com/PINTO0309/tflite2tensorflow
