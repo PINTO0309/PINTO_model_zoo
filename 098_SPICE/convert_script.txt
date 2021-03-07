@@ -1,0 +1,43 @@
+docker run --gpus all -it --rm \
+    -v `pwd`:/workspace/resources \
+    -e LOCAL_UID=$(id -u $USER) \
+    -e LOCAL_GID=$(id -g $USER) \
+    pinto0309/tflite2tensorflow:latest bash
+
+source /opt/intel/openvino_2021/bin/setupvars.sh
+
+cd resources
+
+tflite2tensorflow \
+  --model_path lite-model_spice_1.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --output_pb True
+
+tflite2tensorflow \
+  --model_path lite-model_spice_1.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_tfjs True \
+  --output_tftrt True
+  
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
