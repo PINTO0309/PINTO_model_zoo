@@ -1,2 +1,0 @@
-https://github.com/google/mediapipe/blob/master/mediapipe/modules/pose_landmark/pose_landmark_full_body.tflite
-https://github.com/PINTO0309/tflite2tensorflow

@@ -1,0 +1,200 @@
+=======================================================================
+docker run --gpus all -it --rm \
+    -v `pwd`:/workspace/resources \
+    -e LOCAL_UID=$(id -u $USER) \
+    -e LOCAL_GID=$(id -g $USER) \
+    pinto0309/tflite2tensorflow:latest bash
+
+cd resources
+
+### Normal
+tflite2tensorflow \
+  --model_path pose_detection.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_tflite_tfjs_coreml_onnx \
+  --output_pb True
+
+tflite2tensorflow \
+  --model_path pose_detection.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_tflite_tfjs_coreml_onnx \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True \
+  --string_formulas_for_normalization 'data / 255' \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True \
+  --output_onnx True \
+  --onnx_opset 13
+
+
+
+### Optimization for EdgeTPU
+tflite2tensorflow \
+  --model_path pose_detection.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_edgetpu \
+  --output_pb True \
+  --optimizing_hardswish_for_edgetpu True
+
+tflite2tensorflow \
+  --model_path pose_detection.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_edgetpu \
+  --string_formulas_for_normalization 'data / 255' \
+  --output_edgetpu True
+
+
+### Optimization for OpenVINO
+source /opt/intel/openvino_2021/bin/setupvars.sh
+
+tflite2tensorflow \
+  --model_path pose_detection.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_openvino \
+  --output_pb True \
+  --optimizing_for_openvino_and_myriad True
+
+tflite2tensorflow \
+  --model_path pose_detection.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_openvino \
+  --string_formulas_for_normalization 'data / 255' \
+  --output_openvino_and_myriad True
+
+==============================================================
+### Normal
+tflite2tensorflow \
+  --model_path pose_landmark_upper_body.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_tflite_tfjs_coreml_onnx \
+  --output_pb True
+
+tflite2tensorflow \
+  --model_path pose_landmark_upper_body.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_tflite_tfjs_coreml_onnx \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True \
+  --string_formulas_for_normalization 'data / 255' \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True \
+  --output_onnx True \
+  --onnx_opset 13
+
+
+
+### Optimization for EdgeTPU
+tflite2tensorflow \
+  --model_path pose_landmark_upper_body.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_edgetpu \
+  --output_pb True \
+  --optimizing_hardswish_for_edgetpu True
+
+tflite2tensorflow \
+  --model_path pose_landmark_upper_body.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_edgetpu \
+  --string_formulas_for_normalization 'data / 255' \
+  --output_edgetpu True
+
+
+### Optimization for OpenVINO
+source /opt/intel/openvino_2021/bin/setupvars.sh
+
+tflite2tensorflow \
+  --model_path pose_landmark_upper_body.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_openvino \
+  --output_pb True \
+  --optimizing_for_openvino_and_myriad True
+
+tflite2tensorflow \
+  --model_path pose_landmark_upper_body.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_openvino \
+  --string_formulas_for_normalization 'data / 255' \
+  --output_openvino_and_myriad True
+
+
+==============================================================
+### Normal
+tflite2tensorflow \
+  --model_path pose_landmark_full_body.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_tflite_tfjs_coreml_onnx \
+  --output_pb True
+
+tflite2tensorflow \
+  --model_path pose_landmark_full_body.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_tflite_tfjs_coreml_onnx \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True \
+  --string_formulas_for_normalization 'data / 255' \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True \
+  --output_onnx True \
+  --onnx_opset 13
+
+
+
+### Optimization for EdgeTPU
+tflite2tensorflow \
+  --model_path pose_landmark_full_body.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_edgetpu \
+  --output_pb True \
+  --optimizing_hardswish_for_edgetpu True
+
+tflite2tensorflow \
+  --model_path pose_landmark_full_body.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_edgetpu \
+  --string_formulas_for_normalization 'data / 255' \
+  --output_edgetpu True
+
+
+### Optimization for OpenVINO
+source /opt/intel/openvino_2021/bin/setupvars.sh
+
+tflite2tensorflow \
+  --model_path pose_landmark_full_body.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_openvino \
+  --output_pb True \
+  --optimizing_for_openvino_and_myriad True
+
+tflite2tensorflow \
+  --model_path pose_landmark_full_body.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_openvino \
+  --string_formulas_for_normalization 'data / 255' \
+  --output_openvino_and_myriad True
