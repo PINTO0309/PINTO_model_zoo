@@ -1,2 +1,3 @@
 https://github.com/shinmura0/EfficientNet_AD_Segmentation
 https://github.com/PINTO0309/openvino2tensorflow
+https://qiita.com/shinmura0/items/5f2c363812f7cdcc8771
