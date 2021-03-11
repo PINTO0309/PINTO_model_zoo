@@ -1,0 +1,34 @@
+docker run --gpus all -it --rm \
+    -v `pwd`:/workspace/resources \
+    -e LOCAL_UID=$(id -u $USER) \
+    -e LOCAL_GID=$(id -g $USER) \
+    pinto0309/openvino2tensorflow:latest bash
+
+source /opt/intel/openvino_2021/bin/setupvars.sh
+
+cd resources
+
+pb_to_saved_model \
+--pb_file_path pb/hifill.pb \
+--inputs img:0,mask:0 \
+--outputs inpainted:0 \
+--model_output_path saved_model
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--output_dir openvino/hifill/FP32 \
+--data_type FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model \
+--output_dir openvino/hifill/FP16 \
+--data_type FP16
+
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--model_output_dir_path saved_model \
+--output_no_quant_float32_tflite True \
+--output_weight_quant_tflite True \
+--output_float16_quant_tflite True \
+--output_onnx True \
+--onnx_opset 13
