@@ -5,3 +5,6 @@ https://github.com/opencv/open_model_zoo/blob/master/models/public/ctdet_coco_dl
 https://github.com/opencv/open_model_zoo/blob/master/models/public/ctdet_coco_dlav0_512/model.yml
 
 https://github.com/xingyizhou/CenterNet/blob/master/readme/MODEL_ZOO.md
+
+
+https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md

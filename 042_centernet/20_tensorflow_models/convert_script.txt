@@ -1,0 +1,94 @@
+==============================================================
+### centernet_mobilenetv2_fpn_kpts_320x320_float32
+
+docker run --gpus all -it --rm \
+    -v `pwd`:/workspace/resources \
+    -e LOCAL_UID=$(id -u $USER) \
+    -e LOCAL_GID=$(id -g $USER) \
+    pinto0309/tflite2tensorflow:latest bash
+
+source /opt/intel/openvino_2021/bin/setupvars.sh
+
+cd resources
+
+### Normal
+tflite2tensorflow \
+  --model_path centernet_mobilenetv2_fpn_kpts_320x320_float32.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_tflite_tfjs_coreml_onnx \
+  --output_pb True
+
+tflite2tensorflow \
+  --model_path centernet_mobilenetv2_fpn_kpts_320x320_float32.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_tflite_tfjs_coreml_onnx \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_onnx True \
+  --onnx_opset 13
+
+python3 -m onnxsim model_float32.onnx model_float32_opt.onnx
+
+
+==============================================================
+### centernet_mobilenetv2_fpn_od_320x320_float32
+
+docker run --gpus all -it --rm \
+    -v `pwd`:/workspace/resources \
+    -e LOCAL_UID=$(id -u $USER) \
+    -e LOCAL_GID=$(id -g $USER) \
+    pinto0309/tflite2tensorflow:latest bash
+
+source /opt/intel/openvino_2021/bin/setupvars.sh
+
+cd resources
+
+### Normal
+tflite2tensorflow \
+  --model_path centernet_mobilenetv2_fpn_od_320x320_float32.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_tflite_tfjs_coreml_onnx \
+  --output_pb True
+
+tflite2tensorflow \
+  --model_path centernet_mobilenetv2_fpn_od_320x320_float32.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_tflite_tfjs_coreml_onnx \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True \
+  --string_formulas_for_normalization 'data * 1.0' \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True \
+  --output_onnx True \
+  --onnx_opset 13
+
+python3 -m onnxsim model_float32.onnx model_float32_opt.onnx
+
+
+### Optimization for OpenVINO
+source /opt/intel/openvino_2021/bin/setupvars.sh
+
+tflite2tensorflow \
+  --model_path centernet_mobilenetv2_fpn_od_320x320_float32.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_openvino \
+  --output_pb True \
+  --optimizing_for_openvino_and_myriad True
+
+tflite2tensorflow \
+  --model_path centernet_mobilenetv2_fpn_od_320x320_float32.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_openvino \
+  --output_openvino_and_myriad True
