@@ -1,0 +1,2 @@
+https://github.com/fizyr/keras-retinanet
+https://github.com/PINTO0309/openvino2tensorflow

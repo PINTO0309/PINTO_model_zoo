@@ -1,0 +1,25 @@
+docker run --gpus all -it --rm \
+    -v `pwd`:/workspace/resources \
+    -e LOCAL_UID=$(id -u $USER) \
+    -e LOCAL_GID=$(id -g $USER) \
+    pinto0309/openvino2tensorflow:latest bash
+
+source /opt/intel/openvino_2021/bin/setupvars.sh
+
+cd resources
+
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_no_quant_float32_tflite True \
+--output_weight_quant_tflite True \
+--output_float16_quant_tflite True \
+--output_integer_quant_tflite True \
+--string_formulas_for_normalization '(data / 127.5) - 1.0' \
+--output_tfjs True \
+--output_tftrt True \
+--output_onnx True \
+--onnx_opset 13
+
+saved_model_to_pb \
+--saved_model_dir_path tflite_from_saved_model \
+--model_output_dir_path tflite_from_saved_model
