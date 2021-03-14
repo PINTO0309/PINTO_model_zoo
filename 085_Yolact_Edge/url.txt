@@ -1,2 +1,6 @@
 https://github.com/haotian-liu/yolact_edge
 https://github.com/PINTO0309/openvino2tensorflow
+
+Yolact Edge + C++
+https://github.com/haotian-liu/yolact_edge/issues/7#issuecomment-766545213
+
