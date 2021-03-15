@@ -154,6 +154,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |050|AnimeGANv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/050_AnimeGANv2)|⚫|⚫|⚫||⚫|⚫|⚫||⚫|⚫||
 |062|Facial Cartoonization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/062_facial_cartoonization)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 |068|Colorful_Image_Colorization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/068_Colorful_Image_Colorization)|⚫|⚫|||⚫|⚫|⚫|⚫||⚫|experimental|
+|101|arbitrary_image_stylization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/101_arbitrary_image_stylization)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|magenta|
 ### 11. Super Resolution
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
