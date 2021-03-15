@@ -1,0 +1,132 @@
+==============================================================
+### magenta_arbitrary-image-stylization-v1-256_fp16_prediction_1
+
+docker run --gpus all -it --rm \
+    -v `pwd`:/workspace/resources \
+    -e LOCAL_UID=$(id -u $USER) \
+    -e LOCAL_GID=$(id -g $USER) \
+    pinto0309/tflite2tensorflow:latest bash
+
+source /opt/intel/openvino_2021/bin/setupvars.sh
+
+cd resources
+
+### Normal
+tflite2tensorflow \
+  --model_path magenta_arbitrary-image-stylization-v1-256_fp16_prediction_1.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_tflite_tfjs_coreml_onnx \
+  --output_pb True
+
+tflite2tensorflow \
+  --model_path magenta_arbitrary-image-stylization-v1-256_fp16_prediction_1.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_tflite_tfjs_coreml_onnx \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_integer_quant_tflite True \
+  --string_formulas_for_normalization 'data / 255.0' \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True \
+  --output_onnx True \
+  --onnx_opset 13
+
+
+### Optimization for EdgeTPU
+tflite2tensorflow \
+  --model_path magenta_arbitrary-image-stylization-v1-256_fp16_prediction_1.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_edgetpu \
+  --output_pb True \
+  --optimizing_hardswish_for_edgetpu True
+
+tflite2tensorflow \
+  --model_path magenta_arbitrary-image-stylization-v1-256_fp16_prediction_1.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_edgetpu \
+  --output_edgetpu True \
+  --string_formulas_for_normalization 'data / 255.0' \
+  --output_integer_quant_type 'uint8'
+
+
+### Optimization for OpenVINO
+source /opt/intel/openvino_2021/bin/setupvars.sh
+
+tflite2tensorflow \
+  --model_path magenta_arbitrary-image-stylization-v1-256_fp16_prediction_1.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_openvino \
+  --output_pb True \
+  --optimizing_for_openvino_and_myriad True
+
+tflite2tensorflow \
+  --model_path magenta_arbitrary-image-stylization-v1-256_fp16_prediction_1.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_openvino \
+  --output_openvino_and_myriad True
+
+
+==============================================================
+### magenta_arbitrary-image-stylization-v1-256_fp16_transfer_1
+
+docker run --gpus all -it --rm \
+    -v `pwd`:/workspace/resources \
+    -e LOCAL_UID=$(id -u $USER) \
+    -e LOCAL_GID=$(id -g $USER) \
+    pinto0309/tflite2tensorflow:latest bash
+
+source /opt/intel/openvino_2021/bin/setupvars.sh
+
+cd resources
+
+### Normal
+tflite2tensorflow \
+  --model_path magenta_arbitrary-image-stylization-v1-256_fp16_transfer_1.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_tflite_tfjs_coreml_onnx \
+  --output_pb True
+
+tflite2tensorflow \
+  --model_path magenta_arbitrary-image-stylization-v1-256_fp16_transfer_1.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_tflite_tfjs_coreml_onnx \
+  --output_no_quant_float32_tflite True \
+  --output_weight_quant_tflite True \
+  --output_float16_quant_tflite True \
+  --output_tfjs True \
+  --output_tftrt True \
+  --output_coreml True \
+  --output_onnx True \
+  --onnx_opset 13
+
+
+python3 01_integer_quantization_full_integer_quantization.py
+
+
+### Optimization for OpenVINO
+source /opt/intel/openvino_2021/bin/setupvars.sh
+
+tflite2tensorflow \
+  --model_path magenta_arbitrary-image-stylization-v1-256_fp16_transfer_1.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_openvino \
+  --output_pb True \
+  --optimizing_for_openvino_and_myriad True
+
+tflite2tensorflow \
+  --model_path magenta_arbitrary-image-stylization-v1-256_fp16_transfer_1.tflite \
+  --flatc_path ../flatc \
+  --schema_path ../schema.fbs \
+  --model_output_path saved_model_openvino \
+  --output_openvino_and_myriad True
