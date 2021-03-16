@@ -194,6 +194,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |091|gaze-estimation-adas-0002|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/091_gaze-estimation-adas-0002)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
+|102|Coconet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/102_Coconet)|⚫|⚫|||⚫|||⚫|||magenta|
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)  
