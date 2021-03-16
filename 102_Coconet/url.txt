@@ -1,0 +1,3 @@
+https://github.com/magenta/magenta/tree/master/magenta/models/coconet
+https://github.com/PINTO0309/tflite2tensorflow
+https://github.com/PINTO0309/openvino2tensorflow
