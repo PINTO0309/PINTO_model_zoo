@@ -1902,3 +1902,4 @@ Memory (bytes): count=0
 22. **[How to install Ubuntu 19.10 aarch64 (64bit) on RaspberryPi4](https://qiita.com/PINTO/items/adc5db7af7a5996c0f72)**
 23. **https://github.com/rwightman/posenet-python.git**
 24. **https://github.com/sayakpaul/Adventures-in-TensorFlow-Lite.git**
+
