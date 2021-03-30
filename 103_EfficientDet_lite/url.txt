@@ -1,3 +1,4 @@
 https://tfhub.dev/tensorflow/efficientdet/lite0/detection/1
 https://github.com/google/automl/tree/master/efficientdet
 https://github.com/PINTO0309/tflite2tensorflow
+https://zenn.dev/pinto0309/scraps/0193a8aaaf6a8c
