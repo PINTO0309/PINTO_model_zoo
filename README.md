@@ -34,7 +34,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 
 - **[[Japanese] Custom Operation入りのtfliteを逆コンバートしてJSON化し標準OPへ置き換えたうえでtfliteを再生成する方法](https://zenn.dev/pinto0309/articles/9d316860f8d418)**
 
-- **[Generate saved_model, tfjs, tf-trt, EdgeTPU, CoreML, quantized tflite and .pb from .tflite.](https://github.com/PINTO0309/tflite2tensorflow)**
+- **[Generate saved_model, tfjs, tf-trt, EdgeTPU, CoreML, quantized tflite, ONNX, OpenVINO, Myriad Inference Engine blob and .pb from .tflite.](https://github.com/PINTO0309/tflite2tensorflow)**
 
 - **[Add a custom OP to the TFLite runtime to build the whl installer (for Python)](https://zenn.dev/pinto0309/articles/a0e40c2817f2ee)**, **`MaxPoolingWithArgmax2D`**, **`MaxUnpooling2D`**, **`Convolution2DTransposeBias`**
 
