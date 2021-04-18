@@ -1,0 +1,108 @@
+python3 train.py \
+--cfg configs/mobile_stylegan_ffhq.json \
+--ckpt stylegan2_ffhq_config_f_mapping_network.ckpt \
+--to-onnx stylegan2_ffhq_config_f_mapping_network.onnx
+
+python3 train.py \
+--cfg configs/mobile_stylegan_ffhq.json \
+--ckpt stylegan2_ffhq_config_f_synthesis_network.ckpt \
+--to-onnx stylegan2_ffhq_config_f_synthesis_network.onnx
+
+python3 -m onnxsim mobilestylegan_ffhq_mnet.onnx mobilestylegan_ffhq_mnet_opt.onnx
+python3 -m onnxsim mobilestylegan_ffhq_snet.onnx mobilestylegan_ffhq_snet_opt.onnx
+
+
+
+
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model mobilestylegan_ffhq_mnet_opt.onnx \
+--output_dir saved_model_m/openvino/FP32 \
+--data_type FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model mobilestylegan_ffhq_mnet_opt.onnx \
+--output_dir saved_model_m/openvino/FP16 \
+--data_type FP16
+
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model mobilestylegan_ffhq_snet_opt.onnx \
+--output_dir saved_model_s/openvino/FP32 \
+--data_type FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model mobilestylegan_ffhq_snet_opt.onnx \
+--output_dir saved_model_s/openvino/FP16 \
+--data_type FP16
+
+
+
+
+
+
+onnx-tf convert -i mobilestylegan_ffhq_mnet_opt.onnx -o saved_model_m
+onnx-tf convert -i mobilestylegan_ffhq_snet_opt.onnx -o saved_model_s
+
+
+
+python3 saved_model_to_tflite.py \
+--saved_model_dir_path saved_model_m \
+--model_output_dir_path saved_model_m \
+--output_weight_quant_tflite True \
+--output_float16_quant_tflite True \
+--output_integer_quant_tflite True \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization '(data / 255)' \
+--output_tfjs True \
+--output_tftrt True \
+--output_coreml True
+
+
+python3 saved_model_to_tflite.py \
+--saved_model_dir_path saved_model_s \
+--model_output_dir_path saved_model_s \
+--output_weight_quant_tflite True \
+--output_float16_quant_tflite True \
+--output_integer_quant_tflite True \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization '(data / 255)' \
+--output_tfjs True \
+--output_tftrt True \
+--output_coreml True
+
+
+python3 saved_model_to_tflite.py \
+--saved_model_dir_path saved_model_s \
+--model_output_dir_path saved_model_s \
+--output_coreml True
+
+
+
+mkdir -p saved_model_m/openvino/myriad
+mkdir -p saved_model_s/openvino/myriad
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model_m/openvino/FP16/mobilestylegan_ffhq_mnet_opt.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model_m/openvino/myriad/mobilestylegan_ffhq_mnet_opt.blob
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model_s/openvino/FP16/mobilestylegan_ffhq_snet_opt.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model_s/openvino/myriad/mobilestylegan_ffhq_snet_opt.blob
+
+
+
+
+
+
+
+
+
+
+
+
+
