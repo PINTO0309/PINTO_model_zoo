@@ -140,6 +140,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |075|ERFNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/075_ERFNet)|⚫|⚫|⚫|⚫|⚫|⚫||⚫|⚫|⚫|Cityscapes,256x512,384x786,512x1024|
 |078|MODNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/078_MODNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|128x128,192x192,256x256,512x512|
 |082|MediaPipe_Meet_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/082_MediaPipe_Meet_Segmentation)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe,128x128,144x256,96x160|
+|104|DeeplabV3-plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/104_DeeplabV3-plus)|⚫|⚫|⚫||⚫|⚫|⚫|⚫||⚫|cityscapes,200x400,400x800,800x1600|
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|

@@ -1,0 +1,109 @@
+xhost +local: && \
+  docker run --gpus all -it --rm \
+    -v `pwd`:/home/user/workdir \
+    -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+    --net=host \
+    -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+    -e DISPLAY=$DISPLAY \
+    --privileged \
+    pinto0309/tflite2tensorflow:latest
+
+saved_model_to_tflite \
+--input_shapes [1,200,400,3] \
+--saved_model_dir_path saved_model_200x400 \
+--model_output_dir_path saved_model_200x400 \
+--output_weight_quant_tflite True \
+--output_float16_quant_tflite True \
+--output_integer_quant_tflite True \
+--output_full_integer_quant_tflite True \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization '(data / 255)' \
+--output_tfjs True \
+--output_coreml True \
+--output_onnx True
+
+saved_model_to_tflite \
+--input_shapes [1,400,800,3] \
+--saved_model_dir_path saved_model_400x800 \
+--model_output_dir_path saved_model_400x800 \
+--output_weight_quant_tflite True \
+--output_float16_quant_tflite True \
+--output_integer_quant_tflite True \
+--output_full_integer_quant_tflite True \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization '(data / 255)' \
+--output_tfjs True \
+--output_coreml True \
+--output_onnx True
+
+saved_model_to_tflite \
+--input_shapes [1,800,1600,3] \
+--saved_model_dir_path saved_model_800x1600 \
+--model_output_dir_path saved_model_800x1600 \
+--output_weight_quant_tflite True \
+--output_float16_quant_tflite True \
+--output_integer_quant_tflite True \
+--output_full_integer_quant_tflite True \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization '(data / 255)' \
+--output_tfjs True \
+--output_coreml True \
+--output_onnx True
+
+python3 -m onnxsim --input-shape=1,200,400,3 saved_model_200x400/model_float32.onnx saved_model_200x400/model_float32_opt.onnx
+python3 -m onnxsim --input-shape=1,400,800,3 saved_model_400x800/model_float32.onnx saved_model_400x800/model_float32_opt.onnx
+python3 -m onnxsim --input-shape=1,800,1600,3 saved_model_800x1600/model_float32.onnx saved_model_800x1600/model_float32_opt.onnx
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_200x400 \
+--input_shape [1,200,400,3] \
+--output_dir saved_model_200x400/openvino/FP32 \
+--data_type FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_200x400 \
+--input_shape [1,200,400,3] \
+--output_dir saved_model_200x400/openvino/FP16 \
+--data_type FP16
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_400x800 \
+--input_shape [1,400,800,3] \
+--output_dir saved_model_400x800/openvino/FP32 \
+--data_type FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_400x800 \
+--input_shape [1,400,800,3] \
+--output_dir saved_model_400x800/openvino/FP16 \
+--data_type FP16
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_800x1600 \
+--input_shape [1,800,1600,3] \
+--output_dir saved_model_800x1600/openvino/FP32 \
+--data_type FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_800x1600 \
+--input_shape [1,800,1600,3] \
+--output_dir saved_model_800x1600/openvino/FP16 \
+--data_type FP16
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model_200x400/openvino/FP16/saved_model.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model_200x400/openvino/myriad
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model_400x800/openvino/FP16/saved_model.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model_400x800/openvino/myriad/saved_model.blob
+
+#${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+#-m saved_model_800x1600/openvino/FP16/saved_model.xml \
+#-VPU_NUMBER_OF_SHAVES 4 \
+#-VPU_NUMBER_OF_CMX_SLICES 4 \
+#-o saved_model_800x1600/openvino/myriad/saved_model.blob
