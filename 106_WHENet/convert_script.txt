@@ -13,7 +13,7 @@ xhost +local: && \
     -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
     -e DISPLAY=$DISPLAY \
     --privileged \
-    whenet:latest
+    pinto0309/whenet:latest
 
 cd /home/user/workdir
 
