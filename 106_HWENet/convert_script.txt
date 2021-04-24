@@ -1,0 +1,88 @@
+git clone https://github.com/Ascend-Research/HeadPoseEstimation-WHENet.git
+cd HeadPoseEstimation-WHENet/yolo_v3/data
+sudo gdown --id 1wGrwu_5etcpuu_sLIXl9Nu0dwNc8YXIH
+cd ../..
+
+
+xhost +local: && \
+  docker run --gpus all -it --rm \
+    -v `pwd`:/home/user/workdir \
+    -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+    --device /dev/video0:/dev/video0:mwr \
+    --net=host \
+    -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+    -e DISPLAY=$DISPLAY \
+    --privileged \
+    whenet:latest
+
+cd /home/user/workdir
+
+python3 demo_video.py
+
+xhost +local: && \
+  docker run --gpus all -it --rm \
+    -v `pwd`:/home/user/workdir \
+    -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+    --device /dev/video0:/dev/video0:mwr \
+    --net=host \
+    -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+    -e DISPLAY=$DISPLAY \
+    --privileged \
+    pinto0309/openvino2tensorflow:latest
+    
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_no_quant_float32_tflite True \
+--output_weight_quant_tflite True \
+--output_float16_quant_tflite True \
+--output_integer_quant_tflite True \
+--output_full_integer_quant_tflite True \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs True \
+--output_tftrt True \
+--output_coreml True \
+--output_edgetpu True \
+--output_onnx True \
+--onnx_opset 11
+
+=======================================================
+
+xhost +local: && \
+  docker run --gpus all -it --rm \
+    -v `pwd`:/home/user/workdir \
+    -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+    --net=host \
+    -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+    -e DISPLAY=$DISPLAY \
+    --privileged \
+    pinto0309/tflite2tensorflow:latest
+
+
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ./flatc \
+--schema_path ./schema.fbs \
+--output_pb True
+
+
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ./flatc \
+--schema_path ./schema.fbs \
+--model_output_path saved_model \
+--output_weight_quant_tflite True \
+--output_float16_quant_tflite True \
+--output_integer_quant_tflite True \
+--output_full_integer_quant_tflite True \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs True \
+--output_tftrt True \
+--output_coreml True \
+--output_edgetpu True \
+--output_onnx True \
+--onnx_opset 11 \
+--output_openvino_and_myriad True
+
+
