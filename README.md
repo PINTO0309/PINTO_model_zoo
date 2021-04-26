@@ -38,6 +38,10 @@ I have been working on quantization of various models as a hobby, but I have ski
 
 - **[Add a custom OP to the TFLite runtime to build the whl installer (for Python)](https://zenn.dev/pinto0309/articles/a0e40c2817f2ee)**, **`MaxPoolingWithArgmax2D`**, **`MaxUnpooling2D`**, **`Convolution2DTransposeBias`**
 
+- **[ONNX to JSON](https://github.com/PINTO0309/onnx2json)**
+
+- **[JSON to ONNX](https://github.com/PINTO0309/json2onnx)**
+
 ## List of pre-quantized models
 \* WQ = Weight Quantization
 \** OV = OpenVINO IR
