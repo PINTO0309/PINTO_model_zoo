@@ -1,0 +1,68 @@
+/opt/intel/openvino_2021/deployment_tools/open_model_zoo/tools/downloader/downloader.py \
+--name efficientdet-d0-tf \
+--precisions FP32,FP16
+
+
+sudo pip3 install tensorflow_model_optimization
+sudo nano /home/user/workdir/public/efficientdet-d0-tf/model/hparams_config.py
+
+  # regularization l2 loss.
+  h.weight_decay = 4e-5
+  h.strategy = None  # 'tpu', 'gpus', None
+  h.mixed_precision = False  # If False, use float32.
+  
+  ↓
+
+  # regularization l2 loss.
+  h.weight_decay = 4e-5
+  h.strategy = None  # 'tpu', 'gpus', None
+  h.mixed_precision = False  # If False, use float32.
+  h.loss_scale = None  # set to 2**16 enables dynamic loss scale
+  h.model_optimizations = {}  # 'prune':{}
+  
+
+sudo cp /opt/intel/openvino_2021/deployment_tools/open_model_zoo/models/public/efficientdet-d0-tf/model.yml \
+        /opt/intel/openvino_2021/deployment_tools/open_model_zoo/models/public/efficientdet-d0-tf/model_org.yml
+
+
+
+sudo nano /opt/intel/openvino_2021/deployment_tools/open_model_zoo/models/public/efficientdet-d0-tf/model.yml
+
+--input_shape=[1,512,512,3]
+--input_shape=[1,320,320,3]
+--input_shape=[1,256,256,3]
+
+
+
+sudo nano /home/user/workdir/public/efficientdet-d0-tf/model/hparams_config.py
+
+efficientdet_model_param_dict = {
+    'efficientdet-d0':
+        dict(
+            name='efficientdet-d0',
+            backbone_name='efficientnet-b0',
+            image_size=512,
+
+or
+
+efficientdet_model_param_dict = {
+    'efficientdet-d0':
+        dict(
+            name='efficientdet-d0',
+            backbone_name='efficientnet-b0',
+            image_size=320,
+
+or
+
+efficientdet_model_param_dict = {
+    'efficientdet-d0':
+        dict(
+            name='efficientdet-d0',
+            backbone_name='efficientnet-b0',
+            image_size=256,
+
+
+
+
+/opt/intel/openvino_2021/deployment_tools/open_model_zoo/tools/downloader/converter.py \
+--name=efficientdet-d0-tf
