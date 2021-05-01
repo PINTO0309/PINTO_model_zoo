@@ -1,0 +1,10 @@
+The output of the IR is a list of 7-element tuples: [image_id, class_id, confidence, x_min, y_min, x_max, y_max], where:
+
+image_id – image batch index.
+class_id – is the id of the detected object class counted from 0.
+confidence – is the confidence of the detected object.
+x_min – normalized x coordinate of the lower left corner of the detected object.
+y_min – normalized y coordinate of the lower left corner of the detected object.
+x_max – normalized x coordinate of the upper right corner of the detected object.
+y_max – normalized y coordinate of the upper right corner of the detected object.
+The first element with image_id = -1 means end of data.
