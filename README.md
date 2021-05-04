@@ -83,7 +83,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |074|Yolact|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/074_Yolact)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 |085|Yolact_Edge|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/085_Yolact_Edge)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|WIP, MobileNetV2(256/320)|
 |089|DETR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/089_DETR)|⚫|⚫|⚫||⚫|||||⚫|256x256|
-|103|EfficientDet_lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/103_EfficientDet_lite)|⚫|⚫|⚫|⚫|⚫|||⚫|⚫|⚫|lite0,lite1,lite2,lite3,lite4|
+|103|EfficientDet_lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/103_EfficientDet_lite)|⚫|⚫|⚫|⚫|⚫|⚫||⚫|⚫|⚫|lite0,lite1,lite2,lite3,lite4|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
