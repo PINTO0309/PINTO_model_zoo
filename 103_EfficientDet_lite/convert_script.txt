@@ -1,0 +1,199 @@
+================================================================================================
+https://tfhub.dev/tensorflow/lite-model/efficientdet/lite0/detection/default/1
+https://tfhub.dev/tensorflow/lite-model/efficientdet/lite1/detection/default/1
+https://tfhub.dev/tensorflow/lite-model/efficientdet/lite2/detection/default/1
+https://tfhub.dev/tensorflow/lite-model/efficientdet/lite3/detection/default/1
+https://tfhub.dev/tensorflow/lite-model/efficientdet/lite4/detection/default/2
+
+
+xhost +local: && \
+  docker run --gpus all -it --rm \
+    -v `pwd`:/home/user/workdir \
+    -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+    --device /dev/video0:/dev/video0:mwr \
+    --net=host \
+    -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+    -e DISPLAY=$DISPLAY \
+    --privileged \
+    pinto0309/openvino2tensorflow:latest
+
+cd workdir
+
+python3 -m tf2onnx.convert \
+--opset 12 \
+--tflite lite-model_efficientdet_lite0_detection_default_1.tflite \
+--output efficientdet_lite0.onnx \
+--dequantize
+
+python3 -m onnxsim efficientdet_lite0.onnx efficientdet_lite0_opt.onnx
+
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model efficientdet_lite0.onnx \
+--data_type FP32 \
+--output_dir openvino/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model efficientdet_lite0.onnx \
+--data_type FP16 \
+--output_dir openvino/FP16
+
+xml edit
+
+openvino2tensorflow \
+--model_path openvino/FP32/efficientdet_lite0.xml \
+--output_saved_model True \
+--output_pb True \
+--output_no_quant_float32_tflite True \
+--output_weight_quant_tflite True \
+--output_float16_quant_tflite True \
+--output_integer_quant_tflite True \
+--string_formulas_for_normalization 'data * 1' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs True \
+--output_tftrt True
+
+==========================================================================
+
+python3 -m tf2onnx.convert \
+--opset 12 \
+--tflite lite-model_efficientdet_lite1_detection_default_1.tflite \
+--output efficientdet_lite1.onnx \
+--dequantize
+
+python3 -m onnxsim efficientdet_lite1.onnx efficientdet_lite1_opt.onnx
+
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model efficientdet_lite1.onnx \
+--data_type FP32 \
+--output_dir openvino/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model efficientdet_lite1.onnx \
+--data_type FP16 \
+--output_dir openvino/FP16
+
+xml edit
+
+openvino2tensorflow \
+--model_path openvino/FP32/efficientdet_lite1.xml \
+--output_saved_model True \
+--output_pb True \
+--output_no_quant_float32_tflite True \
+--output_weight_quant_tflite True \
+--output_float16_quant_tflite True \
+--output_integer_quant_tflite True \
+--string_formulas_for_normalization 'data * 1' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs True \
+--output_tftrt True
+
+==========================================================================
+
+python3 -m tf2onnx.convert \
+--opset 12 \
+--tflite lite-model_efficientdet_lite2_detection_default_1.tflite \
+--output efficientdet_lite2.onnx \
+--dequantize
+
+python3 -m onnxsim efficientdet_lite2.onnx efficientdet_lite2_opt.onnx
+
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model efficientdet_lite2.onnx \
+--data_type FP32 \
+--output_dir openvino/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model efficientdet_lite2.onnx \
+--data_type FP16 \
+--output_dir openvino/FP16
+
+xml edit
+
+openvino2tensorflow \
+--model_path openvino/FP32/efficientdet_lite2.xml \
+--output_saved_model True \
+--output_pb True \
+--output_no_quant_float32_tflite True \
+--output_weight_quant_tflite True \
+--output_float16_quant_tflite True \
+--output_integer_quant_tflite True \
+--string_formulas_for_normalization 'data * 1' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs True \
+--output_tftrt True
+
+==========================================================================
+
+python3 -m tf2onnx.convert \
+--opset 12 \
+--tflite lite-model_efficientdet_lite3_detection_default_1.tflite \
+--output efficientdet_lite3.onnx \
+--dequantize
+
+python3 -m onnxsim efficientdet_lite3.onnx efficientdet_lite3_opt.onnx
+
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model efficientdet_lite3.onnx \
+--data_type FP32 \
+--output_dir openvino/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model efficientdet_lite3.onnx \
+--data_type FP16 \
+--output_dir openvino/FP16
+
+xml edit
+
+openvino2tensorflow \
+--model_path openvino/FP32/efficientdet_lite3.xml \
+--output_saved_model True \
+--output_pb True \
+--output_no_quant_float32_tflite True \
+--output_weight_quant_tflite True \
+--output_float16_quant_tflite True \
+--output_integer_quant_tflite True \
+--string_formulas_for_normalization 'data * 1' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs True \
+--output_tftrt True
+
+
+python3 -m tf2onnx.convert \
+--opset 12 \
+--tflite lite-model_efficientdet_lite4_detection_default_2.tflite \
+--output efficientdet_lite4.onnx \
+--dequantize
+
+python3 -m onnxsim efficientdet_lite4.onnx efficientdet_lite4_opt.onnx
+
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model efficientdet_lite4.onnx \
+--data_type FP32 \
+--output_dir openvino/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model efficientdet_lite4.onnx \
+--data_type FP16 \
+--output_dir openvino/FP16
+
+xml edit
+
+openvino2tensorflow \
+--model_path openvino/FP32/efficientdet_lite4.xml \
+--output_saved_model True \
+--output_pb True \
+--output_no_quant_float32_tflite True \
+--output_weight_quant_tflite True \
+--output_float16_quant_tflite True \
+--output_integer_quant_tflite True \
+--string_formulas_for_normalization 'data * 1' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs True \
+--output_tftrt True
+
+
