@@ -1,0 +1,355 @@
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_incept_256x256.onnx \
+--model_name deblurganv2_incept_256x256 \
+--output_dir openvino/inception/256x256/FP32 \
+--data_type FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_incept_256x256.onnx \
+--model_name deblurganv2_incept_256x256 \
+--output_dir openvino/inception/256x256/FP16 \
+--data_type FP16
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/inception/256x256/FP16/deblurganv2_incept_256x256.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/inception/256x256/myriad/deblurganv2_incept_256x256.blob
+
+
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_mbnv2_256x256.onnx \
+--model_name deblurganv2_mbnv2_256x256 \
+--output_dir openvino/mobilenetv2/256x256/FP32 \
+--data_type FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_mbnv2_256x256.onnx \
+--model_name deblurganv2_mbnv2_256x256 \
+--output_dir openvino/mobilenetv2/256x256/FP16 \
+--data_type FP16
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/mobilenetv2/256x256/FP16/deblurganv2_mbnv2_256x256.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/mobilenetv2/256x256/myriad/deblurganv2_mbnv2_256x256.blob
+
+=============================================================================================
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_incept_320x320.onnx \
+--model_name deblurganv2_incept_320x320 \
+--output_dir openvino/inception/320x320/FP32 \
+--data_type FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_incept_320x320.onnx \
+--model_name deblurganv2_incept_320x320 \
+--output_dir openvino/inception/320x320/FP16 \
+--data_type FP16
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/inception/320x320/FP16/deblurganv2_incept_320x320.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/inception/320x320/myriad/deblurganv2_incept_320x320.blob
+
+
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_mbnv2_320x320.onnx \
+--model_name deblurganv2_mbnv2_320x320 \
+--output_dir openvino/mobilenetv2/320x320/FP32 \
+--data_type FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_mbnv2_320x320.onnx \
+--model_name deblurganv2_mbnv2_320x320 \
+--output_dir openvino/mobilenetv2/320x320/FP16 \
+--data_type FP16
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/mobilenetv2/320x320/FP16/deblurganv2_mbnv2_320x320.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/mobilenetv2/320x320/myriad/deblurganv2_mbnv2_320x320.blob
+
+=============================================================================================
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_incept_480x640.onnx \
+--model_name deblurganv2_incept_480x640 \
+--output_dir openvino/inception/480x640/FP32 \
+--data_type FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_incept_480x640.onnx \
+--model_name deblurganv2_incept_480x640 \
+--output_dir openvino/inception/480x640/FP16 \
+--data_type FP16
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/inception/480x640/FP16/deblurganv2_incept_480x640.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/inception/480x640/myriad/deblurganv2_incept_480x640.blob
+
+
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_mbnv2_480x640.onnx \
+--model_name deblurganv2_mbnv2_480x640 \
+--output_dir openvino/mobilenetv2/480x640/FP32 \
+--data_type FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_mbnv2_480x640.onnx \
+--model_name deblurganv2_mbnv2_480x640 \
+--output_dir openvino/mobilenetv2/480x640/FP16 \
+--data_type FP16
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/mobilenetv2/480x640/FP16/deblurganv2_mbnv2_480x640.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/mobilenetv2/480x640/myriad/deblurganv2_mbnv2_480x640.blob
+
+=============================================================================================
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_incept_736x1280.onnx \
+--model_name deblurganv2_incept_736x1280 \
+--output_dir openvino/inception/736x1280/FP32 \
+--data_type FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_incept_736x1280.onnx \
+--model_name deblurganv2_incept_736x1280 \
+--output_dir openvino/inception/736x1280/FP16 \
+--data_type FP16
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/inception/736x1280/FP16/deblurganv2_incept_736x1280.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/inception/736x1280/myriad/deblurganv2_incept_736x1280.blob
+
+
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_mbnv2_736x1280.onnx \
+--model_name deblurganv2_mbnv2_736x1280 \
+--output_dir openvino/mobilenetv2/736x1280/FP32 \
+--data_type FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_mbnv2_736x1280.onnx \
+--model_name deblurganv2_mbnv2_736x1280 \
+--output_dir openvino/mobilenetv2/736x1280/FP16 \
+--data_type FP16
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/mobilenetv2/736x1280/FP16/deblurganv2_mbnv2_736x1280.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/mobilenetv2/736x1280/myriad/deblurganv2_mbnv2_736x1280.blob
+
+=============================================================================================
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_incept_1024x1280.onnx \
+--model_name deblurganv2_incept_1024x1280 \
+--output_dir openvino/inception/1024x1280/FP32 \
+--data_type FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_incept_1024x1280.onnx \
+--model_name deblurganv2_incept_1024x1280 \
+--output_dir openvino/inception/1024x1280/FP16 \
+--data_type FP16
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/inception/1024x1280/FP16/deblurganv2_incept_1024x1280.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/inception/1024x1280/myriad/deblurganv2_incept_1024x1280.blob
+
+
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_mbnv2_1024x1280.onnx \
+--model_name deblurganv2_mbnv2_1024x1280 \
+--output_dir openvino/mobilenetv2/1024x1280/FP32 \
+--data_type FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model deblurganv2_mbnv2_1024x1280.onnx \
+--model_name deblurganv2_mbnv2_1024x1280 \
+--output_dir openvino/mobilenetv2/1024x1280/FP16 \
+--data_type FP16
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/mobilenetv2/1024x1280/FP16/deblurganv2_mbnv2_1024x1280.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/mobilenetv2/1024x1280/myriad/deblurganv2_mbnv2_1024x1280.blob
+
+=====================================================================================
+
+xhost +local: && \
+  docker run --gpus all -it --rm \
+    -v `pwd`:/home/user/workdir \
+    -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+    --device /dev/video0:/dev/video0:mwr \
+    --net=host \
+    -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+    -e DISPLAY=$DISPLAY \
+    --privileged \
+    pinto0309/openvino2tensorflow:latest
+
+cd workdir
+
+
+openvino2tensorflow \
+--model_path openvino/mobilenetv2/256x256/FP32/deblurganv2_mbnv2_256x256.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_tftrt \
+--output_coreml
+
+openvino2tensorflow \
+--model_path openvino/mobilenetv2/320x320/FP32/deblurganv2_mbnv2_320x320.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_tftrt \
+--output_coreml
+
+openvino2tensorflow \
+--model_path openvino/mobilenetv2/480x640/FP32/deblurganv2_mbnv2_480x640.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_tftrt \
+--output_coreml
+
+openvino2tensorflow \
+--model_path openvino/mobilenetv2/736x1280/FP32/deblurganv2_mbnv2_736x1280.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_tftrt \
+--output_coreml
+
+openvino2tensorflow \
+--model_path openvino/mobilenetv2/1024x1280/FP32/deblurganv2_mbnv2_1024x1280.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_tftrt \
+--output_coreml
+
+==================================================================================
+
+openvino2tensorflow \
+--model_path openvino/inception/256x256/FP32/deblurganv2_incept_256x256.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_tftrt \
+--output_coreml
+
+openvino2tensorflow \
+--model_path openvino/inception/320x320/FP32/deblurganv2_incept_320x320.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_tftrt \
+--output_coreml
+
+openvino2tensorflow.py \
+--model_path openvino/inception/480x640/FP32/deblurganv2_incept_480x640.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_tftrt \
+--output_coreml
+
+openvino2tensorflow \
+--model_path openvino/inception/736x1280/FP32/deblurganv2_incept_736x1280.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_tftrt \
+--output_coreml
+
+openvino2tensorflow \
+--model_path openvino/inception/1024x1280/FP32/deblurganv2_incept_1024x1280.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_tftrt \
+--output_coreml
