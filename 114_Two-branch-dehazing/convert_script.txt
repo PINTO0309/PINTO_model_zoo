@@ -1,0 +1,83 @@
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+--input_model two_branch_dehazing_240x320_opt.onnx \
+--model_name two_branch_dehazing_240x320_opt \
+--output_dir openvino/240x320/FP32 \
+--data_type FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+--input_model two_branch_dehazing_240x320_opt.onnx \
+--model_name two_branch_dehazing_240x320_opt \
+--output_dir openvino/240x320/FP16 \
+--data_type FP16
+
+
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+--input_model two_branch_dehazing_480x640_opt.onnx \
+--model_name two_branch_dehazing_480x640_opt \
+--output_dir openvino/480x640/FP32 \
+--data_type FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+--input_model two_branch_dehazing_480x640_opt.onnx \
+--model_name two_branch_dehazing_480x640_opt \
+--output_dir openvino/480x640/FP16 \
+--data_type FP16
+
+
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+--input_model two_branch_dehazing_720x1280_opt.onnx \
+--model_name two_branch_dehazing_720x1280_opt \
+--output_dir openvino/720x1280/FP32 \
+--data_type FP32
+
+python3 ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+--input_model two_branch_dehazing_720x1280_opt.onnx \
+--model_name two_branch_dehazing_720x1280_opt \
+--output_dir openvino/720x1280/FP16 \
+--data_type FP16
+
+
+==========================================================================
+
+openvino2tensorflow \
+--model_path=openvino/240x320/FP32/two_branch_dehazing_240x320_opt.xml \
+--output_saved_model \
+--output_pb \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_no_quant_float32_tflite \
+--output_integer_quant_tflite \
+--output_full_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_tftrt
+
+openvino2tensorflow \
+--model_path=openvino/480x640/FP32/two_branch_dehazing_480x640_opt.xml \
+--output_saved_model \
+--output_pb \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_no_quant_float32_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_tftrt
+
+openvino2tensorflow \
+--model_path=openvino/720x1280/FP32/two_branch_dehazing_720x1280_opt.xml \
+--output_saved_model \
+--output_pb \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_no_quant_float32_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_tftrt
+
