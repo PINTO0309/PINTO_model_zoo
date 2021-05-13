@@ -196,4 +196,95 @@ openvino2tensorflow \
 --output_tfjs True \
 --output_tftrt True
 
+======================================================--
+
+
+# lite0, lite1, lite2, lite3, lite4
+gdown --id 1FjwPWbBND1b4Ppz3GOCox_DtJc69Ubsi
+gdown --id 1HcSzdxKIyoD_lKLcH4FCadCVdAbiiTzl
+gdown --id 1CUUWTK7RV7HZafQI9V4kDZeevr6FerSb
+gdown --id 1_qTrTVer6ON3NxrerVgBzldotdMWOSji
+gdown --id 1X4C5ZA8HiiTSpcXlJzu4GAjyCD_YUsan
+
+tflite2tensorflow \
+--model_path efficientdet_lite1.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+
+tflite2tensorflow \
+--model_path efficientdet_lite1.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+
+
+tflite2tensorflow \
+--model_path efficientdet_lite2.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+
+tflite2tensorflow \
+--model_path efficientdet_lite2.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+
+
+tflite2tensorflow \
+--model_path efficientdet_lite3.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+
+tflite2tensorflow \
+--model_path efficientdet_lite3.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+
+
+tflite2tensorflow \
+--model_path efficientdet_lite4.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+
+tflite2tensorflow \
+--model_path efficientdet_lite4.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+
+
+mkdir -p saved_model/openvino/myriad
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model/openvino/FP16/efficientdet_lite1.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model/openvino/myriad/efficientdet_lite1.blob
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model/openvino/FP16/efficientdet_lite2.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model/openvino/myriad/efficientdet_lite2.blob
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model/openvino/FP16/efficientdet_lite3.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model/openvino/myriad/efficientdet_lite3.blob
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model/openvino/FP16/efficientdet_lite4.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model/openvino/myriad/efficientdet_lite4.blob
 
