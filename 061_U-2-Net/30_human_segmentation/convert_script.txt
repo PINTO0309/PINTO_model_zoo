@@ -1,0 +1,203 @@
+python3 u2net_human_seg_test.py
+
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model u2net_human_seg_160x96.onnx \
+--data_type FP32 \
+--output_dir openvino/160x96/FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model u2net_human_seg_160x96.onnx \
+--data_type FP16 \
+--output_dir openvino/160x96/FP16
+
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model u2net_human_seg_256x144.onnx \
+--data_type FP32 \
+--output_dir openvino/256x144/FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model u2net_human_seg_256x144.onnx \
+--data_type FP16 \
+--output_dir openvino/256x144/FP16
+
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model u2net_human_seg_320x320.onnx \
+--data_type FP32 \
+--output_dir openvino/320x320/FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model u2net_human_seg_320x320.onnx \
+--data_type FP16 \
+--output_dir openvino/320x320/FP16
+
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model u2net_human_seg_480x640.onnx \
+--data_type FP32 \
+--output_dir openvino/480x640/FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model u2net_human_seg_480x640.onnx \
+--data_type FP16 \
+--output_dir openvino/480x640/FP16
+
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model u2net_human_seg_240x320.onnx \
+--data_type FP32 \
+--output_dir openvino/240x320/FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model u2net_human_seg_240x320.onnx \
+--data_type FP16 \
+--output_dir openvino/240x320/FP16
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model u2net_human_seg_120x160.onnx \
+--data_type FP32 \
+--output_dir openvino/120x160/FP32
+
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model u2net_human_seg_120x160.onnx \
+--data_type FP16 \
+--output_dir openvino/120x160/FP16
+
+=================================================================
+
+
+H=120
+W=160
+
+openvino2tensorflow \
+--model_path openvino/${H}x${W}/FP32/u2net_human_seg_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml
+
+mv saved_model saved_model_${H}x${W}
+
+
+
+H=160
+W=96
+
+openvino2tensorflow \
+--model_path openvino/${H}x${W}/FP32/u2net_human_seg_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml
+
+mv saved_model saved_model_${H}x${W}
+
+
+
+H=240
+W=320
+
+openvino2tensorflow \
+--model_path openvino/${H}x${W}/FP32/u2net_human_seg_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml
+
+mv saved_model saved_model_${H}x${W}
+
+
+
+H=256
+W=144
+
+openvino2tensorflow \
+--model_path openvino/${H}x${W}/FP32/u2net_human_seg_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml
+
+mv saved_model saved_model_${H}x${W}
+
+
+
+H=320
+W=320
+
+openvino2tensorflow \
+--model_path openvino/${H}x${W}/FP32/u2net_human_seg_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml
+
+mv saved_model saved_model_${H}x${W}
+
+
+
+H=480
+W=640
+
+openvino2tensorflow \
+--model_path openvino/${H}x${W}/FP32/u2net_human_seg_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml
+
+mv saved_model saved_model_${H}x${W}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
