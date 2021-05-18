@@ -1,0 +1,88 @@
+xhost +local: && \
+docker run -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+pinto0309/tflite2tensorflow:latest
+
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_no_quant_float32_tflite
+
+tflite2tensorflow \
+--model_path movenet_singlepose_thunder_3.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+json rewrite
+
+../flatc -o . -b ../schema.fbs movenet_singlepose_thunder_3.json
+
+tflite2tensorflow \
+--model_path movenet_singlepose_thunder_3.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path movenet_singlepose_thunder_3.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--output_onnx \
+--onnx_opset 11 \
+--output_openvino_and_myriad
+
+================================================================
+
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_no_quant_float32_tflite
+
+tflite2tensorflow \
+--model_path movenet_singlepose_lightning_3.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+json rewrite
+
+../flatc -o . -b ../schema.fbs movenet_singlepose_lightning_3.json
+
+tflite2tensorflow \
+--model_path movenet_singlepose_lightning_3.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path movenet_singlepose_lightning_3.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--output_onnx \
+--onnx_opset 11 \
+--output_openvino_and_myriad
+
+
+
+
