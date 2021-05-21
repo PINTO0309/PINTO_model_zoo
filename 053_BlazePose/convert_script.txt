@@ -198,3 +198,204 @@ tflite2tensorflow \
   --model_output_path saved_model_openvino \
   --string_formulas_for_normalization 'data / 255' \
   --output_openvino_and_myriad True
+
+
+
+10_lite_full_heavy_version_May6_2021 =====================================================
+
+tflite2tensorflow \
+--model_path pose_landmark_heavy.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path pose_landmark_heavy.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--output_onnx \
+--onnx_opset 11
+
+
+
+tflite2tensorflow \
+--model_path pose_landmark_heavy.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_hardswish_for_edgetpu
+
+
+tflite2tensorflow \
+--model_path pose_landmark_heavy.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_edgetpu \
+--string_formulas_for_normalization 'data / 255.0'
+
+
+
+tflite2tensorflow \
+--model_path pose_landmark_heavy.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+
+tflite2tensorflow \
+--model_path pose_landmark_heavy.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model/openvino/FP16/saved_model.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model/openvino/myriad/saved_model.blob
+
+
+===========================================================================
+
+tflite2tensorflow \
+--model_path pose_landmark_full.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path pose_landmark_full.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--output_onnx \
+--onnx_opset 11
+
+
+
+tflite2tensorflow \
+--model_path pose_landmark_full.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_hardswish_for_edgetpu
+
+
+tflite2tensorflow \
+--model_path pose_landmark_full.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_edgetpu \
+--string_formulas_for_normalization 'data / 255.0'
+
+
+
+tflite2tensorflow \
+--model_path pose_landmark_full.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+
+tflite2tensorflow \
+--model_path pose_landmark_full.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model/openvino/FP16/saved_model.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model/openvino/myriad/saved_model.blob
+
+
+======================================================================
+
+tflite2tensorflow \
+--model_path pose_landmark_lite.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path pose_landmark_lite.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--output_onnx \
+--onnx_opset 11
+
+
+
+tflite2tensorflow \
+--model_path pose_landmark_lite.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_hardswish_for_edgetpu
+
+
+tflite2tensorflow \
+--model_path pose_landmark_lite.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_edgetpu \
+--string_formulas_for_normalization 'data / 255.0'
+
+
+
+tflite2tensorflow \
+--model_path pose_landmark_lite.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+
+tflite2tensorflow \
+--model_path pose_landmark_lite.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model/openvino/FP16/saved_model.xml \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model/openvino/myriad/saved_model.blob
+
+
+
+
+
+
+
+
+
+
+
+
+
+
