@@ -216,6 +216,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |102|Coconet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/102_Coconet)|⚫|⚫|||⚫|||⚫|||magenta|
 |108|HAWP|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/108_HAWP)||||||||||⚫|WIP|
 |110|L-CNN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/110_L-CNN)||||||||||⚫|WIP|
+|117|DTLN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/117_DTLN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)

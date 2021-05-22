@@ -1,0 +1,63 @@
+xhost +local: && \
+  docker run -it --rm \
+  -v `pwd`:/home/user/workdir \
+  -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+  --device /dev/video0:/dev/video0:mwr \
+  --net=host \
+  -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+  -e DISPLAY=$DISPLAY \
+  --privileged \
+  pinto0309/tflite2tensorflow:latest
+cd workdir
+
+tflite2tensorflow \
+--model_path model_1.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path model_1.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_full_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_tftrt \
+--output_coreml \
+--output_edgetpu \
+--output_onnx \
+--onnx_opset 11 \
+--output_openvino_and_myriad
+
+
+
+tflite2tensorflow \
+--model_path model_2.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path model_2.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_full_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_tftrt \
+--output_coreml \
+--output_edgetpu \
+--output_onnx \
+--onnx_opset 11 \
+--output_openvino_and_myriad
+
+
