@@ -140,7 +140,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |020|EdgeTPU-Deeplab|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/020_edgetpu-deeplab)|⚫|⚫|⚫||⚫|||||||
 |021|EdgeTPU-Deeplab-slim|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/021_edgetpu-deeplab-slim)|⚫|⚫|⚫||⚫|||||||
 |026|Mobile-Deeplabv3-plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/026_mobile-deeplabv3-plus)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|035|BodyPix|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/035_BodyPix)|⚫|⚫|⚫||⚫|⚫||⚫|||MediaPipe|
+|035|BodyPix|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/035_BodyPix)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe,MobileNet0.50/0.75/1.00,ResNet50|
 |057|BiSeNetV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/057_BiSeNetV2)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 |060|Hair Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/060_hair_segmentation)|⚫||||⚫|||⚫|⚫|⚫|WIP,MediaPipe|
 |061|U^2-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/061_U-2-Net)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||

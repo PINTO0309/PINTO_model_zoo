@@ -1,0 +1,45 @@
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/mobilenet/float/050/group1-shard1of1.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/mobilenet/float/050/model-stride16.json
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/mobilenet/float/050/model-stride8.json
+
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/mobilenet/float/075/group1-shard1of2.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/mobilenet/float/075/group1-shard2of2.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/mobilenet/float/075/model-stride16.json
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/mobilenet/float/075/model-stride8.json
+
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/mobilenet/float/100/group1-shard1of4.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/mobilenet/float/100/group1-shard2of4.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/mobilenet/float/100/group1-shard3of4.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/mobilenet/float/100/group1-shard4of4.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/mobilenet/float/100/model-stride16.json
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/mobilenet/float/100/model-stride8.json
+
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard1of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard2of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard3of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard4of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard5of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard6of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard7of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard8of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard9of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard10of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard11of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard12of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard13of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard14of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard15of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard16of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard17of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard18of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard19of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard20of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard21of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard22of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard23of23.bin
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/model-stride16.json
+wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/model-stride32.json
+
+
+
+
