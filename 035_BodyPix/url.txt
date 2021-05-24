@@ -3,3 +3,5 @@ https://github.com/patlevin/tfjs-to-tf
 https://qiita.com/PINTO/items/865250ee23a15339d556
 
 https://github.com/Volcomix/virtual-background/issues/11
+
+https://github.com/de-code/python-tf-bodypix
