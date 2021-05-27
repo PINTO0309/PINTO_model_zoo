@@ -12,10 +12,10 @@ pinto0309/tflite2tensorflow:latest
 cd workdir
 
 tflite2tensorflow \
-  --model_path lite-model_spice_1.tflite \
-  --flatc_path ../flatc \
-  --schema_path ../schema.fbs \
-  --output_pb
+--model_path lite-model_spice_1.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
 
 tflite2tensorflow \
 --model_path lite-model_spice_1.tflite \
@@ -26,21 +26,3 @@ tflite2tensorflow \
 --output_float16_quant_tflite \
 --output_tfjs \
 --output_tftrt
-  
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
