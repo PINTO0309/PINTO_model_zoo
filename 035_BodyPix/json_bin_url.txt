@@ -39,7 +39,3 @@ wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/floa
 wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/group1-shard23of23.bin
 wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/model-stride16.json
 wget https://storage.googleapis.com/tfjs-models/savedmodel/bodypix/resnet50/float/model-stride32.json
-
-
-
-
