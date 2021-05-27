@@ -1,4 +1,8 @@
 sudo pip3 install tfjs-graph-converter
+sudo pip3 uninstall \
+  tensorboard-plugin-wit tb-nightly tensorboard \
+  tf-estimator-nightly tensorflow-gpu \
+  tensorflow tf-nightly tensorflow_estimator
 sudo pip3 install tensorflow==2.5.0
 
 
