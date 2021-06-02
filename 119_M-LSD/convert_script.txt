@@ -24,7 +24,7 @@ tflite2tensorflow \
 --output_float16_quant_tflite \
 --output_integer_quant_tflite \
 --output_full_integer_quant_tflite \
---string_formulas_for_normalization 'data / 255.0' \
+--string_formulas_for_normalization 'data * 1' \
 --output_tfjs \
 --output_coreml \
 --output_tftrt \
@@ -63,7 +63,7 @@ tflite2tensorflow \
 --output_float16_quant_tflite \
 --output_integer_quant_tflite \
 --output_full_integer_quant_tflite \
---string_formulas_for_normalization 'data / 255.0' \
+--string_formulas_for_normalization 'data * 1' \
 --output_tfjs \
 --output_coreml \
 --output_tftrt \
@@ -102,7 +102,7 @@ tflite2tensorflow \
 --output_float16_quant_tflite \
 --output_integer_quant_tflite \
 --output_full_integer_quant_tflite \
---string_formulas_for_normalization 'data / 255.0' \
+--string_formulas_for_normalization 'data * 1' \
 --output_tfjs \
 --output_coreml \
 --output_tftrt \
@@ -141,7 +141,7 @@ tflite2tensorflow \
 --output_float16_quant_tflite \
 --output_integer_quant_tflite \
 --output_full_integer_quant_tflite \
---string_formulas_for_normalization 'data / 255.0' \
+--string_formulas_for_normalization 'data * 1' \
 --output_tfjs \
 --output_coreml \
 --output_tftrt \
@@ -162,11 +162,3 @@ tflite2tensorflow \
 --flatc_path ../flatc \
 --schema_path ../schema.fbs \
 --output_openvino_and_myriad
-
-
-
-
-
-
-
-
