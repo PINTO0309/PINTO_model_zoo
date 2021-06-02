@@ -1,0 +1,172 @@
+xhost +local: && \
+docker run -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+pinto0309/tflite2tensorflow:latest
+
+tflite2tensorflow \
+--model_path M-LSD_320_large_fp32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path M-LSD_320_large_fp32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_full_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--output_onnx \
+--onnx_opset 11
+
+rm M-LSD_320_large_fp32.json
+
+tflite2tensorflow \
+--model_path M-LSD_320_large_fp32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+
+tflite2tensorflow \
+--model_path M-LSD_320_large_fp32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+
+======================================================================
+
+tflite2tensorflow \
+--model_path M-LSD_320_tiny_fp32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path M-LSD_320_tiny_fp32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_full_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--output_onnx \
+--onnx_opset 11
+
+rm M-LSD_320_tiny_fp32.json
+
+tflite2tensorflow \
+--model_path M-LSD_320_tiny_fp32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+
+tflite2tensorflow \
+--model_path M-LSD_320_tiny_fp32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+
+======================================================================
+
+tflite2tensorflow \
+--model_path M-LSD_512_large_fp32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path M-LSD_512_large_fp32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_full_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--output_onnx \
+--onnx_opset 11
+
+rm M-LSD_512_large_fp32.json
+
+tflite2tensorflow \
+--model_path M-LSD_512_large_fp32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+
+tflite2tensorflow \
+--model_path M-LSD_512_large_fp32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+
+======================================================================
+
+tflite2tensorflow \
+--model_path M-LSD_512_tiny_fp32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path M-LSD_512_tiny_fp32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_full_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--output_onnx \
+--onnx_opset 11
+
+rm M-LSD_512_tiny_fp32.json
+
+tflite2tensorflow \
+--model_path M-LSD_512_tiny_fp32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+
+tflite2tensorflow \
+--model_path M-LSD_512_tiny_fp32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+
+
+
+
+
+
+
+
