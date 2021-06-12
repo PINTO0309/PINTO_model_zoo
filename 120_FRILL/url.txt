@@ -1,0 +1,5 @@
+https://ai.googleblog.com/2021/06/frill-on-device-speech-representations.html
+https://tfhub.dev/google/lite-model/nonsemantic-speech-benchmark/frill-nofrontend/1
+https://github.com/PINTO0309/tflite2tensorflow
+http://www.interspeech2020.org/uploadfile/pdf/Mon-1-4-1.pdf
+https://github.com/google-research/google-research/tree/master/non_semantic_speech_benchmark
