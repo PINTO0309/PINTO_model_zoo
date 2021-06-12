@@ -193,6 +193,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |048|Mobile_BERT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/048_mobile_bert)|⚫|⚫|||⚫|⚫|⚫|⚫||⚫||
+|121|GPT2/DistillGPT2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/121_GPT2_DistillGPT2)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 ### 14. Text Recognition
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
