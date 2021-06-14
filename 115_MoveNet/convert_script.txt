@@ -37,7 +37,7 @@ tflite2tensorflow \
 --output_weight_quant_tflite \
 --output_float16_quant_tflite \
 --output_integer_quant_tflite \
---string_formulas_for_normalization 'data / 255.0' \
+--string_formulas_for_normalization 'data * 1.0' \
 --output_tfjs \
 --output_coreml \
 --output_tftrt \
@@ -75,14 +75,10 @@ tflite2tensorflow \
 --output_weight_quant_tflite \
 --output_float16_quant_tflite \
 --output_integer_quant_tflite \
---string_formulas_for_normalization 'data / 255.0' \
+--string_formulas_for_normalization 'data * 1.0' \
 --output_tfjs \
 --output_coreml \
 --output_tftrt \
 --output_onnx \
 --onnx_opset 11 \
 --output_openvino_and_myriad
-
-
-
-
