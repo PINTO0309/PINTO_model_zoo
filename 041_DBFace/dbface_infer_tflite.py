@@ -111,14 +111,11 @@ def drawBBox(image, bbox, scale_w, scale_h, color=(0,255,0), thickness=2, textco
     text = f"{bbox[1]:.2f}"
     xyrb = bbox[0]
     x, y, r, b = int(xyrb[0] * scale_w), int(xyrb[1] * scale_h), int(xyrb[2] * scale_w), int(xyrb[3] * scale_h)
-    w = r - x + 1
-    h = b - y + 1
 
-    cv2.rectangle(image, (x, y, r-x+1, b-y+1), color, thickness, 16)
+    cv2.rectangle(image, (x, y), (r, b), color, thickness, 16)
 
-    border = int(thickness / 2)
     pos = (x + 3, y - 5)
-    cv2.rectangle(image, (x - border, y - 21, w + thickness, 21), color, -1, 16)
+    cv2.rectangle(image, (x, y - 21), (r, y), color, -1, 16)
     cv2.putText(image, text, pos, 0, 0.5, textcolor, 1, 16)
 
     landmark = bbox[2]
