@@ -1,9 +1,0 @@
-python3 /opt/intel/openvino/deployment_tools/open_model_zoo/tools/downloader/pytorch_to_onnx.py \
-  --model-name DBFace \
-  --weights dbface.pth \
-  --import-module DBFace \
-  --input-shape 1,3,480,640 \
-  --output-file dbface.onnx \
-  --input-names x \
-  --output-names sigmoid_hm,tlrb,landmark
-
