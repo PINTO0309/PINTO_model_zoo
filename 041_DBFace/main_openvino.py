@@ -109,7 +109,7 @@ def camera_demo():
 
     while ok:
         img = cv2.resize(frame, (640,480))
-        img = ((img / 255.0 - mean) / std).astype(np.float32)
+        #img = ((img / 255.0 - mean) / std).astype(np.float32)
         img = img[np.newaxis, :, :, :]   # Batch size axis add
         img = img.transpose((0, 3, 1, 2))  # NHWC to NCHW
         objs = detect(exec_net, input_blob, img)
