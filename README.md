@@ -85,6 +85,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |089|DETR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/089_DETR)|⚫|⚫|⚫||⚫|||||⚫|256x256|
 |103|EfficientDet_lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/103_EfficientDet_lite)|⚫|⚫|⚫|⚫|⚫|⚫||⚫|⚫|⚫|lite0,lite1,lite2,lite3,lite4|
 |116|DroNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/116_DroNet)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|DroNet,DroNetV3|
+|123|YOLOR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/123_YOLOR)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|ssss_s2d/320x320,640x640,960x960,1280x1280|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|

@@ -1,0 +1,6 @@
+https://github.com/WongKinYiu/yolor
+
+https://github.com/WongKinYiu/yolor/tree/paper
+
+https://github.com/PINTO0309/openvino2tensorflow
+
