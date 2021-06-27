@@ -1,0 +1,220 @@
+H=320
+W=320
+python3 detect.py \
+--source inference/images/horses.jpg \
+--cfg cfg/yolor_csp.cfg \
+--weights yolor_csp.pt \
+--conf 0.25 \
+--img-size ${H} \
+--device 'cpu'
+
+python3 -m onnxsim yolor_csp_${H}x${W}.onnx yolor_csp_${H}x${W}_opt.onnx
+
+
+H=640
+W=640
+python3 detect.py \
+--source inference/images/horses.jpg \
+--cfg cfg/yolor_csp.cfg \
+--weights yolor_csp.pt \
+--conf 0.25 \
+--img-size ${H} \
+--device 'cpu'
+
+python3 -m onnxsim yolor_csp_${H}x${W}.onnx yolor_csp_${H}x${W}_opt.onnx
+
+
+H=960
+W=960
+python3 detect.py \
+--source inference/images/horses.jpg \
+--cfg cfg/yolor_csp.cfg \
+--weights yolor_csp.pt \
+--conf 0.25 \
+--img-size ${H} \
+--device 'cpu'
+
+python3 -m onnxsim yolor_csp_${H}x${W}.onnx yolor_csp_${H}x${W}_opt.onnx
+
+
+H=1280
+W=1280
+python3 detect.py \
+--source inference/images/horses.jpg \
+--cfg cfg/yolor_csp.cfg \
+--weights yolor_csp.pt \
+--conf 0.25 \
+--img-size ${H} \
+--device 'cpu'
+
+python3 -m onnxsim yolor_csp_${H}x${W}.onnx yolor_csp_${H}x${W}_opt.onnx
+
+
+
+
+
+H=320
+W=320
+python3 detect.py \
+--source inference/images/horses.jpg \
+--cfg cfg/yolor_csp_x.cfg \
+--weights yolor_csp_x_star.pt \
+--conf 0.25 \
+--img-size ${H} \
+--device 'cpu'
+
+python3 -m onnxsim yolor_csp_x_star_${H}x${W}.onnx yolor_csp_x_star_${H}x${W}_opt.onnx
+
+
+H=640
+W=640
+python3 detect.py \
+--source inference/images/horses.jpg \
+--cfg cfg/yolor_csp_x.cfg \
+--weights yolor_csp_x_star.pt \
+--conf 0.25 \
+--img-size ${H} \
+--device 'cpu'
+
+python3 -m onnxsim yolor_csp_x_star_${H}x${W}.onnx yolor_csp_x_star_${H}x${W}_opt.onnx
+
+
+H=960
+W=960
+python3 detect.py \
+--source inference/images/horses.jpg \
+--cfg cfg/yolor_csp_x.cfg \
+--weights yolor_csp_x_star.pt \
+--conf 0.25 \
+--img-size ${H} \
+--device 'cpu'
+
+python3 -m onnxsim yolor_csp_x_star_${H}x${W}.onnx yolor_csp_x_star_${H}x${W}_opt.onnx
+
+H=1280
+W=1280
+python3 detect.py \
+--source inference/images/horses.jpg \
+--cfg cfg/yolor_csp_x.cfg \
+--weights yolor_csp_x_star.pt \
+--conf 0.25 \
+--img-size ${H} \
+--device 'cpu'
+
+python3 -m onnxsim yolor_csp_x_star_${H}x${W}.onnx yolor_csp_x_star_${H}x${W}_opt.onnx
+
+====================================================
+
+H=320
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model yolor_csp_${H}x${W}_opt.onnx \
+--data_type FP32 \
+--scale_values [255.0,255.0,255.0] \
+--output_dir openvino/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model yolor_csp_${H}x${W}_opt.onnx \
+--data_type FP16 \
+--output_dir openvino/${H}x${W}/FP16
+
+
+H=640
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model yolor_csp_${H}x${W}_opt.onnx \
+--data_type FP32 \
+--scale_values [255.0,255.0,255.0] \
+--output_dir openvino/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model yolor_csp_${H}x${W}_opt.onnx \
+--data_type FP16 \
+--output_dir openvino/${H}x${W}/FP16
+
+
+H=960
+W=960
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model yolor_csp_${H}x${W}_opt.onnx \
+--data_type FP32 \
+--scale_values [255.0,255.0,255.0] \
+--output_dir openvino/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model yolor_csp_${H}x${W}_opt.onnx \
+--data_type FP16 \
+--output_dir openvino/${H}x${W}/FP16
+
+
+H=1280
+W=1280
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model yolor_csp_${H}x${W}_opt.onnx \
+--data_type FP32 \
+--scale_values [255.0,255.0,255.0] \
+--output_dir openvino/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model yolor_csp_${H}x${W}_opt.onnx \
+--data_type FP16 \
+--output_dir openvino/${H}x${W}/FP16
+
+=====================================================================
+
+H=320
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model yolor_csp_x_star_${H}x${W}_opt.onnx \
+--data_type FP32 \
+--scale_values [255.0,255.0,255.0] \
+--output_dir openvino/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model yolor_csp_x_star_${H}x${W}_opt.onnx \
+--data_type FP16 \
+--output_dir openvino/${H}x${W}/FP16
+
+
+H=640
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model yolor_csp_x_star_${H}x${W}_opt.onnx \
+--data_type FP32 \
+--scale_values [255.0,255.0,255.0] \
+--output_dir openvino/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model yolor_csp_x_star_${H}x${W}_opt.onnx \
+--data_type FP16 \
+--output_dir openvino/${H}x${W}/FP16
+
+
+H=960
+W=960
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model yolor_csp_x_star_${H}x${W}_opt.onnx \
+--data_type FP32 \
+--scale_values [255.0,255.0,255.0] \
+--output_dir openvino/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model yolor_csp_x_star_${H}x${W}_opt.onnx \
+--data_type FP16 \
+--output_dir openvino/${H}x${W}/FP16
+
+
+H=1280
+W=1280
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model yolor_csp_x_star_${H}x${W}_opt.onnx \
+--data_type FP32 \
+--scale_values [255.0,255.0,255.0] \
+--output_dir openvino/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model yolor_csp_x_star_${H}x${W}_opt.onnx \
+--data_type FP16 \
+--output_dir openvino/${H}x${W}/FP16
+
+
