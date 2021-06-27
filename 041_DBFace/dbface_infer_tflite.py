@@ -39,10 +39,17 @@ def detect(interpreter, input_blob, output_blob, image, threshold=0.4, nms_iou=0
     box = interpreter.get_tensor(output_blob[1]['index']).transpose((0,3,1,2)) # 1,h,w,4
     hm = interpreter.get_tensor(output_blob[2]['index']).transpose((0,3,1,2)) # 1,1,h,w
 
-    hm = torch.from_numpy(hm).clone()
-    box = torch.from_numpy(box).clone()
-    landmark = torch.from_numpy(lm).clone()
-
+    x = torch.from_numpy(hm).clone()
+    y = torch.from_numpy(box).clone()
+    z = torch.from_numpy(lm).clone()
+    for var in [x, y, z]:
+        if var.shape[1]==1:
+            hm = var
+        elif var.shape[1]==4:
+            box = var
+        elif var.shape[1]==10:
+            landmark = var
+    
     hm_pool = F.max_pool2d(hm, 3, 1, 1)
     scores, indices = ((hm == hm_pool).float() * hm).view(1, -1).cpu().topk(1000)
     hm_height, hm_width = hm.shape[2:]
