@@ -22,11 +22,15 @@ W=320
 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
 --input_model dbface_mbnv2_${H}x${W}_opt.onnx \
 --data_type FP32 \
+--mean_values [180,154,150] \
+--scale_values [73.7,70.0,70.9] \
 --output_dir openvino/${H}x${W}/FP32
 
 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
 --input_model dbface_mbnv2_${H}x${W}_opt.onnx \
 --data_type FP16 \
+--mean_values [180,154,150] \
+--scale_values [73.7,70.0,70.9] \
 --output_dir openvino/${H}x${W}/FP16
 
 ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
@@ -41,11 +45,15 @@ W=640
 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
 --input_model dbface_mbnv2_${H}x${W}_opt.onnx \
 --data_type FP32 \
+--mean_values [180,154,150] \
+--scale_values [73.7,70.0,70.9] \
 --output_dir openvino/${H}x${W}/FP32
 
 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
 --input_model dbface_mbnv2_${H}x${W}_opt.onnx \
 --data_type FP16 \
+--mean_values [180,154,150] \
+--scale_values [73.7,70.0,70.9] \
 --output_dir openvino/${H}x${W}/FP16
 
 ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
@@ -60,11 +68,15 @@ W=960
 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
 --input_model dbface_mbnv2_${H}x${W}_opt.onnx \
 --data_type FP32 \
+--mean_values [180,154,150] \
+--scale_values [73.7,70.0,70.9] \
 --output_dir openvino/${H}x${W}/FP32
 
 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
 --input_model dbface_mbnv2_${H}x${W}_opt.onnx \
 --data_type FP16 \
+--mean_values [180,154,150] \
+--scale_values [73.7,70.0,70.9] \
 --output_dir openvino/${H}x${W}/FP16
 
 ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
@@ -79,11 +91,15 @@ W=1280
 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
 --input_model dbface_mbnv2_${H}x${W}_opt.onnx \
 --data_type FP32 \
+--mean_values [180,154,150] \
+--scale_values [73.7,70.0,70.9] \
 --output_dir openvino/${H}x${W}/FP32
 
 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
 --input_model dbface_mbnv2_${H}x${W}_opt.onnx \
 --data_type FP16 \
+--mean_values [180,154,150] \
+--scale_values [73.7,70.0,70.9] \
 --output_dir openvino/${H}x${W}/FP16
 
 ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
@@ -120,7 +136,7 @@ openvino2tensorflow \
 --output_weight_quant_tflite \
 --output_float16_quant_tflite \
 --output_integer_quant_tflite \
---string_formulas_for_normalization '(data / 255.0 - [0.408, 0.447, 0.47]) / [0.289, 0.274, 0.278]' \
+--string_formulas_for_normalization 'data * 1' \
 --output_integer_quant_type 'uint8' \
 --output_tfjs \
 --output_tftrt \
@@ -137,7 +153,7 @@ openvino2tensorflow \
 --output_weight_quant_tflite \
 --output_float16_quant_tflite \
 --output_integer_quant_tflite \
---string_formulas_for_normalization '(data / 255.0 - [0.408, 0.447, 0.47]) / [0.289, 0.274, 0.278]' \
+--string_formulas_for_normalization 'data * 1' \
 --output_integer_quant_type 'uint8' \
 --output_tfjs \
 --output_tftrt \
@@ -154,7 +170,7 @@ openvino2tensorflow \
 --output_weight_quant_tflite \
 --output_float16_quant_tflite \
 --output_integer_quant_tflite \
---string_formulas_for_normalization '(data / 255.0 - [0.408, 0.447, 0.47]) / [0.289, 0.274, 0.278]' \
+--string_formulas_for_normalization 'data * 1' \
 --output_integer_quant_type 'uint8' \
 --output_tfjs \
 --output_tftrt \
@@ -171,7 +187,7 @@ openvino2tensorflow \
 --output_weight_quant_tflite \
 --output_float16_quant_tflite \
 --output_integer_quant_tflite \
---string_formulas_for_normalization '(data / 255.0 - [0.408, 0.447, 0.47]) / [0.289, 0.274, 0.278]' \
+--string_formulas_for_normalization 'data * 1' \
 --output_integer_quant_type 'uint8' \
 --output_tfjs \
 --output_tftrt \
