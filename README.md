@@ -57,6 +57,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |083|Person_Reidentification|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/083_Person_Reidentification)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|248,277,286,287,288,300|
 |087|DeepSort|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/087_DeepSort)|⚫|⚫|⚫||⚫|⚫|⚫||⚫|⚫||
 |124|person-attributes-recognition-crossroad-0230|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/124_person-attributes-recognition-crossroad-0230)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|125|person-attributes-recognition-crossroad-0234|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/125_person-attributes-recognition-crossroad-0234)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|

@@ -1,0 +1,55 @@
+xhost +local: && \
+docker run -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+pinto0309/openvino2tensorflow:latest
+
+cd workdir
+
+openvino2tensorflow \
+--model_path person-attributes-recognition-crossroad-0234.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization '(data * 1)' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_tftrt \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11 \
+--output_edgetpu
+
+
+xhost +local: && \
+docker run -it --rm --gpus all \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+pinto0309/openvino2tensorflow:latest
+
+cd workdir
+
+openvino2tensorflow \
+--model_path person-attributes-recognition-crossroad-0234.xml \
+--output_tftrt
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model/openvino/FP16/person-attributes-recognition-crossroad-0234.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model/openvino/myriad/person_attributes_recognition_crossroad_0234.blob
+
