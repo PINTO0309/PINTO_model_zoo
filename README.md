@@ -220,7 +220,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 ### 18. Transformer
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|127|dino|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/127_dino)|⚫|⚫|||⚫|⚫|⚫|⚫||⚫|experimental,dino_deits8|
+|127|dino|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/127_dino)|⚫|⚫|||⚫|⚫|⚫|⚫||⚫|experimental,dino_deits8/dino_deits16|
 ### 19. Others
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
