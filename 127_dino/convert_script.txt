@@ -27,3 +27,18 @@ python3 openvino2tensorflow.py \
 --output_tfjs \
 --weight_replacement_config weight_replacement_config_dino_deits8.json
 
+python3 -m onnxsim dino_deits16.onnx dino_deits16_opt.onnx
+
+python3 openvino2tensorflow.py \
+--model_path dino_deits16/openvino/FP32/dino_deits16_opt.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data * 1' \
+--output_integer_quant_type 'uint8' \
+--output_coreml \
+--output_tfjs \
+--weight_replacement_config weight_replacement_config_dino_deits16.json
