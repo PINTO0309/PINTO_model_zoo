@@ -230,6 +230,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |110|L-CNN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/110_L-CNN)||||||||||⚫|WIP|
 |117|DTLN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/117_DTLN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 |119|M-LSD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/119_M-LSD)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|128|DeepCalib|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/128_DeepCalib)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Single|
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)
