@@ -1,0 +1,746 @@
+xhost +local: && \
+docker run -it --rm --gpus all \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+pinto0309/mmtracking:latest
+
+cd /home/user/workdir
+conda install pip
+pip install onnx onnx-simplifier
+pip install mmcv-full==1.3.3 -f https://download.openmmlab.com/mmcv/dist/cu110/torch1.7.0/index.html
+pip install -r requirements/build.txt
+pip install -v -e .
+
+===========================================
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_500m.py \
+checkpoints/scrfd_500m.pth \
+--shape 240 320 \
+--input-img test.png
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_500m.py \
+checkpoints/scrfd_500m.pth \
+--shape 480 640 \
+--input-img test.png
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_500m.py \
+checkpoints/scrfd_500m.pth \
+--shape 720 1280 \
+--input-img test.png
+
+============================================
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_500m_bnkps.py \
+checkpoints/scrfd_500m_kps.pth \
+--shape 240 320 \
+--input-img test.png
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_500m_bnkps.py \
+checkpoints/scrfd_500m_kps.pth \
+--shape 480 640 \
+--input-img test.png
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_500m_bnkps.py \
+checkpoints/scrfd_500m_kps.pth \
+--shape 720 1280 \
+--input-img test.png
+
+============================================
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_1g.py \
+checkpoints/scrfd_1g.pth \
+--shape 240 320 \
+--input-img test.png
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_1g.py \
+checkpoints/scrfd_1g.pth \
+--shape 480 640 \
+--input-img test.png
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_1g.py \
+checkpoints/scrfd_1g.pth \
+--shape 720 1280 \
+--input-img test.png
+
+============================================
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_2.5g.py \
+checkpoints/scrfd_2.5g.pth \
+--shape 240 320 \
+--input-img test.png
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_2.5g.py \
+checkpoints/scrfd_2.5g.pth \
+--shape 480 640 \
+--input-img test.png
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_2.5g.py \
+checkpoints/scrfd_2.5g.pth \
+--shape 720 1280 \
+--input-img test.png
+
+============================================
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_10g.py \
+checkpoints/scrfd_10g.pth \
+--shape 240 320 \
+--input-img test.png
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_10g.py \
+checkpoints/scrfd_10g.pth \
+--shape 480 640 \
+--input-img test.png
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_10g.py \
+checkpoints/scrfd_10g.pth \
+--shape 720 1280 \
+--input-img test.png
+
+
+============================================
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_34g.py \
+checkpoints/scrfd_34g.pth \
+--shape 240 320 \
+--input-img test.png
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_34g.py \
+checkpoints/scrfd_34g.pth \
+--shape 480 640 \
+--input-img test.png
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_34g.py \
+checkpoints/scrfd_34g.pth \
+--shape 720 1280 \
+--input-img test.png
+
+
+============================================
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_2.5g_bnkps.py \
+checkpoints/scrfd_2.5g_kps.pth \
+--shape 240 320 \
+--input-img test.png
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_2.5g_bnkps.py \
+checkpoints/scrfd_2.5g_kps.pth \
+--shape 480 640 \
+--input-img test.png
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_2.5g_bnkps.py \
+checkpoints/scrfd_2.5g_kps.pth \
+--shape 720 1280 \
+--input-img test.png
+
+============================================
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_10g_bnkps.py \
+checkpoints/scrfd_10g_kps.pth \
+--shape 240 320 \
+--input-img test.png
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_10g_bnkps.py \
+checkpoints/scrfd_10g_kps.pth \
+--shape 480 640 \
+--input-img test.png
+
+python tools/scrfd2onnx.py \
+configs/scrfd/scrfd_10g_bnkps.py \
+checkpoints/scrfd_10g_kps.pth \
+--shape 720 1280 \
+--input-img test.png
+
+====================================================================
+
+xhost +local: && \
+docker run -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+pinto0309/openvino2tensorflow:latest
+
+cd workdir
+
+H=240
+W=320
+MODEL=scrfd_1g
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+
+MODEL=scrfd_2.5g
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_2.5g_bnkps
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_10g
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_10g_bnkps
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_34g
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_500m
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_500m_bnkps
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+
+
+
+H=480
+W=640
+MODEL=scrfd_1g
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+
+MODEL=scrfd_2.5g
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_2.5g_bnkps
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_10g
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_10g_bnkps
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_34g
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_500m
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_500m_bnkps
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+
+
+H=720
+W=1280
+MODEL=scrfd_1g
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+
+MODEL=scrfd_2.5g
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_2.5g_bnkps
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_10g
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_10g_bnkps
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_34g
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_500m
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+MODEL=scrfd_500m_bnkps
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model scrfd_1g_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+
+
+H=240
+W=320
+MODEL=scrfd_1g
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_2.5g
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_2.5g_bnkps
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_10g
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_10g_bnkps
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_34g
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_500m
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_500m_bnkps
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+
+
+H=480
+W=640
+MODEL=scrfd_1g
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_2.5g
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_2.5g_bnkps
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_10g
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_10g_bnkps
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_34g
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_500m
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_500m_bnkps
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+
+
+H=720
+W=1280
+MODEL=scrfd_1g
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_2.5g
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_2.5g_bnkps
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_10g
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_10g_bnkps
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_34g
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_500m
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
+
+MODEL=scrfd_500m_bnkps
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--model_output_path saved_model_${MODEL}_${H}x${W} \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs
