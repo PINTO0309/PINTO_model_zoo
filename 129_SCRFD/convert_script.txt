@@ -10,6 +10,7 @@ docker run -it --rm --gpus all \
 pinto0309/mmtracking:latest
 
 cd /home/user/workdir
+git clone https://github.com/deepinsight/insightface.git && cd insightface/detection/scrfd
 conda install pip
 pip install onnx onnx-simplifier
 pip install mmcv-full==1.3.3 -f https://download.openmmlab.com/mmcv/dist/cu110/torch1.7.0/index.html
