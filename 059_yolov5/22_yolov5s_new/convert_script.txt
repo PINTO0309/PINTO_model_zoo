@@ -1,0 +1,152 @@
+xhost +local: && \
+docker run -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+pinto0309/tflite2tensorflow:latest
+
+cd workdir
+
+
+H=320
+W=320
+tflite2tensorflow \
+--model_path yolov5s_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path yolov5s_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--output_onnx \
+--onnx_opset 11
+
+tflite2tensorflow \
+--model_path yolov5s_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+  
+tflite2tensorflow \
+--model_path yolov5s_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+
+
+H=416
+W=416
+tflite2tensorflow \
+--model_path yolov5s_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path yolov5s_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--output_onnx \
+--onnx_opset 11
+
+tflite2tensorflow \
+--model_path yolov5s_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+  
+tflite2tensorflow \
+--model_path yolov5s_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+
+
+H=480
+W=640
+tflite2tensorflow \
+--model_path yolov5s_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path yolov5s_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--output_onnx \
+--onnx_opset 11
+
+tflite2tensorflow \
+--model_path yolov5s_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+
+tflite2tensorflow \
+--model_path yolov5s_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+
+
+H=736
+W=1280
+tflite2tensorflow \
+--model_path yolov5s_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path yolov5s_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--output_onnx \
+--onnx_opset 11
+
+tflite2tensorflow \
+--model_path yolov5s_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+
+tflite2tensorflow \
+--model_path yolov5s_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
