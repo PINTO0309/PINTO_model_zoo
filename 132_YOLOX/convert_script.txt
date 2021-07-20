@@ -1,0 +1,499 @@
+xhost +local: && \
+docker run -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+pinto0309/openvino2tensorflow:latest
+
+cd workdir
+
+
+MODEL=yolox_nano
+H=320
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+mkdir -p openvino/${MODEL}/${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}/${H}x${W}/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}/${H}x${W}/myriad/${MODEL}_${H}x${W}.blob
+
+H=416
+W=416
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+mkdir -p openvino/${MODEL}/${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}/${H}x${W}/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}/${H}x${W}/myriad/${MODEL}_${H}x${W}.blob
+
+H=480
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+mkdir -p openvino/${MODEL}/${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}/${H}x${W}/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}/${H}x${W}/myriad/${MODEL}_${H}x${W}.blob
+
+H=544
+W=960
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+mkdir -p openvino/${MODEL}/${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}/${H}x${W}/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}/${H}x${W}/myriad/${MODEL}_${H}x${W}.blob
+
+H=736
+W=1280
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+mkdir -p openvino/${MODEL}/${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}/${H}x${W}/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}/${H}x${W}/myriad/${MODEL}_${H}x${W}.blob
+
+H=1088
+W=1920
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+mkdir -p openvino/${MODEL}/${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}/${H}x${W}/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}/${H}x${W}/myriad/${MODEL}_${H}x${W}.blob
+
+
+
+MODEL=yolox_tiny
+H=320
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+mkdir -p openvino/${MODEL}/${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}/${H}x${W}/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}/${H}x${W}/myriad/${MODEL}_${H}x${W}.blob
+
+H=416
+W=416
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+mkdir -p openvino/${MODEL}/${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}/${H}x${W}/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}/${H}x${W}/myriad/${MODEL}_${H}x${W}.blob
+
+H=480
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+mkdir -p openvino/${MODEL}/${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}/${H}x${W}/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}/${H}x${W}/myriad/${MODEL}_${H}x${W}.blob
+
+H=544
+W=960
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+mkdir -p openvino/${MODEL}/${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}/${H}x${W}/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}/${H}x${W}/myriad/${MODEL}_${H}x${W}.blob
+
+H=736
+W=1280
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+mkdir -p openvino/${MODEL}/${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}/${H}x${W}/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}/${H}x${W}/myriad/${MODEL}_${H}x${W}.blob
+
+H=1088
+W=1920
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/${H}x${W}/FP16
+mkdir -p openvino/${MODEL}/${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}/${H}x${W}/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}/${H}x${W}/myriad/${MODEL}_${H}x${W}.blob
+
+
+
+MODEL=yolox_nano
+H=320
+W=320
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+mv saved_model saved_model_${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_edgetpu \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+cp saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+cp saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+
+H=416
+W=416
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+mv saved_model saved_model_${MODEL}_${H}x${W}
+
+H=480
+W=640
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+mv saved_model saved_model_${MODEL}_${H}x${W}
+
+H=544
+W=960
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+mv saved_model saved_model_${MODEL}_${H}x${W}
+
+H=736
+W=1280
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+mv saved_model saved_model_${MODEL}_${H}x${W}
+
+H=1088
+W=1920
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+mv saved_model saved_model_${MODEL}_${H}x${W}
+
+=========================================================
+
+MODEL=yolox_tiny
+H=320
+W=320
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+mv saved_model saved_model_${MODEL}_${H}x${W}
+
+H=416
+W=416
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+mv saved_model saved_model_${MODEL}_${H}x${W}
+
+H=480
+W=640
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+mv saved_model saved_model_${MODEL}_${H}x${W}
+
+H=544
+W=960
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+mv saved_model saved_model_${MODEL}_${H}x${W}
+
+H=736
+W=1280
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+mv saved_model saved_model_${MODEL}_${H}x${W}
+
+H=1088
+W=1920
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+mv saved_model saved_model_${MODEL}_${H}x${W}
+
+================================================
+
+xhost +local: && \
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+pinto0309/openvino2tensorflow:latest
+
+cd workdir
+
+MODEL=yolox_nano
+H=320
+W=320
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+
+
+H=416
+W=416
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+
+
+H=480
+W=640
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+
+
+H=544
+W=960
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+
+
+H=736
+W=1280
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+
+H=1088
+W=1920
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+
