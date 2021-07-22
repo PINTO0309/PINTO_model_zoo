@@ -1,4 +1,8 @@
 https://blog.tensorflow.org/2021/05/next-generation-pose-detection-with-movenet-and-tensorflowjs.html
+
 https://tfhub.dev/google/movenet/singlepose/thunder/3
 https://tfhub.dev/google/movenet/singlepose/lightning/3
+https://tfhub.dev/google/movenet/singlepose/thunder/4
+https://tfhub.dev/google/movenet/singlepose/lightning/4
+
 https://github.com/PINTO0309/tflite2tensorflow
