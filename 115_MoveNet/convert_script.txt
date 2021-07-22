@@ -82,3 +82,98 @@ tflite2tensorflow \
 --output_onnx \
 --onnx_opset 11 \
 --output_openvino_and_myriad
+
+
+========================================== MoveNetV4
+xhost +local: && \
+docker run -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+pinto0309/tflite2tensorflow:latest
+
+tflite2tensorflow \
+--model_path lite-model_movenet_singlepose_thunder_tflite_float16_4.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+
+json edit
+:0 to _0
+UINT8 to FLOAT32
+
+../flatc -o . -b ../schema.fbs lite-model_movenet_singlepose_thunder_tflite_float16_4.json
+
+rm lite-model_movenet_singlepose_thunder_tflite_float16_4.json
+
+tflite2tensorflow \
+--model_path lite-model_movenet_singlepose_thunder_tflite_float16_4.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+
+tflite2tensorflow \
+--model_path lite-model_movenet_singlepose_thunder_tflite_float16_4.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+
+cp saved_model/openvino/FP16/saved_model.xml saved_model/openvino/FP16/saved_model_vino.xml
+
+.xml edit
+convet add
+
+cp saved_model/openvino/FP16/saved_model.xml saved_model/openvino/FP16/saved_model_myriad.xml
+
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model/openvino/FP16/saved_model.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model/openvino/myriad/saved_model.blob
+
+rm saved_model/openvino/FP16/saved_model.xml
+cp saved_model/openvino/FP16/saved_model_vino.xml saved_model/openvino/FP16/saved_model.xml
+
+
+mv saved_model saved_model_vino
+
+rm lite-model_movenet_singlepose_thunder_tflite_float16_4.tflite
+rm lite-model_movenet_singlepose_thunder_tflite_float16_4.json
+
+tflite2tensorflow \
+--model_path lite-model_movenet_singlepose_thunder_tflite_float16_4.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+json edit, :0 to _0, UINT8 to FLOAT32
+../flatc -o . -b ../schema.fbs lite-model_movenet_singlepose_thunder_tflite_float16_4.json
+rm lite-model_movenet_singlepose_thunder_tflite_float16_4.json
+
+tflite2tensorflow \
+--model_path lite-model_movenet_singlepose_thunder_tflite_float16_4.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path lite-model_movenet_singlepose_thunder_tflite_float16_4.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data * 1.0' \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--output_onnx \
+--onnx_opset 11
