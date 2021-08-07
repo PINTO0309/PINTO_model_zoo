@@ -42,12 +42,12 @@ Run demo.
 cd ~/tflite-cv-exampl/eyolox/python
 
 # Camera input demo.
-python yolox_tflite_capture_opencv.py \
+python yolox_tflite_demo.py \
   --model PATH_TO_TFLITE_MODEL_FILE \
   --label ./data/coco_labels.txt
 
 # Video file input demo.
-python yolox_tflite_capture_opencv.py 
+python yolox_tflite_demo.py 
   --model PATH_TO_TFLITE_MODEL_FILE \
   --label ../data/coco_labels.txt \
   --videopath PATH_TO_VIDEO_FILE
