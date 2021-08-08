@@ -1,5 +1,5 @@
 xhost +local: && \
-docker run -it --rm \
+docker run --gpus all -it --rm \
 -v `pwd`:/home/user/workdir \
 -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
 --device /dev/video0:/dev/video0:mwr \
