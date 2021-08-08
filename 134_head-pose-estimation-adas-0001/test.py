@@ -67,9 +67,9 @@ out2 = interpreter.get_tensor(output_blob[2]['index'])
   'shape_signature': array([1, 1], dtype=int32),
   'sparsity_parameters': {}}]
 """
-print(f'fc_p: {np.sum(out2)}')
-print(f'fc_r: {np.sum(out1)}')
-print(f'fc_y: {np.sum(out0)}')
+print(f'fc_p: {out2}')
+print(f'fc_r: {out1}')
+print(f'fc_y: {out0}')
 
 from openvino.inference_engine import IENetwork, IECore
 
