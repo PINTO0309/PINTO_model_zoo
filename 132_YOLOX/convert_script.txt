@@ -279,6 +279,17 @@ openvino2tensorflow \
 --output_coreml \
 --weight_replacement_config weight_replacement_config_${MODEL}.json
 mv saved_model saved_model_${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_edgetpu \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+cp saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+cp saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
 
 H=480
 W=640
@@ -296,6 +307,17 @@ openvino2tensorflow \
 --output_coreml \
 --weight_replacement_config weight_replacement_config_${MODEL}.json
 mv saved_model saved_model_${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_edgetpu \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+cp saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+cp saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
 
 H=544
 W=960
@@ -313,6 +335,17 @@ openvino2tensorflow \
 --output_coreml \
 --weight_replacement_config weight_replacement_config_${MODEL}.json
 mv saved_model saved_model_${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_edgetpu \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+cp saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+cp saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
 
 H=736
 W=1280
@@ -330,6 +363,17 @@ openvino2tensorflow \
 --output_coreml \
 --weight_replacement_config weight_replacement_config_${MODEL}.json
 mv saved_model saved_model_${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_edgetpu \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+cp saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+cp saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
 
 H=1088
 W=1920
@@ -347,6 +391,17 @@ openvino2tensorflow \
 --output_coreml \
 --weight_replacement_config weight_replacement_config_${MODEL}.json
 mv saved_model saved_model_${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_edgetpu \
+--weight_replacement_config weight_replacement_config_${MODEL}.json
+cp saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+cp saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
 
 =========================================================
 
