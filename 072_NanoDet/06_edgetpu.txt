@@ -1,2 +1,0 @@
-edgetpu_compiler -s nanodet_320x320_full_integer_quant.tflite
-edgetpu_compiler -s nanodet_416x416_full_integer_quant.tflite

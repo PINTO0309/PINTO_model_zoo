@@ -1,0 +1,65 @@
+{
+    "format_version": 2,
+    "layers": [
+        {
+            "layer_id": "678",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "684",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "720",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "726",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "762",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "768",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        }
+    ]
+}
