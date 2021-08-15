@@ -1,0 +1,2 @@
+https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/intel/road-segmentation-adas-0001
+https://github.com/PINTO0309/openvino2tensorflow
