@@ -1,0 +1,1 @@
+https://tfhub.dev/google/movenet/multipose/lightning/1
