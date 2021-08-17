@@ -1,14 +1,222 @@
+docker run -it --rm --gpus all \
+  -v `pwd`:/home/user/workdir \
+  pinto0309/tflite2tensorflow:latest
 
-==== MultiPose (WIP)
+H=192
+W=192
+saved_model_to_tflite \
+--saved_model_dir_path . \
+--input_shapes [1,${H},${W},3] \
+--output_no_quant_float32_tflite
+mv tflite_from_saved_model/model_float32.tflite model_float32_${H}x${W}.tflite
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32_${H}x${W}.tflite
 
+H=192
+W=256
+saved_model_to_tflite \
+--saved_model_dir_path . \
+--input_shapes [1,${H},${W},3] \
+--output_no_quant_float32_tflite
+mv tflite_from_saved_model/model_float32.tflite model_float32_${H}x${W}.tflite
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32_${H}x${W}.tflite
+
+
+H=256
+W=256
+saved_model_to_tflite \
+--saved_model_dir_path . \
+--input_shapes [1,${H},${W},3] \
+--output_no_quant_float32_tflite
+mv tflite_from_saved_model/model_float32.tflite model_float32_${H}x${W}.tflite
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32_${H}x${W}.tflite
+
+H=256
+W=320
+saved_model_to_tflite \
+--saved_model_dir_path . \
+--input_shapes [1,${H},${W},3] \
+--output_no_quant_float32_tflite
+mv tflite_from_saved_model/model_float32.tflite model_float32_${H}x${W}.tflite
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32_${H}x${W}.tflite
+
+H=320
+W=320
+saved_model_to_tflite \
+--saved_model_dir_path . \
+--input_shapes [1,${H},${W},3] \
+--output_no_quant_float32_tflite
+mv tflite_from_saved_model/model_float32.tflite model_float32_${H}x${W}.tflite
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32_${H}x${W}.tflite
+
+H=480
+W=640
+saved_model_to_tflite \
+--saved_model_dir_path . \
+--input_shapes [1,${H},${W},3] \
+--output_no_quant_float32_tflite
+mv tflite_from_saved_model/model_float32.tflite model_float32_${H}x${W}.tflite
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32_${H}x${W}.tflite
+
+H=736
+W=1280
+saved_model_to_tflite \
+--saved_model_dir_path . \
+--input_shapes [1,${H},${W},3] \
+--output_no_quant_float32_tflite
+mv tflite_from_saved_model/model_float32.tflite model_float32_${H}x${W}.tflite
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32_${H}x${W}.tflite
+
+H=1280
+W=1920
+saved_model_to_tflite \
+--saved_model_dir_path . \
+--input_shapes [1,${H},${W},3] \
+--output_no_quant_float32_tflite
+mv tflite_from_saved_model/model_float32.tflite model_float32_${H}x${W}.tflite
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32_${H}x${W}.tflite
+
+
+json hack (input INT32 -> FLOAT32)
+
+  "subgraphs": [
+    {
+      "tensors": [
+        {
+          "shape": [
+            1,
+            1280,
+            1920,
+            3
+          ],
+          "type": "INT32",
+          "buffer": 1,
+          "name": "input",
+          "quantization": {
+            "details_type": "NONE",
+            "quantized_dimension": 0
+          },
+          "is_variable": false
+        },
+↓
+  "subgraphs": [
+    {
+      "tensors": [
+        {
+          "shape": [
+            1,
+            1280,
+            1920,
+            3
+          ],
+          "type": "FLOAT32",
+          "buffer": 1,
+          "name": "input",
+          "quantization": {
+            "details_type": "NONE",
+            "quantized_dimension": 0
+          },
+          "is_variable": false
+        },
+
+
+../flatc -o . -b ../schema.fbs model_float32_192x192.json
+../flatc -o . -b ../schema.fbs model_float32_192x256.json
+../flatc -o . -b ../schema.fbs model_float32_256x256.json
+../flatc -o . -b ../schema.fbs model_float32_256x320.json
+../flatc -o . -b ../schema.fbs model_float32_320x320.json
+../flatc -o . -b ../schema.fbs model_float32_480x640.json
+../flatc -o . -b ../schema.fbs model_float32_736x1280.json
+../flatc -o . -b ../schema.fbs model_float32_1280x1920.json
+
+rm -rf tflite_from_saved_model
+
+H=192
+W=192
+rm model_float32_${H}x${W}.json
 tflite2tensorflow \
---model_path model_float32.tflite \
+--model_path model_float32_${H}x${W}.tflite \
 --flatc_path ../flatc \
 --schema_path ../schema.fbs \
 --output_pb
+mv saved_model saved_model_${H}x${W}
 
+H=192
+W=256
+rm model_float32_${H}x${W}.json
 tflite2tensorflow \
---model_path model_float32.tflite \
+--model_path model_float32_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+mv saved_model saved_model_${H}x${W}
+
+H=256
+W=256
+rm model_float32_${H}x${W}.json
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+mv saved_model saved_model_${H}x${W}
+
+H=256
+W=320
+rm model_float32_${H}x${W}.json
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+mv saved_model saved_model_${H}x${W}
+
+H=320
+W=320
+rm model_float32_${H}x${W}.json
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+mv saved_model saved_model_${H}x${W}
+
+H=480
+W=640
+rm model_float32_${H}x${W}.json
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+mv saved_model saved_model_${H}x${W}
+
+H=736
+W=1280
+rm model_float32_${H}x${W}.json
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+mv saved_model saved_model_${H}x${W}
+
+H=1280
+W=1920
+rm model_float32_${H}x${W}.json
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+mv saved_model saved_model_${H}x${W}
+
+
+===========================
+H=192
+W=192
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--model_output_path saved_model_${H}x${W} \
 --flatc_path ../flatc \
 --schema_path ../schema.fbs \
 --output_no_quant_float32_tflite \
@@ -19,11 +227,765 @@ tflite2tensorflow \
 --output_tfjs \
 --output_coreml \
 --output_onnx \
---onnx_opset 11 \
+--onnx_opset 11
+
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--model_output_path saved_model_${H}x${W} \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tftrt
+
+
+H=192
+W=256
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--model_output_path saved_model_${H}x${W} \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11
+
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--model_output_path saved_model_${H}x${W} \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tftrt
+
+
+H=256
+W=256
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--model_output_path saved_model_${H}x${W} \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11
+
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--model_output_path saved_model_${H}x${W} \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tftrt
+
+
+H=256
+W=320
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--model_output_path saved_model_${H}x${W} \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11
+
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--model_output_path saved_model_${H}x${W} \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tftrt
+
+
+H=320
+W=320
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--model_output_path saved_model_${H}x${W} \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11
+
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--model_output_path saved_model_${H}x${W} \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tftrt
+
+
+H=480
+W=640
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--model_output_path saved_model_${H}x${W} \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11
+
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--model_output_path saved_model_${H}x${W} \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tftrt
+
+
+H=736
+W=1280
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--model_output_path saved_model_${H}x${W} \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11
+
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--model_output_path saved_model_${H}x${W} \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tftrt
+
+
+H=1280
+W=1920
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--model_output_path saved_model_${H}x${W} \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11
+
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--model_output_path saved_model_${H}x${W} \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tftrt
+
+
+
+===========================
+H=192
+W=192
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${H}x${W} \
+--output_dir saved_model_${H}x${W}/openvino/FP32 \
+--data_type FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${H}x${W} \
+--output_dir saved_model_${H}x${W}/openvino/FP16 \
+--data_type FP16
+
+H=192
+W=256
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${H}x${W} \
+--output_dir saved_model_${H}x${W}/openvino/FP32 \
+--data_type FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${H}x${W} \
+--output_dir saved_model_${H}x${W}/openvino/FP16 \
+--data_type FP16
+
+H=256
+W=256
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${H}x${W} \
+--output_dir saved_model_${H}x${W}/openvino/FP32 \
+--data_type FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${H}x${W} \
+--output_dir saved_model_${H}x${W}/openvino/FP16 \
+--data_type FP16
+
+H=256
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${H}x${W} \
+--output_dir saved_model_${H}x${W}/openvino/FP32 \
+--data_type FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${H}x${W} \
+--output_dir saved_model_${H}x${W}/openvino/FP16 \
+--data_type FP16
+
+H=320
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${H}x${W} \
+--output_dir saved_model_${H}x${W}/openvino/FP32 \
+--data_type FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${H}x${W} \
+--output_dir saved_model_${H}x${W}/openvino/FP16 \
+--data_type FP16
+
+H=480
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${H}x${W} \
+--output_dir saved_model_${H}x${W}/openvino/FP32 \
+--data_type FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${H}x${W} \
+--output_dir saved_model_${H}x${W}/openvino/FP16 \
+--data_type FP16
+
+H=736
+W=1280
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${H}x${W} \
+--output_dir saved_model_${H}x${W}/openvino/FP32 \
+--data_type FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${H}x${W} \
+--output_dir saved_model_${H}x${W}/openvino/FP16 \
+--data_type FP16
+
+H=1280
+W=1920
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${H}x${W} \
+--output_dir saved_model_${H}x${W}/openvino/FP32 \
+--data_type FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${H}x${W} \
+--output_dir saved_model_${H}x${W}/openvino/FP16 \
+--data_type FP16
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+cp saved_model_${H}x${W}/openvino/FP32/saved_model.xml saved_model_${H}x${W}/openvino/FP32/saved_model_org.xml
+
+saved_model.xml - insert lines
+###########################
+		<layer id="800" name="800_const" type="Const" version="opset1">
+			<data element_type="f32" shape="1, 1, 1, 1" offset="18927245" size="4"/>
+			<output>
+				<port id="0" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="801" name="801_pow" type="Power" version="opset1">
+			<data auto_broadcast="numpy"/>
+			<input>
+				<port id="0" precision="FP32">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>64</dim>
+					<dim>64</dim>
+				</port>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>64</dim>
+					<dim>64</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="802" name="802_const" type="Const" version="opset1">
+			<data element_type="f32" shape="1, 1, 1, 1" offset="18928422" size="4"/>
+			<output>
+				<port id="0" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="803" name="803_pow" type="Power" version="opset1">
+			<data auto_broadcast="numpy"/>
+			<input>
+				<port id="0" precision="FP32">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>64</dim>
+					<dim>64</dim>
+				</port>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32">
+					<dim>1</dim>
+					<dim>3</dim>
+					<dim>64</dim>
+					<dim>64</dim>
+				</port>
+			</output>
+		</layer>
+###########################
+
+saved_model.xml - update lines
+###########################
+		<edge from-layer="386" from-port="2" to-layer="387" to-port="0"/>
+		<edge from-layer="387" from-port="1" to-layer="389" to-port="0"/>
+↓
+		<edge from-layer="386" from-port="2" to-layer="801" to-port="0"/>
+		<edge from-layer="800" from-port="0" to-layer="801" to-port="1"/>
+		<edge from-layer="801" from-port="2" to-layer="803" to-port="0"/>
+		<edge from-layer="802" from-port="0" to-layer="803" to-port="1"/>
+		<edge from-layer="803" from-port="2" to-layer="389" to-port="0"/>
+###########################
+
+saved_model.xml - delete lines
+###########################
+		<layer id="387" name="Abs_StatefulPartitionedCall/Abs" type="Abs" version="opset1">
+			<input>
+				<port id="0" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>64</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32" names="Abs_StatefulPartitionedCall/Abs:0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>64</dim>
+					<dim>64</dim>
+				</port>
+			</output>
+		</layer>
+###########################
+
+saved_model.xml - insert lines
+###########################
+		<layer id="804" name="804_convert" type="Convert" version="opset1">
+			<data destination_type="f32"/>
+			<input>
+				<port id="0" precision="I32">
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="400" name="floordiv_StatefulPartitionedCall/floordiv" type="Floor" version="opset1">
+			<input>
+				<port id="0" precision="FP32">
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="805" name="805_convert" type="Convert" version="opset1">
+			<data destination_type="i32"/>
+			<input>
+				<port id="0" precision="FP32">
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="I32">
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</output>
+		</layer>
+###########################
+
+
+saved_model.xml - update lines
+###########################
+		<edge from-layer="399" from-port="2" to-layer="400" to-port="0"/>
+		<edge from-layer="400" from-port="1" to-layer="687" to-port="1"/>
+		<edge from-layer="400" from-port="1" to-layer="402" to-port="0"/>
+		<edge from-layer="400" from-port="1" to-layer="430" to-port="0"/>
+↓
+		<edge from-layer="399" from-port="2" to-layer="804" to-port="0"/>
+		<edge from-layer="804" from-port="1" to-layer="400" to-port="0"/>
+		<edge from-layer="400" from-port="1" to-layer="805" to-port="0"/>
+		<edge from-layer="805" from-port="1" to-layer="687" to-port="1"/>
+		<edge from-layer="805" from-port="1" to-layer="402" to-port="0"/>
+		<edge from-layer="805" from-port="1" to-layer="430" to-port="0"/>
+###########################
+
+
+saved_model.xml - insert lines
+###########################
+		<layer id="806" name="806_convert" type="Convert" version="opset1">
+			<data destination_type="f32"/>
+			<input>
+				<port id="0" precision="I32">
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="403" name="floordiv_1_StatefulPartitionedCall/floordiv_1" type="Floor" version="opset1">
+			<input>
+				<port id="0" precision="FP32">
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="807" name="807_convert" type="Convert" version="opset1">
+			<data destination_type="i32"/>
+			<input>
+				<port id="0" precision="FP32">
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="I32">
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</output>
+		</layer>
+###########################
+
+saved_model.xml - update lines
+###########################
+		<edge from-layer="402" from-port="2" to-layer="403" to-port="0"/>
+		<edge from-layer="403" from-port="1" to-layer="405" to-port="0"/>
+		<edge from-layer="403" from-port="1" to-layer="495" to-port="0"/>
+		<edge from-layer="403" from-port="1" to-layer="477" to-port="0"/>
+		<edge from-layer="403" from-port="1" to-layer="429" to-port="0"/>
+		<edge from-layer="403" from-port="1" to-layer="425" to-port="0"/>
+↓
+		<edge from-layer="402" from-port="2" to-layer="806" to-port="0"/>
+		<edge from-layer="806" from-port="1" to-layer="403" to-port="0"/>
+		<edge from-layer="403" from-port="1" to-layer="807" to-port="0"/>
+		<edge from-layer="807" from-port="1" to-layer="405" to-port="0"/>
+		<edge from-layer="807" from-port="1" to-layer="495" to-port="0"/>
+		<edge from-layer="807" from-port="1" to-layer="477" to-port="0"/>
+		<edge from-layer="807" from-port="1" to-layer="429" to-port="0"/>
+		<edge from-layer="807" from-port="1" to-layer="425" to-port="0"/>
+###########################
+
+saved_model.xml - insert lines
+###########################
+		<layer id="808" name="808_convert" type="Convert" version="opset1">
+			<data destination_type="f32"/>
+			<input>
+				<port id="0" precision="I32">
+					<dim>1</dim>
+					<dim>6</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP32">
+					<dim>1</dim>
+					<dim>6</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="698" name="Tile_4_StatefulPartitionedCall/Tile_4" type="Tile" version="opset1">
+			<input>
+				<port id="0" precision="FP32">
+					<dim>1</dim>
+					<dim>6</dim>
+					<dim>1</dim>
+				</port>
+				<port id="1" precision="I64">
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32" names="Tile_4_StatefulPartitionedCall/Tile_4:0">
+					<dim>1</dim>
+					<dim>6</dim>
+					<dim>17</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="809" name="809_convert" type="Convert" version="opset1">
+			<data destination_type="i32"/>
+			<input>
+				<port id="0" precision="FP32">
+					<dim>1</dim>
+					<dim>6</dim>
+					<dim>17</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="I32">
+					<dim>1</dim>
+					<dim>6</dim>
+					<dim>17</dim>
+				</port>
+			</output>
+		</layer>
+###########################
+
+saved_model.xml - update lines
+###########################
+		<edge from-layer="696" from-port="4" to-layer="698" to-port="0"/>
+		<edge from-layer="697" from-port="0" to-layer="698" to-port="1"/>
+		<edge from-layer="698" from-port="2" to-layer="700" to-port="0"/>
+↓
+		<edge from-layer="696" from-port="4" to-layer="808" to-port="0"/>
+		<edge from-layer="808" from-port="1" to-layer="698" to-port="0"/>
+		<edge from-layer="697" from-port="0" to-layer="698" to-port="1"/>
+		<edge from-layer="698" from-port="2" to-layer="809" to-port="0"/>
+		<edge from-layer="809" from-port="1" to-layer="700" to-port="0"/>
+###########################
+
+saved_model.xml - insert lines
+###########################
+		<layer id="581" name="GreaterEqual_1_StatefulPartitionedCall/GreaterEqual_1/x" type="Const" version="opset1">
+			<data element_type="f32" shape="64, 64, 1" offset="18864564" size="16384"/>
+			<output>
+				<port id="0" precision="FP32" names="GreaterEqual_1_StatefulPartitionedCall/GreaterEqual_1/x:0">
+					<dim>64</dim>
+					<dim>64</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="810" name="810_convert" type="Convert" version="opset1">
+			<data destination_type="f16"/>
+			<input>
+				<port id="0" precision="I32">
+					<dim>64</dim>
+					<dim>64</dim>
+					<dim>1</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>64</dim>
+					<dim>64</dim>
+					<dim>1</dim>
+				</port>
+			</output>
+		</layer>
+###########################
+
+saved_model.xml - update lines
+###########################
+		<edge from-layer="581" from-port="0" to-layer="584" to-port="0"/>
+↓
+		<edge from-layer="581" from-port="0" to-layer="810" to-port="0"/>
+		<edge from-layer="810" from-port="1" to-layer="584" to-port="0"/>
+###########################
+
+saved_model.xml - insert lines
+###########################
+		<layer id="583" name="Reshape_14_StatefulPartitionedCall/Reshape_14" type="Reshape" version="opset1">
+			<data special_zero="false"/>
+			<input>
+				<port id="0" precision="FP32">
+					<dim>6</dim>
+					<dim>1</dim>
+				</port>
+				<port id="1" precision="I64">
+					<dim>3</dim>
+				</port>
+			</input>
+			<output>
+				<port id="2" precision="FP32" names="Reshape_14_StatefulPartitionedCall/Reshape_14:0">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</output>
+		</layer>
+		<layer id="811" name="811_convert" type="Convert" version="opset1">
+			<data destination_type="f16"/>
+			<input>
+				<port id="0" precision="FP32">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</input>
+			<output>
+				<port id="1" precision="FP16">
+					<dim>1</dim>
+					<dim>1</dim>
+					<dim>6</dim>
+				</port>
+			</output>
+		</layer>
+###########################
+
+saved_model.xml - update lines
+###########################
+		<edge from-layer="583" from-port="2" to-layer="584" to-port="1"/>
+↓
+		<edge from-layer="583" from-port="2" to-layer="811" to-port="0"/>
+		<edge from-layer="811" from-port="1" to-layer="584" to-port="1"/>
+###########################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+H=256
+W=256
+mkdir -p saved_model_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model_${H}x${W}/openvino/FP32/saved_model.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model_${H}x${W}/openvino/myriad/saved_model.blob
+
+
+
+
+H=256
+W=256
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/saved_model.xml \
+--output_myriad \
+--vpu_number_of_shaves 4 \
+--vpu_number_of_cmx_slices 4 \
+--weight_replacement_config replace.json
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+H=256
+W=320
+tflite2tensorflow \
+--model_path model_float32_${H}x${W}.tflite \
+--model_output_path saved_model_${H}x${W} \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
 --output_openvino_and_myriad
 
 
 
 
 
-
+↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+Subtract - tf.numpy_function
+Transpose - unknown shape
