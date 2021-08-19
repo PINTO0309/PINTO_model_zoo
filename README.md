@@ -161,6 +161,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |104|DeeplabV3-plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/104_DeeplabV3-plus)|⚫|⚫|⚫||⚫|⚫|⚫|⚫||⚫|cityscapes,200x400,400x800,800x1600|
 |109|Selfie_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/109_Selfie_Segmentation)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|256x256|
 |136|road-segmentation-adas-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/136_road-segmentation-adas-0001)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|138|BackgroundMattingV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/138_BackgroundMattingV2)||||||⚫||||⚫|WIP,720x1280,2160x4096|
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
