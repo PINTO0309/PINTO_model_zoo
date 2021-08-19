@@ -1,0 +1,45 @@
+xhost +local: && \
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+pinto0309/openvino2tensorflow:latest
+
+
+MODEL=backgroundmattingv2_hd
+H=720
+W=1280
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${H}x${W}/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${H}x${W}/FP16
+
+MODEL=backgroundmattingv2_4k
+H=2160
+W=4096
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${H}x${W}/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${H}x${W}/FP16
+
+
+MODEL=backgroundmattingv2_hd
+H=720
+W=1280
+openvino2tensorflow \
+--model_path openvino/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite
