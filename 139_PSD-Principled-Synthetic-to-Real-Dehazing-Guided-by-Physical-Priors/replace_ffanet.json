@@ -1,0 +1,38 @@
+{
+    "format_version": 2,
+    "layers": [
+        {
+            "layer_id": "2384",
+            "type": "Reshape",
+            "replace_mode": "insert_after",
+            "values": [
+                1,
+                1,
+                1,
+                64
+            ]
+        },
+        {
+            "layer_id": "2388",
+            "type": "Reshape",
+            "replace_mode": "insert_after",
+            "values": [
+                1,
+                1,
+                1,
+                64
+            ]
+        },
+        {
+            "layer_id": "2393",
+            "type": "Reshape",
+            "replace_mode": "insert_after",
+            "values": [
+                1,
+                1,
+                1,
+                64
+            ]
+        }
+    ]
+}
