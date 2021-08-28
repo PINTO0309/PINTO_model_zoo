@@ -1,0 +1,57 @@
+xhost +local: && \
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+pinto0309/openvino2tensorflow:latest
+
+cd workdir
+
+H=288
+W=800
+MODEL=ultra_fast_lane_detection
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_opt.onnx \
+--data_type FP32 \
+--output_dir openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_opt.onnx \
+--data_type FP16 \
+--output_dir openvino/FP16
+
+mkdir -p openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/FP16/${MODEL}_${H}x${W}_opt.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/myriad/${MODEL}_${H}x${W}.blob
+
+openvino2tensorflow \
+--model_path openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml
+
+openvino2tensorflow \
+--model_path openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt
+
+openvino2tensorflow \
+--model_path openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_edgetpu
