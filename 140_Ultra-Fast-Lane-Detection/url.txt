@@ -1,2 +1,5 @@
 https://github.com/cfzd/Ultra-Fast-Lane-Detection
 https://github.com/PINTO0309/openvino2tensorflow
+
+https://github.com/ibaiGorordo/TfLite-Ultra-Fast-Lane-Detection-Inference
+https://github.com/ibaiGorordo/onnx-Ultra-Fast-Lane-Detection-Inference
