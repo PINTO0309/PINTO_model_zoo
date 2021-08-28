@@ -13,45 +13,102 @@ cd workdir
 
 H=288
 W=800
-MODEL=ultra_fast_lane_detection
+MODEL=culane
 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
---input_model ${MODEL}_${H}x${W}_opt.onnx \
+--input_model ultra_falst_lane_detection_${MODEL}_${H}x${W}.onnx \
 --data_type FP32 \
---output_dir openvino/FP32
+--output_dir openvino/${MODEL}/FP32
 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
---input_model ${MODEL}_${H}x${W}_opt.onnx \
+--input_model ultra_falst_lane_detection_${MODEL}_${H}x${W}.onnx \
 --data_type FP16 \
---output_dir openvino/FP16
-
-mkdir -p openvino/myriad
+--output_dir openvino/${MODEL}/FP16
+mkdir -p openvino/${MODEL}/myriad
 ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
--m openvino/FP16/${MODEL}_${H}x${W}_opt.xml \
+-m openvino/${MODEL}/FP16/ultra_falst_lane_detection_${MODEL}_${H}x${W}.xml \
 -ip U8 \
 -VPU_NUMBER_OF_SHAVES 4 \
 -VPU_NUMBER_OF_CMX_SLICES 4 \
--o openvino/myriad/${MODEL}_${H}x${W}.blob
+-o openvino/${MODEL}/myriad/${MODEL}_${H}x${W}.blob
 
 openvino2tensorflow \
---model_path openvino/FP32/${MODEL}_${H}x${W}.xml \
+--model_path openvino/${MODEL}/FP32/ultra_falst_lane_detection_${MODEL}_${H}x${W}.xml \
 --output_saved_model \
 --output_pb \
 --output_no_quant_float32_tflite \
 --output_weight_quant_tflite \
 --output_float16_quant_tflite \
 --output_integer_quant_tflite \
---string_formulas_for_normalization 'data / 255' \
+--string_formulas_for_normalization '(data / 255 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]' \
 --output_integer_quant_type 'uint8' \
 --output_tfjs \
---output_coreml
+--output_coreml \
+--weight_replacement_config replace_${MODEL}.json
 
 openvino2tensorflow \
---model_path openvino/FP32/${MODEL}_${H}x${W}.xml \
---output_tftrt
+--model_path openvino/${MODEL}/FP32/ultra_falst_lane_detection_${MODEL}_${H}x${W}.xml \
+--output_tftrt \
+--weight_replacement_config replace_${MODEL}.json
+
+mv saved_model saved_model_${MODEL}
 
 openvino2tensorflow \
---model_path openvino/FP32/${MODEL}_${H}x${W}.xml \
+--model_path openvino/${MODEL}/FP32/ultra_falst_lane_detection_${MODEL}_${H}x${W}.xml \
 --output_saved_model \
 --output_pb \
---string_formulas_for_normalization 'data / 255' \
+--string_formulas_for_normalization '(data / 255 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]' \
 --output_integer_quant_type 'uint8' \
---output_edgetpu
+--output_edgetpu \
+--weight_replacement_config replace_${MODEL}.json
+
+
+=====================================
+
+H=288
+W=800
+MODEL=tusimple
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ultra_falst_lane_detection_${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ultra_falst_lane_detection_${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}/FP16
+mkdir -p openvino/${MODEL}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}/FP16/ultra_falst_lane_detection_${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}/myriad/${MODEL}_${H}x${W}.blob
+
+
+openvino2tensorflow \
+--model_path openvino/${MODEL}/FP32/ultra_falst_lane_detection_${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization '(data / 255 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config replace_${MODEL}.json
+
+openvino2tensorflow \
+--model_path openvino/${MODEL}/FP32/ultra_falst_lane_detection_${MODEL}_${H}x${W}.xml \
+--output_tftrt \
+--weight_replacement_config replace_${MODEL}.json
+
+mv saved_model saved_model_${MODEL}
+
+openvino2tensorflow \
+--model_path openvino/${MODEL}/FP32/ultra_falst_lane_detection_${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--string_formulas_for_normalization '(data / 255 - [0.485, 0.456, 0.406]) / [0.229, 0.224, 0.225]' \
+--output_integer_quant_type 'uint8' \
+--output_edgetpu \
+--weight_replacement_config replace_${MODEL}.json
