@@ -1,3 +1,0 @@
-https://github.com/alexvbogdan/DeepCalib
-https://github.com/PINTO0309/openvino2tensorflow
-
