@@ -1,0 +1,335 @@
+xhost +local: && \
+  docker run --gpus all -it --rm \
+  -v `pwd`:/home/user/workdir \
+  -v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+  --device /dev/video0:/dev/video0:mwr \
+  --net=host \
+  -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+  -e DISPLAY=$DISPLAY \
+  --privileged \
+  pinto0309/openvino2tensorflow:latest
+
+=========================
+MODEL=flyingthings_finalpass_xl
+
+pb_to_saved_model \
+--pb_file_path ${MODEL}.pb \
+--inputs input:0 \
+--outputs reference_output_disparity:0,secondary_output_disparity:0 \
+--model_output_path ${MODEL}/saved_model
+
+H=256
+W=256
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}/saved_model \
+--input_shapes [1,${H},${W},6] \
+--model_output_dir_path ${MODEL}/saved_model_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite
+
+python -m tf2onnx.convert \
+--opset 12 \
+--inputs-as-nchw input \
+--tflite ${MODEL}/saved_model_${H}x${W}/model_float32.tflite \
+--output ${MODEL}/saved_model_${H}x${W}/model_float32.onnx
+
+python3 -m onnxsim \
+${MODEL}/saved_model_${H}x${W}/model_float32.onnx \
+${MODEL}/saved_model_${H}x${W}/model_float32_opt.onnx
+
+cp -R ${MODEL}/saved_model/* ${MODEL}/saved_model_${H}x${W}
+
+
+[ 2021-09-05 17:22:08,287 ] [ DEBUG ] [ infer:118 ]  Op: GatherND
+[ 2021-09-05 17:22:08,287 ] [ DEBUG ] [ infer:119 ]  Inputs:
+[ 2021-09-05 17:22:08,287 ] [ DEBUG ] [ infer:19 ]  input[0]: shape = [  1  64  64 320], value = <UNKNOWN>
+[ 2021-09-05 17:22:08,287 ] [ DEBUG ] [ infer:19 ]  input[1]: shape = [ 1 64 64  1  1], value = <UNKNOWN>
+[ 2021-09-05 17:22:08,288 ] [ DEBUG ] [ infer:132 ]  Outputs:
+[ 2021-09-05 17:22:08,288 ] [ DEBUG ] [ infer:19 ]  output[0]: shape = [4096    1], value = <UNKNOWN>
+
+
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}/saved_model_${H}x${W}/model_float32_opt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}/saved_model_${H}x${W}/openvino/FP32 \
+--log_level=DEBUG
+
+
+
+
+H=240
+W=320
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}/saved_model \
+--input_shapes [1,${H},${W},6] \
+--model_output_dir_path ${MODEL}/saved_model_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite
+
+python -m tf2onnx.convert \
+--opset 12 \
+--inputs-as-nchw input \
+--tflite ${MODEL}/saved_model_${H}x${W}/model_float32.tflite \
+--output ${MODEL}/saved_model_${H}x${W}/model_float32.onnx
+
+python3 -m onnxsim \
+${MODEL}/saved_model_${H}x${W}/model_float32.onnx \
+${MODEL}/saved_model_${H}x${W}/model_float32_opt.onnx
+
+cp -R ${MODEL}/saved_model/* ${MODEL}/saved_model_${H}x${W}
+
+H=480
+W=640
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}/saved_model \
+--input_shapes [1,${H},${W},6] \
+--model_output_dir_path ${MODEL}/saved_model_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite
+
+python -m tf2onnx.convert \
+--opset 12 \
+--inputs-as-nchw input \
+--tflite ${MODEL}/saved_model_${H}x${W}/model_float32.tflite \
+--output ${MODEL}/saved_model_${H}x${W}/model_float32.onnx
+
+python3 -m onnxsim \
+${MODEL}/saved_model_${H}x${W}/model_float32.onnx \
+${MODEL}/saved_model_${H}x${W}/model_float32_opt.onnx
+
+cp -R ${MODEL}/saved_model/* ${MODEL}/saved_model_${H}x${W}
+
+H=720
+W=1280
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}/saved_model \
+--input_shapes [1,${H},${W},6] \
+--model_output_dir_path ${MODEL}/saved_model_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite
+
+python -m tf2onnx.convert \
+--opset 12 \
+--inputs-as-nchw input \
+--tflite ${MODEL}/saved_model_${H}x${W}/model_float32.tflite \
+--output ${MODEL}/saved_model_${H}x${W}/model_float32.onnx
+
+python3 -m onnxsim \
+${MODEL}/saved_model_${H}x${W}/model_float32.onnx \
+${MODEL}/saved_model_${H}x${W}/model_float32_opt.onnx
+
+cp -R ${MODEL}/saved_model/* ${MODEL}/saved_model_${H}x${W}
+
+
+
+=========================
+MODEL=eth3d
+
+pb_to_saved_model \
+--pb_file_path ${MODEL}.pb \
+--inputs input:0 \
+--outputs reference_output_disparity:0 \
+--model_output_path ${MODEL}/saved_model
+
+H=256
+W=256
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}/saved_model \
+--input_shapes [1,${H},${W},2] \
+--model_output_dir_path ${MODEL}/saved_model_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite
+
+python -m tf2onnx.convert \
+--opset 12 \
+--inputs-as-nchw input \
+--tflite ${MODEL}/saved_model_${H}x${W}/model_float32.tflite \
+--output ${MODEL}/saved_model_${H}x${W}/model_float32.onnx
+
+python3 -m onnxsim \
+${MODEL}/saved_model_${H}x${W}/model_float32.onnx \
+${MODEL}/saved_model_${H}x${W}/model_float32_opt.onnx
+
+cp -R ${MODEL}/saved_model/* ${MODEL}/saved_model_${H}x${W}
+
+H=240
+W=320
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}/saved_model \
+--input_shapes [1,${H},${W},2] \
+--model_output_dir_path ${MODEL}/saved_model_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite
+
+python -m tf2onnx.convert \
+--opset 12 \
+--inputs-as-nchw input \
+--tflite ${MODEL}/saved_model_${H}x${W}/model_float32.tflite \
+--output ${MODEL}/saved_model_${H}x${W}/model_float32.onnx
+
+python3 -m onnxsim \
+${MODEL}/saved_model_${H}x${W}/model_float32.onnx \
+${MODEL}/saved_model_${H}x${W}/model_float32_opt.onnx
+
+cp -R ${MODEL}/saved_model/* ${MODEL}/saved_model_${H}x${W}
+
+H=480
+W=640
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}/saved_model \
+--input_shapes [1,${H},${W},2] \
+--model_output_dir_path ${MODEL}/saved_model_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite
+
+python -m tf2onnx.convert \
+--opset 12 \
+--inputs-as-nchw input \
+--tflite ${MODEL}/saved_model_${H}x${W}/model_float32.tflite \
+--output ${MODEL}/saved_model_${H}x${W}/model_float32.onnx
+
+python3 -m onnxsim \
+${MODEL}/saved_model_${H}x${W}/model_float32.onnx \
+${MODEL}/saved_model_${H}x${W}/model_float32_opt.onnx
+
+cp -R ${MODEL}/saved_model/* ${MODEL}/saved_model_${H}x${W}
+
+H=720
+W=1280
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}/saved_model \
+--input_shapes [1,${H},${W},2] \
+--model_output_dir_path ${MODEL}/saved_model_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite
+
+python -m tf2onnx.convert \
+--opset 12 \
+--inputs-as-nchw input \
+--tflite ${MODEL}/saved_model_${H}x${W}/model_float32.tflite \
+--output ${MODEL}/saved_model_${H}x${W}/model_float32.onnx
+
+python3 -m onnxsim \
+${MODEL}/saved_model_${H}x${W}/model_float32.onnx \
+${MODEL}/saved_model_${H}x${W}/model_float32_opt.onnx
+
+cp -R ${MODEL}/saved_model/* ${MODEL}/saved_model_${H}x${W}
+
+
+
+=========================
+MODEL=middlebury_d400
+
+pb_to_saved_model \
+--pb_file_path ${MODEL}.pb \
+--inputs input:0 \
+--outputs reference_output_disparity:0 \
+--model_output_path ${MODEL}/saved_model
+
+H=256
+W=256
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}/saved_model \
+--input_shapes [1,${H},${W},6] \
+--model_output_dir_path ${MODEL}/saved_model_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite
+
+python -m tf2onnx.convert \
+--opset 12 \
+--inputs-as-nchw input \
+--tflite ${MODEL}/saved_model_${H}x${W}/model_float32.tflite \
+--output ${MODEL}/saved_model_${H}x${W}/model_float32.onnx
+
+python3 -m onnxsim \
+${MODEL}/saved_model_${H}x${W}/model_float32.onnx \
+${MODEL}/saved_model_${H}x${W}/model_float32_opt.onnx
+
+cp -R ${MODEL}/saved_model/* ${MODEL}/saved_model_${H}x${W}
+
+
+H=240
+W=320
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}/saved_model \
+--input_shapes [1,${H},${W},6] \
+--model_output_dir_path ${MODEL}/saved_model_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite
+
+python -m tf2onnx.convert \
+--opset 12 \
+--inputs-as-nchw input \
+--tflite ${MODEL}/saved_model_${H}x${W}/model_float32.tflite \
+--output ${MODEL}/saved_model_${H}x${W}/model_float32.onnx
+
+python3 -m onnxsim \
+${MODEL}/saved_model_${H}x${W}/model_float32.onnx \
+${MODEL}/saved_model_${H}x${W}/model_float32_opt.onnx
+
+cp -R ${MODEL}/saved_model/* ${MODEL}/saved_model_${H}x${W}
+
+
+H=480
+W=640
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}/saved_model \
+--input_shapes [1,${H},${W},6] \
+--model_output_dir_path ${MODEL}/saved_model_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite
+
+python -m tf2onnx.convert \
+--opset 12 \
+--inputs-as-nchw input \
+--tflite ${MODEL}/saved_model_${H}x${W}/model_float32.tflite \
+--output ${MODEL}/saved_model_${H}x${W}/model_float32.onnx
+
+python3 -m onnxsim \
+${MODEL}/saved_model_${H}x${W}/model_float32.onnx \
+${MODEL}/saved_model_${H}x${W}/model_float32_opt.onnx
+
+cp -R ${MODEL}/saved_model/* ${MODEL}/saved_model_${H}x${W}
+
+
+H=720
+W=1280
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}/saved_model \
+--input_shapes [1,${H},${W},6] \
+--model_output_dir_path ${MODEL}/saved_model_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite
+
+python -m tf2onnx.convert \
+--opset 12 \
+--inputs-as-nchw input \
+--tflite ${MODEL}/saved_model_${H}x${W}/model_float32.tflite \
+--output ${MODEL}/saved_model_${H}x${W}/model_float32.onnx
+
+python3 -m onnxsim \
+${MODEL}/saved_model_${H}x${W}/model_float32.onnx \
+${MODEL}/saved_model_${H}x${W}/model_float32_opt.onnx
+
+cp -R ${MODEL}/saved_model/* ${MODEL}/saved_model_${H}x${W}
+
+
+
+
+
+
+
+
