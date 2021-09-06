@@ -2,4 +2,6 @@ https://github.com/google-research/google-research/tree/master/hitnet
 https://github.com/PINTO0309/openvino2tensorflow
 
 https://github.com/ibaiGorordo/HITNET-Stereo-Depth-estimation
+https://github.com/ibaiGorordo/TFLite-HITNET-Stereo-depth-estimation
+https://github.com/ibaiGorordo/ONNX-HITNET-Stereo-Depth-estimation
 https://github.com/ibaiGorordo/UnrealCV-stereo-depth-generation
