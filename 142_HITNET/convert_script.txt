@@ -163,7 +163,7 @@ H=120
 W=160
 saved_model_to_tflite \
 --saved_model_dir_path ${MODEL}/saved_model \
---input_shapes [1,${H},${W},6] \
+--input_shapes [1,${H},${W},2] \
 --model_output_dir_path ${MODEL}/saved_model_${H}x${W} \
 --output_no_quant_float32_tflite \
 --output_weight_quant_tflite \
