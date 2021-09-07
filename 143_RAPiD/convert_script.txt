@@ -90,7 +90,7 @@ $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
 MODEL=cepdof
 H=608
 W=608
-python3 openvino2tensorflow.py \
+openvino2tensorflow \
 --model_path ${MODEL}/openvino/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
 --model_output_path ${MODEL}/saved_model_${H}x${W} \
 --output_saved_model \
@@ -107,7 +107,7 @@ python3 openvino2tensorflow.py \
 MODEL=habbof
 H=608
 W=608
-python3 openvino2tensorflow.py \
+openvino2tensorflow \
 --model_path ${MODEL}/openvino/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
 --model_output_path ${MODEL}/saved_model_${H}x${W} \
 --output_saved_model \
@@ -124,7 +124,7 @@ python3 openvino2tensorflow.py \
 MODEL=mw_r
 H=608
 W=608
-python3 openvino2tensorflow.py \
+openvino2tensorflow \
 --model_path ${MODEL}/openvino/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
 --model_output_path ${MODEL}/saved_model_${H}x${W} \
 --output_saved_model \
@@ -142,7 +142,7 @@ python3 openvino2tensorflow.py \
 MODEL=cepdof
 H=1024
 W=1024
-python3 openvino2tensorflow.py \
+openvino2tensorflow \
 --model_path ${MODEL}/openvino/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
 --model_output_path ${MODEL}/saved_model_${H}x${W} \
 --output_saved_model \
@@ -159,7 +159,7 @@ python3 openvino2tensorflow.py \
 MODEL=habbof
 H=1024
 W=1024
-python3 openvino2tensorflow.py \
+openvino2tensorflow \
 --model_path ${MODEL}/openvino/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
 --model_output_path ${MODEL}/saved_model_${H}x${W} \
 --output_saved_model \
@@ -176,7 +176,7 @@ python3 openvino2tensorflow.py \
 MODEL=mw_r
 H=1024
 W=1024
-python3 openvino2tensorflow.py \
+openvino2tensorflow \
 --model_path ${MODEL}/openvino/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
 --model_output_path ${MODEL}/saved_model_${H}x${W} \
 --output_saved_model \
