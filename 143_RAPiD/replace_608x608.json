@@ -1,0 +1,281 @@
+{
+    "format_version": 2,
+    "layers": [
+        {
+            "layer_id": "479",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "480",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                3,
+                6,
+                76,
+                76
+            ]
+        },
+        {
+            "layer_id": "499",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                76,
+                3,
+                76
+            ]
+        },
+        {
+            "layer_id": "501",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                3,
+                76,
+                76,
+                1
+            ]
+        },
+        {
+            "layer_id": "510",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                76,
+                3,
+                76
+            ]
+        },
+        {
+            "layer_id": "512",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                3,
+                76,
+                76,
+                1
+            ]
+        },
+        {
+            "layer_id": "539",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                76,
+                3,
+                76
+            ]
+        },
+        {
+            "layer_id": "541",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                3,
+                76,
+                76,
+                1
+            ]
+        },
+        {
+            "layer_id": "555",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "556",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                3,
+                6,
+                38,
+                38
+            ]
+        },
+        {
+            "layer_id": "575",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                38,
+                3,
+                38
+            ]
+        },
+        {
+            "layer_id": "577",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                3,
+                38,
+                38,
+                1
+            ]
+        },
+        {
+            "layer_id": "586",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                38,
+                3,
+                38
+            ]
+        },
+        {
+            "layer_id": "588",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                3,
+                38,
+                38,
+                1
+            ]
+        },
+        {
+            "layer_id": "615",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                38,
+                3,
+                38
+            ]
+        },
+        {
+            "layer_id": "617",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                3,
+                38,
+                38,
+                1
+            ]
+        },
+        {
+            "layer_id": "631",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "632",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                3,
+                6,
+                19,
+                19
+            ]
+        },
+        {
+            "layer_id": "651",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                19,
+                3,
+                19
+            ]
+        },
+        {
+            "layer_id": "653",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                3,
+                19,
+                19,
+                1
+            ]
+        },
+        {
+            "layer_id": "662",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                19,
+                3,
+                19
+            ]
+        },
+        {
+            "layer_id": "664",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                3,
+                19,
+                19,
+                1
+            ]
+        },
+        {
+            "layer_id": "691",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                19,
+                3,
+                19
+            ]
+        },
+        {
+            "layer_id": "693",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                3,
+                19,
+                19,
+                1
+            ]
+        }
+    ]
+}
