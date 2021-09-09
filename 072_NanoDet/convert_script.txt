@@ -114,3 +114,273 @@ openvino2tensorflow \
 --weight_replacement_config replace.json
 mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model saved_model_${MODEL}_${H}x${W}
 rm -rf saved_model
+
+
+=== nanodet_m =====================================
+
+CONFIG_PATH=config/nanodet-m.yml
+PYTORCH_MODEL_PATH=nanodet_m.ckpt
+python3 tools/export_onnx.py --cfg_path ${CONFIG_PATH} --model_path ${PYTORCH_MODEL_PATH}
+
+CONFIG_PATH=config/nanodet-m-416.yml
+PYTORCH_MODEL_PATH=nanodet_m_416.ckpt
+python3 tools/export_onnx.py --cfg_path ${CONFIG_PATH} --model_path ${PYTORCH_MODEL_PATH}
+
+CONFIG_PATH=config/nanodet-m-0.5x.yml
+PYTORCH_MODEL_PATH=nanodet_m_0.5x.ckpt
+python3 tools/export_onnx.py --cfg_path ${CONFIG_PATH} --model_path ${PYTORCH_MODEL_PATH}
+
+CONFIG_PATH=config/nanodet-m-1.5x.yml
+PYTORCH_MODEL_PATH=nanodet_m_1.5x.ckpt
+python3 tools/export_onnx.py --cfg_path ${CONFIG_PATH} --model_path ${PYTORCH_MODEL_PATH}
+
+CONFIG_PATH=config/nanodet-m-1.5x-416.yml
+PYTORCH_MODEL_PATH=nanodet_m_1.5x_416.ckpt
+python3 tools/export_onnx.py --cfg_path ${CONFIG_PATH} --model_path ${PYTORCH_MODEL_PATH}
+
+
+
+
+python3 -m onnxsim onnx/nanodet_m_320x320.onnx onnx/nanodet_m_320x320.onnx
+python3 -m onnxsim onnx/nanodet_m_416x416.onnx onnx/nanodet_m_416x416.onnx
+python3 -m onnxsim onnx/nanodet_m_0.5x_320x320.onnx onnx/nanodet_m_0.5x_320x320.onnx
+python3 -m onnxsim onnx/nanodet_m_1.5x_320x320.onnx onnx/nanodet_m_1.5x_320x320.onnx
+python3 -m onnxsim onnx/nanodet_m_1.5x_416x416.onnx onnx/nanodet_m_1.5x_416x416.onnx
+
+
+
+xhost +local: && \
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+pinto0309/openvino2tensorflow:latest
+
+cd workdir
+
+
+H=320
+W=320
+MODEL=nanodet_m
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32 \
+--mean_values [103.53,116.28,123.675] \
+--scale_values [57.375,57.12,58.395]
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+--mean_values [103.53,116.28,123.675] \
+--scale_values [57.375,57.12,58.395]
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}_${H}x${W}.blob
+
+H=416
+W=416
+MODEL=nanodet_m
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32 \
+--mean_values [103.53,116.28,123.675] \
+--scale_values [57.375,57.12,58.395]
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+--mean_values [103.53,116.28,123.675] \
+--scale_values [57.375,57.12,58.395]
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}_${H}x${W}.blob
+
+H=320
+W=320
+MODEL=nanodet_m_0.5x
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32 \
+--mean_values [103.53,116.28,123.675] \
+--scale_values [57.375,57.12,58.395]
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+--mean_values [103.53,116.28,123.675] \
+--scale_values [57.375,57.12,58.395]
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}_${H}x${W}.blob
+
+H=320
+W=320
+MODEL=nanodet_m_1.5x
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32 \
+--mean_values [103.53,116.28,123.675] \
+--scale_values [57.375,57.12,58.395]
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+--mean_values [103.53,116.28,123.675] \
+--scale_values [57.375,57.12,58.395]
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}_${H}x${W}.blob
+
+H=416
+W=416
+MODEL=nanodet_m_1.5x
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32 \
+--mean_values [103.53,116.28,123.675] \
+--scale_values [57.375,57.12,58.395]
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+--mean_values [103.53,116.28,123.675] \
+--scale_values [57.375,57.12,58.395]
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}_${H}x${W}.blob
+
+=============================================
+
+H=320
+W=320
+MODEL=nanodet_m
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data * 1' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--weight_replacement_config replace_nanodet_m.json
+
+mv saved_model saved_model_${MODEL}_${H}x${W}
+
+
+H=416
+W=416
+MODEL=nanodet_m
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data * 1' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--weight_replacement_config replace_nanodet_m.json
+
+mv saved_model saved_model_${MODEL}_${H}x${W}
+
+
+H=320
+W=320
+MODEL=nanodet_m_0.5x
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data * 1' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--weight_replacement_config replace_nanodet_m.json
+
+mv saved_model saved_model_${MODEL}_${H}x${W}
+
+
+H=320
+W=320
+MODEL=nanodet_m_1.5x
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data * 1' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--weight_replacement_config replace_nanodet_m.json
+
+mv saved_model saved_model_${MODEL}_${H}x${W}
+
+
+H=416
+W=416
+MODEL=nanodet_m_1.5x
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data * 1' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--output_tftrt \
+--weight_replacement_config replace_nanodet_m.json
+
+mv saved_model saved_model_${MODEL}_${H}x${W}
+
