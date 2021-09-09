@@ -97,6 +97,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |036|Objectron|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/036_Objectron)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
 |063|3D BoundingBox estimation for autonomous driving|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/063_3d-bounding-box-estimation-for-autonomous-driving)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|**[YouTube](https://youtu.be/MKer-Sj87d4)**|
 |107|SFA3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/107_SFA3D)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|145|text_detection_db|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/145_text_detection_db)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|480x640|
 ### 4. 2D/3D Face Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -217,7 +218,6 @@ I have been working on quantization of various models as a hobby, but I have ski
 |052|Handwritten_Text_Recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/052_Handwritten_Text_Recognition)|⚫|⚫|||⚫|||||||
 |055|Handwritten_Japanese_Recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/055_Handwritten_Japanese_Recognition)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |093|ocr_japanese|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/093_ocr_japanese)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|120x160|
-|145|text_detection_db|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/145_text_detection_db)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|480x640|
 ### 15. Action Recognition
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
