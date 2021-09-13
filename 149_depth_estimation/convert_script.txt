@@ -148,16 +148,6 @@ openvino2tensorflow \
 --output_tftrt
 mv saved_model saved_model_${H}x${W}
 
-openvino2tensorflow \
---model_path ${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
---output_saved_model \
---output_pb \
---output_edgetpu \
---string_formulas_for_normalization 'data / 255' \
---output_integer_quant_type 'uint8'
-mv saved_model/model_full_integer_quant.tflite saved_model_${H}x${W}/model_full_integer_quant.tflite
-mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${H}x${W}/model_full_integer_quant_edgetpu.tflite
-
 mv ${H}x${W}/openvino saved_model_${H}x${W}/openvino
 mv ${MODEL}_${H}x${W}.onnx saved_model_${H}x${W}/${MODEL}_${H}x${W}.onnx
 
