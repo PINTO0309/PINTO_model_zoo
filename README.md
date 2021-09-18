@@ -150,6 +150,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |147|PackNet-SfM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/147_PackNet-SfM)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|ddad/kitti,Convert all ResNet18 backbones only|
 |148|LapDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/148_LapDepth)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|kitti/nyu,192x320/256x320/368x640/480x640/720x1280|
 |149|depth_estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/149_depth_estimation)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|nyu,180x320/240x320/360x640/480x640/720x1280|
+|150|MobileStereoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/150_MobileStereoNet)|||||||||||WIP. Conversion script only.|
 ### 8. Semantic Segmentation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
