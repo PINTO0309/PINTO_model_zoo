@@ -33,7 +33,7 @@ If you want to change the model, specify it with an argument.
     parser.add_argument(
         "--model",
         type=str,
-        default='resources_l_v4/model_float16_quant.tflite',
+        default='model_float16_quant.tflite',
     )
     parser.add_argument(
         "--input_size",
