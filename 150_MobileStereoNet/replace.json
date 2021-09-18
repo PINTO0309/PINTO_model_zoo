@@ -1638,7 +1638,7 @@
             "type": "Const",
             "replace_mode": "direct",
             "values": [
-                2
+                1
             ]
         },
         {
