@@ -122,8 +122,8 @@ def draw_debug(
         [0, 5, (255, 0, 0)],  # nose → left shoulder
         [0, 6, (0, 0, 255)],  # nose → right shoulder
         [5, 6, (0, 255, 0)],  # left shoulder → right shoulder
-        [5, 7, (255, 0, 0)],  # left shoulder → right elbow
-        [7, 9, (255, 0, 0)],  # right elbow → left wrist
+        [5, 7, (255, 0, 0)],  # left shoulder → left elbow
+        [7, 9, (255, 0, 0)],  # left elbow → left wrist
         [6, 8, (0, 0, 255)],  # right shoulder → right elbow
         [8, 10, (0, 0, 255)],  # right elbow → right wrist
         [11, 12, (0, 255, 0)],  # left hip → right hip
