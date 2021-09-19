@@ -92,6 +92,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |132|YOLOX|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/132_YOLOX)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|nano/tiny,320x320,416x416,480x640,544x960,736x1280,1088x1920|
 |143|RAPiD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/143_RAPiD)|⚫|⚫|⚫||⚫|⚫||||⚫|Fisheye, cepdof/habbof/mw_r, 608x608/1024x1024|
 |145|text_detection_db|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/145_text_detection_db)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|480x640|
+|151|object_detection_mobile_object_localizer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/151_object_detection_mobile_object_localizer)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|192x192|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|

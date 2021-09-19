@@ -1,0 +1,2 @@
+https://tfhub.dev/google/lite-model/object_detection/mobile_object_localizer_v1/1/default/1
+https://github.com/PINTO0309/tflite2tensorflow
