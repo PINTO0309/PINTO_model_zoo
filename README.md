@@ -204,7 +204,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |112|DeblurGANv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/112_DeblurGANv2)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|inception/mobilenetv2:256x256,320x320,480x640,736x1280,1024x1280|
 |114|Two-branch-dehazing|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/114_Two-branch-dehazing)|⚫|⚫|⚫||⚫|⚫||⚫|⚫|⚫|240x320,480x640,720x1280|
 |133|Real-ESRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/133_Real-ESRGAN)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|16x16,32x32,64x64,128x128,240x320,256x256,320x320,480x640|
-|152|DeepLPF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/152_DeepLPF-ESRGAN)|⚫|⚫|||⚫|⚫||||⚫||
+|152|DeepLPF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/152_DeepLPF)|⚫|⚫|||⚫|⚫||||⚫||
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
