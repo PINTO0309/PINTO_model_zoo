@@ -1,0 +1,9 @@
+BSD-3-Clause License
+
+@InProceedings{Moran_2020_CVPR,
+author = {Moran, Sean and Marza, Pierre and McDonagh, Steven and Parisot, Sarah and Slabaugh, Gregory},
+title = {DeepLPF: Deep Local Parametric Filters for Image Enhancement},
+booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {June},
+year = {2020}
+}

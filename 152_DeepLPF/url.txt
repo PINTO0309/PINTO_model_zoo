@@ -1,0 +1,2 @@
+https://github.com/sjmoran/DeepLPF
+https://github.com/PINTO0309/tflite2tensorflow
