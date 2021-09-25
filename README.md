@@ -46,6 +46,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 \* WQ = Weight Quantization
 \** OV = OpenVINO IR
 \*** CM = CoreML
+\**** DQ = Dynamic Range Quantization
 ### 1. Image Classification
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -243,19 +244,20 @@ I have been working on quantization of various models as a hobby, but I have ski
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |127|dino|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/127_dino)|⚫|⚫|||⚫|⚫|⚫|⚫||⚫|experimental,dino_deits8/dino_deits16|
 ### 19. Others
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|091|gaze-estimation-adas-0002|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/091_gaze-estimation-adas-0002)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|102|Coconet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/102_Coconet)|⚫|⚫|||⚫|||⚫|||magenta|
-|108|HAWP|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/108_HAWP)||||||||||⚫|WIP|
-|110|L-CNN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/110_L-CNN)||||||||||⚫|WIP|
-|117|DTLN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/117_DTLN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|119|M-LSD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/119_M-LSD)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|131|CFNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/131_CFNet)||||||||||⚫|256x256,512x768|
-|139|PSD-Principled-Synthetic-to-Real-Dehazing-Guided-by-Physical-Priors|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/139_PSD-Principled-Synthetic-to-Real-Dehazing-Guided-by-Physical-Priors)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|140|Ultra-Fast-Lane-Detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/140_Ultra-Fast-Lane-Detection)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|288x800|
-|141|lanenet-lane-detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/141_lanenet-lane-detection)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|256x512|
-|155|driver-action-recognition-adas-0002-decoder|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/155_driver-action-recognition-adas-0002-decoder)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|091|gaze-estimation-adas-0002|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/091_gaze-estimation-adas-0002)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|102|Coconet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/102_Coconet)|⚫|⚫||||⚫|||⚫|||magenta|
+|108|HAWP|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/108_HAWP)|||||||||||⚫|WIP|
+|110|L-CNN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/110_L-CNN)|||||||||||⚫|WIP|
+|117|DTLN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/117_DTLN)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|119|M-LSD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/119_M-LSD)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|131|CFNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/131_CFNet)|||||||||||⚫|256x256,512x768|
+|139|PSD-Principled-Synthetic-to-Real-Dehazing-Guided-by-Physical-Priors|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/139_PSD-Principled-Synthetic-to-Real-Dehazing-Guided-by-Physical-Priors)|⚫|⚫||||⚫|⚫|⚫|⚫|⚫|⚫||
+|140|Ultra-Fast-Lane-Detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/140_Ultra-Fast-Lane-Detection)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|288x800|
+|141|lanenet-lane-detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/141_lanenet-lane-detection)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|256x512|
+|154|driver-action-recognition-adas-0002-encoder|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/154_driver-action-recognition-adas-0002-encoder)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|⚫||
+|155|driver-action-recognition-adas-0002-decoder|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/155_driver-action-recognition-adas-0002-decoder)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)

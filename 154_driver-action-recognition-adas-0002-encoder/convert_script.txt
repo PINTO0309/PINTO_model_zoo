@@ -1,0 +1,45 @@
+xhost +local: && \
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+pinto0309/openvino2tensorflow:latest
+
+cd workdir
+
+openvino2tensorflow \
+--model_path openvino/driver-action-recognition-adas-0002-encoder/driver-action-recognition-adas-0002-encoder.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--output_myriad \
+--vpu_number_of_shaves 4 \
+--vpu_number_of_cmx_slices 4
+
+openvino2tensorflow \
+--model_path openvino/driver-action-recognition-adas-0002-encoder/driver-action-recognition-adas-0002-encoder.xml \
+--output_saved_model \
+--output_pb \
+--output_tftrt
+
+mv saved_model saved_model_encoder
+
+openvino2tensorflow \
+--model_path openvino/driver-action-recognition-adas-0002-encoder/driver-action-recognition-adas-0002-encoder.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw
+
+mv saved_model/model_float32.onnx saved_model_encoder/model_float32.onnx
+
