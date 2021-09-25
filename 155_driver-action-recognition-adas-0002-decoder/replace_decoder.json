@@ -1,0 +1,219 @@
+{
+    "format_version": 2,
+    "layers": [
+        {
+            "layer_id": "121",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                1
+            ]
+        },
+        {
+            "layer_id": "125",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                1
+            ]
+        },
+        {
+            "layer_id": "130",
+            "type": "Transpose",
+            "replace_mode": "insert_before",
+            "values": [
+                0,
+                2,
+                1
+            ]
+        },
+        {
+            "layer_id": "150",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                1
+            ]
+        },
+        {
+            "layer_id": "155",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                2
+            ]
+        },
+        {
+            "layer_id": "156",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "173",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                1
+            ]
+        },
+        {
+            "layer_id": "141",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                2
+            ]
+        },
+        {
+            "layer_id": "142",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "178",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                2
+            ]
+        },
+        {
+            "layer_id": "179",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "233",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                1
+            ]
+        },
+        {
+            "layer_id": "238",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                2
+            ]
+        },
+        {
+            "layer_id": "239",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "253",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                1
+            ]
+        },
+        {
+            "layer_id": "254",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                1
+            ]
+        },
+        {
+            "layer_id": "255",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "266",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "388",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "399",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "521",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "532",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "540",
+            "type": "Transpose",
+            "replace_mode": "insert_before",
+            "values": [
+                0,
+                2,
+                1
+            ]
+        }
+    ]
+}

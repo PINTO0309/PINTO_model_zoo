@@ -255,6 +255,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |139|PSD-Principled-Synthetic-to-Real-Dehazing-Guided-by-Physical-Priors|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/139_PSD-Principled-Synthetic-to-Real-Dehazing-Guided-by-Physical-Priors)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |140|Ultra-Fast-Lane-Detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/140_Ultra-Fast-Lane-Detection)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|288x800|
 |141|lanenet-lane-detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/141_lanenet-lane-detection)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|256x512|
+|155|driver-action-recognition-adas-0002-decoder|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/155_driver-action-recognition-adas-0002-decoder)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)
