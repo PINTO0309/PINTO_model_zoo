@@ -124,18 +124,19 @@ I have been working on quantization of various models as a hobby, but I have ski
 |033|Hand_Detection_and_Tracking|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/033_Hand_Detection_and_Tracking)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
 |094|hand_recrop|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/094_hand_recrop)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
 ### 6. 2D/3D Human Pose Estimation
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|003|Posenet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/003_posenet)|⚫|⚫|⚫|⚫|⚫|⚫||||||
-|007|Mobilenetv2_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/007_mobilenetv2-poseestimation)|⚫|⚫|⚫|⚫|⚫|⚫||⚫|⚫|||
-|029|Human_Pose_Estimation_3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/029_human-pose-estimation-3d-0001)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|053|BlazePose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/053_BlazePose)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe,Integrate 058_BlazePose_Full_Keypoints|
-|065|ThreeDPoseUnityBarracuda|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/065_ThreeDPoseUnityBarracuda)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|**[YouTube](https://www.youtube.com/watch?v=L0ieoaOD6Po)**|
-|080|tf_pose_estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/080_tf_pose_estimation)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|084|EfficientPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/084_EfficientPose)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|SinglePose|
-|088|Mobilenetv3_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/088_mobilenetv3-poseestimation)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|115|MoveNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/115_MoveNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|lightning,thunder|
-|137|MoveNet_MultiPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/137_MoveNet_MultiPose)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|lightning,192x192,192x256,256x256,256x320,320x320,480x640,720x1280,1280x1920|
+|003|Posenet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/003_posenet)|⚫|⚫|⚫|⚫||⚫|⚫||||||
+|007|Mobilenetv2_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/007_mobilenetv2-poseestimation)|⚫|⚫|⚫|⚫||⚫|⚫||⚫|⚫|||
+|029|Human_Pose_Estimation_3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/029_human-pose-estimation-3d-0001)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|053|BlazePose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/053_BlazePose)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe,Integrate 058_BlazePose_Full_Keypoints|
+|065|ThreeDPoseUnityBarracuda|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/065_ThreeDPoseUnityBarracuda)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|**[YouTube](https://www.youtube.com/watch?v=L0ieoaOD6Po)**|
+|080|tf_pose_estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/080_tf_pose_estimation)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|084|EfficientPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/084_EfficientPose)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|SinglePose|
+|088|Mobilenetv3_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/088_mobilenetv3-poseestimation)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|115|MoveNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/115_MoveNet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|lightning,thunder|
+|137|MoveNet_MultiPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/137_MoveNet_MultiPose)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|lightning,192x192,192x256,256x256,256x320,320x320,480x640,720x1280,1280x1920|
+|156|MobileHumanPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/156_MobileHumanPose)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|3D|
 ### 7. Depth Estimation from Monocular/Stereo Images
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
