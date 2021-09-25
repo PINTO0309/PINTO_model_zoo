@@ -125,7 +125,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |094|hand_recrop|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/094_hand_recrop)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
 ### 6. 2D/3D Human Pose Estimation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |003|Posenet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/003_posenet)|⚫|⚫|⚫|⚫||⚫|⚫||||||
 |007|Mobilenetv2_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/007_mobilenetv2-poseestimation)|⚫|⚫|⚫|⚫||⚫|⚫||⚫|⚫|||
 |029|Human_Pose_Estimation_3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/029_human-pose-estimation-3d-0001)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
