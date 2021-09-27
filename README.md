@@ -42,6 +42,8 @@ I have been working on quantization of various models as a hobby, but I have ski
 
 - **[JSON to ONNX](https://github.com/PINTO0309/json2onnx)**
 
+- **[Steps to merge two ONNX files into one](https://zenn.dev/pinto0309/articles/80f18207a3f1ab)**
+
 ## List of pre-quantized models
 \* WQ = Weight Quantization
 \** OV = OpenVINO IR
