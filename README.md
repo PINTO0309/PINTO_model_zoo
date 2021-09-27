@@ -44,6 +44,8 @@ I have been working on quantization of various models as a hobby, but I have ski
 
 - **[Steps to merge two ONNX files into one](https://zenn.dev/pinto0309/articles/80f18207a3f1ab)**
 
+- **[Inverse Quantization of tflite's Sparse Tensor Densify to Refine a Clean Float32 Model](https://zenn.dev/pinto0309/articles/f6cabb1d13019f)**
+
 ## List of pre-quantized models
 \* WQ = Weight Quantization
 \** OV = OpenVINO IR
