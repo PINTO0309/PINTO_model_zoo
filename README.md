@@ -42,6 +42,12 @@ I have been working on quantization of various models as a hobby, but I have ski
 
 - **[JSON to ONNX](https://github.com/PINTO0309/json2onnx)**
 
+- **[Steps to merge two ONNX files into one](https://zenn.dev/pinto0309/articles/80f18207a3f1ab)**
+
+- **[Inverse Quantization of tflite's Sparse Tensor Densify to Refine a Clean Float32 Model](https://zenn.dev/pinto0309/articles/f6cabb1d13019f)**
+
+- **[Replace PyTorch's argsort with sort and export to ONNX](https://zenn.dev/pinto0309/articles/ae0982b8673623)**
+
 ## List of pre-quantized models
 \* WQ = Weight Quantization
 \** OV = OpenVINO IR
@@ -139,23 +145,24 @@ I have been working on quantization of various models as a hobby, but I have ski
 |156|MobileHumanPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/156_MobileHumanPose)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|3D|
 |157|3DMPPE_POSENET|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/157_3DMPPE_POSENET)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|3D,192x192/256x256/320x320/416x416/480x640/512x512|
 ### 7. Depth Estimation from Monocular/Stereo Images
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|009|Multi-Scale Local Planar Guidance for Monocular Depth Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/009_multi-scale_local_planar_guidance_for_monocular_depth_estimation)|⚫|||||||||||
-|014|tf-monodepth2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/014_tf-monodepth2)|⚫|⚫|⚫||⚫|⚫|⚫||⚫|⚫||
-|028|struct2depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/028_struct2depth)|⚫|⚫|||⚫|||||⚫||
-|064|Dense Depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/064_Dense_Depth)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|066|Footprints|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/066_footprints)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|067|MiDaS|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/067_MiDaS)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|081|MiDaS v2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/081_MiDaS_v2)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|135|CoEx|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/135_CoEx)||||||⚫||||⚫|WIP, onnx/OpenVINO only|
-|142|HITNET|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/142_HITNET)|⚫|⚫|||⚫|||||⚫|WIP [issue](https://github.com/openvinotoolkit/openvino/issues/7379),flyingthings_finalpass_xl/eth3d/middlebury_d400,120x160/240x320/256x256/480x640/720x1280|
-|146|FastDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/146_FastDepth)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|128x160,224x224,256x256,256x320,320x320,480x640,512x512,768x1280|
-|147|PackNet-SfM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/147_PackNet-SfM)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|ddad/kitti,Convert all ResNet18 backbones only|
-|148|LapDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/148_LapDepth)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|kitti/nyu,192x320/256x320/368x640/480x640/720x1280|
-|149|depth_estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/149_depth_estimation)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|nyu,180x320/240x320/360x640/480x640/720x1280|
-|150|MobileStereoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/150_MobileStereoNet)|||||||||||WIP. Conversion script only.|
-|153|MegaDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/153_MegaDepth)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|192x256,384x512|
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|009|Multi-Scale Local Planar Guidance for Monocular Depth Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/009_multi-scale_local_planar_guidance_for_monocular_depth_estimation)|⚫||||||||||||
+|014|tf-monodepth2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/014_tf-monodepth2)|⚫|⚫|⚫|||⚫|⚫|⚫||⚫|⚫||
+|028|struct2depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/028_struct2depth)|⚫|⚫||||⚫|||||⚫||
+|064|Dense Depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/064_Dense_Depth)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|066|Footprints|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/066_footprints)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|067|MiDaS|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/067_MiDaS)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|081|MiDaS v2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/081_MiDaS_v2)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|135|CoEx|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/135_CoEx)|||||||⚫||||⚫|WIP, onnx/OpenVINO only|
+|142|HITNET|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/142_HITNET)|⚫|⚫||||⚫|||||⚫|WIP [issue](https://github.com/openvinotoolkit/openvino/issues/7379),flyingthings_finalpass_xl/eth3d/middlebury_d400,120x160/240x320/256x256/480x640/720x1280|
+|146|FastDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/146_FastDepth)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|128x160,224x224,256x256,256x320,320x320,480x640,512x512,768x1280|
+|147|PackNet-SfM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/147_PackNet-SfM)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|ddad/kitti,Convert all ResNet18 backbones only|
+|148|LapDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/148_LapDepth)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|kitti/nyu,192x320/256x320/368x640/480x640/720x1280|
+|149|depth_estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/149_depth_estimation)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|nyu,180x320/240x320/360x640/480x640/720x1280|
+|150|MobileStereoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/150_MobileStereoNet)||||||||||||WIP. Conversion script only.|
+|153|MegaDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/153_MegaDepth)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|192x256,384x512|
+|158|158_HR-Depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/158_HR-Depth)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 ### 8. Semantic Segmentation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|

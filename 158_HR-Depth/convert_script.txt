@@ -1,0 +1,310 @@
+python3 evaluate_depth.py \
+--data_path ./kitti_RAW \
+--load_weights_folder ./models/Lite_HR_Depth_K_T_1280x384 \
+--Lite_HR_Depth
+
+MODEL=lite_hr_depth_k_t
+H=384
+W=1280
+TYPE=encoder
+python3 -m onnxsim ${MODEL}_${TYPE}_${H}x${W}.onnx ${MODEL}_${TYPE}_${H}x${W}.onnx
+TYPE=depth
+python3 -m onnxsim ${MODEL}_${TYPE}_${H}x${W}.onnx ${MODEL}_${TYPE}_${H}x${W}.onnx
+
+===================================================================
+python3 evaluate_depth.py \
+--data_path ./kitti_RAW \
+--load_weights_folder ./models/Lite_HR_Depth_K_T_1280x384 \
+--Lite_HR_Depth
+
+MODEL=lite_hr_depth_k_t
+H=192
+W=640
+TYPE=encoder
+python3 -m onnxsim ${MODEL}_${TYPE}_${H}x${W}.onnx ${MODEL}_${TYPE}_${H}x${W}.onnx
+TYPE=depth
+python3 -m onnxsim ${MODEL}_${TYPE}_${H}x${W}.onnx ${MODEL}_${TYPE}_${H}x${W}.onnx
+
+
+===================================================================
+python3 evaluate_depth.py \
+--data_path ./kitti_RAW \
+--load_weights_folder ./models/HR_Depth_CS_K_MS_640x192 \
+--HR_Depth
+
+MODEL=hr_depth_cs_k_ms
+H=192
+W=640
+TYPE=encoder
+python3 -m onnxsim ${MODEL}_${TYPE}_${H}x${W}.onnx ${MODEL}_${TYPE}_${H}x${W}.onnx
+TYPE=depth
+python3 -m onnxsim ${MODEL}_${TYPE}_${H}x${W}.onnx ${MODEL}_${TYPE}_${H}x${W}.onnx
+
+====================================================================
+python3 evaluate_depth.py \
+--data_path ./kitti_RAW \
+--load_weights_folder ./models/HR_Depth_K_M_1280x384 \
+--HR_Depth
+
+MODEL=hr_depth_k_m
+H=384
+W=1280
+TYPE=encoder
+python3 -m onnxsim ${MODEL}_${TYPE}_${H}x${W}.onnx ${MODEL}_${TYPE}_${H}x${W}.onnx
+TYPE=depth
+python3 -m onnxsim ${MODEL}_${TYPE}_${H}x${W}.onnx ${MODEL}_${TYPE}_${H}x${W}.onnx
+
+====================================================================
+python3 evaluate_depth.py \
+--data_path ./kitti_RAW \
+--load_weights_folder ./models/HR_Depth_K_MS_1024x320 \
+--HR_Depth
+
+MODEL=hr_depth_k_ms
+H=320
+W=1024
+TYPE=encoder
+python3 -m onnxsim ${MODEL}_${TYPE}_${H}x${W}.onnx ${MODEL}_${TYPE}_${H}x${W}.onnx
+TYPE=depth
+python3 -m onnxsim ${MODEL}_${TYPE}_${H}x${W}.onnx ${MODEL}_${TYPE}_${H}x${W}.onnx
+
+
+====================================================================
+
+ONNX merge (onnx_merge.py)
+
+====================================================================
+
+xhost +local: && \
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+pinto0309/openvino2tensorflow:latest
+
+cd workdir
+
+H=192
+W=640
+MODEL=lite_hr_depth_k_t_encoder_depth
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=384
+W=1280
+MODEL=lite_hr_depth_k_t_encoder_depth
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=192
+W=640
+MODEL=hr_depth_cs_k_ms_depth_encoder_depth
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=384
+W=1280
+MODEL=hr_depth_k_m_depth_encoder_depth
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=320
+W=1024
+MODEL=hr_depth_k_ms_depth_encoder_depth
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+====================================================================
+
+H=192
+W=640
+MODEL=lite_hr_depth_k_t_encoder_depth
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_tftrt
+mv saved_model saved_model_${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}.onnx saved_model_${MODEL}_${H}x${W}/${MODEL}_${H}x${W}.onnx
+
+
+H=384
+W=1280
+MODEL=lite_hr_depth_k_t_encoder_depth
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_tftrt
+mv saved_model saved_model_${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}.onnx saved_model_${MODEL}_${H}x${W}/${MODEL}_${H}x${W}.onnx
+
+
+H=192
+W=640
+MODEL=hr_depth_cs_k_ms_depth_encoder_depth
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_tftrt
+mv saved_model saved_model_${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}.onnx saved_model_${MODEL}_${H}x${W}/${MODEL}_${H}x${W}.onnx
+
+
+H=384
+W=1280
+MODEL=hr_depth_k_m_depth_encoder_depth
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_tftrt
+mv saved_model saved_model_${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}.onnx saved_model_${MODEL}_${H}x${W}/${MODEL}_${H}x${W}.onnx
+
+
+H=320
+W=1024
+MODEL=hr_depth_k_ms_depth_encoder_depth
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_tftrt
+mv saved_model saved_model_${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}.onnx saved_model_${MODEL}_${H}x${W}/${MODEL}_${H}x${W}.onnx
