@@ -46,6 +46,8 @@ I have been working on quantization of various models as a hobby, but I have ski
 
 - **[Inverse Quantization of tflite's Sparse Tensor Densify to Refine a Clean Float32 Model](https://zenn.dev/pinto0309/articles/f6cabb1d13019f)**
 
+- **[Replace PyTorch's argsort with sort and export to ONNX](https://zenn.dev/pinto0309/articles/ae0982b8673623)**
+
 ## List of pre-quantized models
 \* WQ = Weight Quantization
 \** OV = OpenVINO IR
