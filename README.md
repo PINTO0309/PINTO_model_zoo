@@ -164,6 +164,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |153|MegaDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/153_MegaDepth)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|192x256,384x512|
 |158|HR-Depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/158_HR-Depth)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 |159|EPCDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/159_EPCDepth)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫||
+|160|msg_chn_wacv20|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/160_msg_chn_wacv20)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫||⚫|192x320,240x320,256x256,368x640,480x640,720x1280,1280x1920|
 ### 8. Semantic Segmentation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
