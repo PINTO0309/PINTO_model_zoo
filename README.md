@@ -191,17 +191,18 @@ I have been working on quantization of various models as a hobby, but I have ski
 |005|One_Class_Anomaly_Detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/005_one_class_anomaly_detection)|⚫||⚫|⚫|⚫|||||||
 |099|Efficientnet_Anomaly_Detection_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/099_efficientnet_anomaly_detection_segmentation)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
 ### 10. Artistic
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|017|Artistic-Style-Transfer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/017_Artistic-Style-Transfer)|⚫|⚫|⚫||⚫|⚫|⚫|⚫||⚫||
-|019|White-box-Cartoonization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/019_White-box-Cartoonization)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|||
-|037|First_Neural_Style_Transfer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/037_First_Neural_Style_Transfer)|⚫||||⚫|||||⚫||
-|044|Selfie2Anime|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/044_selfie2anime)|⚫|⚫|⚫||⚫|⚫|⚫|||⚫||
-|050|AnimeGANv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/050_AnimeGANv2)|⚫|⚫|⚫||⚫|⚫|⚫||⚫|⚫||
-|062|Facial Cartoonization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/062_facial_cartoonization)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|068|Colorful_Image_Colorization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/068_Colorful_Image_Colorization)|⚫|⚫|||⚫|⚫|⚫|⚫||⚫|experimental|
-|101|arbitrary_image_stylization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/101_arbitrary_image_stylization)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|magenta|
-|113|Anime2Sketch|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/113_Anime2Sketch)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|017|Artistic-Style-Transfer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/017_Artistic-Style-Transfer)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫||⚫||
+|019|White-box-Cartoonization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/019_White-box-Cartoonization)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|||
+|037|First_Neural_Style_Transfer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/037_First_Neural_Style_Transfer)|⚫|||||⚫|||||⚫||
+|044|Selfie2Anime|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/044_selfie2anime)|⚫|⚫|⚫|||⚫|⚫|⚫|||⚫||
+|050|AnimeGANv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/050_AnimeGANv2)|⚫|⚫|⚫|||⚫|⚫|⚫||⚫|⚫||
+|062|Facial Cartoonization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/062_facial_cartoonization)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|068|Colorful_Image_Colorization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/068_Colorful_Image_Colorization)|⚫|⚫||||⚫|⚫|⚫|⚫||⚫|experimental|
+|101|arbitrary_image_stylization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/101_arbitrary_image_stylization)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|magenta|
+|113|Anime2Sketch|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/113_Anime2Sketch)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|161|EigenGAN-Tensorflow|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/161_EigenGAN-Tensorflow)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|Anime,CelebA|
 ### 11. Super Resolution
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
