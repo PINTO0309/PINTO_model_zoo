@@ -67,39 +67,39 @@ I have been working on quantization of various models as a hobby, but I have ski
 |125|person-attributes-recognition-crossroad-0234|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/125_person-attributes-recognition-crossroad-0234)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 |126|person-attributes-recognition-crossroad-0238|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/126_person-attributes-recognition-crossroad-0238)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 ### 2. 2D Object Detection
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|002|Mobilenetv3-SSD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/002_mobilenetv3-ssd)|⚫||⚫||⚫||⚫|||||
-|006|Mobilenetv2-SSDlite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/006_mobilenetv2-ssdlite)|⚫||⚫|⚫|⚫|||||||
-|008|Mask_RCNN_Inceptionv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/008_mask_rcnn_inceptionv2)|⚫|⚫|||⚫|||||||
-|018|EfficientDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/018_EfficientDet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|023|Yolov3-nano|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/023_yolov3-nano)|⚫|⚫|||⚫|||||⚫||
-|024|Yolov3-lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/024_yolov3-lite)|⚫|⚫|⚫||⚫|⚫||||⚫||
-|031|Yolov4|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/031_yolov4)|⚫|⚫|⚫|⚫|⚫|||||⚫||
-|034|SSD_Mobilenetv2_mnasfpn|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/034_ssd_mobilenet_v2_mnasfpn_shared_box_predictor)|⚫|⚫|⚫|⚫|⚫|||||⚫||
-|038|SSDlite_MobileDet_edgetpu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/038_ssdlite_mobiledet_edgetpu)|⚫|⚫|⚫|⚫|⚫|||⚫|⚫|⚫||
-|039|SSDlite_MobileDet_cpu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/039_ssdlite_mobiledet_cpu)|⚫|⚫|⚫||⚫|||||||
-|042|Centernet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/042_centernet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|045|SSD_Mobilenetv2_oid_v4|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/045_ssd_mobilenet_v2_oid_v4)|⚫|⚫|⚫|⚫|⚫|||⚫||||
-|046|Yolov4-tiny|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/046_yolov4-tiny)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|047|SpineNetMB_49|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/047_SpineNetMB_49)|⚫|⚫|⚫||⚫|||||⚫|Mobile RetinaNet|
-|051|East_Text_Detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/051_East_Text_Detection)|⚫|⚫|⚫|⚫|⚫|⚫||⚫|⚫|⚫||
-|054|KNIFT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/054_KNIFT)|⚫|⚫|⚫||⚫|⚫||||⚫|MediaPipe|
-|056|TextBoxes++ with dense blocks, separable convolution and Focal Loss|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/056_TextBoxes%2B%2B)|⚫|⚫|⚫||⚫|⚫|⚫||⚫|⚫||
-|058|keras-retinanet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/058_keras-retinanet)|⚫|⚫|||⚫|⚫||⚫|⚫|⚫|resnet50_coco_best_v2.1.0.h5,320x320|
-|059|Yolov5|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/059_yolov5)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|072|NanoDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/072_NanoDet)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|[issue #274](https://github.com/google-coral/edgetpu/issues/274)|
-|073|RetinaNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/073_RetinaNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|074|Yolact|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/074_Yolact)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|085|Yolact_Edge|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/085_Yolact_Edge)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|WIP, MobileNetV2(256/320)|
-|089|DETR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/089_DETR)|⚫|⚫|⚫||⚫|||||⚫|256x256|
-|103|EfficientDet_lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/103_EfficientDet_lite)|⚫|⚫|⚫|⚫|⚫|⚫||⚫|⚫|⚫|lite0,lite1,lite2,lite3,lite4|
-|116|DroNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/116_DroNet)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|DroNet,DroNetV3|
-|123|YOLOR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/123_YOLOR)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|ssss_s2d/320x320,640x640,960x960,1280x1280|
-|132|YOLOX|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/132_YOLOX)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|nano/tiny,320x320,416x416,480x640,544x960,736x1280,1088x1920|
-|143|RAPiD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/143_RAPiD)|⚫|⚫|⚫||⚫|⚫||||⚫|Fisheye, cepdof/habbof/mw_r, 608x608/1024x1024|
-|145|text_detection_db|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/145_text_detection_db)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|480x640|
-|151|object_detection_mobile_object_localizer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/151_object_detection_mobile_object_localizer)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|192x192|
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|002|Mobilenetv3-SSD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/002_mobilenetv3-ssd)|⚫||⚫|||⚫||⚫|||||
+|006|Mobilenetv2-SSDlite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/006_mobilenetv2-ssdlite)|⚫||⚫|⚫||⚫|||||||
+|008|Mask_RCNN_Inceptionv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/008_mask_rcnn_inceptionv2)|⚫|⚫||||⚫|||||||
+|018|EfficientDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/018_EfficientDet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|023|Yolov3-nano|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/023_yolov3-nano)|⚫|⚫||||⚫|||||⚫||
+|024|Yolov3-lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/024_yolov3-lite)|⚫|⚫|⚫|||⚫|⚫||||⚫||
+|031|Yolov4|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/031_yolov4)|⚫|⚫|⚫|⚫||⚫|||||⚫||
+|034|SSD_Mobilenetv2_mnasfpn|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/034_ssd_mobilenet_v2_mnasfpn_shared_box_predictor)|⚫|⚫|⚫|⚫||⚫|||||⚫||
+|038|SSDlite_MobileDet_edgetpu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/038_ssdlite_mobiledet_edgetpu)|⚫|⚫|⚫|⚫||⚫|||⚫|⚫|⚫||
+|039|SSDlite_MobileDet_cpu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/039_ssdlite_mobiledet_cpu)|⚫|⚫|⚫|||⚫|||||||
+|042|Centernet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/042_centernet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|045|SSD_Mobilenetv2_oid_v4|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/045_ssd_mobilenet_v2_oid_v4)|⚫|⚫|⚫|⚫||⚫|||⚫||||
+|046|Yolov4-tiny|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/046_yolov4-tiny)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|047|SpineNetMB_49|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/047_SpineNetMB_49)|⚫|⚫|⚫|||⚫|||||⚫|Mobile RetinaNet|
+|051|East_Text_Detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/051_East_Text_Detection)|⚫|⚫|⚫|⚫||⚫|⚫||⚫|⚫|⚫||
+|054|KNIFT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/054_KNIFT)|⚫|⚫|⚫|||⚫|⚫||||⚫|MediaPipe|
+|056|TextBoxes++ with dense blocks, separable convolution and Focal Loss|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/056_TextBoxes%2B%2B)|⚫|⚫|⚫|||⚫|⚫|⚫||⚫|⚫||
+|058|keras-retinanet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/058_keras-retinanet)|⚫|⚫||||⚫|⚫||⚫|⚫|⚫|resnet50_coco_best_v2.1.0.h5,320x320|
+|059|Yolov5|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/059_yolov5)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|072|NanoDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/072_NanoDet)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|[issue #274](https://github.com/google-coral/edgetpu/issues/274)|
+|073|RetinaNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/073_RetinaNet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|074|Yolact|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/074_Yolact)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|085|Yolact_Edge|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/085_Yolact_Edge)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|21/10/05 new MobileNetV2(550x550)|
+|089|DETR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/089_DETR)|⚫|⚫|⚫|||⚫|||||⚫|256x256|
+|103|EfficientDet_lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/103_EfficientDet_lite)|⚫|⚫|⚫|⚫||⚫|⚫||⚫|⚫|⚫|lite0,lite1,lite2,lite3,lite4|
+|116|DroNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/116_DroNet)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|DroNet,DroNetV3|
+|123|YOLOR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/123_YOLOR)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫||⚫|ssss_s2d/320x320,640x640,960x960,1280x1280|
+|132|YOLOX|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/132_YOLOX)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫||⚫|nano/tiny,320x320,416x416,480x640,544x960,736x1280,1088x1920|
+|143|RAPiD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/143_RAPiD)|⚫|⚫|⚫|||⚫|⚫||||⚫|Fisheye, cepdof/habbof/mw_r, 608x608/1024x1024|
+|145|text_detection_db|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/145_text_detection_db)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|480x640|
+|151|object_detection_mobile_object_localizer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/151_object_detection_mobile_object_localizer)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|192x192|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
