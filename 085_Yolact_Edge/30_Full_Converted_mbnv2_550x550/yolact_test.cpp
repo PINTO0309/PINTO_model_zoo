@@ -273,7 +273,7 @@ void decode(const float* confidence, const float* location,const float* priorBox
 		}
 	}
 	std::sort(objects.begin(), objects.end(), [](const Object & a, const Object & b) { return a.prob > b.prob; });
-		
+
 	if (topk < objects.size())
 	{
 		objects.resize(topk);
@@ -282,7 +282,7 @@ void decode(const float* confidence, const float* location,const float* priorBox
 
 void main()
 {
-	
+
 
 	Core ie;
 	InferRequest::Ptr inferRequest;
