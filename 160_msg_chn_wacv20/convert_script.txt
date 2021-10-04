@@ -20,6 +20,12 @@ python3 -m onnxsim msg_chn_wacv20_${H}x${W}.onnx msg_chn_wacv20_${H}x${W}.onnx
 H=256
 W=256
 python3 -m onnxsim msg_chn_wacv20_${H}x${W}.onnx msg_chn_wacv20_${H}x${W}.onnx
+H=352
+W=480
+python3 -m onnxsim msg_chn_wacv20_${H}x${W}.onnx msg_chn_wacv20_${H}x${W}.onnx
+H=368
+W=480
+python3 -m onnxsim msg_chn_wacv20_${H}x${W}.onnx msg_chn_wacv20_${H}x${W}.onnx
 H=368
 W=640
 python3 -m onnxsim msg_chn_wacv20_${H}x${W}.onnx msg_chn_wacv20_${H}x${W}.onnx
@@ -32,6 +38,8 @@ python3 -m onnxsim msg_chn_wacv20_${H}x${W}.onnx msg_chn_wacv20_${H}x${W}.onnx
 H=1280
 W=1920
 python3 -m onnxsim msg_chn_wacv20_${H}x${W}.onnx msg_chn_wacv20_${H}x${W}.onnx
+
+
 
 
 H=192
@@ -91,6 +99,44 @@ ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compi
 -VPU_NUMBER_OF_CMX_SLICES 4 \
 -o ${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
 
+H=352
+W=480
+MODEL=msg_chn_wacv20
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${H}x${W}/openvino/FP16
+mkdir -p ${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=368
+W=480
+MODEL=msg_chn_wacv20
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${H}x${W}/openvino/FP16
+mkdir -p ${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
 H=368
 W=640
 MODEL=msg_chn_wacv20
@@ -153,7 +199,6 @@ $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
 --data_type FP16 \
 --output_dir ${H}x${W}/openvino/FP16
 
-
 H=192
 W=320
 MODEL=msg_chn_wacv20
@@ -199,6 +244,46 @@ openvino2tensorflow \
 --output_dynamic_range_quant_tflite \
 --output_weight_quant_tflite \
 --output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv saved_model saved_model_${H}x${W}
+mv ${MODEL}_${H}x${W}.onnx saved_model_${H}x${W}/${MODEL}_${H}x${W}.onnx
+mv ${H}x${W}/openvino saved_model_${H}x${W}/openvino
+
+H=352
+W=480
+MODEL=msg_chn_wacv20
+openvino2tensorflow \
+--model_path ${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+mv saved_model saved_model_${H}x${W}
+mv ${MODEL}_${H}x${W}.onnx saved_model_${H}x${W}/${MODEL}_${H}x${W}.onnx
+mv ${H}x${W}/openvino saved_model_${H}x${W}/openvino
+
+H=368
+W=480
+MODEL=msg_chn_wacv20
+openvino2tensorflow \
+--model_path ${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
 --output_tfjs \
 --output_coreml
 mv saved_model saved_model_${H}x${W}
