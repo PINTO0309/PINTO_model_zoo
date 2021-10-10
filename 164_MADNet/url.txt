@@ -1,0 +1,3 @@
+https://github.com/CVLAB-Unibo/Real-time-self-adaptive-deep-stereo
+https://github.com/PINTO0309/openvino2tensorflow
+
