@@ -1,0 +1,106 @@
+python3 -m onnxsim rtstereonet_maxdisp192_180x320.onnx rtstereonet_maxdisp192_180x320.onnx
+python3 -m onnxsim rtstereonet_maxdisp192_216x384.onnx rtstereonet_maxdisp192_216x384.onnx
+python3 -m onnxsim rtstereonet_maxdisp192_240x320.onnx rtstereonet_maxdisp192_240x320.onnx
+python3 -m onnxsim rtstereonet_maxdisp192_270x480.onnx rtstereonet_maxdisp192_270x480.onnx
+python3 -m onnxsim rtstereonet_maxdisp192_360x640.onnx rtstereonet_maxdisp192_360x640.onnx
+python3 -m onnxsim rtstereonet_maxdisp192_480x640.onnx rtstereonet_maxdisp192_480x640.onnx
+python3 -m onnxsim rtstereonet_maxdisp192_720x1280.onnx rtstereonet_maxdisp192_720x1280.onnx
+
+xhost +local: && \
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+pinto0309/openvino2tensorflow:latest
+
+cd workdir
+
+H=180
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model rtstereonet_maxdisp192_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir saved_model_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model rtstereonet_maxdisp192_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir saved_model_${H}x${W}/openvino/FP16
+
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/rtstereonet_maxdisp192_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${H}x${W}.json
+
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/rtstereonet_maxdisp192_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_tftrt_float32 \
+--weight_replacement_config replace_${H}x${W}.json
+
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/rtstereonet_maxdisp192_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_tftrt_float16 \
+--weight_replacement_config replace_${H}x${W}.json
+
+mv rtstereonet_maxdisp192_${H}x${W}.onnx saved_model_${H}x${W}/rtstereonet_maxdisp192_${H}x${W}.onnx
+mv saved_model/* saved_model_${H}x${W}
+rm -rf saved_model
+
+
+
+H=216
+W=384
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model rtstereonet_maxdisp192_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir saved_model_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model rtstereonet_maxdisp192_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir saved_model_${H}x${W}/openvino/FP16
+
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/rtstereonet_maxdisp192_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${H}x${W}.json
+
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/rtstereonet_maxdisp192_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_tftrt_float32 \
+--weight_replacement_config replace_${H}x${W}.json
+
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/rtstereonet_maxdisp192_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_tftrt_float16 \
+--weight_replacement_config replace_${H}x${W}.json
+
+mv rtstereonet_maxdisp192_${H}x${W}.onnx saved_model_${H}x${W}/rtstereonet_maxdisp192_${H}x${W}.onnx
+mv saved_model/* saved_model_${H}x${W}
+rm -rf saved_model
