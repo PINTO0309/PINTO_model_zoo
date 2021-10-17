@@ -1,3 +1,5 @@
 https://github.com/JiaRenChang/RealtimeStereo
 https://github.com/PINTO0309/openvino2tensorflow
 
+ONNX export workaround for RTStereoNet (replacing ScatterND and grid_sample)
+https://zenn.dev/pinto0309/scraps/2766a953754dea

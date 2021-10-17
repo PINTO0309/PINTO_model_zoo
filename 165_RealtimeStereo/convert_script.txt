@@ -1,3 +1,8 @@
+python3 Test_img.py \
+--loadmodel trained/pretrained_Kitti2015_realtime.tar \
+--leftimg 0479_left.png \
+--rightimg 0479_right.png \
+--model RTStereoNet
 
 xhost +local: && \
 docker run --gpus all -it --rm \
@@ -12,6 +17,7 @@ pinto0309/openvino2tensorflow:latest
 
 cd workdir
 
+
 H=180
 W=320
 MODEL=rtstereonet
@@ -24,14 +30,56 @@ $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
 --input_model ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx \
 --data_type FP16 \
 --output_dir ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP16
-mkdir -p saved_model_${H}x${W}/openvino/myriad
+mkdir -p ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/myriad
 ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
 -m ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP16/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.xml \
 -ip U8 \
 -VPU_NUMBER_OF_SHAVES 4 \
 -VPU_NUMBER_OF_CMX_SLICES 4 \
 -o ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/myriad/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.blob
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--weight_replacement_config replace_${H}x${W}.json
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_tftrt_float32 \
+--weight_replacement_config replace_${H}x${W}.json
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/rtstereonet_maxdisp192_${H}x${W}.xml \
+--output_tftrt_float16 \
+--weight_replacement_config replace_${H}x${W}.json
+mv ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx saved_model/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx
+mv saved_model/* ${MODEL}_maxdisp${MAXDISP}_${H}x${W}
+rm -rf saved_model
 
+
+
+H=216
+W=384
+MODEL=rtstereonet
+MAXDISP=192
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP16/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/myriad/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.blob
 
 openvino2tensorflow \
 --model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
@@ -43,18 +91,280 @@ openvino2tensorflow \
 --output_float16_quant_tflite \
 --output_tfjs \
 --weight_replacement_config replace_${H}x${W}.json
-
-
 openvino2tensorflow \
 --model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
 --output_tftrt_float32 \
 --weight_replacement_config replace_${H}x${W}.json
-
 openvino2tensorflow \
---model_path saved_model_${H}x${W}/openvino/FP32/rtstereonet_maxdisp192_${H}x${W}.xml \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
 --output_tftrt_float16 \
 --weight_replacement_config replace_${H}x${W}.json
+mv ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx saved_model/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx
+mv saved_model/* ${MODEL}_maxdisp${MAXDISP}_${H}x${W}
+rm -rf saved_model
 
+
+
+
+
+H=240
+W=320
+MODEL=rtstereonet
+MAXDISP=192
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP16/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/myriad/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.blob
+
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--weight_replacement_config replace_${H}x${W}.json
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_tftrt_float32 \
+--weight_replacement_config replace_${H}x${W}.json
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_tftrt_float16 \
+--weight_replacement_config replace_${H}x${W}.json
+mv ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx saved_model/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx
+mv saved_model/* ${MODEL}_maxdisp${MAXDISP}_${H}x${W}
+rm -rf saved_model
+
+
+
+H=270
+W=480
+MODEL=rtstereonet
+MAXDISP=192
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP16/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/myriad/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.blob
+
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--weight_replacement_config replace_${H}x${W}.json
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_tftrt_float32 \
+--weight_replacement_config replace_${H}x${W}.json
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_tftrt_float16 \
+--weight_replacement_config replace_${H}x${W}.json
+mv ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx saved_model/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx
+mv saved_model/* ${MODEL}_maxdisp${MAXDISP}_${H}x${W}
+rm -rf saved_model
+
+
+
+H=360
+W=480
+MODEL=rtstereonet
+MAXDISP=192
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP16/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/myriad/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.blob
+
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--weight_replacement_config replace_${H}x${W}.json
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_tftrt_float32 \
+--weight_replacement_config replace_${H}x${W}.json
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_tftrt_float16 \
+--weight_replacement_config replace_${H}x${W}.json
+mv ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx saved_model/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx
+mv saved_model/* ${MODEL}_maxdisp${MAXDISP}_${H}x${W}
+rm -rf saved_model
+
+
+
+
+H=360
+W=640
+MODEL=rtstereonet
+MAXDISP=192
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP16/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/myriad/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.blob
+
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--weight_replacement_config replace_${H}x${W}.json
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_tftrt_float32 \
+--weight_replacement_config replace_${H}x${W}.json
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_tftrt_float16 \
+--weight_replacement_config replace_${H}x${W}.json
+mv ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx saved_model/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx
+mv saved_model/* ${MODEL}_maxdisp${MAXDISP}_${H}x${W}
+rm -rf saved_model
+
+
+
+H=480
+W=640
+MODEL=rtstereonet
+MAXDISP=192
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP16/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/myriad/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.blob
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--weight_replacement_config replace_${H}x${W}.json
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_tftrt_float32 \
+--weight_replacement_config replace_${H}x${W}.json
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_tftrt_float16 \
+--weight_replacement_config replace_${H}x${W}.json
+mv ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx saved_model/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx
+mv saved_model/* ${MODEL}_maxdisp${MAXDISP}_${H}x${W}
+rm -rf saved_model
+
+
+
+H=720
+W=1280
+MODEL=rtstereonet
+MAXDISP=192
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP16/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/myriad/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.blob
+
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--weight_replacement_config replace_${H}x${W}.json
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_tftrt_float32 \
+--weight_replacement_config replace_${H}x${W}.json
+openvino2tensorflow \
+--model_path ${MODEL}_maxdisp${MAXDISP}_${H}x${W}/openvino/FP32/rtstereonet_maxdisp${MAXDISP}_${H}x${W}.xml \
+--output_tftrt_float16 \
+--weight_replacement_config replace_${H}x${W}.json
 mv ${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx saved_model/${MODEL}_maxdisp${MAXDISP}_${H}x${W}.onnx
 mv saved_model/* ${MODEL}_maxdisp${MAXDISP}_${H}x${W}
 rm -rf saved_model
