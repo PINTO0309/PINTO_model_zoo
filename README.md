@@ -169,7 +169,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |164|MADNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/164_MADNet)|⚫|⚫||||⚫|⚫|⚫|⚫|⚫|⚫|Real-time-self-adaptive-deep-stereo (perform only inference mode, no-backprop, kitti)|
 |165|RealtimeStereo|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/165_RealtimeStereo)|⚫|⚫|||⚫|⚫|⚫||⚫|⚫|⚫|180x320,216x384,240x320,270x480,360x480,360x640,480x640,720x1280|
 |166|Insta-DM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/166_Insta-DM)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|192x320,256x320,256x832,384x640,480x640,736x1280|
-|167|DPT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/167_DPT)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|⚫|dpt-hybrid,480x640,ViT|
+|167|DPT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/167_DPT)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|⚫|dpt-hybrid,480x640,ViT,ONNX 96x128/256x320/384x480/480x640|
 ### 8. Semantic Segmentation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
