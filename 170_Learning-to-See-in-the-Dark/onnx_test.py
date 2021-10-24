@@ -2,6 +2,9 @@
 docker run --rm -it --gpus all \
 -v $PWD:/workspace/work \
 pinto0309/cuda114-tensorrt82 /bin/bash
+
+cd work
+python3 onnx_test.py
 """
 
 import onnxruntime
