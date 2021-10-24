@@ -26,6 +26,10 @@ for _ in range(roop):
     )
     e += (time.time() - s)
 print(f'elapsed time: {e/roop*1000}ms')
+"""
+elapsed time: 57.117438316345215ms
+"""
+
 
 import onnx
 import onnx_tensorrt.backend as be
@@ -38,3 +42,6 @@ for _ in range(roop):
     output = engine.run(inp)[0]
     e += (time.time() - s)
 print(f'elapsed time: {e/roop*1000}ms')
+"""
+elapsed time: 13.761746883392334ms
+"""
