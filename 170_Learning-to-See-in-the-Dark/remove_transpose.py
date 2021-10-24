@@ -36,7 +36,14 @@ graph.cleanup()
 
 h = graph.inputs[0].shape[2]
 w = graph.inputs[0].shape[3]
-graph.outputs[0].shape = [1,3,h*2,w*2]
+
+scale = 0
+if graph.inputs[0].shape[1] == 4:
+    scale = 2
+else:
+    scale = 3
+
+graph.outputs[0].shape = [1,3,h*scale,w*scale]
 print(graph.outputs)
 
 onnx.save(gs.export_onnx(graph), args.onnx_file_path)
