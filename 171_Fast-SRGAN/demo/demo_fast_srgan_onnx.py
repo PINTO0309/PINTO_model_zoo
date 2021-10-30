@@ -90,8 +90,8 @@ def main():
         key = cv.waitKey(1)
         if key == 27:  # ESC
             break
-        cv.imshow('Fast-HRGAN Demo : Original', original_image)
-        cv.imshow('Fast-HRGAN Demo : HR', concat_image)
+        cv.imshow('Fast-SRGAN Demo : Original', original_image)
+        cv.imshow('Fast-SRGAN Demo : HR', concat_image)
 
     cap.release()
     cv.destroyAllWindows()
@@ -115,7 +115,7 @@ def draw_debug(image, elapsed_time, hr_image):
                cv.LINE_AA)
     cv.putText(debug_image, "Left image : Bilinear interpolation", (10, 60),
                cv.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2, cv.LINE_AA)
-    cv.putText(debug_image, "Right image : Fast-HRGAN", (10, 90),
+    cv.putText(debug_image, "Right image : Fast-SRGAN", (10, 90),
                cv.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2, cv.LINE_AA)
 
     concat_image = cv.hconcat([debug_image, hr_image])
