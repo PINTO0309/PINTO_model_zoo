@@ -226,6 +226,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |133|Real-ESRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/133_Real-ESRGAN)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|16x16,32x32,64x64,128x128,240x320,256x256,320x320,480x640|
 |152|DeepLPF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/152_DeepLPF)|⚫|⚫|||⚫|⚫||||⚫||
 |170|Learning-to-See-in-the-Dark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/170_Learning-to-See-in-the-Dark)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|sony/fuji, 240x320,360x480,360x640,480x640|
+|171|Fast-SRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/171_Fast-SRGAN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|||⚫|120x160,128x128,240x320,256x256,480x640,512x512|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
