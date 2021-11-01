@@ -397,9 +397,7 @@ docker run --gpus all -it --rm \
 -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
 -e DISPLAY=$DISPLAY \
 --privileged \
-pinto0309/tflite2tensorflow:latest
-
-cd workdir
+ghcr.io/pinto0309/tflite2tensorflow:latest
 
 tflite2tensorflow \
 --model_path pose_detection.tflite \
@@ -412,26 +410,20 @@ tflite2tensorflow \
 --flatc_path ../flatc \
 --schema_path ../schema.fbs \
 --output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
 --output_weight_quant_tflite \
 --output_float16_quant_tflite \
 --output_integer_quant_tflite \
 --string_formulas_for_normalization 'data / 255' \
---output_tfjs \
---output_tftrt \
 --output_edgetpu
-
-tflite2tensorflow \
---model_path pose_detection.tflite \
---flatc_path ../flatc \
---schema_path ../schema.fbs \
---output_onnx \
---onnx_opset 11
 
 python3 -m tf2onnx.convert \
 --opset 11 \
 --tflite saved_model/model_float32.tflite \
 --output saved_model/model_float32.onnx \
 --inputs-as-nchw input_1:0
+
+python3 -m onnxsim saved_model/model_float32.onnx saved_model/model_float32.onnx
 
 mv saved_model saved_model_224x224
 
@@ -440,7 +432,8 @@ tflite2tensorflow \
 --flatc_path ../flatc \
 --schema_path ../schema.fbs \
 --output_pb \
---optimizing_for_openvino_and_myriad
+--optimizing_for_openvino_and_myriad \
+--rigorous_optimization_for_myriad
 
 tflite2tensorflow \
 --model_path pose_detection.tflite \
