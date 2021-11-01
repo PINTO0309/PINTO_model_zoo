@@ -7,7 +7,7 @@ docker run --gpus all -it --rm \
 -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
 -e DISPLAY=$DISPLAY \
 --privileged \
-pinto0309/tflite2tensorflow:latest
+ghcr.io/pinto0309/tflite2tensorflow:latest
 
 cd workdir
 
@@ -143,7 +143,6 @@ tflite2tensorflow \
 --output_full_integer_quant_tflite \
 --output_integer_quant_typ 'uint8' \
 --string_formulas_for_normalization 'data / 255' \
---output_tfjs \
 --output_coreml \
 --output_edgetpu
 python3 -m tf2onnx.convert \
@@ -152,18 +151,6 @@ python3 -m tf2onnx.convert \
 --inputs-as-nchw input_1:0 \
 --opset 11
 python3 -m onnxsim saved_model/model_float32.onnx saved_model/model_float32.onnx
-tflite2tensorflow \
---model_path hand_landmark_sparse.tflite \
---flatc_path ../flatc \
---schema_path ../schema.fbs \
---model_output_path saved_model \
---output_tftrt_float32
-tflite2tensorflow \
---model_path hand_landmark_sparse.tflite \
---flatc_path ../flatc \
---schema_path ../schema.fbs \
---model_output_path saved_model \
---output_tftrt_float16
 mv saved_model saved_model_hand_landmark_sparse
 tflite2tensorflow \
 --model_path hand_landmark_sparse.tflite \
