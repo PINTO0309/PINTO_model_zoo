@@ -1,0 +1,397 @@
+sudo -E /opt/intel/openvino_2021/deployment_tools/tools/model_downloader/downloader.py --name human-pose-estimation-3d-0001
+sudo -E /opt/intel/openvino_2021/deployment_tools/tools/model_downloader/converter.py --name human-pose-estimation-3d-0001
+
+H=180
+W=320
+sudo -E python3 /opt/intel/openvino_2021/deployment_tools/tools/model_downloader/src/open_model_zoo/model_tools/internal_scripts/pytorch_to_onnx.py \
+--model-path=${PWD} \
+--model-name=PoseEstimationWithMobileNet \
+--model-param=is_convertible_by_mo=True \
+--import-module=model \
+--weights=${PWD}/human-pose-estimation-3d-0001.pth \
+--input-shape=1,3,${H},${W} \
+--input-names=data \
+--output-names=features,heatmaps,pafs \
+--output-file=${PWD}/human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx && \
+sudo chown ${USER} human_pose_estimation_3d_0001_bgr_* && \
+python3 -m onnxsim human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx
+
+H=240
+W=320
+sudo -E python3 /opt/intel/openvino_2021/deployment_tools/tools/model_downloader/src/open_model_zoo/model_tools/internal_scripts/pytorch_to_onnx.py \
+--model-path=${PWD} \
+--model-name=PoseEstimationWithMobileNet \
+--model-param=is_convertible_by_mo=True \
+--import-module=model \
+--weights=${PWD}/human-pose-estimation-3d-0001.pth \
+--input-shape=1,3,${H},${W} \
+--input-names=data \
+--output-names=features,heatmaps,pafs \
+--output-file=${PWD}/human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx && \
+sudo chown ${USER} human_pose_estimation_3d_0001_bgr_* && \
+python3 -m onnxsim human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx
+
+H=360
+W=640
+sudo -E python3 /opt/intel/openvino_2021/deployment_tools/tools/model_downloader/src/open_model_zoo/model_tools/internal_scripts/pytorch_to_onnx.py \
+--model-path=${PWD} \
+--model-name=PoseEstimationWithMobileNet \
+--model-param=is_convertible_by_mo=True \
+--import-module=model \
+--weights=${PWD}/human-pose-estimation-3d-0001.pth \
+--input-shape=1,3,${H},${W} \
+--input-names=data \
+--output-names=features,heatmaps,pafs \
+--output-file=${PWD}/human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx && \
+sudo chown ${USER} human_pose_estimation_3d_0001_bgr_* && \
+python3 -m onnxsim human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx
+
+H=480
+W=640
+sudo -E python3 /opt/intel/openvino_2021/deployment_tools/tools/model_downloader/src/open_model_zoo/model_tools/internal_scripts/pytorch_to_onnx.py \
+--model-path=${PWD} \
+--model-name=PoseEstimationWithMobileNet \
+--model-param=is_convertible_by_mo=True \
+--import-module=model \
+--weights=${PWD}/human-pose-estimation-3d-0001.pth \
+--input-shape=1,3,${H},${W} \
+--input-names=data \
+--output-names=features,heatmaps,pafs \
+--output-file=${PWD}/human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx && \
+sudo chown ${USER} human_pose_estimation_3d_0001_bgr_* && \
+python3 -m onnxsim human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx
+
+H=720
+W=1280
+sudo -E python3 /opt/intel/openvino_2021/deployment_tools/tools/model_downloader/src/open_model_zoo/model_tools/internal_scripts/pytorch_to_onnx.py \
+--model-path=${PWD} \
+--model-name=PoseEstimationWithMobileNet \
+--model-param=is_convertible_by_mo=True \
+--import-module=model \
+--weights=${PWD}/human-pose-estimation-3d-0001.pth \
+--input-shape=1,3,${H},${W} \
+--input-names=data \
+--output-names=features,heatmaps,pafs \
+--output-file=${PWD}/human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx && \
+sudo chown ${USER} human_pose_estimation_3d_0001_bgr_* && \
+python3 -m onnxsim human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx
+
+
+===================================================================================
+H=180
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir saved_model_${H}x${W}/openvino/FP32 \
+--mean_values=data[128.0,128.0,128.0] \
+--scale_values=data[255.0,255.0,255.0] \
+--reverse_input_channels \
+--model_name human_pose_estimation_3d_0001_rgb_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir saved_model_${H}x${W}/openvino/FP16 \
+--mean_values=data[128.0,128.0,128.0] \
+--scale_values=data[255.0,255.0,255.0] \
+--reverse_input_channels \
+--model_name human_pose_estimation_3d_0001_rgb_${H}x${W}
+mkdir -p saved_model_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model_${H}x${W}/openvino/FP16/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model_${H}x${W}/openvino/myriad/human_pose_estimation_3d_0001_rgb_${H}x${W}.blob
+
+H=240
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir saved_model_${H}x${W}/openvino/FP32 \
+--mean_values=data[128.0,128.0,128.0] \
+--scale_values=data[255.0,255.0,255.0] \
+--reverse_input_channels \
+--model_name human_pose_estimation_3d_0001_rgb_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir saved_model_${H}x${W}/openvino/FP16 \
+--mean_values=data[128.0,128.0,128.0] \
+--scale_values=data[255.0,255.0,255.0] \
+--reverse_input_channels \
+--model_name human_pose_estimation_3d_0001_rgb_${H}x${W}
+mkdir -p saved_model_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model_${H}x${W}/openvino/FP16/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model_${H}x${W}/openvino/myriad/human_pose_estimation_3d_0001_rgb_${H}x${W}.blob
+
+H=360
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir saved_model_${H}x${W}/openvino/FP32 \
+--mean_values=data[128.0,128.0,128.0] \
+--scale_values=data[255.0,255.0,255.0] \
+--reverse_input_channels \
+--model_name human_pose_estimation_3d_0001_rgb_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir saved_model_${H}x${W}/openvino/FP16 \
+--mean_values=data[128.0,128.0,128.0] \
+--scale_values=data[255.0,255.0,255.0] \
+--reverse_input_channels \
+--model_name human_pose_estimation_3d_0001_rgb_${H}x${W}
+mkdir -p saved_model_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model_${H}x${W}/openvino/FP16/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model_${H}x${W}/openvino/myriad/human_pose_estimation_3d_0001_rgb_${H}x${W}.blob
+
+H=480
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir saved_model_${H}x${W}/openvino/FP32 \
+--mean_values=data[128.0,128.0,128.0] \
+--scale_values=data[255.0,255.0,255.0] \
+--reverse_input_channels \
+--model_name human_pose_estimation_3d_0001_rgb_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir saved_model_${H}x${W}/openvino/FP16 \
+--mean_values=data[128.0,128.0,128.0] \
+--scale_values=data[255.0,255.0,255.0] \
+--reverse_input_channels \
+--model_name human_pose_estimation_3d_0001_rgb_${H}x${W}
+mkdir -p saved_model_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model_${H}x${W}/openvino/FP16/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model_${H}x${W}/openvino/myriad/human_pose_estimation_3d_0001_rgb_${H}x${W}.blob
+
+H=720
+W=1280
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir saved_model_${H}x${W}/openvino/FP32 \
+--mean_values=data[128.0,128.0,128.0] \
+--scale_values=data[255.0,255.0,255.0] \
+--reverse_input_channels \
+--model_name human_pose_estimation_3d_0001_rgb_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir saved_model_${H}x${W}/openvino/FP16 \
+--mean_values=data[128.0,128.0,128.0] \
+--scale_values=data[255.0,255.0,255.0] \
+--reverse_input_channels \
+--model_name human_pose_estimation_3d_0001_rgb_${H}x${W}
+mkdir -p saved_model_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model_${H}x${W}/openvino/FP16/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model_${H}x${W}/openvino/myriad/human_pose_estimation_3d_0001_rgb_${H}x${W}.blob
+
+===================================================================================
+
+xhost +local: && \
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+H=180
+W=320
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_tftrt_float16
+mv saved_model/* saved_model_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${H}x${W}/model_full_integer_quant.tflite
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${H}x${W}/model_full_integer_quant_edgetpu.tflite
+rm -rf saved_model
+mv human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx saved_model_${H}x${W}
+
+H=240
+W=320
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_tftrt_float16
+mv saved_model/* saved_model_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${H}x${W}/model_full_integer_quant.tflite
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${H}x${W}/model_full_integer_quant_edgetpu.tflite
+rm -rf saved_model
+mv human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx saved_model_${H}x${W}
+
+H=360
+W=640
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_tftrt_float16
+mv saved_model/* saved_model_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${H}x${W}/model_full_integer_quant.tflite
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${H}x${W}/model_full_integer_quant_edgetpu.tflite
+rm -rf saved_model
+mv human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx saved_model_${H}x${W}
+
+H=480
+W=640
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_tftrt_float16
+mv saved_model/* saved_model_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${H}x${W}/model_full_integer_quant.tflite
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${H}x${W}/model_full_integer_quant_edgetpu.tflite
+rm -rf saved_model
+mv human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx saved_model_${H}x${W}
+
+H=720
+W=1280
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_tftrt_float16
+mv saved_model/* saved_model_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/human_pose_estimation_3d_0001_rgb_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${H}x${W}/model_full_integer_quant.tflite
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${H}x${W}/model_full_integer_quant_edgetpu.tflite
+rm -rf saved_model
+mv human_pose_estimation_3d_0001_bgr_${H}x${W}.onnx saved_model_${H}x${W}
