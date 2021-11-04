@@ -1,0 +1,612 @@
+H=320
+W=320
+MODEL=picodet_s
+python3 tools/export_model.py \
+-c configs/picodet/${MODEL}_${H}_coco.yml \
+-o weights=${HOME}/work/PP-PicoDet/${MODEL}_${H}_coco.pdparams \
+--output_dir ${HOME}/work/PP-PicoDet
+paddle2onnx \
+--model_dir ${HOME}/work/PP-PicoDet/${MODEL}_${H}_coco \
+--model_filename model.pdmodel  \
+--params_filename model.pdiparams \
+--opset_version 11 \
+--save_file ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx
+python3 -m onnxsim ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx
+python3 onnx_optimization_process.py --input ${MODEL}_${H}x${W}.onnx --output ${MODEL}_${H}x${W}.onnx
+
+
+H=416
+W=416
+MODEL=picodet_s
+python3 tools/export_model.py \
+-c configs/picodet/${MODEL}_${H}_coco.yml \
+-o weights=${HOME}/work/PP-PicoDet/${MODEL}_${H}_coco.pdparams \
+--output_dir ${HOME}/work/PP-PicoDet
+paddle2onnx \
+--model_dir ${HOME}/work/PP-PicoDet/${MODEL}_${H}_coco \
+--model_filename model.pdmodel  \
+--params_filename model.pdiparams \
+--opset_version 11 \
+--save_file ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx
+python3 -m onnxsim ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx
+python3 onnx_optimization_process.py --input ${MODEL}_${H}x${W}.onnx --output ${MODEL}_${H}x${W}.onnx
+
+H=320
+W=320
+MODEL=picodet_m
+python3 tools/export_model.py \
+-c configs/picodet/${MODEL}_${H}_coco.yml \
+-o weights=${HOME}/work/PP-PicoDet/${MODEL}_${H}_coco.pdparams \
+--output_dir ${HOME}/work/PP-PicoDet
+paddle2onnx \
+--model_dir ${HOME}/work/PP-PicoDet/${MODEL}_${H}_coco \
+--model_filename model.pdmodel  \
+--params_filename model.pdiparams \
+--opset_version 11 \
+--save_file ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx
+python3 -m onnxsim ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx
+python3 onnx_optimization_process.py --input ${MODEL}_${H}x${W}.onnx --output ${MODEL}_${H}x${W}.onnx
+
+H=416
+W=416
+MODEL=picodet_m
+python3 tools/export_model.py \
+-c configs/picodet/${MODEL}_${H}_coco.yml \
+-o weights=${HOME}/work/PP-PicoDet/${MODEL}_${H}_coco.pdparams \
+--output_dir ${HOME}/work/PP-PicoDet
+paddle2onnx \
+--model_dir ${HOME}/work/PP-PicoDet/${MODEL}_${H}_coco \
+--model_filename model.pdmodel  \
+--params_filename model.pdiparams \
+--opset_version 11 \
+--save_file ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx
+python3 -m onnxsim ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx
+python3 onnx_optimization_process.py --input ${MODEL}_${H}x${W}.onnx --output ${MODEL}_${H}x${W}.onnx
+
+H=320
+W=320
+MODEL=picodet_l
+python3 tools/export_model.py \
+-c configs/picodet/${MODEL}_${H}_coco.yml \
+-o weights=${HOME}/work/PP-PicoDet/${MODEL}_${H}_coco.pdparams \
+--output_dir ${HOME}/work/PP-PicoDet
+paddle2onnx \
+--model_dir ${HOME}/work/PP-PicoDet/${MODEL}_${H}_coco \
+--model_filename model.pdmodel  \
+--params_filename model.pdiparams \
+--opset_version 11 \
+--save_file ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx
+python3 -m onnxsim ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx
+python3 onnx_optimization_process.py --input ${MODEL}_${H}x${W}.onnx --output ${MODEL}_${H}x${W}.onnx
+
+H=416
+W=416
+MODEL=picodet_l
+python3 tools/export_model.py \
+-c configs/picodet/${MODEL}_${H}_coco.yml \
+-o weights=${HOME}/work/PP-PicoDet/${MODEL}_${H}_coco.pdparams \
+--output_dir ${HOME}/work/PP-PicoDet
+paddle2onnx \
+--model_dir ${HOME}/work/PP-PicoDet/${MODEL}_${H}_coco \
+--model_filename model.pdmodel  \
+--params_filename model.pdiparams \
+--opset_version 11 \
+--save_file ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx
+python3 -m onnxsim ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx
+python3 onnx_optimization_process.py --input ${MODEL}_${H}x${W}.onnx --output ${MODEL}_${H}x${W}.onnx
+
+H=640
+W=640
+MODEL=picodet_l
+python3 tools/export_model.py \
+-c configs/picodet/${MODEL}_${H}_coco.yml \
+-o weights=${HOME}/work/PP-PicoDet/${MODEL}_${H}_coco.pdparams \
+--output_dir ${HOME}/work/PP-PicoDet
+paddle2onnx \
+--model_dir ${HOME}/work/PP-PicoDet/${MODEL}_${H}_coco \
+--model_filename model.pdmodel  \
+--params_filename model.pdiparams \
+--opset_version 11 \
+--save_file ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx
+python3 -m onnxsim ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx ${HOME}/work/PP-PicoDet/${MODEL}_${H}x${W}.onnx
+python3 onnx_optimization_process.py --input ${MODEL}_${H}x${W}.onnx --output ${MODEL}_${H}x${W}.onnx
+
+================================================================
+xhost +local: && \
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+H=320
+W=320
+MODEL=picodet_s
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config replace_s.json
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt_float32 \
+--weight_replacement_config replace_s.json
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt_float16 \
+--weight_replacement_config replace_s.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+
+H=416
+W=416
+MODEL=picodet_s
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config replace_s.json
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt_float32 \
+--weight_replacement_config replace_s.json
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt_float16 \
+--weight_replacement_config replace_s.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+
+H=320
+W=320
+MODEL=picodet_m
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config replace_m.json
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt_float32 \
+--weight_replacement_config replace_m.json
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt_float16 \
+--weight_replacement_config replace_m.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+
+H=416
+W=416
+MODEL=picodet_m
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config replace_m.json
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt_float32 \
+--weight_replacement_config replace_m.json
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt_float16 \
+--weight_replacement_config replace_m.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+
+
+H=320
+W=320
+MODEL=picodet_l
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config replace_l.json
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt_float32 \
+--weight_replacement_config replace_l.json
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt_float16 \
+--weight_replacement_config replace_l.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+
+H=416
+W=416
+MODEL=picodet_l
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config replace_l.json
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt_float32 \
+--weight_replacement_config replace_l.json
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt_float16 \
+--weight_replacement_config replace_l.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+H=640
+W=640
+MODEL=picodet_l
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config replace_l.json
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt_float32 \
+--weight_replacement_config replace_l.json
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt_float16 \
+--weight_replacement_config replace_l.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+===============================================================
+
+
+H=320
+W=320
+MODEL=picodet_s
+cp ${MODEL}_${H}x${W}/model_float32.tflite .
+
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad \
+--rigorous_optimization_for_myriad
+
+../flatc -o . -b ../schema.fbs model_float32.json
+
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad \
+--rigorous_optimization_for_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+mv saved_model/openvino/myriad/saved_model.blob ${MODEL}_${H}x${W}/openvino/myriad/saved_model.blob
+rm -rf saved_model
+rm model_float32.*
+
+H=416
+W=416
+MODEL=picodet_s
+cp ${MODEL}_${H}x${W}/model_float32.tflite .
+
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad \
+--rigorous_optimization_for_myriad
+
+../flatc -o . -b ../schema.fbs model_float32.json
+rm model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad \
+--rigorous_optimization_for_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+mv saved_model/openvino/myriad/saved_model.blob ${MODEL}_${H}x${W}/openvino/myriad/saved_model.blob
+rm -rf saved_model
+rm model_float32.*
+
+
+H=320
+W=320
+MODEL=picodet_m
+cp ${MODEL}_${H}x${W}/model_float32.tflite .
+
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad \
+--rigorous_optimization_for_myriad
+
+../flatc -o . -b ../schema.fbs model_float32.json
+rm model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad \
+--rigorous_optimization_for_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+mv saved_model/openvino/myriad/saved_model.blob ${MODEL}_${H}x${W}/openvino/myriad/saved_model.blob
+rm -rf saved_model
+rm model_float32.*
+
+H=416
+W=416
+MODEL=picodet_m
+cp ${MODEL}_${H}x${W}/model_float32.tflite .
+
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad \
+--rigorous_optimization_for_myriad
+
+../flatc -o . -b ../schema.fbs model_float32.json
+rm model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad \
+--rigorous_optimization_for_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+mv saved_model/openvino/myriad/saved_model.blob ${MODEL}_${H}x${W}/openvino/myriad/saved_model.blob
+rm -rf saved_model
+rm model_float32.*
+
+
+
+H=320
+W=320
+MODEL=picodet_l
+cp ${MODEL}_${H}x${W}/model_float32.tflite .
+
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad \
+--rigorous_optimization_for_myriad
+
+../flatc -o . -b ../schema.fbs model_float32.json
+rm model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad \
+--rigorous_optimization_for_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+mv saved_model/openvino/myriad/saved_model.blob ${MODEL}_${H}x${W}/openvino/myriad/saved_model.blob
+rm -rf saved_model
+rm model_float32.*
+
+H=416
+W=416
+MODEL=picodet_l
+cp ${MODEL}_${H}x${W}/model_float32.tflite .
+
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad \
+--rigorous_optimization_for_myriad
+
+../flatc -o . -b ../schema.fbs model_float32.json
+rm model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad \
+--rigorous_optimization_for_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+mv saved_model/openvino/myriad/saved_model.blob ${MODEL}_${H}x${W}/openvino/myriad/saved_model.blob
+rm -rf saved_model
+rm model_float32.*
+
+H=640
+W=640
+MODEL=picodet_l
+cp ${MODEL}_${H}x${W}/model_float32.tflite .
+
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad \
+--rigorous_optimization_for_myriad
+
+../flatc -o . -b ../schema.fbs model_float32.json
+rm model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad \
+--rigorous_optimization_for_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+mv saved_model/openvino/myriad/saved_model.blob ${MODEL}_${H}x${W}/openvino/myriad/saved_model.blob
+rm -rf saved_model
+rm model_float32.*
