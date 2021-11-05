@@ -1,1 +1,0 @@
-edgetpu_compiler -s yolov5s_416x416_full_integer_quant.tflite

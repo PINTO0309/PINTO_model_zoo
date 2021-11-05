@@ -1,5 +1,0 @@
-./benchmark_app \
-  -m ${HOME}/git/yolov5/openvino/416x416/FP32/yolov5s_opt.xml \
-  -i ${HOME}/Pictures \
-  -d CPU \
-  -nthreads 8
