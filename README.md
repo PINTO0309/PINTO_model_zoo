@@ -66,6 +66,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |124|person-attributes-recognition-crossroad-0230|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/124_person-attributes-recognition-crossroad-0230)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
 |125|person-attributes-recognition-crossroad-0234|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/125_person-attributes-recognition-crossroad-0234)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 |126|person-attributes-recognition-crossroad-0238|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/126_person-attributes-recognition-crossroad-0238)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
+|176|face-recognition-resnet100-arcface-onnx|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/175_face-recognition-resnet100-arcface-onnx)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|112x112,[1,512]|
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|

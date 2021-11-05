@@ -1,0 +1,5 @@
+https://github.com/openvinotoolkit/open_model_zoo/tree/2021.4.1/models/public/face-recognition-resnet100-arcface-onnx
+https://github.com/onnx/models/tree/master/vision/body_analysis/arcface
+https://github.com/onnx/models/blob/master/vision/body_analysis/arcface/dependencies/face_postprocess.py
+https://github.com/PINTO0309/openvino2tensorflow
+
