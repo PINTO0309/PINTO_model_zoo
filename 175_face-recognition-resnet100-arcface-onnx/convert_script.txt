@@ -13,7 +13,33 @@ git clone -b 2021.4.1 https://github.com/openvinotoolkit/open_model_zoo.git
 cd open_model_zoo/tools/downloader
 
 python3 downloader.py --name face-recognition-resnet100-arcface-onnx
+
+# BGR
 python3 converter.py --name face-recognition-resnet100-arcface-onnx
+
+# RGB
+python3 \
+-m mo \
+--framework=onnx \
+--data_type=FP32 \
+--output_dir=${PWD}/public/face-recognition-resnet100-arcface-onnx/FP32 \
+--model_name=face-recognition-resnet100-arcface-onnx \
+'--input_shape=[1,3,112,112]' \
+--input_model=${PWD}/public/face-recognition-resnet100-arcface-onnx/arcfaceresnet100-8.onnx \
+--input=data \
+--output=fc1
+python3 \
+-m mo \
+--framework=onnx \
+--data_type=FP16 \
+--output_dir=${PWD}/public/face-recognition-resnet100-arcface-onnx/FP16 \
+--model_name=face-recognition-resnet100-arcface-onnx \
+'--input_shape=[1,3,112,112]' \
+--input_model=${PWD}/public/face-recognition-resnet100-arcface-onnx/arcfaceresnet100-8.onnx \
+--input=data \
+--output=fc1
+
+cd public/face-recognition-resnet100-arcface-onnx
 
 H=112
 W=112
