@@ -143,7 +143,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |080|tf_pose_estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/080_tf_pose_estimation)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
 |084|EfficientPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/084_EfficientPose)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|SinglePose|
 |088|Mobilenetv3_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/088_mobilenetv3-poseestimation)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|115|MoveNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/115_MoveNet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|lightning,thunder|
+|115|MoveNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/115_MoveNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|lightning,thunder|
 |137|MoveNet_MultiPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/137_MoveNet_MultiPose)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|lightning,192x192,192x256,256x256,256x320,320x320,480x640,720x1280,1280x1920|
 |156|MobileHumanPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/156_MobileHumanPose)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|3D|
 |157|3DMPPE_POSENET|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/157_3DMPPE_POSENET)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|3D,192x192/256x256/320x320/416x416/480x640/512x512|
