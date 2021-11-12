@@ -110,22 +110,22 @@ I have been working on quantization of various models as a hobby, but I have ski
 |063|3D BoundingBox estimation for autonomous driving|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/063_3d-bounding-box-estimation-for-autonomous-driving)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|**[YouTube](https://youtu.be/MKer-Sj87d4)**|
 |107|SFA3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/107_SFA3D)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
 ### 4. 2D/3D Face Detection
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|025|Head_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/025_head_pose_estimation)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|030|BlazeFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/030_BlazeFace)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
-|032|FaceMesh|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/032_FaceMesh)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
-|040|DSFD_vgg|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/040_DSFD_vgg)|⚫|⚫|||⚫|||||||
-|041|DBFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/041_DBFace)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MobileNetV2/V3, 320x320,480x640,640x960,800x1280|
-|043|Face_Landmark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/043_face_landmark)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|049|Iris_Landmark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/049_iris_landmark)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||MediaPipe|
-|095|CenterFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/095_centerface)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|096|RetinaFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/096_RetinaFace)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|106|WHENet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/106_WHENet)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Real-time Fine-Grained Estimation for Wide Range Head Pose|
-|129|SCRFD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/129_SCRFD)|⚫|⚫|||⚫|⚫||⚫||⚫|All types|
-|130|YOLOv5_Face|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/130_YOLOv5_Face)|⚫|⚫|||⚫|⚫|⚫|⚫||⚫|yolov5n_0.5,yolov5n_face,yolov5s_face/256x320,480x640,736x1280|
-|134|head-pose-estimation-adas-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/134_head-pose-estimation-adas-0001)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|144|YuNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/144_YuNet)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|120x160|
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|025|Head_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/025_head_pose_estimation)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|030|BlazeFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/030_BlazeFace)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
+|032|FaceMesh|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/032_FaceMesh)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
+|040|DSFD_vgg|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/040_DSFD_vgg)|⚫|⚫||||⚫|||||||
+|041|DBFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/041_DBFace)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MobileNetV2/V3, 320x320,480x640,640x960,800x1280|
+|043|Face_Landmark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/043_face_landmark)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|049|Iris_Landmark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/049_iris_landmark)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||MediaPipe|
+|095|CenterFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/095_centerface)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|096|RetinaFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/096_RetinaFace)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|106|WHENet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/106_WHENet)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|Real-time Fine-Grained Estimation for Wide Range Head Pose|
+|129|SCRFD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/129_SCRFD)|⚫|⚫||||⚫|⚫||⚫||⚫|All types|
+|130|YOLOv5_Face|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/130_YOLOv5_Face)|⚫|⚫||||⚫|⚫|⚫|⚫||⚫|yolov5n_0.5,yolov5n_face,yolov5s_face/256x320,480x640,736x1280|
+|134|head-pose-estimation-adas-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/134_head-pose-estimation-adas-0001)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
+|144|YuNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/144_YuNet)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|120x160|
 ### 5. 2D/3D Hand Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|

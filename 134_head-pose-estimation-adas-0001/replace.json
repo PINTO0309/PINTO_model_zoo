@@ -1,0 +1,38 @@
+{
+    "format_version": 2,
+    "layers": [
+        {
+            "layer_id": "72",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "84",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "100",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        }
+    ]
+}
