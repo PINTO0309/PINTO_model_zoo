@@ -233,13 +233,14 @@ I have been working on quantization of various models as a hobby, but I have ski
 |172|Real-Time-Super-Resolution|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/172_Real-Time-Super-Resolution)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|64x64,96x96,128x128,256x256,240x320,480x640|
 |176|StableLLVE|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/176_StableLLVE)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|180x240,240x320,360x640,480x640,720x1280|
 ### 12. Sound Classifier
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|013|ml-sound-classifier|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/013_ml-sound-classifier)|⚫|⚫|⚫||⚫|⚫||⚫|⚫|||
-|097|YAMNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/097_YAMNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|098|SPICE|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/098_SPICE)|⚫|⚫|⚫||⚫|||⚫|⚫|||
-|118|Speech-enhancement|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/118_Speech-enhancement)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|WIP,EdgeTPU(LeakyLeRU)|
-|120|FRILL|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/120_FRILL)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|nofrontend|
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|013|ml-sound-classifier|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/013_ml-sound-classifier)|⚫|⚫|⚫|||⚫|⚫||⚫|⚫|||
+|097|YAMNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/097_YAMNet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|098|SPICE|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/098_SPICE)|⚫|⚫|⚫|||⚫|||⚫|⚫|||
+|118|Speech-enhancement|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/118_Speech-enhancement)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|WIP,EdgeTPU(LeakyLeRU)|
+|120|FRILL|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/120_FRILL)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|nofrontend|
+|177|BirdNET-Lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/177_BirdNET-Lite)|⚫|⚫|⚫||⚫|⚫||||⚫||non-flex|
 ### 13. Natural Language Processing
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
