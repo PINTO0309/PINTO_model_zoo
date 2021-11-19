@@ -1,0 +1,4 @@
+https://github.com/openvinotoolkit/open_model_zoo/tree/2021.4.2/models/intel/vehicle-detection-0200
+https://docs.openvino.ai/2021.4/omz_models_group_intel.html
+https://github.com/PINTO0309/openvino2tensorflow
+
