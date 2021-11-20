@@ -105,7 +105,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |174|PP-PicoDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/174_PP-PicoDet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|S/M/L,320x320/416x416/640x640|
 |178|vehicle-detection-0200|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/178_vehicle-detection-0200)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|256x256,PriorBoxClustered->ndarray(0.npy)|
 |179|person-detection-0202|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/179_person-detection-0202)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|512x512,PriorBoxClustered->ndarray(0.npy)|
-|180|YOLOv5-Lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/180_YOLOv5-Lite)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|S:640x640,TensorRT rtx3070 Float16|
+|180|YOLOv5-Lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/180_YOLOv5-Lite)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|S:640x640,TensorRT rtx3070 Float16|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
