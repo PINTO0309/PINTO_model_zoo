@@ -1,0 +1,347 @@
+xhost +local: && \
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+# Dequantize and convert to onnx
+python3 -m tf2onnx.convert \
+--opset 11 \
+--tflite models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_default_argmax_autoseg_edgetpu_s.tflite \
+--output edgetpu_tflite_default_argmax_autoseg_edgetpu_s.onnx \
+--dequantize \
+--inputs-as-nchw serving_default_input_2:0
+python3 -m onnxsim edgetpu_tflite_default_argmax_autoseg_edgetpu_s.onnx edgetpu_tflite_default_argmax_autoseg_edgetpu_s.onnx
+
+python3 -m tf2onnx.convert \
+--opset 11 \
+--tflite models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_default_argmax_autoseg_edgetpu_xs.tflite \
+--output edgetpu_tflite_default_argmax_autoseg_edgetpu_xs.onnx \
+--dequantize \
+--inputs-as-nchw serving_default_input_2:0
+python3 -m onnxsim edgetpu_tflite_default_argmax_autoseg_edgetpu_xs.onnx edgetpu_tflite_default_argmax_autoseg_edgetpu_xs.onnx
+
+python3 -m tf2onnx.convert \
+--opset 11 \
+--tflite models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_m_ade20k_32.tflite \
+--output edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_m_ade20k_32.onnx \
+--dequantize \
+--inputs-as-nchw serving_default_input_2:0
+python3 -m onnxsim edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_m_ade20k_32.onnx edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_m_ade20k_32.onnx
+
+python3 -m tf2onnx.convert \
+--opset 11 \
+--tflite models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_s_ade20k_32.tflite \
+--output edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_s_ade20k_32.onnx \
+--dequantize \
+--inputs-as-nchw serving_default_input_2:0
+python3 -m onnxsim edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_s_ade20k_32.onnx edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_s_ade20k_32.onnx
+
+python3 -m tf2onnx.convert \
+--opset 11 \
+--tflite models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_xs_ade20k_32.tflite \
+--output edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_xs_ade20k_32.onnx \
+--dequantize \
+--inputs-as-nchw serving_default_input_2:0
+python3 -m onnxsim edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_xs_ade20k_32.onnx edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_xs_ade20k_32.onnx
+
+# Remove Cast layer
+python3 onnx_optimize.py \
+--onnx_file_path edgetpu_tflite_default_argmax_autoseg_edgetpu_s.onnx \
+--remove_node_name serving_default_input_2:0_dequant_Cast__216
+
+python3 onnx_optimize.py \
+--onnx_file_path edgetpu_tflite_default_argmax_autoseg_edgetpu_xs.onnx \
+--remove_node_name serving_default_input_2:0_dequant_Cast__214
+
+python3 onnx_optimize.py \
+--onnx_file_path edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_m_ade20k_32.onnx \
+--remove_node_name serving_default_input_2:0_dequant_Cast__141
+
+python3 onnx_optimize.py \
+--onnx_file_path edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_s_ade20k_32.onnx \
+--remove_node_name serving_default_input_2:0_dequant_Cast__135
+
+python3 onnx_optimize.py \
+--onnx_file_path edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_xs_ade20k_32.onnx \
+--remove_node_name serving_default_input_2:0_dequant_Cast__129
+
+
+
+MODEL=edgetpu_tflite_default_argmax_autoseg_edgetpu_s
+# onnx to OpenVINO
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}.onnx \
+--data_type FP32 \
+--output_dir saved_model_${MODEL}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}.onnx \
+--data_type FP16 \
+--output_dir saved_model_${MODEL}/openvino/FP16
+mkdir -p saved_model_${MODEL}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model_${MODEL}/openvino/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model_${MODEL}/openvino/myriad/${MODEL}.blob
+# tflite to EdgeTPU
+edgetpu_compiler -s models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}.tflite
+rm models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}_edgetpu.log
+mv models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}.tflite saved_model_${MODEL}
+mv models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}_edgetpu.tflite saved_model_${MODEL}
+# OpenVINO to TensorFlow
+openvino2tensorflow \
+--model_path saved_model_${MODEL}/openvino/FP32/${MODEL}.xml \
+--output_pb
+pb_to_saved_model \
+--pb_file_path saved_model/model_float32.pb \
+--inputs inputs:0 \
+--outputs model/tf.reshape/Reshape:0
+mv saved_model_from_pb/* saved_model
+rm -rf saved_model_from_pb
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+cp saved_model/saved_model.pb tflite_from_saved_model
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_tftrt_float32
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_tftrt_float16
+mv tflite_from_saved_model/* saved_model_${MODEL}
+mv saved_model/* saved_model_${MODEL}
+rm -rf saved_model
+rm -rf tflite_from_saved_model
+mv ${MODEL}.onnx saved_model_${MODEL}
+
+
+
+MODEL=edgetpu_tflite_default_argmax_autoseg_edgetpu_xs
+# onnx to OpenVINO
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}.onnx \
+--data_type FP32 \
+--output_dir saved_model_${MODEL}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}.onnx \
+--data_type FP16 \
+--output_dir saved_model_${MODEL}/openvino/FP16
+mkdir -p saved_model_${MODEL}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model_${MODEL}/openvino/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model_${MODEL}/openvino/myriad/${MODEL}.blob
+# tflite to EdgeTPU
+edgetpu_compiler -s models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}.tflite
+rm models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}_edgetpu.log
+mv models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}.tflite saved_model_${MODEL}
+mv models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}_edgetpu.tflite saved_model_${MODEL}
+# OpenVINO to TensorFlow
+openvino2tensorflow \
+--model_path saved_model_${MODEL}/openvino/FP32/${MODEL}.xml \
+--output_pb
+pb_to_saved_model \
+--pb_file_path saved_model/model_float32.pb \
+--inputs inputs:0 \
+--outputs model/tf.reshape/Reshape:0
+mv saved_model_from_pb/* saved_model
+rm -rf saved_model_from_pb
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+cp saved_model/saved_model.pb tflite_from_saved_model
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_tftrt_float32
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_tftrt_float16
+mv tflite_from_saved_model/* saved_model_${MODEL}
+mv saved_model/* saved_model_${MODEL}
+rm -rf saved_model
+rm -rf tflite_from_saved_model
+mv ${MODEL}.onnx saved_model_${MODEL}
+
+
+
+MODEL=edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_m_ade20k_32
+# onnx to OpenVINO
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}.onnx \
+--data_type FP32 \
+--output_dir saved_model_${MODEL}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}.onnx \
+--data_type FP16 \
+--output_dir saved_model_${MODEL}/openvino/FP16
+mkdir -p saved_model_${MODEL}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model_${MODEL}/openvino/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model_${MODEL}/openvino/myriad/${MODEL}.blob
+# tflite to EdgeTPU
+edgetpu_compiler -sad models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}.tflite
+rm models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}_edgetpu.log
+mv models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}.tflite saved_model_${MODEL}
+mv models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}_edgetpu.tflite saved_model_${MODEL}
+# OpenVINO to TensorFlow
+openvino2tensorflow \
+--model_path saved_model_${MODEL}/openvino/FP32/${MODEL}.xml \
+--output_pb
+pb_to_saved_model \
+--pb_file_path saved_model/model_float32.pb \
+--inputs inputs:0 \
+--outputs model/tf.reshape/Reshape:0
+mv saved_model_from_pb/* saved_model
+rm -rf saved_model_from_pb
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+cp saved_model/saved_model.pb tflite_from_saved_model
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_tftrt_float32
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_tftrt_float16
+mv tflite_from_saved_model/* saved_model_${MODEL}
+mv saved_model/* saved_model_${MODEL}
+rm -rf saved_model
+rm -rf tflite_from_saved_model
+mv ${MODEL}.onnx saved_model_${MODEL}
+
+
+
+MODEL=edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_s_ade20k_32
+# onnx to OpenVINO
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}.onnx \
+--data_type FP32 \
+--output_dir saved_model_${MODEL}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}.onnx \
+--data_type FP16 \
+--output_dir saved_model_${MODEL}/openvino/FP16
+mkdir -p saved_model_${MODEL}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model_${MODEL}/openvino/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model_${MODEL}/openvino/myriad/${MODEL}.blob
+# tflite to EdgeTPU
+edgetpu_compiler -sad models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}.tflite
+rm models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}_edgetpu.log
+mv models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}.tflite saved_model_${MODEL}
+mv models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}_edgetpu.tflite saved_model_${MODEL}
+# OpenVINO to TensorFlow
+openvino2tensorflow \
+--model_path saved_model_${MODEL}/openvino/FP32/${MODEL}.xml \
+--output_pb
+pb_to_saved_model \
+--pb_file_path saved_model/model_float32.pb \
+--inputs inputs:0 \
+--outputs model/tf.reshape/Reshape:0
+mv saved_model_from_pb/* saved_model
+rm -rf saved_model_from_pb
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+cp saved_model/saved_model.pb tflite_from_saved_model
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_tftrt_float32
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_tftrt_float16
+mv tflite_from_saved_model/* saved_model_${MODEL}
+mv saved_model/* saved_model_${MODEL}
+rm -rf saved_model
+rm -rf tflite_from_saved_model
+mv ${MODEL}.onnx saved_model_${MODEL}
+
+
+
+MODEL=edgetpu_tflite_default_argmax_deeplabv3plus_mobilenet_edgetpuv2_xs_ade20k_32
+# onnx to OpenVINO
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}.onnx \
+--data_type FP32 \
+--output_dir saved_model_${MODEL}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}.onnx \
+--data_type FP16 \
+--output_dir saved_model_${MODEL}/openvino/FP16
+mkdir -p saved_model_${MODEL}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model_${MODEL}/openvino/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model_${MODEL}/openvino/myriad/${MODEL}.blob
+# tflite to EdgeTPU
+edgetpu_compiler -sad models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}.tflite
+rm models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}_edgetpu.log
+mv models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}.tflite saved_model_${MODEL}
+mv models_edgetpu_checkpoint_and_tflite_vision_segmentation-${MODEL}_edgetpu.tflite saved_model_${MODEL}
+# OpenVINO to TensorFlow
+openvino2tensorflow \
+--model_path saved_model_${MODEL}/openvino/FP32/${MODEL}.xml \
+--output_pb
+pb_to_saved_model \
+--pb_file_path saved_model/model_float32.pb \
+--inputs inputs:0 \
+--outputs model/tf.reshape/Reshape:0
+mv saved_model_from_pb/* saved_model
+rm -rf saved_model_from_pb
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+cp saved_model/saved_model.pb tflite_from_saved_model
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_tftrt_float32
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_tftrt_float16
+mv tflite_from_saved_model/* saved_model_${MODEL}
+mv saved_model/* saved_model_${MODEL}
+rm -rf saved_model
+rm -rf tflite_from_saved_model
+mv ${MODEL}.onnx saved_model_${MODEL}

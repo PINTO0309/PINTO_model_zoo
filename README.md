@@ -178,25 +178,26 @@ I have been working on quantization of various models as a hobby, but I have ski
 |167|DPT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/167_DPT)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|⚫|dpt-hybrid,480x640,ViT,ONNX 96x128/256x320/384x480/480x640|
 |173|MVDepthNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/173_MVDepthNet)|||||||⚫||||⚫|256x320|
 ### 8. Semantic Segmentation
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|001|deeplabv3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/001_deeplabv3)|⚫||||⚫|||||||
-|015|Faster-Grad-CAM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/015_Faster-Grad-CAM)|⚫||⚫||⚫|||||||
-|020|EdgeTPU-Deeplab|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/020_edgetpu-deeplab)|⚫|⚫|⚫||⚫|||||||
-|021|EdgeTPU-Deeplab-slim|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/021_edgetpu-deeplab-slim)|⚫|⚫|⚫||⚫|||||||
-|026|Mobile-Deeplabv3-plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/026_mobile-deeplabv3-plus)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|035|BodyPix|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/035_BodyPix)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe,MobileNet0.50/0.75/1.00,ResNet50|
-|057|BiSeNetV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/057_BiSeNetV2)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|060|Hair Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/060_hair_segmentation)|⚫||||⚫|||⚫|⚫|⚫|WIP,MediaPipe|
-|061|U^2-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/061_U-2-Net)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|069|ENet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/069_ENet)|⚫|⚫|||⚫|||⚫|⚫|⚫|Cityscapes,512x1024|
-|075|ERFNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/075_ERFNet)|⚫|⚫|⚫|⚫|⚫|⚫||⚫|⚫|⚫|Cityscapes,256x512,384x786,512x1024|
-|078|MODNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/078_MODNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|128x128,192x192,256x256,512x512|
-|082|MediaPipe_Meet_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/082_MediaPipe_Meet_Segmentation)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe,128x128,144x256,96x160|
-|104|DeeplabV3-plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/104_DeeplabV3-plus)|⚫|⚫|⚫||⚫|⚫|⚫|⚫||⚫|cityscapes,200x400,400x800,800x1600|
-|109|Selfie_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/109_Selfie_Segmentation)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|256x256|
-|136|road-segmentation-adas-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/136_road-segmentation-adas-0001)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|138|BackgroundMattingV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/138_BackgroundMattingV2)|⚫|⚫|||⚫|⚫||||⚫|720x1280,2160x4096|
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|001|deeplabv3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/001_deeplabv3)|⚫|||||⚫|||||||
+|015|Faster-Grad-CAM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/015_Faster-Grad-CAM)|⚫||⚫|||⚫|||||||
+|020|EdgeTPU-Deeplab|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/020_edgetpu-deeplab)|⚫|⚫|⚫|||⚫|||||||
+|021|EdgeTPU-Deeplab-slim|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/021_edgetpu-deeplab-slim)|⚫|⚫|⚫|||⚫|||||||
+|026|Mobile-Deeplabv3-plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/026_mobile-deeplabv3-plus)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|035|BodyPix|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/035_BodyPix)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe,MobileNet0.50/0.75/1.00,ResNet50|
+|057|BiSeNetV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/057_BiSeNetV2)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|060|Hair Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/060_hair_segmentation)|⚫|||||⚫|||⚫|⚫|⚫|WIP,MediaPipe|
+|061|U^2-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/061_U-2-Net)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|069|ENet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/069_ENet)|⚫|⚫||||⚫|||⚫|⚫|⚫|Cityscapes,512x1024|
+|075|ERFNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/075_ERFNet)|⚫|⚫|⚫|⚫||⚫|⚫||⚫|⚫|⚫|Cityscapes,256x512,384x786,512x1024|
+|078|MODNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/078_MODNet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|128x128,192x192,256x256,512x512|
+|082|MediaPipe_Meet_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/082_MediaPipe_Meet_Segmentation)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe,128x128,144x256,96x160|
+|104|DeeplabV3-plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/104_DeeplabV3-plus)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫||⚫|cityscapes,200x400,400x800,800x1600|
+|109|Selfie_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/109_Selfie_Segmentation)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|256x256|
+|136|road-segmentation-adas-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/136_road-segmentation-adas-0001)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|138|BackgroundMattingV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/138_BackgroundMattingV2)|⚫|⚫||||⚫|⚫||||⚫|720x1280,2160x4096|
+|181|models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_default_argmax|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/181_models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_default_argmax)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
