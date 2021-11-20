@@ -1,0 +1,60 @@
+xhost +local: && \
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+H=640
+W=640
+MODEL=v5lite_s
+openvino2tensorflow \
+--model_path saved_model/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config replace.json
+
+mv saved_model saved_model_${H}x${W}
+
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw \
+--weight_replacement_config replace.json
+
+mv saved_model/model_float32.onnx saved_model_${H}x${W}
+rm -rf saved_model
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model saved_model_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir saved_model_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model saved_model_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir saved_model_${H}x${W}/openvino/FP16
+mkdir -p saved_model_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model_${H}x${W}/openvino/FP16/model_float32.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model_${H}x${W}/openvino/myriad/model.blob
+
+onnx2trt saved_model_${H}x${W}/model_float32.onnx -o saved_model_${H}x${W}/model_float16_rtx3070.trt -b 1 -d 16 -v
