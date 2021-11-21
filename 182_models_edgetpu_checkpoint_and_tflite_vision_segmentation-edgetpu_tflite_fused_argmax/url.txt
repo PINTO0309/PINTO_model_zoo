@@ -1,0 +1,3 @@
+https://github.com/tensorflow/models/tree/master/official/projects/edgetpu/vision#semantic-segmentation-task
+https://github.com/PINTO0309/openvino2tensorflow
+

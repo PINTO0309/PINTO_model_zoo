@@ -198,6 +198,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |136|road-segmentation-adas-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/136_road-segmentation-adas-0001)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |138|BackgroundMattingV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/138_BackgroundMattingV2)|⚫|⚫||||⚫|⚫||||⚫|720x1280,2160x4096|
 |181|models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_default_argmax|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/181_models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_default_argmax)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
+|182|models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_fused_argmax|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/182_models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_fused_argmax)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
