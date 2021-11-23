@@ -1,0 +1,731 @@
+{
+    "format_version": 2,
+    "layers": [
+        {
+            "layer_id": "371",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "368",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "369",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "370",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "376",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "373",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "374",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "375",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "384",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "381",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "382",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "383",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "389",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "386",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "387",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "388",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "397",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "394",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "395",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "396",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "402",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "399",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "400",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "401",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "410",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "407",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "408",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "409",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "415",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "412",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "413",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "414",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "423",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "420",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "421",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "422",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "428",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "425",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "426",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "427",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "436",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "433",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "434",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "435",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "441",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "438",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "439",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "440",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "449",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "446",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "447",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "448",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "454",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "451",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "452",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "453",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "462",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "459",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "460",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "461",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "467",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "464",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "465",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "466",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "475",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "472",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "473",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "474",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "480",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "477",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "478",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "479",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "488",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "485",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "486",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "487",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "493",
+            "type": "StridedSlice",
+            "replace_mode": "change_attributes",
+            "values": [
+                0,
+                0,
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "layer_id": "490",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "491",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "492",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "364",
+            "type": "SoftMax",
+            "replace_mode": "change_axis",
+            "values": 2
+        }
+    ]
+}
