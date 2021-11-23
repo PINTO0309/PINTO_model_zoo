@@ -1,0 +1,63 @@
+xhost +local: && \
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+H=300
+W=300
+MODEL=vehicle-license-plate-detection-barrier-0106
+openvino2tensorflow \
+--model_path ${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+
+mv saved_model saved_model_${H}x${W}
+
+openvino2tensorflow \
+--model_path ${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw
+
+mv saved_model/model_float32.onnx saved_model_${H}x${W}
+rm -rf saved_model
+
+openvino2tensorflow \
+--model_path ${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_tftrt_float32 \
+--output_tftrt_float16
+
+mv saved_model/tensorrt_saved_model_float32 saved_model_${H}x${W}
+mv saved_model/tensorrt_saved_model_float16 saved_model_${H}x${W}
+rm -rf saved_model
+
+openvino2tensorflow \
+--model_path ${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+
+mv saved_model/model_full_integer_quant.tflite saved_model_${H}x${W}
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${H}x${W}
+rm -rf saved_model

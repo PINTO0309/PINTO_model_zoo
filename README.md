@@ -112,6 +112,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |184|pedestrian-and-vehicle-detector-adas-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/184_pedestrian-and-vehicle-detector-adas-0001)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|384x672,PriorBox->ndarray(0.npy)|
 |185|person-vehicle-bike-detection-crossroad-0078|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/185_person-vehicle-bike-detection-crossroad-0078)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|1024x1024,PriorBoxClustered->ndarray(0.npy)|
 |186|person-vehicle-bike-detection-crossroad-1016|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/186_person-vehicle-bike-detection-crossroad-1016)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|512x512,PriorBoxClustered->ndarray(0.npy)|
+|189|vehicle-license-plate-detection-barrier-0106|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/189_vehicle-license-plate-detection-barrier-0106)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|300x300,PriorBoxClustered->ndarray(0.npy)|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
