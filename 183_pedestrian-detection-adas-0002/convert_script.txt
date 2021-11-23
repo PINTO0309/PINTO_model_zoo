@@ -12,7 +12,7 @@ ghcr.io/pinto0309/openvino2tensorflow:latest
 H=384
 W=672
 MODEL=pedestrian-detection-adas-0002
-python3 openvino2tensorflow.py \
+openvino2tensorflow \
 --model_path ${MODEL}.xml \
 --output_saved_model \
 --output_pb \
@@ -29,7 +29,7 @@ python3 openvino2tensorflow.py \
 
 mv saved_model saved_model_${H}x${W}
 
-python3 openvino2tensorflow.py \
+openvino2tensorflow \
 --model_path ${MODEL}.xml \
 --output_saved_model \
 --output_pb \
@@ -41,7 +41,7 @@ python3 openvino2tensorflow.py \
 mv saved_model/model_float32.onnx saved_model_${H}x${W}
 rm -rf saved_model
 
-python3 openvino2tensorflow.py \
+openvino2tensorflow \
 --model_path ${MODEL}.xml \
 --output_saved_model \
 --output_pb \
@@ -53,7 +53,7 @@ mv saved_model/tensorrt_saved_model_float32 saved_model_${H}x${W}
 mv saved_model/tensorrt_saved_model_float16 saved_model_${H}x${W}
 rm -rf saved_model
 
-python3 openvino2tensorflow.py \
+openvino2tensorflow \
 --model_path ${MODEL}.xml \
 --output_saved_model \
 --output_pb \
