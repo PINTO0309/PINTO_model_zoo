@@ -54,19 +54,20 @@ I have been working on quantization of various models as a hobby, but I have ski
 \*** CM = CoreML
 \**** DQ = Dynamic Range Quantization
 ### 1. Image Classification
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|004|Efficientnet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/004_efficientnet)|⚫||⚫||⚫|||||||
-|010|Mobilenetv3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/010_mobilenetv3)|⚫||⚫||⚫|||||||
-|011|Mobilenetv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/011_mobilenetv2)|⚫||⚫|⚫|⚫|||||||
-|016|Efficientnet-lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/016_EfficientNet-lite)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|||
-|070|age-gender-recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/070_age-gender-recognition)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|083|Person_Reidentification|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/083_Person_Reidentification)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|248,277,286,287,288,300|
-|087|DeepSort|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/087_DeepSort)|⚫|⚫|⚫||⚫|⚫|⚫||⚫|⚫||
-|124|person-attributes-recognition-crossroad-0230|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/124_person-attributes-recognition-crossroad-0230)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|125|person-attributes-recognition-crossroad-0234|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/125_person-attributes-recognition-crossroad-0234)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|126|person-attributes-recognition-crossroad-0238|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/126_person-attributes-recognition-crossroad-0238)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|175|face-recognition-resnet100-arcface-onnx|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/175_face-recognition-resnet100-arcface-onnx)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|RGB/BGR,112x112,[1,512]|
+|No.|Model Name|Link|FP32|FP16|INT8|DQ|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|004|Efficientnet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/004_efficientnet)|⚫||⚫|||⚫|||||||
+|010|Mobilenetv3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/010_mobilenetv3)|⚫||⚫|||⚫|||||||
+|011|Mobilenetv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/011_mobilenetv2)|⚫||⚫|⚫||⚫|||||||
+|016|Efficientnet-lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/016_EfficientNet-lite)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|||
+|070|age-gender-recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/070_age-gender-recognition)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|083|Person_Reidentification|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/083_Person_Reidentification)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|248,277,286,287,288,300|
+|087|DeepSort|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/087_DeepSort)|⚫|⚫|⚫|||⚫|⚫|⚫||⚫|⚫||
+|124|person-attributes-recognition-crossroad-0230|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/124_person-attributes-recognition-crossroad-0230)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|125|person-attributes-recognition-crossroad-0234|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/125_person-attributes-recognition-crossroad-0234)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|126|person-attributes-recognition-crossroad-0238|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/126_person-attributes-recognition-crossroad-0238)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|175|face-recognition-resnet100-arcface-onnx|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/175_face-recognition-resnet100-arcface-onnx)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|RGB/BGR,112x112,[1,512]|
+|187|187_vehicle-attributes-recognition-barrier-0039|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/187_vehicle-attributes-recognition-barrier-0039)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|72x72|
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
