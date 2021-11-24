@@ -1,0 +1,4 @@
+https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/public/anti-spoof-mn3
+https://github.com/kprokofi/light-weight-face-anti-spoofing
+https://github.com/PINTO0309/openvino2tensorflow
+
