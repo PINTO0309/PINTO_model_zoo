@@ -46,9 +46,8 @@ def run_inference(
     score_th,
     nms_th,
 ):
-    # Pre process:Resize, BGR->RGB, float32 cast
+    # Pre process:Resize, float32 cast
     input_image = cv.resize(image, dsize=(input_size[1], input_size[0]))
-    input_image = cv.cvtColor(input_image, cv.COLOR_BGR2RGB)
     input_image = np.expand_dims(input_image, axis=0)
     input_image = input_image.astype('float32')
 
