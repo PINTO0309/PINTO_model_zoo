@@ -1,0 +1,710 @@
+{
+    "format_version": 2,
+    "layers": [
+        {
+            "layer_id": "35",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "65",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                2,
+                1,
+                3,
+                4
+            ]
+        },
+        {
+            "layer_id": "76",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                3,
+                1
+            ]
+        },
+        {
+            "layer_id": "94",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "124",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                2,
+                1,
+                3,
+                4
+            ]
+        },
+        {
+            "layer_id": "135",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                3,
+                1
+            ]
+        },
+        {
+            "layer_id": "153",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "183",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                2,
+                1,
+                3,
+                4
+            ]
+        },
+        {
+            "layer_id": "194",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                3,
+                1
+            ]
+        },
+        {
+            "layer_id": "212",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "242",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                2,
+                1,
+                3,
+                4
+            ]
+        },
+        {
+            "layer_id": "253",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                3,
+                1
+            ]
+        },
+        {
+            "layer_id": "281",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "311",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                2,
+                1,
+                3,
+                4
+            ]
+        },
+        {
+            "layer_id": "322",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                3,
+                1
+            ]
+        },
+        {
+            "layer_id": "340",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "370",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                2,
+                1,
+                3,
+                4
+            ]
+        },
+        {
+            "layer_id": "381",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                3,
+                1
+            ]
+        },
+        {
+            "layer_id": "399",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "429",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                2,
+                1,
+                3,
+                4
+            ]
+        },
+        {
+            "layer_id": "440",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                3,
+                1
+            ]
+        },
+        {
+            "layer_id": "458",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "488",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                2,
+                1,
+                3,
+                4
+            ]
+        },
+        {
+            "layer_id": "499",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                3,
+                1
+            ]
+        },
+        {
+            "layer_id": "517",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "547",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                2,
+                1,
+                3,
+                4
+            ]
+        },
+        {
+            "layer_id": "558",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                3,
+                1
+            ]
+        },
+        {
+            "layer_id": "576",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "606",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                2,
+                1,
+                3,
+                4
+            ]
+        },
+        {
+            "layer_id": "617",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                3,
+                1
+            ]
+        },
+        {
+            "layer_id": "694",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "724",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                2,
+                1,
+                3,
+                4
+            ]
+        },
+        {
+            "layer_id": "735",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                3,
+                1
+            ]
+        },
+        {
+            "layer_id": "763",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "793",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                2,
+                1,
+                3,
+                4
+            ]
+        },
+        {
+            "layer_id": "804",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                3,
+                1
+            ]
+        },
+        {
+            "layer_id": "822",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "852",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                2,
+                1,
+                3,
+                4
+            ]
+        },
+        {
+            "layer_id": "863",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                3,
+                1
+            ]
+        },
+        {
+            "layer_id": "881",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "911",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                2,
+                1,
+                3,
+                4
+            ]
+        },
+        {
+            "layer_id": "922",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                3,
+                1
+            ]
+        },
+        {
+            "layer_id": "940",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "970",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                2,
+                1,
+                3,
+                4
+            ]
+        },
+        {
+            "layer_id": "981",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                3,
+                1
+            ]
+        },
+        {
+            "layer_id": "1161",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "1400",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "1173",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "1639",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "1412",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "1878",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "1651",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "2118",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "1890",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "2130",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "1287",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "1526",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "1765",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "2004",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "2244",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        },
+        {
+            "layer_id": "2295",
+            "type": "Reshape",
+            "replace_mode": "insert_after",
+            "values": [
+                1534,
+                1,
+                4
+            ]
+        },
+        {
+            "layer_id": "2360",
+            "type": "Reshape",
+            "replace_mode": "insert_after",
+            "values": [
+                100
+            ]
+        },
+        {
+            "layer_id": "2366",
+            "type": "Reshape",
+            "replace_mode": "insert_after",
+            "values": [
+                1534,
+                1
+            ]
+        },
+        {
+            "layer_id": "2367",
+            "type": "Reshape",
+            "replace_mode": "insert_after",
+            "values": [
+                100
+            ]
+        }
+    ]
+}
