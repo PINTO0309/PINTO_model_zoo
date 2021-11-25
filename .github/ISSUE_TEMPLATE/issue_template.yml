@@ -69,10 +69,16 @@ body:
       description: What programming language are you using? If "other", please provide more details in the "Description" section above.
       multiple: true
       options:
-        - C++
-        - Python
-        - Rust
-        - Go
+        - PyTorch
+        - ONNX
+        - TensorFlow
+        - TensorFlowLite
+        - TensorRT
+        - TF-TRT
+        - OpenVINO
+        - Myriad Inference Engine
+        - PaddlePaddle
+        - NCNN
         - Other
     validations:
       required: true
