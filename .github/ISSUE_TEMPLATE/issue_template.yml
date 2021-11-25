@@ -73,8 +73,10 @@ body:
         - ONNX
         - TensorFlow
         - TensorFlowLite
+        - TensorFlow.js
         - TensorRT
         - TF-TRT
+        - CoreML
         - OpenVINO
         - Myriad Inference Engine
         - PaddlePaddle
