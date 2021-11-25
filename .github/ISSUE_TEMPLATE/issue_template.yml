@@ -97,3 +97,8 @@ body:
       label: Relevant Log Output
       description: Please copy and paste any relevant log output. This will be automatically formatted into code.
       render: shell
+  - type: textarea
+    id: URL-or-source-code-for-simple-inference-testing-code
+    attributes:
+      label: URL or source code for simple inference testing code
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code.
