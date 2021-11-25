@@ -1,0 +1,91 @@
+name: Issue Template
+description: Use this template to report any issue
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The demo code will not be committed, but a pull request is welcome. Also, anything that does not follow the issue template will be closed immediately.
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Issue Type
+      description: What type of issue would you like to report?
+      multiple: true
+      options:
+        - Bug
+        - Performance
+        - Support
+        - Feature Request
+        - Documentation Feature Request
+        - Documentation Bug
+        - Others
+    validations:
+      required: true
+  - type: dropdown
+    id: Operating-System
+    attributes:
+      label: OS
+      description: What OS are you seeing the issue in? If you don't see your OS listed, please provide more details in the "Description" section above.
+      multiple: true
+      options:
+        - Windows
+        - Ubuntu
+        - Mac OS
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: Operating-System-Architecture
+    attributes:
+      label: OS architecture
+      description: If you don't see your device listed, please provide more details in the "Description" section above.
+      multiple: true
+      options:
+        - x86_64
+        - aarch64
+        - armv7
+        - armv6
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: version
+    attributes:
+      label: Programming Language
+      description: What programming language are you using? If "other", please provide more details in the "Description" section above.
+      multiple: true
+      options:
+        - C++
+        - Python
+        - Rust
+        - Go
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: Framework
+    attributes:
+      label: framework
+      description: What programming language are you using? If "other", please provide more details in the "Description" section above.
+      multiple: true
+      options:
+        - C++
+        - Python
+        - Rust
+        - Go
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Description
+      description: Please describe the current and expected behaviour, and attach all files/info needed to reproduce the issue if applicable.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant Log Output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code.
+      render: shell
