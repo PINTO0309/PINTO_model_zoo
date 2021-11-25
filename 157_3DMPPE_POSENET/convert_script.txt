@@ -9,8 +9,6 @@ docker run --gpus all -it --rm \
 --privileged \
 ghcr.io/pinto0309/openvino2tensorflow:latest
 
-cd workdir
-
 MODEL=3dmppe_posenet
 H=192
 W=192
