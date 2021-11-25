@@ -1,7 +1,7 @@
 ---
 name: Issue Template
-about: Define the information needed for the investigation to ensure the fastest problem
-  solving. Please provide as much detail as possible without abbreviating.
+about: The demo code will not be committed, but a pull request is welcome. Also, anything
+  that does not follow the issue template will be closed immediately.
 title: ''
 labels: ''
 assignees: ''
