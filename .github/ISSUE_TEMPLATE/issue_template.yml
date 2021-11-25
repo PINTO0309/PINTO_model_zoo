@@ -1,4 +1,4 @@
-name: Issue Template
+name: Issue
 description: Use this template to report any issue
 body:
   - type: markdown
@@ -52,7 +52,7 @@ body:
     id: version
     attributes:
       label: Programming Language
-      description: What programming language are you using? If "other", please provide more details in the "Description" section above.
+      description: What programming language are you using? If "Other", please provide more details in the "Description" section above.
       multiple: true
       options:
         - C++
@@ -66,7 +66,7 @@ body:
     id: Framework
     attributes:
       label: Framework
-      description: What programming language are you using? If "other", please provide more details in the "Description" section above.
+      description: What framework are you using? If "other", please provide more details in the "Description" section above.
       multiple: true
       options:
         - PyTorch
