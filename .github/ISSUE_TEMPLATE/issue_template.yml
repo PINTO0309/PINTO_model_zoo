@@ -65,7 +65,7 @@ body:
   - type: dropdown
     id: Framework
     attributes:
-      label: framework
+      label: Framework
       description: What programming language are you using? If "other", please provide more details in the "Description" section above.
       multiple: true
       options:
