@@ -101,4 +101,4 @@ body:
     id: URL-or-source-code-for-simple-inference-testing-code
     attributes:
       label: URL or source code for simple inference testing code
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code.
+      description: Please copy and paste URL or source code for simple inference testing code.
