@@ -227,7 +227,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |101|arbitrary_image_stylization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/101_arbitrary_image_stylization)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|magenta|
 |113|Anime2Sketch|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/113_Anime2Sketch)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |161|EigenGAN-Tensorflow|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/161_EigenGAN-Tensorflow)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|Anime,CelebA|
-|193|CoCosNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/193_CoCosNet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫||⚫|RGB,256x256|
+|193|CoCosNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/193_CoCosNet)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫||⚫|RGB,256x256|
 ### 11. Super Resolution
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
