@@ -167,8 +167,8 @@ class SCRFD:
                 if self.use_kps:
                     kps_preds = net_outs[idx + fmc * 2] * stride
 
-            height = input_height // stride
-            width = input_width // stride
+            height = (-1) * (((-1) * input_height) // stride)  # Round up
+            width = (-1) * (((-1) * input_width) // stride)  # Round up
             K = height * width
             key = (height, width, stride)
             if key in self.center_cache:
@@ -307,12 +307,12 @@ if __name__ == '__main__':
 
         for i in range(bboxes.shape[0]):
             bbox = bboxes[i]
-            x1, y1, x2, y2, score = bbox.astype(np.int)
+            x1, y1, x2, y2, score = bbox.astype(np.int32)
             cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 2)
             if kpss is not None:
                 kps = kpss[i]
                 for kp in kps:
-                    kp = kp.astype(np.int)
+                    kp = kp.astype(np.int32)
                     cv2.circle(frame, tuple(kp), 5, (0, 0, 255), 2)
         # Inference elapsed time
         cv2.putText(
