@@ -1,0 +1,35 @@
+{
+    "format_version": 2,
+    "layers": [
+        {
+            "layer_id": "584",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2,
+                3
+            ]
+        },
+        {
+            "layer_id": "588",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "598",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2,
+                3
+            ]
+        }
+    ]
+}
