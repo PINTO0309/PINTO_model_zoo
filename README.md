@@ -71,6 +71,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |188|vehicle-attributes-recognition-barrier-0042|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/188_vehicle-attributes-recognition-barrier-0042)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|72x72|
 |191|anti-spoof-mn3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/191_anti-spoof-mn3)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|128x128|
 |192|open-closed-eye-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/192_open-closed-eye-0001)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|32x32|
+|194|face_recognizer_fast|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/194_face_recognizer_fast)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|112x112|
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|

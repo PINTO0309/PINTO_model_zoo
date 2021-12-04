@@ -1,0 +1,11 @@
+https://github.com/opencv/opencv_zoo/tree/master/models/face_recognition_sface
+
+https://qiita.com/UnaNancyOwen/items/8c65a976b0da2a558f06
+https://docs.opencv.org/4.5.4/d0/dd4/tutorial_dnn_face.html
+https://docs.opencv.org/4.5.4/da/d09/classcv_1_1FaceRecognizerSF.html
+https://gist.github.com/UnaNancyOwen/49df508ad8b6d9520024354df0e3e740
+https://drive.google.com/file/d/1ClK9WiB492c5OZFKveF3XiHCejoOxINW/view
+
+https://github.com/PINTO0309/PINTO_model_zoo/tree/main/144_YuNet
+https://github.com/PINTO0309/openvino2tensorflow
+

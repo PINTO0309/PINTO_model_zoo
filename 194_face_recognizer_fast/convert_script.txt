@@ -1,0 +1,69 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model face_recognizer_fast.onnx \
+--data_type FP32 \
+--output_dir saved_model/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model face_recognizer_fast.onnx \
+--data_type FP16 \
+--output_dir saved_model/openvino/FP16
+mkdir -p saved_model/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model/openvino/FP16/face_recognizer_fast.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model/openvino/myriad/face_recognizer_fast.blob
+
+openvino2tensorflow \
+--model_path saved_model/openvino/FP32/face_recognizer_fast.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config replace.json
+
+openvino2tensorflow \
+--model_path saved_model/openvino/FP32/face_recognizer_fast.xml \
+--output_tftrt_float32 \
+--weight_replacement_config replace.json
+openvino2tensorflow \
+--model_path saved_model/openvino/FP32/face_recognizer_fast.xml \
+--output_tftrt_float16 \
+--weight_replacement_config replace.json
+
+mv saved_model saved_model_face_recognizer_fast
+
+openvino2tensorflow \
+--model_path saved_model_face_recognizer_fast/openvino/FP32/face_recognizer_fast.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw \
+--weight_replacement_config replace.json
+
+mv saved_model/*.onnx saved_model_face_recognizer_fast
+rm -rf saved_model
+
+openvino2tensorflow \
+--model_path saved_model_face_recognizer_fast/openvino/FP32/face_recognizer_fast.xml \
+--output_saved_model \
+--output_pb \
+--output_edgetpu \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--weight_replacement_config replace.json
+
+mv saved_model/*.tflite saved_model_face_recognizer_fast
+rm -rf saved_model
