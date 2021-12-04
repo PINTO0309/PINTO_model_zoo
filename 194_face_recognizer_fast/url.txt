@@ -1,4 +1,5 @@
 https://github.com/opencv/opencv_zoo/tree/master/models/face_recognition_sface
+https://github.com/zhongyy/SFace
 
 https://qiita.com/UnaNancyOwen/items/8c65a976b0da2a558f06
 https://docs.opencv.org/4.5.4/d0/dd4/tutorial_dnn_face.html
