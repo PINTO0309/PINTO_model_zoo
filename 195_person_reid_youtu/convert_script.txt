@@ -1,0 +1,63 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+python3 -m onnxsim --input-shape="1,3,256,128" person_reid_youtu_2021nov.onnx person_reid_youtu_2021nov_batch1.onnx
+python3 -m onnxsim --input-shape="4,3,256,128" person_reid_youtu_2021nov.onnx person_reid_youtu_2021nov_batch4.onnx
+python3 -m onnxsim --input-shape="8,3,256,128" person_reid_youtu_2021nov.onnx person_reid_youtu_2021nov_batch8.onnx
+python3 -m onnxsim --input-shape="16,3,256,128" person_reid_youtu_2021nov.onnx person_reid_youtu_2021nov_batch16.onnx
+
+MODEL=person_reid_youtu_2021nov_batch1
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}.onnx \
+--data_type FP32 \
+--output_dir saved_model/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}.onnx \
+--data_type FP16 \
+--output_dir saved_model/openvino/FP16
+mkdir -p saved_model/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model/openvino/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model/openvino/myriad/${MODEL}.blob
+
+openvino2tensorflow \
+--model_path saved_model/openvino/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml
+
+openvino2tensorflow \
+--model_path saved_model/openvino/FP32/${MODEL}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path saved_model/openvino/FP32/${MODEL}.xml \
+--output_tftrt_float16
+
+mv saved_model saved_model_${MODEL}
+
+openvino2tensorflow \
+--model_path saved_model_${MODEL}/openvino/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_edgetpu \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1'
+
+mv saved_model/*.tflite saved_model_${MODEL}
+rm -rf saved_model
+
+mv *.onnx saved_model_${MODEL}
+mv saved_model_${MODEL} saved_model_person_reid_youtu
