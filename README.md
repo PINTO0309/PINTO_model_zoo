@@ -119,6 +119,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |189|vehicle-license-plate-detection-barrier-0106|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/189_vehicle-license-plate-detection-barrier-0106)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|300x300,PriorBoxClustered->ndarray(0.npy)|
 |190|person-detection-asl-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/190_person-detection-asl-0001)|⚫|⚫|⚫||⚫|⚫|⚫||||⚫|320x320|
 |197|yolact-resnet50-fpn|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/197_yolact-resnet50-fpn)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|RGB,550x550|
+|198|YOLOF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/198_YOLOF)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|BGR/RGB,608x608|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
