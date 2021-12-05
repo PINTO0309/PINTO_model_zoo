@@ -1,0 +1,76 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+H=550
+W=550
+MODEL=yolact-resnet50-fpn-pytorch
+
+python3 -m onnxsim ${MODEL}.onnx ${MODEL}.onnx
+
+
+python3 -m mo \
+--framework=onnx \
+--data_type=FP32 \
+--output_dir=saved_model_${H}x${W}/openvino/FP32 \
+--model_name=yolact_resnet50_fpn \
+--input=input.1 \
+'--mean_values=input.1[123.675,116.78,103.94]' \
+'--scale_values=input.1[58.395,57.12,57.375]' \
+--output=conf,mask,proto,boxes \
+--input_model=yolact-resnet50-fpn.onnx
+
+python3 -m mo \
+--framework=onnx \
+--data_type=FP16 \
+--output_dir=saved_model_${H}x${W}/openvino/FP16 \
+--model_name=yolact_resnet50_fpn \
+--input=input.1 \
+'--mean_values=input.1[123.675,116.78,103.94]' \
+'--scale_values=input.1[58.395,57.12,57.375]' \
+--output=conf,mask,proto,boxes \
+--input_model=yolact-resnet50-fpn.onnx
+
+
+H=550
+W=550
+MODEL=yolact_resnet50_fpn
+
+mkdir -p saved_model_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model_${H}x${W}/openvino/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model_${H}x${W}/openvino/myriad/${MODEL}.blob
+
+H=550
+W=550
+MODEL=yolact_resnet50_fpn
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml
+
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/${MODEL}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path saved_model_${H}x${W}/openvino/FP32/${MODEL}.xml \
+--output_tftrt_float16
+
+mv saved_model/* saved_model_${H}x${W}
+mv *.onnx saved_model_${H}x${W}
+rm -rf saved_model
+
+
+
