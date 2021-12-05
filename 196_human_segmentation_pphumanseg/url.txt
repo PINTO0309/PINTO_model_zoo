@@ -1,4 +1,5 @@
 https://github.com/opencv/opencv_zoo/tree/master/models/human_segmentation_pphumanseg
+https://github.com/PaddlePaddle/PaddleSeg/tree/release/2.2/contrib/PP-HumanSeg
 https://github.com/PaddlePaddle/PaddleHub
 https://github.com/PINTO0309/openvino2tensorflow
 
