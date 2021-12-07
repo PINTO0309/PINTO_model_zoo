@@ -36,6 +36,8 @@ def run_inference(interpreter, input_size, image):
 def main():
     parser = argparse.ArgumentParser()
 
+    parser.add_argument("--device", type=int, default=0)
+    parser.add_argument("--movie", type=str, default=None)
     parser.add_argument(
         "--model",
         type=str,
@@ -54,7 +56,10 @@ def main():
     input_size = [int(i) for i in input_size.split(',')]
 
     # Initialize video capture
-    cap = cv.VideoCapture(0)
+    cap_device = args.device
+    if args.movie is not None:
+        cap_device = args.movie
+    cap = cv.VideoCapture(cap_device)
 
     # Load model
     interpreter = tf.lite.Interpreter(model_path=model_path)

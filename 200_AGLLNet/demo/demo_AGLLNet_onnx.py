@@ -24,9 +24,9 @@ def run_inference(onnx_session, input_size, image):
     result = onnx_session.run([output_name], {input_name: input_image})
 
     # Post process:squeeze, RGB->BGR, Transpose, uint8 cast
-    output_image = np.squeeze(result)
-    output_image = np.clip(output_image * 255.0, 0, 255)
-    output_image = output_image.transpose(1, 2, 0).astype(np.uint8)
+    result = np.array(result)[0]
+    output_image = result[0, :, :, 4:7]
+    output_image = np.clip(output_image * 255.0, 0, 255).astype(np.uint8)
     output_image = cv.cvtColor(output_image, cv.COLOR_RGB2BGR)
 
     return output_image
@@ -40,12 +40,12 @@ def main():
     parser.add_argument(
         "--model",
         type=str,
-        default='stablellve_180x320/stablellve_180x320.onnx',
+        default='saved_model_256x256/model_float32.onnx',
     )
     parser.add_argument(
         "--input_size",
         type=str,
-        default='180,320',
+        default='256,256',
     )
 
     args = parser.parse_args()
@@ -91,11 +91,13 @@ def main():
             "Elapsed Time : " + '{:.1f}'.format(elapsed_time * 1000) + "ms",
             (10, 30), cv.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 1, cv.LINE_AA)
 
+        debug_image = cv.resize(debug_image, dsize=None, fx=0.5, fy=0.5)
+        output_image = cv.resize(output_image, dsize=None, fx=0.5, fy=0.5)
         key = cv.waitKey(1)
         if key == 27:  # ESC
             break
-        cv.imshow('StableLLVE Input', debug_image)
-        cv.imshow('StableLLVE Output', output_image)
+        cv.imshow('AGLLNet Input', debug_image)
+        cv.imshow('AGLLNet Output', output_image)
 
     cap.release()
     cv.destroyAllWindows()
