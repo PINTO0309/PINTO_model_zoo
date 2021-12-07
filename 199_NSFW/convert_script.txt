@@ -1,0 +1,91 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/tflite2tensorflow:latest
+
+tflite2tensorflow \
+--model_path nsfw.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path nsfw.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml
+
+tflite2tensorflow \
+--model_path nsfw.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tftrt_float32
+
+tflite2tensorflow \
+--model_path nsfw.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tftrt_float16
+
+mv saved_model saved_model_nsfw
+rm nsfw.json
+
+tflite2tensorflow \
+--model_path nsfw.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_hardswish_for_edgetpu
+
+tflite2tensorflow \
+--model_path nsfw.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_edgetpu
+
+mv saved_model/*.tflite saved_model_nsfw
+rm -rf saved_model
+rm nsfw.json
+
+tflite2tensorflow \
+--model_path nsfw.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+
+tflite2tensorflow \
+--model_path nsfw.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+
+mv saved_model/openvino saved_model_nsfw
+rm -rf saved_model
+rm nsfw.json
+
+tflite2tensorflow \
+--model_path nsfw.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path nsfw.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_onnx \
+--onnx_opset 11
+
+mv saved_model/*.onnx saved_model_nsfw
+rm -rf saved_model
+rm nsfw.json
