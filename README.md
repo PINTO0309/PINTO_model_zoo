@@ -136,7 +136,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |040|DSFD_vgg|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/040_DSFD_vgg)|⚫|⚫||||⚫|||||||
 |041|DBFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/041_DBFace)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MobileNetV2/V3, 320x320,480x640,640x960,800x1280|
 |043|Face_Landmark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/043_face_landmark)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|049|Iris_Landmark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/049_iris_landmark)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||MediaPipe|
+|049|Iris_Landmark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/049_iris_landmark)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
 |095|CenterFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/095_centerface)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |096|RetinaFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/096_RetinaFace)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |106|WHENet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/106_WHENet)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|Real-time Fine-Grained Estimation for Wide Range Head Pose|

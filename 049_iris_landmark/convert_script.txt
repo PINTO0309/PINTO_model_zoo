@@ -1,0 +1,82 @@
+xhost +local: && \
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+-v /tmp/.X11-unix/:/tmp/.X11-unix:rw \
+--device /dev/video0:/dev/video0:mwr \
+--net=host \
+-e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+-e DISPLAY=$DISPLAY \
+--privileged \
+ghcr.io/pinto0309/tflite2tensorflow:latest
+
+tflite2tensorflow \
+--model_path iris_landmark.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path iris_landmark.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11
+
+tflite2tensorflow \
+--model_path iris_landmark.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tftrt_float32
+
+tflite2tensorflow \
+--model_path iris_landmark.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tftrt_float16
+
+mv saved_model saved_model_64x64
+rm iris_landmark.json
+
+tflite2tensorflow \
+--model_path iris_landmark.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_hardswish_for_edgetpu
+
+tflite2tensorflow \
+--model_path iris_landmark.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_edgetpu \
+--string_formulas_for_normalization 'data / 255.0'
+
+mv saved_model/*.tflite saved_model_64x64
+rm -rf saved_model
+rm iris_landmark.json
+
+tflite2tensorflow \
+--model_path iris_landmark.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad \
+--rigorous_optimization_for_myriad
+
+tflite2tensorflow \
+--model_path iris_landmark.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_openvino_and_myriad
+
+mv saved_model/openvino saved_model_64x64
+rm -rf saved_model
+rm iris_landmark.json

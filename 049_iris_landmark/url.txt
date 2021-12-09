@@ -1,2 +1,3 @@
-https://ai.googleblog.com/2020/08/mediapipe-iris-real-time-iris-tracking.html
-https://google.github.io/mediapipe/solutions/iris
+https://github.com/google/mediapipe/blob/master/docs/solutions/models.md
+https://github.com/google/mediapipe/tree/master/mediapipe/modules/iris_landmark
+https://github.com/PINTO0309/tflite2tensorflow
