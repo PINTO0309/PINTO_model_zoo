@@ -1,0 +1,3 @@
+https://github.com/PaddlePaddle/PaddleSeg/tree/release/2.3/contrib
+https://github.com/PINTO0309/openvino2tensorflow
+https://zenn.dev/pinto0309/scraps/cf319db8fea4c3
