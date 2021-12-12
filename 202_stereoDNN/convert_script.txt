@@ -234,18 +234,7 @@ saved_model_to_tflite \
 --saved_model_dir_path saved_model_${MODEL}_${H}x${W} \
 --output_tftrt_float16
 
-
-
-
-
-
-
-
-
-
-
-
-
+mv tflite_from_saved_model/* saved_model_${MODEL}_${H}x${W}
 mv model-inference-${MODEL}-${W}x${H}-0.pb saved_model_${MODEL}_${H}x${W}
 
 
