@@ -215,51 +215,36 @@ $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
 --data_type FP16 \
 --model_name ${MODEL}_${H}x${W}
 
-
-
-
-
-openvino2tensorflow \
---model_path saved_model_${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
---output_saved_model \
---output_pb \
---output_no_quant_float32_tflite \
---weight_replacement_config replace_${MODEL}.json
-
-
-
-
-
-
-
-
-
-openvino2tensorflow \
---model_path saved_model_${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
---output_saved_model \
---output_pb \
+saved_model_to_tflite \
+--saved_model_dir_path saved_model_${MODEL}_${H}x${W} \
 --output_no_quant_float32_tflite \
 --output_dynamic_range_quant_tflite \
 --output_weight_quant_tflite \
 --output_float16_quant_tflite \
 --output_coreml \
---weight_replacement_config replace_${MODEL}.json
-
-mv saved_model/* saved_model_${MODEL}_${H}x${W}
-rm -rf saved_model
-
-openvino2tensorflow \
---model_path saved_model_${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
---output_saved_model \
---output_pb \
 --output_onnx \
---onnx_opset 11 \
---disable_onnx_optimization \
---keep_input_tensor_in_nchw \
---weight_replacement_config replace_${MODEL}.json
+--onnx_opset 11
 
-mv saved_model/*.onnx saved_model_${MODEL}_${H}x${W}
-rm -rf saved_model
+cp saved_model_${MODEL}_${H}x${W}/saved_model.pb tflite_from_saved_model
+cp -R saved_model_${MODEL}_${H}x${W}/variables tflite_from_saved_model
+saved_model_to_tflite \
+--saved_model_dir_path saved_model_${MODEL}_${H}x${W} \
+--output_tftrt_float32
+saved_model_to_tflite \
+--saved_model_dir_path saved_model_${MODEL}_${H}x${W} \
+--output_tftrt_float16
+
+
+
+
+
+
+
+
+
+
+
+
 
 mv model-inference-${MODEL}-${W}x${H}-0.pb saved_model_${MODEL}_${H}x${W}
 
