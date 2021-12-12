@@ -1,0 +1,268 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+python3 scripts/model_builder.py --checkpoint_path models/NVSmall/TensorFlow/model-inference-1025x321-0
+python3 scripts/model_builder.py --checkpoint_path models/NVTiny/TensorFlow/model-inference-513x161-0
+python3 scripts/model_builder.py --checkpoint_path models/ResNet-18/TensorFlow/model-inference-1025x321-0
+python3 scripts/model_builder.py --checkpoint_path models/ResNet-18_2D/TensorFlow/model-inference-513x257-0
+
+H=321
+W=1025
+MODEL=nvsmall
+
+pb_to_saved_model \
+--pb_file_path model-inference-${MODEL}-${W}x${H}-0.pb \
+--inputs Dataloader/ExpandDims:0,Dataloader/ExpandDims_1:0 \
+--outputs disparities/ExpandDims:0,disparities/ExpandDims_1:0
+
+mv saved_model_from_pb saved_model_${MODEL}_${H}x${W}
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${MODEL}_${H}x${W} \
+--output_dir saved_model_${MODEL}_${H}x${W}/openvino/FP32 \
+--input Dataloader/ExpandDims,Dataloader/ExpandDims_1 \
+--input_shape [1,${H},${W},3],[1,${H},${W},3] \
+--data_type FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${MODEL}_${H}x${W} \
+--output_dir saved_model_${MODEL}_${H}x${W}/openvino/FP16 \
+--input Dataloader/ExpandDims,Dataloader/ExpandDims_1 \
+--input_shape [1,${H},${W},3],[1,${H},${W},3] \
+--data_type FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+openvino2tensorflow \
+--model_path saved_model_${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_coreml \
+--weight_replacement_config replace_${MODEL}.json
+
+openvino2tensorflow \
+--model_path saved_model_${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt_float32 \
+--weight_replacement_config replace_${MODEL}.json
+openvino2tensorflow \
+--model_path saved_model_${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_tftrt_float16 \
+--weight_replacement_config replace_${MODEL}.json
+
+mv saved_model/* saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+
+openvino2tensorflow \
+--model_path saved_model_${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--disable_onnx_optimization \
+--keep_input_tensor_in_nchw \
+--weight_replacement_config replace_${MODEL}.json
+
+mv saved_model/*.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+
+mv model-inference-${MODEL}-${W}x${H}-0.pb saved_model_${MODEL}_${H}x${W}
+
+
+
+H=161
+W=513
+MODEL=nvtiny
+
+pb_to_saved_model \
+--pb_file_path model-inference-${MODEL}-${W}x${H}-0.pb \
+--inputs Dataloader/ExpandDims:0,Dataloader/ExpandDims_1:0 \
+--outputs disparities/ExpandDims:0,disparities/ExpandDims_1:0
+
+mv saved_model_from_pb saved_model_${MODEL}_${H}x${W}
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${MODEL}_${H}x${W} \
+--output_dir saved_model_${MODEL}_${H}x${W}/openvino/FP32 \
+--input Dataloader/ExpandDims,Dataloader/ExpandDims_1 \
+--input_shape [1,${H},${W},3],[1,${H},${W},3] \
+--data_type FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${MODEL}_${H}x${W} \
+--output_dir saved_model_${MODEL}_${H}x${W}/openvino/FP16 \
+--input Dataloader/ExpandDims,Dataloader/ExpandDims_1 \
+--input_shape [1,${H},${W},3],[1,${H},${W},3] \
+--data_type FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+openvino2tensorflow \
+--model_path saved_model_${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_coreml \
+--weight_replacement_config replace_${MODEL}.json
+
+mv saved_model/* saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+
+openvino2tensorflow \
+--model_path saved_model_${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--disable_onnx_optimization \
+--keep_input_tensor_in_nchw \
+--weight_replacement_config replace_${MODEL}.json
+
+mv saved_model/*.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+
+mv model-inference-${MODEL}-${W}x${H}-0.pb saved_model_${MODEL}_${H}x${W}
+
+
+
+
+H=321
+W=1025
+MODEL=resnet18
+
+pb_to_saved_model \
+--pb_file_path model-inference-${MODEL}-${W}x${H}-0.pb \
+--inputs Dataloader/ExpandDims:0,Dataloader/ExpandDims_1:0 \
+--outputs disparities/ExpandDims:0,disparities/ExpandDims_1:0
+
+mv saved_model_from_pb saved_model_${MODEL}_${H}x${W}
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${MODEL}_${H}x${W} \
+--output_dir saved_model_${MODEL}_${H}x${W}/openvino/FP32 \
+--input Dataloader/ExpandDims,Dataloader/ExpandDims_1 \
+--input_shape [1,${H},${W},3],[1,${H},${W},3] \
+--data_type FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${MODEL}_${H}x${W} \
+--output_dir saved_model_${MODEL}_${H}x${W}/openvino/FP16 \
+--input Dataloader/ExpandDims,Dataloader/ExpandDims_1 \
+--input_shape [1,${H},${W},3],[1,${H},${W},3] \
+--data_type FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+openvino2tensorflow \
+--model_path saved_model_${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_coreml \
+--weight_replacement_config replace_${MODEL}.json
+
+mv saved_model/* saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+
+openvino2tensorflow \
+--model_path saved_model_${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--disable_onnx_optimization \
+--keep_input_tensor_in_nchw \
+--weight_replacement_config replace_${MODEL}.json
+
+mv saved_model/*.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+
+mv model-inference-${MODEL}-${W}x${H}-0.pb saved_model_${MODEL}_${H}x${W}
+
+
+
+
+H=257
+W=513
+MODEL=resnet18_2d
+
+pb_to_saved_model \
+--pb_file_path model-inference-${MODEL}-${W}x${H}-0.pb \
+--inputs IteratorGetNext:0,IteratorGetNext:1 \
+--outputs disparities/ExpandDims:0,disparities/ExpandDims_1:0
+
+mv saved_model_from_pb saved_model_${MODEL}_${H}x${W}
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${MODEL}_${H}x${W} \
+--output_dir saved_model_${MODEL}_${H}x${W}/openvino/FP32 \
+--input IteratorGetNext,IteratorGetNext_1 \
+--input_shape [1,${H},${W},3],[1,${H},${W},3] \
+--data_type FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${MODEL}_${H}x${W} \
+--output_dir saved_model_${MODEL}_${H}x${W}/openvino/FP16 \
+--input IteratorGetNext,IteratorGetNext_1 \
+--input_shape [1,${H},${W},3],[1,${H},${W},3] \
+--data_type FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+
+
+
+
+openvino2tensorflow \
+--model_path saved_model_${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--weight_replacement_config replace_${MODEL}.json
+
+
+
+
+
+
+
+
+
+openvino2tensorflow \
+--model_path saved_model_${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_coreml \
+--weight_replacement_config replace_${MODEL}.json
+
+mv saved_model/* saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+
+openvino2tensorflow \
+--model_path saved_model_${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--disable_onnx_optimization \
+--keep_input_tensor_in_nchw \
+--weight_replacement_config replace_${MODEL}.json
+
+mv saved_model/*.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+
+mv model-inference-${MODEL}-${W}x${H}-0.pb saved_model_${MODEL}_${H}x${W}
+
+
+
+

@@ -1,0 +1,109 @@
+{
+    "format_version": 2,
+    "layers": [
+        {
+            "layer_id": "212",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "214",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                -1,
+                68,
+                161,
+                513,
+                32
+            ]
+        },
+        {
+            "layer_id": "220",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                3,
+                4,
+                1
+            ]
+        },
+        {
+            "layer_id": "324",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                4,
+                2,
+                3
+            ]
+        },
+        {
+            "layer_id": "360",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                2
+            ]
+        },
+        {
+            "layer_id": "372",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1
+            ]
+        },
+        {
+            "layer_id": "374",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                -1,
+                68,
+                161,
+                513,
+                32
+            ]
+        },
+        {
+            "layer_id": "386",
+            "type": "Transpose",
+            "replace_mode": "insert_after",
+            "values": [
+                0,
+                2,
+                3,
+                4,
+                1
+            ]
+        },
+        {
+            "layer_id": "490",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                4,
+                2,
+                3
+            ]
+        },
+        {
+            "layer_id": "526",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                2
+            ]
+        }
+    ]
+}
