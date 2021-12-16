@@ -1,0 +1,2 @@
+https://github.com/megvii-model/HINet
+https://github.com/PINTO0309/openvino2tensorflow

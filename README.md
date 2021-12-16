@@ -238,26 +238,27 @@ I have been working on quantization of various models as a hobby, but I have ski
 |161|EigenGAN-Tensorflow|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/161_EigenGAN-Tensorflow)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|Anime,CelebA|
 |193|CoCosNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/193_CoCosNet)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫||⚫|RGB,256x256|
 ### 11. Super Resolution
-|No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
-|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|012|Fast_Accurate_and_Lightweight_Super-Resolution|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/012_Fast_Accurate_and_Lightweight_Super-Resolution)|⚫||⚫||⚫|||||||
-|022|Learning_to_See_Moving_Objects_in_the_Dark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/022_Learning_to_See_Moving_Objects_in_the_Dark)|⚫|⚫|||⚫|||||⚫||
-|071|Noise2Noise|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/071_Noise2Noise)|⚫|⚫|⚫|⚫|⚫|||||⚫|srresnet/clear only|
-|076|Deep_White_Balance|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/076_Deep_White_Balance)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|077|ESRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/077_ESRGAN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|50x50->x4, 100x100->x4|
-|079|MIRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/079_MIRNet)|⚫|⚫|⚫|⚫|⚫|⚫||⚫|⚫|⚫||
-|086|Defocus Deblurring Using Dual-Pixel|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/086_defocus-deblurring-dual-pixel)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|090|Ghost-free_Shadow_Removal|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/090_Ghost-free_Shadow_Removal)|⚫|⚫|⚫||⚫|⚫|⚫|||⚫|256x256|
-|111|SRN-Deblur|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/111_SRN-Deblur)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|240x320,480x640,720x1280,1024x1280|
-|112|DeblurGANv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/112_DeblurGANv2)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|inception/mobilenetv2:256x256,320x320,480x640,736x1280,1024x1280|
-|114|Two-branch-dehazing|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/114_Two-branch-dehazing)|⚫|⚫|⚫||⚫|⚫||⚫|⚫|⚫|240x320,480x640,720x1280|
-|133|Real-ESRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/133_Real-ESRGAN)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|16x16,32x32,64x64,128x128,240x320,256x256,320x320,480x640|
-|152|DeepLPF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/152_DeepLPF)|⚫|⚫|||⚫|⚫||||⚫||
-|170|Learning-to-See-in-the-Dark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/170_Learning-to-See-in-the-Dark)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|sony/fuji, 240x320,360x480,360x640,480x640|
-|171|Fast-SRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/171_Fast-SRGAN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|||⚫|120x160,128x128,240x320,256x256,480x640,512x512|
-|172|Real-Time-Super-Resolution|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/172_Real-Time-Super-Resolution)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|64x64,96x96,128x128,256x256,240x320,480x640|
-|176|StableLLVE|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/176_StableLLVE)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|180x240,240x320,360x640,480x640,720x1280|
-|200|AGLLNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/200_AGLLNet)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|256x256,256x384,384x512,512x640,768x768,768x1280|
+|No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
+|:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
+|012|Fast_Accurate_and_Lightweight_Super-Resolution|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/012_Fast_Accurate_and_Lightweight_Super-Resolution)|⚫||⚫|||⚫|||||||
+|022|Learning_to_See_Moving_Objects_in_the_Dark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/022_Learning_to_See_Moving_Objects_in_the_Dark)|⚫|⚫||||⚫|||||⚫||
+|071|Noise2Noise|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/071_Noise2Noise)|⚫|⚫|⚫|⚫||⚫|||||⚫|srresnet/clear only|
+|076|Deep_White_Balance|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/076_Deep_White_Balance)|⚫|⚫||||⚫|⚫|⚫|⚫|⚫|⚫||
+|077|ESRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/077_ESRGAN)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|50x50->x4, 100x100->x4|
+|079|MIRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/079_MIRNet)|⚫|⚫|⚫|⚫||⚫|⚫||⚫|⚫|⚫||
+|086|Defocus Deblurring Using Dual-Pixel|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/086_defocus-deblurring-dual-pixel)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|090|Ghost-free_Shadow_Removal|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/090_Ghost-free_Shadow_Removal)|⚫|⚫|⚫|||⚫|⚫|⚫|||⚫|256x256|
+|111|SRN-Deblur|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/111_SRN-Deblur)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|240x320,480x640,720x1280,1024x1280|
+|112|DeblurGANv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/112_DeblurGANv2)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|inception/mobilenetv2:256x256,320x320,480x640,736x1280,1024x1280|
+|114|Two-branch-dehazing|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/114_Two-branch-dehazing)|⚫|⚫|⚫|||⚫|⚫||⚫|⚫|⚫|240x320,480x640,720x1280|
+|133|Real-ESRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/133_Real-ESRGAN)|⚫|⚫||||⚫|⚫|⚫|⚫|⚫|⚫|16x16,32x32,64x64,128x128,240x320,256x256,320x320,480x640|
+|152|DeepLPF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/152_DeepLPF)|⚫|⚫||||⚫|⚫||||⚫||
+|170|Learning-to-See-in-the-Dark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/170_Learning-to-See-in-the-Dark)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|sony/fuji, 240x320,360x480,360x640,480x640|
+|171|Fast-SRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/171_Fast-SRGAN)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|||⚫|120x160,128x128,240x320,256x256,480x640,512x512|
+|172|Real-Time-Super-Resolution|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/172_Real-Time-Super-Resolution)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|64x64,96x96,128x128,256x256,240x320,480x640|
+|176|StableLLVE|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/176_StableLLVE)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|180x240,240x320,360x640,480x640,720x1280|
+|200|AGLLNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/200_AGLLNet)|⚫|⚫||||⚫|⚫|⚫|⚫|⚫|⚫|256x256,256x384,384x512,512x640,768x768,768x1280|
+|204|HINet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/204_HINet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|DeBlur,DeNoise,DeRain/256x320,320x480,480x640|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
