@@ -259,6 +259,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |176|StableLLVE|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/176_StableLLVE)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|180x240,240x320,360x640,480x640,720x1280|
 |200|AGLLNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/200_AGLLNet)|⚫|⚫||||⚫|⚫|⚫|⚫|⚫|⚫|256x256,256x384,384x512,512x640,768x768,768x1280|
 |204|HINet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/204_HINet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|DeBlur,DeNoise,DeRain/256x320,320x480,480x640|
+|205|MBLLEN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/205_MBLLEN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image/Video Enhancement,180x320,240x320,360x640,480x640,720x1280|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|

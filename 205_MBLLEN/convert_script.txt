@@ -1,0 +1,1062 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+rm -rf openvino
+cd main
+
+MODEL=LOL_img_lowlight
+H=180
+W=320
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32
+H=240
+W=320
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32
+H=360
+W=640
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32
+H=480
+W=640
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32
+H=720
+W=1280
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32
+
+MODEL=Syn_img_lowlight
+H=180
+W=320
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32
+H=240
+W=320
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32
+H=360
+W=640
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32
+H=480
+W=640
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32
+H=720
+W=1280
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32
+
+MODEL=Syn_img_lowlight_withnoise
+H=180
+W=320
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32
+H=240
+W=320
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32
+H=360
+W=640
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32
+H=480
+W=640
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32
+H=720
+W=1280
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP32 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP32
+
+
+
+MODEL=LOL_img_lowlight
+H=180
+W=320
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+H=240
+W=320
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+H=360
+W=640
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+H=480
+W=640
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+H=720
+W=1280
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+
+MODEL=Syn_img_lowlight
+H=180
+W=320
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+H=240
+W=320
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+H=360
+W=640
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+H=480
+W=640
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+H=720
+W=1280
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+
+MODEL=Syn_img_lowlight_withnoise
+H=180
+W=320
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+H=240
+W=320
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+H=360
+W=640
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+H=480
+W=640
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+H=720
+W=1280
+python3 $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--input_model ${MODEL}.pb \
+--input_shape [1,${H},${W},3] \
+--data_type FP16 \
+--output_dir openvino/${MODEL}_${H}x${W}/FP16
+
+
+
+MODEL=LOL_img_lowlight
+H=180
+W=320
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}.blob
+H=240
+W=320
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}.blob
+H=360
+W=640
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}.blob
+H=480
+W=640
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}.blob
+H=720
+W=1280
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}.blob
+
+MODEL=Syn_img_lowlight
+H=180
+W=320
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}.blob
+H=240
+W=320
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}.blob
+H=360
+W=640
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}.blob
+H=480
+W=640
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}.blob
+H=720
+W=1280
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}.blob
+
+MODEL=Syn_img_lowlight_withnoise
+H=180
+W=320
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}.blob
+H=240
+W=320
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}.blob
+H=360
+W=640
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}.blob
+H=480
+W=640
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}.blob
+H=720
+W=1280
+mkdir -p openvino/${MODEL}_${H}x${W}/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m openvino/${MODEL}_${H}x${W}/FP16/${MODEL}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o openvino/${MODEL}_${H}x${W}/myriad/${MODEL}.blob
+
+
+
+MODEL=LOL_img_lowlight
+H=180
+W=320
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float16
+mv saved_model saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw
+mv saved_model/model_float32.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+mkdir -p saved_model_${MODEL}_${H}x${W}/openvino
+mv openvino/${MODEL}_${H}x${W}/* saved_model_${MODEL}_${H}x${W}/openvino
+
+H=240
+W=320
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float16
+mv saved_model saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw
+mv saved_model/model_float32.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+mkdir -p saved_model_${MODEL}_${H}x${W}/openvino
+mv openvino/${MODEL}_${H}x${W}/* saved_model_${MODEL}_${H}x${W}/openvino
+
+H=360
+W=640
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float16
+mv saved_model saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw
+mv saved_model/model_float32.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+mkdir -p saved_model_${MODEL}_${H}x${W}/openvino
+mv openvino/${MODEL}_${H}x${W}/* saved_model_${MODEL}_${H}x${W}/openvino
+
+H=480
+W=640
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float16
+mv saved_model saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw
+mv saved_model/model_float32.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+mkdir -p saved_model_${MODEL}_${H}x${W}/openvino
+mv openvino/${MODEL}_${H}x${W}/* saved_model_${MODEL}_${H}x${W}/openvino
+
+H=720
+W=1280
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float16
+mv saved_model saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw
+mv saved_model/model_float32.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+mkdir -p saved_model_${MODEL}_${H}x${W}/openvino
+mv openvino/${MODEL}_${H}x${W}/* saved_model_${MODEL}_${H}x${W}/openvino
+
+
+
+
+
+
+MODEL=Syn_img_lowlight
+H=180
+W=320
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float16
+mv saved_model saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw
+mv saved_model/model_float32.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+mkdir -p saved_model_${MODEL}_${H}x${W}/openvino
+mv openvino/${MODEL}_${H}x${W}/* saved_model_${MODEL}_${H}x${W}/openvino
+
+H=240
+W=320
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float16
+mv saved_model saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw
+mv saved_model/model_float32.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+mkdir -p saved_model_${MODEL}_${H}x${W}/openvino
+mv openvino/${MODEL}_${H}x${W}/* saved_model_${MODEL}_${H}x${W}/openvino
+
+H=360
+W=640
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float16
+mv saved_model saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw
+mv saved_model/model_float32.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+mkdir -p saved_model_${MODEL}_${H}x${W}/openvino
+mv openvino/${MODEL}_${H}x${W}/* saved_model_${MODEL}_${H}x${W}/openvino
+
+H=480
+W=640
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float16
+mv saved_model saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw
+mv saved_model/model_float32.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+mkdir -p saved_model_${MODEL}_${H}x${W}/openvino
+mv openvino/${MODEL}_${H}x${W}/* saved_model_${MODEL}_${H}x${W}/openvino
+
+H=720
+W=1280
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float16
+mv saved_model saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw
+mv saved_model/model_float32.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+mkdir -p saved_model_${MODEL}_${H}x${W}/openvino
+mv openvino/${MODEL}_${H}x${W}/* saved_model_${MODEL}_${H}x${W}/openvino
+
+
+
+
+
+MODEL=Syn_img_lowlight_withnoise
+H=180
+W=320
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float16
+mv saved_model saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw
+mv saved_model/model_float32.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+mkdir -p saved_model_${MODEL}_${H}x${W}/openvino
+mv openvino/${MODEL}_${H}x${W}/* saved_model_${MODEL}_${H}x${W}/openvino
+
+H=240
+W=320
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float16
+mv saved_model saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw
+mv saved_model/model_float32.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+mkdir -p saved_model_${MODEL}_${H}x${W}/openvino
+mv openvino/${MODEL}_${H}x${W}/* saved_model_${MODEL}_${H}x${W}/openvino
+
+H=360
+W=640
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float16
+mv saved_model saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw
+mv saved_model/model_float32.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+mkdir -p saved_model_${MODEL}_${H}x${W}/openvino
+mv openvino/${MODEL}_${H}x${W}/* saved_model_${MODEL}_${H}x${W}/openvino
+
+H=480
+W=640
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float16
+mv saved_model saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw
+mv saved_model/model_float32.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+mkdir -p saved_model_${MODEL}_${H}x${W}/openvino
+mv openvino/${MODEL}_${H}x${W}/* saved_model_${MODEL}_${H}x${W}/openvino
+
+H=720
+W=1280
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float32
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_tftrt_float16
+mv saved_model saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw
+mv saved_model/model_float32.onnx saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+openvino2tensorflow \
+--model_path openvino/${MODEL}_${H}x${W}/FP32/${MODEL}.xml \
+--output_saved_model \
+--output_pb \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu
+mv saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
+mv saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
+rm -rf saved_model
+mkdir -p saved_model_${MODEL}_${H}x${W}/openvino
+mv openvino/${MODEL}_${H}x${W}/* saved_model_${MODEL}_${H}x${W}/openvino
