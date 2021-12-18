@@ -218,6 +218,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |182|models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_fused_argmax|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/182_models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_fused_argmax)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 |196|human_segmentation_pphumanseg|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/196_human_segmentation_pphumanseg)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
 |201|CityscapesSOTA|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/201_CityscapesSOTA)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|180x320,240x320,360x640,480x640,720x1280|
+|206|Matting|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/206_Matting)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|PaddleSeg/modnet_mobilenetv2,modnet_hrnet_w18,modnet_resnet50_vd/256x256,384x384,512x512,640x640|
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
