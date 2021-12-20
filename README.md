@@ -194,6 +194,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |173|MVDepthNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/173_MVDepthNet)|||||||⚫||||⚫|256x320|
 |202|stereoDNN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/202_stereoDNN)|⚫|⚫|||⚫|⚫|⚫|⚫||⚫|⚫|NVSmall_321x1025,NVTiny_161x513,ResNet18_321x1025,ResNet18_2d_257x513|
 |203|SRHNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/203_SRHNet)|||||||||||⚫|finetune2_kitti/sceneflow,maxdisp192,320x480/480x640|
+|210|SC_Depth_pl|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/210_SC_Depth_pl)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|kitti/nyu,320x320,320x480,480x640,640x800|
 ### 8. Semantic Segmentation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|

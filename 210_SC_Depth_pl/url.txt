@@ -1,0 +1,2 @@
+https://github.com/JiawangBian/sc_depth_pl
+https://github.com/PINTO0309/openvino2tensorflow
