@@ -199,16 +199,6 @@ openvino2tensorflow \
 --output_tftrt_float16
 mv saved_model/* ${MODEL}_${H}x${W}
 rm -rf saved_model
-openvino2tensorflow \
---model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
---output_saved_model \
---output_pb \
---output_integer_quant_typ 'uint8' \
---string_formulas_for_normalization 'data / 255' \
---output_edgetpu
-mv saved_model/model_full_integer_quant.tflite ${MODEL}_${H}x${W}
-mv saved_model/model_full_integer_quant_edgetpu.tflite ${MODEL}_${H}x${W}
-rm -rf saved_model
 mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
 
 H=240
@@ -250,16 +240,6 @@ openvino2tensorflow \
 --model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
 --output_tftrt_float16
 mv saved_model/* ${MODEL}_${H}x${W}
-rm -rf saved_model
-openvino2tensorflow \
---model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
---output_saved_model \
---output_pb \
---output_integer_quant_typ 'uint8' \
---string_formulas_for_normalization 'data / 255' \
---output_edgetpu
-mv saved_model/model_full_integer_quant.tflite ${MODEL}_${H}x${W}
-mv saved_model/model_full_integer_quant_edgetpu.tflite ${MODEL}_${H}x${W}
 rm -rf saved_model
 mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
 
@@ -303,16 +283,6 @@ openvino2tensorflow \
 --output_tftrt_float16
 mv saved_model/* ${MODEL}_${H}x${W}
 rm -rf saved_model
-openvino2tensorflow \
---model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
---output_saved_model \
---output_pb \
---output_integer_quant_typ 'uint8' \
---string_formulas_for_normalization 'data / 255' \
---output_edgetpu
-mv saved_model/model_full_integer_quant.tflite ${MODEL}_${H}x${W}
-mv saved_model/model_full_integer_quant_edgetpu.tflite ${MODEL}_${H}x${W}
-rm -rf saved_model
 mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
 
 H=480
@@ -355,16 +325,6 @@ openvino2tensorflow \
 --output_tftrt_float16
 mv saved_model/* ${MODEL}_${H}x${W}
 rm -rf saved_model
-openvino2tensorflow \
---model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
---output_saved_model \
---output_pb \
---output_integer_quant_typ 'uint8' \
---string_formulas_for_normalization 'data / 255' \
---output_edgetpu
-mv saved_model/model_full_integer_quant.tflite ${MODEL}_${H}x${W}
-mv saved_model/model_full_integer_quant_edgetpu.tflite ${MODEL}_${H}x${W}
-rm -rf saved_model
 mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
 
 H=720
@@ -399,22 +359,6 @@ openvino2tensorflow \
 --string_formulas_for_normalization 'data / 255' \
 --output_tfjs \
 --output_coreml
-openvino2tensorflow \
---model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
---output_tftrt_float32
-openvino2tensorflow \
---model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
---output_tftrt_float16
 mv saved_model/* ${MODEL}_${H}x${W}
-rm -rf saved_model
-openvino2tensorflow \
---model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
---output_saved_model \
---output_pb \
---output_integer_quant_typ 'uint8' \
---string_formulas_for_normalization 'data / 255' \
---output_edgetpu
-mv saved_model/model_full_integer_quant.tflite ${MODEL}_${H}x${W}
-mv saved_model/model_full_integer_quant_edgetpu.tflite ${MODEL}_${H}x${W}
 rm -rf saved_model
 mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
