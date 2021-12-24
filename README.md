@@ -1,4 +1,4 @@
-# PINTO_model_zoo ![visitors](https://visitor-badge.glitch.me/badge?page_id=pinto0309.pinto_model_zoo&left_color=gray&right_color=blue)
+# PINTO_model_zoo
 <p align="center">
   <img src="https://user-images.githubusercontent.com/33194443/104581604-2592cb00-56a2-11eb-9610-5eaa0afb6e1f.png" />
 </p>
@@ -266,6 +266,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |207|GLADNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/207_GLADNet)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image/Video Enhancement,180x320,240x320,360x640,480x640,720x1280,No-LICENSE|
 |208|SAPNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/208_SAPNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|DeRain,180x320,240x320,360x640,480x640,720x1280|
 |209|MSBDN-DFF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/209_MSBDN-DFF)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Dehazing,192x320,240x320,320x480,384x640,480x640,720x1280,No-LICENSE|
+|212|GFN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/212_GFN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|DeBlur+SuperResolution,x4/64x64,96x96,128x128,192x192,240x320,256x256,480x640,720x1280/No-LICENSE|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
