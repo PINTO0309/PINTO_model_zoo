@@ -1,4 +1,4 @@
-# PINTO_model_zoo ![visitors](https://visitor-badge.glitch.me/badge?page_id=pinto0309.pinto_model_zoo&left_color=gray&right_color=blue)
+# PINTO_model_zoo
 <p align="center">
   <img src="https://user-images.githubusercontent.com/33194443/104581604-2592cb00-56a2-11eb-9610-5eaa0afb6e1f.png" />
 </p>
