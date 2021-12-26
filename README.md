@@ -259,8 +259,8 @@ I have been working on quantization of various models as a hobby, but I have ski
 |170|Learning-to-See-in-the-Dark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/170_Learning-to-See-in-the-Dark)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|sony/fuji, 240x320,360x480,360x640,480x640|
 |171|Fast-SRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/171_Fast-SRGAN)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|||⚫|120x160,128x128,240x320,256x256,480x640,512x512|
 |172|Real-Time-Super-Resolution|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/172_Real-Time-Super-Resolution)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|64x64,96x96,128x128,256x256,240x320,480x640|
-|176|StableLLVE|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/176_StableLLVE)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|180x240,240x320,360x640,480x640,720x1280|
-|200|AGLLNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/200_AGLLNet)|⚫|⚫||||⚫|⚫|⚫|⚫|⚫|⚫|256x256,256x384,384x512,512x640,768x768,768x1280|
+|176|StableLLVE|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/176_StableLLVE)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image/Video Enhancement,180x240,240x320,360x640,480x640,720x1280|
+|200|AGLLNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/200_AGLLNet)|⚫|⚫||||⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image/Video Enhancement,256x256,256x384,384x512,512x640,768x768,768x1280|
 |204|HINet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/204_HINet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|DeBlur,DeNoise,DeRain/256x320,320x480,480x640|
 |205|MBLLEN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/205_MBLLEN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image/Video Enhancement,180x320,240x320,360x640,480x640,720x1280|
 |207|GLADNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/207_GLADNet)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image/Video Enhancement,180x320,240x320,360x640,480x640,720x1280,No-LICENSE|
