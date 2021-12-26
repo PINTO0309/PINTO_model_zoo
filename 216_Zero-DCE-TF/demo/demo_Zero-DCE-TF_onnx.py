@@ -10,6 +10,10 @@ import onnxruntime
 
 
 def run_inference(onnx_session, input_size, image):
+    original_image = cv.resize(image, dsize=(input_size[1], input_size[0]))
+    original_image = cv.cvtColor(original_image, cv.COLOR_BGR2RGB)
+    original_image = original_image / 255.0
+
     # Pre process:Resize, BGR->RGB, Transpose, float32 cast
     input_image = cv.resize(image, dsize=(input_size[1], input_size[0]))
     input_image = cv.cvtColor(input_image, cv.COLOR_BGR2RGB)
@@ -20,13 +24,28 @@ def run_inference(onnx_session, input_size, image):
 
     # Inference
     input_name = onnx_session.get_inputs()[0].name
-    result = onnx_session.run(None, {input_name: input_image})
+    A = onnx_session.run(None, {input_name: input_image})
 
-    # Post process:squeeze, RGB->BGR, Transpose, uint8 cast
-    result = np.array(result)
-
-    output_image = result[0][0]
-    output_image = output_image.transpose(1, 2, 0)
+    # Post process
+    A = np.array(A)[0]
+    r1 = A[:, :, :, :3]
+    r2 = A[:, :, :, 3:6]
+    r3 = A[:, :, :, 6:9]
+    r4 = A[:, :, :, 9:12]
+    r5 = A[:, :, :, 12:15]
+    r6 = A[:, :, :, 15:18]
+    r7 = A[:, :, :, 18:21]
+    r8 = A[:, :, :, 21:24]
+    x = original_image + r1 * (np.power(original_image, 2) - original_image)
+    x = x + r2 * (np.power(x, 2) - x)
+    x = x + r3 * (np.power(x, 2) - x)
+    enhanced_image_1 = x + r4 * (np.power(x, 2) - x)
+    x = enhanced_image_1 + r5 * (np.power(enhanced_image_1, 2) -
+                                 enhanced_image_1)
+    x = x + r6 * (np.power(x, 2) - x)
+    x = x + r7 * (np.power(x, 2) - x)
+    output_image = x + r8 * (np.power(x, 2) - x)
+    output_image = output_image[0, :, :, :]
     output_image = np.clip(output_image * 255.0, 0, 255).astype(np.uint8)
     output_image = cv.cvtColor(output_image, cv.COLOR_RGB2BGR)
 
@@ -41,7 +60,7 @@ def main():
     parser.add_argument(
         "--model",
         type=str,
-        default='aodnet_180x320/aodnet_180x320.onnx',
+        default='saved_model_180x320/model_float32.onnx',
     )
     parser.add_argument(
         "--input_size",
@@ -94,8 +113,8 @@ def main():
         key = cv.waitKey(1)
         if key == 27:  # ESC
             break
-        cv.imshow('AOD-Net Input', debug_image)
-        cv.imshow('AOD-Net Output', output_image)
+        cv.imshow('Zero-DCE-TF Input', debug_image)
+        cv.imshow('Zero-DCE-TF Output', output_image)
 
     cap.release()
     cv.destroyAllWindows()

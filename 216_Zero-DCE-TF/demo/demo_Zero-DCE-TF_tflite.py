@@ -6,27 +6,49 @@ import argparse
 
 import cv2 as cv
 import numpy as np
-import onnxruntime
+import tensorflow as tf
 
 
-def run_inference(onnx_session, input_size, image):
-    # Pre process:Resize, BGR->RGB, Transpose, float32 cast
+def run_inference(interpreter, input_size, image):
+    original_image = cv.resize(image, dsize=(input_size[1], input_size[0]))
+    original_image = cv.cvtColor(original_image, cv.COLOR_BGR2RGB)
+    original_image = original_image / 255.0
+
+    # Pre process:Resize, BGR->RGB, float32 cast
     input_image = cv.resize(image, dsize=(input_size[1], input_size[0]))
     input_image = cv.cvtColor(input_image, cv.COLOR_BGR2RGB)
-    input_image = input_image.transpose(2, 0, 1)
     input_image = np.expand_dims(input_image, axis=0)
     input_image = input_image.astype('float32')
     input_image = input_image / 255.0
 
     # Inference
-    input_name = onnx_session.get_inputs()[0].name
-    result = onnx_session.run(None, {input_name: input_image})
+    input_details = interpreter.get_input_details()
+    interpreter.set_tensor(input_details[0]['index'], input_image)
+    interpreter.invoke()
 
-    # Post process:squeeze, RGB->BGR, Transpose, uint8 cast
-    result = np.array(result)
+    output_details = interpreter.get_output_details()
+    A = interpreter.get_tensor(output_details[0]['index'])
 
-    output_image = result[0][0]
-    output_image = output_image.transpose(1, 2, 0)
+    # Post process:squeeze, RGB->BGR, uint8 cast
+    A = np.array(A)
+    r1 = A[:, :, :, :3]
+    r2 = A[:, :, :, 3:6]
+    r3 = A[:, :, :, 6:9]
+    r4 = A[:, :, :, 9:12]
+    r5 = A[:, :, :, 12:15]
+    r6 = A[:, :, :, 15:18]
+    r7 = A[:, :, :, 18:21]
+    r8 = A[:, :, :, 21:24]
+    x = original_image + r1 * (np.power(original_image, 2) - original_image)
+    x = x + r2 * (np.power(x, 2) - x)
+    x = x + r3 * (np.power(x, 2) - x)
+    enhanced_image_1 = x + r4 * (np.power(x, 2) - x)
+    x = enhanced_image_1 + r5 * (np.power(enhanced_image_1, 2) -
+                                 enhanced_image_1)
+    x = x + r6 * (np.power(x, 2) - x)
+    x = x + r7 * (np.power(x, 2) - x)
+    output_image = x + r8 * (np.power(x, 2) - x)
+    output_image = output_image[0, :, :, :]
     output_image = np.clip(output_image * 255.0, 0, 255).astype(np.uint8)
     output_image = cv.cvtColor(output_image, cv.COLOR_RGB2BGR)
 
@@ -41,7 +63,7 @@ def main():
     parser.add_argument(
         "--model",
         type=str,
-        default='aodnet_180x320/aodnet_180x320.onnx',
+        default='saved_model_180x320/model_float16_quant.tflite',
     )
     parser.add_argument(
         "--input_size",
@@ -62,7 +84,8 @@ def main():
     cap = cv.VideoCapture(cap_device)
 
     # Load model
-    onnx_session = onnxruntime.InferenceSession(model_path)
+    interpreter = tf.lite.Interpreter(model_path=model_path)
+    interpreter.allocate_tensors()
 
     while True:
         start_time = time.time()
@@ -76,7 +99,7 @@ def main():
 
         # Inference execution
         output_image = run_inference(
-            onnx_session,
+            interpreter,
             input_size,
             frame,
         )

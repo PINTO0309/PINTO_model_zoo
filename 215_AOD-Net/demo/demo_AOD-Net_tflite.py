@@ -94,9 +94,6 @@ def main():
             "Elapsed Time : " + '{:.1f}'.format(elapsed_time * 1000) + "ms",
             (10, 30), cv.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 1, cv.LINE_AA)
 
-        debug_image = cv.resize(debug_image, dsize=None, fx=0.5, fy=0.5)
-        output_image = cv.resize(output_image, dsize=None, fx=0.5, fy=0.5)
-
         key = cv.waitKey(1)
         if key == 27:  # ESC
             break
