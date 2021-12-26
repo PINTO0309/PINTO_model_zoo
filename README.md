@@ -270,6 +270,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |213|TBEFN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/213_TBEFN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280|
 |214|EnlightenGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/214_EnlightenGAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/192x320,240x320,320x480,368x640,480x640,720x1280|
 |215|AOD-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/215_AOD-Net)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|DeHazing/180x320,240x320,320x480,360x640,480x640,720x1280|
+|216|Zero-DCE-TF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/216_Zero-DCE-TF)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
