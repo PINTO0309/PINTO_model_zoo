@@ -9,7 +9,7 @@ import numpy as np
 import tensorflow as tf
 
 
-def run_inference(interpreter, input_size, image):
+def run_inference(interpreter, input_size, image, use_post_process=False):
     original_image = cv.resize(image, dsize=(input_size[1], input_size[0]))
     original_image = cv.cvtColor(original_image, cv.COLOR_BGR2RGB)
     original_image = original_image / 255.0
@@ -29,28 +29,33 @@ def run_inference(interpreter, input_size, image):
     output_details = interpreter.get_output_details()
     A = interpreter.get_tensor(output_details[0]['index'])
 
-    # Post process:squeeze, RGB->BGR, uint8 cast
-    A = np.array(A)
-    r1 = A[:, :, :, :3]
-    r2 = A[:, :, :, 3:6]
-    r3 = A[:, :, :, 6:9]
-    r4 = A[:, :, :, 9:12]
-    r5 = A[:, :, :, 12:15]
-    r6 = A[:, :, :, 15:18]
-    r7 = A[:, :, :, 18:21]
-    r8 = A[:, :, :, 21:24]
-    x = original_image + r1 * (np.power(original_image, 2) - original_image)
-    x = x + r2 * (np.power(x, 2) - x)
-    x = x + r3 * (np.power(x, 2) - x)
-    enhanced_image_1 = x + r4 * (np.power(x, 2) - x)
-    x = enhanced_image_1 + r5 * (np.power(enhanced_image_1, 2) -
-                                 enhanced_image_1)
-    x = x + r6 * (np.power(x, 2) - x)
-    x = x + r7 * (np.power(x, 2) - x)
-    output_image = x + r8 * (np.power(x, 2) - x)
-    output_image = output_image[0, :, :, :]
-    output_image = np.clip(output_image * 255.0, 0, 255).astype(np.uint8)
-    output_image = cv.cvtColor(output_image, cv.COLOR_RGB2BGR)
+    # Post process
+    if use_post_process:
+        A = np.array(A)
+        r1 = A[:, :, :, :3]
+        r2 = A[:, :, :, 3:6]
+        r3 = A[:, :, :, 6:9]
+        r4 = A[:, :, :, 9:12]
+        r5 = A[:, :, :, 12:15]
+        r6 = A[:, :, :, 15:18]
+        r7 = A[:, :, :, 18:21]
+        r8 = A[:, :, :, 21:24]
+        x = original_image + r1 * (np.power(original_image, 2) -
+                                   original_image)
+        x = x + r2 * (np.power(x, 2) - x)
+        x = x + r3 * (np.power(x, 2) - x)
+        enhanced_image_1 = x + r4 * (np.power(x, 2) - x)
+        x = enhanced_image_1 + r5 * (np.power(enhanced_image_1, 2) -
+                                     enhanced_image_1)
+        x = x + r6 * (np.power(x, 2) - x)
+        x = x + r7 * (np.power(x, 2) - x)
+        output_image = x + r8 * (np.power(x, 2) - x)
+        output_image = output_image[0, :, :, :]
+        output_image = np.clip(output_image * 255.0, 0, 255).astype(np.uint8)
+        output_image = cv.cvtColor(output_image, cv.COLOR_RGB2BGR)
+    else:
+        output_image = np.array(A).astype(np.uint8)
+        output_image = cv.cvtColor(output_image, cv.COLOR_RGB2BGR)
 
     return output_image
 
