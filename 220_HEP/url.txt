@@ -1,3 +1,4 @@
 https://github.com/fengzhang427/HEP
 https://github.com/PINTO0309/openvino2tensorflow
 
+https://zenn.dev/pinto0309/scraps/62da09b025790d
