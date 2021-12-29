@@ -274,6 +274,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |216|Zero-DCE-TF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/216_Zero-DCE-TF)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280|
 |217|RUAS|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/217_RUAS)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280,No-LICENSE|
 |218|DSLR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/218_DSLR)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Low-light Image Enhancement/256x256,256x384,256x512,384x640,512x640,768x1280|
+|220|HEP|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/220_HEP)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
