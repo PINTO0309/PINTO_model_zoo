@@ -267,7 +267,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |207|GLADNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/207_GLADNet)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image/Video Enhancement,180x320,240x320,360x640,480x640,720x1280,No-LICENSE|
 |208|SAPNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/208_SAPNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|DeRain,180x320,240x320,360x640,480x640,720x1280|
 |209|MSBDN-DFF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/209_MSBDN-DFF)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Dehazing,192x320,240x320,320x480,384x640,480x640,720x1280,No-LICENSE|
-|212|GFN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/212_GFN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|DeBlur+SuperResolution,x4/64x64,96x96,128x128,192x192,240x320,256x256,480x640,720x1280/No-LICENSE|
+|212|GFN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/212_GFN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|DeBlur+SuperResolution,x4/64x64,96x96,128x128,192x192,240x320,256x256,480x640,720x1280|
 |213|TBEFN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/213_TBEFN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280|
 |214|EnlightenGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/214_EnlightenGAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/192x320,240x320,320x480,368x640,480x640,720x1280|
 |215|AOD-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/215_AOD-Net)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|DeHazing/180x320,240x320,320x480,360x640,480x640,720x1280|
