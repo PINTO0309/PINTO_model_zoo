@@ -1,6 +1,6 @@
 # Demo projects
 
-## TBEFN with ONNX Runtime in Python
+## RUAS with ONNX Runtime in Python
 ```
 python demo_RUAS_onnx.py
 ```
@@ -25,7 +25,7 @@ If you want to change the model, specify it with an argument.
     )
 ```
 
-## TBEFN with TensorFlow Lite in Python
+## RUAS with TensorFlow Lite in Python
 ```
 python demo_RUAS_tflite.py
 ```

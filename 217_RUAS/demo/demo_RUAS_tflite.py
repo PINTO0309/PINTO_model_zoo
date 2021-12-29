@@ -111,8 +111,8 @@ def main():
         key = cv.waitKey(1)
         if key == 27:  # ESC
             break
-        cv.imshow('TBFEN Input', debug_image)
-        cv.imshow('TBFEN Output', output_image)
+        cv.imshow('RUAS Input', debug_image)
+        cv.imshow('RUAS Output', output_image)
 
     cap.release()
     cv.destroyAllWindows()

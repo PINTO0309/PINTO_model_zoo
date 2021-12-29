@@ -8,7 +8,7 @@ import numpy as np
 import onnxruntime
 
 
-def run_inference(onnx_session, input_size, image, model_type='dark'):
+def run_inference(onnx_session, input_size, image):
     # Pre process:Resize, BGR->RGB, Transpose, float32 cast
     input_image = cv.resize(image, dsize=(input_size[1], input_size[0]))
     input_image = cv.cvtColor(input_image, cv.COLOR_BGR2RGB)
@@ -22,10 +22,7 @@ def run_inference(onnx_session, input_size, image, model_type='dark'):
     result = onnx_session.run(None, {input_name: input_image})
 
     # Post process:squeeze, RGB->BGR, Transpose, uint8 cast
-    if model_type == 'lol':
-        output_image = np.squeeze(result)[-1]
-    elif model_type == 'upe' or model_type == 'dark':
-        output_image = np.squeeze(result)[-2]
+    output_image = np.squeeze(result)
     output_image = output_image.transpose(1, 2, 0)
     output_image = np.clip(output_image * 255.0, 0, 255)
     output_image = output_image.astype(np.uint8)
@@ -42,18 +39,12 @@ def main():
     parser.add_argument(
         "--model",
         type=str,
-        default='lol_180x320/lol_180x320.onnx',
+        default='dslr_256x256/dslr_256x256.onnx',
     )
     parser.add_argument(
         "--input_size",
         type=str,
-        default='180,320',
-    )
-    parser.add_argument(
-        "--model_type",
-        type=str,
-        default='lol',
-        choices=['lol', 'upe', 'dark'],
+        default='256,256',
     )
 
     args = parser.parse_args()
@@ -61,7 +52,6 @@ def main():
     input_size = args.input_size
 
     input_size = [int(i) for i in input_size.split(',')]
-    model_type = args.model_type
 
     # Initialize video capture
     cap_device = args.device
@@ -87,7 +77,6 @@ def main():
             onnx_session,
             input_size,
             frame,
-            model_type,
         )
 
         output_image = cv.resize(output_image,
@@ -104,8 +93,8 @@ def main():
         key = cv.waitKey(1)
         if key == 27:  # ESC
             break
-        cv.imshow('RUAS Input', debug_image)
-        cv.imshow('RUAS Output', output_image)
+        cv.imshow('DSLR Input', debug_image)
+        cv.imshow('DSLR Output', output_image)
 
     cap.release()
     cv.destroyAllWindows()

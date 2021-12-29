@@ -5,28 +5,27 @@ import argparse
 
 import cv2 as cv
 import numpy as np
-import onnxruntime
+import tensorflow as tf
 
 
-def run_inference(onnx_session, input_size, image, model_type='dark'):
-    # Pre process:Resize, BGR->RGB, Transpose, float32 cast
+def run_inference(interpreter, input_size, image):
+    # Pre process:Resize, BGR->RGB, float32 cast
     input_image = cv.resize(image, dsize=(input_size[1], input_size[0]))
     input_image = cv.cvtColor(input_image, cv.COLOR_BGR2RGB)
-    input_image = input_image.transpose(2, 0, 1)
     input_image = np.expand_dims(input_image, axis=0)
     input_image = input_image.astype('float32')
     input_image = input_image / 255.0
 
     # Inference
-    input_name = onnx_session.get_inputs()[0].name
-    result = onnx_session.run(None, {input_name: input_image})
+    input_details = interpreter.get_input_details()
+    interpreter.set_tensor(input_details[0]['index'], input_image)
+    interpreter.invoke()
 
-    # Post process:squeeze, RGB->BGR, Transpose, uint8 cast
-    if model_type == 'lol':
-        output_image = np.squeeze(result)[-1]
-    elif model_type == 'upe' or model_type == 'dark':
-        output_image = np.squeeze(result)[-2]
-    output_image = output_image.transpose(1, 2, 0)
+    output_details = interpreter.get_output_details()
+    result = interpreter.get_tensor(output_details[0]['index'])
+
+    # Post process:squeeze, RGB->BGR, uint8 cast
+    output_image = np.squeeze(result)
     output_image = np.clip(output_image * 255.0, 0, 255)
     output_image = output_image.astype(np.uint8)
     output_image = cv.cvtColor(output_image, cv.COLOR_RGB2BGR)
@@ -42,18 +41,12 @@ def main():
     parser.add_argument(
         "--model",
         type=str,
-        default='lol_180x320/lol_180x320.onnx',
+        default='dslr_256x256/model_float16_quant.tflite',
     )
     parser.add_argument(
         "--input_size",
         type=str,
-        default='180,320',
-    )
-    parser.add_argument(
-        "--model_type",
-        type=str,
-        default='lol',
-        choices=['lol', 'upe', 'dark'],
+        default='256,256',
     )
 
     args = parser.parse_args()
@@ -61,7 +54,6 @@ def main():
     input_size = args.input_size
 
     input_size = [int(i) for i in input_size.split(',')]
-    model_type = args.model_type
 
     # Initialize video capture
     cap_device = args.device
@@ -70,7 +62,8 @@ def main():
     cap = cv.VideoCapture(cap_device)
 
     # Load model
-    onnx_session = onnxruntime.InferenceSession(model_path)
+    interpreter = tf.lite.Interpreter(model_path=model_path)
+    interpreter.allocate_tensors()
 
     while True:
         start_time = time.time()
@@ -84,10 +77,9 @@ def main():
 
         # Inference execution
         output_image = run_inference(
-            onnx_session,
+            interpreter,
             input_size,
             frame,
-            model_type,
         )
 
         output_image = cv.resize(output_image,
@@ -104,8 +96,8 @@ def main():
         key = cv.waitKey(1)
         if key == 27:  # ESC
             break
-        cv.imshow('RUAS Input', debug_image)
-        cv.imshow('RUAS Output', output_image)
+        cv.imshow('DSLR Input', debug_image)
+        cv.imshow('DSLR Output', output_image)
 
     cap.release()
     cv.destroyAllWindows()
