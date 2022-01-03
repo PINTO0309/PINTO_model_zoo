@@ -278,6 +278,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |220|HEP|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/220_HEP)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640|
 |222|LFT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/222_LFT)|||||||||||⚫|Transformer/2x,4x/65x65|
 |223|DA_dahazing|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/223_DA_dahazing)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|DeHazing/192x320,240x320,320x480,360x640,480x640,720x1280,No-LICENSE|
+|224|Y-net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/224_Y-net)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|DeHazing/192x320,240x320,320x480,384x640,480x640,720x1280,No-LICENSE|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
