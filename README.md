@@ -177,7 +177,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |067|MiDaS|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/067_MiDaS)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |081|MiDaS v2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/081_MiDaS_v2)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
 |135|CoEx|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/135_CoEx)|||||||⚫||||⚫|WIP, onnx/OpenVINO only|
-|142|HITNET|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/142_HITNET)|⚫|⚫||||⚫|||||⚫|WIP [issue](https://github.com/openvinotoolkit/openvino/issues/7379),flyingthings_finalpass_xl/eth3d/middlebury_d400,120x160/240x320/256x256/480x640/720x1280|
+|142|HITNET|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/142_HITNET)|⚫|⚫||||⚫|||||⚫|WIP [issue1](https://github.com/openvinotoolkit/openvino/issues/7379),[issue2](https://github.com/openvinotoolkit/openvino/issues/9517),flyingthings_finalpass_xl/eth3d/middlebury_d400,120x160/240x320/256x256/480x640/720x1280|
 |146|FastDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/146_FastDepth)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|128x160,224x224,256x256,256x320,320x320,480x640,512x512,768x1280|
 |147|PackNet-SfM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/147_PackNet-SfM)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|ddad/kitti,Convert all ResNet18 backbones only|
 |148|LapDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/148_LapDepth)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|kitti/nyu,192x320/256x320/368x640/480x640/720x1280|
