@@ -1,0 +1,97 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+
+cd ~
+git clone --branch v2.10.0 https://github.com/open-mmlab/mmdetection.git
+cd mmdetection
+
+wget https://github.com/iiLaurens/CascadeTabNet/releases/download/v1.0.0/General.Model.table.detection.v2.pth
+wget https://github.com/iiLaurens/CascadeTabNet/releases/download/v1.0.0/ICDAR.13.table.detection.v2.pth
+wget https://github.com/iiLaurens/CascadeTabNet/releases/download/v1.0.0/ICDAR.19.Track.A.Modern.table.detection.v2.pth
+wget https://github.com/iiLaurens/CascadeTabNet/releases/download/v1.0.0/ICDAR.19.Track.B2.Modern.table.structure.recognition.v2.pth
+wget https://github.com/iiLaurens/CascadeTabNet/releases/download/v1.0.0/Table.Bank.Both.table.detection.v2.pth
+wget https://github.com/iiLaurens/CascadeTabNet/releases/download/v1.0.0/Table.Bank.Latex.table.detection.v2.pth
+wget https://github.com/iiLaurens/CascadeTabNet/releases/download/v1.0.0/Table.Bank.Word.table.detection.v2.pth
+
+wget -O demo.png https://github.com/iiLaurens/CascadeTabNet/raw/mmdet2x/imgs/TSR.png
+
+pytorch2onnx.py
+# if model.with_mask:
+#     output_names.append('masks')
+
+MODEL=General.Model.table.detection.v2
+H=320
+W=320
+python3 tools/deployment/pytorch2onnx.py \
+cascade_mask_rcnn_hrnetv2p_w32_20e.py \
+${MODEL}.pth \
+--output-file ${MODEL}_${H}x${W}.onnx \
+--input-img demo.png \
+--shape ${H} ${W}
+python3 -m onnxsim ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}.onnx
+mv ${MODEL}_${H}x${W}.onnx ${HOME}/workdir
+
+H=480
+W=480
+python3 tools/deployment/pytorch2onnx.py \
+cascade_mask_rcnn_hrnetv2p_w32_20e.py \
+${MODEL}.pth \
+--output-file ${MODEL}_${H}x${W}.onnx \
+--input-img demo.png \
+--shape ${H} ${W}
+python3 -m onnxsim ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}.onnx
+mv ${MODEL}_${H}x${W}.onnx ${HOME}/workdir
+
+H=640
+W=640
+python3 tools/deployment/pytorch2onnx.py \
+cascade_mask_rcnn_hrnetv2p_w32_20e.py \
+${MODEL}.pth \
+--output-file ${MODEL}_${H}x${W}.onnx \
+--input-img demo.png \
+--shape ${H} ${W}
+python3 -m onnxsim ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}.onnx
+mv ${MODEL}_${H}x${W}.onnx ${HOME}/workdir
+
+H=800
+W=800
+python3 tools/deployment/pytorch2onnx.py \
+cascade_mask_rcnn_hrnetv2p_w32_20e.py \
+${MODEL}.pth \
+--output-file ${MODEL}_${H}x${W}.onnx \
+--input-img demo.png \
+--shape ${H} ${W}
+python3 -m onnxsim ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}.onnx
+mv ${MODEL}_${H}x${W}.onnx ${HOME}/workdir
+
+
+cd ${HOME}/workdir
+MODEL=General.Model.table.detection.v2
+H=320
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_320x320.json
+
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+

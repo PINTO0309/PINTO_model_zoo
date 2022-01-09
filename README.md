@@ -122,6 +122,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |197|yolact-resnet50-fpn|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/197_yolact-resnet50-fpn)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|RGB,550x550|
 |198|YOLOF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/198_YOLOF)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|BGR/RGB,608x608|
 |221|YOLACT-PyTorch|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/221_YOLACT-PyTorch)|⚫|⚫|⚫||⚫|⚫|⚫||⚫|⚫|⚫|180x320,240x320,320x480,480x640,544x544,720x1280|
+|226|CascadeTableNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/226_CascadeTableNet)|⚫|⚫|||⚫|⚫|⚫||||⚫|General,32x320 only|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
