@@ -1,0 +1,15 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_onnx \
+--onnx_opset 11
+
+mv tflite_from_saved_model/* saved_model
