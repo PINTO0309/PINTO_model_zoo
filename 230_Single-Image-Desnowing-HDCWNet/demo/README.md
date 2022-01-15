@@ -11,12 +11,12 @@ Note: The ONNX file will fail to load.<Br>
     parser.add_argument(
         "--model",
         type=str,
-        default='saved_model_nsfw/model_float32.onnx',
+        default='saved_model_batch_1/model_float32.onnx',
     )
     parser.add_argument(
         "--input_size",
         type=str,
-        default='224,224',
+        default='512,672',
     )
 ```
 
@@ -31,12 +31,12 @@ Note: You need TensorFlow-Lite with FlexDelegate enabled.<Br>
     parser.add_argument(
         "--model",
         type=str,
-        default='saved_model_nsfw/model_float16_quant.tflite',
+        default='saved_model_batch_1/model_float16_quant.tflite',
     )
     parser.add_argument(
         "--input_size",
         type=str,
-        default='224,224',
+        default='512,672',
     )
 ```
 
