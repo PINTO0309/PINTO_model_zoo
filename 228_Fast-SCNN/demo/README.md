@@ -38,4 +38,5 @@ If you want to change the model, specify it with an argument.
     )
 ```
 
-
+## Fast-SCNN with TensorRT in Python
+- https://github.com/NobuoTsukamoto/tensorrt-examples/blob/main/python/fast_scnn
