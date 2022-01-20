@@ -1,0 +1,5 @@
+https://github.com/daiszh/A-TVSNet
+https://github.com/PINTO0309/openvino2tensorflow
+
+https://zenn.dev/pinto0309/scraps/a46835a40c91f5
+https://github.com/daiszh/A-TVSNet/issues/6

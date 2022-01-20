@@ -1,0 +1,107 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+H=192
+W=320
+pb_to_saved_model \
+--pb_file_path atvsnet_stereo_${H}x${W}.pb \
+--inputs Model_tower0/images:0,Model_tower0/cams:0 \
+--outputs Model_tower0/soft_arg_min_2/output:0
+rm -rf saved_model
+mv saved_model_from_pb saved_model
+python3 -m tf2onnx.convert \
+--saved-model saved_model \
+--opset 11 \
+--output model_float32.onnx \
+--extra_opset com.microsoft:1
+mv model_float32.onnx saved_model
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_no_quant_float32_tflite \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite
+mv tflite_from_saved_model/* saved_model
+mv atvsnet_stereo_${H}x${W}.pb saved_model
+mv saved_model saved_model_${H}x${W}
+rm -rf tflite_from_saved_model
+
+H=256
+W=320
+pb_to_saved_model \
+--pb_file_path atvsnet_stereo_${H}x${W}.pb \
+--inputs Model_tower0/images:0,Model_tower0/cams:0 \
+--outputs Model_tower0/soft_arg_min_2/output:0
+rm -rf saved_model
+mv saved_model_from_pb saved_model
+python3 -m tf2onnx.convert \
+--saved-model saved_model \
+--opset 11 \
+--output model_float32.onnx \
+--extra_opset com.microsoft:1
+mv model_float32.onnx saved_model
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_no_quant_float32_tflite \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite
+mv tflite_from_saved_model/* saved_model
+mv atvsnet_stereo_${H}x${W}.pb saved_model
+mv saved_model saved_model_${H}x${W}
+rm -rf tflite_from_saved_model
+
+H=320
+W=480
+pb_to_saved_model \
+--pb_file_path atvsnet_stereo_${H}x${W}.pb \
+--inputs Model_tower0/images:0,Model_tower0/cams:0 \
+--outputs Model_tower0/soft_arg_min_2/output:0
+rm -rf saved_model
+mv saved_model_from_pb saved_model
+python3 -m tf2onnx.convert \
+--saved-model saved_model \
+--opset 11 \
+--output model_float32.onnx \
+--extra_opset com.microsoft:1
+mv model_float32.onnx saved_model
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_no_quant_float32_tflite \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite
+mv tflite_from_saved_model/* saved_model
+mv atvsnet_stereo_${H}x${W}.pb saved_model
+mv saved_model saved_model_${H}x${W}
+rm -rf tflite_from_saved_model
+
+H=480
+W=640
+pb_to_saved_model \
+--pb_file_path atvsnet_stereo_${H}x${W}.pb \
+--inputs Model_tower0/images:0,Model_tower0/cams:0 \
+--outputs Model_tower0/soft_arg_min_2/output:0
+rm -rf saved_model
+mv saved_model_from_pb saved_model
+python3 -m tf2onnx.convert \
+--saved-model saved_model \
+--opset 11 \
+--output model_float32.onnx \
+--extra_opset com.microsoft:1
+mv model_float32.onnx saved_model
+saved_model_to_tflite \
+--saved_model_dir_path saved_model \
+--output_no_quant_float32_tflite \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite
+mv tflite_from_saved_model/* saved_model
+mv atvsnet_stereo_${H}x${W}.pb saved_model
+mv saved_model saved_model_${H}x${W}
+rm -rf tflite_from_saved_model
