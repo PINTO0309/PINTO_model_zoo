@@ -1,0 +1,3 @@
+https://github.com/bytedance/piano_transcription
+https://github.com/qiuqiangkong/piano_transcription_inference
+

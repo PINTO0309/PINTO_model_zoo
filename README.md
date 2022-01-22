@@ -345,6 +345,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |167|LSTR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/167_LSTR)|⚫|⚫|||⚫|⚫|⚫||⚫||⚫|180x320,240x320,360x640,480x640,720x1280|
 |229|DexiNed|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/229_DexiNed)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|160x320,320x480,368x640,480x640,720x1280|
 |233|HRNet-for-Fashion-Landmark-Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/233_HRNet-for-Fashion-Landmark-Estimation)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|192x320,256x320,320x480,384x640,480x640,736x1280|
+|237|piano_transcription|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/237_piano_transcription)|||||||⚫||||⚫|1x160000,Nx160000|
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)
