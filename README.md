@@ -202,6 +202,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |219|StereoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/219_StereoNet)|⚫|⚫|⚫||⚫|⚫|⚫|||⚫|⚫|Left/180x320,240x320,320x480,360x640,480x640|
 |235|W-Stereo-Disp|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/235_W-Stereo-Disp)|||||||||||⚫|Kitti,Sceneflow/320x480,384x576,480x640|
 |236|A-TVSNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/236_A-TVSNet)|⚫|⚫|||⚫|⚫|||||⚫|Stereo only/192x320,256x320,320x480,480x640,No-LICENSE|
+|239|CasStereoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/239_CasStereoNet)|||||||||||⚫|Stereo KITTI only/256x320,384x480,480x640,736x1280|
 ### 8. Semantic Segmentation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
