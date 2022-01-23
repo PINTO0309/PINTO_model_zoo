@@ -291,6 +291,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |231|DRBL|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/231_DRBL)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280,No-LICENSE|
 |232|MIMO-UNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/232_MIMO-UNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|DeBlur/180x320,240x320,320x480,360x640,480x640,720x1280,No-LICENSE|
 |234|FBCNN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/234_FBCNN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|DeNoise/180x320,240x320,320x480,360x640,480x640,720x1280|
+|240|BSRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/240_BSRGAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|x2,x4/64x64,96x96,128x128,160x160,180x320,240x320|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
