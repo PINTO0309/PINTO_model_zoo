@@ -1,0 +1,13 @@
+{
+    "format_version": 2,
+    "layers": [
+        {
+            "layer_id": "717",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                4
+            ]
+        }
+    ]
+}
