@@ -74,6 +74,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |194|face_recognizer_fast|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/194_face_recognizer_fast)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|112x112|
 |195|person_reid_youtu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/195_person_reid_youtu)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|256x128|
 |199|NSFW|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/199_NSFW)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|224x224|
+|244|FINNger|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/244_FINNger)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|96x96,No-LICENSE|
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -294,7 +295,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |234|FBCNN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/234_FBCNN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|DeNoise/180x320,240x320,320x480,360x640,480x640,720x1280|
 |240|BSRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/240_BSRGAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|x2,x4/64x64,96x96,128x128,160x160,180x320,240x320,No-LICENSE|
 |241|SCL-LLE|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/241_SCL-LLE)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,480x640,720x1280,No-LICENSE|
-|243|Zero-DCE-improved|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/243_Zero-DCE-improved)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280,No-LICENSE|
+|243|Zero-DCE-improved|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/243_Zero-DCE-improved)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280,academic use only|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
