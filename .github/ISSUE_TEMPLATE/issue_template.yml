@@ -1,4 +1,5 @@
 name: Issue
+blank_issues_enabled: false
 description: All issues should be created by pressing the "Get started" button on the right, and any miscellaneous issues that do not follow the issue template will be closed immediately.
 body:
   - type: markdown
