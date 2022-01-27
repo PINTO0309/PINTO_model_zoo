@@ -87,7 +87,7 @@ body:
   - type: textarea
     id: what-model
     attributes:
-      label: ModelName and Weights/Checkpoints URL
+      label: Model name and Weights/Checkpoints URL
       description: Include the name of the model and the URL from which the model was taken.
     validations:
       required: true
