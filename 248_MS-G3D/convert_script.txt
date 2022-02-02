@@ -1,0 +1,106 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+
+python3 main.py \
+--config config/kinetics-skeleton/test_bone.yaml \
+--work-dir workdir \
+--device 0 \
+--weights pretrained-models/kinetics-bone.pt
+
+
+
+MODEL=msg3d_kinetics_bone
+T=16
+V=18
+M=2
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${T}x${V}x${M}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${T}x${V}x${M}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${T}x${V}x${M}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${T}x${V}x${M}/openvino/FP16
+mkdir -p ${MODEL}_${T}x${V}x${M}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${T}x${V}x${M}/openvino/FP16/${MODEL}_${T}x${V}x${M}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${T}x${V}x${M}/openvino/myriad/${MODEL}_${T}x${V}x${M}.blob
+mv ${MODEL}_${T}x${V}x${M}.onnx ${MODEL}_${T}x${V}x${M}
+
+python3 main.py \
+--config config/kinetics-skeleton/test_joint.yaml \
+--work-dir workdir \
+--device 0 \
+--weights pretrained-models/kinetics-joint.pt
+
+python3 main.py \
+--config config/nturgbd-cross-subject/test_bone.yaml \
+--work-dir workdir \
+--device 0 \
+--weights pretrained-models/ntu60-xsub-bone.pt
+
+python3 main.py \
+--config config/nturgbd-cross-subject/test_joint.yaml \
+--work-dir workdir \
+--device 0 \
+--weights pretrained-models/ntu60-xsub-joint-better.pt
+
+python3 main.py \
+--config config/nturgbd-cross-view/test_bone.yaml \
+--work-dir workdir \
+--device 0 \
+--weights pretrained-models/ntu60-xview-bone.pt
+
+python3 main.py \
+--config config/nturgbd-cross-view/test_joint.yaml \
+--work-dir workdir \
+--device 0 \
+--weights pretrained-models/ntu60-xview-joint.pt
+
+
+
+
+python3 main.py \
+--config config/nturgbd120-cross-setup/test_bone.yaml \
+--work-dir workdir \
+--device 0 \
+--weights pretrained-models/ntu120-xset-bone.pt
+
+python3 main.py \
+--config config/nturgbd120-cross-setup/test_joint.yaml \
+--work-dir workdir \
+--device 0 \
+--weights pretrained-models/ntu120-xset-joint.pt
+
+
+
+
+
+python3 main.py \
+--config config/nturgbd120-cross-subject/test_bone.yaml \
+--work-dir workdir \
+--device 0 \
+--weights pretrained-models/ntu120-xsub-bone.pt
+
+python3 main.py \
+--config config/nturgbd120-cross-subject/test_joint.yaml \
+--work-dir workdir \
+--device 0 \
+--weights pretrained-models/ntu120-xsub-joint.pt
+
+
+
+
+
+
+
+
+
+
+
+

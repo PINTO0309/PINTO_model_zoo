@@ -324,6 +324,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |092|weld-porosity-detection-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/092_weld-porosity-detection-0001)|⚫|⚫|⚫|⚫||⚫|⚫|⚫||⚫|⚫||
 |247|PoseC3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/247_PoseC3D)|||||||||||⚫|FineGYM,NTU60_XSub,NTU120_XSub,UCF101,HMDB51/1x1xTx56x56|
+|248|MS-G3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/248_MS-G3D)|||||||||||⚫|Kinetics,NTU60,NTU120/1x3xTx25x2|
 ### 16. Inpainting
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
