@@ -1,0 +1,581 @@
+git clone https://github.com/open-mmlab/mmaction2.git && cd mmaction2
+git checkout 7c94243542985db813bb9021f97c95b59d136e52
+mkdir -p data
+
+docker run --rm -it --gpus all \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/mmaction2onnxexpenv:latest
+
+wget https://download.openmmlab.com/mmaction/skeleton/posec3d/slowonly_r50_u48_240e_gym_keypoint/slowonly_r50_u48_240e_gym_keypoint-b07a98a0.pth -O slowonly_r50_u48_240e_gym_keypoint.pth
+wget https://download.openmmlab.com/mmaction/skeleton/posec3d/slowonly_r50_u48_240e_gym_limb/slowonly_r50_u48_240e_gym_limb-c0d7b482.pth -O slowonly_r50_u48_240e_gym_limb.pth
+wget https://download.openmmlab.com/mmaction/skeleton/posec3d/slowonly_r50_u48_240e_ntu60_xsub_keypoint/slowonly_r50_u48_240e_ntu60_xsub_keypoint-f3adabf1.pth -O slowonly_r50_u48_240e_ntu60_xsub_keypoint.pth
+wget https://download.openmmlab.com/mmaction/skeleton/posec3d/slowonly_r50_u48_240e_ntu60_xsub_limb/slowonly_r50_u48_240e_ntu60_xsub_limb-1d69006a.pth -O slowonly_r50_u48_240e_ntu60_xsub_limb.pth
+wget https://download.openmmlab.com/mmaction/skeleton/posec3d/slowonly_r50_u48_240e_ntu120_xsub_keypoint/slowonly_r50_u48_240e_ntu120_xsub_keypoint-6736b03f.pth -O slowonly_r50_u48_240e_ntu120_xsub_keypoint.pth
+wget https://download.openmmlab.com/mmaction/skeleton/posec3d/slowonly_r50_u48_240e_ntu120_xsub_limb/slowonly_r50_u48_240e_ntu120_xsub_limb-803c2317.pth -O slowonly_r50_u48_240e_ntu120_xsub_limb.pth
+wget https://download.openmmlab.com/mmaction/skeleton/posec3d/slowonly_kinetics400_pretrained_r50_u48_120e_ucf101_split1_keypoint/slowonly_kinetics400_pretrained_r50_u48_120e_ucf101_split1_keypoint-cae8aa4a.pth -O slowonly_kinetics400_pretrained_r50_u48_120e_ucf101_split1_keypoint.pth
+wget https://download.openmmlab.com/mmaction/skeleton/posec3d/slowonly_kinetics400_pretrained_r50_u48_120e_hmdb51_split1_keypoint/slowonly_kinetics400_pretrained_r50_u48_120e_hmdb51_split1_keypoint-76ffdd8b.pth -O slowonly_kinetics400_pretrained_r50_u48_120e_hmdb51_split1_keypoint.pth
+
+H=56
+W=56
+
+MODEL=slowonly_r50_u48_240e_gym_keypoint
+CONFPATH=configs/skeleton/posec3d/${MODEL}.py
+T=15
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=30
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=45
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=60
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=75
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=90
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=120
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=150
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=300
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+
+
+MODEL=slowonly_r50_u48_240e_gym_limb
+CONFPATH=configs/skeleton/posec3d/${MODEL}.py
+T=15
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=30
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=45
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=60
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=75
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=90
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=120
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=150
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=300
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+
+
+MODEL=slowonly_r50_u48_240e_ntu60_xsub_keypoint
+CONFPATH=configs/skeleton/posec3d/${MODEL}.py
+T=15
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=30
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=45
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=60
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=75
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=90
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=120
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=150
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=300
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+
+
+MODEL=slowonly_r50_u48_240e_ntu60_xsub_limb
+CONFPATH=configs/skeleton/posec3d/${MODEL}.py
+T=15
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=30
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=45
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=60
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=75
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=90
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=120
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=150
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=300
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+
+
+MODEL=slowonly_r50_u48_240e_ntu120_xsub_keypoint
+CONFPATH=configs/skeleton/posec3d/${MODEL}.py
+T=15
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=30
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=45
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=60
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=75
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=90
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=120
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=150
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=300
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+
+
+MODEL=slowonly_r50_u48_240e_ntu120_xsub_limb
+CONFPATH=configs/skeleton/posec3d/${MODEL}.py
+T=15
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=30
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=45
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=60
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=75
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=90
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=120
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=150
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+
+T=300
+python tools/deployment/pytorch2onnx.py \
+${CONFPATH} \
+${MODEL}.pth \
+--shape 1 1 17 ${T} ${H} ${W} \
+--verify \
+--output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
+--opset-version 11
+python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
