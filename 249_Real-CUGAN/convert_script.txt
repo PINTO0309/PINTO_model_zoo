@@ -1,0 +1,434 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+MODEL=realcugan
+X=2
+H=64
+W=64
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=96
+W=96
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=120
+W=160
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=128
+W=128
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=160
+W=160
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=180
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=240
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+
+
+
+X=3
+H=64
+W=64
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=96
+W=96
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=120
+W=160
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=128
+W=128
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=160
+W=160
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=180
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=240
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+
+
+
+X=4
+H=64
+W=64
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=96
+W=96
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=120
+W=160
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=128
+W=128
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=160
+W=160
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=180
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+H=240
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${X}x_tile3_denoise_${H}x${W}
+# mkdir -p ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad
+# ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+# -m ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/FP16/${MODEL}_${X}x_tile3_denoise_${H}x${W}.xml \
+# -ip U8 \
+# -VPU_NUMBER_OF_SHAVES 4 \
+# -VPU_NUMBER_OF_CMX_SLICES 4 \
+# -o ${MODEL}_${X}x_tile3_denoise_${H}x${W}/openvino/myriad/${MODEL}_${X}x_tile3_denoise_${H}x${W}.blob
+mv ${MODEL}_${X}x_tile3_denoise_${H}x${W}.onnx ${MODEL}_${X}x_tile3_denoise_${H}x${W}
