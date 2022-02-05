@@ -1,0 +1,258 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+MODEL=facedetector
+H=300
+W=300
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model face_detector/res10_${H}x${W}_ssd_iter_140000.caffemodel \
+--input_proto face_detector/deploy.prototxt \
+--data_type FP32 \
+--model_name ${MODEL}_${H}x${W} \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model face_detector/res10_${H}x${W}_ssd_iter_140000.caffemodel \
+--input_proto face_detector/deploy.prototxt \
+--data_type FP16 \
+--model_name ${MODEL}_${H}x${W} \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace.json
+mv saved_model/* ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_onnx \
+--onnx_opset 11 \
+--keep_input_tensor_in_nchw \
+--non_verbose \
+--weight_replacement_config replace.json
+mv saved_model/*.onnx ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+python3 -m onnxsim mask_detector.onnx mask_detector_224x224.onnx
+python3 set_batchsize.py N mask_detector_224x224.onnx
+
+python3 -m onnxsim --input-shape=1,3,224,224 mask_detector_Nx3x224x224.onnx mask_detector_1x3x224x224.onnx
+python3 -m onnxsim --input-shape=4,3,224,224 mask_detector_Nx3x224x224.onnx mask_detector_4x3x224x224.onnx
+python3 -m onnxsim --input-shape=8,3,224,224 mask_detector_Nx3x224x224.onnx mask_detector_8x3x224x224.onnx
+python3 -m onnxsim --input-shape=16,3,224,224 mask_detector_Nx3x224x224.onnx mask_detector_16x3x224x224.onnx
+python3 -m onnxsim --input-shape=32,3,224,224 mask_detector_Nx3x224x224.onnx mask_detector_32x3x224x224.onnx
+
+MODEL=mask_detector
+B=1
+H=224
+W=224
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model mask_detector_${B}x3x${H}x${W}.onnx \
+--data_type FP32 \
+--model_name ${MODEL}_${B}x3x${H}x${W} \
+--output_dir ${MODEL}_${B}x3x${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model mask_detector_${B}x3x${H}x${W}.onnx \
+--data_type FP16 \
+--model_name ${MODEL}_${B}x3x${H}x${W} \
+--output_dir ${MODEL}_${B}x3x${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_${B}x3x${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${B}x3x${H}x${W}/openvino/FP16/${MODEL}_${B}x3x${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${B}x3x${H}x${W}/openvino/myriad/${MODEL}_${B}x3x${H}x${W}.blob
+openvino2tensorflow \
+--model_path ${MODEL}_${B}x3x${H}x${W}/openvino/FP32/mask_detector_${B}x3x${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--output_edgetpu \
+--non_verbose
+mv saved_model/* ${MODEL}_${B}x3x${H}x${W}
+mv ${MODEL}_${B}x3x${H}x${W}.onnx ${MODEL}_${B}x3x${H}x${W}
+rm -rf saved_model
+
+B=4
+H=224
+W=224
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model mask_detector_${B}x3x${H}x${W}.onnx \
+--data_type FP32 \
+--model_name ${MODEL}_${B}x3x${H}x${W} \
+--output_dir ${MODEL}_${B}x3x${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model mask_detector_${B}x3x${H}x${W}.onnx \
+--data_type FP16 \
+--model_name ${MODEL}_${B}x3x${H}x${W} \
+--output_dir ${MODEL}_${B}x3x${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_${B}x3x${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${B}x3x${H}x${W}/openvino/FP16/${MODEL}_${B}x3x${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${B}x3x${H}x${W}/openvino/myriad/${MODEL}_${B}x3x${H}x${W}.blob
+openvino2tensorflow \
+--model_path ${MODEL}_${B}x3x${H}x${W}/openvino/FP32/mask_detector_${B}x3x${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--output_edgetpu \
+--non_verbose
+mv saved_model/* ${MODEL}_${B}x3x${H}x${W}
+mv ${MODEL}_${B}x3x${H}x${W}.onnx ${MODEL}_${B}x3x${H}x${W}
+rm -rf saved_model
+
+B=8
+H=224
+W=224
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model mask_detector_${B}x3x${H}x${W}.onnx \
+--data_type FP32 \
+--model_name ${MODEL}_${B}x3x${H}x${W} \
+--output_dir ${MODEL}_${B}x3x${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model mask_detector_${B}x3x${H}x${W}.onnx \
+--data_type FP16 \
+--model_name ${MODEL}_${B}x3x${H}x${W} \
+--output_dir ${MODEL}_${B}x3x${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_${B}x3x${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${B}x3x${H}x${W}/openvino/FP16/${MODEL}_${B}x3x${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${B}x3x${H}x${W}/openvino/myriad/${MODEL}_${B}x3x${H}x${W}.blob
+openvino2tensorflow \
+--model_path ${MODEL}_${B}x3x${H}x${W}/openvino/FP32/mask_detector_${B}x3x${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--output_edgetpu \
+--non_verbose
+mv saved_model/* ${MODEL}_${B}x3x${H}x${W}
+mv ${MODEL}_${B}x3x${H}x${W}.onnx ${MODEL}_${B}x3x${H}x${W}
+rm -rf saved_model
+
+B=16
+H=224
+W=224
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model mask_detector_${B}x3x${H}x${W}.onnx \
+--data_type FP32 \
+--model_name ${MODEL}_${B}x3x${H}x${W} \
+--output_dir ${MODEL}_${B}x3x${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model mask_detector_${B}x3x${H}x${W}.onnx \
+--data_type FP16 \
+--model_name ${MODEL}_${B}x3x${H}x${W} \
+--output_dir ${MODEL}_${B}x3x${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_${B}x3x${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${B}x3x${H}x${W}/openvino/FP16/${MODEL}_${B}x3x${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${B}x3x${H}x${W}/openvino/myriad/${MODEL}_${B}x3x${H}x${W}.blob
+openvino2tensorflow \
+--model_path ${MODEL}_${B}x3x${H}x${W}/openvino/FP32/mask_detector_${B}x3x${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--output_edgetpu \
+--non_verbose
+mv saved_model/* ${MODEL}_${B}x3x${H}x${W}
+mv ${MODEL}_${B}x3x${H}x${W}.onnx ${MODEL}_${B}x3x${H}x${W}
+rm -rf saved_model
+
+B=32
+H=224
+W=224
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model mask_detector_${B}x3x${H}x${W}.onnx \
+--data_type FP32 \
+--model_name ${MODEL}_${B}x3x${H}x${W} \
+--output_dir ${MODEL}_${B}x3x${H}x${W}/openvino/FP32
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model mask_detector_${B}x3x${H}x${W}.onnx \
+--data_type FP16 \
+--model_name ${MODEL}_${B}x3x${H}x${W} \
+--output_dir ${MODEL}_${B}x3x${H}x${W}/openvino/FP16
+mkdir -p ${MODEL}_${B}x3x${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${B}x3x${H}x${W}/openvino/FP16/${MODEL}_${B}x3x${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${B}x3x${H}x${W}/openvino/myriad/${MODEL}_${B}x3x${H}x${W}.blob
+openvino2tensorflow \
+--model_path ${MODEL}_${B}x3x${H}x${W}/openvino/FP32/mask_detector_${B}x3x${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--output_edgetpu \
+--non_verbose
+mv saved_model/* ${MODEL}_${B}x3x${H}x${W}
+mv ${MODEL}_${B}x3x${H}x${W}.onnx ${MODEL}_${B}x3x${H}x${W}
+rm -rf saved_model
