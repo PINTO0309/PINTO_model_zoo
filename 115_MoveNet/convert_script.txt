@@ -22,6 +22,7 @@ tflite2tensorflow \
 json rewrite
 
 ../flatc -o . -b ../schema.fbs movenet_singlepose_thunder_3.json
+rm movenet_singlepose_thunder_3.json
 
 tflite2tensorflow \
 --model_path movenet_singlepose_thunder_3.tflite \
@@ -60,6 +61,7 @@ tflite2tensorflow \
 json rewrite
 
 ../flatc -o . -b ../schema.fbs movenet_singlepose_lightning_3.json
+rm movenet_singlepose_lightning_3.json
 
 tflite2tensorflow \
 --model_path movenet_singlepose_lightning_3.tflite \
