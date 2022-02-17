@@ -235,7 +235,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |238|SUIM-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/238_SUIM-Net)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|||⚫|RSB,VGG/240x320,256x320,320x480,360x640,384x480,384x640,480x640,720x1280|
 |242|RobustVideoMatting|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/242_RobustVideoMatting)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|Mbnv3,ResNet50/192x320,240x320,320x480,384x640,480x640,720x1280,1088x1920,2160x3840|
 |246|SqueezeSegV3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/246_SqueezeSegV3)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫||⚫|21,53/180x320,240x320,320x480,360x640,480x640,720x1280|
-|256|FasterSeg|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/256_FasterSeg)|||||||||||⚫|256x320,256x512,480x640,512x1024,736x1280,1024x2048|
+|256|FasterSeg|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/256_FasterSeg)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|256x320,256x512,480x640,512x1024,736x1280,1024x2048|
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
