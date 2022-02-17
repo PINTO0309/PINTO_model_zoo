@@ -15,567 +15,116 @@ wget https://download.openmmlab.com/mmaction/skeleton/posec3d/slowonly_r50_u48_2
 wget https://download.openmmlab.com/mmaction/skeleton/posec3d/slowonly_kinetics400_pretrained_r50_u48_120e_ucf101_split1_keypoint/slowonly_kinetics400_pretrained_r50_u48_120e_ucf101_split1_keypoint-cae8aa4a.pth -O slowonly_kinetics400_pretrained_r50_u48_120e_ucf101_split1_keypoint.pth
 wget https://download.openmmlab.com/mmaction/skeleton/posec3d/slowonly_kinetics400_pretrained_r50_u48_120e_hmdb51_split1_keypoint/slowonly_kinetics400_pretrained_r50_u48_120e_hmdb51_split1_keypoint-76ffdd8b.pth -O slowonly_kinetics400_pretrained_r50_u48_120e_hmdb51_split1_keypoint.pth
 
-H=56
-W=56
+FILE=test
 
 MODEL=slowonly_r50_u48_240e_gym_keypoint
 CONFPATH=configs/skeleton/posec3d/${MODEL}.py
-T=15
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=30
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=45
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=60
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=75
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=90
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=120
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=150
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=300
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-
+python3 demo/demo_skeleton.py demo/${FILE}.mp4 demo/${FILE}_out.mp4 \
+--config ${CONFPATH} \
+--checkpoint ${MODEL}.pth \
+--det-config demo/faster_rcnn_r50_fpn_2x_coco.py \
+--det-checkpoint http://download.openmmlab.com/mmdetection/v2.0/faster_rcnn/faster_rcnn_r50_fpn_2x_coco/faster_rcnn_r50_fpn_2x_coco_bbox_mAP-0.384_20200504_210434-a5d8aa15.pth \
+--det-score-thr 0.9 \
+--pose-config demo/hrnet_w32_coco_256x192.py \
+--pose-checkpoint https://download.openmmlab.com/mmpose/top_down/hrnet/hrnet_w32_coco_256x192-c78dce93_20200708.pth \
+--label-map tools/data/skeleton/label_map_ntu120.txt
+mv test.onnx ${MODEL}_1x20x17x48x64x64.onnx
+python3 -m onnxsim ${MODEL}_1x20x17x48x64x64.onnx ${MODEL}_1x20x17x48x64x64.onnx
 
 MODEL=slowonly_r50_u48_240e_gym_limb
 CONFPATH=configs/skeleton/posec3d/${MODEL}.py
-T=15
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=30
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=45
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=60
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=75
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=90
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=120
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=150
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=300
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-
+python3 demo/demo_skeleton.py demo/${FILE}.mp4 demo/${FILE}_out.mp4 \
+--config ${CONFPATH} \
+--checkpoint ${MODEL}.pth \
+--det-config demo/faster_rcnn_r50_fpn_2x_coco.py \
+--det-checkpoint http://download.openmmlab.com/mmdetection/v2.0/faster_rcnn/faster_rcnn_r50_fpn_2x_coco/faster_rcnn_r50_fpn_2x_coco_bbox_mAP-0.384_20200504_210434-a5d8aa15.pth \
+--det-score-thr 0.9 \
+--pose-config demo/hrnet_w32_coco_256x192.py \
+--pose-checkpoint https://download.openmmlab.com/mmpose/top_down/hrnet/hrnet_w32_coco_256x192-c78dce93_20200708.pth \
+--label-map tools/data/skeleton/label_map_ntu120.txt
+mv test.onnx ${MODEL}_1x20x17x48x64x64.onnx
+python3 -m onnxsim ${MODEL}_1x20x17x48x64x64.onnx ${MODEL}_1x20x17x48x64x64.onnx
 
 MODEL=slowonly_r50_u48_240e_ntu60_xsub_keypoint
 CONFPATH=configs/skeleton/posec3d/${MODEL}.py
-T=15
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=30
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=45
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=60
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=75
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=90
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=120
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=150
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=300
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-
+python3 demo/demo_skeleton.py demo/${FILE}.mp4 demo/${FILE}_out.mp4 \
+--config ${CONFPATH} \
+--checkpoint ${MODEL}.pth \
+--det-config demo/faster_rcnn_r50_fpn_2x_coco.py \
+--det-checkpoint http://download.openmmlab.com/mmdetection/v2.0/faster_rcnn/faster_rcnn_r50_fpn_2x_coco/faster_rcnn_r50_fpn_2x_coco_bbox_mAP-0.384_20200504_210434-a5d8aa15.pth \
+--det-score-thr 0.9 \
+--pose-config demo/hrnet_w32_coco_256x192.py \
+--pose-checkpoint https://download.openmmlab.com/mmpose/top_down/hrnet/hrnet_w32_coco_256x192-c78dce93_20200708.pth \
+--label-map tools/data/skeleton/label_map_ntu120.txt
+mv test.onnx ${MODEL}_1x20x17x48x64x64.onnx
+python3 -m onnxsim ${MODEL}_1x20x17x48x64x64.onnx ${MODEL}_1x20x17x48x64x64.onnx
 
 MODEL=slowonly_r50_u48_240e_ntu60_xsub_limb
 CONFPATH=configs/skeleton/posec3d/${MODEL}.py
-T=15
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=30
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=45
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=60
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=75
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=90
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=120
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=150
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=300
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-
+python3 demo/demo_skeleton.py demo/${FILE}.mp4 demo/${FILE}_out.mp4 \
+--config ${CONFPATH} \
+--checkpoint ${MODEL}.pth \
+--det-config demo/faster_rcnn_r50_fpn_2x_coco.py \
+--det-checkpoint http://download.openmmlab.com/mmdetection/v2.0/faster_rcnn/faster_rcnn_r50_fpn_2x_coco/faster_rcnn_r50_fpn_2x_coco_bbox_mAP-0.384_20200504_210434-a5d8aa15.pth \
+--det-score-thr 0.9 \
+--pose-config demo/hrnet_w32_coco_256x192.py \
+--pose-checkpoint https://download.openmmlab.com/mmpose/top_down/hrnet/hrnet_w32_coco_256x192-c78dce93_20200708.pth \
+--label-map tools/data/skeleton/label_map_ntu120.txt
+mv test.onnx ${MODEL}_1x20x17x48x64x64.onnx
+python3 -m onnxsim ${MODEL}_1x20x17x48x64x64.onnx ${MODEL}_1x20x17x48x64x64.onnx
 
 MODEL=slowonly_r50_u48_240e_ntu120_xsub_keypoint
 CONFPATH=configs/skeleton/posec3d/${MODEL}.py
-T=15
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=30
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=45
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=60
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=75
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=90
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=120
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=150
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=300
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-
+python3 demo/demo_skeleton.py demo/${FILE}.mp4 demo/${FILE}_out.mp4 \
+--config ${CONFPATH} \
+--checkpoint ${MODEL}.pth \
+--det-config demo/faster_rcnn_r50_fpn_2x_coco.py \
+--det-checkpoint http://download.openmmlab.com/mmdetection/v2.0/faster_rcnn/faster_rcnn_r50_fpn_2x_coco/faster_rcnn_r50_fpn_2x_coco_bbox_mAP-0.384_20200504_210434-a5d8aa15.pth \
+--det-score-thr 0.9 \
+--pose-config demo/hrnet_w32_coco_256x192.py \
+--pose-checkpoint https://download.openmmlab.com/mmpose/top_down/hrnet/hrnet_w32_coco_256x192-c78dce93_20200708.pth \
+--label-map tools/data/skeleton/label_map_ntu120.txt
+mv test.onnx ${MODEL}_1x20x17x48x64x64.onnx
+python3 -m onnxsim ${MODEL}_1x20x17x48x64x64.onnx ${MODEL}_1x20x17x48x64x64.onnx
 
 MODEL=slowonly_r50_u48_240e_ntu120_xsub_limb
 CONFPATH=configs/skeleton/posec3d/${MODEL}.py
-T=15
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+python3 demo/demo_skeleton.py demo/${FILE}.mp4 demo/${FILE}_out.mp4 \
+--config ${CONFPATH} \
+--checkpoint ${MODEL}.pth \
+--det-config demo/faster_rcnn_r50_fpn_2x_coco.py \
+--det-checkpoint http://download.openmmlab.com/mmdetection/v2.0/faster_rcnn/faster_rcnn_r50_fpn_2x_coco/faster_rcnn_r50_fpn_2x_coco_bbox_mAP-0.384_20200504_210434-a5d8aa15.pth \
+--det-score-thr 0.9 \
+--pose-config demo/hrnet_w32_coco_256x192.py \
+--pose-checkpoint https://download.openmmlab.com/mmpose/top_down/hrnet/hrnet_w32_coco_256x192-c78dce93_20200708.pth \
+--label-map tools/data/skeleton/label_map_ntu120.txt
+mv test.onnx ${MODEL}_1x20x17x48x64x64.onnx
+python3 -m onnxsim ${MODEL}_1x20x17x48x64x64.onnx ${MODEL}_1x20x17x48x64x64.onnx
 
-T=30
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+MODEL=slowonly_kinetics400_pretrained_r50_u48_120e_hmdb51_split1_keypoint
+CONFPATH=configs/skeleton/posec3d/${MODEL}.py
+python3 demo/demo_skeleton.py demo/${FILE}.mp4 demo/${FILE}_out.mp4 \
+--config ${CONFPATH} \
+--checkpoint ${MODEL}.pth \
+--det-config demo/faster_rcnn_r50_fpn_2x_coco.py \
+--det-checkpoint http://download.openmmlab.com/mmdetection/v2.0/faster_rcnn/faster_rcnn_r50_fpn_2x_coco/faster_rcnn_r50_fpn_2x_coco_bbox_mAP-0.384_20200504_210434-a5d8aa15.pth \
+--det-score-thr 0.9 \
+--pose-config demo/hrnet_w32_coco_256x192.py \
+--pose-checkpoint https://download.openmmlab.com/mmpose/top_down/hrnet/hrnet_w32_coco_256x192-c78dce93_20200708.pth \
+--label-map tools/data/skeleton/label_map_ntu120.txt
+mv test.onnx ${MODEL}_1x20x17x48x64x64.onnx
+python3 -m onnxsim ${MODEL}_1x20x17x48x64x64.onnx ${MODEL}_1x20x17x48x64x64.onnx
 
-T=45
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=60
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=75
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=90
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=120
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=150
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
-
-T=300
-python tools/deployment/pytorch2onnx.py \
-${CONFPATH} \
-${MODEL}.pth \
---shape 1 1 17 ${T} ${H} ${W} \
---verify \
---output-file ${MODEL}_17x${T}x${H}x${W}.onnx \
---opset-version 11
-python -m onnxsim ${MODEL}_17x${T}x${H}x${W}.onnx ${MODEL}_17x${T}x${H}x${W}.onnx
+MODEL=slowonly_kinetics400_pretrained_r50_u48_120e_ucf101_split1_keypoint
+CONFPATH=configs/skeleton/posec3d/${MODEL}.py
+python3 demo/demo_skeleton.py demo/${FILE}.mp4 demo/${FILE}_out.mp4 \
+--config ${CONFPATH} \
+--checkpoint ${MODEL}.pth \
+--det-config demo/faster_rcnn_r50_fpn_2x_coco.py \
+--det-checkpoint http://download.openmmlab.com/mmdetection/v2.0/faster_rcnn/faster_rcnn_r50_fpn_2x_coco/faster_rcnn_r50_fpn_2x_coco_bbox_mAP-0.384_20200504_210434-a5d8aa15.pth \
+--det-score-thr 0.9 \
+--pose-config demo/hrnet_w32_coco_256x192.py \
+--pose-checkpoint https://download.openmmlab.com/mmpose/top_down/hrnet/hrnet_w32_coco_256x192-c78dce93_20200708.pth \
+--label-map tools/data/skeleton/label_map_ntu120.txt
+mv test.onnx ${MODEL}_1x20x17x48x64x64.onnx
+python3 -m onnxsim ${MODEL}_1x20x17x48x64x64.onnx ${MODEL}_1x20x17x48x64x64.onnx
