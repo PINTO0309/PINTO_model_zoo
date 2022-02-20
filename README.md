@@ -363,7 +363,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |229|DexiNed|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/229_DexiNed)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|160x320,320x480,368x640,480x640,720x1280|
 |233|HRNet-for-Fashion-Landmark-Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/233_HRNet-for-Fashion-Landmark-Estimation)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|192x320,256x320,320x480,384x640,480x640,736x1280|
 |237|piano_transcription|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/237_piano_transcription)|||||||⚫||||⚫|1x160000,Nx160000|
-|252|RAFT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/252_RAFT)|||||||||||⚫|small,chairs,kitti,sintel,things/iters=20/240x320,360x480,480x640|
+|252|RAFT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/252_RAFT)|||||||||||⚫|small,chairs,kitti,sintel,things/iters=10,20/240x320,360x480,480x640|
 |254|FullSubNet-plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/254_FullSubNet-plus)|||||||||||⚫|1x1x257x100,200,500,1000,2000,3000,5000,7000,8000,10000|
 |255|FILM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/255_FILM)|⚫|⚫|||⚫|⚫|⚫||⚫||⚫|L1,Style,VGG/256x256,180x320,240x320,360x640,480x640,720x1280,1080x1920|
 
