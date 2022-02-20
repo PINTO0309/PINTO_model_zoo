@@ -75,6 +75,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |195|person_reid_youtu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/195_person_reid_youtu)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|256x128|
 |199|NSFW|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/199_NSFW)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|224x224|
 |244|FINNger|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/244_FINNger)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|96x96|
+|256|SFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/256_SFace)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|112x112|
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
