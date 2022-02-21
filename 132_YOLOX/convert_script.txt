@@ -249,7 +249,7 @@ openvino2tensorflow \
 --output_integer_quant_type 'uint8' \
 --output_tfjs \
 --output_coreml \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_nano.json
 mv saved_model saved_model_${MODEL}_${H}x${W}
 openvino2tensorflow \
 --model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
@@ -258,7 +258,7 @@ openvino2tensorflow \
 --string_formulas_for_normalization 'data / 255' \
 --output_integer_quant_type 'uint8' \
 --output_edgetpu \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_nano.json
 cp saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
 cp saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
 rm -rf saved_model
@@ -277,7 +277,7 @@ openvino2tensorflow \
 --output_integer_quant_type 'uint8' \
 --output_tfjs \
 --output_coreml \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_nano.json
 mv saved_model saved_model_${MODEL}_${H}x${W}
 openvino2tensorflow \
 --model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
@@ -286,7 +286,7 @@ openvino2tensorflow \
 --string_formulas_for_normalization 'data / 255' \
 --output_integer_quant_type 'uint8' \
 --output_edgetpu \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_nano.json
 cp saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
 cp saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
 rm -rf saved_model
@@ -305,7 +305,7 @@ openvino2tensorflow \
 --output_integer_quant_type 'uint8' \
 --output_tfjs \
 --output_coreml \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_nano.json
 mv saved_model saved_model_${MODEL}_${H}x${W}
 openvino2tensorflow \
 --model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
@@ -314,7 +314,7 @@ openvino2tensorflow \
 --string_formulas_for_normalization 'data / 255' \
 --output_integer_quant_type 'uint8' \
 --output_edgetpu \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_nano.json
 cp saved_model/model_full_integer_quant.tflite saved_model_${MODEL}_${H}x${W}
 cp saved_model/model_full_integer_quant_edgetpu.tflite saved_model_${MODEL}_${H}x${W}
 rm -rf saved_model
@@ -333,7 +333,7 @@ openvino2tensorflow \
 --output_integer_quant_type 'uint8' \
 --output_tfjs \
 --output_coreml \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_nano.json
 mv saved_model saved_model_${MODEL}_${H}x${W}
 
 H=736
@@ -350,7 +350,7 @@ openvino2tensorflow \
 --output_integer_quant_type 'uint8' \
 --output_tfjs \
 --output_coreml \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_nano.json
 mv saved_model saved_model_${MODEL}_${H}x${W}
 
 H=1088
@@ -367,7 +367,7 @@ openvino2tensorflow \
 --output_integer_quant_type 'uint8' \
 --output_tfjs \
 --output_coreml \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_nano.json
 mv saved_model saved_model_${MODEL}_${H}x${W}
 
 =========================================================
@@ -384,7 +384,7 @@ openvino2tensorflow \
 --output_float16_quant_tflite \
 --output_tfjs \
 --output_coreml \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_tiny.json
 mv saved_model saved_model_${MODEL}_${H}x${W}
 
 H=416
@@ -398,7 +398,7 @@ openvino2tensorflow \
 --output_float16_quant_tflite \
 --output_tfjs \
 --output_coreml \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_tiny.json
 mv saved_model saved_model_${MODEL}_${H}x${W}
 
 H=480
@@ -412,7 +412,7 @@ openvino2tensorflow \
 --output_float16_quant_tflite \
 --output_tfjs \
 --output_coreml \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_tiny.json
 mv saved_model saved_model_${MODEL}_${H}x${W}
 
 H=544
@@ -426,7 +426,7 @@ openvino2tensorflow \
 --output_float16_quant_tflite \
 --output_tfjs \
 --output_coreml \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_tiny.json
 mv saved_model saved_model_${MODEL}_${H}x${W}
 
 H=736
@@ -440,7 +440,7 @@ openvino2tensorflow \
 --output_float16_quant_tflite \
 --output_tfjs \
 --output_coreml \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_tiny.json
 mv saved_model saved_model_${MODEL}_${H}x${W}
 
 H=1088
@@ -454,7 +454,7 @@ openvino2tensorflow \
 --output_float16_quant_tflite \
 --output_tfjs \
 --output_coreml \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_tiny.json
 mv saved_model saved_model_${MODEL}_${H}x${W}
 
 ================================================
@@ -478,7 +478,7 @@ W=320
 openvino2tensorflow \
 --model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
 --output_tftrt \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_nano.json
 
 
 H=416
@@ -486,7 +486,7 @@ W=416
 openvino2tensorflow \
 --model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
 --output_tftrt \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_nano.json
 
 
 H=480
@@ -494,7 +494,7 @@ W=640
 openvino2tensorflow \
 --model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
 --output_tftrt \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_nano.json
 
 
 H=544
@@ -502,7 +502,7 @@ W=960
 openvino2tensorflow \
 --model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
 --output_tftrt \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_nano.json
 
 
 H=736
@@ -510,12 +510,12 @@ W=1280
 openvino2tensorflow \
 --model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
 --output_tftrt \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_nano.json
 
 H=1088
 W=1920
 openvino2tensorflow \
 --model_path openvino/${MODEL}/${H}x${W}/FP32/${MODEL}_${H}x${W}.xml \
 --output_tftrt \
---weight_replacement_config weight_replacement_config_${MODEL}.json
+--weight_replacement_config replace_nano.json
 

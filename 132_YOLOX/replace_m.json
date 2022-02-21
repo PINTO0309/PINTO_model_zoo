@@ -1,0 +1,21 @@
+{
+    "format_version": 2,
+    "layers": [
+        {
+            "layer_id": "635",
+            "type": "Concat",
+            "replace_mode": "change_axis",
+            "values": 1
+        },
+        {
+            "layer_id": "636",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2
+            ]
+        }
+    ]
+}

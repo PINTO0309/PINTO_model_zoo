@@ -1,0 +1,1061 @@
+# nano/tiny,256x320,320x320,416x416,480x640,544x960,736x1280,1088x1920
+
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+sudo pip3 install loguru thop tabulate
+
+MODELNAME=yolox
+
+SIZE=s
+MODEL=${MODELNAME}_${SIZE}
+python3 tools/export_onnx.py \
+--output-name ${MODEL}_HxW.onnx \
+-n ${MODELNAME}-${SIZE} \
+-c ${MODEL}.pth \
+--dynamic
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 320 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 416 --width 416
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 384 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 480 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 544 --width 960
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 736 --width 1280
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 1088 --width 1920
+python3 batchsize_clear.py ${MODEL}_256x320.onnx ${MODEL}_Nx256x320.onnx
+
+SIZE=m
+MODEL=${MODELNAME}_${SIZE}
+python3 tools/export_onnx.py \
+--output-name ${MODEL}_HxW.onnx \
+-n ${MODELNAME}-${SIZE} \
+-c ${MODEL}.pth \
+--dynamic
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 320 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 416 --width 416
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 384 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 480 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 544 --width 960
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 736 --width 1280
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 1088 --width 1920
+python3 batchsize_clear.py ${MODEL}_256x320.onnx ${MODEL}_Nx256x320.onnx
+
+SIZE=l
+MODEL=${MODELNAME}_${SIZE}
+python3 tools/export_onnx.py \
+--output-name ${MODEL}_HxW.onnx \
+-n ${MODELNAME}-${SIZE} \
+-c ${MODEL}.pth \
+--dynamic
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 320 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 416 --width 416
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 384 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 480 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 544 --width 960
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 736 --width 1280
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 1088 --width 1920
+python3 batchsize_clear.py ${MODEL}_256x320.onnx ${MODEL}_Nx256x320.onnx
+
+SIZE=x
+MODEL=${MODELNAME}_${SIZE}
+python3 tools/export_onnx.py \
+--output-name ${MODEL}_HxW.onnx \
+-n ${MODELNAME}-${SIZE} \
+-c ${MODEL}.pth \
+--dynamic
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 320 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 416 --width 416
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 384 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 480 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 544 --width 960
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 736 --width 1280
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 1088 --width 1920
+python3 batchsize_clear.py ${MODEL}_256x320.onnx ${MODEL}_Nx256x320.onnx
+
+
+
+MODELNAME=yolox
+SIZE=s
+MODEL=${MODELNAME}_${SIZE}
+H=256
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=320
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=384
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=416
+W=416
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=480
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=544
+W=960
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=736
+W=1280
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=1088
+W=1920
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+
+
+
+MODELNAME=yolox
+SIZE=m
+MODEL=${MODELNAME}_${SIZE}
+H=256
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=320
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=384
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=416
+W=416
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=480
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=544
+W=960
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=736
+W=1280
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=1088
+W=1920
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+
+
+
+MODELNAME=yolox
+SIZE=l
+MODEL=${MODELNAME}_${SIZE}
+H=256
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=320
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=384
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=416
+W=416
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=480
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=544
+W=960
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=736
+W=1280
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=1088
+W=1920
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+
+
+
+MODELNAME=yolox
+SIZE=x
+MODEL=${MODELNAME}_${SIZE}
+H=256
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=320
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=384
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=416
+W=416
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=480
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=544
+W=960
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=736
+W=1280
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+H=1088
+W=1920
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255' \
+--output_integer_quant_type 'uint8' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace_${SIZE}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
