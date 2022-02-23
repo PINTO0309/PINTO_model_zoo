@@ -272,3 +272,301 @@ $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
 --data_type FP16 \
 --output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
 --model_name ${MODEL}_${H}x${W}
+
+
+
+
+
+MODEL=hitnet_sf_finalpass
+H=180
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=240
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=300
+W=400
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=360
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=384
+W=512
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=480
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=720
+W=960
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=720
+W=1280
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+
+MODEL=hitnet_xl_sf_finalpass_from_tf
+H=180
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=240
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=300
+W=400
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=360
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=384
+W=512
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=480
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=720
+W=960
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=720
+W=1280
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+
+MODEL=stereo_net
+H=180
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=240
+W=320
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=300
+W=400
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=360
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=384
+W=512
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=480
+W=640
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=720
+W=960
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+H=720
+W=1280
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}_nonopt
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_nonopt.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}_nonopt/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}_nonopt
