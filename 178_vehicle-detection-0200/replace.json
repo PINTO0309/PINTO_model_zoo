@@ -2,6 +2,42 @@
     "format_version": 2,
     "layers": [
         {
+            "layer_id": "214",
+            "type": "Squeeze",
+            "replace_mode": "insert_after",
+            "values": 1
+        },
+        {
+            "layer_id": "292",
+            "type": "Squeeze",
+            "replace_mode": "insert_after",
+            "values": 1
+        },
+        {
+            "layer_id": "313",
+            "type": "Squeeze",
+            "replace_mode": "insert_after",
+            "values": 1
+        },
+        {
+            "layer_id": "333",
+            "type": "Squeeze",
+            "replace_mode": "insert_after",
+            "values": 1
+        },
+        {
+            "layer_id": "343",
+            "type": "Squeeze",
+            "replace_mode": "insert_after",
+            "values": 1
+        },
+        {
+            "layer_id": "365",
+            "type": "Squeeze",
+            "replace_mode": "insert_after",
+            "values": 1
+        },
+        {
             "layer_id": "370",
             "type": "Const",
             "replace_mode": "direct",
