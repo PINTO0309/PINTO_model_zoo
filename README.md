@@ -306,6 +306,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |249|Real-CUGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/249_Real-CUGAN)||||||||⚫|||⚫|2x,3x,4x/64x64,96x96,128x128,120x160,160x160,180x320,240x320|
 |251|AU-GAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/251_AU-GAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Low-light Image Enhancement/128x256,240x320,240x640,256x512,480x640,512x1024,720x1280|
 |253|TransWeather|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/253_TransWeather)|||||||⚫||||⚫|DeRain,DeHaizing,DeSnow/192x320,256x320,320x480,384x640,480x640,736x1280|
+|261|EfficientDerain|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/261_EfficientDerain)|||||||||||⚫|v4_SPA,v4_rain100H,v4_rain1400/192x320,256x320,320x480,384x640,480x640,608x800,736x1280|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
