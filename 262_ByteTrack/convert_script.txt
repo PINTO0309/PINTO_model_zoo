@@ -1,0 +1,213 @@
+python3 tools/demo_track.py video -f exps/example/mot/yolox_x_ablation.py -c pretrained/bytetrack_ablation.pth.tar -b 1 -d 1 --fp16 --fuse
+python3 tools/demo_track.py video -f exps/example/mot/yolox_x_mix_det.py -c pretrained/bytetrack_x_mot17.pth.tar --fp16 --fuse --save_result
+
+python3 tools/demo_track.py video -f exps/example/mot/yolox_l_mix_det.py -c pretrained/bytetrack_l_mot17.pth.tar --fp16 --fuse --save_result
+python3 tools/demo_track.py video -f exps/example/mot/yolox_m_mix_det.py -c pretrained/bytetrack_m_mot17.pth.tar --fp16 --fuse --save_result
+python3 tools/demo_track.py video -f exps/example/mot/yolox_s_mix_det.py -c pretrained/bytetrack_s_mot17.pth.tar --fp16 --fuse --save_result
+python3 tools/demo_track.py video -f exps/example/mot/yolox_tiny_mix_det.py -c pretrained/bytetrack_tiny_mot17.pth.tar --fp16 --fuse --save_result
+python3 tools/demo_track.py video -f exps/example/mot/yolox_nano_mix_det.py -c pretrained/bytetrack_nano_mot17.pth.tar --fp16 --fuse --save_result
+
+
+
+
+
+python3 tools/export_onnx.py \
+--output-name pretrained/yolox_x_ablation_HxW.onnx \
+--exp_file exps/example/mot/yolox_x_ablation.py \
+--ckpt pretrained/bytetrack_ablation.pth.tar
+
+python3 tools/export_onnx.py \
+--output-name pretrained/bytetrack_x_mot17_HxW.onnx \
+--exp_file exps/example/mot/yolox_x_mix_det.py \
+--ckpt pretrained/bytetrack_x_mot17.pth.tar
+
+python3 tools/export_onnx.py \
+--output-name pretrained/bytetrack_l_mot17_HxW.onnx \
+--exp_file exps/example/mot/yolox_l_mix_det.py \
+--ckpt pretrained/bytetrack_l_mot17.pth.tar
+
+python3 tools/export_onnx.py \
+--output-name pretrained/bytetrack_m_mot17_HxW.onnx \
+--exp_file exps/example/mot/yolox_m_mix_det.py \
+--ckpt pretrained/bytetrack_m_mot17.pth.tar
+
+python3 tools/export_onnx.py \
+--output-name pretrained/bytetrack_s_mot17_HxW.onnx \
+--exp_file exps/example/mot/yolox_s_mix_det.py \
+--ckpt pretrained/bytetrack_s_mot17.pth.tar
+
+python3 tools/export_onnx.py \
+--output-name pretrained/bytetrack_tiny_mot17_HxW.onnx \
+--exp_file exps/example/mot/yolox_tiny_mix_det.py \
+--ckpt pretrained/bytetrack_tiny_mot17.pth.tar
+
+python3 tools/export_onnx.py \
+--output-name pretrained/bytetrack_nano_mot17_HxW.onnx \
+--exp_file exps/example/mot/yolox_nano_mix_det.py \
+--ckpt pretrained/bytetrack_nano_mot17.pth.tar
+
+
+
+MODEL=bytetrack_x_ablation
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 128 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 448
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 448
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 384 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 480 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 512 --width 1280
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 736 --width 1280
+python3 -m onnxsim ${MODEL}_128x320.onnx ${MODEL}_128x320.onnx
+python3 -m onnxsim ${MODEL}_192x320.onnx ${MODEL}_192x320.onnx
+python3 -m onnxsim ${MODEL}_192x448.onnx ${MODEL}_192x448.onnx
+python3 -m onnxsim ${MODEL}_192x640.onnx ${MODEL}_192x640.onnx
+python3 -m onnxsim ${MODEL}_256x320.onnx ${MODEL}_256x320.onnx
+python3 -m onnxsim ${MODEL}_256x448.onnx ${MODEL}_256x448.onnx
+python3 -m onnxsim ${MODEL}_256x640.onnx ${MODEL}_256x640.onnx
+python3 -m onnxsim ${MODEL}_320x448.onnx ${MODEL}_320x448.onnx
+python3 -m onnxsim ${MODEL}_384x640.onnx ${MODEL}_384x640.onnx
+python3 -m onnxsim ${MODEL}_480x640.onnx ${MODEL}_480x640.onnx
+python3 -m onnxsim ${MODEL}_512x1280.onnx ${MODEL}_512x1280.onnx
+python3 -m onnxsim ${MODEL}_736x1280.onnx ${MODEL}_736x1280.onnx
+
+
+MODEL=bytetrack_x_mot17
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 128 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 448
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 448
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 384 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 480 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 512 --width 1280
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 736 --width 1280
+python3 -m onnxsim ${MODEL}_128x320.onnx ${MODEL}_128x320.onnx
+python3 -m onnxsim ${MODEL}_192x320.onnx ${MODEL}_192x320.onnx
+python3 -m onnxsim ${MODEL}_192x448.onnx ${MODEL}_192x448.onnx
+python3 -m onnxsim ${MODEL}_192x640.onnx ${MODEL}_192x640.onnx
+python3 -m onnxsim ${MODEL}_256x320.onnx ${MODEL}_256x320.onnx
+python3 -m onnxsim ${MODEL}_256x448.onnx ${MODEL}_256x448.onnx
+python3 -m onnxsim ${MODEL}_256x640.onnx ${MODEL}_256x640.onnx
+python3 -m onnxsim ${MODEL}_320x448.onnx ${MODEL}_320x448.onnx
+python3 -m onnxsim ${MODEL}_384x640.onnx ${MODEL}_384x640.onnx
+python3 -m onnxsim ${MODEL}_480x640.onnx ${MODEL}_480x640.onnx
+python3 -m onnxsim ${MODEL}_512x1280.onnx ${MODEL}_512x1280.onnx
+python3 -m onnxsim ${MODEL}_736x1280.onnx ${MODEL}_736x1280.onnx
+
+MODEL=bytetrack_l_mot17
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 128 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 448
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 448
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 384 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 480 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 512 --width 1280
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 736 --width 1280
+python3 -m onnxsim ${MODEL}_128x320.onnx ${MODEL}_128x320.onnx
+python3 -m onnxsim ${MODEL}_192x320.onnx ${MODEL}_192x320.onnx
+python3 -m onnxsim ${MODEL}_192x448.onnx ${MODEL}_192x448.onnx
+python3 -m onnxsim ${MODEL}_192x640.onnx ${MODEL}_192x640.onnx
+python3 -m onnxsim ${MODEL}_256x320.onnx ${MODEL}_256x320.onnx
+python3 -m onnxsim ${MODEL}_256x448.onnx ${MODEL}_256x448.onnx
+python3 -m onnxsim ${MODEL}_256x640.onnx ${MODEL}_256x640.onnx
+python3 -m onnxsim ${MODEL}_320x448.onnx ${MODEL}_320x448.onnx
+python3 -m onnxsim ${MODEL}_384x640.onnx ${MODEL}_384x640.onnx
+python3 -m onnxsim ${MODEL}_480x640.onnx ${MODEL}_480x640.onnx
+python3 -m onnxsim ${MODEL}_512x1280.onnx ${MODEL}_512x1280.onnx
+python3 -m onnxsim ${MODEL}_736x1280.onnx ${MODEL}_736x1280.onnx
+
+MODEL=bytetrack_m_mot17
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 128 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 448
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 448
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 384 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 480 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 512 --width 1280
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 736 --width 1280
+python3 -m onnxsim ${MODEL}_128x320.onnx ${MODEL}_128x320.onnx
+python3 -m onnxsim ${MODEL}_192x320.onnx ${MODEL}_192x320.onnx
+python3 -m onnxsim ${MODEL}_192x448.onnx ${MODEL}_192x448.onnx
+python3 -m onnxsim ${MODEL}_192x640.onnx ${MODEL}_192x640.onnx
+python3 -m onnxsim ${MODEL}_256x320.onnx ${MODEL}_256x320.onnx
+python3 -m onnxsim ${MODEL}_256x448.onnx ${MODEL}_256x448.onnx
+python3 -m onnxsim ${MODEL}_256x640.onnx ${MODEL}_256x640.onnx
+python3 -m onnxsim ${MODEL}_320x448.onnx ${MODEL}_320x448.onnx
+python3 -m onnxsim ${MODEL}_384x640.onnx ${MODEL}_384x640.onnx
+python3 -m onnxsim ${MODEL}_480x640.onnx ${MODEL}_480x640.onnx
+python3 -m onnxsim ${MODEL}_512x1280.onnx ${MODEL}_512x1280.onnx
+python3 -m onnxsim ${MODEL}_736x1280.onnx ${MODEL}_736x1280.onnx
+
+MODEL=bytetrack_tiny_mot17
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 128 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 448
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 448
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 384 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 480 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 512 --width 1280
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 736 --width 1280
+python3 -m onnxsim ${MODEL}_128x320.onnx ${MODEL}_128x320.onnx
+python3 -m onnxsim ${MODEL}_192x320.onnx ${MODEL}_192x320.onnx
+python3 -m onnxsim ${MODEL}_192x448.onnx ${MODEL}_192x448.onnx
+python3 -m onnxsim ${MODEL}_192x640.onnx ${MODEL}_192x640.onnx
+python3 -m onnxsim ${MODEL}_256x320.onnx ${MODEL}_256x320.onnx
+python3 -m onnxsim ${MODEL}_256x448.onnx ${MODEL}_256x448.onnx
+python3 -m onnxsim ${MODEL}_256x640.onnx ${MODEL}_256x640.onnx
+python3 -m onnxsim ${MODEL}_320x448.onnx ${MODEL}_320x448.onnx
+python3 -m onnxsim ${MODEL}_384x640.onnx ${MODEL}_384x640.onnx
+python3 -m onnxsim ${MODEL}_480x640.onnx ${MODEL}_480x640.onnx
+python3 -m onnxsim ${MODEL}_512x1280.onnx ${MODEL}_512x1280.onnx
+python3 -m onnxsim ${MODEL}_736x1280.onnx ${MODEL}_736x1280.onnx
+
+MODEL=bytetrack_nano_mot17
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 128 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 448
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 192 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 320
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 448
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 256 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 384 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 480 --width 640
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 512 --width 1280
+python3 set_static_shape.py --model ${MODEL}_HxW.onnx --height 736 --width 1280
+python3 -m onnxsim ${MODEL}_128x320.onnx ${MODEL}_128x320.onnx
+python3 -m onnxsim ${MODEL}_192x320.onnx ${MODEL}_192x320.onnx
+python3 -m onnxsim ${MODEL}_192x448.onnx ${MODEL}_192x448.onnx
+python3 -m onnxsim ${MODEL}_192x640.onnx ${MODEL}_192x640.onnx
+python3 -m onnxsim ${MODEL}_256x320.onnx ${MODEL}_256x320.onnx
+python3 -m onnxsim ${MODEL}_256x448.onnx ${MODEL}_256x448.onnx
+python3 -m onnxsim ${MODEL}_256x640.onnx ${MODEL}_256x640.onnx
+python3 -m onnxsim ${MODEL}_320x448.onnx ${MODEL}_320x448.onnx
+python3 -m onnxsim ${MODEL}_384x640.onnx ${MODEL}_384x640.onnx
+python3 -m onnxsim ${MODEL}_480x640.onnx ${MODEL}_480x640.onnx
+python3 -m onnxsim ${MODEL}_512x1280.onnx ${MODEL}_512x1280.onnx
+python3 -m onnxsim ${MODEL}_736x1280.onnx ${MODEL}_736x1280.onnx
+
+
+
+
+
+
+
+
+
+
+
+
+
