@@ -1,0 +1,572 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+MODEL=egonet_fc
+
+BATCH_SIZE=1
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x66/openvino/FP32/${MODEL}_${BATCH_SIZE}x66.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml \
+--non_verbose
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x66
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x66.onnx ${MODEL}_${BATCH_SIZE}x66
+
+BATCH_SIZE=2
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x66/openvino/FP32/${MODEL}_${BATCH_SIZE}x66.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml \
+--non_verbose
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x66
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x66.onnx ${MODEL}_${BATCH_SIZE}x66
+
+BATCH_SIZE=3
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x66/openvino/FP32/${MODEL}_${BATCH_SIZE}x66.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml \
+--non_verbose
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x66
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x66.onnx ${MODEL}_${BATCH_SIZE}x66
+
+BATCH_SIZE=4
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x66/openvino/FP32/${MODEL}_${BATCH_SIZE}x66.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml \
+--non_verbose
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x66
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x66.onnx ${MODEL}_${BATCH_SIZE}x66
+
+BATCH_SIZE=5
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x66/openvino/FP32/${MODEL}_${BATCH_SIZE}x66.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml \
+--non_verbose
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x66
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x66.onnx ${MODEL}_${BATCH_SIZE}x66
+
+BATCH_SIZE=6
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x66/openvino/FP32/${MODEL}_${BATCH_SIZE}x66.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml \
+--non_verbose
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x66
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x66.onnx ${MODEL}_${BATCH_SIZE}x66
+
+BATCH_SIZE=7
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x66/openvino/FP32/${MODEL}_${BATCH_SIZE}x66.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml \
+--non_verbose
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x66
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x66.onnx ${MODEL}_${BATCH_SIZE}x66
+
+BATCH_SIZE=8
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x66/openvino/FP32/${MODEL}_${BATCH_SIZE}x66.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml \
+--non_verbose
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x66
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x66.onnx ${MODEL}_${BATCH_SIZE}x66
+
+BATCH_SIZE=9
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x66/openvino/FP32/${MODEL}_${BATCH_SIZE}x66.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml \
+--non_verbose
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x66
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x66.onnx ${MODEL}_${BATCH_SIZE}x66
+
+BATCH_SIZE=10
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x66.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x66/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x66
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x66/openvino/FP32/${MODEL}_${BATCH_SIZE}x66.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data * 1' \
+--output_tfjs \
+--output_coreml \
+--non_verbose
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x66
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x66.onnx ${MODEL}_${BATCH_SIZE}x66
+
+
+
+MODEL=egonet_heatmap
+
+BATCH_SIZE=1
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32/${MODEL}_${BATCH_SIZE}x3x256x256.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace.json
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x3x256x256
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x3x256x256.onnx ${MODEL}_${BATCH_SIZE}x3x256x256
+
+BATCH_SIZE=2
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32/${MODEL}_${BATCH_SIZE}x3x256x256.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace.json
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x3x256x256
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x3x256x256.onnx ${MODEL}_${BATCH_SIZE}x3x256x256
+
+BATCH_SIZE=3
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32/${MODEL}_${BATCH_SIZE}x3x256x256.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace.json
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x3x256x256
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x3x256x256.onnx ${MODEL}_${BATCH_SIZE}x3x256x256
+
+BATCH_SIZE=4
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32/${MODEL}_${BATCH_SIZE}x3x256x256.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace.json
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x3x256x256
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x3x256x256.onnx ${MODEL}_${BATCH_SIZE}x3x256x256
+
+BATCH_SIZE=5
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32/${MODEL}_${BATCH_SIZE}x3x256x256.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace.json
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x3x256x256
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x3x256x256.onnx ${MODEL}_${BATCH_SIZE}x3x256x256
+
+BATCH_SIZE=6
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32/${MODEL}_${BATCH_SIZE}x3x256x256.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace.json
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x3x256x256
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x3x256x256.onnx ${MODEL}_${BATCH_SIZE}x3x256x256
+
+BATCH_SIZE=7
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32/${MODEL}_${BATCH_SIZE}x3x256x256.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace.json
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x3x256x256
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x3x256x256.onnx ${MODEL}_${BATCH_SIZE}x3x256x256
+
+BATCH_SIZE=8
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32/${MODEL}_${BATCH_SIZE}x3x256x256.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace.json
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x3x256x256
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x3x256x256.onnx ${MODEL}_${BATCH_SIZE}x3x256x256
+
+BATCH_SIZE=9
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32/${MODEL}_${BATCH_SIZE}x3x256x256.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace.json
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x3x256x256
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x3x256x256.onnx ${MODEL}_${BATCH_SIZE}x3x256x256
+
+BATCH_SIZE=10
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${BATCH_SIZE}x3x256x256.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP16 \
+--model_name ${MODEL}_${BATCH_SIZE}x3x256x256
+openvino2tensorflow \
+--model_path ${MODEL}_${BATCH_SIZE}x3x256x256/openvino/FP32/${MODEL}_${BATCH_SIZE}x3x256x256.xml \
+--output_saved_model \
+--output_pb \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml \
+--non_verbose \
+--weight_replacement_config replace.json
+mv saved_model/* ${MODEL}_${BATCH_SIZE}x3x256x256
+rm -rf saved_model
+mv ${MODEL}_${BATCH_SIZE}x3x256x256.onnx ${MODEL}_${BATCH_SIZE}x3x256x256
