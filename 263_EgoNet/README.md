@@ -266,7 +266,9 @@
             data = torch.from_numpy(data)
             if cuda:
                 data = data.cuda()
-            prediction = self.L(data)
+            
+            prediction = self.L(data) # <--- egonet_fc_Nx66
+            
             prediction = nop.unnormalize_1d(
                 prediction.data.cpu().numpy(),
                 self.LS['mean_out'],
