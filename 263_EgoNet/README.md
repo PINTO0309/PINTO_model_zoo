@@ -72,8 +72,13 @@
               (int(resolution[0]), int(resolution[1])),
               flags=cv2.INTER_LINEAR
           )
+          instance = instance if pth_trans is None else pth_trans(instance)
           ```
-          https://github.com/Nicholasli1995/EgoNet/blob/a3ea8285d0497723dc2a3a60009b2da95937f542/libs/common/img_proc.py#L26-L64
+          ```
+          pth_trans: Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+          ```
+          https://github.com/Nicholasli1995/EgoNet/blob/a3ea8285d0497723dc2a3a60009b2da95937f542/libs/common/img_proc.py#L26-L64  
+          `rot` is rotaion.
           ```python
           def get_affine_transform(
               center,
@@ -116,7 +121,7 @@
 
               return trans
           ```
-      10. Intermediate processing is required after **`egonet_heatmap_Nx3x256x256`** before passing **`local_coord`** values to **`egonet_fc_Nx66`**. The process of affine transforming the value of the output of **`egonet_heatmap_Nx3x256x256`**. The affine transformed values are saved as **`kpts_2d_pred`** and passed on to the next model input.
+      10. Intermediate processing is required after **`egonet_heatmap_Nx3x256x256`** before passing **`local_coord`** values to **`egonet_fc_Nx66`**. The process of affine transforming the value of the output of **`egonet_heatmap_Nx3x256x256`**. The affine transformed values are saved as **`kpts_2d_pred`** and passed on to the next model input. `instances` is the coordinate information of N cars after affine transformation.
           https://github.com/Nicholasli1995/EgoNet/blob/a3ea8285d0497723dc2a3a60009b2da95937f542/libs/model/egonet.py#L424-L467
           ```python
           instances =
@@ -194,7 +199,7 @@
               """
               if is_cuda:
                   instances = instances.cuda()
-              output = self.HC(instances) # <--- Heat map generation (inference), **`egonet_heatmap_Nx3x256x256`**
+              output = self.HC(instances) # <--- Heat map generation (inference), egonet_heatmap_Nx3x256x256
               
               # local part coordinates
               width, height = self.resolution
