@@ -55,7 +55,8 @@
                   's': np.array([(new_right - new_left)/SIZE, (new_bottom - new_top)/SIZE])
               }
           ```
-      9. Affine transformation of vertices
+      9. Affine transformation of vertices  
+          `img` is not the detected image of the car, but the whole image that is processed for object detection.
           https://github.com/Nicholasli1995/EgoNet/blob/a3ea8285d0497723dc2a3a60009b2da95937f542/libs/model/egonet.py#L81-L89
           ```python
           c, s, r = ret['c'], ret['s'], 0.0
