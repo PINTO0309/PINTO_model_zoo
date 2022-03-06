@@ -201,7 +201,7 @@
               }
           ]
           ```
-          Inverse affine transformation of the keypoints inferred and output by `output = self.HC(instances)`. The converted (preprocessed) keypoints are stored in **`kpts_2d_pred`**. `self.resolution` is `[256, 256]`. `np.array(self.resolution).reshape(1, 1, 2)` is `[[[256, 256]]]`. `local_coord` is `[1, 33, 2]`.
+          Inverse affine transformation of the keypoints inferred and output by `output = self.HC(instances)`. The converted (preprocessed) keypoints are stored in **`kpts_2d_pred`**. `self.resolution` is `[256, 256]`. `np.array(self.resolution).reshape(1, 1, 2)` is `[[[256, 256]]]`. `local_coord` is `[N, 33, 2]`.
           ```python
           def get_keypoints(
               self,
