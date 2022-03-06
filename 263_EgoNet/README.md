@@ -269,5 +269,6 @@ https://github.com/Nicholasli1995/EgoNet/blob/a3ea8285d0497723dc2a3a60009b2da959
         self.LS['mean_out'],
         self.LS['std_out']
     )
+    records[path]['kpts_3d_pred'] = prediction.reshape(len(prediction), -1, 3)
     ```
     ![image](https://user-images.githubusercontent.com/33194443/156892669-6db296f6-fe11-44ad-abde-723893ad38f1.png)
