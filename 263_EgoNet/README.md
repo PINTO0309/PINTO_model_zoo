@@ -10,7 +10,7 @@
         `[-1]` (Cars only, Car = -1)
       4. INPUT scores:  
         `[0.99902]`
-      5. Resize bbox:  
+      5. Resize bbox (Extended car cutout area to 1.1 times larger):  
         `new_width = (701 - 654) * 1.1`  
         `new_height = (232 - 184) * 1.1`  
       6. Calculation of the center point:  
