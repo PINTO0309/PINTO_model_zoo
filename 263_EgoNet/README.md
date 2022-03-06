@@ -237,7 +237,7 @@
                   ret[path]['rotation'].append(record['rotation'])
               return ret
           ```
-4. The normalization process is added at the beginning of the **`egonet_fc_Nx66`** model and the inverse normalization process is added at the end of **`egonet_fc_Nx66`** model. Therefore, the tensor **`[N, 66]`** used as input for the **`egonet_fc_Nx66`** model should not be programmatically normalized.
+4. The normalization process is added at the beginning of the **`egonet_fc_Nx66`** model and the inverse normalization process is added at the end of **`egonet_fc_Nx66`** model. Therefore, the tensor **`[N, 66]`** used as input for the **`egonet_fc_Nx66`** model should not be programmatically normalized. `len(prediction)` is the batch size `N`. It is synonymous with the number of cars detected for one image.
     https://github.com/Nicholasli1995/EgoNet/blob/a3ea8285d0497723dc2a3a60009b2da95937f542/libs/model/egonet.py#L469-L486
     ```python
     def lift_2d_to_3d(self, records, cuda=True):
