@@ -134,7 +134,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |036|Objectron|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/036_Objectron)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe/camera,chair,chair_1stage,cup,sneakers,sneakers_1stage,ssd_mobilenetv2_oidv4_fp16|
 |063|3D BoundingBox estimation for autonomous driving|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/063_3d-bounding-box-estimation-for-autonomous-driving)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|**[YouTube](https://youtu.be/MKer-Sj87d4)**|
 |107|SFA3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/107_SFA3D)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|263|EgoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/263_EgoNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|No-LICENSE|
+|263|EgoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/263_EgoNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫||
 ### 4. 2D/3D Face Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
