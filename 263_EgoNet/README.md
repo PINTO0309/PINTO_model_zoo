@@ -54,7 +54,7 @@ ONNX, TFLite, OpenVINO, TensorFlow.js, CoreML.
               return {
                   'bbox': [new_left, new_top, new_right, new_bottom],
                   'c': np.array([center_x, center_y]),
-                  's': np.array([(new_right - new_left)/SIZE, (new_bottom - new_top)/SIZE])
+                  's': np.array([(new_right - new_left)/SIZE, (new_bottom - new_top)/SIZE]) # SIZE=200.0
               }
           ```
       9. Affine transformation of vertices  
