@@ -1,7 +1,7 @@
 ## Results of logic analysis when converting EgoNet models
 ![1](https://user-images.githubusercontent.com/33194443/156893046-0f514c27-5899-4637-b284-e660faeb235b.png) ![2](https://user-images.githubusercontent.com/33194443/156893059-ef96afc7-df8e-4322-aa61-98e0e432e916.png)
 1. This model requires two different files to be run in sequence. The order of execution is **`egonet_heatmap_Nx3x256x256`** first, then **`egonet_fc_Nx66`**.
-2. **`N`** in the input tensor of **`egonet_heatmap_Nx3x256x256`** is the batch size. What this batch size means is the number of cars detected using your favorite object detection model. This means that before using EgoNet's model, the car must be detected beforehand using an object detection model such as YOLO or MobileNet, and the car region must be cut out with a bounding box. Thus, the batch size **`N`** of the input tensor of the EgoNet model is the number of vehicles obtained by object detection.
+2. **`N`** in the input tensor of **`egonet_heatmap_Nx3x256x256`** is the batch size. What this batch size means is the number of cars detected using your favorite object detection model. This means that before using EgoNet's model, the car must be detected beforehand using an object detection model such as YOLO or SSD, etc, and the car region must be cut out with a bounding box. Thus, the batch size **`N`** of the input tensor of the EgoNet model is the number of vehicles obtained by object detection.
 3. Preprocessing
     - crop_instances - Loop processing for all detected car bounding boxes
       1. INPUT bbox:  
