@@ -121,7 +121,7 @@
 
               return trans
           ```
-      10. Intermediate processing is required after **`egonet_heatmap_Nx3x256x256`** before passing **`local_coord`** values to **`egonet_fc_Nx66`**. The process of affine transforming the value of the output of **`egonet_heatmap_Nx3x256x256`**. The affine transformed values are saved as **`kpts_2d_pred`** and passed on to the next model input. `instances` is the coordinate information of N cars after affine transformation.
+      10. Intermediate processing is required after **`egonet_heatmap_Nx3x256x256`** before passing **`local_coord`** values to **`egonet_fc_Nx66`**. The process of affine transforming the value of the output of **`egonet_heatmap_Nx3x256x256`**. The affine transformed values are saved as **`kpts_2d_pred`** and passed on to the next model input. `instances` is the coordinate information of N cars after affine transformations and normalization.
           https://github.com/Nicholasli1995/EgoNet/blob/a3ea8285d0497723dc2a3a60009b2da95937f542/libs/model/egonet.py#L424-L467
           ```python
           instances =
