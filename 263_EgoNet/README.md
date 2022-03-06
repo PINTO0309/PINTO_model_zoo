@@ -7,9 +7,9 @@
       1. INPUT bbox:  
         `[[654 , 184, 701, 232]] <- [[X1, Y1, X2, Y2],[X1, Y1, X2, Y2], ..., [X1, Y1, X2, Y2]]`
       3. INPUT labels:  
-        `-1` (Cars only, Car = -1)
+        `[-1]` (Cars only, Car = -1)
       4. INPUT scores:  
-        `0.99902`
+        `[0.99902]`
       5. Resize bbox:  
         `new_width = (701 - 654) * 1.1`  
         `new_height = (232 - 184) * 1.1`  
