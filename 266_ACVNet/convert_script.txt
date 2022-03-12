@@ -1,0 +1,141 @@
+docker run --rm -it -v `pwd`:/workdir pinto0309/openvino:2022.1.20220312
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/openvino/runtime/lib/intel64
+sudo ldconfig
+cd /workdir
+
+MODEL=acvnet_maxdisp192_sceneflow
+H=240
+W=320
+sudo python /usr/local/lib/python3.8/dist-packages/openvino/tools/mo/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+sudo python /usr/local/lib/python3.8/dist-packages/openvino/tools/mo/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+
+H=320
+W=480
+sudo python /usr/local/lib/python3.8/dist-packages/openvino/tools/mo/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+sudo python /usr/local/lib/python3.8/dist-packages/openvino/tools/mo/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+H=384
+W=640
+sudo python /usr/local/lib/python3.8/dist-packages/openvino/tools/mo/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+sudo python /usr/local/lib/python3.8/dist-packages/openvino/tools/mo/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+H=480
+W=640
+sudo python /usr/local/lib/python3.8/dist-packages/openvino/tools/mo/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+sudo python /usr/local/lib/python3.8/dist-packages/openvino/tools/mo/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+H=544
+W=960
+sudo python /usr/local/lib/python3.8/dist-packages/openvino/tools/mo/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+sudo python /usr/local/lib/python3.8/dist-packages/openvino/tools/mo/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+H=720
+W=1280
+sudo python /usr/local/lib/python3.8/dist-packages/openvino/tools/mo/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+sudo python /usr/local/lib/python3.8/dist-packages/openvino/tools/mo/mo.py \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+exit
+
+
+
+MODEL=acvnet_maxdisp192_sceneflow
+sudo chmod -R 777 ${MODEL}_*
+sudo chown -R `whoami` ${MODEL}_*
+
+
+
+
+
+"""Reshape 18848
+name: 18847
+kind: Const
+type: int64[2]
+[
+    -1,
+    2
+]
+
+[
+    5,
+    2
+]
+"""
+
+"""Reshape 18856
+name: 18855
+kind: Const
+type: int64[1]
+[
+    -1
+]
+
+[
+    10
+]
+"""
+
+
+# onnx2trt acvnet_maxdisp192_240x320.onnx -o acvnet_maxdisp192_240x320.trt -b 1 -d 16 -v
+
+
+#=============================================================================
+
+# git clone https://github.com/openvinotoolkit/docker_ci.git && cd docker_ci
+# git checkout 915b8d8bb13e5a10956ff743ccd36c3f649df85b
+# cd dockerfiles/ubuntu20/build_custom
+# docker build -t pinto0309/openvino:2022.1.20220312 .
+
+# cd ../../../..
+# docker run --rm -it -v `pwd`:/workdir pinto0309/openvino:2022.1.20220312
+# export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/openvino/runtime/lib/intel64
+# sudo ldconfig
+
