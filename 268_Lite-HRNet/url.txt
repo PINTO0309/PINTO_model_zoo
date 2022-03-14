@@ -1,3 +1,4 @@
 https://github.com/HRNet/Lite-HRNet
 https://github.com/PINTO0309/openvino2tensorflow
 
+https://zenn.dev/pinto0309/scraps/1ecbf4ef73d3ac
