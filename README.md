@@ -177,6 +177,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |156|MobileHumanPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/156_MobileHumanPose)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|3D|
 |157|3DMPPE_POSENET|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/157_3DMPPE_POSENET)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|3D,192x192/256x256/320x320/416x416/480x640/512x512|
 |265|PoseAug|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/265_PoseAug)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|2D->3D/GCN,MLP,STGCN,VideoPose/Nx16x2|
+|268|Lite-HRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/268_Lite-HRNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|COCO,MPII|
 ### 7. Depth Estimation from Monocular/Stereo Images
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
