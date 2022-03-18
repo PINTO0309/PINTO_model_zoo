@@ -350,6 +350,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |100|HiFill|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/100_HiFill)|⚫|⚫||||⚫|⚫||||⚫||
 |163|MST_inpainting|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/163_MST_inpainting)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫||
 |273|OPN(Onion-Peel Networks)|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/273_OPN)|||||||||||⚫||
+|274|DeepFillv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/274_DeepFillv2)|⚫|⚫|||⚫|⚫|⚫||||⚫||
 ### 17. GAN
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|

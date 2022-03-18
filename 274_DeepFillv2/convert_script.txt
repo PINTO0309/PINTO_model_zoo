@@ -1,0 +1,283 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+DATASET=celeba_hq
+H=192
+W=320
+saved_model_to_tflite \
+--saved_model_dir_path saved_model_${DATASET}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_onnx \
+--onnx_opset 11
+mv tflite_from_saved_model/* saved_model_${DATASET}_${H}x${W}
+rm -rf tflite_from_saved_model
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP32 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP32 \
+--model_name ${DATASET}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP16 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP16 \
+--model_name ${DATASET}_${H}x${W}
+
+H=240
+W=320
+saved_model_to_tflite \
+--saved_model_dir_path saved_model_${DATASET}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_onnx \
+--onnx_opset 11
+mv tflite_from_saved_model/* saved_model_${DATASET}_${H}x${W}
+rm -rf tflite_from_saved_model
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP32 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP32 \
+--model_name ${DATASET}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP16 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP16 \
+--model_name ${DATASET}_${H}x${W}
+
+H=360
+W=640
+saved_model_to_tflite \
+--saved_model_dir_path saved_model_${DATASET}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_onnx \
+--onnx_opset 11
+mv tflite_from_saved_model/* saved_model_${DATASET}_${H}x${W}
+rm -rf tflite_from_saved_model
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP32 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP32 \
+--model_name ${DATASET}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP16 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP16 \
+--model_name ${DATASET}_${H}x${W}
+
+H=480
+W=640
+saved_model_to_tflite \
+--saved_model_dir_path saved_model_${DATASET}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_onnx \
+--onnx_opset 11
+mv tflite_from_saved_model/* saved_model_${DATASET}_${H}x${W}
+rm -rf tflite_from_saved_model
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP32 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP32 \
+--model_name ${DATASET}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP16 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP16 \
+--model_name ${DATASET}_${H}x${W}
+
+H=720
+W=1280
+saved_model_to_tflite \
+--saved_model_dir_path saved_model_${DATASET}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_onnx \
+--onnx_opset 11
+mv tflite_from_saved_model/* saved_model_${DATASET}_${H}x${W}
+rm -rf tflite_from_saved_model
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP32 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP32 \
+--model_name ${DATASET}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP16 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP16 \
+--model_name ${DATASET}_${H}x${W}
+
+H=1080
+W=1920
+saved_model_to_tflite \
+--saved_model_dir_path saved_model_${DATASET}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_onnx \
+--onnx_opset 11
+mv tflite_from_saved_model/* saved_model_${DATASET}_${H}x${W}
+rm -rf tflite_from_saved_model
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP32 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP32 \
+--model_name ${DATASET}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP16 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP16 \
+--model_name ${DATASET}_${H}x${W}
+
+
+
+DATASET=places2
+H=192
+W=320
+saved_model_to_tflite \
+--saved_model_dir_path saved_model_${DATASET}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_onnx \
+--onnx_opset 11
+mv tflite_from_saved_model/* saved_model_${DATASET}_${H}x${W}
+rm -rf tflite_from_saved_model
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP32 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP32 \
+--model_name ${DATASET}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP16 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP16 \
+--model_name ${DATASET}_${H}x${W}
+
+H=240
+W=320
+saved_model_to_tflite \
+--saved_model_dir_path saved_model_${DATASET}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_onnx \
+--onnx_opset 11
+mv tflite_from_saved_model/* saved_model_${DATASET}_${H}x${W}
+rm -rf tflite_from_saved_model
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP32 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP32 \
+--model_name ${DATASET}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP16 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP16 \
+--model_name ${DATASET}_${H}x${W}
+
+H=360
+W=640
+saved_model_to_tflite \
+--saved_model_dir_path saved_model_${DATASET}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_onnx \
+--onnx_opset 11
+mv tflite_from_saved_model/* saved_model_${DATASET}_${H}x${W}
+rm -rf tflite_from_saved_model
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP32 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP32 \
+--model_name ${DATASET}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP16 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP16 \
+--model_name ${DATASET}_${H}x${W}
+
+H=480
+W=640
+saved_model_to_tflite \
+--saved_model_dir_path saved_model_${DATASET}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_onnx \
+--onnx_opset 11
+mv tflite_from_saved_model/* saved_model_${DATASET}_${H}x${W}
+rm -rf tflite_from_saved_model
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP32 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP32 \
+--model_name ${DATASET}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP16 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP16 \
+--model_name ${DATASET}_${H}x${W}
+
+H=720
+W=1280
+saved_model_to_tflite \
+--saved_model_dir_path saved_model_${DATASET}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_onnx \
+--onnx_opset 11
+mv tflite_from_saved_model/* saved_model_${DATASET}_${H}x${W}
+rm -rf tflite_from_saved_model
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP32 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP32 \
+--model_name ${DATASET}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP16 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP16 \
+--model_name ${DATASET}_${H}x${W}
+
+H=1080
+W=1920
+saved_model_to_tflite \
+--saved_model_dir_path saved_model_${DATASET}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_onnx \
+--onnx_opset 11
+mv tflite_from_saved_model/* saved_model_${DATASET}_${H}x${W}
+rm -rf tflite_from_saved_model
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP32 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP32 \
+--model_name ${DATASET}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo_tf.py \
+--saved_model_dir saved_model_${DATASET}_${H}x${W} \
+--data_type FP16 \
+--output_dir saved_model_${DATASET}_${H}x${W}/openvino/FP16 \
+--model_name ${DATASET}_${H}x${W}
