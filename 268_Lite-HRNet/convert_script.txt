@@ -229,3 +229,56 @@ openvino2tensorflow \
 --non_verbose
 mv saved_model/* ${MODEL}_${H}x${W}
 rm -rf saved_model
+
+
+
+python remove_initializer_from_input.py \
+--input litehrnet_18_coco_Nx256x192.onnx \
+--output litehrnet_18_coco_Nx256x192.onnx
+
+python remove_initializer_from_input.py \
+--input litehrnet_18_coco_Nx384x288.onnx \
+--output litehrnet_18_coco_Nx384x288.onnx
+
+python remove_initializer_from_input.py \
+--input litehrnet_18_mpii_Nx256x256.onnx \
+--output litehrnet_18_mpii_Nx256x256.onnx
+
+python remove_initializer_from_input.py \
+--input litehrnet_30_coco_Nx256x192.onnx \
+--output litehrnet_30_coco_Nx256x192.onnx
+
+python remove_initializer_from_input.py \
+--input litehrnet_30_coco_Nx384x288.onnx \
+--output litehrnet_30_coco_Nx384x288.onnx
+
+python remove_initializer_from_input.py \
+--input litehrnet_30_mpii_Nx256x256.onnx \
+--output litehrnet_30_mpii_Nx256x256.onnx
+
+
+python remove_initializer_from_input.py \
+--input litehrnet_18_coco_256x192/litehrnet_18_coco_256x192.onnx \
+--output litehrnet_18_coco_256x192/litehrnet_18_coco_256x192.onnx
+
+python remove_initializer_from_input.py \
+--input litehrnet_18_coco_384x288/litehrnet_18_coco_384x288.onnx \
+--output litehrnet_18_coco_384x288/litehrnet_18_coco_384x288.onnx
+
+python remove_initializer_from_input.py \
+--input litehrnet_18_mpii_256x256/litehrnet_18_mpii_256x256.onnx \
+--output litehrnet_18_mpii_256x256/litehrnet_18_mpii_256x256.onnx
+
+python remove_initializer_from_input.py \
+--input litehrnet_30_coco_256x192/litehrnet_30_coco_256x192.onnx \
+--output litehrnet_30_coco_256x192/litehrnet_30_coco_256x192.onnx
+
+python remove_initializer_from_input.py \
+--input litehrnet_30_coco_384x288/litehrnet_30_coco_384x288.onnx \
+--output litehrnet_30_coco_384x288/litehrnet_30_coco_384x288.onnx
+
+python remove_initializer_from_input.py \
+--input litehrnet_30_mpii_256x256/litehrnet_30_mpii_256x256.onnx \
+--output litehrnet_30_mpii_256x256/litehrnet_30_mpii_256x256.onnx
+
+
