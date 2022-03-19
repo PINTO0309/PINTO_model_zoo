@@ -1,3 +1,4 @@
 https://github.com/datvuthanh/HybridNets
 https://github.com/PINTO0309/openvino2tensorflow
 
+https://zenn.dev/pinto0309/scraps/b077a1bcac9ff4
