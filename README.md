@@ -275,7 +275,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |071|Noise2Noise|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/071_Noise2Noise)|⚫|⚫|⚫|⚫||⚫|||||⚫|srresnet/clear only|
 |076|Deep_White_Balance|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/076_Deep_White_Balance)|⚫|⚫||||⚫|⚫|⚫|⚫|⚫|⚫||
 |077|ESRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/077_ESRGAN)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|50x50->x4, 100x100->x4|
-|079|MIRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/079_MIRNet)|⚫|⚫|⚫|⚫||⚫|⚫||⚫|⚫|⚫||
+|079|MIRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/079_MIRNet)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/40x40,80x80,120x120,120x160,120x320,120x480,120x640,120x1280,180x480,180x640,180x1280,180x320,240x320,240x480,360x480,360x640,480x640,720x1280|
 |086|Defocus Deblurring Using Dual-Pixel|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/086_defocus-deblurring-dual-pixel)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |090|Ghost-free_Shadow_Removal|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/090_Ghost-free_Shadow_Removal)|⚫|⚫|⚫|||⚫|⚫|⚫|||⚫|256x256|
 |111|SRN-Deblur|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/111_SRN-Deblur)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|240x320,480x640,720x1280,1024x1280|
