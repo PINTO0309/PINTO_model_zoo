@@ -80,6 +80,7 @@ def main():
                 }
             ),
             'CUDAExecutionProvider',
+            'OpenVINOExecutionProvider',
             'CPUExecutionProvider'
         ],
     )
