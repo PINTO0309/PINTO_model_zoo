@@ -5,6 +5,9 @@ https://github.com/NobuoTsukamoto/tensorrt-examples/blob/main/python/mirnet/READ
 
 ## MIRNet with ONNX in Python
 ```bash
+##### Environment
+https://github.com/PINTO0309/openvino2tensorflow#1-environment
+
 ##### For GPU
 xhost +local: && \
 docker run --gpus all -it --rm \
