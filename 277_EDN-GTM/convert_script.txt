@@ -1,0 +1,1109 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+MODEL=densehaze_generator
+H=192
+W=320
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=240
+W=320
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=384
+W=480
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=384
+W=640
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=480
+W=640
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=512
+W=512
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+H=720
+W=1280
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+H=1088
+W=1920
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--saved-model ${MODEL}_HxW \
+--output ${MODEL}_HxW/model_float32.onnx
+python3 shape_inference.py ${MODEL}_HxW/model_float32.onnx
+
+
+
+MODEL=ihaze_generator
+H=192
+W=320
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=240
+W=320
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=384
+W=480
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=384
+W=640
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=480
+W=640
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=512
+W=512
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+H=720
+W=1280
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+H=1088
+W=1920
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--saved-model ${MODEL}_HxW \
+--output ${MODEL}_HxW/model_float32.onnx
+python3 shape_inference.py ${MODEL}_HxW/model_float32.onnx
+
+
+
+MODEL=nhhaze_generator
+H=192
+W=320
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=240
+W=320
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=384
+W=480
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=384
+W=640
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=480
+W=640
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=512
+W=512
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+H=720
+W=1280
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+H=1088
+W=1920
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--saved-model ${MODEL}_HxW \
+--output ${MODEL}_HxW/model_float32.onnx
+python3 shape_inference.py ${MODEL}_HxW/model_float32.onnx
+
+
+
+MODEL=ohaze_generator
+H=192
+W=320
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=240
+W=320
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=384
+W=480
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=384
+W=640
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=480
+W=640
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+mkdir -p ${MODEL}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${H}x${W}/openvino/FP16/${MODEL}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${H}x${W}/openvino/myriad/${MODEL}_${H}x${W}.blob
+
+H=512
+W=512
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+H=720
+W=1280
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+H=1088
+W=1920
+saved_model_to_tflite \
+--saved_model_dir_path ${MODEL}_${H}x${W} \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_tfjs \
+--output_coreml
+mv tflite_from_saved_model/* ${MODEL}_${H}x${W}
+rm -rf tflite_from_saved_model
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--tflite ${MODEL}_${H}x${W}/model_float32.tflite \
+--output ${MODEL}_${H}x${W}/model_float32.onnx
+onnxsim ${MODEL}_${H}x${W}/model_float32.onnx ${MODEL}_${H}x${W}/model_float32.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+
+python -m tf2onnx.convert \
+--opset 11 \
+--inputs-as-nchw input_1 \
+--saved-model ${MODEL}_HxW \
+--output ${MODEL}_HxW/model_float32.onnx
+python3 shape_inference.py ${MODEL}_HxW/model_float32.onnx
