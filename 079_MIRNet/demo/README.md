@@ -55,3 +55,5 @@ If you want to change the model, specify it with an argument.
         default='360,640',
     )
 ```
+https://user-images.githubusercontent.com/33194443/159192316-0e6eb6b7-0e5c-4c7f-8daa-b7453d5becde.mp4
+
