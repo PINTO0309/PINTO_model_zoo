@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
+import sys
 import copy
 import time
 import argparse
@@ -131,13 +132,40 @@ def main():
             ],
         )
 
+
+    # Warmup
+    ret, frame = cap.read()
+    if not ret:
+        sys.exit(0)
+    debug_image = copy.deepcopy(frame)
+    frame_height, frame_width = frame.shape[0], frame.shape[1]
+    _ = run_inference(
+        onnx_session,
+        input_size,
+        frame,
+    )
+    start_time = time.time()
+    _ = run_inference(
+        onnx_session,
+        input_size,
+        frame,
+    )
+    elapsed_time = time.time() - start_time
+    real_fps = int(1/elapsed_time)
+    output_file = 'output.mp4'
+    out = None
+    if cap_fps < real_fps:
+        out = cv.VideoWriter(output_file, fourcc, cap_fps, (w,h))
+    else:
+        out = cv.VideoWriter(output_file, fourcc, real_fps, (w,h))
+
+    # Main
     while True:
         # Capture read
         ret, frame = cap.read()
         if not ret:
             break
         debug_image = copy.deepcopy(frame)
-        frame_height, frame_width = frame.shape[0], frame.shape[1]
 
         start_time = time.time()
 
