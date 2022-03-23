@@ -387,6 +387,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |272|CSFlow|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/272_CSFlow)|||||||||||⚫|chairs,kitti,things/iters=10,20/192x320,240x320,320x480,384x640,480x640,736x1280|
 |276|HybridNets|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/276_HybridNets)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|anchor_HxW.npy/256x384,256x512,384x512,384x640,384x1024,512x640,768x1280,1152x1920|
 |278|DWARF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/278_DWARF)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|StereoDepth+OpticalFlow,/192x320,256x320,384x640,512x640,512x640,768x1280|
+|279|F-Clip|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/279_F-Clip)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||⚫|ALL/192x320,256x320,320x480,384x640,480x640,736x1280|
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)

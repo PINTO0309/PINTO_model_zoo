@@ -1,0 +1,19 @@
+{
+    "format_version": 2,
+    "layers": [
+        {
+            "layer_id": "408",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                3
+            ]
+        },
+        {
+            "layer_id": "455",
+            "type": "Squeeze",
+            "replace_mode": "insert_before",
+            "values": 0
+        }
+    ]
+}
