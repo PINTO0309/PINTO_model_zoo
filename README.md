@@ -367,7 +367,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |091|gaze-estimation-adas-0002|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/091_gaze-estimation-adas-0002)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
 |102|Coconet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/102_Coconet)|⚫|⚫||||⚫|||⚫|||magenta|
 |108|HAWP|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/108_HAWP)|||||||||||⚫|Line Parsing,WIP|
-|110|L-CNN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/110_L-CNN)|||||||||||⚫|WIP|
+|110|L-CNN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/110_L-CNN)|||||||||||⚫|Line Parsing,WIP|
 |117|DTLN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/117_DTLN)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
 |119|M-LSD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/119_M-LSD)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |131|CFNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/131_CFNet)|||||||||||⚫|256x256,512x768|
