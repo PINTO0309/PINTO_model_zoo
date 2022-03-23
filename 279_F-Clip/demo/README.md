@@ -66,6 +66,6 @@ If you want to change the model, specify it with an argument.
     )
 ```
 
-- ONNX 512x512 - USB Camera 480x640 - ONNX TensorRT Execution Provider Float16
+- F-Clip HR, ONNX 512x512 - USB Camera 480x640 - ONNX TensorRT Execution Provider Float16
 
 https://user-images.githubusercontent.com/33194443/159731723-a2840ca1-a6b5-4175-90dc-41a8238927e9.mp4
