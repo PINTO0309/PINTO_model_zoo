@@ -1,7 +1,7 @@
 #!/bin/bash
 
-curl -sc /tmp/cookie "https://drive.google.com/uc?export=download&id=11wCtdIQMZ06MuTQWj8HKNQT3_4DHdhle" > /dev/null
-CODE="$(awk '/_warning_/ {print $NF}' /tmp/cookie)"
-curl -Lb /tmp/cookie "https://drive.google.com/uc?export=download&confirm=${CODE}&id=11wCtdIQMZ06MuTQWj8HKNQT3_4DHdhle" -o mobilenet_v2_224_dm10_integer_quant.tflite
+fileid="11wCtdIQMZ06MuTQWj8HKNQT3_4DHdhle"
+html=`curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}"`
+curl -Lb ./cookie "https://drive.google.com/uc?export=download&`echo ${html}|grep -Po '(confirm=[a-zA-Z0-9\-_]+)'`&id=${fileid}" -o mobilenet_v2_224_dm10_integer_quant.tflite
 
 echo Download finished.
