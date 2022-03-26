@@ -1,7 +1,7 @@
 #!/bin/bash
 
-curl -sc /tmp/cookie "https://drive.google.com/uc?export=download&id=1xm5vizWif56d1eBqu81ziJtkgmEujNj0" > /dev/null
-CODE="$(awk '/_warning_/ {print $NF}' /tmp/cookie)"
-curl -Lb /tmp/cookie "https://drive.google.com/uc?export=download&confirm=${CODE}&id=1xm5vizWif56d1eBqu81ziJtkgmEujNj0" -o v3-small-minimalistic_224_1.0_float.pb
+fileid="1xm5vizWif56d1eBqu81ziJtkgmEujNj0"
+html=`curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}"`
+curl -Lb ./cookie "https://drive.google.com/uc?export=download&`echo ${html}|grep -Po '(confirm=[a-zA-Z0-9\-_]+)'`&id=${fileid}" -o v3-small-minimalistic_224_1.0_float.pb
 
 echo Download finished.
