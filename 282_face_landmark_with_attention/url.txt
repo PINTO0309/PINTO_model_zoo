@@ -1,6 +1,4 @@
 https://github.com/google/mediapipe/tree/master/mediapipe/modules/face_landmark
 
-# WIP
 https://github.com/PINTO0309/tflite2tensorflow
 https://github.com/PINTO0309/openvino2tensorflow
-
