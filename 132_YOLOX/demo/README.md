@@ -12,3 +12,6 @@ https://github.com/iwatake2222/play_with_tensorrt/tree/master/pj_tensorrt_det_yo
 ## Self-Driving-ish Computer Vision System
 - https://github.com/iwatake2222/self-driving-ish_computer_vision_system
 - Using this model with TensorRT / TensorFlow Lite in C++
+
+## YOLOX with TensorFlow Lite / TensorRT / OpenCV / OpenVINO / ncnn / MNN / Arm NN / ONNX Runtime / TensorFlow in C++ on Windows / Linux / Linux(Arm) / Android
+https://github.com/iwatake2222/InferenceHelper_Sample/tree/master/pj_det_yolox
