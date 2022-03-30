@@ -1,0 +1,76 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+tflite2tensorflow \
+--model_path face_landmark_with_attention.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path face_landmark_with_attention.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_onnx \
+--onnx_opset 11
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model saved_model/model_float32.onnx \
+--data_type FP32 \
+--output_dir saved_model/openvino/FP32 \
+--model_name face_landmark_with_attention_192x192
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model saved_model/model_float32.onnx \
+--data_type FP16 \
+--output_dir saved_model/openvino/FP16 \
+--model_name face_landmark_with_attention_192x192
+
+mv saved_model saved_model_a
+
+
+
+
+
+tflite2tensorflow \
+--model_path face_landmark_with_attention.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_barracuda
+
+tflite2tensorflow \
+--model_path face_landmark_with_attention.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_typ 'uint8' \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_onnx \
+--onnx_opset 11
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model saved_model/model_float32.onnx \
+--data_type FP32 \
+--output_dir saved_model/openvino/FP32 \
+--model_name face_landmark_with_attention_192x192
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model saved_model/model_float32.onnx \
+--data_type FP16 \
+--output_dir saved_model/openvino/FP16 \
+--model_name face_landmark_with_attention_192x192
+
+mv saved_model saved_model_b
