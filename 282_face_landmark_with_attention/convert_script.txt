@@ -74,3 +74,36 @@ $INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
 --model_name face_landmark_with_attention_192x192
 
 mv saved_model saved_model_b
+
+
+
+tflite2tensorflow \
+--model_path face_landmark_with_attention.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad \
+--rigorous_optimization_for_myriad
+
+tflite2tensorflow \
+--model_path face_landmark_with_attention.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_onnx \
+--onnx_opset 11
+
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model saved_model/model_float32.onnx \
+--data_type FP16 \
+--output_dir saved_model/openvino/FP16 \
+--model_name face_landmark_with_attention_192x192
+
+mkdir -p saved_model/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m saved_model/openvino/FP16/face_landmark_with_attention_192x192.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o saved_model/openvino/myriad/face_landmark_with_attention_192x192.blob
+
+mv saved_model saved_model_c
