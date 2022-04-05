@@ -50,6 +50,10 @@ I have been working on quantization of various models as a hobby, but I have ski
 
 - **[Replace PyTorch's argsort with sort and export to ONNX](https://zenn.dev/pinto0309/articles/ae0982b8673623)**
 
+- **[A very simple tool that compresses the overall size of the ONNX model by aggregating duplicate constant values as much as possible. Simple Constant value Shrink for ONNX.](https://github.com/PINTO0309/scs4onnx)**
+
+- **[Simple node deletion tool for onnx. I only test very miscellaneous and limited patterns as a hobby.](https://github.com/PINTO0309/snd4onnx)**
+
 ## List of pre-quantized models
 \* WQ = Weight Quantization
 \** OV = OpenVINO IR
