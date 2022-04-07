@@ -54,6 +54,8 @@ I have been working on quantization of various models as a hobby, but I have ski
 
 - **[Simple node deletion tool for onnx. I only test very miscellaneous and limited patterns as a hobby.](https://github.com/PINTO0309/snd4onnx)**
 
+- **[A very simple tool for situations where optimization with onnx-simplifier would exceed the Protocol Buffers upper file size limit of 2GB, or simply to separate onnx files to any size you want. Simple Network Extraction for ONNX.](https://github.com/PINTO0309/sne4onnx)**
+
 ## List of pre-quantized models
 \* WQ = Weight Quantization
 \** OV = OpenVINO IR
