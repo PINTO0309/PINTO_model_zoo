@@ -1,5 +1,4 @@
 import onnx
-from onnxsim import simplify
 
 INIT_MODEL = [
     'crestereo_init_iter10_120x160.onnx',
