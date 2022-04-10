@@ -56,6 +56,8 @@ I have been working on quantization of various models as a hobby, but I have ski
 
 - **[A very simple tool for situations where optimization with onnx-simplifier would exceed the Protocol Buffers upper file size limit of 2GB, or simply to separate onnx files to any size you want. Simple Network Extraction for ONNX.](https://github.com/PINTO0309/sne4onnx)**
 
+- **[Simple tool to combine onnx models. Simple Network Combine Tool for ONNX.](https://github.com/PINTO0309/snc4onnx)**
+
 ## List of pre-quantized models
 \* WQ = Weight Quantization
 \** OV = OpenVINO IR
