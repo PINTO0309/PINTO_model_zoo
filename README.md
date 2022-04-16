@@ -56,7 +56,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 
 - **[Simple tool to combine onnx models. Simple Network Combine Tool for ONNX.](https://github.com/PINTO0309/snc4onnx)**
 
-- **[About A set of simple tools for splitting, merging, OP deletion, size compression, rewriting attributes and constants, OP generation, and change opset for ONNX models.](https://github.com/PINTO0309/simple-onnx-processing-tools)**
+- **[A set of simple tools for splitting, merging, OP deletion, size compression, rewriting attributes and constants, OP generation, and change opset for ONNX models.](https://github.com/PINTO0309/simple-onnx-processing-tools)**
 
   ![image](https://user-images.githubusercontent.com/33194443/163656988-4e854448-7459-47d5-be85-436f340e60e6.png)
 
