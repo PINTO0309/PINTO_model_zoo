@@ -9,7 +9,7 @@ import numpy as np
 import onnxruntime
 
 
-def run_inference(onnx_session, input_size, image):
+def run_inference(onnx_session, input_size, image, input_name):
     # Pre process:Resize, BGR->RGB, Transpose, float32 cast
     input_image = cv.resize(image, dsize=(input_size[1], input_size[0]))
     input_image = cv.cvtColor(input_image, cv.COLOR_BGR2RGB)
@@ -19,7 +19,6 @@ def run_inference(onnx_session, input_size, image):
     input_image = input_image / 255.0
 
     # Inference
-    input_name = onnx_session.get_inputs()[0].name
     result = onnx_session.run(None, {input_name: input_image})
 
     # Post process:squeeze, Transpoes, uint8 cast, RGB->BGR,
@@ -61,6 +60,7 @@ def main():
         model_path,
         providers=['CUDAExecutionProvider', 'CPUExecutionProvider'],
     )
+    input_name = onnx_session.get_inputs()[0].name
 
     while True:
         start_time = time.time()
@@ -78,6 +78,7 @@ def main():
             onnx_session,
             input_size,
             frame,
+            input_name,
         )
 
         elapsed_time = time.time() - start_time
