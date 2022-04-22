@@ -7,7 +7,7 @@
 
 **Please read the contents of the `LICENSE` file located directly under each folder before using the model. My model conversion scripts are released under the MIT license, but the license of the source model itself is subject to the license of the provider repository.**
 
-A repository for storing models that have been inter-converted between various frameworks. Supported frameworks are TensorFlow, PyTorch, ONNX, OpenVINO, TFJS, TFTRT, TensorFlowLite (Float32/16/8), EdgeTPU, CoreML.
+A repository for storing models that have been inter-converted between various frameworks. Supported frameworks are TensorFlow, PyTorch, ONNX, OpenVINO, TFJS, TFTRT, TensorFlowLite (Float32/16/INT8), EdgeTPU, CoreML.
 
 TensorFlow Lite, OpenVINO, CoreML, TensorFlow.js, TF-TRT, MediaPipe, ONNX [.tflite, .h5, .pb, saved_model, tfjs, tftrt, mlmodel, .xml/.bin, .onnx]
 
