@@ -1,6 +1,16 @@
 import onnx
 
 INIT_MODEL = [
+    'crestereo_init_iter2_120x160.onnx',
+    'crestereo_init_iter2_160x240.onnx',
+    'crestereo_init_iter2_180x320.onnx',
+    'crestereo_init_iter2_240x320.onnx',
+    'crestereo_init_iter2_360x640.onnx',
+    'crestereo_init_iter5_120x160.onnx',
+    'crestereo_init_iter5_160x240.onnx',
+    'crestereo_init_iter5_180x320.onnx',
+    'crestereo_init_iter5_240x320.onnx',
+    'crestereo_init_iter5_360x640.onnx',
     'crestereo_init_iter10_120x160.onnx',
     'crestereo_init_iter10_160x240.onnx',
     'crestereo_init_iter10_180x320.onnx',
@@ -14,6 +24,16 @@ INIT_MODEL = [
 ]
 
 NEXT_MODEL = [
+    'crestereo_next_iter2_240x320.onnx',
+    'crestereo_next_iter2_320x480.onnx',
+    'crestereo_next_iter2_360x640.onnx',
+    'crestereo_next_iter2_480x640.onnx',
+    'crestereo_next_iter2_720x1280.onnx',
+    'crestereo_next_iter5_240x320.onnx',
+    'crestereo_next_iter5_320x480.onnx',
+    'crestereo_next_iter5_360x640.onnx',
+    'crestereo_next_iter5_480x640.onnx',
+    'crestereo_next_iter5_720x1280.onnx',
     'crestereo_next_iter10_240x320.onnx',
     'crestereo_next_iter10_320x480.onnx',
     'crestereo_next_iter10_360x640.onnx',
