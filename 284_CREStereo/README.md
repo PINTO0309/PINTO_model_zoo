@@ -19,6 +19,9 @@
   **[CREStereo's OAK-D optimization validation](https://zenn.dev/pinto0309/scraps/475e4f2a641d22)**
   ```bash
   ###
+  ### Based ONNX file
+  ### https://github.com/PINTO0309/PINTO_model_zoo/blob/main/284_CREStereo/download_iter02_tensorrt.sh
+  ###
   ### crestereo_init_iter2_120x160.onnx - TensorRT ver.
   ### crestereo_init_iter2_160x240.onnx - TensorRT ver.
   ### crestereo_init_iter2_180x320.onnx - TensorRT ver.
