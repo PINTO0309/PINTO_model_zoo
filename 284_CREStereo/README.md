@@ -20,7 +20,13 @@
   ```bash
   ###
   ### crestereo_init_iter2_120x160.onnx - TensorRT ver.
+  ### crestereo_init_iter2_160x240.onnx - TensorRT ver.
+  ### crestereo_init_iter2_180x320.onnx - TensorRT ver.
   ### crestereo_init_iter2_240x320.onnx - TensorRT ver.
+  ### crestereo_init_iter2_320x480.onnx - TensorRT ver.
+  ### crestereo_init_iter2_360x640.onnx - TensorRT ver.
+  ### crestereo_init_iter2_480x640.onnx - TensorRT ver.
+  ### crestereo_init_iter2_720x1280.onnx - TensorRT ver.
   ###
 
   docker run --gpus all -it --rm \
