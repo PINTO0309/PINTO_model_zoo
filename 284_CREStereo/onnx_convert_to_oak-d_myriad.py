@@ -11,7 +11,13 @@ import onnx_graphsurgeon as gs
 import numpy as np
 
 # Load
-onnx_graph = onnx.load('crestereo_init_iter2_120x160.onnx')
+onnx_file = 'crestereo_init_iter2_240x320.onnx'
+onnx_graph = onnx.load(onnx_file)
+
+# mul_shape = 70 #120x160
+mul_shape = 300 #240x320
+
+
 graph = gs.import_onnx(onnx_graph)
 
 # MVN
@@ -366,7 +372,8 @@ for mod_sub_op, mod_sub_op_output, mod_div_op, mod_div_op_input in zip(mod_sub_o
             gs.Variable(
                 name=f"{mod_output.name}_dummy_mul_output",
                 dtype=np.float32,
-                shape=[1,70,256],
+                # shape=[1,70,256],
+                shape=[1,mul_shape,256],
             ),
         ]
     )
@@ -536,4 +543,5 @@ changed_graph = gs.export_onnx(graph)
 # Shape inference
 new_model = onnx.shape_inference.infer_shapes(changed_graph)
 # Save
-onnx.save(new_model, 'crestereo_init_iter2_120x160_myriad_oak.onnx')
+# onnx.save(new_model, 'crestereo_init_iter2_120x160_myriad_oak.onnx')
+onnx.save(new_model, 'crestereo_init_iter2_240x320_myriad_oak.onnx')
