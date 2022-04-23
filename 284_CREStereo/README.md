@@ -33,10 +33,13 @@
   -v `pwd`:/home/user/workdir \
   ghcr.io/pinto0309/openvino2tensorflow:latest
 
-  python3 onnx_convert_to_oak-d_myriad.py
-
   H=120
   W=160
+  python onnx_convert_to_oak-d_myriad.py \
+  --input_onnx_file_path crestereo_init_iter2_${H}x${W}.onnx \
+  --resolution ${H}x${W} \
+  --output_onnx_file_path crestereo_init_iter2_${H}x${W}_myriad_oak.onnx
+
   ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
   --input_model crestereo_init_iter2_${H}x${W}_myriad_oak.onnx \
   --data_type FP16 \
