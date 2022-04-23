@@ -13,3 +13,25 @@
 - Verified results courtesy of yamifuwazaia
 
   ![image](https://user-images.githubusercontent.com/33194443/162623239-88f1c562-eca6-47d1-aa04-e67d5fbbbafa.png)
+
+- [WIP] OAK-D (Myriad)
+  ```bash
+  ###
+  ### crestereo_init_iter2_120x160.onnx - TensorRT ver.
+  ###
+
+  python3 onnx_convert_to_oak-d_myriad.py
+
+  ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
+  --input_model crestereo_init_iter2_120x160_myriad_oak.onnx \
+  --data_type FP16 \
+  --output_dir crestereo_init_iter2_120x160_myriad_oak/openvino/FP16 \
+  --model_name crestereo_init_iter2_120x160_myriad_oak
+
+  ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+  -m crestereo_init_iter2_120x160_avoid_mvn/openvino/FP16/crestereo_init_iter2_120x160_avoid_mvn.xml \
+  -ip U8 \
+  -VPU_NUMBER_OF_SHAVES 4 \
+  -VPU_NUMBER_OF_CMX_SLICES 4 \
+  -o crestereo_init_iter2_120x160_avoid_mvn/openvino/myriad/crestereo_init_iter2_120x160_avoid_mvn.blob
+  ```
