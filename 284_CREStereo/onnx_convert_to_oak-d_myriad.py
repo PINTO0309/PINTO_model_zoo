@@ -6,6 +6,7 @@ Based ONNX file
 https://github.com/PINTO0309/PINTO_model_zoo/blob/main/284_CREStereo/download_iter02_tensorrt.sh
 """
 
+import os
 import onnx
 import onnx_graphsurgeon as gs
 import numpy as np
@@ -543,5 +544,4 @@ changed_graph = gs.export_onnx(graph)
 # Shape inference
 new_model = onnx.shape_inference.infer_shapes(changed_graph)
 # Save
-# onnx.save(new_model, 'crestereo_init_iter2_120x160_myriad_oak.onnx')
-onnx.save(new_model, 'crestereo_init_iter2_240x320_myriad_oak.onnx')
+onnx.save(new_model, f'{os.path.splitext(onnx_file)[0]}_myriad_oak.onnx')
