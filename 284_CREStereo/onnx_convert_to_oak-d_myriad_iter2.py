@@ -1,5 +1,6 @@
 """
 Blog that verified the conversion
+CREStereo's OAK-D optimization validation
 https://zenn.dev/pinto0309/scraps/475e4f2a641d22
 
 Based ONNX file
