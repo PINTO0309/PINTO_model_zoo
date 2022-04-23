@@ -33,26 +33,27 @@
   -v `pwd`:/home/user/workdir \
   ghcr.io/pinto0309/openvino2tensorflow:latest
 
+  ITER=2
   H=120
   W=160
-  python onnx_convert_to_oak-d_myriad.py \
-  --input_onnx_file_path crestereo_init_iter2_${H}x${W}.onnx \
+  python onnx_convert_to_oak-d_myriad_iter${ITER}.py \
+  --input_onnx_file_path crestereo_init_iter${ITER}_${H}x${W}.onnx \
   --resolution ${H}x${W} \
-  --output_onnx_file_path crestereo_init_iter2_${H}x${W}_myriad_oak.onnx
+  --output_onnx_file_path crestereo_init_iter${ITER}_${H}x${W}_myriad_oak.onnx
 
   ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
-  --input_model crestereo_init_iter2_${H}x${W}_myriad_oak.onnx \
+  --input_model crestereo_init_iter${ITER}_${H}x${W}_myriad_oak.onnx \
   --data_type FP16 \
-  --output_dir crestereo_init_iter2_${H}x${W}_myriad_oak/openvino/FP16 \
-  --model_name crestereo_init_iter2_${H}x${W}_myriad_oak
+  --output_dir crestereo_init_iter${ITER}_${H}x${W}_myriad_oak/openvino/FP16 \
+  --model_name crestereo_init_iter${ITER}_${H}x${W}_myriad_oak
 
-  mkdir -p crestereo_init_iter2_${H}x${W}_myriad_oak/openvino/myriad
+  mkdir -p crestereo_init_iter${ITER}_${H}x${W}_myriad_oak/openvino/myriad
 
   ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
-  -m crestereo_init_iter2_${H}x${W}_myriad_oak/openvino/FP16/crestereo_init_iter2_${H}x${W}_myriad_oak.xml \
+  -m crestereo_init_iter${ITER}_${H}x${W}_myriad_oak/openvino/FP16/crestereo_init_iter${ITER}_${H}x${W}_myriad_oak.xml \
   -ip U8 \
   -VPU_NUMBER_OF_SHAVES 4 \
   -VPU_NUMBER_OF_CMX_SLICES 4 \
-  -o crestereo_init_iter2_${H}x${W}_myriad_oak/openvino/myriad/crestereo_init_iter2_${H}x${W}_myriad_oak.blob
+  -o crestereo_init_iter${ITER}_${H}x${W}_myriad_oak/openvino/myriad/crestereo_init_iter${ITER}_${H}x${W}_myriad_oak.blob
   ```
   ![image](https://user-images.githubusercontent.com/33194443/164913113-5053fb8a-0b48-4a11-85bf-b19123cb6f76.png)
