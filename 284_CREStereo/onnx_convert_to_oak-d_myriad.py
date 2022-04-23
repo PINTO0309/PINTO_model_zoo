@@ -12,7 +12,7 @@ import onnx_graphsurgeon as gs
 import numpy as np
 
 # Load
-onnx_file = 'crestereo_init_iter2_160x240.onnx'
+onnx_file = 'crestereo_init_iter2_480x640.onnx'
 onnx_graph = onnx.load(onnx_file)
 
 # mul_shape = 70 #120x160
