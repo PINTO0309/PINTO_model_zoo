@@ -22,6 +22,10 @@
   ### crestereo_init_iter2_120x160.onnx - TensorRT ver.
   ###
 
+  docker run --gpus all -it --rm \
+  -v `pwd`:/home/user/workdir \
+  ghcr.io/pinto0309/openvino2tensorflow:latest
+
   python3 onnx_convert_to_oak-d_myriad.py
 
   ${INTEL_OPENVINO_DIR}/deployment_tools/model_optimizer/mo.py \
