@@ -28,10 +28,12 @@
   --output_dir crestereo_init_iter2_120x160_myriad_oak/openvino/FP16 \
   --model_name crestereo_init_iter2_120x160_myriad_oak
 
+  mkdir -p crestereo_init_iter2_120x160_myriad_oak/openvino/myriad
+
   ${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
-  -m crestereo_init_iter2_120x160_avoid_mvn/openvino/FP16/crestereo_init_iter2_120x160_avoid_mvn.xml \
+  -m crestereo_init_iter2_120x160_myriad_oak/openvino/FP16/crestereo_init_iter2_120x160_myriad_oak.xml \
   -ip U8 \
   -VPU_NUMBER_OF_SHAVES 4 \
   -VPU_NUMBER_OF_CMX_SLICES 4 \
-  -o crestereo_init_iter2_120x160_avoid_mvn/openvino/myriad/crestereo_init_iter2_120x160_avoid_mvn.blob
+  -o crestereo_init_iter2_120x160_myriad_oak/openvino/myriad/crestereo_init_iter2_120x160_myriad_oak.blob
   ```
