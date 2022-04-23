@@ -37,3 +37,4 @@
   -VPU_NUMBER_OF_CMX_SLICES 4 \
   -o crestereo_init_iter2_120x160_myriad_oak/openvino/myriad/crestereo_init_iter2_120x160_myriad_oak.blob
   ```
+  ![image](https://user-images.githubusercontent.com/33194443/164913113-5053fb8a-0b48-4a11-85bf-b19123cb6f76.png)
