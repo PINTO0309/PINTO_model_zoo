@@ -378,7 +378,6 @@ for mod_sub_op, mod_sub_op_output, mod_div_op, mod_div_op_input in zip(mod_sub_o
             gs.Variable(
                 name=f"{mod_output.name}_dummy_mul_output",
                 dtype=np.float32,
-                # shape=[1,70,256],
                 shape=[1,mul_shape,256],
             ),
         ]
