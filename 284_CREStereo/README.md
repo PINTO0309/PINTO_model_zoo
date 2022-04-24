@@ -32,7 +32,7 @@
   ### crestereo_init_iter2_720x1280.onnx - TensorRT ver.
   ###
 
-  docker run --gpus all -it --rm \
+  docker run -it --rm \
   -v `pwd`:/home/user/workdir \
   ghcr.io/pinto0309/openvino2tensorflow:latest
 
