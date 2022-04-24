@@ -7,6 +7,10 @@ https://github.com/iwatake2222/play_with_tflite/tree/master/pj_tflite_ss_road-se
 - https://github.com/iwatake2222/self-driving-ish_computer_vision_system
 - Using this model with TensorRT / TensorFlow Lite in C++
 
+## InferenceHelper Sample ROS
+- https://github.com/iwatake2222/InferenceHelper_Sample_ROS
+- Using this model with TensorFlow Lite / ONNX Runtime in ROS2 (rclcpp)
+
 ## Road Segmentation Adas with TensorFlow Lite in Python
 ```
 python demo_road-segmentation-adas-0001_tflite.py
