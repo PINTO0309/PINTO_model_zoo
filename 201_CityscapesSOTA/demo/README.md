@@ -3,6 +3,10 @@
 ## Segmentation using PaddleSeg CityscapesSOTA with TensorRT in C++
 https://github.com/iwatake2222/play_with_tensorrt/tree/master/pj_tensorrt_seg_paddleseg_cityscapessota
 
+## InferenceHelper Sample ROS
+- https://github.com/iwatake2222/InferenceHelper_Sample_ROS
+- Using this model with TensorFlow Lite / ONNX Runtime in ROS2 (rclcpp)
+
 ## Segmentation using PaddleSeg CityscapesSOTA with ONNX Runtime in Python
 ```
 python demo_CityscapesSOTA_onnx.py
