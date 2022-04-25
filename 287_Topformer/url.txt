@@ -1,3 +1,4 @@
 https://github.com/hustvl/TopFormer
+https://github.com/ibaiGorordo/depthai-TopFormer-Semantic-Segmentation
 https://github.com/PINTO0309/openvino2tensorflow
 
