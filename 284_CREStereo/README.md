@@ -14,7 +14,7 @@
 
   ![image](https://user-images.githubusercontent.com/33194443/162623239-88f1c562-eca6-47d1-aa04-e67d5fbbbafa.png)
 
-## OAK-D (Myriad)
+## OAK-D (Myriad) convert
 
   **[CREStereo's OAK-D optimization validation](https://zenn.dev/pinto0309/scraps/475e4f2a641d22)**
   ```bash
