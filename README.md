@@ -263,6 +263,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |242|RobustVideoMatting|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/242_RobustVideoMatting)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|Mbnv3,ResNet50/192x320,240x320,320x480,384x640,480x640,720x1280,1088x1920,2160x3840|
 |246|SqueezeSegV3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/246_SqueezeSegV3)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫||⚫|21,53/180x320,240x320,320x480,360x640,480x640,720x1280|
 |267|LIOT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/267_LIOT)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|180x320,240x320,320x480,360x640,480x640,540x960,720x1280,1080x1920|
+|287|Topformer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/287_Topformer)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Tiny,Small,Base/448x448,512x512|
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|

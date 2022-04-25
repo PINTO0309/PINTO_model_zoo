@@ -1,0 +1,271 @@
+#### Tiny
+H=448
+W=448
+python3 tools/convert2onnx.py local_configs/topformer/topformer_tiny_448x448_160k_2x8_ade20k.py \
+--checkpoint checkpoints/TopFormer-T_448x448_2x8_160k-32.5.pth \
+--output-file topformer_tiny_${H}x${W}.onnx \
+--opset-version 11 \
+--shape ${H} ${W}
+H=448
+W=448
+onnxsim topformer_tiny_${H}x${W}.onnx topformer_tiny_${H}x${W}.onnx
+sog4onnx \
+--op_type ArgMax \
+--opset 11 \
+--input_variables input float32 [1,150,$((${H}/8)),$((${W}/8))] \
+--output_variables output int64 [1,1,$((${H}/8)),$((${W}/8))] \
+--attributes axis 1 \
+--attributes keepdims 1 \
+--non_verbose
+snc4onnx \
+--input_onnx_file_paths topformer_tiny_${H}x${W}.onnx ArgMax.onnx \
+--op_prefixes_after_merging first second \
+--srcop_destop output input \
+--output_onnx_file_path topformer_tiny_${H}x${W}_argmax.onnx
+rm topformer_tiny_${H}x${W}.onnx
+
+
+H=512
+W=512
+python3 tools/convert2onnx.py local_configs/topformer/topformer_tiny_512x512_160k_2x8_ade20k.py \
+--checkpoint checkpoints/TopFormer-T_512x512_2x8_160k-33.6.pth \
+--output-file topformer_tiny_${H}x${W}.onnx \
+--opset-version 11 \
+--shape ${H} ${W}
+H=512
+W=512
+onnxsim topformer_tiny_${H}x${W}.onnx topformer_tiny_${H}x${W}.onnx
+sog4onnx \
+--op_type ArgMax \
+--opset 11 \
+--input_variables input float32 [1,150,$((${H}/8)),$((${W}/8))] \
+--output_variables output int64 [1,1,$((${H}/8)),$((${W}/8))] \
+--attributes axis 1 \
+--attributes keepdims 1 \
+--non_verbose
+snc4onnx \
+--input_onnx_file_paths topformer_tiny_${H}x${W}.onnx ArgMax.onnx \
+--op_prefixes_after_merging first second \
+--srcop_destop output input \
+--output_onnx_file_path topformer_tiny_${H}x${W}_argmax.onnx
+rm topformer_tiny_${H}x${W}.onnx
+
+
+#### Small
+H=512
+W=512
+python3 tools/convert2onnx.py local_configs/topformer/topformer_small_512x512_160k_2x8_ade20k.py \
+--checkpoint checkpoints/TopFormer-S_512x512_2x8_160k-36.5.pth \
+--output-file topformer_small_${H}x${W}.onnx \
+--opset-version 11 \
+--shape ${H} ${W}
+H=512
+W=512
+onnxsim topformer_small_${H}x${W}.onnx topformer_small_${H}x${W}.onnx
+sog4onnx \
+--op_type ArgMax \
+--opset 11 \
+--input_variables input float32 [1,150,$((${H}/8)),$((${W}/8))] \
+--output_variables output int64 [1,1,$((${H}/8)),$((${W}/8))] \
+--attributes axis 1 \
+--attributes keepdims 1 \
+--non_verbose
+snc4onnx \
+--input_onnx_file_paths topformer_small_${H}x${W}.onnx ArgMax.onnx \
+--op_prefixes_after_merging first second \
+--srcop_destop output input \
+--output_onnx_file_path topformer_small_${H}x${W}_argmax.onnx
+rm topformer_small_${H}x${W}.onnx
+
+
+#### Base
+H=512
+W=512
+python3 tools/convert2onnx.py local_configs/topformer/topformer_base_512x512_160k_2x8_ade20k.py \
+--checkpoint checkpoints/TopFormer-B_512x512_2x8_160k-38.3.pth \
+--output-file topformer_base_${H}x${W}.onnx \
+--opset-version 11 \
+--shape ${H} ${W}
+H=512
+W=512
+onnxsim topformer_base_${H}x${W}.onnx topformer_base_${H}x${W}.onnx
+sog4onnx \
+--op_type ArgMax \
+--opset 11 \
+--input_variables input float32 [1,150,$((${H}/8)),$((${W}/8))] \
+--output_variables output int64 [1,1,$((${H}/8)),$((${W}/8))] \
+--attributes axis 1 \
+--attributes keepdims 1 \
+--non_verbose
+snc4onnx \
+--input_onnx_file_paths topformer_base_${H}x${W}.onnx ArgMax.onnx \
+--op_prefixes_after_merging first second \
+--srcop_destop output input \
+--output_onnx_file_path topformer_base_${H}x${W}_argmax.onnx
+rm topformer_base_${H}x${W}.onnx
+
+
+
+###########################################################
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+MODEL=topformer
+SIZE=tiny
+H=448
+W=448
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${SIZE}_${H}x${W}_argmax.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${SIZE}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${SIZE}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${SIZE}_${H}x${W}_argmax.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${SIZE}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${SIZE}_${H}x${W}
+mkdir -p ${MODEL}_${SIZE}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${SIZE}_${H}x${W}/openvino/FP16/${MODEL}_${SIZE}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${SIZE}_${H}x${W}/openvino/myriad/${MODEL}_${SIZE}_${H}x${W}.blob
+mv ${MODEL}_${SIZE}_${H}x${W}_argmax.onnx ${MODEL}_${SIZE}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${SIZE}_${H}x${W}/openvino/FP32/${MODEL}_${SIZE}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model/* ${MODEL}_${SIZE}_${H}x${W}
+
+
+MODEL=topformer
+SIZE=tiny
+H=512
+W=512
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${SIZE}_${H}x${W}_argmax.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${SIZE}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${SIZE}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${SIZE}_${H}x${W}_argmax.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${SIZE}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${SIZE}_${H}x${W}
+mkdir -p ${MODEL}_${SIZE}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${SIZE}_${H}x${W}/openvino/FP16/${MODEL}_${SIZE}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${SIZE}_${H}x${W}/openvino/myriad/${MODEL}_${SIZE}_${H}x${W}.blob
+mv ${MODEL}_${SIZE}_${H}x${W}_argmax.onnx ${MODEL}_${SIZE}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${SIZE}_${H}x${W}/openvino/FP32/${MODEL}_${SIZE}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model/* ${MODEL}_${SIZE}_${H}x${W}
+
+
+MODEL=topformer
+SIZE=small
+H=512
+W=512
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${SIZE}_${H}x${W}_argmax.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${SIZE}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${SIZE}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${SIZE}_${H}x${W}_argmax.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${SIZE}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${SIZE}_${H}x${W}
+mkdir -p ${MODEL}_${SIZE}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${SIZE}_${H}x${W}/openvino/FP16/${MODEL}_${SIZE}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${SIZE}_${H}x${W}/openvino/myriad/${MODEL}_${SIZE}_${H}x${W}.blob
+mv ${MODEL}_${SIZE}_${H}x${W}_argmax.onnx ${MODEL}_${SIZE}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${SIZE}_${H}x${W}/openvino/FP32/${MODEL}_${SIZE}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model/* ${MODEL}_${SIZE}_${H}x${W}
+
+
+MODEL=topformer
+SIZE=base
+H=512
+W=512
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${SIZE}_${H}x${W}_argmax.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${SIZE}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${SIZE}_${H}x${W}
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${SIZE}_${H}x${W}_argmax.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${SIZE}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${SIZE}_${H}x${W}
+mkdir -p ${MODEL}_${SIZE}_${H}x${W}/openvino/myriad
+${INTEL_OPENVINO_DIR}/deployment_tools/inference_engine/lib/intel64/myriad_compile \
+-m ${MODEL}_${SIZE}_${H}x${W}/openvino/FP16/${MODEL}_${SIZE}_${H}x${W}.xml \
+-ip U8 \
+-VPU_NUMBER_OF_SHAVES 4 \
+-VPU_NUMBER_OF_CMX_SLICES 4 \
+-o ${MODEL}_${SIZE}_${H}x${W}/openvino/myriad/${MODEL}_${SIZE}_${H}x${W}.blob
+mv ${MODEL}_${SIZE}_${H}x${W}_argmax.onnx ${MODEL}_${SIZE}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${SIZE}_${H}x${W}/openvino/FP32/${MODEL}_${SIZE}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model/* ${MODEL}_${SIZE}_${H}x${W}
