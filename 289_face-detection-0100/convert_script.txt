@@ -1,0 +1,34 @@
+docker run -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+openvino2tensorflow \
+--model_path face-detection-0100.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11 \
+--weight_replacement_config replace.json
+mv saved_model saved_model_tmp
+
+openvino2tensorflow \
+--model_path face-detection-0100.xml \
+--output_saved_model \
+--non_verbose \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_edgetpu \
+--weight_replacement_config replace.json
+mv saved_model/*.tflite saved_model_tmp
+rm -rf saved_model
+mv saved_model_tmp saved_model
