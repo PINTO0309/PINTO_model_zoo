@@ -1,0 +1,16 @@
+{
+    "format_version": 2,
+    "layers": [
+        {
+            "layer_id": "805",
+            "type": "Transpose",
+            "replace_mode": "insert_before",
+            "values": [
+                0,
+                3,
+                1,
+                2
+            ]
+        }
+    ]
+}

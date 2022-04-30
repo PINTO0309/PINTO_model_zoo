@@ -90,6 +90,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |256|SFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/256_SFace)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|112x112|
 |257|PiCANet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/257_PiCANet)|||||||⚫||||⚫|BDDA,SAGE/224x224|
 |259|Emotion_FERPlus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/259_Emotion_FERPlus)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|64x64|
+|290|AdaFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/290_AdaFace)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|112x112|
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
