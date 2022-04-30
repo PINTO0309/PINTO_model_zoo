@@ -1,5 +1,5 @@
 name: Issue
-description: All issues should be created by pressing the "Get started" button on the right, and any miscellaneous issues that do not follow the issue template will be closed immediately.
+description:Any miscellaneous issues that do not follow the issue template will be closed immediately. If you have no intention of returning useful information to the community, you have no right to post an issue here. Please withdraw.
 body:
   - type: markdown
     attributes:
