@@ -1,0 +1,49 @@
+{
+    "format_version": 2,
+    "layers": [
+        {
+            "layer_id": "40",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                360,
+                640,
+                3
+            ]
+        },
+        {
+            "layer_id": "42",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2,
+                3
+            ]
+        },
+        {
+            "layer_id": "224",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                1,
+                360,
+                640,
+                3
+            ]
+        },
+        {
+            "layer_id": "226",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                1,
+                2,
+                3
+            ]
+        }
+    ]
+}
