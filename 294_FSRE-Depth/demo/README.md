@@ -18,3 +18,8 @@ If you want to change the model, specify it with an argument.
         default='192,320',
     )
 ```
+
+
+## Depth Estimation (FSRE-Depth) with TensorRT in C++
+https://github.com/iwatake2222/play_with_tensorrt/tree/master/pj_tensorrt_depth_fsre
+
