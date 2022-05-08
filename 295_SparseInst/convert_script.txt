@@ -1,0 +1,377 @@
+MODEL=sparseinst_r50_giam_aug
+
+H=192
+W=384
+sne4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}.onnx \
+--input_op_names input \
+--output_op_names 1415 \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp1.onnx
+onnxsim ${MODEL}_${H}x${W}_tmp1.onnx ${MODEL}_${H}x${W}_tmp1.onnx
+sne4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}.onnx \
+--input_op_names 1508,1415 \
+--output_op_names mask_pred,scores,labels \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx
+sor4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx \
+--old_new "1415" "next" \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}_tmp1.onnx ${MODEL}_${H}x${W}_tmp2.onnx \
+--srcop_destop 1415 next \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp3.onnx
+CONST=`python3 -c "import numpy as np;np.set_printoptions(threshold=np.inf);arr=np.ones([1,2,$((${H}/8)),$((${W}/8))]);print(np.array2string(arr,separator=',',formatter={'float_kind':lambda x:'{: .1f}'.format(x)}))"`
+sog4onnx \
+--op_type Constant \
+--opset 11 \
+--op_name 1508_const \
+--output_variables 1508_const_out float32 [1,2,$((${H}/8)),$((${W}/8))] \
+--attributes value float32 "$CONST"
+snc4onnx \
+--input_onnx_file_paths Constant.onnx ${MODEL}_${H}x${W}_tmp3.onnx \
+--srcop_destop 1508_const_out 1508 \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp4.onnx
+soc4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}_tmp4.onnx \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp4_11.onnx \
+--opset 11
+onnxsim ${MODEL}_${H}x${W}_tmp4_11.onnx ${MODEL}_${H}x${W}_tmp4_11_opt.onnx
+onnxsim ${MODEL}_${H}x${W}_tmp4_11_opt.onnx ${MODEL}_${H}x${W}_tmp4_11_opt.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_tmp4_11_opt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}_tmp4_11_opt.onnx sparseinst_r50_giam_aug_${H}x${W}_opt.onnx
+rm ${MODEL}_${H}x${W}_tmp*.onnx
+rm ${MODEL}_${H}x${W}.onnx
+
+H=384
+W=384
+sne4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}.onnx \
+--input_op_names input \
+--output_op_names 1415 \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp1.onnx
+onnxsim ${MODEL}_${H}x${W}_tmp1.onnx ${MODEL}_${H}x${W}_tmp1.onnx
+sne4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}.onnx \
+--input_op_names 1508,1415 \
+--output_op_names mask_pred,scores,labels \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx
+sor4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx \
+--old_new "1415" "next" \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}_tmp1.onnx ${MODEL}_${H}x${W}_tmp2.onnx \
+--srcop_destop 1415 next \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp3.onnx
+CONST=`python3 -c "import numpy as np;np.set_printoptions(threshold=np.inf);arr=np.ones([1,2,$((${H}/8)),$((${W}/8))]);print(np.array2string(arr,separator=',',formatter={'float_kind':lambda x:'{: .1f}'.format(x)}))"`
+sog4onnx \
+--op_type Constant \
+--opset 11 \
+--op_name 1508_const \
+--output_variables 1508_const_out float32 [1,2,$((${H}/8)),$((${W}/8))] \
+--attributes value float32 "$CONST"
+snc4onnx \
+--input_onnx_file_paths Constant.onnx ${MODEL}_${H}x${W}_tmp3.onnx \
+--srcop_destop 1508_const_out 1508 \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp4.onnx
+soc4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}_tmp4.onnx \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp4_11.onnx \
+--opset 11
+onnxsim ${MODEL}_${H}x${W}_tmp4_11.onnx ${MODEL}_${H}x${W}_tmp4_11_opt.onnx
+onnxsim ${MODEL}_${H}x${W}_tmp4_11_opt.onnx ${MODEL}_${H}x${W}_tmp4_11_opt.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_tmp4_11_opt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}_tmp4_11_opt.onnx sparseinst_r50_giam_aug_${H}x${W}_opt.onnx
+rm ${MODEL}_${H}x${W}_tmp*.onnx
+rm ${MODEL}_${H}x${W}.onnx
+
+H=384
+W=576
+sne4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}.onnx \
+--input_op_names input \
+--output_op_names 1415 \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp1.onnx
+onnxsim ${MODEL}_${H}x${W}_tmp1.onnx ${MODEL}_${H}x${W}_tmp1.onnx
+sne4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}.onnx \
+--input_op_names 1508,1415 \
+--output_op_names mask_pred,scores,labels \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx
+sor4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx \
+--old_new "1415" "next" \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}_tmp1.onnx ${MODEL}_${H}x${W}_tmp2.onnx \
+--srcop_destop 1415 next \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp3.onnx
+CONST=`python3 -c "import numpy as np;np.set_printoptions(threshold=np.inf);arr=np.ones([1,2,$((${H}/8)),$((${W}/8))]);print(np.array2string(arr,separator=',',formatter={'float_kind':lambda x:'{: .1f}'.format(x)}))"`
+sog4onnx \
+--op_type Constant \
+--opset 11 \
+--op_name 1508_const \
+--output_variables 1508_const_out float32 [1,2,$((${H}/8)),$((${W}/8))] \
+--attributes value float32 "$CONST"
+snc4onnx \
+--input_onnx_file_paths Constant.onnx ${MODEL}_${H}x${W}_tmp3.onnx \
+--srcop_destop 1508_const_out 1508 \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp4.onnx
+soc4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}_tmp4.onnx \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp4_11.onnx \
+--opset 11
+onnxsim ${MODEL}_${H}x${W}_tmp4_11.onnx ${MODEL}_${H}x${W}_tmp4_11_opt.onnx
+onnxsim ${MODEL}_${H}x${W}_tmp4_11_opt.onnx ${MODEL}_${H}x${W}_tmp4_11_opt.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_tmp4_11_opt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}_tmp4_11_opt.onnx sparseinst_r50_giam_aug_${H}x${W}_opt.onnx
+rm ${MODEL}_${H}x${W}_tmp*.onnx
+rm ${MODEL}_${H}x${W}.onnx
+
+H=384
+W=768
+sne4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}.onnx \
+--input_op_names input \
+--output_op_names 1415 \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp1.onnx
+onnxsim ${MODEL}_${H}x${W}_tmp1.onnx ${MODEL}_${H}x${W}_tmp1.onnx
+sne4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}.onnx \
+--input_op_names 1508,1415 \
+--output_op_names mask_pred,scores,labels \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx
+sor4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx \
+--old_new "1415" "next" \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}_tmp1.onnx ${MODEL}_${H}x${W}_tmp2.onnx \
+--srcop_destop 1415 next \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp3.onnx
+CONST=`python3 -c "import numpy as np;np.set_printoptions(threshold=np.inf);arr=np.ones([1,2,$((${H}/8)),$((${W}/8))]);print(np.array2string(arr,separator=',',formatter={'float_kind':lambda x:'{: .1f}'.format(x)}))"`
+sog4onnx \
+--op_type Constant \
+--opset 11 \
+--op_name 1508_const \
+--output_variables 1508_const_out float32 [1,2,$((${H}/8)),$((${W}/8))] \
+--attributes value float32 "$CONST"
+snc4onnx \
+--input_onnx_file_paths Constant.onnx ${MODEL}_${H}x${W}_tmp3.onnx \
+--srcop_destop 1508_const_out 1508 \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp4.onnx
+soc4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}_tmp4.onnx \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp4_11.onnx \
+--opset 11
+onnxsim ${MODEL}_${H}x${W}_tmp4_11.onnx ${MODEL}_${H}x${W}_tmp4_11_opt.onnx
+onnxsim ${MODEL}_${H}x${W}_tmp4_11_opt.onnx ${MODEL}_${H}x${W}_tmp4_11_opt.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_tmp4_11_opt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}_tmp4_11_opt.onnx sparseinst_r50_giam_aug_${H}x${W}_opt.onnx
+rm ${MODEL}_${H}x${W}_tmp*.onnx
+rm ${MODEL}_${H}x${W}.onnx
+
+H=576
+W=576
+sne4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}.onnx \
+--input_op_names input \
+--output_op_names 1415 \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp1.onnx
+onnxsim ${MODEL}_${H}x${W}_tmp1.onnx ${MODEL}_${H}x${W}_tmp1.onnx
+sne4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}.onnx \
+--input_op_names 1508,1415 \
+--output_op_names mask_pred,scores,labels \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx
+sor4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx \
+--old_new "1415" "next" \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}_tmp1.onnx ${MODEL}_${H}x${W}_tmp2.onnx \
+--srcop_destop 1415 next \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp3.onnx
+CONST=`python3 -c "import numpy as np;np.set_printoptions(threshold=np.inf);arr=np.ones([1,2,$((${H}/8)),$((${W}/8))]);print(np.array2string(arr,separator=',',formatter={'float_kind':lambda x:'{: .1f}'.format(x)}))"`
+sog4onnx \
+--op_type Constant \
+--opset 11 \
+--op_name 1508_const \
+--output_variables 1508_const_out float32 [1,2,$((${H}/8)),$((${W}/8))] \
+--attributes value float32 "$CONST"
+snc4onnx \
+--input_onnx_file_paths Constant.onnx ${MODEL}_${H}x${W}_tmp3.onnx \
+--srcop_destop 1508_const_out 1508 \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp4.onnx
+soc4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}_tmp4.onnx \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp4_11.onnx \
+--opset 11
+onnxsim ${MODEL}_${H}x${W}_tmp4_11.onnx ${MODEL}_${H}x${W}_tmp4_11_opt.onnx
+onnxsim ${MODEL}_${H}x${W}_tmp4_11_opt.onnx ${MODEL}_${H}x${W}_tmp4_11_opt.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_tmp4_11_opt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}_tmp4_11_opt.onnx sparseinst_r50_giam_aug_${H}x${W}_opt.onnx
+rm ${MODEL}_${H}x${W}_tmp*.onnx
+rm ${MODEL}_${H}x${W}.onnx
+
+H=576
+W=768
+sne4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}.onnx \
+--input_op_names input \
+--output_op_names 1415 \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp1.onnx
+onnxsim ${MODEL}_${H}x${W}_tmp1.onnx ${MODEL}_${H}x${W}_tmp1.onnx
+sne4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}.onnx \
+--input_op_names 1508,1415 \
+--output_op_names mask_pred,scores,labels \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx
+sor4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx \
+--old_new "1415" "next" \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}_tmp1.onnx ${MODEL}_${H}x${W}_tmp2.onnx \
+--srcop_destop 1415 next \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp3.onnx
+CONST=`python3 -c "import numpy as np;np.set_printoptions(threshold=np.inf);arr=np.ones([1,2,$((${H}/8)),$((${W}/8))]);print(np.array2string(arr,separator=',',formatter={'float_kind':lambda x:'{: .1f}'.format(x)}))"`
+sog4onnx \
+--op_type Constant \
+--opset 11 \
+--op_name 1508_const \
+--output_variables 1508_const_out float32 [1,2,$((${H}/8)),$((${W}/8))] \
+--attributes value float32 "$CONST"
+snc4onnx \
+--input_onnx_file_paths Constant.onnx ${MODEL}_${H}x${W}_tmp3.onnx \
+--srcop_destop 1508_const_out 1508 \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp4.onnx
+soc4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}_tmp4.onnx \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp4_11.onnx \
+--opset 11
+onnxsim ${MODEL}_${H}x${W}_tmp4_11.onnx ${MODEL}_${H}x${W}_tmp4_11_opt.onnx
+onnxsim ${MODEL}_${H}x${W}_tmp4_11_opt.onnx ${MODEL}_${H}x${W}_tmp4_11_opt.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_tmp4_11_opt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}_tmp4_11_opt.onnx sparseinst_r50_giam_aug_${H}x${W}_opt.onnx
+rm ${MODEL}_${H}x${W}_tmp*.onnx
+rm ${MODEL}_${H}x${W}.onnx
+
+H=768
+W=768
+sne4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}.onnx \
+--input_op_names input \
+--output_op_names 1415 \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp1.onnx
+onnxsim ${MODEL}_${H}x${W}_tmp1.onnx ${MODEL}_${H}x${W}_tmp1.onnx
+sne4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}.onnx \
+--input_op_names 1508,1415 \
+--output_op_names mask_pred,scores,labels \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx
+sor4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx \
+--old_new "1415" "next" \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}_tmp1.onnx ${MODEL}_${H}x${W}_tmp2.onnx \
+--srcop_destop 1415 next \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp3.onnx
+CONST=`python3 -c "import numpy as np;np.set_printoptions(threshold=np.inf);arr=np.ones([1,2,$((${H}/8)),$((${W}/8))]);print(np.array2string(arr,separator=',',formatter={'float_kind':lambda x:'{: .1f}'.format(x)}))"`
+sog4onnx \
+--op_type Constant \
+--opset 11 \
+--op_name 1508_const \
+--output_variables 1508_const_out float32 [1,2,$((${H}/8)),$((${W}/8))] \
+--attributes value float32 "$CONST"
+snc4onnx \
+--input_onnx_file_paths Constant.onnx ${MODEL}_${H}x${W}_tmp3.onnx \
+--srcop_destop 1508_const_out 1508 \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp4.onnx
+soc4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}_tmp4.onnx \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp4_11.onnx \
+--opset 11
+onnxsim ${MODEL}_${H}x${W}_tmp4_11.onnx ${MODEL}_${H}x${W}_tmp4_11_opt.onnx
+onnxsim ${MODEL}_${H}x${W}_tmp4_11_opt.onnx ${MODEL}_${H}x${W}_tmp4_11_opt.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_tmp4_11_opt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}_tmp4_11_opt.onnx sparseinst_r50_giam_aug_${H}x${W}_opt.onnx
+rm ${MODEL}_${H}x${W}_tmp*.onnx
+rm ${MODEL}_${H}x${W}.onnx
+
+H=768
+W=1344
+sne4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}.onnx \
+--input_op_names input \
+--output_op_names 1415 \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp1.onnx
+onnxsim ${MODEL}_${H}x${W}_tmp1.onnx ${MODEL}_${H}x${W}_tmp1.onnx
+sne4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}.onnx \
+--input_op_names 1508,1415 \
+--output_op_names mask_pred,scores,labels \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx
+sor4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx \
+--old_new "1415" "next" \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp2.onnx
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}_tmp1.onnx ${MODEL}_${H}x${W}_tmp2.onnx \
+--srcop_destop 1415 next \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp3.onnx
+CONST=`python3 -c "import numpy as np;np.set_printoptions(threshold=np.inf);arr=np.ones([1,2,$((${H}/8)),$((${W}/8))]);print(np.array2string(arr,separator=',',formatter={'float_kind':lambda x:'{: .1f}'.format(x)}))"`
+sog4onnx \
+--op_type Constant \
+--opset 11 \
+--op_name 1508_const \
+--output_variables 1508_const_out float32 [1,2,$((${H}/8)),$((${W}/8))] \
+--attributes value float32 "$CONST"
+snc4onnx \
+--input_onnx_file_paths Constant.onnx ${MODEL}_${H}x${W}_tmp3.onnx \
+--srcop_destop 1508_const_out 1508 \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp4.onnx
+soc4onnx \
+--input_onnx_file_path ${MODEL}_${H}x${W}_tmp4.onnx \
+--output_onnx_file_path ${MODEL}_${H}x${W}_tmp4_11.onnx \
+--opset 11
+onnxsim ${MODEL}_${H}x${W}_tmp4_11.onnx ${MODEL}_${H}x${W}_tmp4_11_opt.onnx
+onnxsim ${MODEL}_${H}x${W}_tmp4_11_opt.onnx ${MODEL}_${H}x${W}_tmp4_11_opt.onnx
+$INTEL_OPENVINO_DIR/deployment_tools/model_optimizer/mo.py \
+--input_model ${MODEL}_${H}x${W}_tmp4_11_opt.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}_tmp4_11_opt.onnx sparseinst_r50_giam_aug_${H}x${W}_opt.onnx
+rm ${MODEL}_${H}x${W}_tmp*.onnx
+rm ${MODEL}_${H}x${W}.onnx
