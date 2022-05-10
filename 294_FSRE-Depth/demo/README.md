@@ -23,3 +23,5 @@ If you want to change the model, specify it with an argument.
 ## Depth Estimation (FSRE-Depth) with TensorRT in C++
 https://github.com/iwatake2222/play_with_tensorrt/tree/master/pj_tensorrt_depth_fsre
 
+## Depth Estimation (FSRE-Depth) with MNN in C++
+https://github.com/iwatake2222/play_with_mnn/tree/master/pj_mnn_depth_fsre
