@@ -1,0 +1,7 @@
+https://github.com/markusschoen/MGNet
+https://github.com/PINTO0309/simple-onnx-processing-tools
+https://github.com/PINTO0309/openvino2tensorflow
+
+https://zenn.dev/pinto0309/scraps/48d6131bd10e50
+https://zenn.dev/pinto0309/scraps/bb435b47e41e36
+

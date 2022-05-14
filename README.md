@@ -238,6 +238,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |284|CREStereo|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/284_CREStereo)|||||||||||⚫|ITER2,ITER5,ITER10,ITER20/240x320,320x480,360x640,480x640,480x640,720x1280|
 |292|Graft-PSMNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/292_Graft-PSMNet)|||||||||||⚫|192x320,240x320,320x480,368x640,480x640,720x1280,No-LICENSE|
 |294|FSRE-Depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/294_FSRE-Depth)|||||||⚫||||⚫|192x320,256x320,320x480,368x640,480x640,736x1280|
+|296|MGNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/296_MGNet)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||⚫|240x320,360x480,360x640,360x1280,480x640,720x1280|
 ### 8. Semantic Segmentation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
