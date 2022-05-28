@@ -418,6 +418,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |288|perceptual-reflection-removal|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/288_perceptual-reflection-removal)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||⚫|Reflection-Removal/180x320,240x320,360x480,360x640,480x640,720x1280|
 |291|SeAFusion|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/291_SeAFusion)|⚫|⚫|||⚫|⚫|⚫||⚫||⚫|180x320,240x320,360x480,360x640,480x640,720x1280|
 |297|GazeNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/297_GazeNet)|||||||||||⚫|1x7x3x256x192/NxFx3x256x192|
+|298|DEQ-Flow|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/298_DEQ-Flow)|||||||||||⚫|AGPL-3.0 license|
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)
