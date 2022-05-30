@@ -271,7 +271,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |267|LIOT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/267_LIOT)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|180x320,240x320,320x480,360x640,480x640,540x960,720x1280,1080x1920|
 |287|Topformer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/287_Topformer)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Tiny,Small,Base/448x448,512x512|
 |295|SparseInst|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/295_SparseInst)|||||||⚫||||⚫|r50_giam_aug/192x384,384x384,384x576,384x768,576x576,576x768,768x1344|
-|299|DGNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/299_DGNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|No-LICENSE|
+|299|DGNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/299_DGNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫||
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
