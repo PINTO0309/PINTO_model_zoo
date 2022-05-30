@@ -1,0 +1,729 @@
+{
+  "format_version": 2,
+  "layers": [
+      {
+          "layer_id": "898",
+          "type": "StridedSlice",
+          "replace_mode": "replace",
+          "values": [
+              [0,0,0,0],
+              [2,11,16,8],
+              [1,1,1,1],
+              0,
+              0,
+              0,
+              0,
+              0
+          ]
+      },
+      {
+          "layer_id": "923",
+          "type": "StridedSlice",
+          "replace_mode": "replace",
+          "values": [
+              [0,0,0,0],
+              [2,11,16,4],
+              [1,1,1,1],
+              0,
+              0,
+              0,
+              0,
+              0
+          ]
+      },
+      {
+          "layer_id": "927",
+          "type": "StridedSlice",
+          "replace_mode": "replace",
+          "values": [
+              [0,0,0,8],
+              [2,11,16,16],
+              [1,1,1,1],
+              0,
+              0,
+              0,
+              0,
+              0
+          ]
+      },
+      {
+        "layer_id": "931",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,4],
+            [2,11,16,8],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "935",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,16],
+            [2,11,16,24],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "939",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,8],
+            [2,11,16,12],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "943",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,24],
+            [2,11,16,32],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "947",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,12],
+            [2,11,16,16],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "951",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,32],
+            [2,11,16,40],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "955",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,16],
+            [2,11,16,20],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "959",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,40],
+            [2,11,16,48],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "963",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,20],
+            [2,11,16,24],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "967",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,48],
+            [2,11,16,56],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "971",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,24],
+            [2,11,16,28],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "975",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,56],
+            [2,11,16,64],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "979",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,28],
+            [2,11,16,32],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+
+
+      {
+        "layer_id": "1014",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,0],
+            [2,21,31,8],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+          "layer_id": "1023",
+          "type": "StridedSlice",
+          "replace_mode": "replace",
+          "values": [
+              [0,0,0,0],
+              [2,21,31,4],
+              [1,1,1,1],
+              0,
+              0,
+              0,
+              0,
+              0
+          ]
+      },
+      {
+          "layer_id": "1027",
+          "type": "StridedSlice",
+          "replace_mode": "replace",
+          "values": [
+              [0,0,0,8],
+              [2,21,31,16],
+              [1,1,1,1],
+              0,
+              0,
+              0,
+              0,
+              0
+          ]
+      },
+      {
+        "layer_id": "1031",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,4],
+            [2,21,31,8],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1035",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,16],
+            [2,21,31,24],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1039",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,8],
+            [2,21,31,12],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1043",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,24],
+            [2,21,31,32],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1047",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,12],
+            [2,21,31,16],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1051",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,32],
+            [2,21,31,40],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1055",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,16],
+            [2,21,31,20],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1059",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,40],
+            [2,21,31,48],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1063",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,20],
+            [2,21,31,24],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1067",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,48],
+            [2,21,31,56],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1071",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,24],
+            [2,21,31,28],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1075",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,56],
+            [2,21,31,64],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1079",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,28],
+            [2,21,31,32],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+
+
+      {
+        "layer_id": "1127",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,0],
+            [2,41,61,8],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+          "layer_id": "1131",
+          "type": "StridedSlice",
+          "replace_mode": "replace",
+          "values": [
+              [0,0,0,0],
+              [2,41,61,4],
+              [1,1,1,1],
+              0,
+              0,
+              0,
+              0,
+              0
+          ]
+      },
+      {
+          "layer_id": "1135",
+          "type": "StridedSlice",
+          "replace_mode": "replace",
+          "values": [
+              [0,0,0,8],
+              [2,41,61,16],
+              [1,1,1,1],
+              0,
+              0,
+              0,
+              0,
+              0
+          ]
+      },
+      {
+        "layer_id": "1139",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,4],
+            [2,41,61,8],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1143",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,16],
+            [2,41,61,24],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1147",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,8],
+            [2,41,61,12],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1151",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,24],
+            [2,41,61,32],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1155",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,12],
+            [2,41,61,16],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1159",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,32],
+            [2,41,61,40],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1163",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,16],
+            [2,41,61,20],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1167",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,40],
+            [2,41,61,48],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1171",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,20],
+            [2,41,61,24],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1175",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,48],
+            [2,41,61,56],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1179",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,24],
+            [2,41,61,28],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1183",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,56],
+            [2,41,61,64],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      },
+      {
+        "layer_id": "1187",
+        "type": "StridedSlice",
+        "replace_mode": "replace",
+        "values": [
+            [0,0,0,28],
+            [2,41,61,32],
+            [1,1,1,1],
+            0,
+            0,
+            0,
+            0,
+            0
+        ]
+      }
+  ]
+}

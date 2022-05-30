@@ -1,0 +1,1033 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+
+SIZE=m
+MODEL=dgnet_${SIZE}
+H=192
+W=320
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+
+H=256
+W=320
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+
+
+H=256
+W=480
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+
+
+H=256
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+
+
+H=320
+W=480
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+
+
+H=352
+W=352
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+
+
+H=384
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+
+
+H=480
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+
+
+H=736
+W=1280
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+
+
+
+
+SIZE=s
+MODEL=dgnet_${SIZE}
+H=192
+W=320
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+
+H=256
+W=320
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+
+
+H=256
+W=480
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+
+
+H=256
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+
+
+H=320
+W=480
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+
+
+H=352
+W=352
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+
+
+H=384
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+
+
+H=480
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+
+
+H=736
+W=1280
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--weight_replacement_config replace_${SIZE}_${H}x${W}.json
+mv saved_model saved_model_
+cp saved_model_/model_float32.tflite .
+../flatc -t --strict-json --defaults-json -o . ../schema.fbs -- model_float32.tflite
+sed -i -e 's/serving_default_input:0/input/g' model_float32.json
+sed -i -e 's/StatefulPartitionedCall:0/output/g' model_float32.json
+../flatc -o . -b ../schema.fbs model_float32.json
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs \
+--output_coreml
+cp -r saved_model/* saved_model_
+rm -rf saved_model
+mv saved_model_/* ${MODEL}_${H}x${W}
+rm -rf saved_model_
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
