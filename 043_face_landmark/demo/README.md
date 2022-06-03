@@ -3,7 +3,7 @@
 ## Face landmark with TensorRT in Python
 https://github.com/NobuoTsukamoto/tensorrt-examples/blob/main/python/face_landmark/README.md
 
-## First demo
+## First demo - ONNX/TensorRT/CUDA/CPU in Python
 ```bash
 $ gdown --id 1jYIMT0mV7jWIuSwTFypE1EfZX5ZRK70-
 $ gdown --id 14bqW9HPAHPO_-Cdx0jWzJwjByYmCX2LF
