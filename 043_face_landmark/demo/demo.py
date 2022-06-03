@@ -55,8 +55,15 @@ def resize_and_pad(
             np.floor(pad_horz).astype(int), np.ceil(pad_horz).astype(int)
         pad_top, pad_bot = 0, 0
     else:
-        new_h, new_w = sh, sw
-        pad_left, pad_right, pad_top, pad_bot = 0, 0, 0, 0
+        h_ratio = sh/h
+        w_ratio = sw/w
+        resize_ratio = min(h_ratio, w_ratio)
+        new_h = np.round(h*resize_ratio).astype(int)
+        new_w = np.round(w*resize_ratio).astype(int)
+        pad_vert = (sh-new_h)/2
+        pad_top, pad_bot = np.floor(pad_vert).astype(int), np.ceil(pad_vert).astype(int)
+        pad_horz = (sw-new_w)/2
+        pad_left, pad_right = np.floor(pad_horz).astype(int), np.ceil(pad_horz).astype(int)
     if len(img.shape) == 3 and not isinstance(pad_color, (list, tuple, np.ndarray)):
         pad_color = [pad_color]*3
     scaled_img = cv2.resize(
