@@ -1,0 +1,31 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/tflite2tensorflow:latest
+
+tflite2tensorflow \
+--model_path keypoints.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb
+
+tflite2tensorflow \
+--model_path keypoints.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11 \
+--output_openvino_and_myriad
+
+sbi4onnx \
+--input_onnx_file_path saved_model/model_float32.onnx \
+--output_onnx_file_path saved_model/model_float32_Nx3x160x160.onnx \
+--initialization_character_string N
+
