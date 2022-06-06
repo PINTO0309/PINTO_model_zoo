@@ -3,7 +3,7 @@
 ## FaceMesh with TensorFlow Lite in C++
 https://github.com/iwatake2222/play_with_tflite/tree/master/pj_tflite_face_facemesh
 
-## FaceMesh with ONNX (TensorRT, CUDA, CPU)
+## FaceMesh with ONNX (TensorRT, CUDA, CPU) in Python (Non-MediaPipe)
 Verify that the post-processing merged into FaceMesh works correctly. The object detection model can be anything other than BlazeFace. YOLOv4 and FaceMesh committed to this repository have modified post-processing.
 
 https://github.com/PINTO0309/facemesh_onnx_tensorrt
