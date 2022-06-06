@@ -172,6 +172,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |289|face-detection-0100|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/289_face-detection-0100)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|256x256,PriorBoxClustered->ndarray(0.npy)|
 |293|Lightweight-Head-Pose-Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/293_Lightweight-Head-Pose-Estimation)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|HeadPose, 224x224|
 |300|6DRepNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/300_6DRepNet)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||⚫|HeadPose, 224x224|
+|301|YOLOv4_Face|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/301_YOLOv4_Face)|||||||||||⚫|480x640|
 ### 5. 2D/3D Hand Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
