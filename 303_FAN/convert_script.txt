@@ -1,0 +1,112 @@
+snd4onnx \
+--remove_node_names Expand_432 \
+--input_onnx_file_path 2dfan2_alt_1x3x128x128.onnx \
+--output_onnx_file_path 2dfan2_alt_1x3x128x128.onnx
+
+snd4onnx \
+--remove_node_names Expand_820 \
+--input_onnx_file_path 2dfan4_1x3x128x128.onnx \
+--output_onnx_file_path 2dfan4_1x3x128x128_.onnx
+
+
+onnxsim 2dfan2_alt_1x3x128x128.onnx 2dfan2_alt_1x3x128x128.onnx
+onnxsim 2dfan2_alt_1x3x128x128.onnx 2dfan2_alt_1x3x128x128.onnx
+onnxsim 2dfan2_alt_1x3x128x128.onnx 2dfan2_alt_1x3x128x128.onnx
+onnxsim 2dfan2_alt_1x3x128x128.onnx 2dfan2_alt_1x3x128x128.onnx
+
+onnxsim 2dfan4_1x3x128x128.onnx 2dfan4_1x3x128x128.onnx
+onnxsim 2dfan4_1x3x128x128.onnx 2dfan4_1x3x128x128.onnx
+onnxsim 2dfan4_1x3x128x128.onnx 2dfan4_1x3x128x128.onnx
+onnxsim 2dfan4_1x3x128x128.onnx 2dfan4_1x3x128x128.onnx
+
+
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+
+MODEL=2dfan2_alt
+H=128
+W=128
+mo \
+--framework onnx \
+--input_model ${MODEL}_1x3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_1x3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_1x3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_1x3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_1x3x${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_1x3x${H}x${W}
+
+MODEL=2dfan4
+H=128
+W=128
+mo \
+--framework onnx \
+--input_model ${MODEL}_1x3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_1x3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_1x3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_1x3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_1x3x${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_1x3x${H}x${W}
+
+###########################################################################
+MODEL=2dfan2_alt
+H=128
+W=128
+openvino2tensorflow \
+--model_path ${MODEL}_1x3x${H}x${W}/openvino/FP32/${MODEL}_1x3x${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11 \
+--weight_replacement_config replace_2dfan2_alt.json
+mv saved_model/* ${MODEL}_1x3x${H}x${W}
+mv ${MODEL}_1x3x${H}x${W}/model_float32.onnx ${MODEL}_1x3x${H}x${W}/${MODEL}_1x3x${H}x${W}.onnx
+rm ${MODEL}_1x3x${H}x${W}.onnx
+mv ${MODEL}_*.onnx ${MODEL}_1x3x${H}x${W}
+
+
+
+MODEL=2dfan4
+H=128
+W=128
+openvino2tensorflow \
+--model_path ${MODEL}_1x3x${H}x${W}/openvino/FP32/${MODEL}_1x3x${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11 \
+--weight_replacement_config replace_2dfan4.json
+
+mv saved_model/* ${MODEL}_1x3x${H}x${W}
+mv ${MODEL}_1x3x${H}x${W}/model_float32.onnx ${MODEL}_1x3x${H}x${W}/${MODEL}_1x3x${H}x${W}.onnx
+rm ${MODEL}_1x3x${H}x${W}.onnx
+mv ${MODEL}_*.onnx ${MODEL}_1x3x${H}x${W}
