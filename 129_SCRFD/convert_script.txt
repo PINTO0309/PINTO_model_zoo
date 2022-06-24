@@ -17,6 +17,8 @@ pip install mmcv-full==1.3.3 -f https://download.openmmlab.com/mmcv/dist/cu110/t
 pip install -r requirements/build.txt
 pip install -v -e .
 
+export PYTHONPATH=$PYTHONPATH:${PWD}
+
 ===========================================
 python tools/scrfd2onnx.py \
 configs/scrfd/scrfd_500m.py \
