@@ -18,6 +18,7 @@ pip install -r requirements/build.txt
 pip install -v -e .
 
 export PYTHONPATH=$PYTHONPATH:${PWD}
+pip install typing_extensions --upgrade
 
 ===========================================
 python tools/scrfd2onnx.py \
