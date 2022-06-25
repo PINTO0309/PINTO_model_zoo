@@ -1,0 +1,2 @@
+https://github.com/choyingw/SynergyNet
+https://github.com/PINTO0309/simple-onnx-processing-tools
