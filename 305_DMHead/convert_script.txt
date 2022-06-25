@@ -1,0 +1,179 @@
+############ Add
+OP=Add
+LOWEROP=${OP,,}
+NUM_BATCHES=1
+OPSET=11
+sog4onnx \
+--op_type ${OP} \
+--opset ${OPSET} \
+--op_name ${LOWEROP}${OPSET} \
+--input_variables whenet_a float32 [${NUM_BATCHES},3] \
+--input_variables 6drepnet_b float32 [${NUM_BATCHES},3] \
+--output_variables yaw_roll_pitch float32 [${NUM_BATCHES},3] \
+--output_onnx_file_path ${OP}${OPSET}_merged_add.onnx
+
+
+############ WHENet shrink
+snc4onnx \
+--input_onnx_file_paths whenet_1x3x224x224_prepost.onnx shrunk_whenet.onnx \
+--srcop_destop yaw_roll_pitch shrunk_input \
+--output_onnx_file_path whenet_prepost_disable_front_side_detection_1x3x224x224.onnx
+
+onnxsim whenet_prepost_disable_front_side_detection_1x3x224x224.onnx whenet_prepost_disable_front_side_detection_1x3x224x224.onnx
+
+############ 6DRepNet shrink
+snc4onnx \
+--input_onnx_file_paths sixdrepnet_300w_lp_maskplus_prepost_1x3x224x224.onnx shrunk_6drepnet.onnx \
+--srcop_destop output_6drep_yaw_roll_pitch shrunk_input \
+--output_onnx_file_path sixdrepnet_300w_lp_maskplus_prepost_disable_rear_side_detection_1x3x224x224.onnx
+
+onnxsim sixdrepnet_300w_lp_maskplus_prepost_disable_rear_side_detection_1x3x224x224.onnx sixdrepnet_300w_lp_maskplus_prepost_disable_rear_side_detection_1x3x224x224.onnx
+
+
+############ WHENet + 6DRepNet
+snc4onnx \
+--input_onnx_file_paths whenet_prepost_disable_front_side_detection_1x3x224x224.onnx sixdrepnet_300w_lp_maskplus_prepost_disable_rear_side_detection_1x3x224x224.onnx \
+--srcop_destop input input \
+--op_prefixes_after_merging whenet 6drepnet \
+--output_onnx_file_path dmhead_merged.onnx
+
+############ pinheadpose_merged + Add
+snc4onnx \
+--input_onnx_file_paths dmhead_merged.onnx Add11_merged_add.onnx \
+--srcop_destop whenet_shrunk_output whenet_a 6drepnet_shrunk_output 6drepnet_b \
+--output_onnx_file_path dmhead_1x3x224x224.onnx
+
+onnxsim dmhead_1x3x224x224.onnx dmhead_1x3x224x224.onnx
+
+
+
+
+
+N-Batch ###########################################################################################################
+
+############ Add
+OP=Add
+LOWEROP=${OP,,}
+OPSET=11
+sog4onnx \
+--op_type ${OP} \
+--opset ${OPSET} \
+--op_name ${LOWEROP}${OPSET} \
+--input_variables whenet_a float32 [\'N\',3] \
+--input_variables 6drepnet_b float32 [\'N\',3] \
+--output_variables yaw_roll_pitch float32 [\'N\',3] \
+--output_onnx_file_path ${OP}${OPSET}_merged_add_N.onnx
+
+############ WHENet shrink
+snc4onnx \
+--input_onnx_file_paths whenet_Nx3x224x224_prepost.onnx shrunk_whenet_N.onnx \
+--srcop_destop yaw_roll_pitch shrunk_input \
+--output_onnx_file_path whenet_prepost_disable_front_side_detection_Nx3x224x224.onnx
+
+
+############ 6DRepNet shrink
+snc4onnx \
+--input_onnx_file_paths sixdrepnet_300w_lp_maskplus_prepost_Nx3x224x224.onnx shrunk_6drepnet_N.onnx \
+--srcop_destop output_6drep_yaw_roll_pitch shrunk_input \
+--output_onnx_file_path sixdrepnet_300w_lp_maskplus_prepost_disable_rear_side_detection_Nx3x224x224.onnx
+
+
+
+############ WHENet + 6DRepNet
+snc4onnx \
+--input_onnx_file_paths whenet_prepost_disable_front_side_detection_Nx3x224x224.onnx sixdrepnet_300w_lp_maskplus_prepost_disable_rear_side_detection_Nx3x224x224.onnx \
+--srcop_destop input input \
+--op_prefixes_after_merging whenet 6drepnet \
+--output_onnx_file_path dmhead_merged_N.onnx
+
+############ pinheadpose_merged + Add
+snc4onnx \
+--input_onnx_file_paths dmhead_merged_N.onnx Add11_merged_add_N.onnx \
+--srcop_destop whenet_shrunk_output whenet_a 6drepnet_shrunk_output 6drepnet_b \
+--output_onnx_file_path dmhead_Nx3x224x224.onnx
+
+
+
+
+############ Add
+OP=Add
+LOWEROP=${OP,,}
+OPSET=11
+sog4onnx \
+--op_type ${OP} \
+--opset ${OPSET} \
+--op_name ${LOWEROP}${OPSET} \
+--input_variables whenet_a float32 [\'N\',3] \
+--input_variables synergynet_b float32 [\'N\',3] \
+--output_variables yaw_roll_pitch float32 [\'N\',3] \
+--output_onnx_file_path ${OP}${OPSET}_merged_add_N.onnx
+
+############ WHENet shrink
+snc4onnx \
+--input_onnx_file_paths whenet_Nx3x224x224_prepost.onnx shrunk_whenet_N.onnx \
+--srcop_destop yaw_roll_pitch shrunk_input \
+--output_onnx_file_path whenet_prepost_disable_front_side_detection_Nx3x224x224.onnx
+
+
+
+
+sor4onnx \
+--input_onnx_file_path synergynet_1x3x224x224.onnx \
+--old_new "yaw_roll_pitch" "output_synergy_yaw_roll_pitch" \
+--output_onnx_file_path synergynet_1x3x224x224.onnx \
+--mode outputs
+
+sor4onnx \
+--input_onnx_file_path synergynet_Nx3x224x224.onnx \
+--old_new "yaw_roll_pitch" "output_synergy_yaw_roll_pitch" \
+--output_onnx_file_path synergynet_Nx3x224x224.onnx \
+--mode outputs
+
+
+sbi4onnx \
+--input_onnx_file_path shrunk_whenet.onnx \
+--output_onnx_file_path shrunk_whenet_N.onnx \
+--initialization_character_string N
+
+sbi4onnx \
+--input_onnx_file_path shrunk_synergynet.onnx \
+--output_onnx_file_path shrunk_synergynet_N.onnx \
+--initialization_character_string N
+
+
+
+
+
+############ SynergyNet shrink
+snc4onnx \
+--input_onnx_file_paths synergynet_Nx3x224x224.onnx shrunk_synergynet_N.onnx \
+--srcop_destop output_synergy_yaw_roll_pitch shrunk_input \
+--output_onnx_file_path synergynet_prepost_disable_rear_side_detection_Nx3x224x224.onnx
+
+
+############ WHENet + SynergyNet
+snc4onnx \
+--input_onnx_file_paths whenet_prepost_disable_front_side_detection_Nx3x224x224.onnx synergynet_prepost_disable_rear_side_detection_Nx3x224x224.onnx \
+--srcop_destop input input \
+--op_prefixes_after_merging whenet synergynet \
+--output_onnx_file_path dmhead_merged_N.onnx
+
+
+sor4onnx \
+--input_onnx_file_path dmhead_merged_N.onnx \
+--old_new "whenet_whenet_shrunk_output" "whenet_shrunk_output" \
+--output_onnx_file_path dmhead_merged_N.onnx \
+--mode outputs
+
+sor4onnx \
+--input_onnx_file_path dmhead_merged_N.onnx \
+--old_new "synergynet_synergynet_shrunk_output" "synergynet_shrunk_output" \
+--output_onnx_file_path dmhead_merged_N.onnx \
+--mode outputs
+
+
+############ pinheadpose_merged + Add
+snc4onnx \
+--input_onnx_file_paths dmhead_merged_N.onnx Add11_merged_add_N.onnx \
+--srcop_destop whenet_shrunk_output whenet_a synergynet_shrunk_output synergynet_b \
+--output_onnx_file_path dmhead_nomask_Nx3x224x224.onnx
