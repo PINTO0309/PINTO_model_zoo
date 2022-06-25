@@ -174,7 +174,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |300|6DRepNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/300_6DRepNet)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||⚫|6D HeadPose, 224x224|
 |301|YOLOv4_Face|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/301_YOLOv4_Face)|||||||||||⚫|480x640|
 |302|SLPT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/302_SLPT)|||||||||||⚫|decoder=6/12,256x256|
-|303|FAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/303_FAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Face Alignment,128x128|
+|303|FAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/303_FAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Face Alignment,128x128/256x256|
 |304|SynergyNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/304_SynergyNet)|||||||||||⚫|6D HeadPose,224x224|
 ### 5. 2D/3D Hand Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
