@@ -55,3 +55,19 @@ sam4onnx \
 --output_onnx_file_path nms_yolov7_${BOXES}.onnx \
 --input_constants main01_score_threshold float32 [0.7]
 ```
+
+# How to merge post-processing into a YOLOv7 model
+Simply execute the following command.
+```bash
+################################################### YOLOv7 + Post-Process
+MODEL=yolov7
+H=256
+W=320
+
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}.onnx nms_yolov7_${BOXES}.onnx \
+--srcop_destop output predictions \
+--output_onnx_file_path ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+```
