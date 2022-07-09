@@ -2,8 +2,15 @@
 - INPUTS
   - `predictions`: `float32 [batches, boxes, classes + 5]`
 - OUTPUTS
-  - `batchno_classid_x1y1x2y2`: `int64 [final_boxes_count, 6]` *N (final_boxes_count) ≠ batches, NMS boxes
-  - `score`: `float32 [final_boxes_count, 1]` *N (final_boxes_count) ≠ batches, NMS boxes
+  - `batchno_classid_x1y1x2y2`: `int64 [final_boxes_count, 6]`
+
+    * NMS boxes
+    * final_boxes_count (N) ≠ batches
+    * 6 = [batch_no, classid, x1, y1, x2, y2]
+  - `score`: `float32 [final_boxes_count, 1]`
+  
+    * final_boxes_count (N) ≠ batches, NMS boxes
+
 ![nms_yolov7_5040 onnx](https://user-images.githubusercontent.com/33194443/178084831-eaab28b4-cda8-4528-9e7f-f0b9d0dc7ca5.png)
 
 # How to change NMS parameters
