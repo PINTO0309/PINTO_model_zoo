@@ -1,6 +1,8 @@
 # Note
 - INPUTS
   - `predictions`: `float32 [batches, boxes, classes + 5]`
+  
+    * 5 = [center_x, center_y, width, height, score]
 - OUTPUTS
   - `batchno_classid_x1y1x2y2`: `int64 [final_boxes_count, 6]`
 
