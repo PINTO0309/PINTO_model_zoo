@@ -13,10 +13,23 @@
 
 ![nms_yolov7_5040 onnx](https://user-images.githubusercontent.com/33194443/178084831-eaab28b4-cda8-4528-9e7f-f0b9d0dc7ca5.png)
 
+# How to generate post-processing ONNX
+https://github.com/PINTO0309/PINTO_model_zoo/blob/main/307_YOLOv7/post_process_gen_tools/convert_script.txt
+
+Simply change the following parameters and run all shells.
+```bash
+OPSET=11
+BATCHES=1
+BOXES=5040
+CLASSES=80
+```
+
 # How to change NMS parameters
 ![image](https://user-images.githubusercontent.com/33194443/178084918-af33bfcc-425f-496e-87fb-1331ef7b2b6e.png)
 
 https://github.com/PINTO0309/simple-onnx-processing-tools
+
+Run the script below to directly rewrite the parameters of the ONNX file.
 ```bash
 ### Number of output boxes for YOLOv7
 BOXES=5040
