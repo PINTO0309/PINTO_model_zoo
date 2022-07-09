@@ -40,7 +40,7 @@ sog4onnx \
 --opset ${OPSET} \
 --op_name score_threshold_const \
 --output_variables score_threshold float32 [1] \
---attributes value float32 [-inf] \
+--attributes value float32 [0.4] \
 --output_onnx_file_path Constant_score_threshold.onnx
 
 
