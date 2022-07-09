@@ -14,9 +14,9 @@
 ![nms_yolov7_5040 onnx](https://user-images.githubusercontent.com/33194443/178084831-eaab28b4-cda8-4528-9e7f-f0b9d0dc7ca5.png)
 
 # How to generate post-processing ONNX
-https://github.com/PINTO0309/PINTO_model_zoo/blob/main/307_YOLOv7/post_process_gen_tools/convert_script.txt
-
 Simply change the following parameters and run all shells.
+
+https://github.com/PINTO0309/PINTO_model_zoo/blob/main/307_YOLOv7/post_process_gen_tools/convert_script.txt
 ```bash
 OPSET=11
 BATCHES=1
