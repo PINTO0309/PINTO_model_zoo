@@ -27,6 +27,9 @@ BOXES=5040
 CLASSES=80
 ```
 
+https://user-images.githubusercontent.com/33194443/178095678-04041976-4e16-4719-8abe-845bb86c8591.mp4
+
+
 # How to change NMS parameters
 ![image](https://user-images.githubusercontent.com/33194443/178084918-af33bfcc-425f-496e-87fb-1331ef7b2b6e.png)
 
