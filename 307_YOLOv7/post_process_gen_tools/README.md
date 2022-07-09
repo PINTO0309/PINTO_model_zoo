@@ -11,7 +11,8 @@
     * 6 = [batch_no, classid, x1, y1, x2, y2]
   - `score`: `float32 [final_boxes_count, 1]`
   
-    * final_boxes_count (N) ≠ batches, NMS boxes
+    * NMS box scores
+    * final_boxes_count (N) ≠ batches
 
 ![nms_yolov7_5040 onnx](https://user-images.githubusercontent.com/33194443/178084831-eaab28b4-cda8-4528-9e7f-f0b9d0dc7ca5.png)
 
