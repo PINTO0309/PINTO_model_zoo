@@ -61,6 +61,7 @@ Simply execute the following command.
 ```bash
 ################################################### YOLOv7 + Post-Process
 MODEL=yolov7
+BOXES=5040
 H=256
 W=320
 
