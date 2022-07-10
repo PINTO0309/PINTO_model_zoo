@@ -80,6 +80,135 @@ snc4onnx \
 onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
 onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
 
+################################################### 1 Batch
+
+MODEL=yolov7
+
+BOXES=5040
+H=256
+W=320
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}.onnx nms_yolov7_${BOXES}.onnx \
+--srcop_destop output predictions \
+--output_onnx_file_path ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+
+BOXES=7560
+H=256
+W=480
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}.onnx nms_yolov7_${BOXES}.onnx \
+--srcop_destop output predictions \
+--output_onnx_file_path ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+
+BOXES=10080
+H=256
+W=640
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}.onnx nms_yolov7_${BOXES}.onnx \
+--srcop_destop output predictions \
+--output_onnx_file_path ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+
+BOXES=15120
+H=384
+W=640
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}.onnx nms_yolov7_${BOXES}.onnx \
+--srcop_destop output predictions \
+--output_onnx_file_path ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+
+BOXES=18900
+H=480
+W=640
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}.onnx nms_yolov7_${BOXES}.onnx \
+--srcop_destop output predictions \
+--output_onnx_file_path ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+
+BOXES=57960
+H=736
+W=1280
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}.onnx nms_yolov7_${BOXES}.onnx \
+--srcop_destop output predictions \
+--output_onnx_file_path ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+
+
+#==========================================
+
+
+MODEL=yolov7-tiny
+
+BOXES=5040
+H=256
+W=320
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}.onnx nms_yolov7_${BOXES}.onnx \
+--srcop_destop output predictions \
+--output_onnx_file_path ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+
+BOXES=7560
+H=256
+W=480
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}.onnx nms_yolov7_${BOXES}.onnx \
+--srcop_destop output predictions \
+--output_onnx_file_path ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+
+BOXES=10080
+H=256
+W=640
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}.onnx nms_yolov7_${BOXES}.onnx \
+--srcop_destop output predictions \
+--output_onnx_file_path ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+
+BOXES=15120
+H=384
+W=640
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}.onnx nms_yolov7_${BOXES}.onnx \
+--srcop_destop output predictions \
+--output_onnx_file_path ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+
+BOXES=18900
+H=480
+W=640
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}.onnx nms_yolov7_${BOXES}.onnx \
+--srcop_destop output predictions \
+--output_onnx_file_path ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+
+BOXES=57960
+H=736
+W=1280
+snc4onnx \
+--input_onnx_file_paths ${MODEL}_${H}x${W}.onnx nms_yolov7_${BOXES}.onnx \
+--srcop_destop output predictions \
+--output_onnx_file_path ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
+onnxsim ${MODEL}_post_${H}x${W}.onnx ${MODEL}_post_${H}x${W}.onnx
 
 ################################################### N Batch
 
