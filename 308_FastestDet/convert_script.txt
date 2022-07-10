@@ -313,7 +313,7 @@ mv nms_yolov7_${BOXES}.onnx nms_fastestdet_${BOXES}.onnx
 
 
 
-################################################### YOLOv7 + Post-Process
+################################################### FastestDet + Post-Process
 H=180
 W=320
 snc4onnx \
