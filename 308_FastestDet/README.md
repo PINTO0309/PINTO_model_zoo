@@ -1,7 +1,7 @@
 # How to generate post-processing ONNX
 Simply change the following parameters and run all shells.
 
-https://github.com/PINTO0309/PINTO_model_zoo/blob/main/307_YOLOv7/post_process_gen_tools/convert_script.txt
+https://github.com/PINTO0309/PINTO_model_zoo/blob/main/308_FastestDet/convert_script.txt
 ```bash
 OPSET=11
 BATCHES=1
