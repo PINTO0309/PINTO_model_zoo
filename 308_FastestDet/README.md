@@ -10,7 +10,7 @@ CLASSES=80
 ```
 
 # How to change NMS parameters
-![image](https://user-images.githubusercontent.com/33194443/178084918-af33bfcc-425f-496e-87fb-1331ef7b2b6e.png)
+![image](https://user-images.githubusercontent.com/33194443/178145616-be4d3c94-8785-4d6a-bf89-17b31b2a348d.png)
 
 https://github.com/PINTO0309/simple-onnx-processing-tools
 
