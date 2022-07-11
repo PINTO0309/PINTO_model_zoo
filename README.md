@@ -142,7 +142,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |226|CascadeTableNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/226_CascadeTableNet)|⚫|⚫|||⚫|⚫|⚫||||⚫|General,320x320 only|
 |262|ByteTrack|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/262_ByteTrack)|||||||||||⚫|YOLOX/nano,tiny,s,m,l,x,mot17,ablation/128x320,192x320,192x448,192x640,256x320,256x448,256x640,384x640,512x1280,736x1280|
 |264|object_localization_network|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/264_object_localization_network)|||||||||||⚫|180x320,240x320,270x480,360x480,360x480,360x640,480x640,720x1280|
-|307|YOLOv7|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/307_YOLOv7)|||||||||||⚫|YOLOv7,YOLOv7-tiny|
+|307|YOLOv7|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/307_YOLOv7)|||||||⚫||||⚫|YOLOv7,YOLOv7-tiny|
 |308|FastestDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/308_FastestDet)|||||||||||⚫|180x320,256x320,320x480,352x352,352x640,480x640,736x1280|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|

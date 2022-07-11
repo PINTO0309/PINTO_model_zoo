@@ -1,0 +1,845 @@
+
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+
+
+MODEL=yolov7
+H=256
+W=320
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=256
+W=480
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=256
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=384
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=480
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=736
+W=1280
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+
+
+MODEL=yolov7_post
+H=256
+W=320
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=256
+W=480
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=256
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=384
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=480
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=736
+W=1280
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+
+
+MODEL=yolov7-tiny
+H=256
+W=320
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=256
+W=480
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=256
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=384
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=480
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=736
+W=1280
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+
+
+MODEL=yolov7-tiny_post
+H=256
+W=320
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=256
+W=480
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=256
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=384
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=480
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+H=736
+W=1280
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+
+
+#=========================================================================== N batch
+
+MODEL=yolov7
+H=256
+W=320
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=256
+W=480
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=256
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=384
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=480
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=736
+W=1280
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+
+
+MODEL=yolov7-tiny
+H=256
+W=320
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=256
+W=480
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=256
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=384
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=480
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=736
+W=1280
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+
+
+MODEL=yolov7_post
+H=256
+W=320
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=256
+W=480
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=256
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=384
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=480
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=736
+W=1280
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+
+
+MODEL=yolov7-tiny_post
+H=256
+W=320
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=256
+W=480
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=256
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=384
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=480
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+
+H=736
+W=1280
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_Nx3x${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_Nx3x${H}x${W}
