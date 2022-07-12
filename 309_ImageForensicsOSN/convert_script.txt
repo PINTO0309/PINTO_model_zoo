@@ -1,0 +1,444 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+
+MODEL=imageforensicsosn
+
+H=180
+W=320
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255'
+mv saved_model/* ${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+H=240
+W=320
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255'
+mv saved_model/* ${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+H=320
+W=480
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255'
+mv saved_model/* ${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+H=360
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255'
+mv saved_model/* ${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+H=480
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255'
+mv saved_model/* ${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+H=720
+W=1280
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255'
+mv saved_model/* ${MODEL}_${H}x${W}
+mv ${MODEL}_${H}x${W}.onnx ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+exit
+
+
+#===============================================================
+
+MODEL=imageforensicsosn
+H=180
+W=320
+cd ${MODEL}_${H}x${W}
+docker run --rm -it -v `pwd`:/home/user/workdir ghcr.io/pinto0309/tflite2json2tflite:latest
+./flatc -t \
+--strict-json \
+--defaults-json \
+-o workdir \
+./schema.fbs -- workdir/model_float32.tflite
+sed -i -e 's/:0//g' workdir/model_float32.json
+sed -i -e 's/serving_default_input/input/g' workdir/model_float32.json
+sed -i -e 's/StatefulPartitionedCall/output/g' workdir/model_float32.json
+./flatc \
+-o workdir \
+-b ./schema.fbs workdir/model_float32.json
+rm workdir/model_float32.json
+exit
+
+cd ..
+
+
+MODEL=imageforensicsosn
+H=240
+W=320
+cd ${MODEL}_${H}x${W}
+docker run --rm -it -v `pwd`:/home/user/workdir ghcr.io/pinto0309/tflite2json2tflite:latest
+./flatc -t \
+--strict-json \
+--defaults-json \
+-o workdir \
+./schema.fbs -- workdir/model_float32.tflite
+sed -i -e 's/:0//g' workdir/model_float32.json
+sed -i -e 's/serving_default_input/input/g' workdir/model_float32.json
+sed -i -e 's/StatefulPartitionedCall/output/g' workdir/model_float32.json
+./flatc \
+-o workdir \
+-b ./schema.fbs workdir/model_float32.json
+rm workdir/model_float32.json
+exit
+cd ..
+
+
+MODEL=imageforensicsosn
+H=320
+W=480
+cd ${MODEL}_${H}x${W}
+docker run --rm -it -v `pwd`:/home/user/workdir ghcr.io/pinto0309/tflite2json2tflite:latest
+./flatc -t \
+--strict-json \
+--defaults-json \
+-o workdir \
+./schema.fbs -- workdir/model_float32.tflite
+sed -i -e 's/:0//g' workdir/model_float32.json
+sed -i -e 's/serving_default_input/input/g' workdir/model_float32.json
+sed -i -e 's/StatefulPartitionedCall/output/g' workdir/model_float32.json
+./flatc \
+-o workdir \
+-b ./schema.fbs workdir/model_float32.json
+rm workdir/model_float32.json
+exit
+cd ..
+
+
+MODEL=imageforensicsosn
+H=360
+W=640
+cd ${MODEL}_${H}x${W}
+docker run --rm -it -v `pwd`:/home/user/workdir ghcr.io/pinto0309/tflite2json2tflite:latest
+./flatc -t \
+--strict-json \
+--defaults-json \
+-o workdir \
+./schema.fbs -- workdir/model_float32.tflite
+sed -i -e 's/:0//g' workdir/model_float32.json
+sed -i -e 's/serving_default_input/input/g' workdir/model_float32.json
+sed -i -e 's/StatefulPartitionedCall/output/g' workdir/model_float32.json
+./flatc \
+-o workdir \
+-b ./schema.fbs workdir/model_float32.json
+rm workdir/model_float32.json
+exit
+cd ..
+
+
+MODEL=imageforensicsosn
+H=480
+W=640
+cd ${MODEL}_${H}x${W}
+docker run --rm -it -v `pwd`:/home/user/workdir ghcr.io/pinto0309/tflite2json2tflite:latest
+./flatc -t \
+--strict-json \
+--defaults-json \
+-o workdir \
+./schema.fbs -- workdir/model_float32.tflite
+sed -i -e 's/:0//g' workdir/model_float32.json
+sed -i -e 's/serving_default_input/input/g' workdir/model_float32.json
+sed -i -e 's/StatefulPartitionedCall/output/g' workdir/model_float32.json
+./flatc \
+-o workdir \
+-b ./schema.fbs workdir/model_float32.json
+rm workdir/model_float32.json
+exit
+cd ..
+
+
+MODEL=imageforensicsosn
+H=720
+W=1280
+cd ${MODEL}_${H}x${W}
+docker run --rm -it -v `pwd`:/home/user/workdir ghcr.io/pinto0309/tflite2json2tflite:latest
+./flatc -t \
+--strict-json \
+--defaults-json \
+-o workdir \
+./schema.fbs -- workdir/model_float32.tflite
+sed -i -e 's/:0//g' workdir/model_float32.json
+sed -i -e 's/serving_default_input/input/g' workdir/model_float32.json
+sed -i -e 's/StatefulPartitionedCall/output/g' workdir/model_float32.json
+./flatc \
+-o workdir \
+-b ./schema.fbs workdir/model_float32.json
+rm workdir/model_float32.json
+exit
+cd ..
+
+
+#=========================================================
+
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/tflite2tensorflow:latest
+
+MODEL=imageforensicsosn
+H=180
+W=320
+cp ${MODEL}_${H}x${W}/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_coreml
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs
+rm model_float32.tflite
+rm model_float32.json
+cp -r saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+MODEL=imageforensicsosn
+H=240
+W=320
+cp ${MODEL}_${H}x${W}/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_coreml
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs
+rm model_float32.tflite
+rm model_float32.json
+cp -r saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+MODEL=imageforensicsosn
+H=320
+W=480
+cp ${MODEL}_${H}x${W}/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_coreml
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs
+rm model_float32.tflite
+rm model_float32.json
+cp -r saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+MODEL=imageforensicsosn
+H=360
+W=640
+cp ${MODEL}_${H}x${W}/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_coreml
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs
+rm model_float32.tflite
+rm model_float32.json
+cp -r saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+MODEL=imageforensicsosn
+H=480
+W=640
+cp ${MODEL}_${H}x${W}/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_coreml
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs
+rm model_float32.tflite
+rm model_float32.json
+cp -r saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+MODEL=imageforensicsosn
+H=720
+W=1280
+cp ${MODEL}_${H}x${W}/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_coreml
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_tfjs
+rm model_float32.tflite
+rm model_float32.json
+cp -r saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
