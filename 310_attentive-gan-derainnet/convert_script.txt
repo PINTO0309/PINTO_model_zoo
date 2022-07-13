@@ -1,0 +1,341 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+MODEL=attentive_gan_derainnet
+
+H=180
+W=320
+saved_model_to_tflite \
+--signature_def inputs \
+--saved_model_dir_path attentive_gan_derainnet_${H}x${W} \
+--output_no_quant_float32_tflite
+cp tflite_from_saved_model/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization '(data / 127.5) - 1.0' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11
+mo \
+--framework onnx \
+--input_model saved_model/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model saved_model/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model saved_model/model_float32.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+cp -r saved_model/* ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+rm -rf saved_model
+
+H=240
+W=320
+saved_model_to_tflite \
+--signature_def inputs \
+--saved_model_dir_path attentive_gan_derainnet_${H}x${W} \
+--output_no_quant_float32_tflite
+cp tflite_from_saved_model/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization '(data / 127.5) - 1.0' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11
+mo \
+--framework onnx \
+--input_model saved_model/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model saved_model/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model saved_model/model_float32.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+cp -r saved_model/* ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+rm -rf saved_model
+
+H=240
+W=360
+saved_model_to_tflite \
+--signature_def inputs \
+--saved_model_dir_path attentive_gan_derainnet_${H}x${W} \
+--output_no_quant_float32_tflite
+cp tflite_from_saved_model/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization '(data / 127.5) - 1.0' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11
+mo \
+--framework onnx \
+--input_model saved_model/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model saved_model/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model saved_model/model_float32.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+cp -r saved_model/* ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+rm -rf saved_model
+
+H=320
+W=480
+saved_model_to_tflite \
+--signature_def inputs \
+--saved_model_dir_path attentive_gan_derainnet_${H}x${W} \
+--output_no_quant_float32_tflite
+cp tflite_from_saved_model/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization '(data / 127.5) - 1.0' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11
+mo \
+--framework onnx \
+--input_model saved_model/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model saved_model/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model saved_model/model_float32.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+cp -r saved_model/* ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+rm -rf saved_model
+
+H=360
+W=640
+saved_model_to_tflite \
+--signature_def inputs \
+--saved_model_dir_path attentive_gan_derainnet_${H}x${W} \
+--output_no_quant_float32_tflite
+cp tflite_from_saved_model/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization '(data / 127.5) - 1.0' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11
+mo \
+--framework onnx \
+--input_model saved_model/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model saved_model/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model saved_model/model_float32.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+cp -r saved_model/* ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+rm -rf saved_model
+
+H=480
+W=640
+saved_model_to_tflite \
+--signature_def inputs \
+--saved_model_dir_path attentive_gan_derainnet_${H}x${W} \
+--output_no_quant_float32_tflite
+cp tflite_from_saved_model/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization '(data / 127.5) - 1.0' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11
+mo \
+--framework onnx \
+--input_model saved_model/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model saved_model/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model saved_model/model_float32.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+cp -r saved_model/* ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+rm -rf saved_model
+
+H=720
+W=1280
+saved_model_to_tflite \
+--signature_def inputs \
+--saved_model_dir_path attentive_gan_derainnet_${H}x${W} \
+--output_no_quant_float32_tflite
+cp tflite_from_saved_model/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--string_formulas_for_normalization '(data / 127.5) - 1.0' \
+--output_tfjs \
+--output_coreml \
+--output_onnx \
+--onnx_opset 11
+mo \
+--framework onnx \
+--input_model saved_model/model_float32.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model saved_model/model_float32.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model saved_model/model_float32.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+cp -r saved_model/* ${MODEL}_${H}x${W}
+rm model_float32.tflite
+rm model_float32.json
+rm -rf saved_model

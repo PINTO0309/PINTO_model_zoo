@@ -393,6 +393,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |105|MobileStyleGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/105_MobileStyleGAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|310|attentive-gan-derainnet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/310_attentive-gan-derainnet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫||⚫|DeRain/180x320,240x320,240x360,320x480,360x640,480x640,720x1280|
 ### 18. Transformer
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
