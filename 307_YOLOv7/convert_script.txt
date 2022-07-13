@@ -752,7 +752,7 @@ mo \
 --model_name ${MODEL}_Nx3x${H}x${W}
 
 
-
+#========================================================
 MODEL=yolov7-tiny_post
 H=256
 W=320
@@ -843,3 +843,433 @@ mo \
 --data_type FP16 \
 --output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP32 \
 --model_name ${MODEL}_Nx3x${H}x${W}
+
+
+
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+#========================================================
+POST=_post
+MODEL=yolov7-tiny
+MODEL_POST=${MODEL}${POST}
+H=256
+W=320
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=256
+W=480
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=256
+W=640
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=384
+W=640
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=480
+W=640
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=736
+W=1280
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+#========================================================
+POST=
+MODEL=yolov7-tiny
+MODEL_POST=${MODEL}${POST}
+H=256
+W=320
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=256
+W=480
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=256
+W=640
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=384
+W=640
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=480
+W=640
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=736
+W=1280
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+#========================================================
+POST=_post
+MODEL=yolov7
+MODEL_POST=${MODEL}${POST}
+H=256
+W=320
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=256
+W=480
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=256
+W=640
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=384
+W=640
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=480
+W=640
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=736
+W=1280
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+#========================================================
+POST=
+MODEL=yolov7
+MODEL_POST=${MODEL}${POST}
+H=256
+W=320
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=256
+W=480
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=256
+W=640
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=384
+W=640
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=480
+W=640
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
+
+H=736
+W=1280
+openvino2tensorflow \
+--model_path ${MODEL_POST}_${H}x${W}/openvino/FP32/${MODEL_POST}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255' \
+--output_tfjs \
+--weight_replacement_config replace_${MODEL_POST}.json
+cp -r saved_model/* ${MODEL_POST}_${H}x${W}
+rm -rf saved_model
