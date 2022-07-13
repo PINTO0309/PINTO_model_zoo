@@ -6,11 +6,13 @@ MODEL=attentive_gan_derainnet
 
 H=180
 W=320
+### TF1 -> TF2
 saved_model_to_tflite \
 --signature_def inputs \
 --saved_model_dir_path attentive_gan_derainnet_${H}x${W} \
 --output_no_quant_float32_tflite
 cp tflite_from_saved_model/model_float32.tflite .
+### tflite -> Full Framework Convert
 tflite2tensorflow \
 --model_path model_float32.tflite \
 --flatc_path ../flatc \
@@ -54,11 +56,13 @@ rm -rf saved_model
 
 H=240
 W=320
+### TF1 -> TF2
 saved_model_to_tflite \
 --signature_def inputs \
 --saved_model_dir_path attentive_gan_derainnet_${H}x${W} \
 --output_no_quant_float32_tflite
 cp tflite_from_saved_model/model_float32.tflite .
+### tflite -> Full Framework Convert
 tflite2tensorflow \
 --model_path model_float32.tflite \
 --flatc_path ../flatc \
@@ -102,11 +106,13 @@ rm -rf saved_model
 
 H=240
 W=360
+### TF1 -> TF2
 saved_model_to_tflite \
 --signature_def inputs \
 --saved_model_dir_path attentive_gan_derainnet_${H}x${W} \
 --output_no_quant_float32_tflite
 cp tflite_from_saved_model/model_float32.tflite .
+### tflite -> Full Framework Convert
 tflite2tensorflow \
 --model_path model_float32.tflite \
 --flatc_path ../flatc \
@@ -150,11 +156,13 @@ rm -rf saved_model
 
 H=320
 W=480
+### TF1 -> TF2
 saved_model_to_tflite \
 --signature_def inputs \
 --saved_model_dir_path attentive_gan_derainnet_${H}x${W} \
 --output_no_quant_float32_tflite
 cp tflite_from_saved_model/model_float32.tflite .
+### tflite -> Full Framework Convert
 tflite2tensorflow \
 --model_path model_float32.tflite \
 --flatc_path ../flatc \
@@ -198,11 +206,13 @@ rm -rf saved_model
 
 H=360
 W=640
+### TF1 -> TF2
 saved_model_to_tflite \
 --signature_def inputs \
 --saved_model_dir_path attentive_gan_derainnet_${H}x${W} \
 --output_no_quant_float32_tflite
 cp tflite_from_saved_model/model_float32.tflite .
+### tflite -> Full Framework Convert
 tflite2tensorflow \
 --model_path model_float32.tflite \
 --flatc_path ../flatc \
@@ -246,11 +256,13 @@ rm -rf saved_model
 
 H=480
 W=640
+### TF1 -> TF2
 saved_model_to_tflite \
 --signature_def inputs \
 --saved_model_dir_path attentive_gan_derainnet_${H}x${W} \
 --output_no_quant_float32_tflite
 cp tflite_from_saved_model/model_float32.tflite .
+### tflite -> Full Framework Convert
 tflite2tensorflow \
 --model_path model_float32.tflite \
 --flatc_path ../flatc \
@@ -294,11 +306,13 @@ rm -rf saved_model
 
 H=720
 W=1280
+### TF1 -> TF2
 saved_model_to_tflite \
 --signature_def inputs \
 --saved_model_dir_path attentive_gan_derainnet_${H}x${W} \
 --output_no_quant_float32_tflite
 cp tflite_from_saved_model/model_float32.tflite .
+### tflite -> Full Framework Convert
 tflite2tensorflow \
 --model_path model_float32.tflite \
 --flatc_path ../flatc \
