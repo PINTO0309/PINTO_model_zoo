@@ -288,17 +288,17 @@ sor4onnx \
 ################################################### nms output merge
 python make_nms_outputs_merge.py
 
-onnxsim nms_batchno_classid_x1y1x2y2_cat.onnx nms_batchno_classid_x1y1x2y2_cat.onnx
+onnxsim nms_batchno_classid_y1x1y2x2_cat.onnx nms_batchno_classid_y1x1y2x2_cat.onnx
 
 
 ################################################### merge
 snc4onnx \
---input_onnx_file_paths nms_yolov7_${BOXES}_merged.onnx nms_batchno_classid_x1y1x2y2_cat.onnx \
---srcop_destop final_boxes cat_x1y1x2y2 final_class_nums cat_classid final_scores cat_score \
+--input_onnx_file_paths nms_yolov7_${BOXES}_merged.onnx nms_batchno_classid_y1x1y2x2_cat.onnx \
+--srcop_destop final_boxes cat_y1x1y2x2 final_class_nums cat_classid final_scores cat_score \
 --output_onnx_file_path nms_yolov7_${BOXES}.onnx
 
 ################################################### Cleaning
-rm nms_batchno_classid_x1y1x2y2_cat.onnx
+rm nms_batchno_classid_y1x1y2x2_cat.onnx
 rm nms_box_gather_nd.onnx
 rm nms_final_batch_nums_final_class_nums_final_box_nums.onnx
 rm nms_yolov7_${BOXES}_merged.onnx
