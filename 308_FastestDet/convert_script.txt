@@ -583,3 +583,254 @@ openvino2tensorflow \
 --weight_replacement_config replace_${H}x${W}.json
 mv saved_model/* ${MODEL}_${H}x${W}
 rm -rf saved_model
+
+
+
+MODEL=fastestdet_post
+H=180
+W=320
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${H}x${W}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+H=256
+W=320
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${H}x${W}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+H=320
+W=480
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${H}x${W}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+H=352
+W=352
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${H}x${W}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+H=352
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${H}x${W}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+H=352
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${H}x${W}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+H=480
+W=640
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${H}x${W}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
+
+H=736
+W=1280
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP32 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP32 \
+--model_name ${MODEL}_${H}x${W}
+mo \
+--framework onnx \
+--input_model ${MODEL}_${H}x${W}.onnx \
+--data_type FP16 \
+--output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
+--model_name ${MODEL}_${H}x${W}
+blobconverter \
+--onnx-model ${MODEL}_${H}x${W}.onnx \
+--shaves 6 \
+-o ${MODEL}_${H}x${W}/openvino/myriad
+openvino2tensorflow \
+--model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+--output_saved_model \
+--output_pb \
+--non_verbose \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--weight_replacement_config replace_${H}x${W}.json
+mv saved_model/* ${MODEL}_${H}x${W}
+rm -rf saved_model
