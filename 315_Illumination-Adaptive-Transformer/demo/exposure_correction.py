@@ -6,11 +6,14 @@ import time
 import argparse
 
 
-class ExposeCorrection:
+class ExposureCorrection:
     def __init__(self, model_path: str) -> None:
         self.session = ort.InferenceSession(
             model_path,
-            providers=['CUDAExecutionProvider', 'CPUExecutionProvider']
+            providers=[
+                # 'CUDAExecutionProvider',
+                'CPUExecutionProvider',
+            ]
         )
 
         model_inputs = self.session.get_inputs()
@@ -59,7 +62,7 @@ if __name__ == "__main__":
     model_path = args.model
     video_path = args.video
 
-    exp = ExposeCorrection(model_path)
+    exp = ExposureCorrection(model_path)
 
     cap = cv2.VideoCapture(video_path)
     while cap.isOpened():

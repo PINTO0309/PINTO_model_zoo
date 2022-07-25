@@ -10,7 +10,10 @@ class LowLightEnhancement:
     def __init__(self, model_path: str) -> None:
         self.session = ort.InferenceSession(
             model_path,
-            providers=['CUDAExecutionProvider', 'CPUExecutionProvider']
+            providers=[
+                # 'CUDAExecutionProvider',
+                'CPUExecutionProvider',
+            ]
         )
 
         model_inputs = self.session.get_inputs()
