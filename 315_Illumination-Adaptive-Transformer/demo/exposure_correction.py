@@ -29,7 +29,7 @@ class ExposeCorrection:
         output_width = output_shape[3]
 
     def preprocess(self, img_bgr):
-        img_input = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img_input = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
         img_input = cv2.resize(img_input, (self.input_width, self.input_height))
         img_input = img_input.transpose(2, 0, 1)
         img_input = img_input[np.newaxis, :, :, :]
