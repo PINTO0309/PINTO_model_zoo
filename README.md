@@ -360,6 +360,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |285|Decoupled-Low-light-Image-Enhancement|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/285_Decoupled-Low-light-Image-Enhancement)|||||||||||⚫|Low-light Image Enhancement/180x320,240x320,360x480,360x640,480x640,720x1280|
 |286|SCI|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/286_SCI)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,360x480,360x640,480x640,720x1280|
 |315|Illumination-Adaptive-Transformer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/315_Illumination-Adaptive-Transformer)|||||||||||⚫|Low-light Image Enhancement|
+|316|night_enhancement|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/316_night_enhancement)|||||||||||⚫|Low-light Image Enhancement|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
