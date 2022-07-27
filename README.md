@@ -438,6 +438,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |298|DEQ-Flow|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/298_DEQ-Flow)|||||||||||⚫|AGPL-3.0 license|
 |306|GMFlowNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/306_GMFlowNet)|||||||||||⚫|OpticalFlow/192x320,240x320,320x480,360x640,480x640,720x1280|
 |309|ImageForensicsOSN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/309_ImageForensicsOSN)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||⚫|forgery detection/180x320,240x320,320x480,360x640,480x640,720x1280|
+|318|pips|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/318_pips)|||||||||||⚫||
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)
