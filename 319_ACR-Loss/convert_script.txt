@@ -1,0 +1,289 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+DATASET=300w
+BACKBONE=EF3
+saved_model_to_tflite \
+--saved_model_dir_path ${DATASET}_${BACKBONE} \
+--input_shapes [1,224,224,3] \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml
+cp tflite_from_saved_model/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_onnx \
+--onnx_opset 11
+rm model_float32.tflite
+rm model_float32.json
+mv saved_model/model_float32.onnx tflite_from_saved_model
+sor4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--old_new "input_1" "input" \
+--mode inputs \
+--output_onnx_file_path tflite_from_saved_model/model_float32.onnx
+sor4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--old_new "Identity" "output" \
+--mode outputs \
+--output_onnx_file_path tflite_from_saved_model/model_float32.onnx
+sbi4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--output_onnx_file_path tflite_from_saved_model/model_float32_Nx224x224.onnx \
+--initialization_character_string N
+rm -rf saved_model
+mv tflite_from_saved_model/* ${DATASET}_${BACKBONE}
+rm -rf tflite_from_saved_model
+
+BACKBONE=EF0
+saved_model_to_tflite \
+--saved_model_dir_path ${DATASET}_${BACKBONE} \
+--input_shapes [1,224,224,3] \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml
+cp tflite_from_saved_model/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_onnx \
+--onnx_opset 11
+rm model_float32.tflite
+rm model_float32.json
+mv saved_model/model_float32.onnx tflite_from_saved_model
+sor4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--old_new "input_1" "input" \
+--mode inputs \
+--output_onnx_file_path tflite_from_saved_model/model_float32.onnx
+sor4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--old_new "Identity" "output" \
+--mode outputs \
+--output_onnx_file_path tflite_from_saved_model/model_float32.onnx
+sbi4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--output_onnx_file_path tflite_from_saved_model/model_float32_Nx224x224.onnx \
+--initialization_character_string N
+rm -rf saved_model
+mv -f tflite_from_saved_model/* ${DATASET}_${BACKBONE}
+rm -rf tflite_from_saved_model
+
+BACKBONE=mnv2
+saved_model_to_tflite \
+--saved_model_dir_path ${DATASET}_${BACKBONE} \
+--input_shapes [1,224,224,3] \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml
+cp tflite_from_saved_model/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_onnx \
+--onnx_opset 11
+rm model_float32.tflite
+rm model_float32.json
+mv saved_model/model_float32.onnx tflite_from_saved_model
+sor4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--old_new "input_1" "input" \
+--mode inputs \
+--output_onnx_file_path tflite_from_saved_model/model_float32.onnx
+sor4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--old_new "Identity" "output" \
+--mode outputs \
+--output_onnx_file_path tflite_from_saved_model/model_float32.onnx
+sbi4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--output_onnx_file_path tflite_from_saved_model/model_float32_Nx224x224.onnx \
+--initialization_character_string N
+rm -rf saved_model
+mv -f tflite_from_saved_model/* ${DATASET}_${BACKBONE}
+rm -rf tflite_from_saved_model
+
+
+
+DATASET=cofw
+BACKBONE=EF3
+saved_model_to_tflite \
+--saved_model_dir_path ${DATASET}_${BACKBONE} \
+--input_shapes [1,224,224,3] \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml
+cp tflite_from_saved_model/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_onnx \
+--onnx_opset 11
+rm model_float32.tflite
+rm model_float32.json
+mv saved_model/model_float32.onnx tflite_from_saved_model
+sor4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--old_new "input_1" "input" \
+--mode inputs \
+--output_onnx_file_path tflite_from_saved_model/model_float32.onnx
+sor4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--old_new "Identity" "output" \
+--mode outputs \
+--output_onnx_file_path tflite_from_saved_model/model_float32.onnx
+sbi4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--output_onnx_file_path tflite_from_saved_model/model_float32_Nx224x224.onnx \
+--initialization_character_string N
+rm -rf saved_model
+mv tflite_from_saved_model/* ${DATASET}_${BACKBONE}
+rm -rf tflite_from_saved_model
+
+BACKBONE=EF0
+saved_model_to_tflite \
+--saved_model_dir_path ${DATASET}_${BACKBONE} \
+--input_shapes [1,224,224,3] \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml
+cp tflite_from_saved_model/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_onnx \
+--onnx_opset 11
+rm model_float32.tflite
+rm model_float32.json
+mv saved_model/model_float32.onnx tflite_from_saved_model
+sor4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--old_new "input_1" "input" \
+--mode inputs \
+--output_onnx_file_path tflite_from_saved_model/model_float32.onnx
+sor4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--old_new "Identity" "output" \
+--mode outputs \
+--output_onnx_file_path tflite_from_saved_model/model_float32.onnx
+sbi4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--output_onnx_file_path tflite_from_saved_model/model_float32_Nx224x224.onnx \
+--initialization_character_string N
+rm -rf saved_model
+mv -f tflite_from_saved_model/* ${DATASET}_${BACKBONE}
+rm -rf tflite_from_saved_model
+
+BACKBONE=mnv2
+saved_model_to_tflite \
+--saved_model_dir_path ${DATASET}_${BACKBONE} \
+--input_shapes [1,224,224,3] \
+--output_no_quant_float32_tflite \
+--output_dynamic_range_quant_tflite \
+--output_weight_quant_tflite \
+--output_float16_quant_tflite \
+--output_integer_quant_tflite \
+--output_integer_quant_type 'uint8' \
+--string_formulas_for_normalization 'data / 255.0' \
+--output_tfjs \
+--output_coreml
+cp tflite_from_saved_model/model_float32.tflite .
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path model_float32.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_onnx \
+--onnx_opset 11
+rm model_float32.tflite
+rm model_float32.json
+mv saved_model/model_float32.onnx tflite_from_saved_model
+sor4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--old_new "input_1" "input" \
+--mode inputs \
+--output_onnx_file_path tflite_from_saved_model/model_float32.onnx
+sor4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--old_new "Identity" "output" \
+--mode outputs \
+--output_onnx_file_path tflite_from_saved_model/model_float32.onnx
+sbi4onnx \
+--input_onnx_file_path tflite_from_saved_model/model_float32.onnx \
+--output_onnx_file_path tflite_from_saved_model/model_float32_Nx224x224.onnx \
+--initialization_character_string N
+rm -rf saved_model
+mv -f tflite_from_saved_model/* ${DATASET}_${BACKBONE}
+rm -rf tflite_from_saved_model

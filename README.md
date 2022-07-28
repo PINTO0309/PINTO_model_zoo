@@ -181,6 +181,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |304|SynergyNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/304_SynergyNet)|||||||||||⚫|6D HeadPose,224x224|
 |305|DMHead|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/305_DMHead)|||||||||||⚫|6D HeadPose,Multi-Model-Fused,224x224|
 |311|HHP-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/311_HHP-Net)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|6D HeadPose,No-LICENSE|
+|319|ACR-Loss|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/319_ACR-Loss)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Face Alignment|
 ### 5. 2D/3D Hand Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
