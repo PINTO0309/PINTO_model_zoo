@@ -21,3 +21,11 @@
 
   https://user-images.githubusercontent.com/33194443/182017136-354254e8-36ef-4b84-a252-ded136568c8d.mp4
 
+- I-HAZE + SOTS-INDOOR
+
+  https://user-images.githubusercontent.com/33194443/182052772-3c9b6469-11ef-4e7b-b086-d47fac2f7ce3.mp4
+
+- Comparison
+
+  https://user-images.githubusercontent.com/33194443/182052868-560cf69d-86a3-482a-82dc-da8aee08d98f.mp4
+
