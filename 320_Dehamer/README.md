@@ -29,3 +29,4 @@
 
   https://user-images.githubusercontent.com/33194443/182052868-560cf69d-86a3-482a-82dc-da8aee08d98f.mp4
 
+![valid-loss_](https://user-images.githubusercontent.com/33194443/182054549-1f482815-a8a1-48b8-a21d-1a507e2ccb32.png)![valid-psnr_](https://user-images.githubusercontent.com/33194443/182054555-51458c6b-03c9-486f-b3e7-247715356469.png)
