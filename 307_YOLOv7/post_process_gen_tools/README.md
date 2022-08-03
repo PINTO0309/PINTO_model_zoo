@@ -1,6 +1,6 @@
 # Note
 - INPUTS
-  - `predictions`: `float32 [batches, boxes, classes + 5]`
+  - `predictions`: `float32 [batches, boxes, 5 + classes]`
   
     * 5 = [center_x, center_y, width, height, score]
 - OUTPUTS
