@@ -49,3 +49,9 @@ https://github.com/PINTO0309/crowdhuman_hollywoodhead_yolo_convert
   INFO: output_name.1: score shape: [0, 1] dtype: float32
   INFO: output_name.2: batchno_classid_x1y1x2y2 shape: [0, 6] dtype: int64
   ```
+
+# How to change NMS parameters
+https://github.com/PINTO0309/PINTO_model_zoo/tree/main/307_YOLOv7/post_process_gen_tools#how-to-change-nms-parameters
+
+# How to generate post-processing ONNX
+https://github.com/PINTO0309/PINTO_model_zoo/tree/main/307_YOLOv7/post_process_gen_tools#how-to-generate-post-processing-onnx
