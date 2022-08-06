@@ -8,7 +8,7 @@ https://github.com/PINTO0309/crowdhuman_hollywoodhead_yolo_convert
   ![test_batch2_pred](https://user-images.githubusercontent.com/33194443/183251276-d96e52fb-4805-4087-bb06-7d3afee4d9e8.jpg)
 
 # Benchmark
-- YOLOv7-tiny_Head with Post-Process, TensorRT
+- YOLOv7-tiny_Head with Post-Process, ONNX TensorRT, RTX3070
   ```bash
   $ sit4onnx --input_onnx_file_path yolov7_tiny_head_0.752_post_480x640.onnx
 
