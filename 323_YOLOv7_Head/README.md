@@ -54,5 +54,36 @@ https://github.com/PINTO0309/crowdhuman_hollywoodhead_yolo_convert
 https://github.com/PINTO0309/PINTO_model_zoo/tree/main/307_YOLOv7/post_process_gen_tools#how-to-change-nms-parameters
 ![image](https://user-images.githubusercontent.com/33194443/183257801-bd25214a-79a9-483c-b03e-fcaa4c229837.png)
 
+https://github.com/PINTO0309/simple-onnx-processing-tools
+
+Run the script below to directly rewrite the parameters of the ONNX file.
+```bash
+$ docker run --rm -it \
+-v `pwd`:/workdir \
+-w /workdir \
+pinto0309/simple-onnx-processing-tools:1.0.41
+
+### max_output_boxes_per_class
+$ sam4onnx \
+--op_name main01_nonmaxsuppression11 \
+--input_onnx_file_path yolov7_tiny_head_0.752_post_480x640.onnx \
+--output_onnx_file_path yolov7_tiny_head_0.752_post_480x640.onnx \
+--input_constants main01_max_output_boxes_per_class int64 [100]
+
+### iou_threshold
+$ sam4onnx \
+--op_name main01_nonmaxsuppression11 \
+--input_onnx_file_path yolov7_tiny_head_0.752_post_480x640.onnx \
+--output_onnx_file_path yolov7_tiny_head_0.752_post_480x640.onnx \
+--input_constants main01_iou_threshold float32 [0.6]
+
+### score_threshold
+$ sam4onnx \
+--op_name main01_nonmaxsuppression11 \
+--input_onnx_file_path yolov7_tiny_head_0.752_post_480x640.onnx \
+--output_onnx_file_path yolov7_tiny_head_0.752_post_480x640.onnx \
+--input_constants main01_score_threshold float32 [0.2]
+```
+
 # How to generate post-processing ONNX
 https://github.com/PINTO0309/PINTO_model_zoo/tree/main/307_YOLOv7/post_process_gen_tools#how-to-generate-post-processing-onnx
