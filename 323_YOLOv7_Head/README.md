@@ -65,25 +65,28 @@ $ docker run --rm -it \
 -w /workdir \
 pinto0309/simple-onnx-processing-tools:1.0.41
 
+H=480
+W=640
+
 ### max_output_boxes_per_class
 $ sam4onnx \
 --op_name main01_nonmaxsuppression11 \
---input_onnx_file_path yolov7_tiny_head_0.752_post_480x640.onnx \
---output_onnx_file_path yolov7_tiny_head_0.752_post_480x640.onnx \
+--input_onnx_file_path yolov7_tiny_head_0.752_post_${H}x${W}.onnx \
+--output_onnx_file_path yolov7_tiny_head_0.752_post_${H}x${W}.onnx \
 --input_constants main01_max_output_boxes_per_class int64 [100]
 
 ### iou_threshold
 $ sam4onnx \
 --op_name main01_nonmaxsuppression11 \
---input_onnx_file_path yolov7_tiny_head_0.752_post_480x640.onnx \
---output_onnx_file_path yolov7_tiny_head_0.752_post_480x640.onnx \
+--input_onnx_file_path yolov7_tiny_head_0.752_post_${H}x${W}.onnx \
+--output_onnx_file_path yolov7_tiny_head_0.752_post_${H}x${W}.onnx \
 --input_constants main01_iou_threshold float32 [0.6]
 
 ### score_threshold
 $ sam4onnx \
 --op_name main01_nonmaxsuppression11 \
---input_onnx_file_path yolov7_tiny_head_0.752_post_480x640.onnx \
---output_onnx_file_path yolov7_tiny_head_0.752_post_480x640.onnx \
+--input_onnx_file_path yolov7_tiny_head_0.752_post_${H}x${W}.onnx \
+--output_onnx_file_path yolov7_tiny_head_0.752_post_${H}x${W}.onnx \
 --input_constants main01_score_threshold float32 [0.2]
 ```
 
