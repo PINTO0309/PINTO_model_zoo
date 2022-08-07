@@ -57,6 +57,8 @@ https://github.com/PINTO0309/PINTO_model_zoo/tree/main/307_YOLOv7/post_process_g
 https://github.com/PINTO0309/simple-onnx-processing-tools
 
 Run the script below to directly rewrite the parameters of the ONNX file.
+
+e.g.
 ```bash
 $ docker run --rm -it \
 -v `pwd`:/workdir \
