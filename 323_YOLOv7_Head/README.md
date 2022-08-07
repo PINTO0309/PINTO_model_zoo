@@ -62,7 +62,7 @@ e.g.
 $ docker run --rm -it \
 -v `pwd`:/workdir \
 -w /workdir \
-pinto0309/simple-onnx-processing-tools:1.0.41
+pinto0309/simple-onnx-processing-tools:1.0.42
 
 H=480
 W=640
