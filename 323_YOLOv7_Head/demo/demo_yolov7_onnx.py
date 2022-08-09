@@ -270,7 +270,7 @@ def main():
         fps = 1 / elapsed_time
         cv2.putText(
             debug_image,
-            f'{fps:.1f} FPS (inferece only)',
+            f'{fps:.1f} FPS (inference only)',
             (10, 30),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.7,
@@ -280,7 +280,7 @@ def main():
         )
         cv2.putText(
             debug_image,
-            f'{fps:.1f} FPS (inferece only)',
+            f'{fps:.1f} FPS (inference only)',
             (10, 30),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.7,
