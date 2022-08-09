@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 
-import copy
-
-import cv2
 import time
+import copy
+import cv2
 import numpy as np
 import onnxruntime
 from argparse import ArgumentParser
