@@ -13,16 +13,16 @@ from typing import Tuple, Optional, List
 class YOLOv7ONNX(object):
     def __init__(
         self,
-        model_path: Optional[str] = 'yolov7_tiny_head_0.752_post_480x640.onnx',
-        class_score_th: Optional[float] = 0.30,
+        model_path: Optional[str] = 'yolov7_tiny_head_0.768_post_480x640.onnx',
+        class_score_th: Optional[float] = 0.20,
         providers: Optional[List] = [
-            # (
-            #     'TensorrtExecutionProvider', {
-            #         'trt_engine_cache_enable': True,
-            #         'trt_engine_cache_path': '.',
-            #         'trt_fp16_enable': True,
-            #     }
-            # ),
+            (
+                'TensorrtExecutionProvider', {
+                    'trt_engine_cache_enable': True,
+                    'trt_engine_cache_path': '.',
+                    'trt_fp16_enable': True,
+                }
+            ),
             'CUDAExecutionProvider',
             'CPUExecutionProvider',
         ],
@@ -37,7 +37,7 @@ class YOLOv7ONNX(object):
         class_score_th: Optional[float]
 
         class_score_th: Optional[float]
-            Score threshold. Default: 0.30
+            Score threshold. Default: 0.20
 
         providers: Optional[List]
             Name of onnx execution providers
@@ -231,7 +231,7 @@ def main():
         '-m',
         '--model',
         type=str,
-        default='yolov7_tiny_head_0.752_post_480x640.onnx',
+        default='yolov7_tiny_head_0.768_post_480x640.onnx',
     )
     parser.add_argument(
         '-v',
@@ -301,7 +301,7 @@ def main():
                 debug_image,
                 (face_box[0], face_box[1]),
                 (face_box[2], face_box[3]),
-                (0,255,0),
+                (0, 0, 255),
                 1,
             )
             cv2.putText(
@@ -326,7 +326,7 @@ def main():
                 ),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 0.7,
-                (0, 255, 0),
+                (0, 0, 255),
                 1,
                 cv2.LINE_AA,
             )
