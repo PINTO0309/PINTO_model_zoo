@@ -100,7 +100,7 @@ class YOLOv7ONNX(object):
 
         # PreProcess
         resized_image = self.__preprocess(
-            temp_image,
+            image=temp_image,
         )
 
         # Inference
