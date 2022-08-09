@@ -97,3 +97,11 @@ $ sam4onnx \
 # How to generate post-processing ONNX
 https://github.com/PINTO0309/PINTO_model_zoo/tree/main/307_YOLOv7/post_process_gen_tools#how-to-generate-post-processing-onnx
 https://github.com/PINTO0309/simple-onnx-processing-tools
+
+# References
+1. https://github.com/PINTO0309/crowdhuman_hollywoodhead_yolo_convert
+2. https://github.com/PINTO0309/Face_Mask_Augmentation
+3. [CrowdHuman Dataset](https://www.crowdhuman.org/)
+4. [HollywoodHeads](https://www.di.ens.fr/willow/research/headdetection/)
+5. [300W-LP](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm)
+6. [AFLW2000](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm)
