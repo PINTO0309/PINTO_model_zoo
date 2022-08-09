@@ -201,7 +201,6 @@ class YOLOv7ONNX(object):
         scores: float32[N,1],
         batchno_classid_y1x1y2x2: int64[N,6],
         """
-        scores = scores
         keep_idxs = scores[:, 0] > self.class_score_th
         scores_keep = scores[keep_idxs, :]
         boxes_keep = boxes[keep_idxs, :]
