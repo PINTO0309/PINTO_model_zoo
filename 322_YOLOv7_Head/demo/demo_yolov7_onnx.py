@@ -13,7 +13,7 @@ from typing import Tuple, Optional, List
 class YOLOv7ONNX(object):
     def __init__(
         self,
-        model_path: Optional[str] = 'yolov7_tiny_head_0.752_post_480x640.onnx',
+        model_path: Optional[str] = 'yolov7_tiny_head_0.768_post_480x640.onnx',
         class_score_th: Optional[float] = 0.30,
         providers: Optional[List] = [
             # (
@@ -231,7 +231,7 @@ def main():
         '-m',
         '--model',
         type=str,
-        default='yolov7_tiny_head_0.752_post_480x640.onnx',
+        default='yolov7_tiny_head_0.768_post_480x640.onnx',
     )
     parser.add_argument(
         '-v',
