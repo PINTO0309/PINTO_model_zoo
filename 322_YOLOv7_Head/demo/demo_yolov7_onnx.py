@@ -16,13 +16,13 @@ class YOLOv7ONNX(object):
         model_path: Optional[str] = 'yolov7_tiny_head_0.768_post_480x640.onnx',
         class_score_th: Optional[float] = 0.30,
         providers: Optional[List] = [
-            # (
-            #     'TensorrtExecutionProvider', {
-            #         'trt_engine_cache_enable': True,
-            #         'trt_engine_cache_path': '.',
-            #         'trt_fp16_enable': True,
-            #     }
-            # ),
+            (
+                'TensorrtExecutionProvider', {
+                    'trt_engine_cache_enable': True,
+                    'trt_engine_cache_path': '.',
+                    'trt_fp16_enable': True,
+                }
+            ),
             'CUDAExecutionProvider',
             'CPUExecutionProvider',
         ],
