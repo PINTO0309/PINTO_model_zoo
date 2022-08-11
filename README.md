@@ -183,7 +183,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |305|DMHead|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/305_DMHead)|||||||||||⚫|6D HeadPose,Multi-Model-Fused,224x224,PINTO's custom models|
 |311|HHP-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/311_HHP-Net)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|6D HeadPose,No-LICENSE|
 |319|ACR-Loss|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/319_ACR-Loss)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Face Alignment|
-|323|YOLOv7_Head|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/323_YOLOv7_Head)|||||||||||⚫|PINTO's custom models|
+|322|YOLOv7_Head|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/322_YOLOv7_Head)|||||||||||⚫|PINTO's custom models|
 ### 5. 2D/3D Hand Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -366,6 +366,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |315|Illumination-Adaptive-Transformer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/315_Illumination-Adaptive-Transformer)|||||||||||⚫|Low-light Image Enhancement|
 |316|night_enhancement|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/316_night_enhancement)|||||||||||⚫|Low-light Image Enhancement|
 |320|Dehamer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/320_Dehamer)|||||||||||⚫|Dehazing|
+|323|Stripformer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/323_Stripformer)|||||||||||⚫|DeBlur|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
