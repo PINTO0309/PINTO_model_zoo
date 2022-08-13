@@ -7,6 +7,10 @@ https://github.com/PINTO0309/crowdhuman_hollywoodhead_yolo_convert
 - YOLOv7-tiny_Head - mAP 0.752
   ![test_batch2_pred](https://user-images.githubusercontent.com/33194443/183251276-d96e52fb-4805-4087-bb06-7d3afee4d9e8.jpg)
 
+- YOLOv7-tiny_Head - mAP 0.768
+
+  https://user-images.githubusercontent.com/33194443/184472532-36639769-4940-4aba-a45e-bc673e20e110.mp4
+
 # Benchmark
 - YOLOv7-tiny_Head with Post-Process, ONNX TensorRT, RTX3070
   ```bash
