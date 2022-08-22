@@ -378,3 +378,96 @@ sor4onnx \
 --output_onnx_file_path palm_detection_lite_inf_post_192x192.onnx
 
 
+sam4onnx \
+--input_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--op_name Slice_19 \
+--input_constants onnx::Slice_14 int64 [2]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--op_name Slice_14 \
+--input_constants onnx::Slice_14 int64 [2]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--op_name Slice_39 \
+--input_constants onnx::Slice_14 int64 [-1]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--op_name NonMaxSuppression_31 \
+--input_constants onnx::Slice_14 int64 [2016]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--op_name Gather_33 \
+--input_constants onnx::Slice_14 int64 [2]
+
+
+
+sam4onnx \
+--input_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--op_name Slice_19 \
+--input_constants onnx::Slice_14 int64 [2]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--op_name Slice_14 \
+--input_constants onnx::Slice_14 int64 [2]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--op_name Slice_39 \
+--input_constants onnx::Slice_14 int64 [-1]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--op_name NonMaxSuppression_31 \
+--input_constants onnx::Slice_14 int64 [2016]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--op_name Gather_33 \
+--input_constants onnx::Slice_14 int64 [2]
+
+
+
+sam4onnx \
+--input_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--output_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--op_name Slice_19 \
+--input_constants onnx::Slice_14 int64 [2]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--output_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--op_name Slice_14 \
+--input_constants onnx::Slice_14 int64 [2]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--output_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--op_name Slice_39 \
+--input_constants onnx::Slice_14 int64 [-1]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--output_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--op_name NonMaxSuppression_31 \
+--input_constants onnx::Slice_14 int64 [896]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--output_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--op_name Gather_33 \
+--input_constants onnx::Slice_14 int64 [2]
