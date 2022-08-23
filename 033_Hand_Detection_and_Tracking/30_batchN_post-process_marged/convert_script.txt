@@ -471,3 +471,22 @@ sam4onnx \
 --output_onnx_file_path palm_detection_inf_post_128x128.onnx \
 --op_name Gather_33 \
 --input_constants onnx::Slice_14 int64 [2]
+
+
+snc4onnx \
+--input_onnx_file_paths hand_landmark_080_1x3x224x224.onnx round_left_right_1x3x224x224.onnx \
+--srcop_destop left_hand_0_or_right_hand_1 round_input \
+--output_onnx_file_path hand_landmark_080_1x3x224x224.onnx
+snc4onnx \
+--input_onnx_file_paths hand_landmark_080_Nx3x224x224.onnx round_left_right_Nx3x224x224.onnx \
+--srcop_destop left_hand_0_or_right_hand_1 round_input \
+--output_onnx_file_path hand_landmark_080_Nx3x224x224.onnx
+
+snc4onnx \
+--input_onnx_file_paths hand_landmark_sparse_1x3x224x224.onnx round_left_right_1x3x224x224.onnx \
+--srcop_destop left_hand_0_or_right_hand_1 round_input \
+--output_onnx_file_path hand_landmark_sparse_1x3x224x224.onnx
+snc4onnx \
+--input_onnx_file_paths hand_landmark_sparse_Nx3x224x224.onnx round_left_right_Nx3x224x224.onnx \
+--srcop_destop left_hand_0_or_right_hand_1 round_input \
+--output_onnx_file_path hand_landmark_sparse_Nx3x224x224.onnx
