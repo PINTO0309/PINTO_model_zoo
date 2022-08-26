@@ -21,18 +21,18 @@ class CenterFace(object):
 
     def inference(self, img, threshold):
         h, w = img.shape[:2]
-        self.img_h_new, self.img_w_new, scale_h, scale_w = self.transform(h, w)
+        img_h_new, img_w_new, scale_h, scale_w = self.transform(h, w)
 
         input_image = cv2.dnn.blobFromImage(img, scalefactor=1.0,
-                                            size=(self.img_w_new, self.img_h_new),
+                                            size=(img_w_new, img_h_new),
                                             mean=(0, 0, 0), swapRB=True, crop=False)
 
         outputs = self.sess.run(self.output_names, {self.input_name: input_image})
         heatmap, scale, offset, lms = outputs
-        return self.postprocess(heatmap, lms, offset, scale, scale_h, scale_w, threshold)
+        return self.postprocess(heatmap, lms, offset, scale, scale_h, scale_w, img_h_new, img_w_new, threshold)
 
-    def postprocess(self, heatmap, lms, offset, scale, scale_h, scale_w, threshold):
-        dets, lms = self.decode(heatmap, scale, offset, lms, (self.img_h_new, self.img_w_new), threshold=threshold)
+    def postprocess(self, heatmap, lms, offset, scale, scale_h, scale_w, img_h_new, img_w_new, threshold):
+        dets, lms = self.decode(heatmap, scale, offset, lms, (img_h_new, img_w_new), threshold=threshold)
         if len(dets) > 0:
             dets[:, 0:4:2], dets[:, 1:4:2] = dets[:, 0:4:2] / scale_w, dets[:, 1:4:2] / scale_h
             lms[:, 0:10:2], lms[:, 1:10:2] = lms[:, 0:10:2] / scale_w, lms[:, 1:10:2] / scale_h
@@ -119,10 +119,12 @@ def main():
         default='./centerface_1x3xHxW.onnx',
     )
     parser.add_argument("--video", type=str, default="/dev/video0")
+    parser.add_argument("--threshold", type=float, default=0.3)
 
     args = parser.parse_args()
     model_path = args.model
     video_path = args.video
+    threshold = args.threshold
 
     centerface = CenterFace(model_path)
 
@@ -133,9 +135,8 @@ def main():
         if not ret:
             break
 
-        # Inference execution
         t = time.time()
-        dets, lms = centerface.inference(frame, 0.3)
+        dets, lms = centerface.inference(frame, threshold)
         dt = time.time() - t
         print(f"{1/dt}FPS")
 
