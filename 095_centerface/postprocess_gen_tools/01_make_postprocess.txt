@@ -1,0 +1,442 @@
+OPSET=12
+BATCHES=1
+BOXES=boxes
+
+python make_decode.py
+
+################################################### Boxes + Scores
+python make_boxes_scores.py -o ${OPSET} -b ${BATCHES} -x ${BOXES}
+
+################################################### NonMaxSuppression
+sog4onnx \
+--op_type Constant \
+--opset ${OPSET} \
+--op_name max_output_boxes_per_class_const \
+--output_variables max_output_boxes_per_class int64 [1] \
+--attributes value int64 [1000] \
+--output_onnx_file_path Constant_max_output_boxes_per_class.onnx
+
+sog4onnx \
+--op_type Constant \
+--opset ${OPSET} \
+--op_name iou_threshold_const \
+--output_variables iou_threshold float32 [1] \
+--attributes value float32 [0.3] \
+--output_onnx_file_path Constant_iou_threshold.onnx
+
+sog4onnx \
+--op_type Constant \
+--opset ${OPSET} \
+--op_name score_threshold_const \
+--output_variables score_threshold float32 [1] \
+--attributes value float32 [-inf] \
+--output_onnx_file_path Constant_score_threshold.onnx
+
+
+OP=NonMaxSuppression
+LOWEROP=${OP,,}
+sog4onnx \
+--op_type ${OP} \
+--opset ${OPSET} \
+--op_name ${LOWEROP}${OPSET} \
+--input_variables boxes_var float32 [\"${BATCHES}\",\"${BOXES}\",4] \
+--input_variables scores_var float32 [\"${BATCHES}\",1,\"${BOXES}\"] \
+--input_variables max_output_boxes_per_class_var int64 [1] \
+--input_variables iou_threshold_var float32 [1] \
+--input_variables score_threshold_var float32 [1] \
+--output_variables selected_indices int64 [\"${BOXES}\",3] \
+--attributes center_point_box int64 0 \
+--output_onnx_file_path ${OP}${OPSET}.onnx
+
+
+snc4onnx \
+--input_onnx_file_paths Constant_max_output_boxes_per_class.onnx NonMaxSuppression${OPSET}.onnx \
+--srcop_destop max_output_boxes_per_class max_output_boxes_per_class_var \
+--output_onnx_file_path NonMaxSuppression${OPSET}.onnx
+
+snc4onnx \
+--input_onnx_file_paths Constant_iou_threshold.onnx NonMaxSuppression${OPSET}.onnx \
+--srcop_destop iou_threshold iou_threshold_var \
+--output_onnx_file_path NonMaxSuppression${OPSET}.onnx
+
+snc4onnx \
+--input_onnx_file_paths Constant_score_threshold.onnx NonMaxSuppression${OPSET}.onnx \
+--srcop_destop score_threshold score_threshold_var \
+--output_onnx_file_path NonMaxSuppression${OPSET}.onnx
+
+soc4onnx \
+--input_onnx_file_path NonMaxSuppression${OPSET}.onnx \
+--output_onnx_file_path NonMaxSuppression${OPSET}.onnx \
+--opset ${OPSET}
+
+
+################################################### Boxes + Scores + NonMaxSuppression
+snc4onnx \
+--input_onnx_file_paths boxes_scores_${BOXES}.onnx NonMaxSuppression${OPSET}.onnx \
+--srcop_destop nms_scores scores_var nms_y1x1y2x2 boxes_var \
+--output_onnx_file_path nms_centernet_${BOXES}.onnx
+
+
+################################################### Myriad workaround Mul
+OP=Mul
+LOWEROP=${OP,,}
+OPSET=${OPSET}
+sog4onnx \
+--op_type ${OP} \
+--opset ${OPSET} \
+--op_name ${LOWEROP}${OPSET} \
+--input_variables workaround_mul_a int64 [\"${BOXES}\",3] \
+--input_variables workaround_mul_b int64 [1] \
+--output_variables workaround_mul_out int64 [\"${BOXES}\",3] \
+--output_onnx_file_path ${OP}${OPSET}_workaround.onnx
+
+############ Myriad workaround Constant
+sog4onnx \
+--op_type Constant \
+--opset ${OPSET} \
+--op_name workaround_mul_const_op \
+--output_variables workaround_mul_const int64 [1] \
+--attributes value int64 [1] \
+--output_onnx_file_path Constant_workaround_mul.onnx
+
+############ Myriad workaround Mul + Myriad workaround Constant
+snc4onnx \
+--input_onnx_file_paths Constant_workaround_mul.onnx Mul${OPSET}_workaround.onnx \
+--srcop_destop workaround_mul_const workaround_mul_b \
+--output_onnx_file_path Mul${OPSET}_workaround.onnx
+
+################################################### NonMaxSuppression + Myriad workaround Mul
+snc4onnx \
+--input_onnx_file_paths nms_centernet_${BOXES}.onnx Mul${OPSET}_workaround.onnx \
+--srcop_destop selected_indices workaround_mul_a \
+--output_onnx_file_path nms_centernet_${BOXES}.onnx
+
+################################################### Cleaning
+rm boxes_scores_${BOXES}.onnx
+rm Constant_iou_threshold.onnx
+rm Constant_max_output_boxes_per_class.onnx
+rm Constant_score_threshold.onnx
+rm Constant_workaround_mul.onnx
+rm Mul${OPSET}_workaround.onnx
+rm NonMaxSuppression${OPSET}.onnx
+
+################################################### Score GatherND
+python make_score_gather_nd.py -b ${BATCHES}
+
+python -m tf2onnx.convert \
+--opset ${OPSET} \
+--tflite saved_model_postprocess/nms_score_gather_nd.tflite \
+--output nms_score_gather_nd.onnx
+
+sor4onnx \
+--input_onnx_file_path nms_score_gather_nd.onnx \
+--old_new ":0" "" \
+--output_onnx_file_path nms_score_gather_nd.onnx
+
+sor4onnx \
+--input_onnx_file_path nms_score_gather_nd.onnx \
+--old_new "serving_default_input_1" "gn_scores" \
+--output_onnx_file_path nms_score_gather_nd.onnx \
+--mode inputs
+
+sor4onnx \
+--input_onnx_file_path nms_score_gather_nd.onnx \
+--old_new "serving_default_input_2" "gn_selected_indices" \
+--output_onnx_file_path nms_score_gather_nd.onnx \
+--mode inputs
+
+sor4onnx \
+--input_onnx_file_path nms_score_gather_nd.onnx \
+--old_new "PartitionedCall" "final_scores" \
+--output_onnx_file_path nms_score_gather_nd.onnx \
+--mode outputs
+
+sio4onnx \
+--input_onnx_file_path nms_score_gather_nd.onnx \
+--output_onnx_file_path nms_score_gather_nd.onnx \
+--input_names "gn_scores" \
+--input_names "gn_selected_indices" \
+--input_shapes 1 1 "boxes" \
+--input_shapes "boxes" 3 \
+--output_names "final_scores" \
+--output_shapes "boxes" 1
+
+onnxsim nms_score_gather_nd.onnx nms_score_gather_nd.onnx
+onnxsim nms_score_gather_nd.onnx nms_score_gather_nd.onnx
+
+################################################### NonMaxSuppression + Score GatherND
+snc4onnx \
+--input_onnx_file_paths nms_centernet_${BOXES}.onnx nms_score_gather_nd.onnx \
+--srcop_destop nms_scores gn_scores workaround_mul_out gn_selected_indices \
+--output_onnx_file_path nms_centernet_${BOXES}_nd.onnx
+
+onnxsim nms_centernet_${BOXES}_nd.onnx nms_centernet_${BOXES}_nd.onnx
+onnxsim nms_centernet_${BOXES}_nd.onnx nms_centernet_${BOXES}_nd.onnx
+
+################################################### Final Batch Nums
+python make_final_batch_nums_final_class_nums_final_box_nums.py
+
+
+
+
+################################################### Boxes GatherND
+python make_box_gather_nd.py
+
+python -m tf2onnx.convert \
+--opset ${OPSET} \
+--tflite saved_model_postprocess/nms_box_gather_nd.tflite \
+--output nms_box_gather_nd.onnx
+
+sor4onnx \
+--input_onnx_file_path nms_box_gather_nd.onnx \
+--old_new ":0" "" \
+--output_onnx_file_path nms_box_gather_nd.onnx
+
+sor4onnx \
+--input_onnx_file_path nms_box_gather_nd.onnx \
+--old_new "serving_default_input_1" "gn_boxes" \
+--output_onnx_file_path nms_box_gather_nd.onnx \
+--mode inputs
+
+sor4onnx \
+--input_onnx_file_path nms_box_gather_nd.onnx \
+--old_new "serving_default_input_2" "gn_box_selected_indices" \
+--output_onnx_file_path nms_box_gather_nd.onnx \
+--mode inputs
+
+sor4onnx \
+--input_onnx_file_path nms_box_gather_nd.onnx \
+--old_new "PartitionedCall" "final_boxes" \
+--output_onnx_file_path nms_box_gather_nd.onnx \
+--mode outputs
+
+sio4onnx \
+--input_onnx_file_path nms_box_gather_nd.onnx \
+--output_onnx_file_path nms_box_gather_nd.onnx \
+--input_names "gn_boxes" \
+--input_names "gn_box_selected_indices" \
+--input_shapes 1 "boxes" 4 \
+--input_shapes "boxes" 2 \
+--output_names "final_boxes" \
+--output_shapes "boxes" 4
+
+onnxsim nms_box_gather_nd.onnx nms_box_gather_nd.onnx
+onnxsim nms_box_gather_nd.onnx nms_box_gather_nd.onnx
+
+
+################################################### LMS GatherND
+python make_lms_gather_nd.py
+
+python -m tf2onnx.convert \
+--opset ${OPSET} \
+--tflite saved_model_postprocess/nms_lms_gather_nd.tflite \
+--output nms_lms_gather_nd.onnx
+
+sor4onnx \
+--input_onnx_file_path nms_lms_gather_nd.onnx \
+--old_new ":0" "" \
+--output_onnx_file_path nms_lms_gather_nd.onnx
+
+sor4onnx \
+--input_onnx_file_path nms_lms_gather_nd.onnx \
+--old_new "serving_default_input_1" "gn_lmses" \
+--output_onnx_file_path nms_lms_gather_nd.onnx \
+--mode inputs
+
+sor4onnx \
+--input_onnx_file_path nms_lms_gather_nd.onnx \
+--old_new "serving_default_input_2" "gn_lms_selected_indices" \
+--output_onnx_file_path nms_lms_gather_nd.onnx \
+--mode inputs
+
+sor4onnx \
+--input_onnx_file_path nms_lms_gather_nd.onnx \
+--old_new "PartitionedCall" "final_lmses" \
+--output_onnx_file_path nms_lms_gather_nd.onnx \
+--mode outputs
+
+sio4onnx \
+--input_onnx_file_path nms_lms_gather_nd.onnx \
+--output_onnx_file_path nms_lms_gather_nd.onnx \
+--input_names "gn_lmses" \
+--input_names "gn_lms_selected_indices" \
+--input_shapes 1 "boxes" 10 \
+--input_shapes "boxes" 2 \
+--output_names "final_lmses" \
+--output_shapes "boxes" 10
+
+onnxsim nms_lms_gather_nd.onnx nms_lms_gather_nd.onnx
+onnxsim nms_lms_gather_nd.onnx nms_lms_gather_nd.onnx
+
+
+
+
+################################################### Cleaning
+rm nms_score_gather_nd.onnx
+rm nms_centernet_boxes.onnx
+
+################################################### nms_centernet_xxx_nd + nms_final_batch_nums_final_class_nums_final_box_nums
+snc4onnx \
+--input_onnx_file_paths nms_centernet_${BOXES}_nd.onnx nms_final_batch_nums_final_class_nums_final_box_nums.onnx \
+--srcop_destop workaround_mul_out bc_input \
+--op_prefixes_after_merging main01 sub01 \
+--output_onnx_file_path nms_centernet_${BOXES}_split.onnx
+
+################################################### nms_centernet_${BOXES}_split + nms_box_gather_nd
+snc4onnx \
+--input_onnx_file_paths nms_centernet_${BOXES}_split.onnx nms_box_gather_nd.onnx \
+--srcop_destop main01_nms_y1x1y2x2 gn_boxes sub01_final_box_nums gn_box_selected_indices \
+--output_onnx_file_path nms_centernet_${BOXES}_merged.onnx
+
+onnxsim nms_centernet_${BOXES}_merged.onnx nms_centernet_${BOXES}_merged.onnx
+onnxsim nms_centernet_${BOXES}_merged.onnx nms_centernet_${BOXES}_merged.onnx
+
+
+################################################### nms output op name Cleaning
+sor4onnx \
+--input_onnx_file_path nms_centernet_${BOXES}_merged.onnx \
+--old_new "main01_final_scores" "final_scores" \
+--output_onnx_file_path nms_centernet_${BOXES}_merged.onnx \
+--mode outputs
+
+sor4onnx \
+--input_onnx_file_path nms_centernet_${BOXES}_merged.onnx \
+--old_new "sub01_final_batch_nums" "final_batch_nums" \
+--output_onnx_file_path nms_centernet_${BOXES}_merged.onnx \
+--mode outputs
+
+sor4onnx \
+--input_onnx_file_path nms_centernet_${BOXES}_merged.onnx \
+--old_new "sub01_final_class_nums" "final_class_nums" \
+--output_onnx_file_path nms_centernet_${BOXES}_merged.onnx \
+--mode outputs
+
+################################################### nms output merge
+python make_nms_outputs_merge.py
+
+onnxsim nms_batchno_classid_y1x1y2x2_cat.onnx nms_batchno_classid_y1x1y2x2_cat.onnx
+
+
+################################################### merge
+snc4onnx \
+--input_onnx_file_paths nms_centernet_${BOXES}_merged.onnx nms_batchno_classid_y1x1y2x2_cat.onnx \
+--srcop_destop final_batch_nums cat_batch final_class_nums cat_classid final_boxes cat_y1x1y2x2 \
+--output_onnx_file_path nms_centernet_${BOXES}.onnx
+
+sor4onnx \
+--input_onnx_file_path nms_centernet_${BOXES}.onnx \
+--old_new "final_scores" "score" \
+--output_onnx_file_path nms_centernet_${BOXES}.onnx \
+--mode outputs
+
+sor4onnx \
+--input_onnx_file_path nms_centernet_${BOXES}.onnx \
+--old_new "s_decode_boxes_y1x1y2x2score" "nms_decode_boxes_y1x1y2x2score" \
+--output_onnx_file_path nms_centernet_${BOXES}.onnx \
+--mode inputs
+
+################################################### Cleaning
+rm nms_batchno_classid_y1x1y2x2_cat.onnx
+rm nms_box_gather_nd.onnx
+rm nms_final_batch_nums_final_class_nums_final_box_nums.onnx
+rm nms_centernet_${BOXES}_merged.onnx
+rm nms_centernet_${BOXES}_nd.onnx
+rm nms_centernet_${BOXES}_split.onnx
+
+
+################################################### merge
+snc4onnx \
+--input_onnx_file_paths nms_centernet_${BOXES}.onnx nms_lms_gather_nd.onnx \
+--srcop_destop sub01_final_box_nums gn_lms_selected_indices \
+--op_prefixes_after_merging main02 sub02 \
+--output_onnx_file_path nms_centernet_${BOXES}.onnx
+
+
+
+sor4onnx \
+--input_onnx_file_path nms_centernet_${BOXES}.onnx \
+--old_new "main02_nms_decode_boxes_y1x1y2x2score" "nms_decode_boxes_y1x1y2x2score" \
+--output_onnx_file_path nms_centernet_${BOXES}.onnx \
+--mode inputs
+
+sor4onnx \
+--input_onnx_file_path nms_centernet_${BOXES}.onnx \
+--old_new "sub02_gn_lmses" "gn_lmses" \
+--output_onnx_file_path nms_centernet_${BOXES}.onnx \
+--mode inputs
+
+
+
+sor4onnx \
+--input_onnx_file_path nms_centernet_${BOXES}.onnx \
+--old_new "main02_score" "score" \
+--output_onnx_file_path nms_centernet_${BOXES}.onnx \
+--mode outputs
+
+sor4onnx \
+--input_onnx_file_path nms_centernet_${BOXES}.onnx \
+--old_new "main02_batchno_classid_y1x1y2x2" "batchno_classid_y1x1y2x2" \
+--output_onnx_file_path nms_centernet_${BOXES}.onnx \
+--mode outputs
+
+sor4onnx \
+--input_onnx_file_path nms_centernet_${BOXES}.onnx \
+--old_new "sub02_final_lmses" "lms_yx" \
+--output_onnx_file_path nms_centernet_${BOXES}.onnx \
+--mode outputs
+
+
+################################################### Cleaning
+rm nms_lms_gather_nd.onnx
+
+
+
+
+
+################################################### Decode + NMS
+snc4onnx \
+--input_onnx_file_paths decode_1x3xHxW.onnx nms_centernet_boxes.onnx \
+--srcop_destop decode_boxes_y1x1y2x2score nms_decode_boxes_y1x1y2x2score decode_lms_yx gn_lmses \
+--output_onnx_file_path centernet_postprocess.onnx
+
+onnxsim centernet_postprocess.onnx centernet_postprocess.onnx
+onnxsim centernet_postprocess.onnx centernet_postprocess.onnx
+
+
+
+
+
+sio4onnx \
+--input_onnx_file_path centernet_postprocess.onnx \
+--output_onnx_file_path centernet_postprocess.onnx \
+--input_names "decode_heatmap" \
+--input_names "decode_scale" \
+--input_names "decode_offset" \
+--input_names "decode_landmark" \
+--input_names "score_threshold" \
+--input_shapes 1 1 "H" "W" \
+--input_shapes 1 2 "H" "W" \
+--input_shapes 1 2 "H" "W" \
+--input_shapes 1 10 "H" "W" \
+--input_shapes 1 \
+--output_names "score" \
+--output_names "batchno_classid_y1x1y2x2" \
+--output_names "lms_yx" \
+--output_shapes "boxes" 1 \
+--output_shapes "boxes" 6 \
+--output_shapes "boxes" 10
+
+
+
+################################################### Final Merge CenterFace + Post-postprocess
+snc4onnx \
+--input_onnx_file_paths centerface_1x3xHxW.onnx centernet_postprocess.onnx \
+--srcop_destop heatmap decode_heatmap scale decode_scale offset decode_offset lms decode_landmark \
+--output_onnx_file_path centerface_1x3xHxW_post.onnx
+
+
+################################################### Opset change 9 -> 12
+soc4onnx \
+--input_onnx_file_path centerface_1x3xHxW_post.onnx \
+--output_onnx_file_path centerface_1x3xHxW_post.onnx \
+--opset 12
