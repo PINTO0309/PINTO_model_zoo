@@ -1,0 +1,144 @@
+DATASET=rshaze
+SIZE=b
+python predict_org.py \
+--model dehazeformer-${SIZE} \
+--folder RESIDE-IN/test/hazy \
+--exp ${DATASET}
+
+DATASET=rshaze
+SIZE=m
+python predict_org.py \
+--model dehazeformer-${SIZE} \
+--folder RESIDE-IN/test/hazy \
+--exp ${DATASET}
+
+DATASET=rshaze
+SIZE=s
+python predict_org.py \
+--model dehazeformer-${SIZE} \
+--folder RESIDE-IN/test/hazy \
+--exp ${DATASET}
+
+DATASET=rshaze
+SIZE=t
+python predict_org.py \
+--model dehazeformer-${SIZE} \
+--folder RESIDE-IN/test/hazy \
+--exp ${DATASET}
+
+
+
+DATASET=indoor
+SIZE=d
+python predict_org.py \
+--model dehazeformer-${SIZE} \
+--folder RESIDE-IN/test/hazy \
+--exp ${DATASET}
+
+DATASET=indoor
+SIZE=w
+python predict_org.py \
+--model dehazeformer-${SIZE} \
+--folder RESIDE-IN/test/hazy \
+--exp ${DATASET}
+
+DATASET=indoor
+SIZE=l
+python predict_org.py \
+--model dehazeformer-${SIZE} \
+--folder RESIDE-IN/test/hazy \
+--exp ${DATASET}
+
+
+
+
+
+
+DATASET=rshaze
+SIZE=b
+onnxsim dehazeformer_${SIZE}_${DATASET}_180x320.onnx dehazeformer_${SIZE}_${DATASET}_180x320.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_180x320.onnx dehazeformer_${SIZE}_${DATASET}_180x320.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_180x320.onnx dehazeformer_${SIZE}_${DATASET}_180x320.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_180x320.onnx dehazeformer_${SIZE}_${DATASET}_180x320.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_180x320.onnx dehazeformer_${SIZE}_${DATASET}_180x320.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_180x320.onnx dehazeformer_${SIZE}_${DATASET}_180x320.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_180x320.onnx dehazeformer_${SIZE}_${DATASET}_180x320.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_180x320.onnx dehazeformer_${SIZE}_${DATASET}_180x320.onnx
+
+DATASET=rshaze
+SIZE=b
+onnxsim dehazeformer_${SIZE}_${DATASET}_228x400.onnx dehazeformer_${SIZE}_${DATASET}_228x400.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_228x400.onnx dehazeformer_${SIZE}_${DATASET}_228x400.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_228x400.onnx dehazeformer_${SIZE}_${DATASET}_228x400.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_228x400.onnx dehazeformer_${SIZE}_${DATASET}_228x400.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_228x400.onnx dehazeformer_${SIZE}_${DATASET}_228x400.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_228x400.onnx dehazeformer_${SIZE}_${DATASET}_228x400.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_228x400.onnx dehazeformer_${SIZE}_${DATASET}_228x400.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_228x400.onnx dehazeformer_${SIZE}_${DATASET}_228x400.onnx
+
+DATASET=rshaze
+SIZE=b
+onnxsim dehazeformer_${SIZE}_${DATASET}_240x320.onnx dehazeformer_${SIZE}_${DATASET}_240x320.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_240x320.onnx dehazeformer_${SIZE}_${DATASET}_240x320.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_240x320.onnx dehazeformer_${SIZE}_${DATASET}_240x320.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_240x320.onnx dehazeformer_${SIZE}_${DATASET}_240x320.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_240x320.onnx dehazeformer_${SIZE}_${DATASET}_240x320.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_240x320.onnx dehazeformer_${SIZE}_${DATASET}_240x320.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_240x320.onnx dehazeformer_${SIZE}_${DATASET}_240x320.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_240x320.onnx dehazeformer_${SIZE}_${DATASET}_240x320.onnx
+
+DATASET=rshaze
+SIZE=b
+onnxsim dehazeformer_${SIZE}_${DATASET}_272x480.onnx dehazeformer_${SIZE}_${DATASET}_272x480.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_272x480.onnx dehazeformer_${SIZE}_${DATASET}_272x480.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_272x480.onnx dehazeformer_${SIZE}_${DATASET}_272x480.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_272x480.onnx dehazeformer_${SIZE}_${DATASET}_272x480.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_272x480.onnx dehazeformer_${SIZE}_${DATASET}_272x480.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_272x480.onnx dehazeformer_${SIZE}_${DATASET}_272x480.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_272x480.onnx dehazeformer_${SIZE}_${DATASET}_272x480.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_272x480.onnx dehazeformer_${SIZE}_${DATASET}_272x480.onnx
+
+DATASET=rshaze
+SIZE=b
+onnxsim dehazeformer_${SIZE}_${DATASET}_360x640.onnx dehazeformer_${SIZE}_${DATASET}_360x640.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_360x640.onnx dehazeformer_${SIZE}_${DATASET}_360x640.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_360x640.onnx dehazeformer_${SIZE}_${DATASET}_360x640.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_360x640.onnx dehazeformer_${SIZE}_${DATASET}_360x640.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_360x640.onnx dehazeformer_${SIZE}_${DATASET}_360x640.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_360x640.onnx dehazeformer_${SIZE}_${DATASET}_360x640.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_360x640.onnx dehazeformer_${SIZE}_${DATASET}_360x640.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_360x640.onnx dehazeformer_${SIZE}_${DATASET}_360x640.onnx
+
+DATASET=rshaze
+SIZE=b
+onnxsim dehazeformer_${SIZE}_${DATASET}_452x800.onnx dehazeformer_${SIZE}_${DATASET}_452x800.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_452x800.onnx dehazeformer_${SIZE}_${DATASET}_452x800.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_452x800.onnx dehazeformer_${SIZE}_${DATASET}_452x800.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_452x800.onnx dehazeformer_${SIZE}_${DATASET}_452x800.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_452x800.onnx dehazeformer_${SIZE}_${DATASET}_452x800.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_452x800.onnx dehazeformer_${SIZE}_${DATASET}_452x800.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_452x800.onnx dehazeformer_${SIZE}_${DATASET}_452x800.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_452x800.onnx dehazeformer_${SIZE}_${DATASET}_452x800.onnx
+
+DATASET=rshaze
+SIZE=b
+onnxsim dehazeformer_${SIZE}_${DATASET}_480x640.onnx dehazeformer_${SIZE}_${DATASET}_480x640.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_480x640.onnx dehazeformer_${SIZE}_${DATASET}_480x640.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_480x640.onnx dehazeformer_${SIZE}_${DATASET}_480x640.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_480x640.onnx dehazeformer_${SIZE}_${DATASET}_480x640.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_480x640.onnx dehazeformer_${SIZE}_${DATASET}_480x640.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_480x640.onnx dehazeformer_${SIZE}_${DATASET}_480x640.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_480x640.onnx dehazeformer_${SIZE}_${DATASET}_480x640.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_480x640.onnx dehazeformer_${SIZE}_${DATASET}_480x640.onnx
+
+DATASET=rshaze
+SIZE=b
+onnxsim dehazeformer_${SIZE}_${DATASET}_720x1280.onnx dehazeformer_${SIZE}_${DATASET}_720x1280.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_720x1280.onnx dehazeformer_${SIZE}_${DATASET}_720x1280.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_720x1280.onnx dehazeformer_${SIZE}_${DATASET}_720x1280.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_720x1280.onnx dehazeformer_${SIZE}_${DATASET}_720x1280.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_720x1280.onnx dehazeformer_${SIZE}_${DATASET}_720x1280.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_720x1280.onnx dehazeformer_${SIZE}_${DATASET}_720x1280.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_720x1280.onnx dehazeformer_${SIZE}_${DATASET}_720x1280.onnx
+onnxsim dehazeformer_${SIZE}_${DATASET}_720x1280.onnx dehazeformer_${SIZE}_${DATASET}_720x1280.onnx
+
