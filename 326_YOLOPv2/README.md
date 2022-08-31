@@ -25,3 +25,4 @@ anchor_grid1.shape
 anchor_grid2.shape
 (1, 3, 1, 1, 2)
 ```
+![image](https://user-images.githubusercontent.com/33194443/187729781-aef11356-2d48-4dcb-954b-e1df1b79eec5.png)
