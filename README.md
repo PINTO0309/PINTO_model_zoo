@@ -446,6 +446,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |309|ImageForensicsOSN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/309_ImageForensicsOSN)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||⚫|forgery detection/180x320,240x320,320x480,360x640,480x640,720x1280|
 |318|pips|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/318_pips)|||||||||||⚫||
 |324|Ultra-Fast-Lane-Detection-v2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/324_Ultra-Fast-Lane-Detection-v2)|||||||||||⚫||
+|326|YOLOPv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/326_YOLOPv2)|||||||||||⚫|736x1280|
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)
