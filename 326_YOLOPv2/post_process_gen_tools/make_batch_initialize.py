@@ -161,18 +161,21 @@ def initialize(
 def main():
     parser = ArgumentParser()
     parser.add_argument(
+        '-if',
         '--input_onnx_file_path',
         type=str,
         required=True,
         help='Input onnx file path.'
     )
     parser.add_argument(
+        '-of',
         '--output_onnx_file_path',
         type=str,
         required=True,
         help='Output onnx file path.'
     )
     parser.add_argument(
+        '-ics',
         '--initialization_character_string',
         type=str,
         default='batch',
@@ -181,6 +184,7 @@ def main():
             'Default: \'batch\''
     )
     parser.add_argument(
+        '-nv',
         '--non_verbose',
         action='store_true',
         help='Do not show all information logs. Only error logs are displayed.'

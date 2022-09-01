@@ -13,7 +13,7 @@ python make_split_for_trace_model.py
 
 OPSET=11
 BATCHES=1
-BOXES=57960
+BOXES=3780
 CLASSES=80
 
 ################################################### Boxes + Scores
@@ -319,6 +319,12 @@ rm nms_final_batch_nums_final_class_nums_final_box_nums.onnx
 rm nms_yolopv2_${BOXES}_merged.onnx
 rm nms_yolopv2_${BOXES}_nd.onnx
 rm nms_yolopv2_${BOXES}_split.onnx
+
+
+################################################### N batch
+python make_batch_initialize.py \
+-if nms_yolopv2_${BOXES}.onnx \
+-of nms_yolopv2_Nx${BOXES}.onnx
 
 
 
