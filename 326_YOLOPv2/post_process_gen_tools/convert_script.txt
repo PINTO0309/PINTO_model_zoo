@@ -327,6 +327,69 @@ python make_batch_initialize.py \
 -of nms_yolopv2_Nx${BOXES}.onnx
 
 
+################################################### split N batch
+H=192
+W=320
+sbi4onnx \
+--input_onnx_file_path split_for_trace_model_${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=256
+W=320
+sbi4onnx \
+--input_onnx_file_path split_for_trace_model_${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=256
+W=416
+sbi4onnx \
+--input_onnx_file_path split_for_trace_model_${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=288
+W=480
+sbi4onnx \
+--input_onnx_file_path split_for_trace_model_${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=384
+W=640
+sbi4onnx \
+--input_onnx_file_path split_for_trace_model_${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=384
+W=1280
+sbi4onnx \
+--input_onnx_file_path split_for_trace_model_${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=480
+W=640
+sbi4onnx \
+--input_onnx_file_path split_for_trace_model_${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=480
+W=800
+sbi4onnx \
+--input_onnx_file_path split_for_trace_model_${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=736
+W=1280
+sbi4onnx \
+--input_onnx_file_path split_for_trace_model_${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
 
 
 
