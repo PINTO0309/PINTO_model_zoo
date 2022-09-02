@@ -311,3 +311,74 @@ anchor_grid1.shape
 (1, 3, 1, 1, 2)
 anchor_grid2.shape
 (1, 3, 1, 1, 2)
+
+
+#=== N batch ===============================================================
+H=192
+W=320
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=256
+W=320
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=256
+W=416
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=288
+W=480
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=384
+W=640
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=384
+W=1280
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=480
+W=640
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=480
+W=800
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=736
+W=1280
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+
+sbi4onnx \
+--input_onnx_file_path yolopv2_HxW.onnx \
+--output_onnx_file_path yolopv2_Nx3xHxW.onnx \
+--initialization_character_string batch
