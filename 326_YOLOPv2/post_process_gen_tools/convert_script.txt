@@ -332,13 +332,364 @@ python make_batch_initialize.py \
 
 
 
-
 ################################################### yolopv2 + Post-Process
 H=192
 W=320
+BOXES=3780
 snc4onnx \
---input_onnx_file_paths yolopv2_${H}x${W}.onnx nms_yolopv2_${BOXES}.onnx \
---srcop_destop output predictions \
+--input_onnx_file_paths yolopv2_${H}x${W}.onnx split_for_trace_model_${H}x${W}.onnx \
+--srcop_destop pred0 split_for_trace_model_pred0 pred1 split_for_trace_model_pred1 pred2 split_for_trace_model_pred2 \
+--op_prefixes_after_merging main split \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+snc4onnx \
+--input_onnx_file_paths yolopv2_split_${H}x${W}.onnx nms_yolopv2_${BOXES}.onnx \
+--srcop_destop split_split_for_trace_model_pred predictions \
 --output_onnx_file_path yolopv2_post_${H}x${W}.onnx
-onnxsim yolopv2_post_${H}x${W}.onnx yolopv2_post_${H}x${W}.onnx
-onnxsim yolopv2_post_${H}x${W}.onnx yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "split_split_" "split_" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+
+H=256
+W=320
+BOXES=5040
+snc4onnx \
+--input_onnx_file_paths yolopv2_${H}x${W}.onnx split_for_trace_model_${H}x${W}.onnx \
+--srcop_destop pred0 split_for_trace_model_pred0 pred1 split_for_trace_model_pred1 pred2 split_for_trace_model_pred2 \
+--op_prefixes_after_merging main split \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+snc4onnx \
+--input_onnx_file_paths yolopv2_split_${H}x${W}.onnx nms_yolopv2_${BOXES}.onnx \
+--srcop_destop split_split_for_trace_model_pred predictions \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "split_split_" "split_" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+
+H=256
+W=416
+BOXES=6552
+snc4onnx \
+--input_onnx_file_paths yolopv2_${H}x${W}.onnx split_for_trace_model_${H}x${W}.onnx \
+--srcop_destop pred0 split_for_trace_model_pred0 pred1 split_for_trace_model_pred1 pred2 split_for_trace_model_pred2 \
+--op_prefixes_after_merging main split \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+snc4onnx \
+--input_onnx_file_paths yolopv2_split_${H}x${W}.onnx nms_yolopv2_${BOXES}.onnx \
+--srcop_destop split_split_for_trace_model_pred predictions \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "split_split_" "split_" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+
+H=288
+W=480
+BOXES=8505
+snc4onnx \
+--input_onnx_file_paths yolopv2_${H}x${W}.onnx split_for_trace_model_${H}x${W}.onnx \
+--srcop_destop pred0 split_for_trace_model_pred0 pred1 split_for_trace_model_pred1 pred2 split_for_trace_model_pred2 \
+--op_prefixes_after_merging main split \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+snc4onnx \
+--input_onnx_file_paths yolopv2_split_${H}x${W}.onnx nms_yolopv2_${BOXES}.onnx \
+--srcop_destop split_split_for_trace_model_pred predictions \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "split_split_" "split_" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+
+H=384
+W=640
+BOXES=15120
+snc4onnx \
+--input_onnx_file_paths yolopv2_${H}x${W}.onnx split_for_trace_model_${H}x${W}.onnx \
+--srcop_destop pred0 split_for_trace_model_pred0 pred1 split_for_trace_model_pred1 pred2 split_for_trace_model_pred2 \
+--op_prefixes_after_merging main split \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+snc4onnx \
+--input_onnx_file_paths yolopv2_split_${H}x${W}.onnx nms_yolopv2_${BOXES}.onnx \
+--srcop_destop split_split_for_trace_model_pred predictions \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "split_split_" "split_" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+
+H=384
+W=1280
+BOXES=30240
+snc4onnx \
+--input_onnx_file_paths yolopv2_${H}x${W}.onnx split_for_trace_model_${H}x${W}.onnx \
+--srcop_destop pred0 split_for_trace_model_pred0 pred1 split_for_trace_model_pred1 pred2 split_for_trace_model_pred2 \
+--op_prefixes_after_merging main split \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+snc4onnx \
+--input_onnx_file_paths yolopv2_split_${H}x${W}.onnx nms_yolopv2_${BOXES}.onnx \
+--srcop_destop split_split_for_trace_model_pred predictions \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "split_split_" "split_" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+
+H=480
+W=640
+BOXES=18900
+snc4onnx \
+--input_onnx_file_paths yolopv2_${H}x${W}.onnx split_for_trace_model_${H}x${W}.onnx \
+--srcop_destop pred0 split_for_trace_model_pred0 pred1 split_for_trace_model_pred1 pred2 split_for_trace_model_pred2 \
+--op_prefixes_after_merging main split \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+snc4onnx \
+--input_onnx_file_paths yolopv2_split_${H}x${W}.onnx nms_yolopv2_${BOXES}.onnx \
+--srcop_destop split_split_for_trace_model_pred predictions \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "split_split_" "split_" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+
+H=480
+W=800
+BOXES=23625
+snc4onnx \
+--input_onnx_file_paths yolopv2_${H}x${W}.onnx split_for_trace_model_${H}x${W}.onnx \
+--srcop_destop pred0 split_for_trace_model_pred0 pred1 split_for_trace_model_pred1 pred2 split_for_trace_model_pred2 \
+--op_prefixes_after_merging main split \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+snc4onnx \
+--input_onnx_file_paths yolopv2_split_${H}x${W}.onnx nms_yolopv2_${BOXES}.onnx \
+--srcop_destop split_split_for_trace_model_pred predictions \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "split_split_" "split_" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+
+H=736
+W=1280
+BOXES=57960
+snc4onnx \
+--input_onnx_file_paths yolopv2_${H}x${W}.onnx split_for_trace_model_${H}x${W}.onnx \
+--srcop_destop pred0 split_for_trace_model_pred0 pred1 split_for_trace_model_pred1 pred2 split_for_trace_model_pred2 \
+--op_prefixes_after_merging main split \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+snc4onnx \
+--input_onnx_file_paths yolopv2_split_${H}x${W}.onnx nms_yolopv2_${BOXES}.onnx \
+--srcop_destop split_split_for_trace_model_pred predictions \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_post_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_post_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "put" "input" \
+--mode inputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "main_" "" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_split_${H}x${W}.onnx \
+--old_new "split_split_" "split_" \
+--mode outputs \
+--output_onnx_file_path yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+onnxsim yolopv2_split_${H}x${W}.onnx yolopv2_split_${H}x${W}.onnx
+
