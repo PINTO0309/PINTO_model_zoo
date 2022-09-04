@@ -411,6 +411,169 @@ sbi4onnx \
 
 
 
+H=192
+W=320
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_78 \
+--input_constants onnx::Reshape_381 int64 [-1,2880,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_150 \
+--input_constants onnx::Reshape_381 int64 [-1,720,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_222 \
+--input_constants onnx::Reshape_381 int64 [-1,180,85]
+
+H=256
+W=320
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_78 \
+--input_constants onnx::Reshape_381 int64 [-1,3840,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_150 \
+--input_constants onnx::Reshape_381 int64 [-1,960,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_222 \
+--input_constants onnx::Reshape_381 int64 [-1,240,85]
+
+H=256
+W=416
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_78 \
+--input_constants onnx::Reshape_381 int64 [-1,4992,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_150 \
+--input_constants onnx::Reshape_381 int64 [-1,1248,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_222 \
+--input_constants onnx::Reshape_381 int64 [-1,312,85]
+
+H=288
+W=480
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_78 \
+--input_constants onnx::Reshape_381 int64 [-1,6480,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_150 \
+--input_constants onnx::Reshape_381 int64 [-1,1620,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_222 \
+--input_constants onnx::Reshape_381 int64 [-1,405,85]
+
+H=384
+W=640
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_78 \
+--input_constants onnx::Reshape_381 int64 [-1,11520,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_150 \
+--input_constants onnx::Reshape_381 int64 [-1,2880,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_222 \
+--input_constants onnx::Reshape_381 int64 [-1,720,85]
+
+H=384
+W=1280
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_78 \
+--input_constants onnx::Reshape_381 int64 [-1,23040,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_150 \
+--input_constants onnx::Reshape_381 int64 [-1,5760,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_222 \
+--input_constants onnx::Reshape_381 int64 [-1,1440,85]
+
+H=480
+W=640
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_78 \
+--input_constants onnx::Reshape_381 int64 [-1,14400,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_150 \
+--input_constants onnx::Reshape_381 int64 [-1,3600,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_222 \
+--input_constants onnx::Reshape_381 int64 [-1,900,85]
+
+H=480
+W=800
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_78 \
+--input_constants onnx::Reshape_381 int64 [-1,18000,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_150 \
+--input_constants onnx::Reshape_381 int64 [-1,4500,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_222 \
+--input_constants onnx::Reshape_381 int64 [-1,1125,85]
+
+H=736
+W=1280
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_78 \
+--input_constants onnx::Reshape_381 int64 [-1,44160,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_150 \
+--input_constants onnx::Reshape_381 int64 [-1,11040,85]
+sam4onnx \
+--input_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--output_onnx_file_path split_for_trace_model_Nx3x${H}x${W}.onnx \
+--op_name Reshape_222 \
+--input_constants onnx::Reshape_381 int64 [-1,2760,85]
+
+
 
 
 ################################################### yolopv2 + Post-Process
