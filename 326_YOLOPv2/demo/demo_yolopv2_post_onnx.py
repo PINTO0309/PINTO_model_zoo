@@ -28,7 +28,7 @@ def run_inference(onnx_session, input_size, image, score_th=0.5):
     drivable_area = np.squeeze(results[3])
     lane_line = np.squeeze(results[4])
     scores = results[5]
-    batchno_classid_x1y1x2y2 = results[6]
+    batchno_classid_y1x1y2x2 = results[6]
 
     # Drivable Area Segmentation
     drivable_area = drivable_area.transpose(1, 2, 0)
@@ -48,23 +48,23 @@ def run_inference(onnx_session, input_size, image, score_th=0.5):
 
     # Traffic Object Detection
     od_bboxes, od_scores, od_class_ids = [], [], []
-    for score, batchno_classid_x1y1x2y2_ in zip(
+    for score, batchno_classid_y1x1y2x2_ in zip(
             scores,
-            batchno_classid_x1y1x2y2,
+            batchno_classid_y1x1y2x2,
     ):
-        class_id = int(batchno_classid_x1y1x2y2_[1])
+        class_id = int(batchno_classid_y1x1y2x2_[1])
 
         if score_th > score:
             continue
 
-        x1 = batchno_classid_x1y1x2y2_[-4]
-        y1 = batchno_classid_x1y1x2y2_[-3]
-        x2 = batchno_classid_x1y1x2y2_[-2]
-        y2 = batchno_classid_x1y1x2y2_[-1]
-        x1 = int(x1 * (image_height / input_size[0]))
-        y1 = int(y1 * (image_width / input_size[1]))
-        x2 = int(x2 * (image_height / input_size[0]))
-        y2 = int(y2 * (image_width / input_size[1]))
+        y1 = batchno_classid_y1x1y2x2_[-4]
+        x1 = batchno_classid_y1x1y2x2_[-3]
+        y2 = batchno_classid_y1x1y2x2_[-2]
+        x2 = batchno_classid_y1x1y2x2_[-1]
+        y1 = int(y1 * (image_height / input_size[0]))
+        x1 = int(x1 * (image_width / input_size[1]))
+        y2 = int(y2 * (image_height / input_size[0]))
+        x2 = int(x2 * (image_width / input_size[1]))
 
         od_bboxes.append([x1, y1, x2, y2])
         od_class_ids.append(class_id)
@@ -184,8 +184,8 @@ def draw_debug(
 
     # Draw:Traffic Object Detection
     for bbox, score, class_id in zip(bboxes, scores, class_ids):
-        y1, x1 = int(bbox[0]), int(bbox[1])
-        y2, x2 = int(bbox[2]), int(bbox[3])
+        x1, y1 = int(bbox[0]), int(bbox[1])
+        x2, y2 = int(bbox[2]), int(bbox[3])
 
         cv.rectangle(debug_image, (x1, y1), (x2, y2), (255, 255, 0), 2)
         cv.putText(debug_image, '%d:%.2f' % (class_id, score), (x1, y1 - 5), 0,
