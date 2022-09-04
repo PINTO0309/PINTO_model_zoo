@@ -27,15 +27,16 @@ class Model(nn.Module):
             ### MyriadX not supported - Scatter_ND_Update
             # y[..., 0:2] = (y[..., 0:2] * 2. - 0.5 + gr) * st[i]  # xy
             # y[..., 2:4] = (y[..., 2:4] * 2) ** 2 * anchor_grid[i]  # wh
+            # z.append(y.view(bs, -1, 85))
             ### MyriadX Compatible - Cat
             y0 = (y[..., 0:1] * 2. - 0.5 + gr[..., 0:1]) * st[i]  # xy
             y1 = (y[..., 1:2] * 2. - 0.5 + gr[..., 1:2]) * st[i]  # xy
             y2 = (y[..., 2:3] * 2) ** 2 * anchor_grid[i][..., 0:1]  # wh
             y3 = (y[..., 3:4] * 2) ** 2 * anchor_grid[i][..., 1:2]  # wh
             y4 = y[..., 4:]
+            y5 = torch.cat([y0,y1,y2,y3,y4], dim=4)
+            z.append(y5.view(bs, -1, 85))
 
-            y = torch.cat([y0,y1,y2,y3,y4], dim=4)
-            z.append(y.view(bs, -1, 85))
         pred = torch.cat(z, 1)
         return pred
 
@@ -58,9 +59,9 @@ if __name__ == "__main__":
     model.to(DEVICE)
     for H, W in RESOLUTION:
         pred = [
-            torch.randn([1,255,H//8,W//8], dtype=torch.float32).to(DEVICE),
-            torch.randn([1,255,H//16,W//16], dtype=torch.float32).to(DEVICE),
-            torch.randn([1,255,H//32,W//32], dtype=torch.float32).to(DEVICE),
+            torch.ones([1,255,H//8,W//8], dtype=torch.float32).to(DEVICE),
+            torch.ones([1,255,H//16,W//16], dtype=torch.float32).to(DEVICE),
+            torch.ones([1,255,H//32,W//32], dtype=torch.float32).to(DEVICE),
         ]
         onnx_file = f'{MODEL}_{H}x{W}.onnx'
         torch.onnx.export(
