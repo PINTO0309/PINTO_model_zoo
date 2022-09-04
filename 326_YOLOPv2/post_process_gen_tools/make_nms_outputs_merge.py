@@ -11,9 +11,9 @@ class Model(nn.Module):
     def __init__(self):
         super(Model, self).__init__()
 
-    def forward(self, batch, classid, x1y1x2y2):
-        batchno_classid_x1y1x2y2_cat = torch.cat([batch, classid, x1y1x2y2], dim=1)
-        return batchno_classid_x1y1x2y2_cat
+    def forward(self, batch, classid, y1x1y2x2):
+        batchno_classid_y1x1y2x2_cat = torch.cat([batch, classid, y1x1y2x2], dim=1)
+        return batchno_classid_y1x1y2x2_cat
 
 
 if __name__ == "__main__":
@@ -29,7 +29,7 @@ if __name__ == "__main__":
 
     model = Model()
 
-    MODEL = f'nms_batchno_classid_x1y1x2y2_cat'
+    MODEL = f'nms_batchno_classid_y1x1y2x2_cat'
 
     onnx_file = f"{MODEL}.onnx"
     OPSET=args.opset
@@ -43,13 +43,13 @@ if __name__ == "__main__":
         args=(x1,x2,x3),
         f=onnx_file,
         opset_version=OPSET,
-        input_names=['cat_batch','cat_classid','cat_x1y1x2y2'],
-        output_names=['batchno_classid_x1y1x2y2'],
+        input_names=['cat_batch','cat_classid','cat_y1x1y2x2'],
+        output_names=['batchno_classid_y1x1y2x2'],
         dynamic_axes={
             'cat_batch': {0: 'N'},
             'cat_classid': {0: 'N'},
-            'cat_x1y1x2y2': {0: 'N'},
-            'batchno_classid_x1y1x2y2': {0: 'N'},
+            'cat_y1x1y2x2': {0: 'N'},
+            'batchno_classid_y1x1y2x2': {0: 'N'},
         }
     )
     model_onnx1 = onnx.load(onnx_file)
