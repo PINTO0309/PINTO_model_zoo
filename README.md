@@ -254,6 +254,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |296|MGNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/296_MGNet)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||⚫|240x320,360x480,360x640,360x1280,480x640,720x1280|
 |312|NeWCRFs|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/312_NeWCRFs)|||||||||||⚫|384x384,384x576,384x768,384x960,576x768,768x1344|
 |313|PyDNet2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/314_PyDNet2)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|Mono-Depth|
+|327|EMDC|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/327_EMDC)|||||||||||⚫|RGB+SarseDepth|
 ### 8. Semantic Segmentation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
