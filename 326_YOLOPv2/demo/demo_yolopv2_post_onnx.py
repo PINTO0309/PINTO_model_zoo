@@ -25,10 +25,10 @@ def run_inference(onnx_session, input_size, image, score_th=0.5):
     results = onnx_session.run(None, {input_name: input_image})
 
     # Post process
-    drivable_area = np.squeeze(results[3])
-    lane_line = np.squeeze(results[4])
-    scores = results[5]
-    batchno_classid_y1x1y2x2 = results[6]
+    drivable_area = np.squeeze(results[0])
+    lane_line = np.squeeze(results[1])
+    scores = results[2]
+    batchno_classid_y1x1y2x2 = results[3]
 
     # Drivable Area Segmentation
     drivable_area = drivable_area.transpose(1, 2, 0)
