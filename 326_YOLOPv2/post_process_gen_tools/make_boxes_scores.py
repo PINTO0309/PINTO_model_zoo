@@ -30,9 +30,13 @@ class Model(nn.Module):
         boxes = x[..., :4] # xywh [n, boxes, 4]
         box_scores = x[..., 4:5] # [n, boxes, 1]
         class_scores = x[..., 5:] # [n, boxes, 80]
-        scores = box_scores * class_scores
-        scores = scores.permute(0,2,1)
-        return boxes, scores
+        # scores = box_scores * class_scores
+        # scores = scores.permute(0,2,1)
+        nms_scores = box_scores * class_scores
+        nms_scores = nms_scores.permute(0,2,1)
+        class_scores = class_scores.permute(0,2,1)
+
+        return boxes, nms_scores, class_scores
 
 
 if __name__ == "__main__":
@@ -84,7 +88,7 @@ if __name__ == "__main__":
         f=onnx_file,
         opset_version=OPSET,
         input_names = ['predictions'],
-        output_names=['boxes_cxcywh','scores'],
+        output_names=['boxes_cxcywh','scores', 'class_scores'],
     )
     model_onnx1 = onnx.load(onnx_file)
     model_onnx1 = onnx.shape_inference.infer_shapes(model_onnx1)
