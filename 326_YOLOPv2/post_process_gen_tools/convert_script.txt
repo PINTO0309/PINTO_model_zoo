@@ -650,3 +650,39 @@ do
     --output_dir ${MODEL}_Nx3x${H}x${W}/openvino/FP16 \
     --model_name ${MODEL}_Nx3x${H}x${W}
 done
+
+
+################################################### TensorFlow
+
+MODEL=yolopv2_post
+RESOLUTION_LIST=(
+    "192 320"
+    "256 320"
+    "256 416"
+    "288 480"
+    "384 640"
+    "384 1280"
+    "480 640"
+    "480 800"
+    "736 1280"
+)
+for((i=0; i<${#RESOLUTION_LIST[@]}; i++))
+do
+    HWs=(`echo ${RESOLUTION_LIST[i]}`)
+    H=${HWs[0]}
+    W=${HWs[1]}
+    echo @@@@@@@@@@@@@@@@@ processing ${H}x${W} ...
+
+    openvino2tensorflow \
+    --model_path ${MODEL}_${H}x${W}/openvino/FP32/${MODEL}_${H}x${W}.xml \
+    --output_saved_model \
+    --output_pb \
+    --non_verbose \
+    --output_no_quant_float32_tflite \
+    --output_dynamic_range_quant_tflite \
+    --output_weight_quant_tflite \
+    --output_float16_quant_tflite \
+    --weight_replacement_config replace.json
+
+    mv saved_model/* ${MODEL}_Nx3x${H}x${W}
+done
