@@ -684,5 +684,5 @@ do
     --output_float16_quant_tflite \
     --weight_replacement_config replace.json
 
-    mv saved_model/* ${MODEL}_Nx3x${H}x${W}
+    mv saved_model/* ${MODEL}_${H}x${W}
 done
