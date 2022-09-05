@@ -3,7 +3,6 @@ docker run --gpus all -it --rm \
 ghcr.io/pinto0309/openvino2tensorflow:latest
 
 
-
 ################################################### split_for_trace_model
 python make_split_for_trace_model.py
 
@@ -201,7 +200,7 @@ for BOXES in "${BOXESLIST[@]}" ; do
     ################################################### NonMaxSuppression + Score GatherND
     snc4onnx \
     --input_onnx_file_paths nms_yolopv2_${BOXES}.onnx nms_score_gather_nd.onnx \
-    --srcop_destop scores gn_scores workaround_mul_out gn_selected_indices \
+    --srcop_destop class_scores gn_scores workaround_mul_out gn_selected_indices \
     --output_onnx_file_path nms_yolopv2_${BOXES}_nd.onnx
 
     onnxsim nms_yolopv2_${BOXES}_nd.onnx nms_yolopv2_${BOXES}_nd.onnx
@@ -631,10 +630,10 @@ do
     --output_dir ${MODEL}_${H}x${W}/openvino/FP16 \
     --model_name ${MODEL}_${H}x${W}
 
-    blobconverter \
-    --onnx-model ${MODEL}_${H}x${W}.onnx \
-    --shaves 6 \
-    -o ${MODEL}_${H}x${W}/openvino/myriad
+    #blobconverter \
+    #--onnx-model ${MODEL}_${H}x${W}.onnx \
+    #--shaves 6 \
+    #-o ${MODEL}_${H}x${W}/openvino/myriad
 
     mo \
     --framework onnx \
@@ -686,3 +685,6 @@ do
 
     mv saved_model/* ${MODEL}_${H}x${W}
 done
+
+
+rm -rf saved_model_postprocess
