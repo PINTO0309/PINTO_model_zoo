@@ -683,8 +683,8 @@ do
     --output_float16_quant_tflite \
     --weight_replacement_config replace.json
 
-    mv saved_model/* ${MODEL}_${H}x${W}
+    cp -fR saved_model/* ${MODEL}_${H}x${W}
 done
 
-
 rm -rf saved_model_postprocess
+rm -rf saved_model
