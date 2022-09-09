@@ -145,7 +145,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |264|object_localization_network|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/264_object_localization_network)|||||||||||⚫|180x320,240x320,270x480,360x480,360x480,360x640,480x640,720x1280|
 |307|YOLOv7|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/307_YOLOv7)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||⚫|YOLOv7,YOLOv7-tiny|
 |308|FastestDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/308_FastestDet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|180x320,256x320,320x480,352x352,352x640,480x640,736x1280|
-|329|PAI-YOLOX|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/329_PAI-YOLOX)|||||||||||⚫||
+|329|YOLOX-PAI|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/329_YOLOX-PAI)|||||||||||⚫||
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
