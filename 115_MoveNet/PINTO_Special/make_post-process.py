@@ -8,8 +8,9 @@ from onnxsim import simplify
 from argparse import ArgumentParser
 
 class Model(nn.Module):
-    def __init__(self):
+    def __init__(self, optimize_myriad):
         super(Model, self).__init__()
+        self.optimize_myriad = optimize_myriad
 
     def forward(
         self,
@@ -35,8 +36,18 @@ class Model(nn.Module):
         keypoints_y = keypoints_y_x_scores[..., 0::3] * image_height
         keypoints_x = keypoints_y_x_scores[..., 1::3] * image_width
 
-        keypoints_y_x_scores[..., 0::3] = keypoints_x[..., 0::1]
-        keypoints_y_x_scores[..., 1::3] = keypoints_y[..., 0::1]
+        keypoint_xys_tensor = None
+        if not self.optimize_myriad:
+            keypoints_y_x_scores[..., 0::3] = keypoints_x[..., 0::1]
+            keypoints_y_x_scores[..., 1::3] = keypoints_y[..., 0::1]
+        else:
+            keypoint_xys = []
+            keypoints_x_split = torch.split(keypoints_x, split_size_or_sections=1, dim=2)
+            keypoints_y_split = torch.split(keypoints_y, split_size_or_sections=1, dim=2)
+            keypoints_score_split = torch.split(keypoints_y_x_scores[..., 2::3], split_size_or_sections=1, dim=2)
+            for x, y, score in zip(keypoints_x_split, keypoints_y_split, keypoints_score_split):
+                keypoint_xys.append(torch.cat([x,y,score], dim=2))
+            keypoint_xys_tensor = torch.cat(keypoint_xys, dim=2)
 
         """
         keypoints_y = [1, 6, [y0, y0, ..., y16]]
@@ -51,7 +62,7 @@ class Model(nn.Module):
 
         keypoints_bboxes = torch.cat(
             [
-                keypoints_y_x_scores,
+                keypoints_y_x_scores if not self.optimize_myriad else keypoint_xys_tensor,
                 bboxes_x1,
                 bboxes_y1,
                 bboxes_x2,
@@ -100,9 +111,13 @@ if __name__ == "__main__":
         default=640,
         help='Width of the cameras input image (before rescaling)'
     )
+    parser.add_argument(
+        '-m',
+        '--optimize_myriad',
+        action='store_true',
+        help='Enabled for optimization to OAK (Myriad)'
+    )
     args = parser.parse_args()
-
-    model = Model()
 
     MODEL = f'post_process'
     OPSET=args.opset
@@ -110,6 +125,9 @@ if __name__ == "__main__":
     NUMPERSON = args.num_person
     ORIGINAL_IMAGE_HEIGHT = args.original_image_height
     ORIGINAL_IMAGE_WIDTH = args.original_image_width
+    OPTIMIZE_MYRIAD = args.optimize_myriad
+
+    model = Model(OPTIMIZE_MYRIAD)
 
     """
     56 = [
@@ -127,7 +145,7 @@ if __name__ == "__main__":
     image_height = torch.tensor(ORIGINAL_IMAGE_HEIGHT, dtype=torch.int64)
     image_width = torch.tensor(ORIGINAL_IMAGE_WIDTH, dtype=torch.int64)
 
-    onnx_file = f"{MODEL}_p{NUMPERSON}.onnx"
+    onnx_file = f"{MODEL}_p{NUMPERSON}.onnx" if not OPTIMIZE_MYRIAD else f"{MODEL}_p{NUMPERSON}_myriad.onnx"
     torch.onnx.export(
         model,
         args=(
@@ -155,7 +173,7 @@ if __name__ == "__main__":
     onnx.save(model_simp, onnx_file)
 
 
-    onnx_file = f"{MODEL}_p{NUMPERSON}_N.onnx"
+    onnx_file = f"{MODEL}_p{NUMPERSON}_N.onnx" if not OPTIMIZE_MYRIAD else f"{MODEL}_p{NUMPERSON}_N_myriad.onnx"
     torch.onnx.export(
         model,
         args=(
