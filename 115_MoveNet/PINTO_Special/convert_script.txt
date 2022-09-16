@@ -1473,3 +1473,146 @@ do
     --srcop_destop output pp_input \
     --output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
 done
+
+
+
+### Myriad #################################################################################
+
+NUMPERSONSLIST=(
+    "6"
+    "10"
+    "20"
+)
+for((i=0; i<${#NUMPERSONSLIST[@]}; i++))
+do
+    NUMPERSONS=(`echo ${NUMPERSONSLIST[i]}`)
+
+    sor4onnx \
+    --input_onnx_file_path workaround_cast1_p${NUMPERSONS}.onnx \
+    --old_new "Cast_0" "workaround_cast1" \
+    --output_onnx_file_path workaround_cast1_p${NUMPERSONS}.onnx
+
+    sor4onnx \
+    --input_onnx_file_path workaround_cast1_p${NUMPERSONS}_N.onnx \
+    --old_new "Cast_0" "workaround_cast1" \
+    --output_onnx_file_path workaround_cast1_p${NUMPERSONS}_N.onnx
+
+    sor4onnx \
+    --input_onnx_file_path workaround_cast2_p${NUMPERSONS}.onnx \
+    --old_new "Cast_0" "workaround_cast2" \
+    --output_onnx_file_path workaround_cast2_p${NUMPERSONS}.onnx
+
+    sor4onnx \
+    --input_onnx_file_path workaround_cast2_p${NUMPERSONS}_N.onnx \
+    --old_new "Cast_0" "workaround_cast2" \
+    --output_onnx_file_path workaround_cast2_p${NUMPERSONS}_N.onnx
+done
+
+RESOLUTION_LIST=(
+    "6 192 256"
+    "6 192 320"
+    "6 256 320"
+    "6 256 416"
+    "6 288 480"
+    "6 384 640"
+    "6 384 1280"
+    "6 480 640"
+    "6 480 800"
+    "6 736 1280"
+    "10 192 256"
+    "10 192 320"
+    "10 256 320"
+    "10 256 416"
+    "10 288 480"
+    "10 384 640"
+    "10 384 1280"
+    "10 480 640"
+    "10 480 800"
+    "10 736 1280"
+    "20 192 256"
+    "20 192 320"
+    "20 256 320"
+    "20 256 416"
+    "20 288 480"
+    "20 384 640"
+    "20 384 1280"
+    "20 480 640"
+    "20 480 800"
+    "20 736 1280"
+)
+for((i=0; i<${#RESOLUTION_LIST[@]}; i++))
+do
+    PHWs=(`echo ${RESOLUTION_LIST[i]}`)
+    P=${PHWs[0]}
+    H=${PHWs[1]}
+    W=${PHWs[2]}
+    echo @@@@@@@@@@@@@@@@@ processing p${P}_${H}x${W} ...
+
+    snc4onnx \
+    -if movenet_multipose_lightning_${H}x${W}_p${P}_nopost.onnx workaround_cast1_p${P}.onnx \
+    -sd StatefulPartitionedCall/strided_slice_21 cast1_input \
+    -of movenet_multipose_lightning_${H}x${W}_nopost_tmp1.onnx
+
+    onnx2json \
+    --input_onnx_file_path movenet_multipose_lightning_${H}x${W}_nopost_tmp1.onnx \
+    --output_json_path movenet_multipose_lightning_${H}x${W}_nopost_tmp1.json \
+    --json_indent 2
+
+    sed -i -z -e 's/"input": \[\n          "StatefulPartitionedCall\/strided_slice_21",/"input": \[\n          "cast1_output",/g' movenet_multipose_lightning_${H}x${W}_nopost_tmp1.json
+
+    json2onnx \
+    --input_json_path movenet_multipose_lightning_${H}x${W}_nopost_tmp1.json \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}_nopost_tmp2.onnx
+
+    sod4onnx \
+    -if movenet_multipose_lightning_${H}x${W}_nopost_tmp2.onnx \
+    -on cast1_output \
+    -of movenet_multipose_lightning_${H}x${W}_nopost_tmp3.onnx
+
+    snc4onnx \
+    -if movenet_multipose_lightning_${H}x${W}_nopost_tmp3.onnx workaround_cast2_p${P}.onnx \
+    -sd StatefulPartitionedCall/Tile_4 cast2_input \
+    -of movenet_multipose_lightning_${H}x${W}_nopost_tmp4.onnx
+
+    onnx2json \
+    --input_onnx_file_path movenet_multipose_lightning_${H}x${W}_nopost_tmp4.onnx \
+    --output_json_path movenet_multipose_lightning_${H}x${W}_nopost_tmp4.json \
+    --json_indent 2
+
+    sed -i -z -e 's/"input": \[\n          "StatefulPartitionedCall\/Tile_4",/"input": \[\n          "cast2_output",/g' movenet_multipose_lightning_${H}x${W}_nopost_tmp4.json
+
+    json2onnx \
+    --input_json_path movenet_multipose_lightning_${H}x${W}_nopost_tmp4.json \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}_nopost_tmp5.onnx
+
+    sod4onnx \
+    -if movenet_multipose_lightning_${H}x${W}_nopost_tmp5.onnx \
+    -on cast2_output \
+    -of movenet_multipose_lightning_${H}x${W}_nopost_tmp6.onnx
+
+    onnx2json \
+    --input_onnx_file_path movenet_multipose_lightning_${H}x${W}_nopost_tmp6.onnx \
+    --output_json_path movenet_multipose_lightning_${H}x${W}_nopost_tmp7.json \
+    --json_indent 2
+
+    sed -i -z -e 's/"name": "StatefulPartitionedCall\/Tile_4",\n        "type": {\n          "tensorType": {\n            "elemType": 6,/"name": "StatefulPartitionedCall\/Tile_4",\n        "type": {\n          "tensorType": {\n            "elemType": 1,/g' movenet_multipose_lightning_${H}x${W}_nopost_tmp7.json
+
+    json2onnx \
+    --input_json_path movenet_multipose_lightning_${H}x${W}_nopost_tmp7.json \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${P}_nopost_myriad.onnx
+
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp1.json
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp4.json
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp7.json
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp1.onnx
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp2.onnx
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp3.onnx
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp4.onnx
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp5.onnx
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp6.onnx
+
+    snc4onnx \
+    --input_onnx_file_paths movenet_multipose_lightning_${H}x${W}_p${P}_nopost_myriad.onnx post_process_p${P}_myriad.onnx \
+    --srcop_destop output pp_input \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${P}_myriad.onnx
+done
