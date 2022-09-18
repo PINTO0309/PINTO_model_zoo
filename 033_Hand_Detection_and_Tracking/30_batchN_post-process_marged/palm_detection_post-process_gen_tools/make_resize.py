@@ -28,11 +28,11 @@ if __name__ == "__main__":
         args=(x),
         f=onnx_file,
         opset_version=11,
-        input_names=['input'],
-        output_names=['output'],
+        input_names=['resize1_input'],
+        output_names=['resize1_output'],
         dynamic_axes={
-            'input' : {0: 'batch'},
-            'output' : {0: 'batch'},
+            'resize1_input' : {0: 'batch'},
+            'resize1_output' : {0: 'batch'},
         }
     )
     model_onnx1 = onnx.load(onnx_file)
@@ -48,11 +48,11 @@ if __name__ == "__main__":
         args=(x),
         f=onnx_file,
         opset_version=11,
-        input_names=['input'],
-        output_names=['output'],
+        input_names=['resize2_input'],
+        output_names=['resize2_output'],
         dynamic_axes={
-            'input' : {0: 'batch'},
-            'output' : {0: 'batch'},
+            'resize2_input' : {0: 'batch'},
+            'resize2_output' : {0: 'batch'},
         }
     )
     model_onnx1 = onnx.load(onnx_file)
@@ -68,11 +68,11 @@ if __name__ == "__main__":
         args=(x),
         f=onnx_file,
         opset_version=11,
-        input_names=['input'],
-        output_names=['output'],
+        input_names=['resize3_input'],
+        output_names=['resize3_output'],
         dynamic_axes={
-            'input' : {0: 'batch'},
-            'output' : {0: 'batch'},
+            'resize3_input' : {0: 'batch'},
+            'resize3_output' : {0: 'batch'},
         }
     )
     model_onnx1 = onnx.load(onnx_file)
@@ -88,11 +88,11 @@ if __name__ == "__main__":
         args=(x),
         f=onnx_file,
         opset_version=11,
-        input_names=['input'],
-        output_names=['output'],
+        input_names=['resize4_input'],
+        output_names=['resize4_output'],
         dynamic_axes={
-            'input' : {0: 'batch'},
-            'output' : {0: 'batch'},
+            'resize4_input' : {0: 'batch'},
+            'resize4_output' : {0: 'batch'},
         }
     )
     model_onnx1 = onnx.load(onnx_file)
