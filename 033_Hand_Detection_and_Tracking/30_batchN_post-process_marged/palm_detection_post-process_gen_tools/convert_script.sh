@@ -405,3 +405,25 @@ do
     --old_new "final_batch_nums" "batch_nums" \
     --output_onnx_file_path PDPostProcessing_reg_class_Nx3x${H}x${W}_split_box_score_cat.onnx
 done
+
+sam4onnx \
+--input_onnx_file_path PDPostProcessing_reg_class_Nx3x128x128_split_box_score_cat.onnx \
+--output_onnx_file_path PDPostProcessing_reg_class_Nx3x128x128_split_box_score_cat.onnx \
+--op_name nonmaxsuppression11 \
+--input_constants max_output_boxes_per_class int64 [1]
+sam4onnx \
+--input_onnx_file_path PDPostProcessing_reg_class_Nx3x128x128_split_box_score_cat.onnx \
+--output_onnx_file_path PDPostProcessing_reg_class_Nx3x128x128_split_box_score_cat.onnx \
+--op_name nonmaxsuppression11 \
+--input_constants score_threshold float32 [\'-Infinity\']
+
+sam4onnx \
+--input_onnx_file_path PDPostProcessing_reg_class_Nx3x192x192_split_box_score_cat.onnx \
+--output_onnx_file_path PDPostProcessing_reg_class_Nx3x192x192_split_box_score_cat.onnx \
+--op_name nonmaxsuppression11 \
+--input_constants max_output_boxes_per_class int64 [1]
+sam4onnx \
+--input_onnx_file_path PDPostProcessing_reg_class_Nx3x192x192_split_box_score_cat.onnx \
+--output_onnx_file_path PDPostProcessing_reg_class_Nx3x192x192_split_box_score_cat.onnx \
+--op_name nonmaxsuppression11 \
+--input_constants score_threshold float32 [\'-Infinity\']
