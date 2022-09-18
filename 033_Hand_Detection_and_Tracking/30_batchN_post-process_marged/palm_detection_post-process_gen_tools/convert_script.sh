@@ -427,3 +427,48 @@ sam4onnx \
 --output_onnx_file_path PDPostProcessing_reg_class_Nx3x192x192_split_box_score_cat.onnx \
 --op_name nonmaxsuppression11 \
 --input_constants score_threshold float32 [\'-Infinity\']
+
+
+sor4onnx \
+--input_onnx_file_path PDPostProcessing_reg_class_1x3x128x128_split_box_score_cat.onnx \
+--old_new "classificators" "pp_classificators" \
+--mode inputs \
+--output_onnx_file_path PDPostProcessing_reg_class_1x3x128x128_split_box_score_cat.onnx
+sor4onnx \
+--input_onnx_file_path PDPostProcessing_reg_class_1x3x128x128_split_box_score_cat.onnx \
+--old_new "regressors" "pp_regressors" \
+--mode inputs \
+--output_onnx_file_path PDPostProcessing_reg_class_1x3x128x128_split_box_score_cat.onnx
+
+sor4onnx \
+--input_onnx_file_path PDPostProcessing_reg_class_1x3x192x192_split_box_score_cat.onnx \
+--old_new "classificators" "pp_classificators" \
+--mode inputs \
+--output_onnx_file_path PDPostProcessing_reg_class_1x3x192x192_split_box_score_cat.onnx
+sor4onnx \
+--input_onnx_file_path PDPostProcessing_reg_class_1x3x192x192_split_box_score_cat.onnx \
+--old_new "regressors" "pp_regressors" \
+--mode inputs \
+--output_onnx_file_path PDPostProcessing_reg_class_1x3x192x192_split_box_score_cat.onnx
+
+sor4onnx \
+--input_onnx_file_path PDPostProcessing_reg_class_Nx3x128x128_split_box_score_cat.onnx \
+--old_new "classificators" "pp_classificators" \
+--mode inputs \
+--output_onnx_file_path PDPostProcessing_reg_class_Nx3x128x128_split_box_score_cat.onnx
+sor4onnx \
+--input_onnx_file_path PDPostProcessing_reg_class_Nx3x128x128_split_box_score_cat.onnx \
+--old_new "regressors" "pp_regressors" \
+--mode inputs \
+--output_onnx_file_path PDPostProcessing_reg_class_Nx3x128x128_split_box_score_cat.onnx
+
+sor4onnx \
+--input_onnx_file_path PDPostProcessing_reg_class_Nx3x192x192_split_box_score_cat.onnx \
+--old_new "classificators" "pp_classificators" \
+--mode inputs \
+--output_onnx_file_path PDPostProcessing_reg_class_Nx3x192x192_split_box_score_cat.onnx
+sor4onnx \
+--input_onnx_file_path PDPostProcessing_reg_class_Nx3x192x192_split_box_score_cat.onnx \
+--old_new "regressors" "pp_regressors" \
+--mode inputs \
+--output_onnx_file_path PDPostProcessing_reg_class_Nx3x192x192_split_box_score_cat.onnx
