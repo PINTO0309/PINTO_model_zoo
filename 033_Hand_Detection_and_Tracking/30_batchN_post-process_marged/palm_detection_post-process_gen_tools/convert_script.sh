@@ -29,6 +29,14 @@ do
     --attributes value float32 [0.3] \
     --output_onnx_file_path Constant_iou_threshold.onnx
 
+    sog4onnx \
+    --op_type Constant \
+    --opset ${OPSET} \
+    --op_name score_threshold_const \
+    --output_variables score_threshold float32 [1] \
+    --attributes value float32 [0.6] \
+    --output_onnx_file_path Constant_score_threshold.onnx
+
     OP=NonMaxSuppression
     LOWEROP=${OP,,}
     sog4onnx \
@@ -39,6 +47,7 @@ do
     --input_variables scores_var float32 [${BATCHES},${CLASSES},${BOXES}] \
     --input_variables max_output_boxes_per_class_var int64 [1] \
     --input_variables iou_threshold_var float32 [1] \
+    --input_variables score_threshold_var float32 [1] \
     --output_variables selected_indices int64 [\'N\',3] \
     --attributes center_point_box int64 0 \
     --output_onnx_file_path ${OP}${OPSET}_${BOXES}.onnx
@@ -51,6 +60,11 @@ do
     snc4onnx \
     --input_onnx_file_paths Constant_iou_threshold.onnx ${OP}${OPSET}_${BOXES}.onnx \
     --srcop_destop iou_threshold iou_threshold_var \
+    --output_onnx_file_path ${OP}${OPSET}_${BOXES}.onnx
+
+    snc4onnx \
+    --input_onnx_file_paths Constant_score_threshold.onnx ${OP}${OPSET}_${BOXES}.onnx \
+    --srcop_destop score_threshold score_threshold_var \
     --output_onnx_file_path ${OP}${OPSET}_${BOXES}.onnx
 
     soc4onnx \
@@ -116,6 +130,7 @@ do
     ################################################### Cleaning
     rm Constant_iou_threshold.onnx
     rm Constant_max_output_boxes_per_class.onnx
+    rm Constant_score_threshold.onnx
     rm Constant_workaround_mul.onnx
     rm Mul11_workaround.onnx
 done
@@ -259,10 +274,10 @@ do
     --output_onnx_file_path nms_box_gather_nd_${BOXES}.onnx \
     --input_names gn_boxes \
     --input_names gn_box_selected_indices \
-    --input_shapes ${BATCHES} ${BOXES} 4 \
+    --input_shapes ${BATCHES} ${BOXES} 7 \
     --input_shapes N 2 \
     --output_names final_boxes \
-    --output_shapes N 4
+    --output_shapes N 7
 
     onnxsim nms_box_gather_nd_${BOXES}.onnx nms_box_gather_nd_${BOXES}.onnx
     onnxsim nms_box_gather_nd_${BOXES}.onnx nms_box_gather_nd_${BOXES}.onnx
@@ -272,10 +287,10 @@ do
     -of nms_box_gather_nd_N_${BOXES}.onnx \
     -i gn_boxes \
     -i gn_box_selected_indices \
-    -is "batch" ${BOXES} 4 \
+    -is "batch" ${BOXES} 7 \
     -is "N" 2 \
     -o final_boxes \
-    -os "N" 4
+    -os "N" 7
 done
 rm -rf saved_model_postprocess
 
@@ -315,32 +330,24 @@ do
     ################################################### NonMaxSuppression_split + Boxes GatherND
     snc4onnx \
     --input_onnx_file_paths PDPostProcessing_reg_class_1x3x${H}x${W}_split.onnx nms_box_gather_nd_${BOXES}.onnx \
-    --srcop_destop bb_x1y1x2y2  gn_boxes final_box_nums gn_box_selected_indices \
+    --srcop_destop cxcyw_wristcenterxy_middlefingerxy gn_boxes final_box_nums gn_box_selected_indices \
     --output_onnx_file_path PDPostProcessing_reg_class_1x3x${H}x${W}_split_box.onnx
     onnxsim PDPostProcessing_reg_class_1x3x${H}x${W}_split_box.onnx PDPostProcessing_reg_class_1x3x${H}x${W}_split_box.onnx
     onnxsim PDPostProcessing_reg_class_1x3x${H}x${W}_split_box.onnx PDPostProcessing_reg_class_1x3x${H}x${W}_split_box.onnx
     sor4onnx \
     --input_onnx_file_path PDPostProcessing_reg_class_1x3x${H}x${W}_split_box.onnx \
-    --old_new "model/tf.compat.v1.gather_nd/GatherNd" "nms_box_gathernd" \
-    --output_onnx_file_path PDPostProcessing_reg_class_1x3x${H}x${W}_split_box.onnx
-    sor4onnx \
-    --input_onnx_file_path PDPostProcessing_reg_class_1x3x${H}x${W}_split_box.onnx \
-    --old_new "PartitionedCall" "nms_box_gathernd_cast" \
+    --old_new "PartitionedCall" "nms_box_gathernd" \
     --output_onnx_file_path PDPostProcessing_reg_class_1x3x${H}x${W}_split_box.onnx
 
     snc4onnx \
     --input_onnx_file_paths PDPostProcessing_reg_class_Nx3x${H}x${W}_split.onnx nms_box_gather_nd_N_${BOXES}.onnx \
-    --srcop_destop bb_x1y1x2y2  gn_boxes final_box_nums gn_box_selected_indices \
+    --srcop_destop cxcyw_wristcenterxy_middlefingerxy gn_boxes final_box_nums gn_box_selected_indices \
     --output_onnx_file_path PDPostProcessing_reg_class_Nx3x${H}x${W}_split_box.onnx
     onnxsim PDPostProcessing_reg_class_Nx3x${H}x${W}_split_box.onnx PDPostProcessing_reg_class_Nx3x${H}x${W}_split_box.onnx
     onnxsim PDPostProcessing_reg_class_Nx3x${H}x${W}_split_box.onnx PDPostProcessing_reg_class_Nx3x${H}x${W}_split_box.onnx
     sor4onnx \
     --input_onnx_file_path PDPostProcessing_reg_class_Nx3x${H}x${W}_split_box.onnx \
-    --old_new "model/tf.compat.v1.gather_nd/GatherNd" "nms_box_gathernd" \
-    --output_onnx_file_path PDPostProcessing_reg_class_Nx3x${H}x${W}_split_box.onnx
-    sor4onnx \
-    --input_onnx_file_path PDPostProcessing_reg_class_Nx3x${H}x${W}_split_box.onnx \
-    --old_new "PartitionedCall" "nms_box_gathernd_cast" \
+    --old_new "PartitionedCall" "nms_box_gathernd" \
     --output_onnx_file_path PDPostProcessing_reg_class_Nx3x${H}x${W}_split_box.onnx
 
     ################################################### NonMaxSuppression + Score GatherND
@@ -377,26 +384,24 @@ do
 
     ################################################### NMS outputs merge
     python make_nms_outputs_merge.py
-    onnxsim nms_batchno_classid_x1y1x2y2_cat.onnx nms_batchno_classid_x1y1x2y2_cat.onnx
+    onnxsim nms_scores_boxes_cat.onnx nms_scores_boxes_cat.onnx
 
     ################################################### merge
     snc4onnx \
-    --input_onnx_file_paths PDPostProcessing_reg_class_1x3x${H}x${W}_split_box_score.onnx nms_batchno_classid_x1y1x2y2_cat.onnx \
-    --srcop_destop final_batch_nums cat_batch final_class_nums cat_classid final_boxes cat_x1y1x2y2 \
+    --input_onnx_file_paths PDPostProcessing_reg_class_1x3x${H}x${W}_split_box_score.onnx nms_scores_boxes_cat.onnx \
+    --srcop_destop final_scores cat_score final_boxes cat_boxes \
     --output_onnx_file_path PDPostProcessing_reg_class_1x3x${H}x${W}_split_box_score_cat.onnx
-    sor4onnx \
+    sod4onnx \
     --input_onnx_file_path PDPostProcessing_reg_class_1x3x${H}x${W}_split_box_score_cat.onnx \
-    --old_new "final_scores" "score" \
-    --output_onnx_file_path PDPostProcessing_reg_class_1x3x${H}x${W}_split_box_score_cat.onnx \
-    --mode outputs
+    --output_op_names "final_batch_nums" \
+    --output_onnx_file_path PDPostProcessing_reg_class_1x3x${H}x${W}_split_box_score_cat.onnx
 
     snc4onnx \
-    --input_onnx_file_paths PDPostProcessing_reg_class_Nx3x${H}x${W}_split_box_score.onnx nms_batchno_classid_x1y1x2y2_cat.onnx \
-    --srcop_destop final_batch_nums cat_batch final_class_nums cat_classid final_boxes cat_x1y1x2y2 \
+    --input_onnx_file_paths PDPostProcessing_reg_class_Nx3x${H}x${W}_split_box_score.onnx nms_scores_boxes_cat.onnx \
+    --srcop_destop final_scores cat_score final_boxes cat_boxes \
     --output_onnx_file_path PDPostProcessing_reg_class_Nx3x${H}x${W}_split_box_score_cat.onnx
     sor4onnx \
     --input_onnx_file_path PDPostProcessing_reg_class_Nx3x${H}x${W}_split_box_score_cat.onnx \
-    --old_new "final_scores" "score" \
-    --output_onnx_file_path PDPostProcessing_reg_class_Nx3x${H}x${W}_split_box_score_cat.onnx \
-    --mode outputs
+    --old_new "final_batch_nums" "batch_nums" \
+    --output_onnx_file_path PDPostProcessing_reg_class_Nx3x${H}x${W}_split_box_score_cat.onnx
 done

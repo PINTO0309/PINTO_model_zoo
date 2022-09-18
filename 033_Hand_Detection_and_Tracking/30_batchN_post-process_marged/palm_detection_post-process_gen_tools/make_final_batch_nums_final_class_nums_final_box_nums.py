@@ -13,9 +13,8 @@ class Model(nn.Module):
 
     def forward(self, x):
         batch_nums = x[:, 0][:, np.newaxis] # batch number
-        class_nums = x[:, 1][:, np.newaxis] # class ids
         box_nums = x[:, [0,2]] # batch number + box number
-        return batch_nums, class_nums, box_nums
+        return batch_nums, box_nums
 
 
 if __name__ == "__main__":
@@ -42,12 +41,16 @@ if __name__ == "__main__":
         args=(x),
         f=onnx_file,
         opset_version=OPSET,
-        input_names=['bc_input'],
-        output_names=['final_batch_nums','final_class_nums','final_box_nums'],
+        input_names=[
+            'bc_input',
+        ],
+        output_names=[
+            'final_batch_nums',
+            'final_box_nums',
+        ],
         dynamic_axes={
             'bc_input': {0: 'N'},
             'final_batch_nums': {0: 'N'},
-            'final_class_nums': {0: 'N'},
             'final_box_nums': {0: 'N'},
         }
     )

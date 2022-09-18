@@ -11,9 +11,9 @@ class Model(nn.Module):
     def __init__(self):
         super(Model, self).__init__()
 
-    def forward(self, batch, classid, x1y1x2y2):
-        batchno_classid_x1y1x2y2_cat = torch.cat([batch, classid, x1y1x2y2], dim=1)
-        return batchno_classid_x1y1x2y2_cat
+    def forward(self, cat_score, cat_boxes):
+        score_cx_cy_w_wristcenterxy_middlefingerxy_cat = torch.cat([cat_score, cat_boxes], dim=1)
+        return score_cx_cy_w_wristcenterxy_middlefingerxy_cat
 
 
 if __name__ == "__main__":
@@ -29,27 +29,30 @@ if __name__ == "__main__":
 
     model = Model()
 
-    MODEL = f'nms_batchno_classid_x1y1x2y2_cat'
+    MODEL = f'nms_scores_boxes_cat'
 
     onnx_file = f"{MODEL}.onnx"
     OPSET=args.opset
 
-    x1 = torch.ones([1, 1], dtype=torch.int64)
-    x2 = torch.ones([1, 1], dtype=torch.int64)
-    x3 = torch.ones([1, 4], dtype=torch.int64)
+    x1 = torch.ones([1, 1], dtype=torch.float32)
+    x2 = torch.ones([1, 7], dtype=torch.float32)
 
     torch.onnx.export(
         model,
-        args=(x1,x2,x3),
+        args=(x1,x2),
         f=onnx_file,
         opset_version=OPSET,
-        input_names=['cat_batch','cat_classid','cat_x1y1x2y2'],
-        output_names=['batchno_classid_x1y1x2y2'],
+        input_names=[
+            'cat_score',
+            'cat_boxes',
+        ],
+        output_names=[
+            'score_cx_cy_w_wristcenterxy_middlefingerxy',
+        ],
         dynamic_axes={
-            'cat_batch': {0: 'N'},
-            'cat_classid': {0: 'N'},
-            'cat_x1y1x2y2': {0: 'N'},
-            'batchno_classid_x1y1x2y2': {0: 'N'},
+            'cat_score': {0: 'N'},
+            'cat_boxes': {0: 'N'},
+            'score_cx_cy_w_wristcenterxy_middlefingerxy': {0: 'N'},
         }
     )
     model_onnx1 = onnx.load(onnx_file)

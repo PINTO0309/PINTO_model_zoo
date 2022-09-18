@@ -30,7 +30,7 @@ if __name__ == "__main__":
     boxes = tf.keras.layers.Input(
         shape=[
             BOXES,
-            4,
+            7,
         ],
         batch_size=BATCHES,
         dtype=tf.float32,
@@ -48,9 +48,8 @@ if __name__ == "__main__":
         selected_indices,
         batch_dims=0,
     )
-    gathered_boxes_casted = tf.cast(gathered_boxes, dtype=tf.int64)
 
-    model = tf.keras.models.Model(inputs=[boxes, selected_indices], outputs=[gathered_boxes_casted])
+    model = tf.keras.models.Model(inputs=[boxes, selected_indices], outputs=[gathered_boxes])
     model.summary()
     output_path = 'saved_model_postprocess'
     tf.saved_model.save(model, output_path)
