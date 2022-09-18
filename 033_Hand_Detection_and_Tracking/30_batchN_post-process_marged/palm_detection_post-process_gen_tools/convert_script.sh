@@ -472,3 +472,32 @@ sor4onnx \
 --old_new "regressors" "pp_regressors" \
 --mode inputs \
 --output_onnx_file_path PDPostProcessing_reg_class_Nx3x192x192_split_box_score_cat.onnx
+
+
+
+snc4onnx \
+-if palm_detection_1x3x128x128.onnx PDPostProcessing_reg_class_1x3x128x128_split_box_score_cat.onnx \
+-sd classificators pp_classificators regressors pp_regressors \
+-of palm_detection_1x3x128x128_post.onnx
+snc4onnx \
+-if palm_detection_Nx3x128x128.onnx PDPostProcessing_reg_class_Nx3x128x128_split_box_score_cat.onnx \
+-sd classificators pp_classificators regressors pp_regressors \
+-of palm_detection_Nx3x128x128_post.onnx
+
+snc4onnx \
+-if palm_detection_full_1x3x192x192.onnx PDPostProcessing_reg_class_1x3x192x192_split_box_score_cat.onnx \
+-sd classificators pp_classificators regressors pp_regressors \
+-of palm_detection_full_1x3x192x192_post.onnx
+snc4onnx \
+-if palm_detection_full_Nx3x192x192.onnx PDPostProcessing_reg_class_Nx3x192x192_split_box_score_cat.onnx \
+-sd classificators pp_classificators regressors pp_regressors \
+-of palm_detection_full_Nx3x192x192_post.onnx
+
+snc4onnx \
+-if palm_detection_lite_1x3x192x192.onnx PDPostProcessing_reg_class_1x3x192x192_split_box_score_cat.onnx \
+-sd classificators pp_classificators regressors pp_regressors \
+-of palm_detection_lite_1x3x192x192_post.onnx
+snc4onnx \
+-if palm_detection_lite_Nx3x192x192.onnx PDPostProcessing_reg_class_Nx3x192x192_split_box_score_cat.onnx \
+-sd classificators pp_classificators regressors pp_regressors \
+-of palm_detection_lite_Nx3x192x192_post.onnx
