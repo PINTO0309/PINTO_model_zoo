@@ -25,3 +25,4 @@
 ## References
 1. [GatherND implementation and ONNX export for Unity Barracuda](https://zenn.dev/pinto0309/scraps/d6598463fd75e2)
 2. [Split implementation and ONNX export for Unity Barracuda](https://zenn.dev/pinto0309/scraps/69fa6d74bb3de3)
+3. [simple-onnx-processing-tools](https://github.com/PINTO0309/simple-onnx-processing-tools)
