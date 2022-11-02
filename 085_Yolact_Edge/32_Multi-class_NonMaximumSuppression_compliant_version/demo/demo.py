@@ -83,8 +83,6 @@ def main():
     parser.add_argument("--image", type=str, default=None)
     parser.add_argument("--threshold", type=float, default=0.1)
 
-    # todo イメージも足す
-
     args = parser.parse_args()
     model_path = '../yolact_edge_mobilenetv2_550x550.onnx'
     input_size = INPUT_SIZE
@@ -100,7 +98,7 @@ def main():
     # Load model
     onnx_session = onnxruntime.InferenceSession(
         model_path,
-        providers=['CPUExecutionProvider'],
+        providers=['CUDAExecutionProvider', 'CPUExecutionProvider'],
     )
 
     # Prepare color table
