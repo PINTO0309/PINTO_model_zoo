@@ -43,4 +43,8 @@ If you want to change the model, specify it with an argument.
     )
 ```
 
+## 6 persons version
+https://github.com/Kazuhito00/MoveNet-Python-Example
 
+## 10 persons version (MoveNet model optimized)
+https://github.com/PINTO0309/MoveNet-Python-Example

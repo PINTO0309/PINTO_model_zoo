@@ -1,0 +1,512 @@
+MODEL=palm_detection
+tflite2tensorflow \
+--model_path ${MODEL}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path ${MODEL}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_onnx \
+--onnx_opset 11
+onnxsim saved_model/model_float32.onnx saved_model/model_float32.onnx
+onnxsim saved_model/model_float32.onnx saved_model/model_float32.onnx
+onnxsim saved_model/model_float32.onnx saved_model/model_float32.onnx
+
+
+MODEL=palm_detection_full
+tflite2tensorflow \
+--model_path ${MODEL}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path ${MODEL}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_onnx \
+--onnx_opset 11
+onnxsim saved_model/model_float32.onnx saved_model/model_float32.onnx
+onnxsim saved_model/model_float32.onnx saved_model/model_float32.onnx
+onnxsim saved_model/model_float32.onnx saved_model/model_float32.onnx
+
+MODEL=palm_detection_lite
+tflite2tensorflow \
+--model_path ${MODEL}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path ${MODEL}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_onnx \
+--onnx_opset 11
+onnxsim saved_model/model_float32.onnx saved_model/model_float32.onnx
+onnxsim saved_model/model_float32.onnx saved_model/model_float32.onnx
+onnxsim saved_model/model_float32.onnx saved_model/model_float32.onnx
+
+
+
+MODEL=hand_landmark_080
+tflite2tensorflow \
+--model_path ${MODEL}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path ${MODEL}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_onnx \
+--onnx_opset 11
+onnxsim saved_model/model_float32.onnx saved_model/model_float32.onnx
+onnxsim saved_model/model_float32.onnx saved_model/model_float32.onnx
+onnxsim saved_model/model_float32.onnx saved_model/model_float32.onnx
+
+MODEL=hand_landmark_sparse
+tflite2tensorflow \
+--model_path ${MODEL}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_pb \
+--optimizing_for_openvino_and_myriad
+tflite2tensorflow \
+--model_path ${MODEL}.tflite \
+--flatc_path ../flatc \
+--schema_path ../schema.fbs \
+--output_onnx \
+--onnx_opset 11
+
+
+onnxsim saved_model/model_float32.onnx saved_model/model_float32.onnx
+onnxsim saved_model/model_float32.onnx saved_model/model_float32.onnx
+onnxsim saved_model/model_float32.onnx saved_model/model_float32.onnx
+
+
+
+
+MODEL=hand_landmark_full_1x3x224x224
+sor4onnx \
+--input_onnx_file_path ${MODEL}.onnx \
+--old_new "input_1" "input" \
+--mode inputs \
+--output_onnx_file_path ${MODEL}.onnx
+
+MODEL=hand_landmark_lite_1x3x224x224
+sor4onnx \
+--input_onnx_file_path ${MODEL}.onnx \
+--old_new "input_1" "input" \
+--mode inputs \
+--output_onnx_file_path ${MODEL}.onnx
+
+MODEL=palm_detection_full_1x3x192x192
+sor4onnx \
+--input_onnx_file_path ${MODEL}.onnx \
+--old_new "input_1" "input" \
+--mode inputs \
+--output_onnx_file_path ${MODEL}.onnx
+MODEL=palm_detection_full_1x3x192x192
+sor4onnx \
+--input_onnx_file_path ${MODEL}.onnx \
+--old_new "Identity_1" "classificators" \
+--mode outputs \
+--output_onnx_file_path ${MODEL}.onnx
+sor4onnx \
+--input_onnx_file_path ${MODEL}.onnx \
+--old_new "Identity" "regressors" \
+--mode outputs \
+--output_onnx_file_path ${MODEL}.onnx
+
+
+
+MODEL=palm_detection_lite_1x3x192x192
+sor4onnx \
+--input_onnx_file_path ${MODEL}.onnx \
+--old_new "input_1" "input" \
+--mode inputs \
+--output_onnx_file_path ${MODEL}.onnx
+
+MODEL=palm_detection_lite_1x3x192x192
+sor4onnx \
+--input_onnx_file_path ${MODEL}.onnx \
+--old_new "Identity_1" "classificators" \
+--mode outputs \
+--output_onnx_file_path ${MODEL}.onnx
+sor4onnx \
+--input_onnx_file_path ${MODEL}.onnx \
+--old_new "Identity" "regressors" \
+--mode outputs \
+--output_onnx_file_path ${MODEL}.onnx
+
+
+
+
+sio4onnx \
+--input_onnx_file_path PDPostProcessing_top2_128x128.onnx \
+--output_onnx_file_path PDPostProcessing_top2_128x128.onnx \
+--input_names "classificators" \
+--input_names "regressors" \
+--input_shapes 1 896 1 \
+--input_shapes 1 896 18 \
+--output_names "result" \
+--output_shapes "N" 8
+
+sio4onnx \
+--input_onnx_file_path PDPostProcessing_top2_192x192.onnx \
+--output_onnx_file_path PDPostProcessing_top2_192x192.onnx \
+--input_names "classificators" \
+--input_names "regressors" \
+--input_shapes 1 2016 1 \
+--input_shapes 1 2016 18 \
+--output_names "result" \
+--output_shapes "N" 8
+
+sor4onnx \
+--input_onnx_file_path PDPostProcessing_top2_128x128.onnx \
+--old_new "classificators" "pd_classificators" \
+--mode inputs \
+--output_onnx_file_path PDPostProcessing_top2_128x128.onnx
+sor4onnx \
+--input_onnx_file_path PDPostProcessing_top2_128x128.onnx \
+--old_new "regressors" "pd_regressors" \
+--mode inputs \
+--output_onnx_file_path PDPostProcessing_top2_128x128.onnx
+
+sor4onnx \
+--input_onnx_file_path PDPostProcessing_top2_192x192.onnx \
+--old_new "classificators" "pd_classificators" \
+--mode inputs \
+--output_onnx_file_path PDPostProcessing_top2_192x192.onnx
+sor4onnx \
+--input_onnx_file_path PDPostProcessing_top2_192x192.onnx \
+--old_new "regressors" "pd_regressors" \
+--mode inputs \
+--output_onnx_file_path PDPostProcessing_top2_192x192.onnx
+
+
+
+snc4onnx \
+--input_onnx_file_paths palm_detection_128x128.onnx PDPostProcessing_top2_128x128.onnx \
+--srcop_destop classificators pd_classificators regressors pd_regressors \
+--output_onnx_file_path palm_detection_top2_post_128x128.onnx
+
+snc4onnx \
+--input_onnx_file_paths palm_detection_full_192x192.onnx PDPostProcessing_top2_192x192.onnx \
+--srcop_destop classificators pd_classificators regressors pd_regressors \
+--output_onnx_file_path palm_detection_full_top2_post_192x192.onnx
+
+snc4onnx \
+--input_onnx_file_paths palm_detection_lite_192x192.onnx PDPostProcessing_top2_192x192.onnx \
+--srcop_destop classificators pd_classificators regressors pd_regressors \
+--output_onnx_file_path palm_detection_lite_top2_post_192x192.onnx
+
+
+sor4onnx \
+--input_onnx_file_path palm_detection_top2_post_128x128.onnx \
+--old_new "result" "pdscore_boxx_boxy_boxsize_kp0x_kp0y_kp2x_kp2y" \
+--mode outputs \
+--output_onnx_file_path palm_detection_top2_post_128x128.onnx
+sor4onnx \
+--input_onnx_file_path palm_detection_full_top2_post_192x192.onnx \
+--old_new "result" "pdscore_boxx_boxy_boxsize_kp0x_kp0y_kp2x_kp2y" \
+--mode outputs \
+--output_onnx_file_path palm_detection_full_top2_post_192x192.onnx
+sor4onnx \
+--input_onnx_file_path palm_detection_lite_top2_post_192x192.onnx \
+--old_new "result" "pdscore_boxx_boxy_boxsize_kp0x_kp0y_kp2x_kp2y" \
+--mode outputs \
+--output_onnx_file_path palm_detection_lite_top2_post_192x192.onnx
+
+
+
+
+sbi4onnx \
+--input_onnx_file_path hand_landmark_full_1x3x224x224.onnx \
+--output_onnx_file_path hand_landmark_full_Nx3x224x224.onnx \
+--initialization_character_string N
+sbi4onnx \
+--input_onnx_file_path hand_landmark_lite_1x3x224x224.onnx \
+--output_onnx_file_path hand_landmark_lite_Nx3x224x224.onnx \
+--initialization_character_string N
+sbi4onnx \
+--input_onnx_file_path hand_landmark_sparse_1x3x224x224.onnx \
+--output_onnx_file_path hand_landmark_sparse_Nx3x224x224.onnx \
+--initialization_character_string N
+sbi4onnx \
+--input_onnx_file_path hand_landmark_080_1x3x224x224.onnx \
+--output_onnx_file_path hand_landmark_080_Nx3x224x224.onnx \
+--initialization_character_string N
+
+
+sor4onnx \
+--input_onnx_file_path hand_landmark_080_1x3x224x224.onnx \
+--old_new "input_1" "input" \
+--mode inputs \
+--output_onnx_file_path hand_landmark_080_1x3x224x224.onnx
+sor4onnx \
+--input_onnx_file_path hand_landmark_sparse_1x3x224x224.onnx \
+--old_new "input_1" "input" \
+--mode inputs \
+--output_onnx_file_path hand_landmark_sparse_1x3x224x224.onnx
+
+sor4onnx \
+--input_onnx_file_path hand_landmark_080_Nx3x224x224.onnx \
+--old_new "input_1" "input" \
+--mode inputs \
+--output_onnx_file_path hand_landmark_080_Nx3x224x224.onnx
+sor4onnx \
+--input_onnx_file_path hand_landmark_sparse_Nx3x224x224.onnx \
+--old_new "input_1" "input" \
+--mode inputs \
+--output_onnx_file_path hand_landmark_sparse_Nx3x224x224.onnx
+
+
+# Identity -> xyz_x21
+# Identity_1 -> hand_score
+# Identity_2 -> left_hand_0_or_right_hand_1
+
+
+sor4onnx \
+--input_onnx_file_path hand_landmark_080_1x3x224x224.onnx \
+--old_new "Identity_2" "left_hand_0_or_right_hand_1" \
+--mode outputs \
+--output_onnx_file_path hand_landmark_080_1x3x224x224.onnx
+sor4onnx \
+--input_onnx_file_path hand_landmark_080_1x3x224x224.onnx \
+--old_new "Identity_1" "hand_score" \
+--mode outputs \
+--output_onnx_file_path hand_landmark_080_1x3x224x224.onnx
+sor4onnx \
+--input_onnx_file_path hand_landmark_080_1x3x224x224.onnx \
+--old_new "Identity" "xyz_x21" \
+--mode outputs \
+--output_onnx_file_path hand_landmark_080_1x3x224x224.onnx
+
+sor4onnx \
+--input_onnx_file_path hand_landmark_080_Nx3x224x224.onnx \
+--old_new "Identity_2" "left_hand_0_or_right_hand_1" \
+--mode outputs \
+--output_onnx_file_path hand_landmark_080_Nx3x224x224.onnx
+sor4onnx \
+--input_onnx_file_path hand_landmark_080_Nx3x224x224.onnx \
+--old_new "Identity_1" "hand_score" \
+--mode outputs \
+--output_onnx_file_path hand_landmark_080_Nx3x224x224.onnx
+sor4onnx \
+--input_onnx_file_path hand_landmark_080_Nx3x224x224.onnx \
+--old_new "Identity" "xyz_x21" \
+--mode outputs \
+--output_onnx_file_path hand_landmark_080_Nx3x224x224.onnx
+
+sor4onnx \
+--input_onnx_file_path hand_landmark_sparse_1x3x224x224.onnx \
+--old_new "Identity_2" "left_hand_0_or_right_hand_1" \
+--mode outputs \
+--output_onnx_file_path hand_landmark_sparse_1x3x224x224.onnx
+sor4onnx \
+--input_onnx_file_path hand_landmark_sparse_1x3x224x224.onnx \
+--old_new "Identity_1" "hand_score" \
+--mode outputs \
+--output_onnx_file_path hand_landmark_sparse_1x3x224x224.onnx
+sor4onnx \
+--input_onnx_file_path hand_landmark_sparse_1x3x224x224.onnx \
+--old_new "Identity" "xyz_x21" \
+--mode outputs \
+--output_onnx_file_path hand_landmark_sparse_1x3x224x224.onnx
+
+sor4onnx \
+--input_onnx_file_path hand_landmark_sparse_Nx3x224x224.onnx \
+--old_new "Identity_2" "left_hand_0_or_right_hand_1" \
+--mode outputs \
+--output_onnx_file_path hand_landmark_sparse_Nx3x224x224.onnx
+sor4onnx \
+--input_onnx_file_path hand_landmark_sparse_Nx3x224x224.onnx \
+--old_new "Identity_1" "hand_score" \
+--mode outputs \
+--output_onnx_file_path hand_landmark_sparse_Nx3x224x224.onnx
+sor4onnx \
+--input_onnx_file_path hand_landmark_sparse_Nx3x224x224.onnx \
+--old_new "Identity" "xyz_x21" \
+--mode outputs \
+--output_onnx_file_path hand_landmark_sparse_Nx3x224x224.onnx
+
+sam4onnx \
+--input_onnx_file_path PDPostProcessing_inf_128x128.onnx \
+--output_onnx_file_path PDPostProcessing_inf_128x128_.onnx \
+--op_name NonMaxSuppression_31 \
+--input_constants onnx::Slice_14 float32 [\'-Infinity\']
+sam4onnx \
+--input_onnx_file_path PDPostProcessing_inf_192x192.onnx \
+--output_onnx_file_path PDPostProcessing_inf_192x192.onnx \
+--op_name NonMaxSuppression_31 \
+--input_constants onnx::Slice_14 float32 [\'-Infinity\']
+
+snc4onnx \
+--input_onnx_file_paths palm_detection_128x128.onnx PDPostProcessing_inf_128x128.onnx \
+--srcop_destop classificators pd_classificators regressors pd_regressors \
+--output_onnx_file_path palm_detection_inf_post_128x128.onnx
+snc4onnx \
+--input_onnx_file_paths palm_detection_full_192x192.onnx PDPostProcessing_inf_192x192.onnx \
+--srcop_destop classificators pd_classificators regressors pd_regressors \
+--output_onnx_file_path palm_detection_full_inf_post_192x192.onnx
+snc4onnx \
+--input_onnx_file_paths palm_detection_lite_192x192.onnx PDPostProcessing_inf_192x192.onnx \
+--srcop_destop classificators pd_classificators regressors pd_regressors \
+--output_onnx_file_path palm_detection_lite_inf_post_192x192.onnx
+
+
+sor4onnx \
+--input_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--old_new "result" "pdscore_boxx_boxy_boxsize_kp0x_kp0y_kp2x_kp2y" \
+--mode outputs \
+--output_onnx_file_path palm_detection_inf_post_128x128.onnx
+sor4onnx \
+--input_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--old_new "result" "pdscore_boxx_boxy_boxsize_kp0x_kp0y_kp2x_kp2y" \
+--mode outputs \
+--output_onnx_file_path palm_detection_full_inf_post_192x192.onnx
+sor4onnx \
+--input_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--old_new "result" "pdscore_boxx_boxy_boxsize_kp0x_kp0y_kp2x_kp2y" \
+--mode outputs \
+--output_onnx_file_path palm_detection_lite_inf_post_192x192.onnx
+
+
+sam4onnx \
+--input_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--op_name Slice_19 \
+--input_constants onnx::Slice_14 int64 [2]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--op_name Slice_14 \
+--input_constants onnx::Slice_14 int64 [2]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--op_name Slice_39 \
+--input_constants onnx::Slice_14 int64 [2016]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--op_name NonMaxSuppression_31 \
+--input_constants onnx::Slice_14 int64 [2016]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_full_inf_post_192x192.onnx \
+--op_name Gather_33 \
+--input_constants onnx::Slice_14 int64 [2]
+
+
+
+sam4onnx \
+--input_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--op_name Slice_19 \
+--input_constants onnx::Slice_14 int64 [2]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--op_name Slice_14 \
+--input_constants onnx::Slice_14 int64 [2]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--op_name Slice_39 \
+--input_constants onnx::Slice_14 int64 [2016]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--op_name NonMaxSuppression_31 \
+--input_constants onnx::Slice_14 int64 [2016]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--output_onnx_file_path palm_detection_lite_inf_post_192x192.onnx \
+--op_name Gather_33 \
+--input_constants onnx::Slice_14 int64 [2]
+
+
+
+sam4onnx \
+--input_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--output_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--op_name Slice_19 \
+--input_constants onnx::Slice_14 int64 [2]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--output_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--op_name Slice_14 \
+--input_constants onnx::Slice_14 int64 [2]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--output_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--op_name Slice_39 \
+--input_constants onnx::Slice_14 int64 [896]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--output_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--op_name NonMaxSuppression_31 \
+--input_constants onnx::Slice_14 int64 [896]
+
+sam4onnx \
+--input_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--output_onnx_file_path palm_detection_inf_post_128x128.onnx \
+--op_name Gather_33 \
+--input_constants onnx::Slice_14 int64 [2]
+
+
+snc4onnx \
+--input_onnx_file_paths hand_landmark_080_1x3x224x224.onnx round_left_right_1x3x224x224.onnx \
+--srcop_destop left_hand_0_or_right_hand_1 round_input \
+--output_onnx_file_path hand_landmark_080_1x3x224x224.onnx
+snc4onnx \
+--input_onnx_file_paths hand_landmark_080_Nx3x224x224.onnx round_left_right_Nx3x224x224.onnx \
+--srcop_destop left_hand_0_or_right_hand_1 round_input \
+--output_onnx_file_path hand_landmark_080_Nx3x224x224.onnx
+
+snc4onnx \
+--input_onnx_file_paths hand_landmark_sparse_1x3x224x224.onnx round_left_right_1x3x224x224.onnx \
+--srcop_destop left_hand_0_or_right_hand_1 round_input \
+--output_onnx_file_path hand_landmark_sparse_1x3x224x224.onnx
+snc4onnx \
+--input_onnx_file_paths hand_landmark_sparse_Nx3x224x224.onnx round_left_right_Nx3x224x224.onnx \
+--srcop_destop left_hand_0_or_right_hand_1 round_input \
+--output_onnx_file_path hand_landmark_sparse_Nx3x224x224.onnx
+
+
+
+snc4onnx \
+--input_onnx_file_paths hand_landmark_080_1x3x224x224.onnx round_left_right_1x3x224x224.onnx \
+--srcop_destop left_hand_0_or_right_hand_1 round_input \
+--output_onnx_file_path hand_landmark_080_1x3x224x224.onnx
+snc4onnx \
+--input_onnx_file_paths hand_landmark_080_Nx3x224x224.onnx round_left_right_Nx3x224x224.onnx \
+--srcop_destop left_hand_0_or_right_hand_1 round_input \
+--output_onnx_file_path hand_landmark_080_Nx3x224x224.onnx
+
+snc4onnx \
+--input_onnx_file_paths hand_landmark_sparse_1x3x224x224.onnx round_left_right_1x3x224x224.onnx \
+--srcop_destop left_hand_0_or_right_hand_1 round_input \
+--output_onnx_file_path hand_landmark_sparse_1x3x224x224.onnx
+snc4onnx \
+--input_onnx_file_paths hand_landmark_sparse_Nx3x224x224.onnx round_left_right_Nx3x224x224.onnx \
+--srcop_destop left_hand_0_or_right_hand_1 round_input \
+--output_onnx_file_path hand_landmark_sparse_Nx3x224x224.onnx

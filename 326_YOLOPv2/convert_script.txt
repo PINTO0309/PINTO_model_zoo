@@ -1,0 +1,384 @@
+MODEL = f'yolopv2'
+onnx_file = f"{MODEL}_{H}x{W}.onnx"
+x = torch.randn(1, 3, H, W).cpu()
+model.cpu()
+torch.onnx.export(
+    model,
+    args=(x),
+    f=onnx_file,
+    opset_version=11,
+    input_names=['input'],
+    output_names=['pred','anchor_grid0','anchor_grid1','anchor_grid2','seg','ll'],
+    do_constant_folding=False,
+)
+model_onnx1 = onnx.load(onnx_file)
+model_onnx1 = onnx.shape_inference.infer_shapes(model_onnx1)
+onnx.save(model_onnx1, onnx_file)
+
+H=736
+W=1280
+snd4onnx \
+--remove_node_names SequenceConstruct_470 \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_599" "pred0" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_602" "pred1" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_605" "pred2" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+
+H=192
+W=320
+snd4onnx \
+--remove_node_names SequenceConstruct_470 \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_599" "pred0" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_602" "pred1" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_605" "pred2" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+
+H=256
+W=320
+snd4onnx \
+--remove_node_names SequenceConstruct_470 \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_599" "pred0" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_602" "pred1" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_605" "pred2" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+
+H=256
+W=416
+snd4onnx \
+--remove_node_names SequenceConstruct_470 \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_599" "pred0" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_602" "pred1" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_605" "pred2" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+
+H=288
+W=480
+snd4onnx \
+--remove_node_names SequenceConstruct_470 \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_599" "pred0" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_602" "pred1" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_605" "pred2" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+
+H=384
+W=640
+snd4onnx \
+--remove_node_names SequenceConstruct_470 \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_599" "pred0" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_602" "pred1" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_605" "pred2" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+
+H=384
+W=1280
+snd4onnx \
+--remove_node_names SequenceConstruct_470 \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_599" "pred0" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_602" "pred1" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_605" "pred2" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+
+H=480
+W=640
+snd4onnx \
+--remove_node_names SequenceConstruct_470 \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_599" "pred0" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_602" "pred1" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_605" "pred2" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+
+H=480
+W=800
+snd4onnx \
+--remove_node_names SequenceConstruct_470 \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+onnxsim yolopv2_${H}x${W}.onnx yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_599" "pred0" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_602" "pred1" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--old_new "onnx::SequenceConstruct_605" "pred2" \
+--mode outputs \
+--output_onnx_file_path yolopv2_${H}x${W}.onnx
+
+
+snd4onnx \
+--remove_node_names SequenceConstruct_470 \
+--input_onnx_file_path yolopv2_HxW.onnx \
+--output_onnx_file_path yolopv2_HxW.onnx
+onnxsim yolopv2_HxW.onnx yolopv2_HxW.onnx
+onnxsim yolopv2_HxW.onnx yolopv2_HxW.onnx
+onnxsim yolopv2_HxW.onnx yolopv2_HxW.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_HxW.onnx \
+--old_new "onnx::SequenceConstruct_599" "pred0" \
+--mode outputs \
+--output_onnx_file_path yolopv2_HxW.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_HxW.onnx \
+--old_new "onnx::SequenceConstruct_602" "pred1" \
+--mode outputs \
+--output_onnx_file_path yolopv2_HxW.onnx
+sor4onnx \
+--input_onnx_file_path yolopv2_HxW.onnx \
+--old_new "onnx::SequenceConstruct_605" "pred2" \
+--mode outputs \
+--output_onnx_file_path yolopv2_HxW.onnx
+
+
+onnx2json \
+--input_onnx_file_path yolopv2_HxW.onnx \
+--output_json_path yolopv2_HxW.json \
+--json_indent 2
+
+json2onnx \
+--input_json_path yolopv2_HxW.json \
+--output_onnx_file_path yolopv2_HxW.onnx
+
+
+sio4onnx \
+--input_onnx_file_path yolopv2_HxW.onnx \
+--output_onnx_file_path yolopv2_HxW.onnx \
+--input_names "input" \
+--input_shapes 1 3 "height" "width" \
+--output_names "seg" \
+--output_names "ll" \
+--output_names "pred0" \
+--output_names "pred1" \
+--output_names "pred2" \
+--output_shapes 1 2 "height" "width" \
+--output_shapes 1 1 "height" "width" \
+--output_shapes 1 255 "pred0h" "pred0w" \
+--output_shapes 1 255 "pred1h" "pred1w" \
+--output_shapes 1 255 "pred2h" "pred2w"
+
+onnxsim yolopv2_HxW.onnx yolopv2_HxW.onnx
+
+
+
+
+#===========================================================================
+anchor_grids = np.load('model_105_anchor_grid.npy')
+anchor_grids.shape
+(3, 1, 3, 1, 1, 2)
+
+anchor_grid0 = anchor_grids[0]
+anchor_grid1 = anchor_grids[1]
+anchor_grid2 = anchor_grids[2]
+
+anchor_grid0.shape
+(1, 3, 1, 1, 2)
+anchor_grid1.shape
+(1, 3, 1, 1, 2)
+anchor_grid2.shape
+(1, 3, 1, 1, 2)
+
+
+#=== N batch ===============================================================
+H=192
+W=320
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=256
+W=320
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=256
+W=416
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=288
+W=480
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=384
+W=640
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=384
+W=1280
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=480
+W=640
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=480
+W=800
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+H=736
+W=1280
+sbi4onnx \
+--input_onnx_file_path yolopv2_${H}x${W}.onnx \
+--output_onnx_file_path yolopv2_Nx3x${H}x${W}.onnx \
+--initialization_character_string batch
+
+
+sbi4onnx \
+--input_onnx_file_path yolopv2_HxW.onnx \
+--output_onnx_file_path yolopv2_Nx3xHxW.onnx \
+--initialization_character_string batch

@@ -1,0 +1,1618 @@
+docker run --gpus all -it --rm \
+-v `pwd`:/home/user/workdir \
+ghcr.io/pinto0309/openvino2tensorflow:latest
+
+############################################################ 1x3xHxW 6 person
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--output movenet_multipose_lightning_HxW.onnx
+
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_HxW.onnx \
+--output_onnx_file_path movenet_multipose_lightning_HxW.onnx
+
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_HxW.onnx \
+--output_json_path movenet_multipose_lightning_HxW.json \
+--json_indent 2
+
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}.json
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_HxW.json \
+--output_onnx_file_path movenet_multipose_lightning_HxW.onnx
+
+onnxsim movenet_multipose_lightning_HxW.onnx movenet_multipose_lightning_HxW.onnx
+onnxsim movenet_multipose_lightning_HxW.onnx movenet_multipose_lightning_HxW.onnx
+onnxsim movenet_multipose_lightning_HxW.onnx movenet_multipose_lightning_HxW.onnx
+
+rm movenet_multipose_lightning_HxW.json
+
+
+############################################################ Fixed resolution 6 person
+PERSONS=6
+python make_post-process.py \
+--opset 11 \
+--batches 1 \
+--num_person ${PERSONS}
+
+RESOLUTION_LIST=(
+    "192 256"
+    "192 320"
+    "256 320"
+    "256 416"
+    "288 480"
+    "384 640"
+    "384 1280"
+    "480 640"
+    "480 800"
+    "736 1280"
+)
+for((i=0; i<${#RESOLUTION_LIST[@]}; i++))
+do
+    HWs=(`echo ${RESOLUTION_LIST[i]}`)
+    H=${HWs[0]}
+    W=${HWs[1]}
+    echo @@@@@@@@@@@@@@@@@ processing ${H}x${W} ...
+
+    python -m tf2onnx.convert \
+    --opset 11 \
+    --saved-model . \
+    --inputs-as-nchw input:0 \
+    --inputs input:0[1,${H},${W},3] \
+    --output movenet_multipose_lightning_${H}x${W}.onnx
+
+    snd4onnx \
+    --remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+    --input_onnx_file_path movenet_multipose_lightning_${H}x${W}.onnx \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}.onnx
+
+    onnx2json \
+    --input_onnx_file_path movenet_multipose_lightning_${H}x${W}.onnx \
+    --output_json_path movenet_multipose_lightning_${H}x${W}.json \
+    --json_indent 2
+
+    sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}.json
+    sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}.json
+    sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}.json
+
+    json2onnx \
+    --input_json_path movenet_multipose_lightning_${H}x${W}.json \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}.onnx
+
+    onnxsim movenet_multipose_lightning_${H}x${W}.onnx movenet_multipose_lightning_${H}x${W}.onnx
+    onnxsim movenet_multipose_lightning_${H}x${W}.onnx movenet_multipose_lightning_${H}x${W}.onnx
+    onnxsim movenet_multipose_lightning_${H}x${W}.onnx movenet_multipose_lightning_${H}x${W}.onnx
+
+    rm movenet_multipose_lightning_${H}x${W}.json
+
+    snc4onnx \
+    --input_onnx_file_paths movenet_multipose_lightning_${H}x${W}.onnx post_process_p${PERSONS}.onnx \
+    --srcop_destop output pp_input \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}.onnx
+done
+
+
+################################################################ 10 person
+PERSONS=10
+python make_post-process.py \
+--opset 11 \
+--batches 1 \
+--num_person ${PERSONS}
+
+RESOLUTION_LIST=(
+    "192 256"
+    "192 320"
+    "256 320"
+    "256 416"
+    "288 480"
+    "384 640"
+    "384 1280"
+    "480 640"
+    "480 800"
+    "736 1280"
+)
+for((i=0; i<${#RESOLUTION_LIST[@]}; i++))
+do
+    HWs=(`echo ${RESOLUTION_LIST[i]}`)
+    H=${HWs[0]}
+    W=${HWs[1]}
+    echo @@@@@@@@@@@@@@@@@ processing ${H}x${W} ...
+
+    python -m tf2onnx.convert \
+    --opset 11 \
+    --saved-model . \
+    --inputs-as-nchw input:0 \
+    --inputs input:0[1,${H},${W},3] \
+    --output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+
+    snd4onnx \
+    --remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+    --input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+
+    onnx2json \
+    --input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+    --output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+    --json_indent 2
+
+    sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+    sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+    sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+    json2onnx \
+    --input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+
+    onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+    onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+    onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+
+    rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+    snc4onnx \
+    --input_onnx_file_paths movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx post_process_p${PERSONS}.onnx \
+    --srcop_destop output pp_input \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+done
+
+
+
+###########################################################################
+PERSONS=10
+H=192
+W=256
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"CgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"CgAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"CgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAAAoAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAKAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/\+qAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "10",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "10"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "170",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__675",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "10",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__675",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+###########################################################################
+PERSONS=10
+H=192
+W=320
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"CgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"CgAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"CgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAAAoAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAKAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/\+qAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "10",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "10"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "170",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__698",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "10",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__698",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+###########################################################################
+PERSONS=10
+H=256
+W=320
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"CgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"CgAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"CgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAAAoAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAKAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/\+qAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "10",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "10"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "170",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__677",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "10",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__677",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+###########################################################################
+PERSONS=10
+H=256
+W=416
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"CgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"CgAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"CgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAAAoAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAKAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/\+qAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "10",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "10"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "170",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__687",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "10",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__687",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+
+###########################################################################
+PERSONS=10
+H=288
+W=480
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"CgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"CgAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"CgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAAAoAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAKAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/\+qAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "10",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "10"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "170",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__684",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "10",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__684",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+
+###########################################################################
+PERSONS=10
+H=384
+W=640
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"CgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"CgAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"CgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAAAoAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAKAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/\+qAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "10",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "10"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "170",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__674",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "10",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__674",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+###########################################################################
+PERSONS=10
+H=384
+W=1280
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"CgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"CgAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"CgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAAAoAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAKAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/\+qAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "10",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "10"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "170",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__715",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "10",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__715",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+
+
+
+###########################################################################
+PERSONS=10
+H=480
+W=640
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"CgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"CgAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"CgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAAAoAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAKAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/\+qAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "10",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "10"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "170",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__711",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "10",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__711",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+
+###########################################################################
+PERSONS=10
+H=480
+W=800
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"CgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"CgAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"CgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAAAoAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAKAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/\+qAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "10",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "10"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "170",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__676",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "10",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__676",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+
+###########################################################################
+PERSONS=10
+H=736
+W=1280
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"CgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"CgAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"CgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAAAoAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAKAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAKAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/\+qAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "10",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "10"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "170",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__721",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "10",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__721",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+
+
+################################################################ 20 person
+PERSONS=20
+python make_post-process.py \
+--opset 11 \
+--batches 1 \
+--num_person ${PERSONS}
+
+RESOLUTION_LIST=(
+    "192 256"
+    "192 320"
+    "256 320"
+    "256 416"
+    "288 480"
+    "384 640"
+    "384 1280"
+    "480 640"
+    "480 800"
+    "736 1280"
+)
+for((i=0; i<${#RESOLUTION_LIST[@]}; i++))
+do
+    HWs=(`echo ${RESOLUTION_LIST[i]}`)
+    H=${HWs[0]}
+    W=${HWs[1]}
+    echo @@@@@@@@@@@@@@@@@ processing ${H}x${W} ...
+
+    python -m tf2onnx.convert \
+    --opset 11 \
+    --saved-model . \
+    --inputs-as-nchw input:0 \
+    --inputs input:0[1,${H},${W},3] \
+    --output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+
+    snd4onnx \
+    --remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+    --input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+
+    onnx2json \
+    --input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+    --output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+    --json_indent 2
+
+    sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+    sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+    sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+    json2onnx \
+    --input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+
+    onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+    onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+    onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+
+    rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+    snc4onnx \
+    --input_onnx_file_paths movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx post_process_p${PERSONS}.onnx \
+    --srcop_destop output pp_input \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+done
+
+
+
+###########################################################################
+PERSONS=20
+H=192
+W=256
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"FAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"FAAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"FAAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAABQAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAUAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/9UAQAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "20",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "20"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "340",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__672",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "20",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__672",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+###########################################################################
+PERSONS=20
+H=192
+W=320
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"FAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"FAAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"FAAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAABQAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAUAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/9UAQAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "20",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "20"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "340",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__678",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "20",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__678",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+###########################################################################
+PERSONS=20
+H=256
+W=320
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"FAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"FAAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"FAAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAABQAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAUAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/9UAQAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "20",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "20"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "340",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__671",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "20",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__671",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+###########################################################################
+PERSONS=20
+H=256
+W=416
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"FAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"FAAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"FAAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAABQAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAUAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/9UAQAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "20",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "20"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "340",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__715",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "20",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__715",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+###########################################################################
+PERSONS=20
+H=288
+W=480
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"FAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"FAAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"FAAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAABQAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAUAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/9UAQAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "20",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "20"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "340",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__709",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "20",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__709",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+###########################################################################
+PERSONS=20
+H=384
+W=640
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"FAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"FAAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"FAAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAABQAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAUAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/9UAQAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "20",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "20"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "340",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__712",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "20",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__712",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+###########################################################################
+PERSONS=20
+H=384
+W=1280
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"FAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"FAAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"FAAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAABQAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAUAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/9UAQAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "20",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "20"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "340",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__690",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "20",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__690",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+###########################################################################
+PERSONS=20
+H=480
+W=640
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"FAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"FAAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"FAAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAABQAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAUAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/9UAQAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "20",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "20"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "340",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__686",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "20",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__686",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+###########################################################################
+PERSONS=20
+H=480
+W=800
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"FAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"FAAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"FAAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAABQAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAUAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/9UAQAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "20",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "20"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "340",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__719",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "20",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__719",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+
+###########################################################################
+PERSONS=20
+H=736
+W=1280
+python -m tf2onnx.convert \
+--opset 11 \
+--saved-model . \
+--inputs-as-nchw input:0 \
+--inputs input:0[1,${H},${W},3] \
+--output movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+snd4onnx \
+--remove_node_names StatefulPartitionedCall/Cast StatefulPartitionedCall/sub \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnx2json \
+--input_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx \
+--output_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--json_indent 2
+sed -i -e 's/"elemType": 6/"elemType": 1/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/:0//g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/output_0/output/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAA="/"FAAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAAIAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAABAAAAAAAAAA=="/"FAAAAAAAAAABAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"BgAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/"FAAAAAAAAAARAAAAAAAAAAIAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAABAAAAAAAAAAYAAAAAAAAA"/"AQAAAAAAAAABAAAAAAAAABQAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAA"/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAA"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/"AQAAAAAAAAAUAAAAAAAAABEAAAAAAAAAAgAAAAAAAAA="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AQAAAAAAAAAGAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/"AQAAAAAAAAAUAAAAAAAAAP\/\/\/\/\/\/\/\/\/\/"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"\/\/\/\/\/\/\/\/\/\/9mAAAAAAAAAA=="/"\/\/\/\/\/\/\/\/\/\/9UAQAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/zeros_like
+sed -i -z -e 's/"1",\n          "6",\n          "17"/"1",\n          "20",\n          "17"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json   # StatefulPartitionedCall/zeros_like
+sed -i -e 's/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"/"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/concat_1
+sed -i -e 's/"dimValue": "6"/"dimValue": "20"/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+############################################################################### StatefulPartitionedCall/stack_6_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/"dims": \[\n          "102",\n          "1"\n        \],/"dims": \[\n          "340",\n          "1"\n        \],/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+sed -i -e 's/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAA"/"AAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAAAAAAABAAAAAgAAAAMAAAAEAAAABQAAAAYAAAAHAAAACAAAAAkAAAAKAAAACwAAAAwAAAANAAAADgAAAA8AAAAQAAAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAALAAAADAAAAA0AAAAOAAAADwAAABAAAAAAAAAAAQAAAAIAAAADAAAABAAAAAUAAAAGAAAABwAAAAgAAAAJAAAACgAAAAsAAAAMAAAADQAAAA4AAAAPAAAAEAAAAA=="/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+############################################################################### StatefulPartitionedCall/stack_1_Concat__xxx - const_fold_opt__xxx
+sed -i -z -e 's/      {\n        "dims": \[\n          "6",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__722",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"\n      },/      {\n        "dims": \[\n          "20",\n          "1"\n        \],\n        "dataType": 6,\n        "name": "const_fold_opt__722",\n        "rawData": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="\n      },/g' movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+json2onnx \
+--input_json_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json \
+--output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}_tmp.onnx
+
+
+
+
+############################################################################
+RESOLUTION_LIST=(
+    "192 256"
+    "192 320"
+    "256 320"
+    "256 416"
+    "288 480"
+    "384 640"
+    "384 1280"
+    "480 640"
+    "480 800"
+    "736 1280"
+)
+for((i=0; i<${#RESOLUTION_LIST[@]}; i++))
+do
+    HWs=(`echo ${RESOLUTION_LIST[i]}`)
+    H=${HWs[0]}
+    W=${HWs[1]}
+    echo @@@@@@@@@@@@@@@@@ processing ${H}x${W} ...
+
+    snc4onnx \
+    --input_onnx_file_paths movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx post_process_p${PERSONS}.onnx \
+    --srcop_destop output pp_input \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx
+done
+
+
+
+### Myriad #################################################################################
+
+NUMPERSONSLIST=(
+    "6"
+    "10"
+    "20"
+)
+for((i=0; i<${#NUMPERSONSLIST[@]}; i++))
+do
+    NUMPERSONS=(`echo ${NUMPERSONSLIST[i]}`)
+
+    sor4onnx \
+    --input_onnx_file_path workaround_cast1_p${NUMPERSONS}.onnx \
+    --old_new "Cast_0" "workaround_cast1" \
+    --output_onnx_file_path workaround_cast1_p${NUMPERSONS}.onnx
+
+    sor4onnx \
+    --input_onnx_file_path workaround_cast1_p${NUMPERSONS}_N.onnx \
+    --old_new "Cast_0" "workaround_cast1" \
+    --output_onnx_file_path workaround_cast1_p${NUMPERSONS}_N.onnx
+
+    sor4onnx \
+    --input_onnx_file_path workaround_cast2_p${NUMPERSONS}.onnx \
+    --old_new "Cast_0" "workaround_cast2" \
+    --output_onnx_file_path workaround_cast2_p${NUMPERSONS}.onnx
+
+    sor4onnx \
+    --input_onnx_file_path workaround_cast2_p${NUMPERSONS}_N.onnx \
+    --old_new "Cast_0" "workaround_cast2" \
+    --output_onnx_file_path workaround_cast2_p${NUMPERSONS}_N.onnx
+done
+
+RESOLUTION_LIST=(
+    "6 192 256"
+    "6 192 320"
+    "6 256 320"
+    "6 256 416"
+    "6 288 480"
+    "6 384 640"
+    "6 384 1280"
+    "6 480 640"
+    "6 480 800"
+    "6 736 1280"
+    "10 192 256"
+    "10 192 320"
+    "10 256 320"
+    "10 256 416"
+    "10 288 480"
+    "10 384 640"
+    "10 384 1280"
+    "10 480 640"
+    "10 480 800"
+    "10 736 1280"
+    "20 192 256"
+    "20 192 320"
+    "20 256 320"
+    "20 256 416"
+    "20 288 480"
+    "20 384 640"
+    "20 384 1280"
+    "20 480 640"
+    "20 480 800"
+    "20 736 1280"
+)
+for((i=0; i<${#RESOLUTION_LIST[@]}; i++))
+do
+    PHWs=(`echo ${RESOLUTION_LIST[i]}`)
+    P=${PHWs[0]}
+    H=${PHWs[1]}
+    W=${PHWs[2]}
+    echo @@@@@@@@@@@@@@@@@ processing p${P}_${H}x${W} ...
+
+    snc4onnx \
+    -if movenet_multipose_lightning_${H}x${W}_p${P}_nopost.onnx workaround_cast1_p${P}.onnx \
+    -sd StatefulPartitionedCall/strided_slice_21 cast1_input \
+    -of movenet_multipose_lightning_${H}x${W}_nopost_tmp1.onnx
+
+    onnx2json \
+    --input_onnx_file_path movenet_multipose_lightning_${H}x${W}_nopost_tmp1.onnx \
+    --output_json_path movenet_multipose_lightning_${H}x${W}_nopost_tmp1.json \
+    --json_indent 2
+
+    sed -i -z -e 's/"input": \[\n          "StatefulPartitionedCall\/strided_slice_21",/"input": \[\n          "cast1_output",/g' movenet_multipose_lightning_${H}x${W}_nopost_tmp1.json
+
+    json2onnx \
+    --input_json_path movenet_multipose_lightning_${H}x${W}_nopost_tmp1.json \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}_nopost_tmp2.onnx
+
+    sod4onnx \
+    -if movenet_multipose_lightning_${H}x${W}_nopost_tmp2.onnx \
+    -on cast1_output \
+    -of movenet_multipose_lightning_${H}x${W}_nopost_tmp3.onnx
+
+    snc4onnx \
+    -if movenet_multipose_lightning_${H}x${W}_nopost_tmp3.onnx workaround_cast2_p${P}.onnx \
+    -sd StatefulPartitionedCall/Tile_4 cast2_input \
+    -of movenet_multipose_lightning_${H}x${W}_nopost_tmp4.onnx
+
+    onnx2json \
+    --input_onnx_file_path movenet_multipose_lightning_${H}x${W}_nopost_tmp4.onnx \
+    --output_json_path movenet_multipose_lightning_${H}x${W}_nopost_tmp4.json \
+    --json_indent 2
+
+    sed -i -z -e 's/"input": \[\n          "StatefulPartitionedCall\/Tile_4",/"input": \[\n          "cast2_output",/g' movenet_multipose_lightning_${H}x${W}_nopost_tmp4.json
+
+    json2onnx \
+    --input_json_path movenet_multipose_lightning_${H}x${W}_nopost_tmp4.json \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}_nopost_tmp5.onnx
+
+    sod4onnx \
+    -if movenet_multipose_lightning_${H}x${W}_nopost_tmp5.onnx \
+    -on cast2_output \
+    -of movenet_multipose_lightning_${H}x${W}_nopost_tmp6.onnx
+
+    onnx2json \
+    --input_onnx_file_path movenet_multipose_lightning_${H}x${W}_nopost_tmp6.onnx \
+    --output_json_path movenet_multipose_lightning_${H}x${W}_nopost_tmp7.json \
+    --json_indent 2
+
+    sed -i -z -e 's/"name": "StatefulPartitionedCall\/Tile_4",\n        "type": {\n          "tensorType": {\n            "elemType": 6,/"name": "StatefulPartitionedCall\/Tile_4",\n        "type": {\n          "tensorType": {\n            "elemType": 1,/g' movenet_multipose_lightning_${H}x${W}_nopost_tmp7.json
+
+    json2onnx \
+    --input_json_path movenet_multipose_lightning_${H}x${W}_nopost_tmp7.json \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${P}_nopost_myriad.onnx
+
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp1.json
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp4.json
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp7.json
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp1.onnx
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp2.onnx
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp3.onnx
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp4.onnx
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp5.onnx
+    rm movenet_multipose_lightning_${H}x${W}_nopost_tmp6.onnx
+
+    snc4onnx \
+    --input_onnx_file_paths movenet_multipose_lightning_${H}x${W}_p${P}_nopost_myriad.onnx post_process_p${P}_myriad.onnx \
+    --srcop_destop output pp_input \
+    --output_onnx_file_path movenet_multipose_lightning_${H}x${W}_p${P}_myriad.onnx
+done

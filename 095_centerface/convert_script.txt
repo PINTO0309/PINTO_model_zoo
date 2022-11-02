@@ -43,3 +43,51 @@ openvino2tensorflow \
 --output_onnx True \
 --onnx_opset 13
 
+=============================================
+
+onnx2json \
+--input_onnx_file_path centerface.onnx \
+--output_json_path centerface_pre.json \
+--json_indent 2
+
+json2onnx \
+--input_json_path centerface_pre.json \
+--output_onnx_file_path centerface_Nx3xHxW.onnx
+
+
+sor4onnx \
+--input_onnx_file_path centerface_Nx3xHxW.onnx \
+--old_new "input.1" "input" \
+--mode inputs \
+--output_onnx_file_path centerface_Nx3xHxW.onnx
+
+sor4onnx \
+--input_onnx_file_path centerface_Nx3xHxW.onnx \
+--old_new "537" "heatmap" \
+--mode outputs \
+--output_onnx_file_path centerface_Nx3xHxW.onnx
+
+sor4onnx \
+--input_onnx_file_path centerface_Nx3xHxW.onnx \
+--old_new "538" "scale" \
+--mode outputs \
+--output_onnx_file_path centerface_Nx3xHxW.onnx
+
+sor4onnx \
+--input_onnx_file_path centerface_Nx3xHxW.onnx \
+--old_new "539" "offset" \
+--mode outputs \
+--output_onnx_file_path centerface_Nx3xHxW.onnx
+
+sor4onnx \
+--input_onnx_file_path centerface_Nx3xHxW.onnx \
+--old_new "540" "lms" \
+--mode outputs \
+--output_onnx_file_path centerface_Nx3xHxW.onnx
+
+
+sbi4onnx \
+--input_onnx_file_path centerface_Nx3xHxW.onnx \
+--output_onnx_file_path centerface_1x3xHxW.onnx \
+--initialization_character_string 1
+

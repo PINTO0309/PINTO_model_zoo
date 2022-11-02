@@ -1,0 +1,47 @@
+{
+    "format_version": 2,
+    "layers": [
+        {
+            "layer_id": "374",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                3,
+                1,
+                2,
+                4
+            ]
+        },
+        {
+            "layer_id": "494",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                3,
+                1,
+                2,
+                4
+            ]
+        },
+        {
+            "layer_id": "613",
+            "type": "Const",
+            "replace_mode": "direct",
+            "values": [
+                0,
+                3,
+                1,
+                2,
+                4
+            ]
+        },
+        {
+            "layer_id": "739",
+            "type": "Cast",
+            "replace_mode": "insert_after",
+            "values": "i32"
+        }
+    ]
+}

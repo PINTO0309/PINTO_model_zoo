@@ -60,6 +60,11 @@ I have been working on quantization of various models as a hobby, but I have ski
 
   ![image](https://user-images.githubusercontent.com/33194443/163656988-4e854448-7459-47d5-be85-436f340e60e6.png)
 
+- **[Self-Created Tools to convert ONNX files (NCHW) to TensorFlow format (NHWC). The purpose of this tool is to solve the massive Transpose extrapolation problem in onnx-tensorflow (onnx-tf).](https://github.com/PINTO0309/onnx2tf)**
+
+  ![image](https://user-images.githubusercontent.com/33194443/194713898-31fc9edc-1e6c-42b3-9f2a-60e3cbf21f80.png)
+
+
 ## List of pre-quantized models
 \* WQ = Weight Quantization
 \** OV = OpenVINO IR
@@ -91,6 +96,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |257|PiCANet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/257_PiCANet)|||||||⚫||||⚫|BDDA,SAGE/224x224|
 |259|Emotion_FERPlus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/259_Emotion_FERPlus)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|64x64|
 |290|AdaFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/290_AdaFace)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|112x112|
+|317|MobileOne|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/317_MobileOne)|||||||||||⚫|224x224|
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -144,6 +150,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |264|object_localization_network|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/264_object_localization_network)|||||||||||⚫|180x320,240x320,270x480,360x480,360x480,360x640,480x640,720x1280|
 |307|YOLOv7|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/307_YOLOv7)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||⚫|YOLOv7,YOLOv7-tiny|
 |308|FastestDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/308_FastestDet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|180x320,256x320,320x480,352x352,352x640,480x640,736x1280|
+|329|YOLOX-PAI|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/329_YOLOX-PAI)|||||||||||⚫||
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -151,6 +158,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |063|3D BoundingBox estimation for autonomous driving|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/063_3d-bounding-box-estimation-for-autonomous-driving)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|**[YouTube](https://youtu.be/MKer-Sj87d4)**|
 |107|SFA3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/107_SFA3D)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |263|EgoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/263_EgoNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫||
+|321|DID-M3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/321_DID-M3D)|||||||||||⚫||
 ### 4. 2D/3D Face Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -178,8 +186,10 @@ I have been working on quantization of various models as a hobby, but I have ski
 |302|SLPT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/302_SLPT)|||||||||||⚫|decoder=6/12,256x256|
 |303|FAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/303_FAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Face Alignment,128x128/256x256|
 |304|SynergyNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/304_SynergyNet)|||||||||||⚫|6D HeadPose,224x224|
-|305|DMHead|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/305_DMHead)|||||||||||⚫|6D HeadPose,Multi-Model-Fused,224x224|
+|305|DMHead|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/305_DMHead)|||||||||||⚫|6D HeadPose,Multi-Model-Fused,224x224,PINTO's custom models|
 |311|HHP-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/311_HHP-Net)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|6D HeadPose,No-LICENSE|
+|319|ACR-Loss|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/319_ACR-Loss)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Face Alignment|
+|322|YOLOv7_Head|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/322_YOLOv7_Head)|||||||||||⚫|PINTO's custom models|
 ### 5. 2D/3D Hand Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -250,6 +260,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |296|MGNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/296_MGNet)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||⚫|240x320,360x480,360x640,360x1280,480x640,720x1280|
 |312|NeWCRFs|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/312_NeWCRFs)|||||||||||⚫|384x384,384x576,384x768,384x960,576x768,768x1344|
 |313|PyDNet2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/314_PyDNet2)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|Mono-Depth|
+|327|EMDC|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/327_EMDC)|||||||||||⚫|RGB+SarseDepth|
 ### 8. Semantic Segmentation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -293,7 +304,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |017|Artistic-Style-Transfer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/017_Artistic-Style-Transfer)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫||⚫||
-|019|White-box-Cartoonization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/019_White-box-Cartoonization)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|||
+|019|White-box-Cartoonization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/019_White-box-Cartoonization)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |037|First_Neural_Style_Transfer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/037_First_Neural_Style_Transfer)|⚫|||||⚫|||||⚫||
 |044|Selfie2Anime|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/044_selfie2anime)|⚫|⚫|⚫|||⚫|⚫|⚫|||⚫||
 |050|AnimeGANv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/050_AnimeGANv2)|⚫|⚫|⚫|||⚫|⚫|⚫||⚫|⚫||
@@ -361,6 +372,9 @@ I have been working on quantization of various models as a hobby, but I have ski
 |286|SCI|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/286_SCI)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,360x480,360x640,480x640,720x1280|
 |315|Illumination-Adaptive-Transformer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/315_Illumination-Adaptive-Transformer)|||||||||||⚫|Low-light Image Enhancement|
 |316|night_enhancement|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/316_night_enhancement)|||||||||||⚫|Low-light Image Enhancement|
+|320|Dehamer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/320_Dehamer)|||||||||||⚫|Dehazing|
+|323|Stripformer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/323_Stripformer)|||||||||||⚫|DeBlur|
+|325|DehazeFormer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/325_DehazeFormer)|||||||||||⚫|Dehazing|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -437,6 +451,10 @@ I have been working on quantization of various models as a hobby, but I have ski
 |298|DEQ-Flow|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/298_DEQ-Flow)|||||||||||⚫|AGPL-3.0 license|
 |306|GMFlowNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/306_GMFlowNet)|||||||||||⚫|OpticalFlow/192x320,240x320,320x480,360x640,480x640,720x1280|
 |309|ImageForensicsOSN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/309_ImageForensicsOSN)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||⚫|forgery detection/180x320,240x320,320x480,360x640,480x640,720x1280|
+|318|pips|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/318_pips)|||||||||||⚫||
+|324|Ultra-Fast-Lane-Detection-v2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/324_Ultra-Fast-Lane-Detection-v2)|||||||||||⚫||
+|326|YOLOPv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/326_YOLOPv2)|⚫|⚫|||⚫|⚫|⚫||||⚫||
+|328|Stable_Diffusion|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/328_Stable_Diffusion)|||||||||||⚫||
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)
