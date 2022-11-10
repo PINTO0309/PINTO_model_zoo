@@ -1,0 +1,59 @@
+{
+  "format_version": 1,
+  "operations": [
+    {
+      "op_name": "model/mosaic_segmentation_model/mosaic_encoder_block/average_pooling2d_2/AvgPool__315",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/Relu_8;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_2/batchnorm_2/add_1;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/depthwise_conv2d/depthwise_2;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_2/batchnorm_2/mul_1;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_2/batchnorm/mul;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_2/batchnorm/sub__316",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/Relu_10;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_4/batchnorm_2/add_1;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/depthwise_conv2d/depthwise_2;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_4/batchnorm_2/mul_1;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/depthwise_conv2d_1/depthwise_2;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_4/batchnorm/mul;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_4/batchnorm/sub__324",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "model/mosaic_segmentation_model/mosaic_encoder_block/average_pooling2d_1/AvgPool__330",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/Relu_4;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_2/batchnorm_1/add_1;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/depthwise_conv2d/depthwise_2;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_2/batchnorm_1/mul_1;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/depthwise_conv2d/depthwise_1;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_2/batchnorm/mul;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_2/batchnorm/sub__336",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/Relu_6;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_4/batchnorm_1/add_1;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/depthwise_conv2d/depthwise_2;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_4/batchnorm_1/mul_1;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/depthwise_conv2d_1/depthwise_2;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/depthwise_conv2d_1/depthwise_1;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_4/batchnorm/mul;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_4/batchnorm/sub__331",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "model/mosaic_segmentation_model/mosaic_encoder_block/average_pooling2d/AvgPool__345",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/Relu;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_2/batchnorm/add_1;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/depthwise_conv2d/depthwise_2;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_2/batchnorm/mul_1;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/depthwise_conv2d/depthwise;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_2/batchnorm/mul;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_2/batchnorm/sub__351",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/Relu_2;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_4/batchnorm/add_1;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/depthwise_conv2d/depthwise_2;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_4/batchnorm/mul_1;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/depthwise_conv2d_1/depthwise_2;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/depthwise_conv2d_1/depthwise;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_4/batchnorm/mul;model/mosaic_segmentation_model/mosaic_encoder_block/multi_kernel_group_conv_block/sync_batch_normalization_4/batchnorm/sub__346",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    }
+  ]
+}
