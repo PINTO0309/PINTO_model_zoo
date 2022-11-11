@@ -21,8 +21,8 @@ Convert checkpoints to ONNX model and add fused argmax.
 Downlaod checkpoints and convert checkpoints to TF-Lite model.
 ```
 $ git clone https://github.com/PINTO0309/PINTO_model_zoo.git
-$ cd 330_MOSAIC/
-$ sudo podman run -it --rm -v _YOUR_WORK_DIR_:/workdir tensorflow/tensorflow:2.10.0-gpu
+$ cd PINTO_model_zoo/330_MOSAIC/
+$ sudo podman run -it --rm -v `pwd`:/workdir tensorflow/tensorflow:2.10.0-gpu
 
 # apt update && apt install git wget
 # cd /workdir
@@ -44,7 +44,7 @@ $ sudo podman run -it --rm -v _YOUR_WORK_DIR_:/workdir tensorflow/tensorflow:2.1
 # cp /tmp/mosaic_mnv35_cityscapes.tflite /workdir/mosaic_mnv35_cityscapes_argmax.tflite
 ```
 
-Convert ONNX model
+Convert ONNX model.
 ```
 # pip3 install tf2onnx
 # cd /workdir
@@ -57,6 +57,11 @@ Convert ONNX model
 ```
 
 Convert ONNX model to TF-Lite model and replace argmax with fused argmax.  
+The converted onnx model contains `Transpose ope`. You need to exclude `Transpose ope` when converting to TF-Lite model with onnx2tf. Specify the `Transpose ope` to exclude with the `param_replacement_file` option.  
+![](image/01.png)
+
+Check the [param_replacement.json](param_replacement.json) file for details.
+
 
 Note:  
 Jetson Nano cannot convert the model due to lack of memory unless `fused_argmax_scale_ratio` is set to `0.25`. It affects quality.
@@ -76,11 +81,15 @@ Jetson Nano cannot convert the model due to lack of memory unless `fused_argmax_
 # python3 -m tf2onnx.convert \
     --opset 13 --tflite ./saved_model/model_float32.tflite \
     --output /workdir/mosaic_mnv35_cityscapes_fused_argmax.onnx \
-    --inputs-as-nchw serving_default_input_2:0 \
+    --inputs-as-nchw inputs_0 \
     --dequantize
 ``` 
 
-### Jetson Nano
+Repace argmax to fused argmax. 
+
+![](image/02.png)
+
+### Exec trtexec on Jetson Nano
 
 Copy `mosaic_mnv35_cityscapes_fused_argmax.onnx` to Jetson Nano.  
 Check `trtexec`.
