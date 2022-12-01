@@ -37,3 +37,6 @@ If you want to change the model, specify it with an argument.
         default='256,128',
     )
 ```
+## person_reid_youtu with ONNX and Tensorflowjs in Javascript(Typescript)
+https://w-okada.github.io/yolox-onnx-test/
+
