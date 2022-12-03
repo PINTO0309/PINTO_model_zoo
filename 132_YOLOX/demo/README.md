@@ -20,5 +20,7 @@ https://github.com/iwatake2222/InferenceHelper_Sample/tree/master/pj_det_yolox
 - https://github.com/iwatake2222/InferenceHelper_Sample_ROS
 - Using this model with TensorFlow Lite / ONNX Runtime in ROS2 (rclcpp)
 
-## YOLOX with ONNX and Tensorflowjsin in JavaScript(Typescript)
+## YOLOX with ONNX and Tensorflowjs in JavaScript(Typescript)
 https://w-okada.github.io/yolox-onnx-test/
+
+[movie](https://twitter.com/DannadoriYellow/status/1597369995302178817)
