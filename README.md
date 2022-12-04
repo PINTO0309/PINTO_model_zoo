@@ -217,7 +217,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |268|Lite-HRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/268_Lite-HRNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|COCO,MPII/Top-Down|
 |269|Higher-HRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/269_Higher-HRNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|192x320,256x320,320x480,384x640,480x640,512x512,576x960,736x1280/Bottom-Up|
 |271|HRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/271_HRNet)|||||||||||⚫|COCO,MPII/Top-Down|
-|333|E2Pose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/333_E2Pose)|⚫|⚫|⚫||⚫||||||⚫|Top-Down|
+|333|E2Pose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/333_E2Pose)|⚫|⚫|⚫||⚫||||||⚫|COCO/CrowdPose,End-to-End|
 ### 7. Depth Estimation from Monocular/Stereo Images
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
