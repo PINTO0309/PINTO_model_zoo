@@ -1,0 +1,153 @@
+H=550
+W=550
+
+### Custom NonMaxSuppresion #############################################
+sam4onnx \
+--input_onnx_file_path postprocess_${H}x${W}.onnx \
+--output_onnx_file_path postprocess_${H}x${W}.onnx \
+--op_name fnms_nonmaxsuppression11 \
+--input_constants fnms_max_output_boxes_per_class int64 [0]
+
+sam4onnx \
+--input_onnx_file_path postprocess_${H}x${W}.onnx \
+--output_onnx_file_path postprocess_${H}x${W}.onnx \
+--op_name fnms_nonmaxsuppression11 \
+--input_constants fnms_iou_threshold float32 [0.3]
+
+sam4onnx \
+--input_onnx_file_path postprocess_${H}x${W}.onnx \
+--output_onnx_file_path postprocess_${H}x${W}.onnx \
+--op_name fnms_nonmaxsuppression11 \
+--input_constants fnms_score_threshold float32 [\'-Infinity\']
+
+
+
+
+sam4onnx \
+--input_onnx_file_path yolact_base_54_800000_${H}x${W}_post.onnx \
+--output_onnx_file_path yolact_base_54_800000_${H}x${W}_post.onnx \
+--op_name fnms_nonmaxsuppression11 \
+--input_constants /fpn/Constant_9_output_0_mod_2 int64 [10]
+
+sam4onnx \
+--input_onnx_file_path yolact_base_54_800000_${H}x${W}_post.onnx \
+--output_onnx_file_path yolact_base_54_800000_${H}x${W}_post.onnx \
+--op_name fnms_nonmaxsuppression11 \
+--input_constants fnms_score_threshold float32 [\'-Infinity\']
+
+sam4onnx \
+--input_onnx_file_path yolact_base_54_800000_${H}x${W}_post.onnx \
+--output_onnx_file_path yolact_base_54_800000_${H}x${W}_post.onnx \
+--op_name fnms_nonmaxsuppression11 \
+--input_constants fnms_score_threshold float32 [0.65]
+
+
+### Generate Post-Process ###############################################
+onnx2json \
+--input_onnx_file_path postprocess_550x550.onnx \
+--output_json_path postprocess_550x550.json \
+--json_indent 2
+
+RESOLUTION_LIST=(
+    "180 320 3723 46 80"
+    "225 400 5895 58 100"
+    "240 320 4818 60 80"
+    "270 480 8211 68 120"
+    "360 640 14505 90 160"
+    "450 800 22971 114 200"
+    "480 640 19200 120 160"
+    "540 960 32655 136 240"
+    "700 700 30963 176 176"
+    "720 1280 57660 180 320"
+)
+for((i=0; i<${#RESOLUTION_LIST[@]}; i++))
+do
+    HWs=(`echo ${RESOLUTION_LIST[i]}`)
+    H=${HWs[0]}
+    W=${HWs[1]}
+    BOXES=${HWs[2]}
+    PROTOH=${HWs[3]}
+    PROTOW=${HWs[4]}
+    echo @@@@@@@@@@@@@@@@@ processing ${H}x${W}_${BOXES} ...
+
+    cp postprocess_550x550.json postprocess_${H}x${W}.json
+    sed -i -e "s/19248/${BOXES}/g" postprocess_${H}x${W}.json
+    sed -i -z -e 's/{\n                  "dimValue": "138"\n                },\n                {\n                  "dimValue": "138"\n                }/{\n                  "dimValue": "'$PROTOH'"\n                },\n                {\n                  "dimValue": "'$PROTOW'"\n                }/g' postprocess_${H}x${W}.json
+
+    json2onnx \
+    --input_json_path postprocess_${H}x${W}.json \
+    --output_onnx_file_path postprocess_${H}x${W}.onnx
+
+    sam4onnx \
+    --input_onnx_file_path postprocess_${H}x${W}.onnx \
+    --output_onnx_file_path postprocess_${H}x${W}.onnx \
+    --op_name fnms_model/tf.__operators__.getitem_7/strided_slice3 \
+    --input_constants fnms_const_fold_opt__28_mod_4 int64 [1,${BOXES},1]
+    sam4onnx \
+    --input_onnx_file_path postprocess_${H}x${W}.onnx \
+    --output_onnx_file_path postprocess_${H}x${W}.onnx \
+    --op_name fnms_model/tf.__operators__.getitem_5/strided_slice \
+    --input_constants fnms_const_fold_opt__28_mod_4 int64 [1,${BOXES},1]
+    sam4onnx \
+    --input_onnx_file_path postprocess_${H}x${W}.onnx \
+    --output_onnx_file_path postprocess_${H}x${W}.onnx \
+    --op_name fnms_model/tf.__operators__.getitem_3/strided_slice \
+    --input_constants fnms_const_fold_opt__28_mod_4 int64 [1,${BOXES},1]
+    sam4onnx \
+    --input_onnx_file_path postprocess_${H}x${W}.onnx \
+    --output_onnx_file_path postprocess_${H}x${W}.onnx \
+    --op_name fnms_model/tf.__operators__.getitem_1/strided_slice \
+    --input_constants fnms_const_fold_opt__28_mod_4 int64 [1,${BOXES},1]
+
+    sam4onnx \
+    --input_onnx_file_path postprocess_${H}x${W}.onnx \
+    --output_onnx_file_path postprocess_${H}x${W}.onnx \
+    --op_name fnms_nonmaxsuppression11 \
+    --input_constants fnms_max_output_boxes_per_class int64 [10]
+    sam4onnx \
+    --input_onnx_file_path postprocess_${H}x${W}.onnx \
+    --output_onnx_file_path postprocess_${H}x${W}.onnx \
+    --op_name fnms_nonmaxsuppression11 \
+    --input_constants fnms_score_threshold float32 [0.65]
+
+    onnxsim postprocess_${H}x${W}.onnx postprocess_${H}x${W}.onnx
+    rm postprocess_${H}x${W}.json
+done
+
+
+### Merge Post-Process ###############################################
+MODELS=(
+    "yolact_base_54_800000"
+    "yolact_darknet53_54_800000"
+    "yolact_im700_54_800000"
+    "yolact_resnet50_54_800000"
+)
+RESOLUTION_LIST=(
+    "180 320"
+    "225 400"
+    "240 320"
+    "270 480"
+    "360 640"
+    "450 800"
+    "480 640"
+    "540 960"
+    "550 550"
+    "700 700"
+    "720 1280"
+)
+for((i=0; i<${#MODELS[@]}; i++))
+do
+    MODELNAME=(`echo ${MODELS[i]}`)
+    MODEL=${MODELNAME[0]}
+    for((j=0; j<${#RESOLUTION_LIST[@]}; j++))
+    do
+        HWs=(`echo ${RESOLUTION_LIST[j]}`)
+        H=${HWs[0]}
+        W=${HWs[1]}
+        echo @@@@@@@@@@@@@@@@@ processing ${MODEL}_${H}x${W} ...
+        snc4onnx \
+        --input_onnx_file_paths ${MODEL}_${H}x${W}.onnx postprocess_${H}x${W}.onnx \
+        --output_onnx_file_path ${MODEL}_${H}x${W}_post.onnx \
+        --srcop_destop box post_loc mask post_masks score post_score proto post_proto
+    done
+done
