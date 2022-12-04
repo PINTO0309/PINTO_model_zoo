@@ -1,0 +1,35 @@
+{
+  "format_version": 1,
+  "operations": [
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_decode_01_norm/FusedBatchNormV3__956",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_decode_02_norm/FusedBatchNormV3__1032",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_decode_03_norm/FusedBatchNormV3__1108",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_decode_04_norm/FusedBatchNormV3__1184",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_output_05_cyx/concat",
+      "param_target": "attributes",
+      "param_name": "axis",
+      "values": 3
+    }
+  ]
+}
