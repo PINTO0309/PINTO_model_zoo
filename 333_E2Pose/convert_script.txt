@@ -1,0 +1,1 @@
+onnx2tf -i e2epose_1x3x512x512.onnx -prf replace.json -oiqt
