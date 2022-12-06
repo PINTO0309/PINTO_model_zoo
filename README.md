@@ -153,6 +153,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |329|YOLOX-PAI|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/329_YOLOX-PAI)|||||||||||⚫||
 |331|YOLOv5L6_Ball|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/331_YOLOv5L6_Ball)|||||||||||⚫||
 |332|CrowdDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/332_CrowdDet)|||||||||||⚫||
+|334|DAMO-YOLO|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/334_DAMO-YOLO)|||||||||||⚫||
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
