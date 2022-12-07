@@ -12,21 +12,34 @@ import onnxruntime
 def get_args():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--device", type=int, default=0)
-    parser.add_argument("--movie", type=str, default=None)
-    parser.add_argument("--width", help='cap width', type=int, default=960)
-    parser.add_argument("--height", help='cap height', type=int, default=540)
+    parser.add_argument('-d', '--device', type=int, default=0)
+    parser.add_argument('-mo', '--movie', type=str, default=None)
+    parser.add_argument('-wt', '--width', help='cap width', type=int, default=960)
+    parser.add_argument('-ht', '--height', help='cap height', type=int, default=540)
 
     parser.add_argument(
-        "--model",
+        '-m',
+        '--model',
         type=str,
-        default='saved_model/e2epose_resnet50_1x3x512x512.onnx',
+        default='saved_model/e2epose_resnet101_1x3x512x512.onnx',
     )
     parser.add_argument(
+        '-s',
         '--score_th',
         type=float,
         default=0.4,
         help='Class confidence',
+    )
+    device_group = parser.add_mutually_exclusive_group()
+    device_group.add_argument(
+        '-c',
+        '--use_cuda',
+        action='store_true',
+    )
+    device_group.add_argument(
+        '-trt',
+        '--use_tensorrt',
+        action='store_true',
     )
 
     args = parser.parse_args()
@@ -34,10 +47,8 @@ def get_args():
     return args
 
 
-def run_inference(onnx_session, image, score_th=0.5):
+def run_inference(onnx_session, input_name, input_size,image, score_th=0.5):
     # ONNX Infomation
-    input_name = onnx_session.get_inputs()[0].name
-    input_size = onnx_session.get_inputs()[0].shape
     input_width = input_size[3]
     input_height = input_size[2]
     image_height, image_width = image.shape[0], image.shape[1]
@@ -86,17 +97,51 @@ def main():
 
     model_path = args.model
     score_th = args.score_th
+    use_cuda = args.use_cuda
+    use_tensorrt = args.use_tensorrt
 
     # Initialize video capture
     cap = cv2.VideoCapture(cap_device)
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, cap_width)
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, cap_height)
+    cap_fps = cap.get(cv2.CAP_PROP_FPS)
+    fourcc = cv2.VideoWriter_fourcc('m','p','4','v')
+    video_writer = cv2.VideoWriter(
+        filename='output.mp4',
+        fourcc=fourcc,
+        fps=cap_fps,
+        frameSize=(cap_width, cap_height),
+    )
 
     # Load model
+    providers = None
+    if not use_cuda and not use_tensorrt:
+        providers = [
+            'CPUExecutionProvider',
+        ]
+    elif use_cuda:
+        providers = [
+            'CUDAExecutionProvider',
+            'CPUExecutionProvider',
+        ]
+    elif use_tensorrt:
+        providers = [
+            (
+                'TensorrtExecutionProvider', {
+                    'trt_engine_cache_enable': True,
+                    'trt_engine_cache_path': '.',
+                    'trt_fp16_enable': True,
+                }
+            ),
+            'CUDAExecutionProvider',
+            'CPUExecutionProvider',
+        ]
     onnx_session = onnxruntime.InferenceSession(
         model_path,
-        providers=['CPUExecutionProvider'],
+        providers=providers,
     )
+    input_name = onnx_session.get_inputs()[0].name
+    input_size = onnx_session.get_inputs()[0].shape
 
     while True:
         start_time = time.time()
@@ -110,6 +155,8 @@ def main():
         # Inference execution
         results = run_inference(
             onnx_session,
+            input_name,
+            input_size,
             frame,
             score_th=score_th,
         )
@@ -124,11 +171,15 @@ def main():
         )
 
         cv2.imshow('E2Pose ONNX Sample', debug_image)
+        video_writer.write(debug_image)
         key = cv2.waitKey(1)
         if key == 27:  # ESC
             break
 
-    cap.release()
+    if video_writer:
+        video_writer.release()
+    if cap:
+        cap.release()
     cv2.destroyAllWindows()
 
 
