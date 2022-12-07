@@ -13,3 +13,13 @@ If you want to change the model, specify it with an argument.
         default='saved_model/e2epose_1x3x512x512_post.onnx',
     )
 ```
+
+- CUDA
+    
+    https://user-images.githubusercontent.com/33194443/206191133-5aac3b34-d74f-403d-9ce9-90cc0bccc96e.mp4
+
+
+- TensorRT
+    
+    https://user-images.githubusercontent.com/33194443/206191168-3a651c20-7e50-4920-9ca9-8b77d678cbda.mp4
+
