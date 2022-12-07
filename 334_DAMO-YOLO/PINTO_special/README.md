@@ -27,7 +27,7 @@
   --input_onnx_file_path nms_base_component.onnx \
   --output_onnx_file_path nms_base_component.onnx \
   --op_name nonmaxsuppression11 \
-  --input_constants iou_threshold float32 [0.7]
+  --input_constants iou_threshold float32 [0.5]
   ```
   or
   ```bash
@@ -35,7 +35,7 @@
   --input_onnx_file_path damoyolo_tinynasL35_M_640x640.onnx \
   --output_onnx_file_path damoyolo_tinynasL35_M_640x640.onnx \
   --op_name nonmaxsuppression11 \
-  --input_constants iou_threshold float32 [0.7]
+  --input_constants iou_threshold float32 [0.5]
   ```
 ## 3. score_threshold
   Threshold of scores to be detected for banding boxes. The closer the value is to 1.0, the faster the overall post-processing speed.
@@ -44,7 +44,7 @@
   --input_onnx_file_path nms_base_component.onnx \
   --output_onnx_file_path nms_base_component.onnx \
   --op_name nonmaxsuppression11 \
-  --input_constants score_threshold float32 [0.25]
+  --input_constants score_threshold float32 [0.75]
   ```
   or
   ```bash
@@ -52,5 +52,5 @@
   --input_onnx_file_path damoyolo_tinynasL35_M_640x640.onnx \
   --output_onnx_file_path damoyolo_tinynasL35_M_640x640.onnx \
   --op_name nonmaxsuppression11 \
-  --input_constants score_threshold float32 [0.25]
+  --input_constants score_threshold float32 [0.75]
   ```
