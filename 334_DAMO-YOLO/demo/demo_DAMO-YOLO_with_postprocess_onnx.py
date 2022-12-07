@@ -60,21 +60,64 @@ def main():
         default='damoyolo_tinynasL20_T_192x320_post.onnx',
     )
     parser.add_argument("--score_th", type=float, default=0.4)
+    device_group = parser.add_mutually_exclusive_group()
+    device_group.add_argument(
+        '--use_cuda',
+        action='store_true',
+    )
+    device_group.add_argument(
+        '--use_tensorrt',
+        action='store_true',
+    )
 
     args = parser.parse_args()
     model_path = args.model
     score_th = args.score_th
+    use_cuda = args.use_cuda
+    use_tensorrt = args.use_tensorrt
 
     # Initialize video capture
     cap_device = args.device
     if args.movie is not None:
         cap_device = args.movie
     cap = cv.VideoCapture(cap_device)
+    cap_height = int(cap.get(cv.CAP_PROP_FRAME_HEIGHT))
+    cap_width = int(cap.get(cv.CAP_PROP_FRAME_WIDTH))
+    cap_fps = cap.get(cv.CAP_PROP_FPS)
+    fourcc = cv.VideoWriter_fourcc('m','p','4','v')
+    video_writer = cv.VideoWriter(
+        filename='output.mp4',
+        fourcc=fourcc,
+        fps=cap_fps,
+        frameSize=(cap_width, cap_height),
+    )
 
     # Load model
+    providers = None
+    if not use_cuda and not use_tensorrt:
+        providers = [
+            'CPUExecutionProvider',
+        ]
+    elif use_cuda:
+        providers = [
+            'CUDAExecutionProvider',
+            'CPUExecutionProvider',
+        ]
+    elif use_tensorrt:
+        providers = [
+            (
+                'TensorrtExecutionProvider', {
+                    'trt_engine_cache_enable': True,
+                    'trt_engine_cache_path': '.',
+                    'trt_fp16_enable': True,
+                }
+            ),
+            'CUDAExecutionProvider',
+            'CPUExecutionProvider',
+        ]
     onnx_session = onnxruntime.InferenceSession(
         model_path,
-        providers=['CPUExecutionProvider'],
+        providers=providers,
     )
 
     while True:
@@ -110,12 +153,16 @@ def main():
             cv.putText(debug_image, '%d:%.2f' % (class_id, score),
                        (x1, y1 - 5), 0, 0.7, (0, 255, 0), 2)
 
+        video_writer.write(debug_image)
         key = cv.waitKey(1)
         if key == 27:  # ESC
             break
         cv.imshow('DAMO-YOLO ONNX', debug_image)
 
-    cap.release()
+    if video_writer:
+        video_writer.release()
+    if cap:
+        cap.release()
     cv.destroyAllWindows()
 
 
