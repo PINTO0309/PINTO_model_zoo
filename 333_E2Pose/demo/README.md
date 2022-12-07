@@ -10,7 +10,7 @@ If you want to change the model, specify it with an argument.
     parser.add_argument(
         "--model",
         type=str,
-        default='saved_model/e2epose_1x3x512x512_post.onnx',
+        default='saved_model/e2epose_resnet101_1x3x512x512.onnx',
     )
 ```
 
