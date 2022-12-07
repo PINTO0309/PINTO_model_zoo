@@ -20,7 +20,7 @@ def get_args():
     parser.add_argument(
         "--model",
         type=str,
-        default='saved_model/e2epose_1x3x512x512_post.onnx',
+        default='saved_model/e2epose_resnet50_1x3x512x512.onnx',
     )
     parser.add_argument(
         '--score_th',
