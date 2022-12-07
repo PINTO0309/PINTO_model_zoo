@@ -15,10 +15,6 @@ sam4onnx \
 --op_name nonmaxsuppression11 \
 --input_constants score_threshold float32 [0.25]
 
-
-json2onnx \
---input_json_path nms_base_component.json \
---output_onnx_file_path nms_base_component.onnx
 ####################################################################################################
 MODEL_LIST=(
     "damoyolo_tinynasL20_T"
