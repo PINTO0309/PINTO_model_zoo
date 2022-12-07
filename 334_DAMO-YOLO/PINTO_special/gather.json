@@ -1,0 +1,84 @@
+{
+  "irVersion": "6",
+  "producerName": "pytorch",
+  "producerVersion": "1.13.0",
+  "graph": {
+    "node": [
+      {
+        "input": [
+          "post_gather_input",
+          "post_gather_boxes_1"
+        ],
+        "output": [
+          "post_gateher_output"
+        ],
+        "name": "post_gather_boxes_3_1",
+        "opType": "Gather",
+        "attribute": [
+          {
+            "name": "axis",
+            "i": "1",
+            "type": "INT"
+          }
+        ]
+      }
+    ],
+    "name": "torch_jit",
+    "initializer": [
+      {
+        "dims": [
+          "2"
+        ],
+        "dataType": 7,
+        "name": "post_gather_boxes_1",
+        "rawData": "AAAAAAAAAAACAAAAAAAAAA=="
+      }
+    ],
+    "input": [
+      {
+        "name": "post_gather_input",
+        "type": {
+          "tensorType": {
+            "elemType": 7,
+            "shape": {
+              "dim": [
+                {
+                  "dimParam": "N"
+                },
+                {
+                  "dimValue": "3"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "output": [
+      {
+        "name": "post_gateher_output",
+        "type": {
+          "tensorType": {
+            "elemType": 7,
+            "shape": {
+              "dim": [
+                {
+                  "dimParam": "N"
+                },
+                {
+                  "dimValue": "2"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "opsetImport": [
+    {
+      "domain": "",
+      "version": "11"
+    }
+  ]
+}

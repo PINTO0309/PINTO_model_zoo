@@ -1,0 +1,85 @@
+################################################## Change NMS parameters
+sam4onnx \
+--input_onnx_file_path nms_base_component.onnx \
+--output_onnx_file_path nms_base_component.onnx \
+--op_name nonmaxsuppression11 \
+--input_constants max_output_boxes_per_class int64 [20]
+sam4onnx \
+--input_onnx_file_path nms_base_component.onnx \
+--output_onnx_file_path nms_base_component.onnx \
+--op_name nonmaxsuppression11 \
+--input_constants iou_threshold float32 [0.7]
+sam4onnx \
+--input_onnx_file_path nms_base_component.onnx \
+--output_onnx_file_path nms_base_component.onnx \
+--op_name nonmaxsuppression11 \
+--input_constants score_threshold float32 [0.25]
+
+
+json2onnx \
+--input_json_path nms_base_component.json \
+--output_onnx_file_path nms_base_component.onnx
+####################################################################################################
+MODEL_LIST=(
+    "damoyolo_tinynasL20_T"
+    "damoyolo_tinynasL25_S"
+    "damoyolo_tinynasL35_M"
+)
+RESOLUTION_LIST=(
+    "192 192 756"
+    "192 320 1260"
+    "256 320 1680"
+    "256 416 2184"
+    "288 480 2835"
+    "320 320 2100"
+    "384 640 5040"
+    "416 416 3549"
+    "480 640 6300"
+    "480 800 7875"
+    "640 640 8400"
+    "736 1280 19320"
+)
+################################################## NMS ONNX to json
+onnx2json \
+--input_onnx_file_path nms_base_component.onnx \
+--output_json_path nms_base_component.json \
+--json_indent 2
+
+################################################## Post-Process gen
+for((i=0; i<${#RESOLUTION_LIST[@]}; i++))
+do
+    RESOLUTION=(`echo ${RESOLUTION_LIST[i]}`)
+    H=${RESOLUTION[0]}
+    W=${RESOLUTION[1]}
+    BOXES=${RESOLUTION[2]}
+
+    cp nms_base_component.json postprocess_${BOXES}.json
+    sed -i -e 's/"756"/'$BOXES'/g' postprocess_${BOXES}.json
+    json2onnx \
+    --input_json_path postprocess_${BOXES}.json \
+    --output_onnx_file_path postprocess_${BOXES}.onnx
+    rm postprocess_${BOXES}.json
+done
+
+################################################## Merge Post-Process
+for((i=0; i<${#MODEL_LIST[@]}; i++))
+do
+    MODEL=(`echo ${MODEL_LIST[i]}`)
+    MODELNAME=${MODEL[0]}
+    for((j=0; j<${#RESOLUTION_LIST[@]}; j++))
+    do
+        RESOLUTION=(`echo ${RESOLUTION_LIST[j]}`)
+        H=${RESOLUTION[0]}
+        W=${RESOLUTION[1]}
+        BOXES=${RESOLUTION[2]}
+        echo @@@@@@@@@@@@@@@@@ processing ${MODELNAME}_${H}x${W} ...
+        snc4onnx \
+        --input_onnx_file_paths ${MODELNAME}_${H}x${W}.onnx postprocess_${BOXES}.onnx \
+        --output_onnx_file_path ${MODELNAME}_${H}x${W}_post.onnx \
+        --srcop_destop boxes post_boxes scores post_scores
+    done
+done
+
+
+
+
