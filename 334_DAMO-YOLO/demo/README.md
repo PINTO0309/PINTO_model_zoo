@@ -17,7 +17,7 @@ If you want to change the model, specify it with an argument.
 A model with post-processing runs like this.<br>
 
 ```
-python demo_DAMO-YOLO_onnx.py
+python demo_DAMO-YOLO_with_postprocess_onnx.py
 ```
 
 If you want to change the model, specify it with an argument.
