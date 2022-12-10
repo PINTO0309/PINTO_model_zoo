@@ -79,5 +79,6 @@ If you want to change the model, specify it with an argument.
     find . -name "*.whl"
     ./build/Linux/Release/dist/onnxruntime_gpu-1.12.0-cp38-cp38-linux_x86_64.whl
 
+    sudo pip uninstall onnxruntime onnxruntime-gpu
     pip install ./build/Linux/Release/dist/onnxruntime_gpu-*.whl
     ```
