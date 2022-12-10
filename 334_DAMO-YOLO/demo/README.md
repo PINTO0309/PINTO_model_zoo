@@ -36,7 +36,33 @@ If you want to change the model, specify it with an argument.
 - onnxruntime-gpu build (Generation of onnxruntime-gpu installers that match the CUDA version and TensorRT version of your environment)
   - If the build fails, OutOfMemory is most likely occurring. Therefore, change `--parallel $(nproc)` to a number such as `--parallel 4` or `--parallel 2` to adjust the number of parallel builds.
   - I dare to use TensorRT 8.4.0 EA because TensorRT 8.4.1+ has a problem that significantly degrades FP16 accuracy.
-  - For Windows: https://onnxruntime.ai/docs/build/custom.html#build-on-windows-with-reduced-operator-support-and-support-for-ort-format-models-only
+  - The version of onnxruntime obtained from GitHub is usually fine as long as it is a newer version.
+  - For Windows:
+  
+    ```
+    git clone -b v1.13.1 https://github.com/microsoft/onnxruntime.git
+    cd onnxruntime
+
+    pip install -U cmake
+
+    .\build.bat ^
+    --config=Release ^
+    --cmake_generator="Visual Studio 16 2019" ^
+    --build_shared_lib ^
+    --cudnn_home "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.4" ^
+    --cuda_home "C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.4" ^
+    --use_tensorrt ^
+    --use_cuda ^
+    --cuda_version 11.4 ^
+    --tensorrt_home "C:\Program Files\TensorRT-8.4.0.6" ^
+    --enable_pybind ^
+    --build_wheel ^
+    --enable_reduced_operator_type_support ^
+    --skip_tests
+    
+    pip uninstall onnxruntime onnxruntime-gpu
+    pip install -U .\build\Windows\Release\Release\dist\onnxruntime_gpu-1.13.1-cp39-cp39-win_amd64.whl
+    ```
   - For Linux:
 
     ```
