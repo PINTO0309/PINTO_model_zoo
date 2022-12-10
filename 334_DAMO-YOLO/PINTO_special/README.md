@@ -15,8 +15,8 @@
   or
   ```
   sam4onnx \
-  --input_onnx_file_path damoyolo_tinynasL35_M_640x640.onnx \
-  --output_onnx_file_path damoyolo_tinynasL35_M_640x640.onnx \
+  --input_onnx_file_path damoyolo_tinynasL35_M_640x640_post.onnx \
+  --output_onnx_file_path damoyolo_tinynasL35_M_640x640_post.onnx \
   --op_name nonmaxsuppression11 \
   --input_constants max_output_boxes_per_class int64 [5]
   ```
@@ -32,8 +32,8 @@
   or
   ```bash
   sam4onnx \
-  --input_onnx_file_path damoyolo_tinynasL35_M_640x640.onnx \
-  --output_onnx_file_path damoyolo_tinynasL35_M_640x640.onnx \
+  --input_onnx_file_path damoyolo_tinynasL35_M_640x640_post.onnx \
+  --output_onnx_file_path damoyolo_tinynasL35_M_640x640_post.onnx \
   --op_name nonmaxsuppression11 \
   --input_constants iou_threshold float32 [0.5]
   ```
@@ -49,8 +49,8 @@
   or
   ```bash
   sam4onnx \
-  --input_onnx_file_path damoyolo_tinynasL35_M_640x640.onnx \
-  --output_onnx_file_path damoyolo_tinynasL35_M_640x640.onnx \
+  --input_onnx_file_path damoyolo_tinynasL35_M_640x640_post.onnx \
+  --output_onnx_file_path damoyolo_tinynasL35_M_640x640_post.onnx \
   --op_name nonmaxsuppression11 \
   --input_constants score_threshold float32 [0.75]
   ```
