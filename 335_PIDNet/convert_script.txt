@@ -1,0 +1,11 @@
+### Float32 + Float16
+onnx2tf -i pidnet_S_camvid_384x640.onnx
+
+### Float32 + Float16 + FusedArgMax
+onnx2tf -i pidnet_S_camvid_384x640.onnx -rafi64
+
+### Float32 + Float16 + FusedArgMax (scale ratio 0.25)
+onnx2tf -i pidnet_S_camvid_384x640.onnx -rafi64 -fasr 0.25
+
+### INT8 Quantization + FusedArgMax
+onnx2tf -i pidnet_S_camvid_384x640.onnx -rafi64 -oiqt
