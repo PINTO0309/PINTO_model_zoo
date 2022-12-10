@@ -4,6 +4,8 @@ Specifying a Float32 value for the reduction ratio in `fused_argmax_scale_ratio`
 
 See. https://github.com/tensorflow/models/tree/master/official/projects/edgetpu/vision#argmax-fusion-to-improve-segmentation-model-latency
 
+![image](https://user-images.githubusercontent.com/33194443/206860685-5ae497c9-37e4-4820-9ee9-a5a38301cd61.png)
+
 ```
 inputs:
   input: float32 [N,C,H,W]
