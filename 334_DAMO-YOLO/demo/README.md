@@ -34,6 +34,7 @@ If you want to change the model, specify it with an argument.
     https://user-images.githubusercontent.com/33194443/206323392-28ac9707-8c12-4431-870b-a90399955b83.mp4
 
 - onnxruntime-gpu build (Generation of onnxruntime-gpu installers that match the CUDA version and TensorRT version of your environment)
+  - If the build fails, OutOfMemory is most likely occurring. Therefore, change `--parallel $(nproc)` to a number such as `--parallel 4` or `--parallel 2` to adjust the number of parallel builds.
 
     ```
     git clone https://github.com/microsoft/onnxruntime.git \
