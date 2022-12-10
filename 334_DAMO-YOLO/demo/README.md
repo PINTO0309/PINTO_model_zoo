@@ -36,6 +36,8 @@ If you want to change the model, specify it with an argument.
 - onnxruntime-gpu build (Generation of onnxruntime-gpu installers that match the CUDA version and TensorRT version of your environment)
   - If the build fails, OutOfMemory is most likely occurring. Therefore, change `--parallel $(nproc)` to a number such as `--parallel 4` or `--parallel 2` to adjust the number of parallel builds.
   - I dare to use TensorRT 8.4.0 EA because TensorRT 8.4.1+ has a problem that significantly degrades FP16 accuracy.
+  - For Windows: https://onnxruntime.ai/docs/build/custom.html#build-on-windows-with-reduced-operator-support-and-support-for-ort-format-models-only
+  - For Linux:
 
     ```
     git clone https://github.com/microsoft/onnxruntime.git \
