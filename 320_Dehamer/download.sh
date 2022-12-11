@@ -1,8 +1,6 @@
 #!/bin/bash
 
-fileid="1l0VQMLOqdE8TrUL30hqUz3g2i1mdvkxz"
-html=`curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}"`
-curl -Lb ./cookie "https://drive.google.com/uc?export=download&`echo ${html}|grep -Po '(confirm=[a-zA-Z0-9\-_]+)'`&id=${fileid}" -o resources.tar.gz
+curl "https://s3.ap-northeast-2.wasabisys.com/pinto-model-zoo/320_Dehamer/resources.tar.gz" -o resources.tar.gz
 tar -zxvf resources.tar.gz
 rm resources.tar.gz
 
