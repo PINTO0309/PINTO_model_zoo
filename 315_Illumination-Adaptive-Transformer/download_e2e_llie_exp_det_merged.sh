@@ -1,8 +1,6 @@
 #!/bin/bash
 
-fileid="1_jfHtYtW6AdFMV5QiHMk7ebFPtLGc8dr"
-html=`curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}"`
-curl -Lb ./cookie "https://drive.google.com/uc?export=download&`echo ${html}|grep -Po '(confirm=[a-zA-Z0-9\-_]+)'`&id=${fileid}" -o resources.tar.gz
+curl "https://s3.ap-northeast-2.wasabisys.com/pinto-model-zoo/315_Illumination-Adaptive-Transformer/resources_e2e_llie_exp_det.tar.gz" -o resources.tar.gz
 tar -zxvf resources.tar.gz
 rm resources.tar.gz
 
