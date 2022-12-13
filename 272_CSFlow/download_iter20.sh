@@ -1,8 +1,6 @@
 #!/bin/bash
 
-fileid="1mjYegy8kMVtLn7u2v4D_EVU77ciEqdcD"
-html=`curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}"`
-curl -Lb ./cookie "https://drive.google.com/uc?export=download&`echo ${html}|grep -Po '(confirm=[a-zA-Z0-9\-_]+)'`&id=${fileid}" -o resources.tar.gz
+curl "https://s3.ap-northeast-2.wasabisys.com/pinto-model-zoo/272_CSFlow/02_ITER_20/resources.tar.gz" -o resources.tar.gz
 tar -zxvf resources.tar.gz
 rm resources.tar.gz
 
