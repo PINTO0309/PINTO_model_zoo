@@ -1,4 +1,8 @@
 # Note
+- Demo - FreeYOLO Nano 192x320 PINTO_special - Corei9 Gen.10 CPU
+
+  https://user-images.githubusercontent.com/33194443/207495316-31b4f2ff-7ba6-49ef-af79-a84c7d02e216.mp4
+
 - Demo - FreeYOLO Nano 640x640 PINTO_special - Corei9 Gen.10 CPU
 
   https://user-images.githubusercontent.com/33194443/207490809-cd41b658-01dc-4bab-a02a-4092cc58f38b.mp4
