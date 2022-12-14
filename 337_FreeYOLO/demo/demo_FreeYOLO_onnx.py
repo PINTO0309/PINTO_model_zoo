@@ -340,7 +340,7 @@ def main():
         )
 
         cv2.imshow('FreeYOLO ONNX Sample', debug_image)
-        key = cv2.waitKey(1)
+        key = cv2.waitKey(1) if isinstance(cap_device, int) else cv2.waitKey(0)
         if key == 27:  # ESC
             break
 
