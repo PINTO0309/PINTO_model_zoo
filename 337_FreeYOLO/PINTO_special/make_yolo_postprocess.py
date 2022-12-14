@@ -46,6 +46,7 @@ class Model(nn.Module):
             anchor_x, anchor_y = torch.meshgrid(
                 torch.arange(fmp_w),
                 torch.arange(fmp_h),
+                indexing='xy',
             )
             # [H, W, 2]
             anchor_xy = torch.stack([anchor_x, anchor_y], axis=-1)
