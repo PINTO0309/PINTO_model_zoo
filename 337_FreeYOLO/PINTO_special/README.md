@@ -17,6 +17,17 @@ pip install -U onnx \
 && pip install -U onnx2tf
 ```
 
+```
+# Optional
+sudo pip unisntall -y onnxruntime onnxruntime-gpu
+
+pip install -U onnxruntime
+
+or
+
+pip install -U onnxruntime-gpu
+```
+
 ## 1. max_output_boxes_per_class
   Value that controls the maximum number of bounding boxes output per class. The closer the value is to 1, the faster the overall post-processing speed.
   ```
