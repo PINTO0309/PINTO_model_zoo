@@ -7,6 +7,16 @@
 ![image](https://user-images.githubusercontent.com/33194443/207271656-0b7fc7ca-aadb-4d3c-b18c-388bd60c687d.png)
 
 # How to change NMS parameter
+## Tools Install
+```
+pip install -U onnx \
+&& pip install -U nvidia-pyindex \
+&& pip install -U onnx-graphsurgeon \
+&& pip install -U onnxsim \
+&& pip install -U simple_onnx_processing_tools \
+&& pip install -U onnx2tf
+```
+
 ## 1. max_output_boxes_per_class
   Value that controls the maximum number of bounding boxes output per class. The closer the value is to 1, the faster the overall post-processing speed.
   ```
