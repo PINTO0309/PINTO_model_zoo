@@ -37,6 +37,7 @@ or
   - If the build fails, OutOfMemory is most likely occurring. Therefore, change `--parallel $(nproc)` to a number such as `--parallel 4` or `--parallel 2` to adjust the number of parallel builds.
   - I dare to use TensorRT 8.4.0 EA because TensorRT 8.4.1+ has a problem that significantly degrades FP16 accuracy.
   - The version of onnxruntime obtained from GitHub is usually fine as long as it is a newer version.
+  - The versions of onnxruntime, CUDA and TensorRT are for reference. Any version can be used.
   - For Windows:
   
     ```
