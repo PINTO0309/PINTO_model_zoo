@@ -162,3 +162,92 @@ do
         --srcop_destop output post_input
     done
 done
+
+
+####################################################################################################
+####################################################################################################
+####################################################################################################
+MODEL_LIST=(
+    "yolo_free_nano_widerface"
+    "yolo_free_tiny_widerface"
+)
+RESOLUTION_LIST=(
+    "192 192 756 1"
+    "192 320 1260 1"
+    "256 320 1680 1"
+    "256 416 2184 1"
+    "288 480 2835 1"
+    "320 320 2100 1"
+    "384 640 5040 1"
+    "416 416 3549 1"
+    "480 640 6300 1"
+    "480 800 7875 1"
+    "544 960 10710 1"
+    "640 640 8400 1"
+    "736 1280 19320 1"
+)
+
+################################################## Base Component gen
+onnx2json \
+--input_onnx_file_path nms_base_component.onnx \
+--output_json_path nms_base_component.json \
+--json_indent 2
+
+################################################## Post-Process + NMS gen
+for((i=0; i<${#RESOLUTION_LIST[@]}; i++))
+do
+    RESOLUTION=(`echo ${RESOLUTION_LIST[i]}`)
+    H=${RESOLUTION[0]}
+    W=${RESOLUTION[1]}
+    BOXES=${RESOLUTION[2]}
+    CLASSES=${RESOLUTION[3]}
+
+    python make_yolo_postprocess.py \
+    --opset 11 \
+    --model_input_shape 1 3 ${H} ${W} \
+    --strides 8 16 32 \
+    --classes ${CLASSES} \
+    --boxes ${BOXES}
+
+    cp nms_base_component.json postprocess_${BOXES}.json
+    sed -i -e 's/"1260"/'$BOXES'/g' postprocess_${BOXES}.json
+    sed -i -e 's/"80"/'$CLASSES'/g' postprocess_${BOXES}.json
+    json2onnx \
+    --input_json_path postprocess_${BOXES}.json \
+    --output_onnx_file_path postprocess_${BOXES}.onnx
+    rm postprocess_${BOXES}.json
+
+    snc4onnx \
+    --input_onnx_file_paths postprocess_anchors_${BOXES}.onnx postprocess_${BOXES}.onnx \
+    --output_onnx_file_path postprocess_${BOXES}.onnx \
+    --srcop_destop bboxes_xyxy post_boxes scores post_scores
+
+    rm postprocess_anchors_${BOXES}.onnx
+done
+
+
+################################################## Model + Post-Process merge
+for((i=0; i<${#MODEL_LIST[@]}; i++))
+do
+    MODEL=(`echo ${MODEL_LIST[i]}`)
+    MODELNAME=${MODEL[0]}
+    for((j=0; j<${#RESOLUTION_LIST[@]}; j++))
+    do
+        RESOLUTION=(`echo ${RESOLUTION_LIST[j]}`)
+        H=${RESOLUTION[0]}
+        W=${RESOLUTION[1]}
+        BOXES=${RESOLUTION[2]}
+        CLASSES=${RESOLUTION[3]}
+        echo @@@@@@@@@@@@@@@@@ processing ${MODELNAME}_${H}x${W} ...
+        snc4onnx \
+        --input_onnx_file_paths ${MODELNAME}_${H}x${W}.onnx postprocess_${BOXES}.onnx \
+        --output_onnx_file_path ${MODELNAME}_${H}x${W}_post.onnx \
+        --srcop_destop output post_input
+
+        sam4onnx \
+        --input_onnx_file_path ${MODELNAME}_${H}x${W}_post.onnx \
+        --output_onnx_file_path ${MODELNAME}_${H}x${W}_post.onnx \
+        --op_name post_nms_NonMaxSuppression \
+        --input_constants max_output_boxes_per_class int64 [200]
+    done
+done
