@@ -85,6 +85,8 @@ done
 ####################################################################################################
 MODEL_LIST=(
     "yolo_free_nano_crowdhuman"
+    "yolo_free_tiny_crowdhuman"
+    "yolo_free_large_crowdhuman"
 )
 RESOLUTION_LIST=(
     "192 192 756 1"
