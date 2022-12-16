@@ -170,6 +170,7 @@ done
 MODEL_LIST=(
     "yolo_free_nano_widerface"
     "yolo_free_tiny_widerface"
+    "yolo_free_large_widerface"
 )
 RESOLUTION_LIST=(
     "192 192 756 1"
