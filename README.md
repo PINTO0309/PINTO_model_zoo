@@ -152,6 +152,10 @@ I have been working on quantization of various models as a hobby, but I have ski
 |308|FastestDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/308_FastestDet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|180x320,256x320,320x480,352x352,352x640,480x640,736x1280|
 |329|YOLOX-PAI|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/329_YOLOX-PAI)|||||||||||⚫||
 |331|YOLOv5L6_Ball|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/331_YOLOv5L6_Ball)|||||||||||⚫||
+|332|CrowdDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/332_CrowdDet)|||||||||||⚫||
+|334|DAMO-YOLO|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/334_DAMO-YOLO)|||||||||||⚫||
+|336|PP-YOLOE-Plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/336_PP-YOLOE-Plus)|||||||||||⚫||
+|337|FreeYOLO|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/337_FreeYOLO)|||||||||||⚫||
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -216,6 +220,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |268|Lite-HRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/268_Lite-HRNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|COCO,MPII/Top-Down|
 |269|Higher-HRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/269_Higher-HRNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|192x320,256x320,320x480,384x640,480x640,512x512,576x960,736x1280/Bottom-Up|
 |271|HRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/271_HRNet)|||||||||||⚫|COCO,MPII/Top-Down|
+|333|E2Pose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/333_E2Pose)|⚫|⚫|⚫||⚫||||||⚫|COCO/CrowdPose,End-to-End|
 ### 7. Depth Estimation from Monocular/Stereo Images
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -296,6 +301,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |295|SparseInst|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/295_SparseInst)|||||||⚫||||⚫|r50_giam_aug/192x384,384x384,384x576,384x768,576x576,576x768,768x1344|
 |299|DGNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/299_DGNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫||
 |313|IS-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/313_IS-Net)|||||||||||⚫|180x320,240x320,320x480,360x640,480x640,720x1280,1080x1920,1080x2048,2160x4096,N-batch,Dynamic-HeightxWidth|
+|335|PIDNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/335_PIDNet)|||||||||||⚫|Cityscapes,CamVid/Dynamic-HeightxWidth|
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|

@@ -1,0 +1,119 @@
+{
+  "format_version": 1,
+  "operations": [
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_decode_01_norm/FusedBatchNormV3__930",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_decode_02_norm/FusedBatchNormV3__1055",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_decode_03_norm/FusedBatchNormV3__1180",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_decode_04_norm/FusedBatchNormV3__1305",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_decode_02_p_seed/Conv2D__1065",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_decode_03_p_seed/Conv2D__1190",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_decode_04_p_seed/Conv2D__1315",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_decode_05_p_seed/Conv2D__1408",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_output_04_cyx_seed_split/split",
+      "param_target": "attributes",
+      "param_name": "axis",
+      "values": 3
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_output_03_cyx_seed_split/split",
+      "param_target": "attributes",
+      "param_name": "axis",
+      "values": 3
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_output_02_cyx_seed_split/split",
+      "param_target": "attributes",
+      "param_name": "axis",
+      "values": 3
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_output_01_cyx_seed_split/split",
+      "param_target": "attributes",
+      "param_name": "axis",
+      "values": 3
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_output_05_cyx_seed_split/split",
+      "param_target": "attributes",
+      "param_name": "axis",
+      "values": 3
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_output_04_cyx/concat",
+      "param_target": "attributes",
+      "param_name": "axis",
+      "values": 3
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_output_03_cyx/concat",
+      "param_target": "attributes",
+      "param_name": "axis",
+      "values": 3
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_output_02_cyx/concat",
+      "param_target": "attributes",
+      "param_name": "axis",
+      "values": 3
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_output_01_cyx/concat",
+      "param_target": "attributes",
+      "param_name": "axis",
+      "values": 3
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_output_05_cyx/concat",
+      "param_target": "attributes",
+      "param_name": "axis",
+      "values": 3
+    },
+    {
+      "op_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_output_04_cyx_reshape/Reshape",
+      "param_target": "inputs",
+      "param_name": "e2pose/E2Pose_Inference/E2Pose_pose_stage00_output_04_cyx/concat:0",
+      "pre_process_transpose_perm": [0,2,3,1]
+    }
+  ]
+}
