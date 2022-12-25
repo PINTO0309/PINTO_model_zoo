@@ -1,0 +1,202 @@
+{
+  "format_version": 1,
+  "operations": [
+    {
+      "op_name": "/Slice",
+      "param_target": "op",
+      "begin": [0,0,1,0],
+      "end": [0,0,0,0],
+      "end_mask": 15
+    },
+    {
+      "op_name": "/Slice_1",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,39,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_5",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,38,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_9",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,37,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_13",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,36,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_17",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,35,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_21",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,34,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_25",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,33,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_29",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,32,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_33",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,31,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_37",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,30,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_41",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,29,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_45",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,28,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_49",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,27,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_53",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,26,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_57",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,25,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_61",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,24,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_65",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,23,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_69",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,22,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_73",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,21,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_77",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,20,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_81",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,19,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_85",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,18,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Slice_89",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,17,0],
+      "end_mask": 11
+    },
+    {
+      "op_name": "/Unsqueeze_129",
+      "param_target": "inputs",
+      "param_name": "/stem_4/stem_4.3/Relu_output_0",
+      "pre_process_transpose_perm": [0,3,1,2]
+    },
+    {
+      "op_name": "/Unsqueeze_129",
+      "param_target": "op",
+      "new_shape": [1,48,1,48,80]
+    },
+    {
+      "op_name": "/ReduceMean_24",
+      "param_target": "outputs",
+      "param_name": "/ReduceMean_24_output_0",
+      "post_process_transpose_perm": [0,2,3,1]
+    },
+    {
+      "op_name": "/Tile_5",
+      "param_target": "outputs",
+      "param_name": "/Tile_5_output_0",
+      "post_process_transpose_perm": [0,4,1,2,3]
+    },
+    {
+      "op_name": "/Concat_62",
+      "param_target": "outputs",
+      "param_name": "/Concat_62_output_0",
+      "post_process_transpose_perm": [0,2,3,4,1]
+    }
+  ]
+}
