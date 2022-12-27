@@ -463,6 +463,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |324|Ultra-Fast-Lane-Detection-v2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/324_Ultra-Fast-Lane-Detection-v2)|||||||||||⚫||
 |326|YOLOPv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/326_YOLOPv2)|⚫|⚫|||⚫|⚫|⚫||||⚫||
 |328|Stable_Diffusion|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/328_Stable_Diffusion)|||||||||||⚫||
+|339|DeepLSD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/339_DeepLSD)|||||||||||⚫||
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)
