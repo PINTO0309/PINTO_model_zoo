@@ -1,0 +1,34 @@
+{
+  "format_version": 1,
+  "operations": [
+    {
+      "op_name": "/Unsqueeze_129",
+      "param_target": "inputs",
+      "param_name": "/stem_4/stem_4.3/Relu_output_0",
+      "pre_process_transpose_perm": [0,3,1,2]
+    },
+    {
+      "op_name": "/Unsqueeze_129",
+      "param_target": "op",
+      "new_shape": [1,48,1,48,80]
+    },
+    {
+      "op_name": "/ReduceMean_24",
+      "param_target": "outputs",
+      "param_name": "/ReduceMean_24_output_0",
+      "post_process_transpose_perm": [0,2,3,1]
+    },
+    {
+      "op_name": "/Tile_5",
+      "param_target": "outputs",
+      "param_name": "/Tile_5_output_0",
+      "post_process_transpose_perm": [0,4,1,2,3]
+    },
+    {
+      "op_name": "/Concat_62",
+      "param_target": "outputs",
+      "param_name": "/Concat_62_output_0",
+      "post_process_transpose_perm": [0,2,3,4,1]
+    }
+  ]
+}
