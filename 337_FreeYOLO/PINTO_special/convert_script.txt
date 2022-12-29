@@ -3,6 +3,7 @@ MODEL_LIST=(
     "yolo_free_nano"
     "yolo_free_tiny"
     "yolo_free_large"
+    "yolo_free_huge"
 )
 RESOLUTION_LIST=(
     "192 192 756 80"
