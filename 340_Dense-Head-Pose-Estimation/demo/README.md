@@ -40,4 +40,6 @@ parser.add_argument(
 )
 ```
 
+- CPU, CUDA, TensorRT
+
 https://user-images.githubusercontent.com/33194443/210041220-b1810699-f04d-4c94-9eee-9d58754fbe4f.mp4
