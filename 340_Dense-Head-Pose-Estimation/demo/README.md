@@ -1,4 +1,4 @@
-# [WIP] Demo projects
+# Demo projects
 
 ## RFB320 with ONNX Runtime in Python
 ```
