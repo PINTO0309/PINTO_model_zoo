@@ -1,11 +1,8 @@
 # Demo projects
 
-## Person Attributes Recognition with TensorFlow Lite in C++
-https://github.com/iwatake2222/play_with_tflite/tree/master/pj_tflite_person-attributes-recognition-crossroad-0230
-
-## person-attributes-recognition-crossroad-0230 with ONNX Runtime in Python
+## person-attributes-recognition-crossroad-0234 with ONNX Runtime in Python
 ```
-python demo_person-attributes-recognition-crossroad-0230_onnx.py
+python demo_person-attributes-recognition-crossroad-0234_onnx.py
 ```
 
 If you want to change the model, specify it with an argument.<br>
@@ -18,9 +15,9 @@ Check the source code for other argument specifications.<br>
     )
 ```
 
-## person-attributes-recognition-crossroad-0230 with TensorFlow Lite in Python
+## person-attributes-recognition-crossroad-0234 with TensorFlow Lite in Python
 ```
-python demo_person-attributes-recognition-crossroad-0230_tflite.py
+python demo_person-attributes-recognition-crossroad-0234_tflite.py
 ```
 
 If you want to change the model, specify it with an argument.<br>
