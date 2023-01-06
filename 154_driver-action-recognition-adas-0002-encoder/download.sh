@@ -1,8 +1,6 @@
 #!/bin/bash
 
-fileid="1gb-aDZ5bmBIxtuQSpr4FNl9qYKWB5itp"
-html=`curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}"`
-curl -Lb ./cookie "https://drive.google.com/uc?export=download&`echo ${html}|grep -Po '(confirm=[a-zA-Z0-9\-_]+)'`&id=${fileid}" -o resources.tar.gz
+curl "https://s3.ap-northeast-2.wasabisys.com/pinto-model-zoo/154_driver-action-recognition-adas-0002-encoder/resources.tar.gz" -o resources.tar.gz
 tar -zxvf resources.tar.gz
 rm resources.tar.gz
 
