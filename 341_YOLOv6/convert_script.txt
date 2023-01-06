@@ -1,0 +1,4 @@
+onnx2tf -i yolov6l_base_bs1.onnx -oiqt
+onnx2tf -i yolov6m_base_bs1.onnx -oiqt
+onnx2tf -i yolov6s_base_bs1.onnx -oiqt
+onnx2tf -i yolov6n_base_bs1.onnx -oiqt
