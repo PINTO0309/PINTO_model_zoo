@@ -147,14 +147,13 @@ def main():
         )
 
     while in_process_flag:
-        start_time = time.time()
-
         # Capture read
         ret, frame = cap.read()
         if not ret:
             break
         debug_image = copy.deepcopy(frame)
-
+        start_time = time.time()
+        
         # Keypoint detection
         matched_keypoints1_xy, matched_keypoints2_xy, keypoints, descriptors = \
             run_inference(
