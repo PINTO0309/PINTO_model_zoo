@@ -170,6 +170,8 @@ def main():
         prev_keypoints = keypoints
         prev_descriptors = descriptors
 
+        elapsed_time = time.time() - start_time
+
         _ = [
             (
                 cv.line(
@@ -190,8 +192,6 @@ def main():
             ) \
             for matched_keypoint1, matched_keypoint2 in zip(matched_keypoints1_xy, matched_keypoints2_xy)
         ]
-
-        elapsed_time = time.time() - start_time
 
         # Inference elapsed time
         cv.putText(

@@ -193,6 +193,8 @@ def main():
                 descriptors=descriptors,
             )
 
+        elapsed_time = time.time() - start_time
+
         if tracker.prev_keypoints is None:
             _ = [
                 cv.circle(
@@ -225,8 +227,6 @@ def main():
                 ) \
                 for matched_keypoint1, matched_keypoint2 in zip(matched_keypoints1, matched_keypoints2)
             ]
-
-        elapsed_time = time.time() - start_time
 
         # Inference elapsed time
         cv.putText(
