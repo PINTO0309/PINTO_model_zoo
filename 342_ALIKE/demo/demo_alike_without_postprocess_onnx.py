@@ -194,15 +194,37 @@ def main():
             )
 
         if tracker.prev_keypoints is None:
-            for keypoint in keypoints:
-                p1 = (int(round(keypoint[0])), int(round(keypoint[1])))
-                cv.circle(debug_image, p1, 1, (0, 0, 255), -1, lineType=16)
+            _ = [
+                cv.circle(
+                    debug_image,
+                    (int(round(keypoint[0])), int(round(keypoint[1]))),
+                    1,
+                    (0, 0, 255),
+                    -1,
+                    lineType=16
+                ) for keypoint in keypoints
+            ]
         else:
-            for matched_keypoint1, matched_keypoint2 in zip(matched_keypoints1, matched_keypoints2):
-                p1 = (int(round(matched_keypoint1[0])), int(round(matched_keypoint1[1])))
-                p2 = (int(round(matched_keypoint2[0])), int(round(matched_keypoint2[1])))
-                cv.line(debug_image, p1, p2, (0, 255, 0), lineType=16)
-                cv.circle(debug_image, p2, 1, (0, 0, 255), -1, lineType=16)
+            _ = [
+                (
+                    cv.line(
+                        debug_image,
+                        (int(round(matched_keypoint1[0])), int(round(matched_keypoint1[1]))),
+                        (int(round(matched_keypoint2[0])), int(round(matched_keypoint2[1]))),
+                        (0, 255, 0),
+                        lineType=16
+                    ), \
+                    cv.circle(
+                        debug_image,
+                        (int(round(matched_keypoint2[0])), int(round(matched_keypoint2[1]))),
+                        1,
+                        (0, 0, 255),
+                        -1,
+                        lineType=16
+                    )
+                ) \
+                for matched_keypoint1, matched_keypoint2 in zip(matched_keypoints1, matched_keypoints2)
+            ]
 
         elapsed_time = time.time() - start_time
 
