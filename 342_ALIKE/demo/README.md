@@ -34,6 +34,6 @@ parser.add_argument(
 )
 ```
 
-- CUDA
+- TensorRT
 
-    https://user-images.githubusercontent.com/33194443/211136390-9b853901-9aff-40e3-8200-4d5bc6e3bac9.mp4
+    https://user-images.githubusercontent.com/33194443/211139176-2b303feb-8ac5-4cb6-af55-30a336e144ff.mp4
