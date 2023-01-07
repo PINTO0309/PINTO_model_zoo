@@ -169,13 +169,12 @@ def main():
     tracker = SimpleTracker()
 
     while True:
-        start_time = time.time()
-
         # Capture read
         ret, frame = cap.read()
         if not ret:
             break
         debug_image = copy.deepcopy(frame)
+        start_time = time.time()
 
         # Keypoint detection
         keypoints, descriptors = run_inference(
