@@ -3,6 +3,7 @@
 import copy
 import time
 import argparse
+import collections
 
 import cv2 as cv
 import numpy as np
@@ -69,11 +70,19 @@ def main():
         default='cpu',
         choices=['cpu','cuda','tensorrt'],
     )
+    parser.add_argument(
+        '-s',
+        '--skip_frame_count',
+        type=int,
+        default=0,
+        help='skip_frame_count+1 value of whether the feature point is compared to the previous frame.'
+    )
     args = parser.parse_args()
     device: int = args.device
     movie: str = args.movie
     model: str = args.model
     provider: str = args.provider
+    skip_frame_count: int = args.skip_frame_count
 
     # Initialize video capture
     cap_device = device
@@ -134,16 +143,22 @@ def main():
     # First time inference
     prev_keypoints = None
     prev_descriptors = None
-    _, _, prev_keypoints, prev_descriptors = \
-        run_inference(
-            onnx_session=onnx_session,
-            input_name_image=input_name_image,
-            input_size_image=input_size_image,
-            input_name_prev_keypoints=input_name_prev_keypoints,
-            input_name_prev_descriptors=input_name_prev_descriptors,
-            prev_keypoints=np.zeros([5000, 2], dtype=np.float32),
-            prev_descriptors=np.zeros([5000, input_size_prev_descriptors[-1]], dtype=np.float32),
-            image=frame,
+    buffer_count = skip_frame_count + 1
+    keypoints_descriptors_buffer = collections.deque([], buffer_count)
+    for _ in range(buffer_count):
+        _, _, prev_keypoints, prev_descriptors = \
+            run_inference(
+                onnx_session=onnx_session,
+                input_name_image=input_name_image,
+                input_size_image=input_size_image,
+                input_name_prev_keypoints=input_name_prev_keypoints,
+                input_name_prev_descriptors=input_name_prev_descriptors,
+                prev_keypoints=np.zeros([5000, 2], dtype=np.float32),
+                prev_descriptors=np.zeros([5000, input_size_prev_descriptors[-1]], dtype=np.float32),
+                image=frame,
+            )
+        keypoints_descriptors_buffer.append(
+            [prev_keypoints, prev_descriptors]
         )
 
     while in_process_flag:
@@ -153,8 +168,9 @@ def main():
             break
         debug_image = copy.deepcopy(frame)
         start_time = time.time()
-        
+
         # Keypoint detection
+        prev_keypoints_prev_descriptors: List = keypoints_descriptors_buffer.popleft()
         matched_keypoints1_xy, matched_keypoints2_xy, keypoints, descriptors = \
             run_inference(
                 onnx_session=onnx_session,
@@ -162,12 +178,13 @@ def main():
                 input_size_image=input_size_image,
                 input_name_prev_keypoints=input_name_prev_keypoints,
                 input_name_prev_descriptors=input_name_prev_descriptors,
-                prev_keypoints=prev_keypoints,
-                prev_descriptors=prev_descriptors,
+                prev_keypoints=prev_keypoints_prev_descriptors[0],
+                prev_descriptors=prev_keypoints_prev_descriptors[1],
                 image=frame,
             )
-        prev_keypoints = keypoints
-        prev_descriptors = descriptors
+        keypoints_descriptors_buffer.append(
+            [keypoints, descriptors]
+        )
 
         elapsed_time = time.time() - start_time
 
