@@ -32,6 +32,13 @@ parser.add_argument(
     default='cpu',
     choices=['cpu','cuda','tensorrt'],
 )
+parser.add_argument(
+    '-s',
+    '--skip_frame_count',
+    type=int,
+    default=0,
+    help='skip_frame_count+1 value of whether the feature point is compared to the previous frame.'
+)
 ```
 
 - TensorRT
