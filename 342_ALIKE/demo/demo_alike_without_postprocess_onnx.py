@@ -42,8 +42,8 @@ class SimpleTracker(object):
     ) -> np.ndarray:
         sim = desc1 @ desc2.transpose()
         sim[sim < 0.9] = 0
-        nn12 = np.argmax(sim, axis=1)
-        nn21 = np.argmax(sim, axis=0)
+        nn12 = np.argmax(sim, axis=1, keepdims=True)[:,0]
+        nn21 = np.argmax(sim, axis=0, keepdims=True)[0,:]
         ids1 = np.arange(0, sim.shape[0])
         mask = (ids1 == nn21[nn12])
         matches = np.stack([ids1[mask], nn12[mask]])
