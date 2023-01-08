@@ -39,6 +39,13 @@ parser.add_argument(
     default=0,
     help='skip_frame_count+1 value of whether the feature point is compared to the previous frame.'
 )
+parser.add_argument(
+    '-oeed',
+    '--output_exclude_euclidean_distance',
+    type=float,
+    default=150,
+    help='Output Exclude Euclidean distance.'
+)
 ```
 
 - TensorRT - skip_frame_count=0
