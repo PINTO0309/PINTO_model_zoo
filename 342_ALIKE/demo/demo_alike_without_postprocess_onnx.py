@@ -242,7 +242,11 @@ def main():
                         lineType=16
                     )
                 ) \
-                for matched_keypoint1, matched_keypoint2 in zip(matched_keypoints1, matched_keypoints2)
+                for matched_keypoint1, matched_keypoint2 in zip(matched_keypoints1, matched_keypoints2) \
+                    if int(round(matched_keypoint1[0])) > 0 \
+                        and int(round(matched_keypoint1[1])) > 0 \
+                        and int(round(matched_keypoint2[0])) > 0 \
+                        and int(round(matched_keypoint2[1])) > 0
             ]
 
         # Inference elapsed time
