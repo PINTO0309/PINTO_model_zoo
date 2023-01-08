@@ -31,7 +31,7 @@ def run_inference(
     input_image = input_image / 255.0
     input_image = input_image.astype('float32')
     # Inference
-    matched_keypoints1_xy, matched_keypoints2_xy, keypoints, descriptors = \
+    matched_keypoints1_xy, matched_keypoints2_xy, euclidean_distances, keypoints, descriptors = \
         onnx_session.run(
             None,
             {
@@ -40,7 +40,7 @@ def run_inference(
                 input_name_prev_descriptors: prev_descriptors,
             },
         )
-    return matched_keypoints1_xy, matched_keypoints2_xy, keypoints, descriptors
+    return matched_keypoints1_xy, matched_keypoints2_xy, euclidean_distances, keypoints, descriptors
 
 
 def main():
@@ -77,12 +77,20 @@ def main():
         default=0,
         help='skip_frame_count+1 value of whether the feature point is compared to the previous frame.'
     )
+    parser.add_argument(
+        '-oeed',
+        '--output_exclude_euclidean_distance',
+        type=float,
+        default=150,
+        help='Output Exclude Euclidean distance.'
+    )
     args = parser.parse_args()
     device: int = args.device
     movie: str = args.movie
     model: str = args.model
     provider: str = args.provider
     skip_frame_count: int = args.skip_frame_count
+    output_exclude_euclidean_distance: float = args.output_exclude_euclidean_distance
 
     # Initialize video capture
     cap_device = device
@@ -146,7 +154,7 @@ def main():
     buffer_count = skip_frame_count + 1
     keypoints_descriptors_buffer = collections.deque([], buffer_count)
     for _ in range(buffer_count):
-        _, _, prev_keypoints, prev_descriptors = \
+        _, _, _, prev_keypoints, prev_descriptors = \
             run_inference(
                 onnx_session=onnx_session,
                 input_name_image=input_name_image,
@@ -171,7 +179,7 @@ def main():
 
         # Keypoint detection
         prev_keypoints_prev_descriptors: List = keypoints_descriptors_buffer.popleft()
-        matched_keypoints1_xy, matched_keypoints2_xy, keypoints, descriptors = \
+        matched_keypoints1_xy, matched_keypoints2_xy, euclidean_distances, keypoints, descriptors = \
             run_inference(
                 onnx_session=onnx_session,
                 input_name_image=input_name_image,
@@ -206,11 +214,12 @@ def main():
                     lineType=16
                 )
             ) \
-            for matched_keypoint1, matched_keypoint2 in zip(matched_keypoints1_xy, matched_keypoints2_xy) \
+            for matched_keypoint1, matched_keypoint2, euclidean_distance in zip(matched_keypoints1_xy, matched_keypoints2_xy, euclidean_distances) \
                 if int(round(matched_keypoint1[0])) > 0 \
                     and int(round(matched_keypoint1[1])) > 0 \
                     and int(round(matched_keypoint2[0])) > 0 \
-                    and int(round(matched_keypoint2[1])) > 0
+                    and int(round(matched_keypoint2[1])) > 0 \
+                    and euclidean_distance < output_exclude_euclidean_distance
         ]
 
         # Inference elapsed time
