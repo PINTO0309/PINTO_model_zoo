@@ -46,5 +46,7 @@ do
     onnxsim ppmattingv2_stdc1_human_${H}x${W}.onnx ppmattingv2_stdc1_human_${H}x${W}.onnx
     onnxsim ppmattingv2_stdc1_human_${H}x${W}.onnx ppmattingv2_stdc1_human_${H}x${W}.onnx
     onnxsim ppmattingv2_stdc1_human_${H}x${W}.onnx ppmattingv2_stdc1_human_${H}x${W}.onnx
+    
+    onnx2tf -i ppmattingv2_stdc1_human_${H}x${W}.onnx -o ppmattingv2_stdc1_human_${H}x${W} -osd
 done
 
