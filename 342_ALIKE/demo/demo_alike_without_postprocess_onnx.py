@@ -26,6 +26,9 @@ class SimpleTracker(object):
         if self.prev_keypoints is None:
             self.prev_keypoints = keypoints
             self.prev_descriptors = descriptors
+        elif len(keypoints) == 1 and keypoints[0,0] == -1:
+            self.prev_keypoints = None
+            self.prev_descriptors = None
         else:
             matches = self.mnn_matcher(self.prev_descriptors, descriptors)
             matched_keypoints1 = self.prev_keypoints[matches[:, 0]]
@@ -56,6 +59,7 @@ def run_inference(
     input_size: List[int],
     image: np.ndarray,
     score_th: float=0.2,
+    description_size: int=64,
 ) -> Tuple[np.ndarray,np.ndarray]:
     # ONNX Infomation
     input_width = input_size[3]
@@ -76,8 +80,20 @@ def run_inference(
     indicies = scores[:, 0] > score_th
     keypoints = keypoints[indicies, :]
     descriptors = descriptors[indicies, :]
-    return keypoints, descriptors
+    if len(descriptors) > 0:
+        return keypoints, descriptors
+    else:
+        keypoints = np.full([1, 2], fill_value=-1)
+        descriptors = np.full([1, description_size], fill_value=-1.0)
+        return keypoints, descriptors
 
+
+DESCRIPTION_SIZES = {
+    "t": 64,
+    "s": 96,
+    "n": 128,
+    "l": 128,
+}
 
 def main():
     parser = argparse.ArgumentParser()
@@ -118,6 +134,7 @@ def main():
     model: str = args.model
     provider: str = args.provider
     score_th: float = args.score_th
+    description_size = DESCRIPTION_SIZES[model.split('_')[1]]
 
     # Initialize video capture
     cap_device = device
@@ -183,6 +200,7 @@ def main():
             input_size=input_size,
             image=frame,
             score_th=score_th,
+            description_size=description_size,
         )
 
         # Tracker update
