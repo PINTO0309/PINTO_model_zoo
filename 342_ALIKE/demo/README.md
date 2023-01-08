@@ -41,6 +41,16 @@ parser.add_argument(
 )
 ```
 
-- TensorRT
+- TensorRT - skip_frame_count=0
 
     https://user-images.githubusercontent.com/33194443/211139176-2b303feb-8ac5-4cb6-af55-30a336e144ff.mp4
+
+- TensorRT - skip_frame_count=1
+
+    https://user-images.githubusercontent.com/33194443/211182741-998923b6-857c-435a-b173-bbeb27aae457.mp4
+
+- TensorRT - skip_frame_count=2
+
+    https://user-images.githubusercontent.com/33194443/211182696-0b4cbd42-59dd-4c70-aa61-1a3b98cf1166.mp4
+
+
