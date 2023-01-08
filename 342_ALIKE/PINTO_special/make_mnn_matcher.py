@@ -1,5 +1,7 @@
 import torch
 import torch.nn as nn
+from torch import linalg as LA
+import numpy as np
 from sor4onnx import rename
 from snc4onnx import combine
 from soa4onnx import outputs_add
@@ -25,7 +27,15 @@ class Model(nn.Module):
         matches = torch.stack([ids1[mask], nn12[mask]]).permute(1,0)
         matched_keypoints1 = prev_keypoints[matches[:, 0]]
         matched_keypoints2 = keypoints[matches[:, 1]]
-        return matched_keypoints1, matched_keypoints2
+
+        subtracted_values = matched_keypoints1 - matched_keypoints2
+        euclidean_distance = torch.sqrt(
+            torch.sum(
+                subtracted_values * subtracted_values,
+                dim=1,
+            )
+        )
+        return matched_keypoints1, matched_keypoints2, euclidean_distance
 
 model = Model()
 
@@ -61,12 +71,14 @@ for type, size in DESCRIPTION_SIZES.items():
             output_names=[
                 'matched_keypoints1_xy',
                 'matched_keypoints2_xy',
+                'euclidean_distance',
             ],
             dynamic_axes={
                 'prev_keypoints': {0: 'M'},
                 'prev_descriptors': {0: 'M'},
                 'matched_keypoints1_xy': {0: 'N'},
                 'matched_keypoints2_xy': {0: 'N'},
+                'euclidean_distance': {0: 'N'},
             }
         )
         import onnx
