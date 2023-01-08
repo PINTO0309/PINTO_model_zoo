@@ -18,8 +18,8 @@ class Model(nn.Module):
         descriptors = descriptors[indicies, :]
         sim = prev_descriptors @ descriptors.permute(1,0)
         sim[sim < 0.9] = 0
-        nn12 = torch.argmax(sim, axis=1)
-        nn21 = torch.argmax(sim, axis=0)
+        nn12 = torch.argmax(sim, axis=1, keepdim=True)[:,0]
+        nn21 = torch.argmax(sim, axis=0, keepdim=True)[0,:]
         ids1 = torch.arange(0, sim.shape[0])
         mask = (ids1 == nn21[nn12])
         matches = torch.stack([ids1[mask], nn12[mask]]).permute(1,0)
