@@ -1,12 +1,13 @@
 # Demo projects
 
-## PP-MattingV2 with ONNX Runtime in Python
+## XYDeblur with ONNX Runtime in Python
 ```
-python demo_ppmattingv2_onnx.py
+python demo_xy_single_image_deblur_onnx.py
 ```
 
 If you want to change the model, specify it with an argument.
 ```python
+parser = argparse.ArgumentParser()
 parser.add_argument(
     '-d',
     '--device',
@@ -23,7 +24,7 @@ parser.add_argument(
     '-mod',
     '--model',
     type=str,
-    default='ppmattingv2_stdc1_human_480x640.onnx',
+    default='xy_single_image_deblur_480x640.onnx',
 )
 parser.add_argument(
     '-p',
@@ -32,14 +33,10 @@ parser.add_argument(
     default='cpu',
     choices=['cpu','cuda','tensorrt'],
 )
-parser.add_argument(
-    '-s',
-    '--score_threshold',
-    type=float,
-    default=0.65,
-)
 ```
 
 - TensorRT
 
-    https://user-images.githubusercontent.com/33194443/211181458-5cb3ef34-5fe2-46a5-a93d-696856b22b73.mp4
+    https://user-images.githubusercontent.com/33194443/211249484-15cc8f67-1691-4802-877c-d92087a7eec1.mp4
+
+
