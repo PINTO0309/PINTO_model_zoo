@@ -307,6 +307,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |313|IS-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/313_IS-Net)|||||||||||⚫|180x320,240x320,320x480,360x640,480x640,720x1280,1080x1920,1080x2048,2160x4096,N-batch,Dynamic-HeightxWidth|
 |335|PIDNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/335_PIDNet)|||||||||||⚫|Cityscapes,CamVid/Dynamic-HeightxWidth|
 |343|PP-MattingV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/343_PP-MattingV2)|⚫|⚫|||||||||⚫|HumanSeg|
+|347|RGBX_Semantic_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/347_RGBX_Semantic_Segmentation)|||||||||||⚫||
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
