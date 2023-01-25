@@ -1,0 +1,7 @@
+onnx2tf \
+-i facial_expression_recognition_mobilefacenet_2022july.onnx \
+-osd \
+-oh5 \
+-oiqt \
+-cotof \
+-cotoa 1e-4

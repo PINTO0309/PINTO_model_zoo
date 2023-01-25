@@ -97,6 +97,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |259|Emotion_FERPlus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/259_Emotion_FERPlus)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|64x64|
 |290|AdaFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/290_AdaFace)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|112x112|
 |317|MobileOne|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/317_MobileOne)|||||||||||⚫|224x224|
+|346|facial_expression_recognition_mobilefacenet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/346_facial_expression_recognition_mobilefacenet)|⚫|⚫|⚫|⚫||⚫|||||⚫|112x112|
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
