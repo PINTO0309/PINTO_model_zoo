@@ -1,19 +1,14 @@
-wget https://github.com/PINTO0309/onnx2tf/raw/main/json_samples/replace_bread.json
-wget https://github.com/PINTO0309/onnx2tf/raw/main/json_samples/replace_bread_nonfm.json
-
 onnx2tf \
 -i bread_180x320.onnx \
 -osd \
 -oh5 \
--oiqt \
--prf replace_bread.json
+-oiqt
 
 onnx2tf \
 -i bread_nonfm_180x320.onnx \
 -osd \
 -oh5 \
--oiqt \
--prf replace_bread_nonfm.json
+-oiqt
 
 onnx2tf -h
 usage: onnx2tf
