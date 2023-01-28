@@ -389,6 +389,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |323|Stripformer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/323_Stripformer)|||||||||||⚫|DeBlur|
 |325|DehazeFormer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/325_DehazeFormer)|||||||||||⚫|Dehazing|
 |344|XYDeblur|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/344_XYDeblur)|||||||||||⚫|DeBlur|
+|348|Bread|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/348_Bread)|||||||||||⚫|Low-light Image Enhancement|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|

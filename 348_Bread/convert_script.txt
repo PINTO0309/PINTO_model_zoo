@@ -1,0 +1,406 @@
+wget https://github.com/PINTO0309/onnx2tf/raw/main/json_samples/replace_bread.json
+wget https://github.com/PINTO0309/onnx2tf/raw/main/json_samples/replace_bread_nonfm.json
+
+onnx2tf \
+-i bread_180x320.onnx \
+-osd \
+-oh5 \
+-oiqt \
+-prf replace_bread.json
+
+onnx2tf \
+-i bread_nonfm_180x320.onnx \
+-osd \
+-oh5 \
+-oiqt \
+-prf replace_bread_nonfm.json
+
+onnx2tf -h
+usage: onnx2tf
+[-h]
+(-i INPUT_ONNX_FILE_PATH | -V)
+[-o OUTPUT_FOLDER_PATH]
+[-osd]
+[-oh5]
+[-ow]
+[-oiqt]
+[-qt {per-channel,per-tensor}]
+[-qcind INPUT_NAME NUMPY_FILE_PATH MEAN STD]
+[-ioqd {int8,uint8}]
+[-nuo]
+[-nuonag]
+[-b BATCH_SIZE]
+[-ois OVERWRITE_INPUT_SHAPE [OVERWRITE_INPUT_SHAPE ...]]
+[-k KEEP_NCW_OR_NCHW_OR_NCDHW_INPUT_NAMES [KEEP_NCW_OR_NCHW_OR_NCDHW_INPUT_NAMES ...]]
+[-kt KEEP_NWC_OR_NHWC_OR_NDHWC_INPUT_NAMES [KEEP_NWC_OR_NHWC_OR_NDHWC_INPUT_NAMES ...]]
+[-kat KEEP_SHAPE_ABSOLUTELY_INPUT_NAMES [KEEP_SHAPE_ABSOLUTELY_INPUT_NAMES ...]]
+[-onimc OUTPUT_NAMES [OUTPUT_NAMES ...]]
+[-dgc]
+[-ebu]
+[-dsft]
+[-nodafc]
+[-ofgd]
+[-rari64 | -rarf32 | -rafi64 | -raff32]
+[-fasr FUSED_ARGMAX_SCALE_RATIO]
+[-rasin]
+[-racos]
+[-rabs]
+[-rpr]
+[-rlr]
+[-rpw]
+[-rgn]
+[-rng]
+[-rhs]
+[-rerf]
+[-me MVN_EPSILON]
+[-prf PARAM_REPLACEMENT_FILE]
+[-cgdc]
+[-coto | -cotof]
+[-coton]
+[-cotor CHECK_ONNX_TF_OUTPUTS_ELEMENTWISE_CLOSE_RTOL]
+[-cotoa CHECK_ONNX_TF_OUTPUTS_ELEMENTWISE_CLOSE_ATOL]
+[-n]
+
+optional arguments:
+  -h, --help
+    show this help message and exit
+
+  -i INPUT_ONNX_FILE_PATH, --input_onnx_file_path INPUT_ONNX_FILE_PATH
+    Input onnx file path.
+
+  -V, --version
+    Show version and exit.
+
+  -o OUTPUT_FOLDER_PATH, --output_folder_path OUTPUT_FOLDER_PATH
+    Output folder path. Default: "saved_model"
+
+  -osd, --output_signaturedefs
+    Signature is added to the output for serving or for conversion
+    to other model formats. However, this can significantly reduce the speed
+    of model conversion and significant increase the size of the model.
+
+  -oh5, --output_h5
+    Output model in Keras (hdf5) format.
+
+  -ow, --output_weights
+    Output weights in hdf5 format.
+
+  -oiqt, --output_integer_quantized_tflite
+    Output of integer quantized tflite.
+
+  -qt {per-channel,per-tensor}, --quant_type {per-channel,per-tensor}
+    Selects whether "per-channel" or "per-tensor" quantization is used.
+    Default: "per-channel"
+
+  -qcind INPUT_NAME NUMPY_FILE_PATH MEAN STD, \
+    --quant_calib_input_op_name_np_data_path INPUT_NAME NUMPY_FILE_PATH MEAN STD
+    INPUT Name of OP and path of calibration data file (Numpy) for quantization and mean and std.
+    The specification can be omitted only when the input OP is a single 4D tensor image data.
+    If omitted, it is automatically calibrated using 20 normalized MS-COCO images.
+    The type of the input OP must be Float32.
+    Data for calibration must be pre-normalized to a range of 0 to 1.
+    -qcind {input_op_name} {numpy_file_path} {mean} {std}
+    Numpy file paths must be specified the same number of times as the number of input OPs.
+    Normalize the value of the input OP based on the tensor specified in mean and std.
+    (input_value - mean) / std
+    Tensors in Numpy file format must be in dimension order after conversion to TF.
+    Note that this is intended for deployment on low-resource devices,
+    so the batch size is limited to 1 only.
+
+    e.g.
+    The example below shows a case where there are three input OPs.
+    Assume input0 is 128x128 RGB image data.
+    In addition, input0 should be a value that has been divided by 255
+    in the preprocessing and normalized to a range between 0 and 1.
+    input1 and input2 assume the input of something that is not an image.
+    Because input1 and input2 assume something that is not an image,
+    the divisor is not 255 when normalizing from 0 to 1.
+    "n" is the number of calibration data.
+
+    ONNX INPUT shapes:
+      input0: [n,3,128,128]
+        mean: [1,3,1,1] -> [[[[0.485]],[[0.456]],[[0.406]]]]
+        std : [1,3,1,1] -> [[[[0.229]],[[0.224]],[[0.225]]]]
+      input1: [n,64,64]
+        mean: [1,64] -> [[0.1, ..., 0.64]]
+        std : [1,64] -> [[0.05, ..., 0.08]]
+      input2: [n,5]
+        mean: [1] -> [0.3]
+        std : [1] -> [0.07]
+
+    TensorFlow INPUT shapes (Numpy file ndarray shapes):
+      input0: [n,128,128,3]
+        mean: [1,1,1,3] -> [[[[0.485, 0.456, 0.406]]]]
+        std : [1,1,1,3] -> [[[[0.229, 0.224, 0.225]]]]
+      input1: [n,64,64]
+        mean: [1,64] -> [[0.1, ..., 0.64]]
+        std : [1,64] -> [[0.05, ..., 0.08]]
+      input2: [n,5]
+        mean: [1] -> [0.3]
+        std : [1] -> [0.07]
+
+    -qcind "input0" "../input0.npy" [[[[0.485, 0.456, 0.406]]]] [[[[0.229, 0.224, 0.225]]]]
+    -qcind "input1" "./input1.npy" [[0.1, ..., 0.64]] [[0.05, ..., 0.08]]
+    -qcind "input2" "input2.npy" [0.3] [0.07]
+
+  -ioqd {int8,uint8}, --input_output_quant_dtype {int8,uint8}
+    Input and Output dtypes when doing Full INT8 Quantization.
+    "int8"(default) or "uint8"
+
+  -nuo, --not_use_onnxsim
+    No optimization by onnx-simplifier is performed.
+    If this option is used, the probability of a conversion error is very high.
+
+  -nuonag, --not_use_opname_auto_generate
+    Automatic generation of each OP name in the old format ONNX file
+    and assignment of OP name are not performed.
+
+  -b BATCH_SIZE, --batch_size BATCH_SIZE
+    Fixes the dynamic batch size to the specified numeric batch size.
+    A value of 1 or more must be specified.
+
+  -ois OVERWRITE_INPUT_SHAPE [OVERWRITE_INPUT_SHAPE ...], \
+      --overwrite_input_shape OVERWRITE_INPUT_SHAPE [OVERWRITE_INPUT_SHAPE ...]
+    Overwrite the input shape.
+    The format is
+    "i1:dim0,...,dimN" "i2:dim0,...,dimN" "i3:dim0,...,dimN"
+    When there is only one input, for example,
+    "data:1,3,224,224"
+    When there are multiple inputs, for example,
+    "data1:1,3,224,224" "data2:1,3,112" "data3:5"
+    A value of 1 or more must be specified.
+    Numerical values other than dynamic dimensions are ignored.
+    Ignores --batch_size if specified at the same time as --batch_size.
+
+  -k KEEP_NCW_OR_NCHW_OR_NCDHW_INPUT_NAMES [KEEP_NCW_OR_NCHW_OR_NCDHW_INPUT_NAMES ...], \
+      --keep_ncw_or_nchw_or_ncdhw_input_names KEEP_NCW_OR_NCHW_OR_NCDHW_INPUT_NAMES \
+          [KEEP_NCW_OR_NCHW_OR_NCDHW_INPUT_NAMES ...]
+    Holds the NCW or NCHW or NCDHW of the input shape for the specified INPUT OP names.
+    If a nonexistent INPUT OP name is specified, it is ignored.
+    Valid only for 3D, 4D and 5D input tensors.
+    e.g. --keep_ncw_or_nchw_or_ncdhw_input_names "input0" "input1" "input2"
+
+  -kt KEEP_NWC_OR_NHWC_OR_NDHWC_INPUT_NAMES [KEEP_NWC_OR_NHWC_OR_NDHWC_INPUT_NAMES ...], \
+      --keep_nwc_or_nhwc_or_ndhwc_input_names KEEP_NWC_OR_NHWC_OR_NDHWC_INPUT_NAMES \
+          [KEEP_NWC_OR_NHWC_OR_NDHWC_INPUT_NAMES ...]
+    Holds the NWC or NHWC or NDHWC of the input shape for the specified INPUT OP names.
+    If a nonexistent INPUT OP name is specified, it is ignored.
+    If the input OP name is the same as the input OP name specified
+    in the keep_ncw_or_nchw_or_ncdhw_input_names option, it is ignored.
+    Valid only for 3D, 4D and 5D input tensors.
+    e.g. --keep_nwc_or_nhwc_or_ndhwc_input_names "input0" "input1" "input2"
+
+  -kat KEEP_SHAPE_ABSOLUTELY_INPUT_NAMES [KEEP_SHAPE_ABSOLUTELY_INPUT_NAMES ...], \
+      --keep_shape_absolutely_input_names KEEP_SHAPE_ABSOLUTELY_INPUT_NAMES \
+        [KEEP_SHAPE_ABSOLUTELY_INPUT_NAMES ...]
+    Name of the INPUT that unconditionally maintains its shape.
+    If a nonexistent INPUT OP name is specified, it is ignored.
+    e.g. --keep_shape_absolutely_input_names "input0" "input1" "input2"
+
+  -onimc OUTPUT_NAMES [OUTPUT_NAMES ...], \
+      --output_names_to_interrupt_model_conversion OUTPUT_NAMES [OUTPUT_NAMES ...]
+    Output names that interrupt model conversion.
+    Interrupts model transformation at the specified output name and outputs the
+    model partitioned into subgraphs.
+    e.g. --output_names_to_interrupt_model_conversion "output0" "output1" "output2"
+
+  -dgc, --disable_group_convolution
+    Disable GroupConvolution and replace it with SeparableConvolution for
+    output to saved_model format.
+
+  -ebu, --enaable_batchmatmul_unfold
+    BatchMatMul is separated batch by batch to generate a primitive MatMul.
+
+  -dsft, --disable_suppression_flextranspose
+    Disables FlexTranspose generation suppression.
+
+  -nodafc, --number_of_dimensions_after_flextranspose_compression
+    Number of Transpose OP dimensions generated after avoiding FlexTranspose generation.
+    Default: 5
+
+  -ofgd, --optimization_for_gpu_delegate
+    Replace operations that do not support gpu delegate with those
+    that do as much as possible.
+
+  -rari64, --replace_argmax_to_reducemax_and_indicies_is_int64
+    Replace ArgMax with a ReduceMax. The returned indicies are int64.
+    Only one of replace_argmax_to_reducemax_and_indicies_is_int64
+    and replace_argmax_to_reducemax_and_indicies_is_float32
+    and replace_argmax_to_fused_argmax_and_indicies_is_int64
+    and replace_argmax_to_fused_argmax_and_indicies_is_float32 can be specified.
+
+  -rarf32, --replace_argmax_to_reducemax_and_indicies_is_float32
+    Replace ArgMax with a ReduceMax. The returned indicies are float32.
+    Only one of replace_argmax_to_reducemax_and_indicies_is_int64
+    and replace_argmax_to_reducemax_and_indicies_is_float32
+    and replace_argmax_to_fused_argmax_and_indicies_is_int64
+    and replace_argmax_to_fused_argmax_and_indicies_is_float32 can be specified.
+
+  -rafi64, --replace_argmax_to_fused_argmax_and_indicies_is_int64
+    Replace ArgMax with a Fused_ArgMax. The returned indicies are int64.
+    It improves inference speed at the cost of a small sacrifice in accuracy.
+    See. https://github.com/tensorflow/models/tree/master/official/projects/edgetpu/vision#argmax-fusion-to-improve-segmentation-model-latency
+    Currently, only 4D tensors are supported.
+    Only one of replace_argmax_to_reducemax_and_indicies_is_int64
+    and replace_argmax_to_reducemax_and_indicies_is_float32
+    and replace_argmax_to_fused_argmax_and_indicies_is_int64
+    and replace_argmax_to_fused_argmax_and_indicies_is_float32 can be specified.
+
+  -raff32, --replace_argmax_to_fused_argmax_and_indicies_is_float32
+    Replace ArgMax with a Fused_ArgMax. The returned indicies are float32.
+    It improves inference speed at the cost of a small sacrifice in accuracy.
+    See. https://github.com/tensorflow/models/tree/master/official/projects/edgetpu/vision#argmax-fusion-to-improve-segmentation-model-latency
+    Currently, only 4D tensors are supported.
+    Only one of replace_argmax_to_reducemax_and_indicies_is_int64
+    and replace_argmax_to_reducemax_and_indicies_is_float32
+    and replace_argmax_to_fused_argmax_and_indicies_is_int64
+    and replace_argmax_to_fused_argmax_and_indicies_is_float32 can be specified.
+
+  -fasr FUSED_ARGMAX_SCALE_RATIO, --fused_argmax_scale_ratio FUSED_ARGMAX_SCALE_RATIO
+    For Fused ArgMax.
+    Scale ratio when generating Fused ArgMax.
+    0.0 < fused_argmax_scale_ratio <= 1.0
+    Default: 0.5
+
+  -rasin, --replace_asin_to_pseudo_asin
+    Replace Asin with a pseudo Asin.
+
+  -racos, --replace_acos_to_pseudo_acos
+    Replace Acos with a pseudo Acos.
+
+  -rabs, --replace_abs_to_pseudo_abs
+    Replace Abs with a pseudo Abs.
+
+  -rpr, --replace_prelu_to_pseudo_prelu
+    Replace PReLU with a pseudo PReLU.
+
+  -rlr, --replace_leakyrelu_to_pseudo_leakyrelu
+    Replace LeakyReLU with a pseudo LeakyReLU.
+
+  -rpw, --replace_power_to_pseudo_power
+    Replace Power with a pseudo Power.
+
+  -rgn, --replace_gathernd_to_pseudo_gathernd
+    Replace GatherND with a pseudo GatherND.
+
+  -rng, --replace_neg_to_pseudo_neg
+    Replace Neg with a pseudo Neg.
+
+  -rhs, --replace_hardswish_to_pseudo_hardswish
+    Replace HardSwish with a pseudo HardSwish.
+
+  -rerf, --replace_erf_to_pseudo_erf
+    Replace Erf with a pseudo Erf.
+
+  -me, --mvn_epsilon
+    For MeanVarianceNormalization.
+    The number to be added to the variance to avoid division by zero
+    when normalizing the value.
+    (input_tensor - mean) / tf.sqrt(variance + mvn_epsilon)
+    Default: 0.0000000001
+
+  -prf PARAM_REPLACEMENT_FILE, --param_replacement_file PARAM_REPLACEMENT_FILE
+    Parameter replacement file path. (.json)
+
+  -cgdc, --check_gpu_delegate_compatibility
+    Run TFLite ModelAnalyzer on the generated Float16 tflite model
+    to check if the model can be supported by GPU Delegate.
+    e.g.
+    """
+    === TFLite ModelAnalyzer ===
+
+    Your TFLite model has '1' subgraph(s). In the subgraph description below,
+    T# represents the Tensor numbers. For example, in Subgraph#0, the RESHAPE op takes
+    tensor #0 and tensor #6 as input and produces tensor #7 as output.
+
+    Subgraph#0 main(T#0) -> [T#17]
+      Op#0 RESHAPE(T#0, T#6[2, 8, 8, 3, 2, ...]) -> [T#7]
+      Op#1 SPLIT(T#5[0], T#7) -> [T#8, T#9]
+      Op#2 RESHAPE(T#8, T#1[8, 8, 3, 2, 2]) -> [T#10]
+      Op#3 TRANSPOSE(T#10, T#4[0, 3, 1, 4, 2]) -> [T#11]
+      Op#4 RESHAPE(T#11, T#2[1, 8, 2, 8, 2, ...]) -> [T#12]
+      Op#5 RESHAPE(T#9, T#1[8, 8, 3, 2, 2]) -> [T#13]
+      Op#6 TRANSPOSE(T#13, T#4[0, 3, 1, 4, 2]) -> [T#14]
+      Op#7 RESHAPE(T#14, T#2[1, 8, 2, 8, 2, ...]) -> [T#15]
+      Op#8 CONCATENATION(T#12, T#15) -> [T#16]
+      Op#9 RESHAPE(T#16, T#3[2, 16, 16, 3]) -> [T#17]
+
+    Tensors of Subgraph#0
+      T#0(inputs_0) shape:[2, 8, 8, 12], type:FLOAT32
+      T#1(model/tf.compat.v1.squeeze_2/Squeeze) shape:[5], type:INT32 RO 20 bytes, data:[8, 8, 3, 2, 2]
+      T#2(model/tf.expand_dims_1/ExpandDims) shape:[6], type:INT32 RO 24 bytes, data:[1, 8, 2, 8, 2, ...]
+      T#3(model/tf.reshape_1/Reshape/shape) shape:[4], type:INT32 RO 16 bytes, data:[2, 16, 16, 3]
+      T#4(model/tf.compat.v1.transpose/transpose/perm) shape:[5], type:INT32 RO 20 bytes, data:[0, 3, 1, 4, 2]
+      T#5(model/tf.concat/concat/axis) shape:[], type:INT32 RO 4 bytes, data:[0]
+      T#6(model/tf.reshape/Reshape/shape) shape:[6], type:INT32 RO 24 bytes, data:[2, 8, 8, 3, 2, ...]
+      T#7(model/tf.reshape/Reshape) shape:[2, 8, 8, 3, 2, 2], type:FLOAT32
+      T#8(model/tf.split/split) shape:[1, 8, 8, 3, 2, 2], type:FLOAT32
+      T#9(model/tf.split/split1) shape:[1, 8, 8, 3, 2, 2], type:FLOAT32
+      T#10(model/tf.compat.v1.squeeze_1/Squeeze) shape:[8, 8, 3, 2, 2], type:FLOAT32
+      T#11(model/tf.compat.v1.transpose/transpose) shape:[8, 2, 8, 2, 3], type:FLOAT32
+      T#12(model/tf.expand_dims/ExpandDims) shape:[1, 8, 2, 8, 2, 3], type:FLOAT32
+      T#13(model/tf.compat.v1.squeeze_2/Squeeze1) shape:[8, 8, 3, 2, 2], type:FLOAT32
+      T#14(model/tf.compat.v1.transpose_1/transpose) shape:[8, 2, 8, 2, 3], type:FLOAT32
+      T#15(model/tf.expand_dims_1/ExpandDims1) shape:[1, 8, 2, 8, 2, 3], type:FLOAT32
+      T#16(model/tf.concat/concat) shape:[2, 8, 2, 8, 2, 3], type:FLOAT32
+      T#17(Identity) shape:[2, 16, 16, 3], type:FLOAT32
+
+    Your model looks compatibile with GPU delegate with TFLite runtime version 2.10.0.
+    But it doesn't guarantee that your model works well with GPU delegate.
+    There could be some runtime incompatibililty happen.
+    ---------------------------------------------------------------
+                  Model size:       2988 bytes
+        Non-data buffer size:       2757 bytes (92.27 %)
+      Total data buffer size:        231 bytes (07.73 %)
+        (Zero value buffers):          4 bytes (00.13 %)
+
+    * Buffers of TFLite model are mostly used for constant tensors.
+      And zero value buffers are buffers filled with zeros.
+      Non-data buffers area are used to store operators, subgraphs and etc.
+      You can find more details from https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/schema/schema.fbs
+    """
+
+  -coto, --check_onnx_tf_outputs_elementwise_close
+    Returns "Matches" if the output of onnx and the output of TF are
+    within acceptable proximity element by element.
+    Returns "Unmatched" if the output of onnx and the output of TF are
+    not within acceptable proximity element by element.
+    If the output of onnx is 1D, it returns "Skipped" and skips the comparison
+    between the output of onnx and that of TF. This is because when undefined
+    dimensions are present, a situation often arises where very large index
+    values are compared, causing OutOfMemory.
+    Only the output content of the models final output OP is checked.
+
+  -cotof, --check_onnx_tf_outputs_elementwise_close_full
+    Returns "Matches" if the output of onnx and the output of TF are
+    within acceptable proximity element by element.
+    Check the output of all OPs in sequence from the beginning,
+    including all but the final output OP of the model.
+    Returns "Unmatched" if the output of onnx and the output of TF are
+    not within acceptable proximity element by element.
+    If the output of onnx is 1D, it returns "Skipped" and skips the comparison
+    between the output of onnx and that of TF. This is because when undefined
+    dimensions are present, a situation often arises where very large index
+    values are compared, causing OutOfMemory.
+    It is very time consuming because it performs as many inferences as
+    there are operations.
+
+  -coton, --check_onnx_tf_outputs_sample_data_normalization
+    norm: Validate using random data normalized to the range 0.0 to 1.0
+    denorm: Validate using random data in the range 0.0 to 255.0
+    If there is a normalization layer at the model's entry point, or
+    if the model was trained on denormalized data, "denorm" must be specified.
+    Default: "norm"
+
+  -cotor CHECK_ONNX_TF_OUTPUTS_ELEMENTWISE_CLOSE_RTOL,\
+    --check_onnx_tf_outputs_elementwise_close_rtol CHECK_ONNX_TF_OUTPUTS_ELEMENTWISE_CLOSE_RTOL
+    The relative tolerance parameter.
+    Default: 0.0
+
+  -cotoa CHECK_ONNX_TF_OUTPUTS_ELEMENTWISE_CLOSE_ATOL,\
+    --check_onnx_tf_outputs_elementwise_close_atol CHECK_ONNX_TF_OUTPUTS_ELEMENTWISE_CLOSE_ATOL
+    The absolute tolerance parameter.
+    Default: 1e-4
+
+  -n, --non_verbose
+    Do not show all information logs. Only error logs are displayed.
