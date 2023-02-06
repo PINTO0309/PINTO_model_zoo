@@ -1,0 +1,8 @@
+onnx2tf -i rfdn_64x64.onnx -o rfdn_64x64 -cotof -osd
+onnx2tf -i rfdn_90x160.onnx -o rfdn_90x160 -cotof -osd
+onnx2tf -i rfdn_96x96.onnx -o rfdn_96x96 -cotof -osd
+onnx2tf -i rfdn_120x160.onnx -o rfdn_120x160 -cotof -osd
+onnx2tf -i rfdn_128x128.onnx -o rfdn_128x128 -cotof -osd
+onnx2tf -i rfdn_160x160.onnx -o rfdn_160x160 -cotof -osd
+onnx2tf -i rfdn_180x320.onnx -o rfdn_180x320 -cotof -osd
+onnx2tf -i rfdn_256x256.onnx -o rfdn_256x256 -cotof -osd
