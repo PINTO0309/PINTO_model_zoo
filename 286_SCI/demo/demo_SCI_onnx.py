@@ -25,7 +25,6 @@ def run_inference(onnx_session, input_size, image):
     # Post process:squeeze, RGB->BGR, Transpose, uint8 cast
     output_image = np.squeeze(result[0])
     output_image = output_image.transpose(1, 2, 0)
-    output_image = np.clip(output_image * 255.0, 0, 255)
     output_image = output_image.astype(np.uint8)
     output_image = cv.cvtColor(output_image, cv.COLOR_RGB2BGR)
 
