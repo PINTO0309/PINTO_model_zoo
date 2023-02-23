@@ -1,3 +1,0 @@
-python3 deeplab/export_model.py \
-  --checkpoint_path=${HOME}/Downloads/deeplabv3_mnv2_pascal_trainval_2018_01_29/deeplabv3_mnv2_pascal_trainval/model.ckpt-30000 \
-  --export_path=${HOME}/Downloads/deeplabv3_mnv2_pascal_trainval_2018_01_29/deeplabv3_mnv2_pascal_trainval/frozen_inference_graph.pb
