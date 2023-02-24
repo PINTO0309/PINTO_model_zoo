@@ -1,4 +1,7 @@
 # PINTO_model_zoo
+
+## As of February 24, 2023, I am unable to download files from Google Drive that exceed 4 GB in size from the resources in this repository. I am in the process of contacting Google Support.
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/33194443/104581604-2592cb00-56a2-11eb-9610-5eaa0afb6e1f.png" />
 </p>
