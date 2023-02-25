@@ -50,7 +50,7 @@ def main():
     parser.add_argument(
         "--model",
         type=str,
-        default='isnet_480x640.onnx',
+        default='isnet_general_use_480x640.onnx',
     )
     parser.add_argument("--score_th", type=float, default=None)
 
