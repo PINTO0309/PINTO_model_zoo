@@ -17,8 +17,8 @@ def run_inference(onnx_session, image, score_th=None):
     # Pre process:Resize, BGR->RGB, float32 cast
     input_image = cv.resize(image, dsize=(input_width, input_height))
     input_image = cv.cvtColor(input_image, cv.COLOR_BGR2RGB)
-    mean = [0.485, 0.456, 0.406]
-    std = [0.229, 0.224, 0.225]
+    mean = [0.5, 0.5, 0.5]
+    std = [1.0, 1.0, 1.0]
     input_image = (input_image / 255.0 - mean) / std
     input_image = input_image.transpose(2, 0, 1)
     input_image = np.expand_dims(input_image, axis=0)
@@ -31,8 +31,11 @@ def run_inference(onnx_session, image, score_th=None):
 
     # Post process:squeeze, Sigmoid, Normarize, uint8 cast
     mask = np.squeeze(result[0])
+    min_value = np.min(mask)
+    max_value = np.max(mask)
+    mask = (mask - min_value) / (max_value - min_value)
     if score_th is not None:
-        mask = np.where(mask > score_th, 1, 0)
+        mask = np.where(mask < score_th, 0, 1)
     mask *= 255
     mask = mask.astype('uint8')
 
@@ -88,17 +91,11 @@ def main():
 
         elapsed_time = time.time() - start_time
 
-        # Inference elapsed time
-        elapsed_time_text = "Elapsed time: "
-        elapsed_time_text += str(round((elapsed_time * 1000), 1))
-        elapsed_time_text += 'ms'
-        cv.putText(debug_image, elapsed_time_text, (10, 30),
-                   cv.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2, cv.LINE_AA)
-
         # Map Resize
         mask = cv.resize(
             mask,
             dsize=(debug_image.shape[1], debug_image.shape[0]),
+            interpolation=cv.INTER_LINEAR,
         )
 
         # Mask Overlay
@@ -106,6 +103,13 @@ def main():
         overlay_image[:] = (255, 255, 255)
         mask = np.stack((mask, ) * 3, axis=-1).astype('uint8')
         mask_image = np.where(mask, debug_image, overlay_image)
+
+        # Inference elapsed time
+        elapsed_time_text = "Elapsed time: "
+        elapsed_time_text += str(round((elapsed_time * 1000), 1))
+        elapsed_time_text += 'ms'
+        cv.putText(debug_image, elapsed_time_text, (10, 30),
+                   cv.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2, cv.LINE_AA)
 
         key = cv.waitKey(1)
         if key == 27:  # ESC
