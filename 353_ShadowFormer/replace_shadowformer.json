@@ -1,0 +1,32 @@
+{
+  "cited": "https://github.com/GuoLanqing/ShadowFormer",
+  "model": "https://github.com/PINTO0309/PINTO_model_zoo/tree/main/353_ShadowFormer",
+  "command": "onnx2tf -i shadowformer_istd_160x240.onnx -prf replace_shadowformer.json -rtpo Erf -cotof",
+  "format_version": 1,
+  "operations": [
+    {
+      "op_name": "/encoderlayer_2/blocks.0/attn/Unsqueeze",
+      "param_target": "op",
+      "param_name": "/encoderlayer_2/blocks.0/attn/Unsqueeze_output_0",
+      "new_shape": [24,1,100,100]
+    },
+    {
+      "op_name": "/encoderlayer_2/blocks.1/attn/Unsqueeze",
+      "param_target": "op",
+      "param_name": "/encoderlayer_2/blocks.1/attn/Unsqueeze_output_0",
+      "new_shape": [24,1,100,100]
+    },
+    {
+      "op_name": "/conv/blocks.0/attn/Unsqueeze",
+      "param_target": "op",
+      "param_name": "/conv/blocks.0/attn/Unsqueeze_output_0",
+      "new_shape": [6,1,100,100]
+    },
+    {
+      "op_name": "/conv/blocks.1/attn/Unsqueeze",
+      "param_target": "op",
+      "param_name": "/conv/blocks.1/attn/Unsqueeze_output_0",
+      "new_shape": [6,1,100,100]
+    }
+  ]
+}
