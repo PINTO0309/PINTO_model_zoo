@@ -1,0 +1,832 @@
+{
+  "irVersion": "8",
+  "graph": {
+    "node": [
+      {
+        "input": [
+          "post_boxes",
+          "post_nms_Constant_1_output_0",
+          "post_nms_Constant_output_0",
+          "post_nms_Constant_output_0",
+          "post_nms_Constant_1_output_0"
+        ],
+        "output": [
+          "post_nms_Slice_output_0"
+        ],
+        "name": "post_nms_Slice",
+        "opType": "Slice"
+      },
+      {
+        "input": [
+          "post_boxes",
+          "post_nms_Constant_5_output_0",
+          "post_nms_Constant_1_output_0",
+          "post_nms_Constant_output_0",
+          "post_nms_Constant_1_output_0"
+        ],
+        "output": [
+          "post_nms_Slice_1_output_0"
+        ],
+        "name": "post_nms_Slice_1",
+        "opType": "Slice"
+      },
+      {
+        "input": [
+          "post_boxes",
+          "post_nms_Constant_9_output_0",
+          "post_nms_Constant_10_output_0",
+          "post_nms_Constant_output_0",
+          "post_nms_Constant_1_output_0"
+        ],
+        "output": [
+          "post_nms_Slice_2_output_0"
+        ],
+        "name": "post_nms_Slice_2",
+        "opType": "Slice"
+      },
+      {
+        "input": [
+          "post_boxes",
+          "post_nms_Constant_output_0",
+          "post_nms_Constant_9_output_0",
+          "post_nms_Constant_output_0",
+          "post_nms_Constant_1_output_0"
+        ],
+        "output": [
+          "post_nms_Slice_3_output_0"
+        ],
+        "name": "post_nms_Slice_3",
+        "opType": "Slice"
+      },
+      {
+        "input": [
+          "post_scores"
+        ],
+        "output": [
+          "scores_for_nms"
+        ],
+        "name": "post_nms_Transpose",
+        "opType": "Transpose",
+        "attribute": [
+          {
+            "name": "perm",
+            "ints": [
+              "0",
+              "2",
+              "1"
+            ],
+            "type": "INTS"
+          }
+        ]
+      },
+      {
+        "input": [
+          "post_nms_Slice_output_0",
+          "post_nms_Slice_1_output_0",
+          "post_nms_Slice_2_output_0",
+          "post_nms_Slice_3_output_0"
+        ],
+        "output": [
+          "boxes_yxyx_for_nms"
+        ],
+        "name": "post_nms_Concat",
+        "opType": "Concat",
+        "attribute": [
+          {
+            "name": "axis",
+            "i": "2",
+            "type": "INT"
+          }
+        ]
+      },
+      {
+        "input": [
+          "boxes_yxyx_for_nms",
+          "scores_for_nms",
+          "max_output_boxes_per_class",
+          "iou_threshold",
+          "score_threshold"
+        ],
+        "output": [
+          "selected_indices"
+        ],
+        "name": "post_nms_NonMaxSuppression",
+        "opType": "NonMaxSuppression",
+        "attribute": [
+          {
+            "name": "center_point_box",
+            "i": "0",
+            "type": "INT"
+          }
+        ]
+      },
+      {
+        "input": [
+          "selected_indices",
+          "post_nms_Constant_1_output_0"
+        ],
+        "output": [
+          "main01_workaround_mul_out"
+        ],
+        "name": "post_nms_Mul",
+        "opType": "Mul"
+      },
+      {
+        "input": [
+          "scores_for_nms",
+          "main01_workaround_mul_out"
+        ],
+        "output": [
+          "post_nms_GatherNd"
+        ],
+        "name": "post_nms_GatherNd",
+        "opType": "GatherND"
+      },
+      {
+        "input": [
+          "main01_workaround_mul_out",
+          "main01_onnx::Gather_1"
+        ],
+        "output": [
+          "sub01_onnx::Unsqueeze_2"
+        ],
+        "name": "post_nms_Gather_2",
+        "opType": "Gather",
+        "attribute": [
+          {
+            "name": "axis",
+            "i": "1",
+            "type": "INT"
+          }
+        ]
+      },
+      {
+        "input": [
+          "main01_workaround_mul_out",
+          "main01_onnx::Gather_9"
+        ],
+        "output": [
+          "sub01_onnx::Unsqueeze_5"
+        ],
+        "name": "post_nms_Gather_1",
+        "opType": "Gather",
+        "attribute": [
+          {
+            "name": "axis",
+            "i": "1",
+            "type": "INT"
+          }
+        ]
+      },
+      {
+        "input": [
+          "main01_workaround_mul_out",
+          "post_gather_boxes_1"
+        ],
+        "output": [
+          "post_gateher_output"
+        ],
+        "name": "post_nms_Gather",
+        "opType": "Gather",
+        "attribute": [
+          {
+            "name": "axis",
+            "i": "1",
+            "type": "INT"
+          }
+        ]
+      },
+      {
+        "input": [
+          "post_boxes",
+          "post_gateher_output"
+        ],
+        "output": [
+          "post_nms_GatherNd_1"
+        ],
+        "name": "post_nms_GatherNd_1",
+        "opType": "GatherND"
+      },
+      {
+        "input": [
+          "post_nms_GatherNd",
+          "main01_const_fold_opt__9"
+        ],
+        "output": [
+          "post_nms_Reshape"
+        ],
+        "name": "post_nms_Reshape",
+        "opType": "Reshape"
+      },
+      {
+        "input": [
+          "sub01_onnx::Unsqueeze_2"
+        ],
+        "output": [
+          "final_batch_nums"
+        ],
+        "name": "post_nms_Unsqueeze_1",
+        "opType": "Unsqueeze",
+        "attribute": [
+          {
+            "name": "axes",
+            "ints": [
+              "1"
+            ],
+            "type": "INTS"
+          }
+        ]
+      },
+      {
+        "input": [
+          "sub01_onnx::Unsqueeze_5"
+        ],
+        "output": [
+          "final_class_nums"
+        ],
+        "name": "post_nms_Unsqueeze",
+        "opType": "Unsqueeze",
+        "attribute": [
+          {
+            "name": "axes",
+            "ints": [
+              "1"
+            ],
+            "type": "INTS"
+          }
+        ]
+      },
+      {
+        "input": [
+          "post_nms_GatherNd_1"
+        ],
+        "output": [
+          "final_boxes"
+        ],
+        "name": "post_nms_Cast",
+        "opType": "Cast",
+        "attribute": [
+          {
+            "name": "to",
+            "i": "7",
+            "type": "INT"
+          }
+        ]
+      },
+      {
+        "input": [
+          "post_nms_Reshape",
+          "main01_const_starts__6",
+          "main01_const_ends__7",
+          "main01_const_axes__8"
+        ],
+        "output": [
+          "score"
+        ],
+        "name": "post_nms_Slice_4",
+        "opType": "Slice"
+      },
+      {
+        "input": [
+          "final_batch_nums",
+          "final_class_nums",
+          "final_boxes"
+        ],
+        "output": [
+          "batchno_classid_x1y1x2y2"
+        ],
+        "name": "post_nms_Concat_1",
+        "opType": "Concat",
+        "attribute": [
+          {
+            "name": "axis",
+            "i": "1",
+            "type": "INT"
+          }
+        ]
+      }
+    ],
+    "name": "torch_jit",
+    "initializer": [
+      {
+        "dims": [
+          "1"
+        ],
+        "dataType": 7,
+        "name": "post_nms_Constant_1_output_0",
+        "rawData": "AQAAAAAAAAA="
+      },
+      {
+        "dims": [
+          "1"
+        ],
+        "dataType": 7,
+        "name": "post_nms_Constant_output_0",
+        "rawData": "AgAAAAAAAAA="
+      },
+      {
+        "dims": [
+          "1"
+        ],
+        "dataType": 7,
+        "name": "post_nms_Constant_5_output_0",
+        "rawData": "AAAAAAAAAAA="
+      },
+      {
+        "dims": [
+          "1"
+        ],
+        "dataType": 7,
+        "name": "post_nms_Constant_9_output_0",
+        "rawData": "AwAAAAAAAAA="
+      },
+      {
+        "dims": [
+          "1"
+        ],
+        "dataType": 7,
+        "name": "post_nms_Constant_10_output_0",
+        "rawData": "BAAAAAAAAAA="
+      },
+      {
+        "dims": [
+          "1"
+        ],
+        "dataType": 7,
+        "name": "max_output_boxes_per_class",
+        "rawData": "FAAAAAAAAAA="
+      },
+      {
+        "dims": [
+          "1"
+        ],
+        "dataType": 1,
+        "name": "iou_threshold",
+        "rawData": "MzMzPw=="
+      },
+      {
+        "dims": [
+          "1"
+        ],
+        "dataType": 1,
+        "name": "score_threshold",
+        "rawData": "AACAPg=="
+      },
+      {
+        "dataType": 7,
+        "name": "main01_onnx::Gather_1",
+        "rawData": "AAAAAAAAAAA="
+      },
+      {
+        "dataType": 7,
+        "name": "main01_onnx::Gather_9",
+        "rawData": "AQAAAAAAAAA="
+      },
+      {
+        "dims": [
+          "2"
+        ],
+        "dataType": 7,
+        "name": "post_gather_boxes_1",
+        "rawData": "AAAAAAAAAAACAAAAAAAAAA=="
+      },
+      {
+        "dims": [
+          "2"
+        ],
+        "dataType": 7,
+        "name": "main01_const_fold_opt__9",
+        "rawData": "//////////8BAAAAAAAAAA=="
+      },
+      {
+        "dims": [
+          "2"
+        ],
+        "dataType": 7,
+        "name": "main01_const_starts__6",
+        "rawData": "AAAAAAAAAAAAAAAAAAAAAA=="
+      },
+      {
+        "dims": [
+          "2"
+        ],
+        "dataType": 7,
+        "name": "main01_const_ends__7",
+        "rawData": "////fwAAAAD///9/AAAAAA=="
+      },
+      {
+        "dims": [
+          "2"
+        ],
+        "dataType": 7,
+        "name": "main01_const_axes__8",
+        "rawData": "AAAAAAAAAAABAAAAAAAAAA=="
+      }
+    ],
+    "input": [
+      {
+        "name": "post_boxes",
+        "type": {
+          "tensorType": {
+            "elemType": 1,
+            "shape": {
+              "dim": [
+                {
+                  "dimValue": "1"
+                },
+                {
+                  "dimValue": "1260"
+                },
+                {
+                  "dimValue": "4"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "post_scores",
+        "type": {
+          "tensorType": {
+            "elemType": 1,
+            "shape": {
+              "dim": [
+                {
+                  "dimValue": "1"
+                },
+                {
+                  "dimValue": "1260"
+                },
+                {
+                  "dimValue": "80"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "output": [
+      {
+        "name": "score",
+        "type": {
+          "tensorType": {
+            "elemType": 1,
+            "shape": {
+              "dim": [
+                {
+                  "dimParam": "N"
+                },
+                {
+                  "dimValue": "1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "batchno_classid_x1y1x2y2",
+        "type": {
+          "tensorType": {
+            "elemType": 7,
+            "shape": {
+              "dim": [
+                {
+                  "dimParam": "N"
+                },
+                {
+                  "dimValue": "6"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ],
+    "valueInfo": [
+      {
+        "name": "post_nms_Slice_output_0",
+        "type": {
+          "tensorType": {
+            "elemType": 1,
+            "shape": {
+              "dim": [
+                {
+                  "dimValue": "1"
+                },
+                {
+                  "dimValue": "1260"
+                },
+                {
+                  "dimValue": "1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "post_nms_Slice_1_output_0",
+        "type": {
+          "tensorType": {
+            "elemType": 1,
+            "shape": {
+              "dim": [
+                {
+                  "dimValue": "1"
+                },
+                {
+                  "dimValue": "1260"
+                },
+                {
+                  "dimValue": "1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "post_nms_Slice_2_output_0",
+        "type": {
+          "tensorType": {
+            "elemType": 1,
+            "shape": {
+              "dim": [
+                {
+                  "dimValue": "1"
+                },
+                {
+                  "dimValue": "1260"
+                },
+                {
+                  "dimValue": "1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "post_nms_Slice_3_output_0",
+        "type": {
+          "tensorType": {
+            "elemType": 1,
+            "shape": {
+              "dim": [
+                {
+                  "dimValue": "1"
+                },
+                {
+                  "dimValue": "1260"
+                },
+                {
+                  "dimValue": "1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "scores_for_nms",
+        "type": {
+          "tensorType": {
+            "elemType": 1,
+            "shape": {
+              "dim": [
+                {
+                  "dimValue": "1"
+                },
+                {
+                  "dimValue": "80"
+                },
+                {
+                  "dimValue": "1260"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "boxes_yxyx_for_nms",
+        "type": {
+          "tensorType": {
+            "elemType": 1,
+            "shape": {
+              "dim": [
+                {
+                  "dimValue": "1"
+                },
+                {
+                  "dimValue": "1260"
+                },
+                {
+                  "dimValue": "4"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "selected_indices",
+        "type": {
+          "tensorType": {
+            "elemType": 7,
+            "shape": {
+              "dim": [
+                {
+                  "dimParam": "N"
+                },
+                {
+                  "dimValue": "3"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "main01_workaround_mul_out",
+        "type": {
+          "tensorType": {
+            "elemType": 7,
+            "shape": {
+              "dim": [
+                {
+                  "dimParam": "N"
+                },
+                {
+                  "dimValue": "3"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "post_nms_GatherNd",
+        "type": {
+          "tensorType": {
+            "elemType": 1,
+            "shape": {
+              "dim": [
+                {
+                  "dimParam": "N"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "sub01_onnx::Unsqueeze_2",
+        "type": {
+          "tensorType": {
+            "elemType": 7,
+            "shape": {
+              "dim": [
+                {
+                  "dimParam": "N"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "sub01_onnx::Unsqueeze_5",
+        "type": {
+          "tensorType": {
+            "elemType": 7,
+            "shape": {
+              "dim": [
+                {
+                  "dimParam": "N"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "post_gateher_output",
+        "type": {
+          "tensorType": {
+            "elemType": 7,
+            "shape": {
+              "dim": [
+                {
+                  "dimParam": "N"
+                },
+                {
+                  "dimValue": "2"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "post_nms_GatherNd_1",
+        "type": {
+          "tensorType": {
+            "elemType": 1,
+            "shape": {
+              "dim": [
+                {
+                  "dimParam": "N"
+                },
+                {
+                  "dimValue": "4"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "post_nms_Reshape",
+        "type": {
+          "tensorType": {
+            "elemType": 1,
+            "shape": {
+              "dim": [
+                {
+                  "dimParam": "N"
+                },
+                {
+                  "dimValue": "1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "final_batch_nums",
+        "type": {
+          "tensorType": {
+            "elemType": 7,
+            "shape": {
+              "dim": [
+                {
+                  "dimParam": "N"
+                },
+                {
+                  "dimValue": "1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "final_class_nums",
+        "type": {
+          "tensorType": {
+            "elemType": 7,
+            "shape": {
+              "dim": [
+                {
+                  "dimParam": "N"
+                },
+                {
+                  "dimValue": "1"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "name": "final_boxes",
+        "type": {
+          "tensorType": {
+            "elemType": 7,
+            "shape": {
+              "dim": [
+                {
+                  "dimParam": "N"
+                },
+                {
+                  "dimValue": "4"
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  },
+  "opsetImport": [
+    {
+      "domain": "",
+      "version": "11"
+    }
+  ]
+}
