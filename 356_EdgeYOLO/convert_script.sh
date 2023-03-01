@@ -1,53 +1,106 @@
 #!/bin/bash
 
-DATASETS=(
-    "haze4k"
-    "its"
-    "ots"
+WEIGHTS=(
+    "edgeyolo_coco"
+    "edgeyolo_m_coco"
+    "edgeyolo_m_visdrone"
+    "edgeyolo_s_coco"
+    "edgeyolo_s_visdrone"
+    "edgeyolo_tiny_coco"
+    "edgeyolo_tiny_lrelu_coco"
+    "edgeyolo_tiny_lrelu_visdrone"
+    "edgeyolo_tiny_visdrone"
+    "edgeyolo_visdrone"
 )
 RESOLUTIONS=(
-    "180 320"
-    "180 416"
-    "180 640"
-    "180 800"
-    "240 320"
-    "240 416"
-    "240 640"
-    "240 800"
-    "240 960"
+    "192 320"
+    "192 416"
+    "192 640"
+    "192 800"
+    "256 320"
+    "256 416"
+    "256 640"
+    "256 800"
+    "256 960"
     "288 480"
     "288 640"
     "288 800"
     "288 960"
     "288 1280"
     "320 320"
-    "360 480"
-    "360 640"
-    "360 800"
-    "360 960"
-    "360 1280"
+    "384 480"
+    "384 640"
+    "384 800"
+    "384 960"
+    "384 1280"
     "416 416"
     "480 640"
     "480 800"
     "480 960"
     "480 1280"
-    "540 800"
-    "540 960"
-    "540 1280"
+    "512 512"
+    "544 800"
+    "544 960"
+    "544 1280"
     "640 640"
-    "720 1280"
+    "736 1280"
 )
 
-for((i=0; i<${#DATASETS[@]}; i++))
+for((i=0; i<${#WEIGHTS[@]}; i++))
 do
-    DATASET=(`echo ${DATASETS[i]}`)
-    for((k=0; k<${#RESOLUTIONS[@]}; k++))
+    WEIGHT=(`echo ${WEIGHTS[i]}`)
+    for((j=0; j<${#RESOLUTIONS[@]}; j++))
     do
-        RESOLUTION=(`echo ${RESOLUTIONS[k]}`)
+        RESOLUTION=(`echo ${RESOLUTIONS[j]}`)
         H=${RESOLUTION[0]}
         W=${RESOLUTION[1]}
-        MODELNAME=dea_net_${DATASET}_${H}x${W}
+        MODELNAME=${WEIGHT}_${H}x${W}
         echo @@@@@@@@@@@@@@@@@ processing ${MODELNAME} ...
-        onnx2tf -i ${MODELNAME}.onnx -o ${MODELNAME}
+
+        python export.py \
+        --onnx-only \
+        --weights weights/${WEIGHT}.pth \
+        --input-size ${H} ${W} \
+        --batch 1 \
+        --opset 11
+    done
+done
+
+
+
+WEIGHTS=(
+    "edgeyolo_coco"
+    "edgeyolo_m_coco"
+    "edgeyolo_m_visdrone"
+    "edgeyolo_s_coco"
+    "edgeyolo_s_visdrone"
+    "edgeyolo_tiny_coco"
+    "edgeyolo_tiny_lrelu_coco"
+    "edgeyolo_tiny_lrelu_visdrone"
+    "edgeyolo_tiny_visdrone"
+    "edgeyolo_visdrone"
+)
+RESOLUTIONS=(
+    "192 320"
+)
+
+for((i=0; i<${#WEIGHTS[@]}; i++))
+do
+    WEIGHT=(`echo ${WEIGHTS[i]}`)
+    for((j=0; j<${#RESOLUTIONS[@]}; j++))
+    do
+        RESOLUTION=(`echo ${RESOLUTIONS[j]}`)
+        H=${RESOLUTION[0]}
+        W=${RESOLUTION[1]}
+        MODELNAME=${WEIGHT}_${H}x${W}
+        echo @@@@@@@@@@@@@@@@@ processing ${MODELNAME} ...
+
+        python export.py \
+        --onnx-only \
+        --weights weights/${WEIGHT}.pth \
+        --input-size ${H} ${W} \
+        --batch 1 \
+        --opset 11 \
+        --dynamic
     done
 done
