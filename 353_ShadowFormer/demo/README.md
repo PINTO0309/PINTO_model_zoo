@@ -24,6 +24,9 @@ If you want to change the model, specify it with an argument.
     )
 ```
 
+![image](https://user-images.githubusercontent.com/37477845/222126922-5f81b96a-8a8a-41b1-be31-3a9218bb2ea3.png)
+
+
 ## About sample images
 The sample image uses the image of "[PAKUTASO](https://www.pakutaso.com/)".<br>
 If you want to use the image itself for another purpose, you must follow the [userpolicy of PAKUTASO](https://www.pakutaso.com/userpolicy.html).
