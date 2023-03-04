@@ -490,6 +490,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |328|Stable_Diffusion|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/328_Stable_Diffusion)|||||||||||⚫||
 |339|DeepLSD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/339_DeepLSD)|||||||||||⚫||
 |342|ALIKE|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/342_ALIKE)|⚫|⚫|⚫||⚫|⚫|||||⚫||
+|357|Unimatch|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/357_Unimatch)|⚫|⚫|||||||||⚫|OpticalFlow, StereoDepth|
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)
