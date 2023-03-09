@@ -1,0 +1,17 @@
+{
+  "format_version": 1,
+  "operations": [
+    {
+      "op_name": "/Transpose",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    },
+    {
+      "op_name": "/Transpose_1",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,2,3]
+    }
+  ]
+}
