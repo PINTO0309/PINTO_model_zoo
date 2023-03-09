@@ -1,4 +1,6 @@
 https://github.com/gangweiX/CGI-Stereo
+
+https://github.com/fateshelled/cgistereo_demo
 https://github.com/PINTO0309/simple-onnx-processing-tools
 https://github.com/PINTO0309/onnx2tf
 
