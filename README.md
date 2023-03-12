@@ -409,6 +409,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |352|MAXIM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/352_MAXIM)|⚫|⚫|||||||||⚫|Dehaze only|
 |353|ShadowFormer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/353_ShadowFormer)|||||||||||⚫|Shadow Removal|
 |354|DEA-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/354_DEA-Net)|⚫|⚫|||||||||⚫|DeHaze|
+|359|MSPFN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/359_MSPFN)|⚫|⚫|||||||||⚫|DeRain|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
