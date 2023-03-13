@@ -1,0 +1,176 @@
+{
+  "format_version": 1,
+  "operations": [
+    {
+      "op_name": "/decoder/layers.0/Add_1",
+      "param_target": "inputs",
+      "param_name": "/decoder/layers.0/Add_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/Add_2",
+      "param_target": "inputs",
+      "param_name": "onnx::Add_4504",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+
+
+
+    {
+      "op_name": "/decoder/layers.0_1/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_8_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_2/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_15_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_3/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_22_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_4/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_29_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_5/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_36_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_6/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_43_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_7/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_50_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_8/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_57_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_9/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_64_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_10/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_71_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_11/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_78_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_12/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_85_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_13/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_92_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_14/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_99_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_15/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_106_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_16/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_113_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_17/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_120_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_18/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_127_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_19/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_134_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_20/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_141_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_21/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_148_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_22/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_155_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_23/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_162_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_24/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_169_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_25/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_176_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_26/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_183_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    }
+  ]
+}

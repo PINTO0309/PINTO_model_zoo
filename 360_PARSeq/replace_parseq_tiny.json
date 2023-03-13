@@ -1,0 +1,86 @@
+{
+  "format_version": 1,
+  "operations": [
+    {
+      "op_name": "/decoder/layers.0/Add_1",
+      "param_target": "inputs",
+      "param_name": "/decoder/layers.0/Add_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/Add_2",
+      "param_target": "inputs",
+      "param_name": "onnx::Add_4129",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+
+    {
+      "op_name": "/decoder/layers.0_1/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_8_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_2/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_15_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_3/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_22_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_4/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_29_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_5/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_36_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+    {
+      "op_name": "/decoder/layers.0_6/Add",
+      "param_target": "inputs",
+      "param_name": "/Slice_43_output_0",
+      "pre_process_transpose_perm": [0,1,2]
+    },
+
+    {
+      "op_name": "/decoder/layers.0/self_attn_6/Transpose_4",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [1,2,0]
+    },
+    {
+      "op_name": "/decoder/layers.0/self_attn_5/Transpose_4",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [1,2,0]
+    },
+
+    {
+      "op_name": "/decoder/layers.0/self_attn_4/Transpose_3",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [1,0,2]
+    },
+    {
+      "op_name": "/decoder/layers.0/self_attn_6/Transpose_3",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [1,0,2]
+    },
+    {
+      "op_name": "/decoder/layers.0/self_attn_5/Transpose_3",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [1,0,2]
+    }
+  ]
+}
