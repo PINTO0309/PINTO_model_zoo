@@ -1,4 +1,4 @@
-onnx2tf -i parseq.onnx -prf replace_parseq.json
-onnx2tf -i parseq_tiny.onnx -prf replace_parseq_tiny.json
+onnx2tf -i parseq.onnx -prf replace_parseq.json -rtpo Erf
+onnx2tf -i parseq_tiny.onnx -prf replace_parseq_tiny.json -rtpo Erf
 
 
