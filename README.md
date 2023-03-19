@@ -285,6 +285,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |327|EMDC|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/327_EMDC)|||||||||||⚫|RGB+SarseDepth|
 |338|Fast-ACVNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/338_Fast-ACVNet)|||||||||||⚫|Stereo/grid_sample opset=16,no_grid_sample opset=11|
 |358|CGI-Stereo|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/358_CGI-Stereo)|⚫|⚫|||||||||⚫|Stereo|
+|362|ZoeDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/362_ZoeDepth)|||||||||||⚫|Mono-Depth|
 ### 8. Semantic Segmentation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
