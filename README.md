@@ -1,7 +1,5 @@
 # PINTO_model_zoo
 
-## As of February 24, 2023, I am unable to download files from Google Drive that exceed 4 GB in size from the resources in this repository. I am in the process of contacting Google Support.
-
 <p align="center">
   <img src="https://user-images.githubusercontent.com/33194443/104581604-2592cb00-56a2-11eb-9610-5eaa0afb6e1f.png" />
 </p>
@@ -177,7 +175,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |107|SFA3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/107_SFA3D)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |263|EgoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/263_EgoNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫||
 |321|DID-M3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/321_DID-M3D)|||||||||||⚫||
-|363|YOLO-6D-Pose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/363_YOLO-6D-Pose)|⚫||||||||||⚫|Texas Instruments ver, PINTO Special ver|
+|363|YOLO-6D-Pose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/363_YOLO-6D-Pose)|⚫||||||||⚫||⚫|Texas Instruments ver, PINTO Special ver|
 ### 4. 2D/3D Face Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
