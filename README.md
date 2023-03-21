@@ -177,6 +177,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |107|SFA3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/107_SFA3D)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |263|EgoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/263_EgoNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫||
 |321|DID-M3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/321_DID-M3D)|||||||||||⚫||
+|363|YOLO-6D-Pose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/363_YOLO-6D-Pose)|⚫||||||||||⚫|Texas Instruments ver, PINTO Special ver|
 ### 4. 2D/3D Face Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
