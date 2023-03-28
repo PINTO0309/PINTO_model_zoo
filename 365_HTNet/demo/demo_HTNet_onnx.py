@@ -129,6 +129,8 @@ def get_pose3D(figure_path, output_dir, file_name, args, with_norm):
     input_2D_no = keypoints[0,:,:,:]
     if not with_norm:
         input_2D = normalize_screen_coordinates(input_2D_no, w=img_size[1], h=img_size[0])
+    else:
+        input_2D = input_2D_no
     input_2D = input_2D.astype(np.float32)
 
     # Load model
@@ -179,8 +181,8 @@ def get_pose3D(figure_path, output_dir, file_name, args, with_norm):
                 None,
                 {
                     input_name1: input_2D,
-                    input_name2: img_size[0],
-                    input_name3: img_size[1],
+                    input_name2: np.asarray(img_size[0]),
+                    input_name3: np.asarray(img_size[1]),
                 },
             )[0]
 
@@ -244,7 +246,7 @@ if __name__ == "__main__":
         '-mod',
         '--model',
         type=str,
-        default='htnet_1x17x2_without_norm.onnx',
+        default='htnet_1x17x2_with_norm.onnx',
     )
     parser.add_argument(
         '-p',

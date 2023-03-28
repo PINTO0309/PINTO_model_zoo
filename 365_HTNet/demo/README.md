@@ -11,7 +11,7 @@ parser.add_argument(
     '-mod',
     '--model',
     type=str,
-    default='htnet_1x17x2_without_norm.onnx',
+    default='htnet_1x17x2_with_norm.onnx',
 )
 parser.add_argument(
     '-p',
