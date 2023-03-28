@@ -236,6 +236,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |333|E2Pose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/333_E2Pose)|⚫|⚫|⚫||⚫||||||⚫|COCO/CrowdPose,End-to-End|
 |350|P-STMO|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/350_P-STMO)|||||||||||⚫|2D->3D,in_the_wild|
 |355|MHFormer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/355_MHFormer)|⚫|⚫|||||||||⚫|2D->3D|
+|365|HTNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/365_HTNet)|||||||||||⚫|2D->3D|
 ### 7. Depth Estimation from Monocular/Stereo Images
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
