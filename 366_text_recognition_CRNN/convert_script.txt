@@ -1,0 +1,4 @@
+onnx2tf -i text_recognition_CRNN_EN_2021sep.onnx -osd -o text_recognition_CRNN_EN_2021sep -cotof
+onnx2tf -i text_recognition_CRNN_CN_2021nov.onnx -osd -o text_recognition_CRNN_CN_2021nov -cotof
+onnx2tf -i text_recognition_CRNN_CH_2021sep.onnx -osd -o text_recognition_CRNN_CH_2021sep -cotof
+
