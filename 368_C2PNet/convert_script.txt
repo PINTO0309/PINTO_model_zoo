@@ -1,0 +1,2 @@
+onnx2tf -i c2pnet_outdoor_480x640.onnx -osd -cotof
+

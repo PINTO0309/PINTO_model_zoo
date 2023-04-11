@@ -414,6 +414,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |359|MSPFN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/359_MSPFN)|⚫|⚫|||||||||⚫|DeRain|
 |361|KBNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/361_KBNet)|||||||||||⚫|Real Image Denoising|
 |367|FLW-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/367_FLW-Net)|||||||||||⚫|Low-light Image Enhancement|
+|368|C2PNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/368_C2PNet)|||||||||||⚫|DeHaze|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
