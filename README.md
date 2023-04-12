@@ -287,6 +287,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |358|CGI-Stereo|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/358_CGI-Stereo)|⚫|⚫|||||||||⚫|Stereo|
 |362|ZoeDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/362_ZoeDepth)|||||||||||⚫|Mono-Depth|
 |364|IGEV|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/364_IGEV)|||||||||||⚫|Stereo|
+|371|Lite-Mono|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/371_Lite-Mono)|||||||||||⚫|Mono|
 ### 8. Semantic Segmentation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|

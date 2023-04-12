@@ -1,0 +1,2 @@
+onnx2tf -i lite-mono_192x640.onnx -cotof
+
