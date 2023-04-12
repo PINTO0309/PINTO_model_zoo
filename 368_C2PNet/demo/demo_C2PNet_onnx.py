@@ -9,17 +9,6 @@ import cv2 as cv
 import numpy as np
 import onnxruntime
 
-MEAN = np.asarray(
-    [0.640, 0.600, 0.580],
-    dtype=np.float32,
-).reshape([1,3,1,1])
-
-STD = np.asarray(
-    [0.140, 0.150, 0.152],
-    dtype=np.float32,
-).reshape([1,3,1,1])
-
-
 def run_inference(
     onnx_session: onnxruntime.InferenceSession,
     input_name: str,
@@ -38,7 +27,6 @@ def run_inference(
     input_image = input_image.transpose(2, 0, 1)
     input_image = np.expand_dims(input_image, axis=0)
     input_image = input_image.astype('float32')
-    # input_image = (input_image / 255.0 - MEAN) / STD
     input_image = input_image / 255.0
 
     # Inference
