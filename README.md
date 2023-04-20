@@ -504,6 +504,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |357|Unimatch|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/357_Unimatch)|⚫|⚫|||||||||⚫|OpticalFlow, StereoDepth|
 |360|PARSeq|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/360_PARSeq)|⚫|⚫|||||||||⚫|Scene Text Recognition|
 |366|text_recognition_CRNN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/366_text_recognition_CRNN)|⚫|⚫|||||||||⚫|CN/CH/EN|
+|373|LiteTrack|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/373_LiteTrack)|⚫|⚫|||||||||⚫|Tracking|
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)

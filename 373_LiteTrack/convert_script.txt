@@ -1,0 +1,2 @@
+onnx2tf -i backbone.onnx -cotof
+onnx2tf -i litetrack.onnx -prf replace.json -cotof

@@ -1,0 +1,11 @@
+  {
+    "format_version": 1,
+    "operations": [
+      {
+        "op_name": "Reshape_304",
+        "param_target": "outputs",
+        "param_name": "780",
+        "post_process_transpose_perm": [0,2,3,1]
+      }
+    ]
+  }
