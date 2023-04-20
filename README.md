@@ -81,63 +81,63 @@ I have been working on quantization of various models as a hobby, but I have ski
 ### 1. Image Classification
 |No.|Model Name|Link|FP32|FP16|INT8|DQ|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|004|Efficientnet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/004_efficientnet)|⚫||⚫|||⚫|||||||
-|010|Mobilenetv3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/010_mobilenetv3)|⚫||⚫|||⚫|||||||
-|011|Mobilenetv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/011_mobilenetv2)|⚫||⚫|⚫||⚫|||||||
-|016|Efficientnet-lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/016_EfficientNet-lite)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|||
-|070|age-gender-recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/070_age-gender-recognition)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|083|Person_Reidentification|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/083_Person_Reidentification)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|248,277,286,287,288,300|
-|087|DeepSort|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/087_DeepSort)|⚫|⚫|⚫|||⚫|⚫|⚫||⚫|⚫||
-|124|person-attributes-recognition-crossroad-0230|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/124_person-attributes-recognition-crossroad-0230)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|125|person-attributes-recognition-crossroad-0234|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/125_person-attributes-recognition-crossroad-0234)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|126|person-attributes-recognition-crossroad-0238|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/126_person-attributes-recognition-crossroad-0238)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|175|face-recognition-resnet100-arcface-onnx|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/175_face-recognition-resnet100-arcface-onnx)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|RGB/BGR,112x112,[1,512]|
-|187|vehicle-attributes-recognition-barrier-0039|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/187_vehicle-attributes-recognition-barrier-0039)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|72x72|
-|188|vehicle-attributes-recognition-barrier-0042|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/188_vehicle-attributes-recognition-barrier-0042)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|72x72|
-|191|anti-spoof-mn3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/191_anti-spoof-mn3)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|128x128|
-|192|open-closed-eye-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/192_open-closed-eye-0001)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|32x32|
-|194|face_recognizer_fast|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/194_face_recognizer_fast)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|112x112|
-|195|person_reid_youtu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/195_person_reid_youtu)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|256x128|
-|199|NSFW|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/199_NSFW)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|224x224|
-|244|FINNger|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/244_FINNger)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|96x96|
-|256|SFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/256_SFace)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|112x112|
-|257|PiCANet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/257_PiCANet)|||||||⚫||||⚫|BDDA,SAGE/224x224|
-|259|Emotion_FERPlus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/259_Emotion_FERPlus)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|64x64|
-|290|AdaFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/290_AdaFace)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|112x112|
-|317|MobileOne|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/317_MobileOne)|||||||||||⚫|224x224|
-|346|facial_expression_recognition_mobilefacenet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/346_facial_expression_recognition_mobilefacenet)|⚫|⚫|⚫|⚫||⚫|||||⚫|112x112|
+|004|Efficientnet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/004_efficientnet)|⚫||⚫|||⚫|||||||
+|010|Mobilenetv3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/010_mobilenetv3)|⚫||⚫|||⚫|||||||
+|011|Mobilenetv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/011_mobilenetv2)|⚫||⚫|⚫||⚫|||||||
+|016|Efficientnet-lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/016_EfficientNet-lite)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|||
+|070|age-gender-recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/070_age-gender-recognition)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|083|Person_Reidentification|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/083_Person_Reidentification)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|248,277,286,287,288,300|
+|087|DeepSort|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/087_DeepSort)|⚫|⚫|⚫|||⚫|⚫|⚫||⚫|⚫||
+|124|person-attributes-recognition-crossroad-0230|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/124_person-attributes-recognition-crossroad-0230)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|125|person-attributes-recognition-crossroad-0234|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/125_person-attributes-recognition-crossroad-0234)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|126|person-attributes-recognition-crossroad-0238|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/126_person-attributes-recognition-crossroad-0238)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|175|face-recognition-resnet100-arcface-onnx|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/175_face-recognition-resnet100-arcface-onnx)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|RGB/BGR,112x112,[1,512]|
+|187|vehicle-attributes-recognition-barrier-0039|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/187_vehicle-attributes-recognition-barrier-0039)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|72x72|
+|188|vehicle-attributes-recognition-barrier-0042|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/188_vehicle-attributes-recognition-barrier-0042)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|72x72|
+|191|anti-spoof-mn3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|128x128|
+|192|open-closed-eye-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/192_open-closed-eye-0001)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|32x32|
+|194|face_recognizer_fast|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/194_face_recognizer_fast)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|112x112|
+|195|person_reid_youtu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/195_person_reid_youtu)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|256x128|
+|199|NSFW|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/199_NSFW)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|224x224|
+|244|FINNger|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/244_FINNger)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|96x96|
+|256|SFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/256_SFace)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|112x112|
+|257|PiCANet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/257_PiCANet)|||||||⚫||||⚫|BDDA,SAGE/224x224|
+|259|Emotion_FERPlus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/259_Emotion_FERPlus)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|64x64|
+|290|AdaFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/290_AdaFace)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|112x112|
+|317|MobileOne|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/317_MobileOne)|||||||||||⚫|224x224|
+|346|facial_expression_recognition_mobilefacenet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/346_facial_expression_recognition_mobilefacenet)|⚫|⚫|⚫|⚫||⚫|||||⚫|112x112|
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|002|Mobilenetv3-SSD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/002_mobilenetv3-ssd)|⚫||⚫|||⚫||⚫|||||
-|006|Mobilenetv2-SSDlite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/006_mobilenetv2-ssdlite)|⚫||⚫|⚫||⚫|||||||
-|008|Mask_RCNN_Inceptionv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/008_mask_rcnn_inceptionv2)|⚫|⚫||||⚫|||||||
-|018|EfficientDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/018_EfficientDet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|023|Yolov3-nano|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/023_yolov3-nano)|⚫|⚫||||⚫|||||⚫||
-|024|Yolov3-lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/024_yolov3-lite)|⚫|⚫|⚫|||⚫|⚫||||⚫||
-|031|Yolov4|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/031_yolov4)|⚫|⚫|⚫|⚫||⚫|||||⚫||
-|034|SSD_Mobilenetv2_mnasfpn|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/034_ssd_mobilenet_v2_mnasfpn_shared_box_predictor)|⚫|⚫|⚫|⚫||⚫|||||⚫||
-|038|SSDlite_MobileDet_edgetpu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/038_ssdlite_mobiledet_edgetpu)|⚫|⚫|⚫|⚫||⚫|||⚫|⚫|⚫||
-|039|SSDlite_MobileDet_cpu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/039_ssdlite_mobiledet_cpu)|⚫|⚫|⚫|||⚫|||||||
-|042|Centernet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/042_centernet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|045|SSD_Mobilenetv2_oid_v4|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/045_ssd_mobilenet_v2_oid_v4)|⚫|⚫|⚫|⚫||⚫|||⚫||||
-|046|Yolov4-tiny|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/046_yolov4-tiny)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|047|SpineNetMB_49|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/047_SpineNetMB_49)|⚫|⚫|⚫|||⚫|||||⚫|Mobile RetinaNet|
-|051|East_Text_Detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/051_East_Text_Detection)|⚫|⚫|⚫|⚫||⚫|⚫||⚫|⚫|⚫||
-|054|KNIFT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/054_KNIFT)|⚫|⚫|⚫|||⚫|⚫||||⚫|MediaPipe|
-|056|TextBoxes++ with dense blocks, separable convolution and Focal Loss|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/056_TextBoxes%2B%2B)|⚫|⚫|⚫|||⚫|⚫|⚫||⚫|⚫||
+|002|Mobilenetv3-SSD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/002_mobilenetv3-ssd)|⚫||⚫|||⚫||⚫|||||
+|006|Mobilenetv2-SSDlite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/006_mobilenetv2-ssdlite)|⚫||⚫|⚫||⚫|||||||
+|008|Mask_RCNN_Inceptionv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/008_mask_rcnn_inceptionv2)|⚫|⚫||||⚫|||||||
+|018|EfficientDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/018_EfficientDet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|023|Yolov3-nano|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/023_yolov3-nano)|⚫|⚫||||⚫|||||⚫||
+|024|Yolov3-lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/024_yolov3-lite)|⚫|⚫|⚫|||⚫|⚫||||⚫||
+|031|Yolov4|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/031_yolov4)|⚫|⚫|⚫|⚫||⚫|||||⚫||
+|034|SSD_Mobilenetv2_mnasfpn|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/034_ssd_mobilenet_v2_mnasfpn_shared_box_predictor)|⚫|⚫|⚫|⚫||⚫|||||⚫||
+|038|SSDlite_MobileDet_edgetpu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/038_ssdlite_mobiledet_edgetpu)|⚫|⚫|⚫|⚫||⚫|||⚫|⚫|⚫||
+|039|SSDlite_MobileDet_cpu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/039_ssdlite_mobiledet_cpu)|⚫|⚫|⚫|||⚫|||||||
+|042|Centernet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/042_centernet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|045|SSD_Mobilenetv2_oid_v4|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/045_ssd_mobilenet_v2_oid_v4)|⚫|⚫|⚫|⚫||⚫|||⚫||||
+|046|Yolov4-tiny|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/046_yolov4-tiny)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|047|SpineNetMB_49|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/047_SpineNetMB_49)|⚫|⚫|⚫|||⚫|||||⚫|Mobile RetinaNet|
+|051|East_Text_Detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/051_East_Text_Detection)|⚫|⚫|⚫|⚫||⚫|⚫||⚫|⚫|⚫||
+|054|KNIFT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/054_KNIFT)|⚫|⚫|⚫|||⚫|⚫||||⚫|MediaPipe|
+|056|TextBoxes++ with dense blocks, separable convolution and Focal Loss|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/056_TextBoxes%2B%2B)|⚫|⚫|⚫|||⚫|⚫|⚫||⚫|⚫||
 |058|keras-retinanet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/058_keras-retinanet)|⚫|⚫||||⚫|⚫||⚫|⚫|⚫|resnet50_coco_best_v2.1.0.h5,320x320|
-|059|Yolov5|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/059_yolov5)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|072|NanoDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/072_NanoDet)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|[issue #274](https://github.com/google-coral/edgetpu/issues/274)|
-|073|RetinaNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/073_RetinaNet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|074|Yolact|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/074_Yolact)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|085|Yolact_Edge|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/085_Yolact_Edge)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|21/10/05 new MobileNetV2(550x550)|
-|089|DETR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/089_DETR)|⚫|⚫|⚫|||⚫|||||⚫|256x256|
-|103|EfficientDet_lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/103_EfficientDet_lite)|⚫|⚫|⚫|⚫||⚫|⚫||⚫|⚫|⚫|lite0,lite1,lite2,lite3,lite4|
-|116|DroNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/116_DroNet)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|DroNet,DroNetV3|
-|123|YOLOR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/123_YOLOR)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫||⚫|ssss_s2d/320x320,640x640,960x960,1280x1280|
-|132|YOLOX|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/132_YOLOX)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|nano,tiny,s,m,l,x/256x320,320x320,416x416,480x640,544x960,736x1280,1088x1920|
-|143|RAPiD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/143_RAPiD)|⚫|⚫|⚫|||⚫|⚫||||⚫|Fisheye, cepdof/habbof/mw_r, 608x608/1024x1024|
+|059|Yolov5|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/059_yolov5)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|072|NanoDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/072_NanoDet)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|[issue #274](https://github.com/google-coral/edgetpu/issues/274)|
+|073|RetinaNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/073_RetinaNet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|074|Yolact|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/074_Yolact)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|085|Yolact_Edge|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/085_Yolact_Edge)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|21/10/05 new MobileNetV2(550x550)|
+|089|DETR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/089_DETR)|⚫|⚫|⚫|||⚫|||||⚫|256x256|
+|103|EfficientDet_lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/103_EfficientDet_lite)|⚫|⚫|⚫|⚫||⚫|⚫||⚫|⚫|⚫|lite0,lite1,lite2,lite3,lite4|
+|116|DroNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/116_DroNet)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|DroNet,DroNetV3|
+|123|YOLOR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/123_YOLOR)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫||⚫|ssss_s2d/320x320,640x640,960x960,1280x1280|
+|132|YOLOX|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/132_YOLOX)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|nano,tiny,s,m,l,x/256x320,320x320,416x416,480x640,544x960,736x1280,1088x1920|
+|143|RAPiD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/143_RAPiD)|⚫|⚫|⚫|||⚫|⚫||||⚫|Fisheye, cepdof/habbof/mw_r, 608x608/1024x1024|
 |145|text_detection_db|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/145_text_detection_db)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|480x640|
 |151|object_detection_mobile_object_localizer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/151_object_detection_mobile_object_localizer)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|192x192|
 |169|spaghettinet_edgetpu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/169_spaghettinet_edgetpu)|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|⚫|⚫|320x320,S/M/L|
@@ -154,38 +154,38 @@ I have been working on quantization of various models as a hobby, but I have ski
 |197|yolact-resnet50-fpn|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/197_yolact-resnet50-fpn)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|RGB,550x550|
 |198|YOLOF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/198_YOLOF)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|BGR/RGB,608x608|
 |221|YOLACT-PyTorch|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/221_YOLACT-PyTorch)|⚫|⚫|⚫||⚫|⚫|⚫||⚫|⚫|⚫|180x320,240x320,320x480,480x640,544x544,720x1280|
-|226|CascadeTableNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/226_CascadeTableNet)|⚫|⚫|||⚫|⚫|⚫||||⚫|General,320x320 only|
-|262|ByteTrack|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/262_ByteTrack)|||||||||||⚫|YOLOX/nano,tiny,s,m,l,x,mot17,ablation/128x320,192x320,192x448,192x640,256x320,256x448,256x640,384x640,512x1280,736x1280|
-|264|object_localization_network|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/264_object_localization_network)|||||||||||⚫|180x320,240x320,270x480,360x480,360x480,360x640,480x640,720x1280|
-|307|YOLOv7|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/307_YOLOv7)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||⚫|YOLOv7,YOLOv7-tiny|
-|308|FastestDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/308_FastestDet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|180x320,256x320,320x480,352x352,352x640,480x640,736x1280|
-|329|YOLOX-PAI|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/329_YOLOX-PAI)|||||||||||⚫||
-|331|YOLOv5L6_Ball|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/331_YOLOv5L6_Ball)|||||||||||⚫||
-|332|CrowdDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/332_CrowdDet)|||||||||||⚫||
-|334|DAMO-YOLO|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/334_DAMO-YOLO)|||||||||||⚫||
-|336|PP-YOLOE-Plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/336_PP-YOLOE-Plus)|||||||||||⚫||
-|337|FreeYOLO|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/337_FreeYOLO)|||||||||||⚫||
-|341|YOLOv6|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/341_YOLOv6)|⚫|⚫|⚫||⚫|⚫|||||⚫||
-|356|EdgeYOLO|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/356_EdgeYOLO)|||||||||||⚫||
+|226|CascadeTableNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/226_CascadeTableNet)|⚫|⚫|||⚫|⚫|⚫||||⚫|General,320x320 only|
+|262|ByteTrack|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/262_ByteTrack)|||||||||||⚫|YOLOX/nano,tiny,s,m,l,x,mot17,ablation/128x320,192x320,192x448,192x640,256x320,256x448,256x640,384x640,512x1280,736x1280|
+|264|object_localization_network|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/264_object_localization_network)|||||||||||⚫|180x320,240x320,270x480,360x480,360x480,360x640,480x640,720x1280|
+|307|YOLOv7|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/307_YOLOv7)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||⚫|YOLOv7,YOLOv7-tiny|
+|308|FastestDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/308_FastestDet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|180x320,256x320,320x480,352x352,352x640,480x640,736x1280|
+|329|YOLOX-PAI|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/329_YOLOX-PAI)|||||||||||⚫||
+|331|YOLOv5L6_Ball|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/331_YOLOv5L6_Ball)|||||||||||⚫||
+|332|CrowdDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/332_CrowdDet)|||||||||||⚫||
+|334|DAMO-YOLO|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/334_DAMO-YOLO)|||||||||||⚫||
+|336|PP-YOLOE-Plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/336_PP-YOLOE-Plus)|||||||||||⚫||
+|337|FreeYOLO|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/337_FreeYOLO)|||||||||||⚫||
+|341|YOLOv6|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/341_YOLOv6)|⚫|⚫|⚫||⚫|⚫|||||⚫||
+|356|EdgeYOLO|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/356_EdgeYOLO)|||||||||||⚫||
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|036|Objectron|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/036_Objectron)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe/camera,chair,chair_1stage,cup,sneakers,sneakers_1stage,ssd_mobilenetv2_oidv4_fp16|
-|063|3D BoundingBox estimation for autonomous driving|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/063_3d-bounding-box-estimation-for-autonomous-driving)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|**[YouTube](https://youtu.be/MKer-Sj87d4)**|
-|107|SFA3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/107_SFA3D)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|263|EgoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/263_EgoNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫||
-|321|DID-M3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/321_DID-M3D)|||||||||||⚫||
-|363|YOLO-6D-Pose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/363_YOLO-6D-Pose)|⚫||||||||⚫||⚫|Texas Instruments ver, PINTO Special ver|
+|036|Objectron|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/036_Objectron)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe/camera,chair,chair_1stage,cup,sneakers,sneakers_1stage,ssd_mobilenetv2_oidv4_fp16|
+|063|3D BoundingBox estimation for autonomous driving|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/063_3d-bounding-box-estimation-for-autonomous-driving)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|**[YouTube](https://youtu.be/MKer-Sj87d4)**|
+|107|SFA3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/107_SFA3D)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|263|EgoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/263_EgoNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫||
+|321|DID-M3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/321_DID-M3D)|||||||||||⚫||
+|363|YOLO-6D-Pose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/363_YOLO-6D-Pose)|⚫||||||||⚫||⚫|Texas Instruments ver, PINTO Special ver|
 ### 4. 2D/3D Face Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|025|Head_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/025_head_pose_estimation)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|030|BlazeFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/030_BlazeFace)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
-|032|FaceMesh|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/032_FaceMesh)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
-|040|DSFD_vgg|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/040_DSFD_vgg)|⚫|⚫||||⚫|||||||
-|041|DBFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/041_DBFace)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MobileNetV2/V3, 320x320,480x640,640x960,800x1280|
-|043|Face_Landmark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/043_face_landmark)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|049|Iris_Landmark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/049_iris_landmark)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
+|025|Head_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/025_head_pose_estimation)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|030|BlazeFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/030_BlazeFace)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
+|032|FaceMesh|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/032_FaceMesh)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
+|040|DSFD_vgg|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/040_DSFD_vgg)|⚫|⚫||||⚫|||||||
+|041|DBFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/041_DBFace)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MobileNetV2/V3, 320x320,480x640,640x960,800x1280|
+|043|Face_Landmark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/043_face_landmark)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|049|Iris_Landmark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/049_iris_landmark)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
 |095|CenterFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/095_centerface)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |096|RetinaFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/096_RetinaFace)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |106|WHENet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/106_WHENet)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|Real-time Fine-Grained Estimation for Wide Range Head Pose|
@@ -211,136 +211,136 @@ I have been working on quantization of various models as a hobby, but I have ski
 ### 5. 2D/3D Hand Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|027|Minimal-Hand|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/027_minimal-hand)|⚫|⚫|⚫|||⚫||⚫|⚫|⚫|⚫||
-|033|Hand_Detection_and_Tracking|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/033_Hand_Detection_and_Tracking)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
+|027|Minimal-Hand|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/027_minimal-hand)|⚫|⚫|⚫|||⚫||⚫|⚫|⚫|⚫||
+|033|Hand_Detection_and_Tracking|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/033_Hand_Detection_and_Tracking)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
 |094|hand_recrop|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/094_hand_recrop)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe|
 ### 6. 2D/3D Human Pose Estimation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|003|Posenet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/003_posenet)|⚫|⚫|⚫|⚫||⚫|⚫||||||
-|007|Mobilenetv2_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/007_mobilenetv2-poseestimation)|⚫|⚫|⚫|⚫||⚫|⚫||⚫|⚫|||
-|029|Human_Pose_Estimation_3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/029_human-pose-estimation-3d-0001)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|RGB,180x320,240x320,360x640,480x640,720x1280|
-|053|BlazePose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/053_BlazePose)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe,Integrate 058_BlazePose_Full_Keypoints|
-|065|ThreeDPoseUnityBarracuda|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/065_ThreeDPoseUnityBarracuda)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|**[YouTube](https://www.youtube.com/watch?v=L0ieoaOD6Po)**|
-|080|tf_pose_estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/080_tf_pose_estimation)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|084|EfficientPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/084_EfficientPose)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|SinglePose|
-|088|Mobilenetv3_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/088_mobilenetv3-poseestimation)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|115|MoveNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/115_MoveNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|lightning,thunder|
-|137|MoveNet_MultiPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/137_MoveNet_MultiPose)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|lightning,192x192,192x256,256x256,256x320,320x320,480x640,720x1280,1280x1920|
-|156|MobileHumanPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/156_MobileHumanPose)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|3D|
-|157|3DMPPE_POSENET|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/157_3DMPPE_POSENET)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|3D,192x192/256x256/320x320/416x416/480x640/512x512|
-|265|PoseAug|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/265_PoseAug)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|2D->3D/GCN,MLP,STGCN,VideoPose/Nx16x2|
-|268|Lite-HRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/268_Lite-HRNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|COCO,MPII/Top-Down|
-|269|Higher-HRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/269_Higher-HRNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|192x320,256x320,320x480,384x640,480x640,512x512,576x960,736x1280/Bottom-Up|
-|271|HRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/271_HRNet)|||||||||||⚫|COCO,MPII/Top-Down|
-|333|E2Pose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/333_E2Pose)|⚫|⚫|⚫||⚫||||||⚫|COCO/CrowdPose,End-to-End|
-|350|P-STMO|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/350_P-STMO)|||||||||||⚫|2D->3D,in_the_wild|
-|355|MHFormer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/355_MHFormer)|⚫|⚫|||||||||⚫|2D->3D|
-|365|HTNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/365_HTNet)|⚫|⚫|||||||||⚫|2D->3D|
+|003|Posenet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/003_posenet)|⚫|⚫|⚫|⚫||⚫|⚫||||||
+|007|Mobilenetv2_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/007_mobilenetv2-poseestimation)|⚫|⚫|⚫|⚫||⚫|⚫||⚫|⚫|||
+|029|Human_Pose_Estimation_3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/029_human-pose-estimation-3d-0001)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|RGB,180x320,240x320,360x640,480x640,720x1280|
+|053|BlazePose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/053_BlazePose)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe,Integrate 058_BlazePose_Full_Keypoints|
+|065|ThreeDPoseUnityBarracuda|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/065_ThreeDPoseUnityBarracuda)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|**[YouTube](https://www.youtube.com/watch?v=L0ieoaOD6Po)**|
+|080|tf_pose_estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/080_tf_pose_estimation)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|084|EfficientPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/084_EfficientPose)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|SinglePose|
+|088|Mobilenetv3_Pose_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/088_mobilenetv3-poseestimation)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|115|MoveNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/115_MoveNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|lightning,thunder|
+|137|MoveNet_MultiPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/137_MoveNet_MultiPose)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|lightning,192x192,192x256,256x256,256x320,320x320,480x640,720x1280,1280x1920|
+|156|MobileHumanPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/156_MobileHumanPose)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|3D|
+|157|3DMPPE_POSENET|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/157_3DMPPE_POSENET)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|3D,192x192/256x256/320x320/416x416/480x640/512x512|
+|265|PoseAug|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/265_PoseAug)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|2D->3D/GCN,MLP,STGCN,VideoPose/Nx16x2|
+|268|Lite-HRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/268_Lite-HRNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|COCO,MPII/Top-Down|
+|269|Higher-HRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/269_Higher-HRNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|192x320,256x320,320x480,384x640,480x640,512x512,576x960,736x1280/Bottom-Up|
+|271|HRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/271_HRNet)|||||||||||⚫|COCO,MPII/Top-Down|
+|333|E2Pose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/333_E2Pose)|⚫|⚫|⚫||⚫||||||⚫|COCO/CrowdPose,End-to-End|
+|350|P-STMO|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/350_P-STMO)|||||||||||⚫|2D->3D,in_the_wild|
+|355|MHFormer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/355_MHFormer)|⚫|⚫|||||||||⚫|2D->3D|
+|365|HTNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/365_HTNet)|⚫|⚫|||||||||⚫|2D->3D|
 ### 7. Depth Estimation from Monocular/Stereo Images
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|009|Multi-Scale Local Planar Guidance for Monocular Depth Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/009_multi-scale_local_planar_guidance_for_monocular_depth_estimation)|⚫||||||||||||
-|014|tf-monodepth2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/014_tf-monodepth2)|⚫|⚫|⚫|||⚫|⚫|⚫||⚫|⚫||
-|028|struct2depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/028_struct2depth)|⚫|⚫||||⚫|||||⚫||
-|064|Dense Depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/064_Dense_Depth)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|066|Footprints|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/066_footprints)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|067|MiDaS|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/067_MiDaS)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|081|MiDaS v2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/081_MiDaS_v2)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|135|CoEx|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/135_CoEx)|||||||⚫||||⚫|WIP, onnx/OpenVINO only|
-|142|HITNET|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/142_HITNET)|⚫|⚫||||⚫|||||⚫|WIP [issue1](https://github.com/openvinotoolkit/openvino/issues/7379),[issue2](https://github.com/openvinotoolkit/openvino/issues/9517),flyingthings_finalpass_xl/eth3d/middlebury_d400,120x160/240x320/256x256/480x640/720x1280|
-|146|FastDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/146_FastDepth)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|128x160,224x224,256x256,256x320,320x320,480x640,512x512,768x1280|
-|147|PackNet-SfM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/147_PackNet-SfM)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|ddad/kitti,Convert all ResNet18 backbones only|
-|148|LapDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/148_LapDepth)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|kitti/nyu,192x320/256x320/368x640/480x640/720x1280|
-|149|depth_estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/149_depth_estimation)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|nyu,180x320/240x320/360x640/480x640/720x1280|
-|150|MobileStereoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/150_MobileStereoNet)||||||||||||WIP. Conversion script only.|
-|153|MegaDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/153_MegaDepth)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|192x256,384x512|
-|158|HR-Depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/158_HR-Depth)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|159|EPCDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/159_EPCDepth)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|160|msg_chn_wacv20|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/160_msg_chn_wacv20)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|192x320,240x320,256x256,352x480,368x480,368x640,480x640,720x1280,1280x1920|
-|162|PyDNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/162_PyDNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|164|MADNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/164_MADNet)|⚫|⚫||||⚫|⚫|⚫|⚫|⚫|⚫|Real-time-self-adaptive-deep-stereo (perform only inference mode, no-backprop, kitti)|
-|165|RealtimeStereo|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/165_RealtimeStereo)|⚫|⚫|||⚫|⚫|⚫||⚫|⚫|⚫|180x320,216x384,240x320,270x480,360x480,360x640,480x640,720x1280|
-|166|Insta-DM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/166_Insta-DM)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|192x320,256x320,256x832,384x640,480x640,736x1280|
+|009|Multi-Scale Local Planar Guidance for Monocular Depth Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/009_multi-scale_local_planar_guidance_for_monocular_depth_estimation)|⚫||||||||||||
+|014|tf-monodepth2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/014_tf-monodepth2)|⚫|⚫|⚫|||⚫|⚫|⚫||⚫|⚫||
+|028|struct2depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/028_struct2depth)|⚫|⚫||||⚫|||||⚫||
+|064|Dense Depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/064_Dense_Depth)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|066|Footprints|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/066_footprints)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|067|MiDaS|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/067_MiDaS)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|081|MiDaS v2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/081_MiDaS_v2)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|135|CoEx|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/135_CoEx)|||||||⚫||||⚫|WIP, onnx/OpenVINO only|
+|142|HITNET|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/142_HITNET)|⚫|⚫||||⚫|||||⚫|WIP [issue1](https://github.com/openvinotoolkit/openvino/issues/7379),[issue2](https://github.com/openvinotoolkit/openvino/issues/9517),flyingthings_finalpass_xl/eth3d/middlebury_d400,120x160/240x320/256x256/480x640/720x1280|
+|146|FastDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/146_FastDepth)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|128x160,224x224,256x256,256x320,320x320,480x640,512x512,768x1280|
+|147|PackNet-SfM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/147_PackNet-SfM)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|ddad/kitti,Convert all ResNet18 backbones only|
+|148|LapDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/148_LapDepth)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|kitti/nyu,192x320/256x320/368x640/480x640/720x1280|
+|149|depth_estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/149_depth_estimation)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|nyu,180x320/240x320/360x640/480x640/720x1280|
+|150|MobileStereoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/150_MobileStereoNet)||||||||||||WIP. Conversion script only.|
+|153|MegaDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/153_MegaDepth)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|192x256,384x512|
+|158|HR-Depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/158_HR-Depth)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫||
+|159|EPCDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/159_EPCDepth)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫||
+|160|msg_chn_wacv20|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/160_msg_chn_wacv20)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|192x320,240x320,256x256,352x480,368x480,368x640,480x640,720x1280,1280x1920|
+|162|PyDNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/162_PyDNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫||
+|164|MADNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/164_MADNet)|⚫|⚫||||⚫|⚫|⚫|⚫|⚫|⚫|Real-time-self-adaptive-deep-stereo (perform only inference mode, no-backprop, kitti)|
+|165|RealtimeStereo|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/165_RealtimeStereo)|⚫|⚫|||⚫|⚫|⚫||⚫|⚫|⚫|180x320,216x384,240x320,270x480,360x480,360x640,480x640,720x1280|
+|166|Insta-DM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/166_Insta-DM)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|192x320,256x320,256x832,384x640,480x640,736x1280|
 |167|DPT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/168_DPT)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|⚫|dpt-hybrid,480x640,ViT,ONNX 96x128/256x320/384x480/480x640|
-|173|MVDepthNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/173_MVDepthNet)|||||||⚫||||⚫|256x320|
-|202|stereoDNN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/202_stereoDNN)|⚫|⚫|||⚫|⚫|⚫|⚫||⚫|⚫|NVSmall_321x1025,NVTiny_161x513,ResNet18_321x1025,ResNet18_2d_257x513|
-|203|SRHNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/203_SRHNet)|||||||||||⚫|finetune2_kitti/sceneflow,maxdisp192,320x480/480x640|
-|210|SC_Depth_pl|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/210_SC_Depth_pl)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|kitti/nyu,320x320,320x480,480x640,640x800|
-|211|Lac-GwcNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/211_Lac-GwcNet)|||||||||||⚫|kitti,240x320,320x480,480x640,720x1280|
-|219|StereoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/219_StereoNet)|⚫|⚫|⚫||⚫|⚫|⚫|||⚫|⚫|Left/180x320,240x320,320x480,360x640,480x640|
-|235|W-Stereo-Disp|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/235_W-Stereo-Disp)|||||||||||⚫|Kitti,Sceneflow/320x480,384x576,480x640|
-|236|A-TVSNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/236_A-TVSNet)|⚫|⚫|||⚫|⚫|||||⚫|Stereo only/192x320,256x320,320x480,480x640|
-|239|CasStereoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/239_CasStereoNet)|||||||||||⚫|Stereo KITTI only/256x320,384x480,480x640,736x1280|
-|245|GLPDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/245_GLPDepth)|||||||⚫||||⚫|Kitti,NYU/192x320,320x480,384x640,480x640,736x1280,non-commercial use only|
-|258|TinyHITNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/258_TinyHITNet)|||||||⚫||||⚫|180x320,240x320,300x400,360x640,384x512,480x640,720x960,720x1280|
-|266|ACVNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/266_ACVNet)|||||||⚫||||⚫|sceneflow,kitti/240x320,320x480,384x640,480x640,544x960,720x1280|
-|280|GASDA|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/280_GASDA)|||||||||||⚫|No-LICENSE|
-|284|CREStereo|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/284_CREStereo)|||||||||||⚫|ITER2,ITER5,ITER10,ITER20/240x320,320x480,360x640,480x640,480x640,720x1280|
-|292|Graft-PSMNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/292_Graft-PSMNet)|||||||||||⚫|192x320,240x320,320x480,368x640,480x640,720x1280|
-|294|FSRE-Depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/294_FSRE-Depth)|||||||⚫||||⚫|192x320,256x320,320x480,368x640,480x640,736x1280|
-|296|MGNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/296_MGNet)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||⚫|240x320,360x480,360x640,360x1280,480x640,720x1280|
-|312|NeWCRFs|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/312_NeWCRFs)|||||||||||⚫|384x384,384x576,384x768,384x960,576x768,768x1344|
-|313|PyDNet2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/314_PyDNet2)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|Mono-Depth|
-|327|EMDC|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/327_EMDC)|||||||||||⚫|RGB+SarseDepth|
-|338|Fast-ACVNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/338_Fast-ACVNet)|||||||||||⚫|Stereo/grid_sample opset=16,no_grid_sample opset=11|
-|358|CGI-Stereo|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/358_CGI-Stereo)|⚫|⚫|||||||||⚫|Stereo|
-|362|ZoeDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/362_ZoeDepth)|||||||||||⚫|Mono-Depth|
-|364|IGEV|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/364_IGEV)|||||||||||⚫|Stereo|
-|371|Lite-Mono|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/371_Lite-Mono)|||||||||||⚫|Mono|
+|173|MVDepthNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/173_MVDepthNet)|||||||⚫||||⚫|256x320|
+|202|stereoDNN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/202_stereoDNN)|⚫|⚫|||⚫|⚫|⚫|⚫||⚫|⚫|NVSmall_321x1025,NVTiny_161x513,ResNet18_321x1025,ResNet18_2d_257x513|
+|203|SRHNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/203_SRHNet)|||||||||||⚫|finetune2_kitti/sceneflow,maxdisp192,320x480/480x640|
+|210|SC_Depth_pl|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/210_SC_Depth_pl)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|kitti/nyu,320x320,320x480,480x640,640x800|
+|211|Lac-GwcNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/211_Lac-GwcNet)|||||||||||⚫|kitti,240x320,320x480,480x640,720x1280|
+|219|StereoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/219_StereoNet)|⚫|⚫|⚫||⚫|⚫|⚫|||⚫|⚫|Left/180x320,240x320,320x480,360x640,480x640|
+|235|W-Stereo-Disp|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/235_W-Stereo-Disp)|||||||||||⚫|Kitti,Sceneflow/320x480,384x576,480x640|
+|236|A-TVSNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/236_A-TVSNet)|⚫|⚫|||⚫|⚫|||||⚫|Stereo only/192x320,256x320,320x480,480x640|
+|239|CasStereoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/239_CasStereoNet)|||||||||||⚫|Stereo KITTI only/256x320,384x480,480x640,736x1280|
+|245|GLPDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/245_GLPDepth)|||||||⚫||||⚫|Kitti,NYU/192x320,320x480,384x640,480x640,736x1280,non-commercial use only|
+|258|TinyHITNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/258_TinyHITNet)|||||||⚫||||⚫|180x320,240x320,300x400,360x640,384x512,480x640,720x960,720x1280|
+|266|ACVNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/266_ACVNet)|||||||⚫||||⚫|sceneflow,kitti/240x320,320x480,384x640,480x640,544x960,720x1280|
+|280|GASDA|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/280_GASDA)|||||||||||⚫|No-LICENSE|
+|284|CREStereo|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/284_CREStereo)|||||||||||⚫|ITER2,ITER5,ITER10,ITER20/240x320,320x480,360x640,480x640,480x640,720x1280|
+|292|Graft-PSMNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/292_Graft-PSMNet)|||||||||||⚫|192x320,240x320,320x480,368x640,480x640,720x1280|
+|294|FSRE-Depth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/294_FSRE-Depth)|||||||⚫||||⚫|192x320,256x320,320x480,368x640,480x640,736x1280|
+|296|MGNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/296_MGNet)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||⚫|240x320,360x480,360x640,360x1280,480x640,720x1280|
+|312|NeWCRFs|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/312_NeWCRFs)|||||||||||⚫|384x384,384x576,384x768,384x960,576x768,768x1344|
+|313|PyDNet2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/314_PyDNet2)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|Mono-Depth|
+|327|EMDC|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/327_EMDC)|||||||||||⚫|RGB+SarseDepth|
+|338|Fast-ACVNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/338_Fast-ACVNet)|||||||||||⚫|Stereo/grid_sample opset=16,no_grid_sample opset=11|
+|358|CGI-Stereo|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/358_CGI-Stereo)|⚫|⚫|||||||||⚫|Stereo|
+|362|ZoeDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/362_ZoeDepth)|||||||||||⚫|Mono-Depth|
+|364|IGEV|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/364_IGEV)|||||||||||⚫|Stereo|
+|371|Lite-Mono|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/371_Lite-Mono)|||||||||||⚫|Mono|
 ### 8. Semantic Segmentation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|001|deeplabv3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/001_deeplabv3)|⚫|||||⚫|||||||
-|015|Faster-Grad-CAM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/015_Faster-Grad-CAM)|⚫||⚫|||⚫|||||||
-|020|EdgeTPU-Deeplab|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/020_edgetpu-deeplab)|⚫|⚫|⚫|||⚫|||||||
-|021|EdgeTPU-Deeplab-slim|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/021_edgetpu-deeplab-slim)|⚫|⚫|⚫|||⚫|||||||
-|026|Mobile-Deeplabv3-plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/026_mobile-deeplabv3-plus)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|035|BodyPix|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/035_BodyPix)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe,MobileNet0.50/0.75/1.00,ResNet50|
-|057|BiSeNetV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/057_BiSeNetV2)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|060|Hair Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/060_hair_segmentation)|⚫|||||⚫|||⚫|⚫|⚫|WIP,MediaPipe|
-|061|U^2-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/061_U-2-Net)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|069|ENet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/069_ENet)|⚫|⚫||||⚫|||⚫|⚫|⚫|Cityscapes,512x1024|
-|075|ERFNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/075_ERFNet)|⚫|⚫|⚫|⚫||⚫|⚫||⚫|⚫|⚫|Cityscapes,256x512,384x786,512x1024|
-|078|MODNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/078_MODNet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|128x128,192x192,256x256,512x512|
-|082|MediaPipe_Meet_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/082_MediaPipe_Meet_Segmentation)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe,128x128,144x256,96x160|
-|104|DeeplabV3-plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/104_DeeplabV3-plus)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫||⚫|cityscapes,200x400,400x800,800x1600|
-|109|Selfie_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/109_Selfie_Segmentation)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|256x256|
-|136|road-segmentation-adas-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/136_road-segmentation-adas-0001)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|138|BackgroundMattingV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/138_BackgroundMattingV2)|⚫|⚫||||⚫|⚫||||⚫|720x1280,2160x4096|
-|181|models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_default_argmax|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/181_models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_default_argmax)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|182|models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_fused_argmax|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/182_models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_fused_argmax)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|196|human_segmentation_pphumanseg|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/196_human_segmentation_pphumanseg)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
-|201|CityscapesSOTA|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/201_CityscapesSOTA)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|180x320,240x320,360x640,480x640,720x1280|
-|206|Matting|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/206_Matting)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|PaddleSeg/modnet_mobilenetv2,modnet_hrnet_w18,modnet_resnet50_vd/256x256,384x384,512x512,640x640|
-|228|Fast-SCNN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/228_Fast-SCNN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|192x384,384x384,384x576,576x576,576x768,768x1344|
-|238|SUIM-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/238_SUIM-Net)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|||⚫|RSB,VGG/240x320,256x320,320x480,360x640,384x480,384x640,480x640,720x1280|
-|242|RobustVideoMatting|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/242_RobustVideoMatting)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|Mbnv3,ResNet50/192x320,240x320,320x480,384x640,480x640,720x1280,1088x1920,2160x3840|
-|246|SqueezeSegV3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/246_SqueezeSegV3)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫||⚫|21,53/180x320,240x320,320x480,360x640,480x640,720x1280|
-|267|LIOT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/267_LIOT)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|180x320,240x320,320x480,360x640,480x640,540x960,720x1280,1080x1920|
-|287|Topformer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/287_Topformer)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Tiny,Small,Base/448x448,512x512|
-|295|SparseInst|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/295_SparseInst)|||||||⚫||||⚫|r50_giam_aug/192x384,384x384,384x576,384x768,576x576,576x768,768x1344|
-|299|DGNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/299_DGNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫||
-|313|IS-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/313_IS-Net)|||||||||||⚫|180x320,240x320,320x480,360x640,480x640,720x1280,1080x1920,1080x2048,2160x4096,N-batch,Dynamic-HeightxWidth|
-|335|PIDNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/335_PIDNet)|||||||||||⚫|Cityscapes,CamVid/Dynamic-HeightxWidth|
-|343|PP-MattingV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/343_PP-MattingV2)|⚫|⚫|||||||||⚫|HumanSeg|
-|347|RGBX_Semantic_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/347_RGBX_Semantic_Segmentation)|||||||||||⚫||
-|369|Segment_Anything|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/369_Segment_Anything)|||||||||||⚫||
+|001|deeplabv3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/001_deeplabv3)|⚫|||||⚫|||||||
+|015|Faster-Grad-CAM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/015_Faster-Grad-CAM)|⚫||⚫|||⚫|||||||
+|020|EdgeTPU-Deeplab|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/020_edgetpu-deeplab)|⚫|⚫|⚫|||⚫|||||||
+|021|EdgeTPU-Deeplab-slim|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/021_edgetpu-deeplab-slim)|⚫|⚫|⚫|||⚫|||||||
+|026|Mobile-Deeplabv3-plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/026_mobile-deeplabv3-plus)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|035|BodyPix|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/035_BodyPix)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe,MobileNet0.50/0.75/1.00,ResNet50|
+|057|BiSeNetV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/057_BiSeNetV2)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|060|Hair Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/060_hair_segmentation)|⚫|||||⚫|||⚫|⚫|⚫|WIP,MediaPipe|
+|061|U^2-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/061_U-2-Net)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|069|ENet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/069_ENet)|⚫|⚫||||⚫|||⚫|⚫|⚫|Cityscapes,512x1024|
+|075|ERFNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/075_ERFNet)|⚫|⚫|⚫|⚫||⚫|⚫||⚫|⚫|⚫|Cityscapes,256x512,384x786,512x1024|
+|078|MODNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/078_MODNet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|128x128,192x192,256x256,512x512|
+|082|MediaPipe_Meet_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/082_MediaPipe_Meet_Segmentation)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|MediaPipe,128x128,144x256,96x160|
+|104|DeeplabV3-plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/104_DeeplabV3-plus)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫||⚫|cityscapes,200x400,400x800,800x1600|
+|109|Selfie_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/109_Selfie_Segmentation)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|256x256|
+|136|road-segmentation-adas-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/136_road-segmentation-adas-0001)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|138|BackgroundMattingV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/138_BackgroundMattingV2)|⚫|⚫||||⚫|⚫||||⚫|720x1280,2160x4096|
+|181|models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_default_argmax|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/181_models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_default_argmax)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
+|182|models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_fused_argmax|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/182_models_edgetpu_checkpoint_and_tflite_vision_segmentation-edgetpu_tflite_fused_argmax)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
+|196|human_segmentation_pphumanseg|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/196_human_segmentation_pphumanseg)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||
+|201|CityscapesSOTA|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/201_CityscapesSOTA)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|180x320,240x320,360x640,480x640,720x1280|
+|206|Matting|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/206_Matting)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|PaddleSeg/modnet_mobilenetv2,modnet_hrnet_w18,modnet_resnet50_vd/256x256,384x384,512x512,640x640|
+|228|Fast-SCNN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/228_Fast-SCNN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|192x384,384x384,384x576,576x576,576x768,768x1344|
+|238|SUIM-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/238_SUIM-Net)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|||⚫|RSB,VGG/240x320,256x320,320x480,360x640,384x480,384x640,480x640,720x1280|
+|242|RobustVideoMatting|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/242_RobustVideoMatting)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|Mbnv3,ResNet50/192x320,240x320,320x480,384x640,480x640,720x1280,1088x1920,2160x3840|
+|246|SqueezeSegV3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/246_SqueezeSegV3)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫||⚫|21,53/180x320,240x320,320x480,360x640,480x640,720x1280|
+|267|LIOT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/267_LIOT)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|180x320,240x320,320x480,360x640,480x640,540x960,720x1280,1080x1920|
+|287|Topformer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/287_Topformer)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Tiny,Small,Base/448x448,512x512|
+|295|SparseInst|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/295_SparseInst)|||||||⚫||||⚫|r50_giam_aug/192x384,384x384,384x576,384x768,576x576,576x768,768x1344|
+|299|DGNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/299_DGNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫||
+|313|IS-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/313_IS-Net)|||||||||||⚫|180x320,240x320,320x480,360x640,480x640,720x1280,1080x1920,1080x2048,2160x4096,N-batch,Dynamic-HeightxWidth|
+|335|PIDNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/335_PIDNet)|||||||||||⚫|Cityscapes,CamVid/Dynamic-HeightxWidth|
+|343|PP-MattingV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/343_PP-MattingV2)|⚫|⚫|||||||||⚫|HumanSeg|
+|347|RGBX_Semantic_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/347_RGBX_Semantic_Segmentation)|||||||||||⚫||
+|369|Segment_Anything|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/369_Segment_Anything)|||||||||||⚫||
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|005|One_Class_Anomaly_Detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/005_one_class_anomaly_detection)|⚫||⚫|⚫|⚫|||||||
-|099|Efficientnet_Anomaly_Detection_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/099_efficientnet_anomaly_detection_segmentation)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|005|One_Class_Anomaly_Detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/005_one_class_anomaly_detection)|⚫||⚫|⚫|⚫|||||||
+|099|Efficientnet_Anomaly_Detection_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/099_efficientnet_anomaly_detection_segmentation)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
 ### 10. Artistic
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|017|Artistic-Style-Transfer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/017_Artistic-Style-Transfer)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫||⚫||
-|019|White-box-Cartoonization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/019_White-box-Cartoonization)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|037|First_Neural_Style_Transfer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/037_First_Neural_Style_Transfer)|⚫|||||⚫|||||⚫||
-|044|Selfie2Anime|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/044_selfie2anime)|⚫|⚫|⚫|||⚫|⚫|⚫|||⚫||
-|050|AnimeGANv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/050_AnimeGANv2)|⚫|⚫|⚫|||⚫|⚫|⚫||⚫|⚫||
-|062|Facial Cartoonization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/062_facial_cartoonization)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
-|068|Colorful_Image_Colorization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/068_Colorful_Image_Colorization)|⚫|⚫||||⚫|⚫|⚫|⚫||⚫|experimental|
+|017|Artistic-Style-Transfer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/017_Artistic-Style-Transfer)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫||⚫||
+|019|White-box-Cartoonization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/019_White-box-Cartoonization)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|037|First_Neural_Style_Transfer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/037_First_Neural_Style_Transfer)|⚫|||||⚫|||||⚫||
+|044|Selfie2Anime|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/044_selfie2anime)|⚫|⚫|⚫|||⚫|⚫|⚫|||⚫||
+|050|AnimeGANv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/050_AnimeGANv2)|⚫|⚫|⚫|||⚫|⚫|⚫||⚫|⚫||
+|062|Facial Cartoonization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/062_facial_cartoonization)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+|068|Colorful_Image_Colorization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/068_Colorful_Image_Colorization)|⚫|⚫||||⚫|⚫|⚫|⚫||⚫|experimental|
 |101|arbitrary_image_stylization|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/101_arbitrary_image_stylization)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|magenta|
 |113|Anime2Sketch|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/113_Anime2Sketch)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |161|EigenGAN-Tensorflow|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/161_EigenGAN-Tensorflow)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|Anime,CelebA|
@@ -348,81 +348,81 @@ I have been working on quantization of various models as a hobby, but I have ski
 ### 11. Super Resolution
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|012|Fast_Accurate_and_Lightweight_Super-Resolution|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/012_Fast_Accurate_and_Lightweight_Super-Resolution)|⚫||⚫|||⚫|||||||
-|022|Learning_to_See_Moving_Objects_in_the_Dark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/022_Learning_to_See_Moving_Objects_in_the_Dark)|⚫|⚫||||⚫|||||⚫||
-|071|Noise2Noise|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/071_Noise2Noise)|⚫|⚫|⚫|⚫||⚫|||||⚫|srresnet/clear only|
-|076|Deep_White_Balance|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/076_Deep_White_Balance)|⚫|⚫||||⚫|⚫|⚫|⚫|⚫|⚫||
-|077|ESRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/077_ESRGAN)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|50x50->x4, 100x100->x4|
-|079|MIRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/079_MIRNet)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/40x40,80x80,120x120,120x160,120x320,120x480,120x640,120x1280,180x480,180x640,180x1280,180x320,240x320,240x480,360x480,360x640,480x640,720x1280|
-|086|Defocus Deblurring Using Dual-Pixel|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/086_defocus-deblurring-dual-pixel)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
-|090|Ghost-free_Shadow_Removal|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/090_Ghost-free_Shadow_Removal)|⚫|⚫|⚫|||⚫|⚫|⚫|||⚫|256x256|
-|111|SRN-Deblur|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/111_SRN-Deblur)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|240x320,480x640,720x1280,1024x1280|
-|112|DeblurGANv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/112_DeblurGANv2)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|inception/mobilenetv2:256x256,320x320,480x640,736x1280,1024x1280|
-|114|Two-branch-dehazing|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/114_Two-branch-dehazing)|⚫|⚫|⚫|||⚫|⚫||⚫|⚫|⚫|240x320,480x640,720x1280|
-|133|Real-ESRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/133_Real-ESRGAN)|⚫|⚫||||⚫|⚫|⚫|⚫|⚫|⚫|16x16,32x32,64x64,128x128,240x320,256x256,320x320,480x640|
-|152|DeepLPF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/152_DeepLPF)|⚫|⚫||||⚫|⚫||||⚫||
-|170|Learning-to-See-in-the-Dark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/170_Learning-to-See-in-the-Dark)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|sony/fuji, 240x320,360x480,360x640,480x640|
-|171|Fast-SRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/171_Fast-SRGAN)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|||⚫|120x160,128x128,240x320,256x256,480x640,512x512|
-|172|Real-Time-Super-Resolution|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/172_Real-Time-Super-Resolution)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|64x64,96x96,128x128,256x256,240x320,480x640|
-|176|StableLLVE|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/176_StableLLVE)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image/Video Enhancement,180x240,240x320,360x640,480x640,720x1280|
-|200|AGLLNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/200_AGLLNet)|⚫|⚫||||⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image/Video Enhancement,256x256,256x384,384x512,512x640,768x768,768x1280|
-|204|HINet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/204_HINet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|DeBlur,DeNoise,DeRain/256x320,320x480,480x640|
-|205|MBLLEN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/205_MBLLEN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image/Video Enhancement,180x320,240x320,360x640,480x640,720x1280|
-|207|GLADNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/207_GLADNet)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image/Video Enhancement,180x320,240x320,360x640,480x640,720x1280,No-LICENSE|
-|208|SAPNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/208_SAPNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|DeRain,180x320,240x320,360x640,480x640,720x1280|
-|209|MSBDN-DFF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/209_MSBDN-DFF)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Dehazing,192x320,240x320,320x480,384x640,480x640,720x1280,No-LICENSE|
-|212|GFN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/212_GFN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|DeBlur+SuperResolution,x4/64x64,96x96,128x128,192x192,240x320,256x256,480x640,720x1280|
-|213|TBEFN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/213_TBEFN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280|
-|214|EnlightenGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/214_EnlightenGAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/192x320,240x320,320x480,368x640,480x640,720x1280|
-|215|AOD-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/215_AOD-Net)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|DeHazing/180x320,240x320,320x480,360x640,480x640,720x1280|
-|216|Zero-DCE-TF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/216_Zero-DCE-TF)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280|
-|217|RUAS|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/217_RUAS)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280,No-LICENSE|
-|218|DSLR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/218_DSLR)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Low-light Image Enhancement/256x256,256x384,256x512,384x640,512x640,768x1280|
-|220|HEP|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/220_HEP)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640|
-|222|LFT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/222_LFT)|||||||||||⚫|Transformer/2x,4x/65x65|
-|223|DA_dahazing|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/223_DA_dahazing)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|DeHazing/192x320,240x320,320x480,360x640,480x640,720x1280,No-LICENSE|
-|224|Y-net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/224_Y-net)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|DeHazing/192x320,240x320,320x480,384x640,480x640,720x1280|
-|225|DRBL|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/225_NTIRE-2021-Dehazing-Two-branch)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|DeHazing/192x320,240x320,320x480,384x640,480x640,720x1280|
-|230|Single-Image-Desnowing-HDCWNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/230_Single-Image-Desnowing-HDCWNet)|⚫|⚫|||⚫|⚫|||⚫||⚫|DeSnowing/512x672|
-|231|DRBL|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/231_DRBL)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280,No-LICENSE|
-|232|MIMO-UNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/232_MIMO-UNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|DeBlur/180x320,240x320,320x480,360x640,480x640,720x1280,No-LICENSE|
-|234|FBCNN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/234_FBCNN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|DeNoise/180x320,240x320,320x480,360x640,480x640,720x1280|
-|240|BSRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/240_BSRGAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|x2,x4/64x64,96x96,128x128,160x160,180x320,240x320,No-LICENSE|
-|241|SCL-LLE|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/241_SCL-LLE)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,480x640,720x1280,No-LICENSE|
-|243|Zero-DCE-improved|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/243_Zero-DCE-improved)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280,academic use only|
-|249|Real-CUGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/249_Real-CUGAN)||||||||⚫|||⚫|2x,3x,4x/64x64,96x96,128x128,120x160,160x160,180x320,240x320|
-|251|AU-GAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/251_AU-GAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Low-light Image Enhancement/128x256,240x320,240x640,256x512,480x640,512x1024,720x1280|
-|253|TransWeather|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/253_TransWeather)|||||||⚫||||⚫|DeRain,DeHaizing,DeSnow/192x320,256x320,320x480,384x640,480x640,736x1280|
-|261|EfficientDerain|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/261_EfficientDerain)|||||||||||⚫|v4_SPA,v4_rain100H,v4_rain1400/192x320,256x320,320x480,384x640,480x640,608x800,736x1280|
-|270|HWMNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/270_HWMNet)|||||||||||⚫|Low-light Image Enhancement/192x320,256x320,320x480,384x640,480x640,544x960,720x1280|
-|275|FD-GAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/275_FD-GAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|DeHaizing/192x320,256x320,384x640,480x640,720x1280,1080x1920,No-LICENSE|
-|277|EDN-GTM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/277_EDN-GTM)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫||⚫|DeHaizing/192x320,240x320,384x480,480x640,512x512,720x1280,1088x1920|
-|281|IMDN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/281_IMDN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|x4/64x64,96x96,128x128,120x160,160x160,180x320,192x192,256x256,180x320,240x320,360x640,480x640|
-|283|UIE-WD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/283_UIE-WD)|||||||||||⚫|Underwater Image Enhancement/WIP [issue #97](https://github.com/PINTO0309/openvino2tensorflow/issues/97)/192x320,240x320,320x480,360x640,480x640,720x1280,1080x1920|
-|285|Decoupled-Low-light-Image-Enhancement|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/285_Decoupled-Low-light-Image-Enhancement)|||||||||||⚫|Low-light Image Enhancement/180x320,240x320,360x480,360x640,480x640,720x1280|
-|286|SCI|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/286_SCI)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,360x480,360x640,480x640,720x1280|
-|315|Illumination-Adaptive-Transformer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/315_Illumination-Adaptive-Transformer)|||||||||||⚫|Low-light Image Enhancement|
-|316|night_enhancement|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/316_night_enhancement)|||||||||||⚫|Low-light Image Enhancement|
-|320|Dehamer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/320_Dehamer)|||||||||||⚫|Dehazing|
-|323|Stripformer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/323_Stripformer)|||||||||||⚫|DeBlur|
-|325|DehazeFormer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/325_DehazeFormer)|||||||||||⚫|Dehazing|
-|344|XYDeblur|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/344_XYDeblur)|||||||||||⚫|DeBlur|
-|348|Bread|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/348_Bread)|||||||||||⚫|Low-light Image Enhancement|
-|348|PMN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/349_PMN)|||||||||||⚫|DeNoise, Low-light Image Enhancement|
-|351|RFDN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/351_RFDN)|||||||||||⚫|x4|
-|352|MAXIM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/352_MAXIM)|⚫|⚫|||||||||⚫|Dehaze only|
-|353|ShadowFormer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/353_ShadowFormer)|||||||||||⚫|Shadow Removal|
-|354|DEA-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/354_DEA-Net)|⚫|⚫|||||||||⚫|DeHaze|
-|359|MSPFN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/359_MSPFN)|⚫|⚫|||||||||⚫|DeRain|
-|361|KBNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/361_KBNet)|||||||||||⚫|Real Image Denoising|
-|367|FLW-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/367_FLW-Net)|||||||||||⚫|Low-light Image Enhancement|
-|368|C2PNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/368_C2PNet)|||||||||||⚫|DeHaze|
-|370|Semantic-Guided-Low-Light-Image-Enhancement|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/370_Semantic-Guided-Low-Light-Image-Enhancement)|||||||||||⚫|Low-light Image Enhancement|
+|012|Fast_Accurate_and_Lightweight_Super-Resolution|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/012_Fast_Accurate_and_Lightweight_Super-Resolution)|⚫||⚫|||⚫|||||||
+|022|Learning_to_See_Moving_Objects_in_the_Dark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/022_Learning_to_See_Moving_Objects_in_the_Dark)|⚫|⚫||||⚫|||||⚫||
+|071|Noise2Noise|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/071_Noise2Noise)|⚫|⚫|⚫|⚫||⚫|||||⚫|srresnet/clear only|
+|076|Deep_White_Balance|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/076_Deep_White_Balance)|⚫|⚫||||⚫|⚫|⚫|⚫|⚫|⚫||
+|077|ESRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/077_ESRGAN)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|50x50->x4, 100x100->x4|
+|079|MIRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/079_MIRNet)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/40x40,80x80,120x120,120x160,120x320,120x480,120x640,120x1280,180x480,180x640,180x1280,180x320,240x320,240x480,360x480,360x640,480x640,720x1280|
+|086|Defocus Deblurring Using Dual-Pixel|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/086_defocus-deblurring-dual-pixel)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|090|Ghost-free_Shadow_Removal|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/090_Ghost-free_Shadow_Removal)|⚫|⚫|⚫|||⚫|⚫|⚫|||⚫|256x256|
+|111|SRN-Deblur|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/111_SRN-Deblur)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|240x320,480x640,720x1280,1024x1280|
+|112|DeblurGANv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/112_DeblurGANv2)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|inception/mobilenetv2:256x256,320x320,480x640,736x1280,1024x1280|
+|114|Two-branch-dehazing|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/114_Two-branch-dehazing)|⚫|⚫|⚫|||⚫|⚫||⚫|⚫|⚫|240x320,480x640,720x1280|
+|133|Real-ESRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/133_Real-ESRGAN)|⚫|⚫||||⚫|⚫|⚫|⚫|⚫|⚫|16x16,32x32,64x64,128x128,240x320,256x256,320x320,480x640|
+|152|DeepLPF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/152_DeepLPF)|⚫|⚫||||⚫|⚫||||⚫||
+|170|Learning-to-See-in-the-Dark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/170_Learning-to-See-in-the-Dark)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|sony/fuji, 240x320,360x480,360x640,480x640|
+|171|Fast-SRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/171_Fast-SRGAN)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|||⚫|120x160,128x128,240x320,256x256,480x640,512x512|
+|172|Real-Time-Super-Resolution|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/172_Real-Time-Super-Resolution)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|64x64,96x96,128x128,256x256,240x320,480x640|
+|176|StableLLVE|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/176_StableLLVE)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image/Video Enhancement,180x240,240x320,360x640,480x640,720x1280|
+|200|AGLLNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/200_AGLLNet)|⚫|⚫||||⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image/Video Enhancement,256x256,256x384,384x512,512x640,768x768,768x1280|
+|204|HINet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/204_HINet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|DeBlur,DeNoise,DeRain/256x320,320x480,480x640|
+|205|MBLLEN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/205_MBLLEN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image/Video Enhancement,180x320,240x320,360x640,480x640,720x1280|
+|207|GLADNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/207_GLADNet)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image/Video Enhancement,180x320,240x320,360x640,480x640,720x1280,No-LICENSE|
+|208|SAPNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/208_SAPNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|DeRain,180x320,240x320,360x640,480x640,720x1280|
+|209|MSBDN-DFF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/209_MSBDN-DFF)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Dehazing,192x320,240x320,320x480,384x640,480x640,720x1280,No-LICENSE|
+|212|GFN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/212_GFN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|DeBlur+SuperResolution,x4/64x64,96x96,128x128,192x192,240x320,256x256,480x640,720x1280|
+|213|TBEFN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/213_TBEFN)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280|
+|214|EnlightenGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/214_EnlightenGAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/192x320,240x320,320x480,368x640,480x640,720x1280|
+|215|AOD-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/215_AOD-Net)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|DeHazing/180x320,240x320,320x480,360x640,480x640,720x1280|
+|216|Zero-DCE-TF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/216_Zero-DCE-TF)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280|
+|217|RUAS|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/217_RUAS)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280,No-LICENSE|
+|218|DSLR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/218_DSLR)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Low-light Image Enhancement/256x256,256x384,256x512,384x640,512x640,768x1280|
+|220|HEP|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/220_HEP)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640|
+|222|LFT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/222_LFT)|||||||||||⚫|Transformer/2x,4x/65x65|
+|223|DA_dahazing|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/223_DA_dahazing)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|DeHazing/192x320,240x320,320x480,360x640,480x640,720x1280,No-LICENSE|
+|224|Y-net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/224_Y-net)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|DeHazing/192x320,240x320,320x480,384x640,480x640,720x1280|
+|225|DRBL|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/225_NTIRE-2021-Dehazing-Two-branch)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|DeHazing/192x320,240x320,320x480,384x640,480x640,720x1280|
+|230|Single-Image-Desnowing-HDCWNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/230_Single-Image-Desnowing-HDCWNet)|⚫|⚫|||⚫|⚫|||⚫||⚫|DeSnowing/512x672|
+|231|DRBL|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/231_DRBL)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280,No-LICENSE|
+|232|MIMO-UNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/232_MIMO-UNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|DeBlur/180x320,240x320,320x480,360x640,480x640,720x1280,No-LICENSE|
+|234|FBCNN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/234_FBCNN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|DeNoise/180x320,240x320,320x480,360x640,480x640,720x1280|
+|240|BSRGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/240_BSRGAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|x2,x4/64x64,96x96,128x128,160x160,180x320,240x320,No-LICENSE|
+|241|SCL-LLE|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/241_SCL-LLE)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,320x480,480x640,720x1280,No-LICENSE|
+|243|Zero-DCE-improved|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/243_Zero-DCE-improved)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|Low-light Image Enhancement/180x320,240x320,320x480,360x640,480x640,720x1280,academic use only|
+|249|Real-CUGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/249_Real-CUGAN)||||||||⚫|||⚫|2x,3x,4x/64x64,96x96,128x128,120x160,160x160,180x320,240x320|
+|251|AU-GAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/251_AU-GAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Low-light Image Enhancement/128x256,240x320,240x640,256x512,480x640,512x1024,720x1280|
+|253|TransWeather|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/253_TransWeather)|||||||⚫||||⚫|DeRain,DeHaizing,DeSnow/192x320,256x320,320x480,384x640,480x640,736x1280|
+|261|EfficientDerain|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/261_EfficientDerain)|||||||||||⚫|v4_SPA,v4_rain100H,v4_rain1400/192x320,256x320,320x480,384x640,480x640,608x800,736x1280|
+|270|HWMNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/270_HWMNet)|||||||||||⚫|Low-light Image Enhancement/192x320,256x320,320x480,384x640,480x640,544x960,720x1280|
+|275|FD-GAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/275_FD-GAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|DeHaizing/192x320,256x320,384x640,480x640,720x1280,1080x1920,No-LICENSE|
+|277|EDN-GTM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/277_EDN-GTM)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫||⚫|DeHaizing/192x320,240x320,384x480,480x640,512x512,720x1280,1088x1920|
+|281|IMDN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/281_IMDN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|x4/64x64,96x96,128x128,120x160,160x160,180x320,192x192,256x256,180x320,240x320,360x640,480x640|
+|283|UIE-WD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/283_UIE-WD)|||||||||||⚫|Underwater Image Enhancement/WIP [issue #97](https://github.com/PINTO0309/openvino2tensorflow/issues/97)/192x320,240x320,320x480,360x640,480x640,720x1280,1080x1920|
+|285|Decoupled-Low-light-Image-Enhancement|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/285_Decoupled-Low-light-Image-Enhancement)|||||||||||⚫|Low-light Image Enhancement/180x320,240x320,360x480,360x640,480x640,720x1280|
+|286|SCI|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/286_SCI)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|Low-light Image Enhancement/180x320,240x320,360x480,360x640,480x640,720x1280|
+|315|Illumination-Adaptive-Transformer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/315_Illumination-Adaptive-Transformer)|||||||||||⚫|Low-light Image Enhancement|
+|316|night_enhancement|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/316_night_enhancement)|||||||||||⚫|Low-light Image Enhancement|
+|320|Dehamer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/320_Dehamer)|||||||||||⚫|Dehazing|
+|323|Stripformer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/323_Stripformer)|||||||||||⚫|DeBlur|
+|325|DehazeFormer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/325_DehazeFormer)|||||||||||⚫|Dehazing|
+|344|XYDeblur|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/344_XYDeblur)|||||||||||⚫|DeBlur|
+|348|Bread|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/348_Bread)|||||||||||⚫|Low-light Image Enhancement|
+|348|PMN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/349_PMN)|||||||||||⚫|DeNoise, Low-light Image Enhancement|
+|351|RFDN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/351_RFDN)|||||||||||⚫|x4|
+|352|MAXIM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/352_MAXIM)|⚫|⚫|||||||||⚫|Dehaze only|
+|353|ShadowFormer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/353_ShadowFormer)|||||||||||⚫|Shadow Removal|
+|354|DEA-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/354_DEA-Net)|⚫|⚫|||||||||⚫|DeHaze|
+|359|MSPFN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/359_MSPFN)|⚫|⚫|||||||||⚫|DeRain|
+|361|KBNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/361_KBNet)|||||||||||⚫|Real Image Denoising|
+|367|FLW-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/367_FLW-Net)|||||||||||⚫|Low-light Image Enhancement|
+|368|C2PNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/368_C2PNet)|||||||||||⚫|DeHaze|
+|370|Semantic-Guided-Low-Light-Image-Enhancement|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/370_Semantic-Guided-Low-Light-Image-Enhancement)|||||||||||⚫|Low-light Image Enhancement|
 |372|URetinex-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/372_URetinex-Net)|||||||||||⚫|Low-light Image Enhancement|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|013|ml-sound-classifier|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/013_ml-sound-classifier)|⚫|⚫|⚫|||⚫|⚫||⚫|⚫|||
+|013|ml-sound-classifier|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/013_ml-sound-classifier)|⚫|⚫|⚫|||⚫|⚫||⚫|⚫|||
 |097|YAMNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/097_YAMNet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |098|SPICE|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/098_SPICE)|⚫|⚫|⚫|||⚫|||⚫|⚫|||
 |118|Speech-enhancement|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/118_Speech-enhancement)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|WIP,EdgeTPU(LeakyLeRU)|
@@ -431,14 +431,14 @@ I have been working on quantization of various models as a hobby, but I have ski
 ### 13. Natural Language Processing
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|048|Mobile_BERT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/048_mobile_bert)|⚫|⚫|||⚫|⚫|⚫|⚫||⚫||
+|048|Mobile_BERT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/048_mobile_bert)|⚫|⚫|||⚫|⚫|⚫|⚫||⚫||
 |121|GPT2/DistillGPT2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/121_GPT2_DistillGPT2)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |122|DistillBert|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/122_DistillBert)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 ### 14. Text Recognition
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|052|Handwritten_Text_Recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/052_Handwritten_Text_Recognition)|⚫|⚫|||⚫|||||||
-|055|Handwritten_Japanese_Recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/055_Handwritten_Japanese_Recognition)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+|052|Handwritten_Text_Recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/052_Handwritten_Text_Recognition)|⚫|⚫|||⚫|||||||
+|055|Handwritten_Japanese_Recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/055_Handwritten_Japanese_Recognition)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |093|ocr_japanese|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/093_ocr_japanese)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|120x160|
 ### 15. Action Recognition
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
@@ -461,7 +461,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 ### 18. Transformer
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
-|127|dino|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/127_dino)|⚫|⚫|||⚫|⚫|⚫|⚫||⚫|experimental,dino_deits8/dino_deits16|
+|127|dino|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/127_dino)|⚫|⚫|||⚫|⚫|⚫|⚫||⚫|experimental,dino_deits8/dino_deits16|
 ### 19. Others
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -509,7 +509,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 - RaspberryPi4 (CPU only)
 - **[Raspbian Buster 64bit](https://github.com/sakaki-/raspbian-nspawn-64.git)**
 - **[Tensorflow](https://github.com/PINTO0309/Tensorflow-bin.git)** / **[Tensorflow Lite](https://github.com/PINTO0309/TensorflowLite-bin.git)** with multi-thread acceleration tuning for PythonAPI
-- **[MobileNetV2-SSDLite 300x300 Integer Quantization](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/006_mobilenetv2-ssdlite/02_voc)**
+- **[MobileNetV2-SSDLite 300x300 Integer Quantization](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/006_mobilenetv2-ssdlite/02_voc)**
 - **[Pascal-VOC Dataset (Japanese article)](https://qiita.com/PINTO/items/107dd6a4e16cb128230b)**
 - MP4 30FPS, 640x360
 - Approximately 14FPS ~ 15FPS for all processes from pre-processing, inference, post-processing, and display
@@ -523,7 +523,7 @@ $ python3 mobilenetv2ssdlite_movie_sync.py
 - RaspberryPi4 (CPU only)
 - **[Ubuntu 19.10 64bit](https://qiita.com/PINTO/items/adc5db7af7a5996c0f72)**
 - **[Tensorflow](https://github.com/PINTO0309/Tensorflow-bin.git)** / **[Tensorflow Lite](https://github.com/PINTO0309/TensorflowLite-bin.git)** with multi-thread acceleration tuning for PythonAPI
-- **[MobileNetV2-SSDLite 300x300 Integer Quantization](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/006_mobilenetv2-ssdlite/02_voc)**
+- **[MobileNetV2-SSDLite 300x300 Integer Quantization](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/006_mobilenetv2-ssdlite/02_voc)**
 - **[Pascal-VOC Dataset (Japanese article)](https://qiita.com/PINTO/items/107dd6a4e16cb128230b)**
 - USB Camera, 640x480
 - IPS 1080p HDMI Display
@@ -606,7 +606,7 @@ $ python3 deeplabv3plus_usbcam.py
 - C/C++
 - OpenGL
 - **[Test Code - tflite_gles_app - gl2handpose - @terryky](https://github.com/terryky/tflite_gles_app.git)**
-![gl2handpose_mov](https://github.com/terryky/tflite_gles_app/blob/master/gl2handpose/gl2handpose_mov.gif)
+![gl2handpose_mov](https://github.com/terryky/tflite_gles_app/blob/main/gl2handpose/gl2handpose_mov.gif)
 ## Sample.10 - DBFace, 640x480_openvino_FP32
 - Ubuntu 18.04 x86_64
 - OpenVINO 2020.2
@@ -631,7 +631,7 @@ $ python3 deeplabv3plus_usbcam.py
 - Ubuntu 18.04 x86_64
 - OpenVINO
 - USB Camera, 640x480
-- **[Test Code](https://github.com/PINTO0309/PINTO_model_zoo/tree/master/062_facial_cartoonization/01_float32)**
+- **[Test Code](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/062_facial_cartoonization/01_float32)**
 ![015](999_media/015.gif)
 
 ## 1. Environment
@@ -1423,7 +1423,7 @@ $ ./bazel-2.0.0-installer-linux-x86_64.sh
 $ sudo apt-get install -y openjdk-8-jdk
 
 ## Bazel for RaspberryPi3/4 Raspbian/Debian Buster armhf install
-$ wget https://github.com/PINTO0309/Bazel_bin/raw/master/3.1.0/Raspbian_Debian_Buster_armhf/openjdk-8-jdk/install.sh
+$ wget https://github.com/PINTO0309/Bazel_bin/raw/main/3.1.0/Raspbian_Debian_Buster_armhf/openjdk-8-jdk/install.sh
 $ ./install.sh
 $ curl -sc /tmp/cookie \
   "https://drive.google.com/uc?export=download&id=1LQUSal55R6fmawZS9zZuk6-5ZFOdUqRK" > /dev/null
@@ -1434,7 +1434,7 @@ $ curl -Lb /tmp/cookie \
 $ sudo apt-get install -y ./adoptopenjdk-8-hotspot_8u222-b10-2_armhf.deb
 
 ## Bazel for RaspberryPi3/4 Raspbian/Debian Buster aarch64 install
-$ wget https://github.com/PINTO0309/Bazel_bin/raw/master/3.1.0/Raspbian_Debian_Buster_aarch64/openjdk-8-jdk/install.sh
+$ wget https://github.com/PINTO0309/Bazel_bin/raw/main/3.1.0/Raspbian_Debian_Buster_aarch64/openjdk-8-jdk/install.sh
 $ ./install.sh
 $ curl -sc /tmp/cookie \
   "https://drive.google.com/uc?export=download&id=1VwLxzT3EOTbhSzwvRF2H4ChTQyTQBt3x" > /dev/null
@@ -2189,10 +2189,10 @@ Memory (bytes): count=0
 1. **[[deeplab] what's the parameters of the mobilenetv3 pretrained model?](https://github.com/tensorflow/models/issues/7911)**
 2. **[When you want to fine-tune DeepLab on other datasets, there are a few cases](https://github.com/tensorflow/models/issues/3730#issuecomment-380168917)**
 3. **[[deeplab] Training deeplab model with ADE20K dataset](https://github.com/tensorflow/models/issues/3730)**
-4. **[Running DeepLab on PASCAL VOC 2012 Semantic Segmentation Dataset](https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/pascal.md)**
-5. **[Quantize DeepLab model for faster on-device inference](https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/quantize.md)**
-6. **https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/model_zoo.md**
-7. **https://github.com/tensorflow/models/blob/master/research/deeplab/g3doc/quantize.md**
+4. **[Running DeepLab on PASCAL VOC 2012 Semantic Segmentation Dataset](https://github.com/tensorflow/models/blob/main/research/deeplab/g3doc/pascal.md)**
+5. **[Quantize DeepLab model for faster on-device inference](https://github.com/tensorflow/models/blob/main/research/deeplab/g3doc/quantize.md)**
+6. **https://github.com/tensorflow/models/blob/main/research/deeplab/g3doc/model_zoo.md**
+7. **https://github.com/tensorflow/models/blob/main/research/deeplab/g3doc/quantize.md**
 8. **[the quantized form of Shape operation is not yet implemented](https://github.com/tensorflow/tensorflow/issues/20955)**
 9. **[Post-training quantization](https://www.tensorflow.org/lite/performance/post_training_quantization)**
 10. **[Converter command line reference](https://www.tensorflow.org/lite/convert/cmdline_reference)**
@@ -2207,7 +2207,7 @@ Memory (bytes): count=0
 18. **[TensorFlow で学習したモデルのグラフを `tf.train.import_meta_graph` でロードする](https://qiita.com/cfiken/items/bcdd7eb945c5c3b2bb5f)**
 19. **[Tensorflowのグラフ操作 Part1](http://docs.fabo.io/tensorflow/building_graph/tensorflow_graph_part1.html)**
 20. **[Configure input_map when importing a tensorflow model from metagraph file](https://stackoverflow.com/questions/42306484/configure-input-map-when-importing-a-tensorflow-model-from-metagraph-file)**
-21. **[TFLite Model Benchmark Tool](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/tools/benchmark)**
+21. **[TFLite Model Benchmark Tool](https://github.com/tensorflow/tensorflow/tree/main/tensorflow/lite/tools/benchmark)**
 22. **[How to install Ubuntu 19.10 aarch64 (64bit) on RaspberryPi4](https://qiita.com/PINTO/items/adc5db7af7a5996c0f72)**
 23. **https://github.com/rwightman/posenet-python.git**
 24. **https://github.com/sayakpaul/Adventures-in-TensorFlow-Lite.git**
