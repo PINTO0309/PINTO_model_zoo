@@ -1,0 +1,9 @@
+# original
+https://github.com/totti0223/P2PNet_tfkeras
+
+# export method
+https://github.com/PINTO0309/P2PNet_tfkeras
+
+https://github.com/PINTO0309/onnx2tf
+https://github.com/PINTO0309/simple-onnx-processing-tools
+
