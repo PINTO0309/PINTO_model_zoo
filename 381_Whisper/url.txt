@@ -1,0 +1,8 @@
+https://github.com/openai/whisper
+
+https://github.com/echogarden-project/whisper-onnx-exporter
+https://github.com/PINTO0309/whisper-onnx-exporter/tree/dev-pinto
+
+https://github.com/PINTO0309/onnx2tf
+https://github.com/PINTO0309/simple-onnx-processing-tools
+
