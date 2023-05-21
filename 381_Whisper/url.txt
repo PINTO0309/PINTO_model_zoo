@@ -5,4 +5,4 @@ https://github.com/PINTO0309/whisper-onnx-exporter/tree/dev-pinto
 
 https://github.com/PINTO0309/onnx2tf
 https://github.com/PINTO0309/simple-onnx-processing-tools
-
+https://github.com/quanvuhust/Export-ONNX-float-16
