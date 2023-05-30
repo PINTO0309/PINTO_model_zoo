@@ -434,6 +434,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |120|FRILL|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/120_FRILL)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|nofrontend|
 |177|BirdNET-Lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/177_BirdNET-Lite)|⚫|⚫|⚫||⚫|⚫||||⚫||non-flex|
 |381|Whisper|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/381_Whisper)||||||||||⚫|||
+|382|Light-SERNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/382_Light-SERNet)|⚫|⚫|⚫||||||||||
 ### 13. Natural Language Processing
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
