@@ -210,6 +210,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |319|ACR-Loss|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/319_ACR-Loss)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Face Alignment|
 |322|YOLOv7_Head|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/322_YOLOv7_Head)|||||||||||⚫|PINTO's custom models|
 |345|YOLOv8|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/345_YOLOv8)|||||||||||⚫||
+|383|DirectMHP|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/383_DirectMHP)|||||||||||⚫||
 ### 5. 2D/3D Hand Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
