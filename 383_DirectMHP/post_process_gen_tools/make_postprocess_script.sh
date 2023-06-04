@@ -81,7 +81,7 @@ do
         --opset ${OPSET} \
         --op_name score_threshold_const \
         --output_variables score_threshold float32 [1] \
-        --attributes value float32 [0.4] \
+        --attributes value float32 [0.25] \
         --output_onnx_file_path 06_Constant_score_threshold.onnx
 
         OP=NonMaxSuppression

@@ -37,7 +37,7 @@ class Model(nn.Module):
         yaw = (x[..., 7:8] - 0.5) * 360.0
         roll = (x[..., 8:9] - 0.5) * 180.0
         pitch_yaw_roll = torch.cat([pitch, yaw, roll], dim=2)
-        scores = box_scores * class_scores
+        scores = torch.sqrt(box_scores * class_scores)
         scores = scores.permute(0,2,1)
         return boxes, scores, pitch_yaw_roll
 
