@@ -10,7 +10,8 @@ import argparse
 import onnxruntime
 import numpy as np
 from math import cos, sin
-from typing import Tuple, Optional, List
+from typing import Tuple, Optional, List, Iterable, NamedTuple
+
 
 class Color:
     BLACK          = '\033[30m'
@@ -36,6 +37,18 @@ class Color:
     BG_WHITE       = '\033[47m'
     BG_DEFAULT     = '\033[49m'
     RESET          = '\033[0m'
+
+
+class Box(NamedTuple):
+    x_min: float
+    y_min: float
+    x_max: float
+    y_max: float
+    yaw: float
+    pitch: float
+    roll: float
+    score: float
+
 
 class DirectMHPONNX(object):
     def __init__(
@@ -107,7 +120,7 @@ class DirectMHPONNX(object):
     def __call__(
         self,
         image: np.ndarray,
-    ) -> np.ndarray:
+    ) -> Iterable[Box]:
         """
 
         Parameters
@@ -117,9 +130,9 @@ class DirectMHPONNX(object):
 
         Returns
         -------
-        face_boxes: np.ndarray
+        face_boxes: Iterable[Box]
             Predicted face boxes
-            float32 [N, [x_min, y_min, x_max, y_max, yaw, pitch, roll, score]]
+            [N, [x_min, y_min, x_max, y_max, yaw, pitch, roll, score]]
         """
         temp_image = copy.deepcopy(image)
 
@@ -138,7 +151,7 @@ class DirectMHPONNX(object):
 
         # PostProcess
         # face_boxes: [N, [x_min, y_min, x_max, y_max, yaw, pitch, roll, score]]
-        face_boxes: np.ndarray = \
+        face_boxes: Iterable[Box] = \
             self.__postprocess(
                 image=temp_image,
                 batchno_classid_x1y1x2y2_score_pitchyawroll=batchno_classid_x1y1x2y2_score_pitchyawroll,
@@ -192,7 +205,7 @@ class DirectMHPONNX(object):
         self,
         image: np.ndarray,
         batchno_classid_x1y1x2y2_score_pitchyawroll: np.ndarray,
-    ) -> np.ndarray:
+    ) -> Iterable[Box]:
         """__postprocess
 
         Parameters
@@ -206,14 +219,13 @@ class DirectMHPONNX(object):
 
         Returns
         -------
-        faceboxes: np.ndarray
-            float32[N, 8]
+        faceboxes: Iterable[Box]
             [N, [x_min, y_min, x_max, y_max, yaw, pitch, roll, score]]
         """
-        image_height = image.shape[0]
-        image_width = image.shape[1]
-        input_height = self.input_shapes[0][2]
-        input_width = self.input_shapes[0][3]
+        image_height: int = image.shape[0]
+        image_width: int = image.shape[1]
+        input_height: int = self.input_shapes[0][2]
+        input_width: int = self.input_shapes[0][3]
         # Head Detector is
         #     N -> Number of boxes detected
         #     batchno -> always 0: BatchNo.0
@@ -221,32 +233,39 @@ class DirectMHPONNX(object):
         #
         # faceboxes: float32[N, 8]
         #     [N, [x_min, y_min, x_max, y_max, yaw, pitch, roll, score]]
-        faceboxes = []
         keep_idxs = batchno_classid_x1y1x2y2_score_pitchyawroll[:, 6] > self.class_score_th
+
         if batchno_classid_x1y1x2y2_score_pitchyawroll.size > 0:
             batchno_classid_x1y1x2y2_score_pitchyawroll_keep = \
                 batchno_classid_x1y1x2y2_score_pitchyawroll[keep_idxs, :]
+
             if len(batchno_classid_x1y1x2y2_score_pitchyawroll_keep) > 0:
                 for box in batchno_classid_x1y1x2y2_score_pitchyawroll_keep:
-                    scale_ratio_width = image_width / input_width
-                    scale_ratio_height = image_height / input_height
-                    cx = (box[4] + box[2]) / 2 * scale_ratio_width
-                    cy = (box[5] + box[3]) / 2 * scale_ratio_height
-                    real_width = (box[4] - box[2]) * scale_ratio_width
-                    real_height = (box[5] - box[3]) * scale_ratio_height
-                    x_min = max(int(cx - real_width / 2), 0)
-                    y_min = max(int(cy - real_height / 2), 0)
-                    x_max = min(int(cx + real_width / 2), image_width)
-                    y_max = min(int(cy + real_height / 2), image_height)
-                    score = box[6]
-                    pitch = box[7]
-                    yaw = box[8]
-                    roll = box[9]
-                    faceboxes.append(
-                        [x_min, y_min, x_max, y_max, yaw, pitch, roll, score]
-                    )
-        return np.asarray(faceboxes, dtype=np.float32)
-
+                    scale_ratio_width: float = float(image_width / input_width)
+                    scale_ratio_height: float = float(image_height / input_height)
+                    cx: float = (box[4] + box[2]) / 2.0 * scale_ratio_width
+                    cy: float = (box[5] + box[3]) / 2.0 * scale_ratio_height
+                    real_width: float = (box[4] - box[2]) * scale_ratio_width
+                    real_height: float = (box[5] - box[3]) * scale_ratio_height
+                    x_min: float = max(cx - real_width / 2.0, 0.0)
+                    y_min: float = max(cy - real_height / 2.0, 0.0)
+                    x_max: float = min(cx + real_width / 2.0, image_width)
+                    y_max: float = min(cy + real_height / 2.0, image_height)
+                    score: float = float(box[6])
+                    pitch: float = float(box[7])
+                    yaw: float = float(box[8])
+                    roll: float = float(box[9])
+                    yield \
+                        Box(
+                            x_min=x_min,
+                            y_min=y_min,
+                            x_max=x_max,
+                            y_max=y_max,
+                            yaw=yaw,
+                            pitch=pitch,
+                            roll=roll,
+                            score=score,
+                        )
 
 def draw_axis(img, yaw, pitch, roll, tdx=None, tdy=None, size=100):
     # Referenced from HopeNet https://github.com/natanielruiz/deep-head-pose
@@ -281,10 +300,11 @@ def draw_axis(img, yaw, pitch, roll, tdx=None, tdy=None, size=100):
 def main(args):
     model_file_path = args.model_file_path
     # DirectMHP
-    directmhp_head = DirectMHPONNX(
-        model_file_path=model_file_path,
-        class_score_th=0.40,
-    )
+    directmhp_head = \
+        DirectMHPONNX(
+            model_file_path=model_file_path,
+            class_score_th=0.40,
+        )
     cap_width = int(args.height_width.split('x')[1])
     cap_height = int(args.height_width.split('x')[0])
     if args.device.isdecimal():
@@ -317,66 +337,65 @@ def main(args):
 
         # ============================================================= DirectMHP
         # face_boxes: [N, [x_min, y_min, x_max, y_max, yaw, pitch, roll, score]]
-        face_boxes: np.ndarray = directmhp_head(frame)
+        face_boxes: Iterable[Box] = directmhp_head(frame)
         canvas = copy.deepcopy(frame)
-        if len(face_boxes) > 0:
-            for x_min, y_min, x_max, y_max, yaw, pitch, roll, score in face_boxes:
-                yaw, pitch, roll = np.squeeze([yaw, pitch, roll])
-                sys.stdout.write(
-                    f'  ' +
-                    f'{Color.GREEN}yaw:{Color.RESET} {yaw:.2f}, ' +
-                    f'{Color.GREEN}pitch:{Color.RESET} {pitch:.2f}, ' +
-                    f'{Color.GREEN}roll:{Color.RESET} {roll:.2f}' +
-                    f'\r'
-                )
-                sys.stdout.flush()
-                # BBox draw
-                deg_norm = 1.0 - abs(yaw / 180)
-                blue = int(255 * deg_norm)
-                cv2.rectangle(
-                    canvas,
-                    (int(x_min), int(y_min)),
-                    (int(x_max), int(y_max)),
-                    color=(blue, 0, 255-blue),
-                    thickness=2
-                )
-                # Axis Draw
-                draw_axis(
-                    canvas,
-                    yaw,
-                    pitch,
-                    roll,
-                    tdx=(x_min+x_max)/2,
-                    tdy=(y_min+y_max)/2,
-                    size=abs(x_max-x_min)//3
-                )
-                cv2.putText(
-                    canvas,
-                    f'yaw: {np.round(yaw)}',
-                    (int(x_min), int(y_min)),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.4,
-                    (100, 255, 0),
-                    1
-                )
-                cv2.putText(
-                    canvas,
-                    f'pitch: {np.round(pitch)}',
-                    (int(x_min), int(y_min) - 15),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.4,
-                    (100, 255, 0),
-                    1
-                )
-                cv2.putText(
-                    canvas,
-                    f'roll: {np.round(roll)}',
-                    (int(x_min), int(y_min)-30),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.4,
-                    (100, 255, 0),
-                    1
-                )
+
+        for face_box in face_boxes:
+            sys.stdout.write(
+                f'  ' +
+                f'{Color.GREEN}yaw:{Color.RESET} {face_box.yaw:.2f}, ' +
+                f'{Color.GREEN}pitch:{Color.RESET} {face_box.pitch:.2f}, ' +
+                f'{Color.GREEN}roll:{Color.RESET} {face_box.roll:.2f}' +
+                f'\r'
+            )
+            sys.stdout.flush()
+            # BBox draw
+            deg_norm: float = 1.0 - abs(face_box.yaw / 180)
+            blue: int = int(255 * deg_norm)
+            cv2.rectangle(
+                canvas,
+                (int(face_box.x_min), int(face_box.y_min)),
+                (int(face_box.x_max), int(face_box.y_max)),
+                color=(blue, 0, 255-blue),
+                thickness=2
+            )
+            # Axis Draw
+            draw_axis(
+                canvas,
+                face_box.yaw,
+                face_box.pitch,
+                face_box.roll,
+                tdx=(face_box.x_min+face_box.x_max)/2,
+                tdy=(face_box.y_min+face_box.y_max)/2,
+                size=abs(face_box.x_max-face_box.x_min)//3
+            )
+            cv2.putText(
+                canvas,
+                f'yaw: {np.round(face_box.yaw)}',
+                (int(face_box.x_min), int(face_box.y_min)),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.4,
+                (100, 255, 0),
+                1
+            )
+            cv2.putText(
+                canvas,
+                f'pitch: {np.round(face_box.pitch)}',
+                (int(face_box.x_min), int(face_box.y_min) - 15),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.4,
+                (100, 255, 0),
+                1
+            )
+            cv2.putText(
+                canvas,
+                f'roll: {np.round(face_box.roll)}',
+                (int(face_box.x_min), int(face_box.y_min)-30),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                0.4,
+                (100, 255, 0),
+                1
+            )
 
         time_txt = f'{(time.time()-start)*1000:.2f} ms (inference+post-process)'
         cv2.putText(
