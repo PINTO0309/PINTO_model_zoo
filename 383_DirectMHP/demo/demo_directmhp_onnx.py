@@ -281,10 +281,11 @@ def draw_axis(img, yaw, pitch, roll, tdx=None, tdy=None, size=100):
 def main(args):
     model_file_path = args.model_file_path
     # DirectMHP
-    directmhp_head = DirectMHPONNX(
-        model_file_path=model_file_path,
-        class_score_th=0.40,
-    )
+    directmhp_head = \
+        DirectMHPONNX(
+            model_file_path=model_file_path,
+            class_score_th=0.40,
+        )
     cap_width = int(args.height_width.split('x')[1])
     cap_height = int(args.height_width.split('x')[0])
     if args.device.isdecimal():
