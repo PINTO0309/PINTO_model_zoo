@@ -94,6 +94,6 @@ $ sam4onnx \
 ```
 
 # How to generate post-processing ONNX
-https://github.com/PINTO0309/PINTO_model_zoo/tree/main/307_YOLOv7/post_process_gen_tools#how-to-generate-post-processing-onnx
-https://github.com/PINTO0309/PINTO_model_zoo/tree/main/383_DirectMHP/post_process_gen_tools
-https://github.com/PINTO0309/simple-onnx-processing-tools
+1. https://github.com/PINTO0309/PINTO_model_zoo/tree/main/307_YOLOv7/post_process_gen_tools#how-to-generate-post-processing-onnx
+2. https://github.com/PINTO0309/PINTO_model_zoo/tree/main/383_DirectMHP/post_process_gen_tools
+3. https://github.com/PINTO0309/simple-onnx-processing-tools
