@@ -55,6 +55,7 @@ class DirectMHPONNX(object):
         self,
         model_file_path: Optional[str] = 'directmhp_cmu_m_post_512x640.onnx',
         class_score_th: Optional[float] = 0.20,
+        cpu_mode: Optional[bool] = False,
         providers: Optional[List] = [
             (
                 'TensorrtExecutionProvider', {
@@ -77,6 +78,11 @@ class DirectMHPONNX(object):
         class_score_th: Optional[float]
             Score threshold. Default: 0.20
 
+        cpu_mode: Optional[bool]
+            Forces inference by the CPU.
+            If not specified, TensorRT or GPU will be used if CUDA is available.
+            Default: False
+
         providers: Optional[List]
             Name of onnx execution providers
             Default:
@@ -94,7 +100,11 @@ class DirectMHPONNX(object):
         """
         # Threshold
         self.class_score_th = class_score_th
-
+        # Provider
+        if cpu_mode:
+            providers = [
+                'CPUExecutionProvider',
+            ]
         # Model loading
         session_option = onnxruntime.SessionOptions()
         session_option.log_severity_level = 3
@@ -298,12 +308,14 @@ def draw_axis(img, yaw, pitch, roll, tdx=None, tdy=None, size=100):
 
 
 def main(args):
-    model_file_path = args.model_file_path
+    model_file_path: str = args.model_file_path
+    cpu_mode: bool = args.cpu
     # DirectMHP
     directmhp_head = \
         DirectMHPONNX(
             model_file_path=model_file_path,
             class_score_th=0.40,
+            cpu_mode=cpu_mode,
         )
     cap_width = int(args.height_width.split('x')[1])
     cap_height = int(args.height_width.split('x')[0])
@@ -452,6 +464,11 @@ if __name__ == "__main__":
         '--model_file_path',
         type=str,
         default='directmhp_cmu_m_post_512x640.onnx',
+    )
+    parser.add_argument(
+        '--cpu',
+        action='store_true',
+        default='CPU mode',
     )
     args = parser.parse_args()
     main(args)
