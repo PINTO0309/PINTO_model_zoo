@@ -169,6 +169,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |341|YOLOv6|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/341_YOLOv6)|⚫|⚫|⚫||⚫|⚫|||||⚫||
 |356|EdgeYOLO|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/356_EdgeYOLO)|||||||||||⚫||
 |376|RT-DETR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/376_RT-DETR)|||||||||||⚫|ResNet50,ResNet101,HgNetv2-L,HgNetv2-X|
+|386|naruto_handsign_detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/386_naruto_handsign_detection)|⚫|⚫|⚫||⚫||||||⚫||
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
