@@ -1,2 +1,0 @@
-$ mkdir -p weights_u2netp/480x640/FP32
-$ python3 90_ir_weight_extractor.py -m openvino/480x640/FP32/u2netp_480x640.xml -o weights_u2netp/480x640/FP32
