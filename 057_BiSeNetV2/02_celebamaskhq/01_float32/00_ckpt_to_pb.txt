@@ -1,4 +1,0 @@
-python3 tools/celebamask_hq/freeze_celebamaskhq_bisenetv2_model.py \
-  --weights_path BiseNetV2_Celebamaskhq/celebamaskhq.ckpt \
-  --frozen_pb_file_path model2/bisenetv2_celebamaskhq_frozen.pb \
-  --optimized_pb_file_path model2/bisenetv2_celebamaskhq_optimized.pb
