@@ -1,1 +1,0 @@
-edgetpu_compiler -s yolov4_tiny_voc_416x416_full_integer_quant.tflite
