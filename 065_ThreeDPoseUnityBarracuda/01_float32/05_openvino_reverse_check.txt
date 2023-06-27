@@ -1,9 +1,0 @@
-python3 /opt/intel/openvino/deployment_tools/model_optimizer/mo_tf.py \
-  --saved_model_dir saved_model_448x448 \
-  --model_name check \
-  --input input_1,input_4,input_7 \
-  --input_shape [1,448,448,3],[1,448,448,3],[1,448,448,3] \
-  --data_type FP32 \
-  --output_dir openvino_check/check/FP32
-
-
