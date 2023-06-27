@@ -1,8 +1,6 @@
 #!/bin/bash
 
-fileid="1VlFRuQ3GvuURE18rpqJw4VN2u12qknPY"
-html=`curl -c ./cookie -s -L "https://drive.google.com/uc?export=download&id=${fileid}"`
-curl -Lb ./cookie "https://drive.google.com/uc?export=download&`echo ${html}|grep -Po '(confirm=[a-zA-Z0-9\-_]+)'`&id=${fileid}" -o resources.tar.gz
+curl "https://s3.ap-northeast-2.wasabisys.com/pinto-model-zoo/055_Handwritten_Japanese_Recognition/resources.tar.gz" -o resources.tar.gz
 tar -zxvf resources.tar.gz
 rm resources.tar.gz
 
