@@ -1,0 +1,8 @@
+https://github.com/cvg/LightGlue
+https://github.com/fabio-sim/LightGlue-ONNX
+
+https://github.com/PINTO0309/onnx2tf
+https://github.com/PINTO0309/simple-onnx-processing-tools
+
+https://zenn.dev/pinto0309/scraps/21b435e9c74d5c
+
