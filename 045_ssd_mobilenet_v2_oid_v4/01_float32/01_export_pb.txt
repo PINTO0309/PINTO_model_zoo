@@ -1,5 +1,0 @@
-$ python3 object_detection/export_tflite_ssd_graph.py \
-    --pipeline_config_path=${HOME}/Downloads/ssd_mobilenet_v2_oid_v4_2018_12_12/pipeline.config \
-    --trained_checkpoint_prefix=${HOME}/Downloads/ssd_mobilenet_v2_oid_v4_2018_12_12/model.ckpt \
-    --output_directory=${HOME}/Downloads/ssd_mobilenet_v2_oid_v4_2018_12_12/export \
-    --add_postprocessing_op=True
