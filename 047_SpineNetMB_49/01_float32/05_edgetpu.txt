@@ -1,3 +1,0 @@
-edgetpu_compiler -s spinenetmb_49_384x384_full_integer_quant.tflite
-edgetpu_compiler -s spinenetmb_49_384x384_integer_quant.tflite
-
