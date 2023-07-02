@@ -1,8 +1,0 @@
-            self.input_image = tf.get_default_graph().get_tensor_by_name('tower_0/images:0')
-            self.training = tf.get_default_graph().get_tensor_by_name('training_flag:0')
-            self.output_ops = [
-                tf.get_default_graph().get_tensor_by_name('tower_0/boxes:0'),
-                tf.get_default_graph().get_tensor_by_name('tower_0/labels:0'),
-                tf.get_default_graph().get_tensor_by_name('tower_0/scores:0'),
-                tf.get_default_graph().get_tensor_by_name('tower_0/num_detections:0'),
-            ]
