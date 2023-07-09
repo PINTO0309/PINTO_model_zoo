@@ -1,0 +1,88 @@
+{
+  "format_version": 1,
+  "operations": [
+    {
+      "op_name": "model_1/tf.__operators__.getitem_2/strided_slice2",
+      "param_target": "inputs",
+      "param_name": "const_fold_opt__397",
+      "values": [1,146,2]
+    },
+    {
+      "op_name": "conv2d/BiasAdd_conv2d/Conv2D_conv2d/BiasAdd/ReadVariableOp__36",
+      "param_target": "inputs",
+      "param_name": "new_shape__469",
+      "values": [1,1,2,146]
+    },
+
+
+    {
+      "op_name": "input_tokens_embedding/BiasAdd_MixerBlock_3/mlp_channel_mixing/Mlp_2/Conv2D_input_tokens_embedding/Conv2D_input_tokens_embedding/BiasAdd/ReadVariableOp__39",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,3,2]
+    },
+
+
+
+    {
+      "op_name": "MixerBlock_0/mlp_token_mixing/Mlp_1/Relu_MixerBlock_0/mlp_token_mixing/Mlp_1/BiasAdd_MixerBlock_3/mlp_token_mixing/Mlp_1/Conv2D_MixerBlock_0/mlp_token_mixing/Mlp_1/Conv2D_MixerBlock_0/mlp_token_mixing/Mlp_1/BiasAdd/ReadVariableOp__44",
+      "param_target": "inputs",
+      "param_name": "new_shape__470",
+      "values": [1,1,64,97]
+    },
+    {
+      "op_name": "MixerBlock_1/mlp_token_mixing/Mlp_1/Relu_MixerBlock_1/mlp_token_mixing/Mlp_1/BiasAdd_MixerBlock_3/mlp_token_mixing/Mlp_1/Conv2D_MixerBlock_1/mlp_token_mixing/Mlp_1/Conv2D_MixerBlock_1/mlp_token_mixing/Mlp_1/BiasAdd/ReadVariableOp__60",
+      "param_target": "inputs",
+      "param_name": "new_shape__470",
+      "values": [1,1,64,97]
+    },
+    {
+      "op_name": "MixerBlock_2/mlp_token_mixing/Mlp_1/Relu_MixerBlock_2/mlp_token_mixing/Mlp_1/BiasAdd_MixerBlock_3/mlp_token_mixing/Mlp_1/Conv2D_MixerBlock_2/mlp_token_mixing/Mlp_1/Conv2D_MixerBlock_2/mlp_token_mixing/Mlp_1/BiasAdd/ReadVariableOp__76",
+      "param_target": "inputs",
+      "param_name": "new_shape__470",
+      "values": [1,1,64,97]
+    },
+    {
+      "op_name": "MixerBlock_3/mlp_token_mixing/Mlp_1/Relu_MixerBlock_3/mlp_token_mixing/Mlp_1/BiasAdd_MixerBlock_3/mlp_token_mixing/Mlp_1/Conv2D_MixerBlock_3/mlp_token_mixing/Mlp_1/BiasAdd/ReadVariableOp__92",
+      "param_target": "inputs",
+      "param_name": "new_shape__470",
+      "values": [1,1,64,97]
+    },
+
+
+
+    {
+      "op_name": "Transpose__178",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,3,2]
+    },
+    {
+      "op_name": "Transpose__198",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,3,2]
+    },
+    {
+      "op_name": "Transpose__210",
+      "param_target": "attributes",
+      "param_name": "perm",
+      "values": [0,1,3,2]
+    },
+
+
+    {
+      "op_name": "AddExtraTokens/concat",
+      "param_target": "outputs",
+      "param_name": "AddExtraTokens/concat",
+      "post_process_transpose_perm": [0,3,1,2]
+    },
+    {
+      "op_name": "tf.__operators__.getitem_1/strided_slice3",
+      "param_target": "op",
+      "begin": [0,0,0,0],
+      "end": [0,0,1,0],
+      "end_mask": 11
+    }
+  ]
+}

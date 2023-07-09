@@ -1,0 +1,7 @@
+https://storage.googleapis.com/mediapipe-assets/Model%20Card%20Blendshape%20V2.pdf
+
+https://github.com/PINTO0309/onnx2tf
+https://github.com/PINTO0309/simple-onnx-processing-tools
+
+https://github.com/PINTO0309/facemesh_onnx_tensorrt/issues/4
+
