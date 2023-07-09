@@ -333,8 +333,8 @@ I have been working on quantization of various models as a hobby, but I have ski
 |343|PP-MattingV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/343_PP-MattingV2)|⚫|⚫|||||||||⚫|HumanSeg|
 |347|RGBX_Semantic_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/347_RGBX_Semantic_Segmentation)|||||||||||⚫||
 |369|Segment_Anything|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/369_Segment_Anything)|||||||||||⚫||
-|380|Skin-Clothes-Hair-Segmentation-using-SMP|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/380_Skin-Clothes-Hair-Segmentation-using-SMP)|⚫|⚫|||||||||⚫|MediaPipe|
-|391|MagicTouch|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/391_MagicTouch)|⚫|⚫|||⚫||||||⚫||
+|380|Skin-Clothes-Hair-Segmentation-using-SMP|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/380_Skin-Clothes-Hair-Segmentation-using-SMP)|⚫|⚫|||||||||⚫||
+|391|MagicTouch|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/391_MagicTouch)|⚫|⚫|||⚫||||||⚫|MediaPipe|
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
