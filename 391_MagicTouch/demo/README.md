@@ -30,4 +30,5 @@ If you want to change the model, specify it with an argument.
     )
 ```
 
-
+---
+https://github.com/PINTO0309/PINTO_model_zoo/assets/37477845/6198b03c-8327-496c-a414-beb42bd39253
