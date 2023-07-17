@@ -1,0 +1,1 @@
+onnx2tf -i rtmpose_m_animal_1x3x256x256.onnx -o rtmpose_m_animal_1x3x256x256 -osd  -cotof -coion -oiqt -qt per-tensor
