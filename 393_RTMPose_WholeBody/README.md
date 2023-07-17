@@ -1,4 +1,7 @@
 # Note
 
-https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/1ac76593-b926-42bc-9e39-bfe0a192be54
+![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/30dbcde3-1ae2-4c7d-b3e9-7eb37c4cdff5)
+
+![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/dbaea21a-a5f8-4d96-9d03-16f265bb6ded)
+
 
