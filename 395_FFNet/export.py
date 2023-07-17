@@ -100,13 +100,15 @@ SEG_MODEL_NAME = {
 }
 
 class ExportFFNet(torch.nn.Module):
-    def __init__(self, model_name):
+    def __init__(self, model_name, h, w):
         super().__init__()
         self.model = model_entrypoint(model_name)()
+        self.h = h
+        self.w = w
 
     def forward(self, x):
         x = self.model(x)
-        x = F.interpolate(x, (1024, 2048), mode="bilinear", align_corners=True)
+        x = F.interpolate(x, (self.h, self.w), mode="bilinear", align_corners=True)
         x = torch.argmax(x, dim=1)
         return x
 
@@ -131,7 +133,7 @@ for model_name, size in SEG_MODEL_NAME:
         continue
 
     # load model and export onnx.
-    model = ExportFFNet(model_name=model_name)
+    model = ExportFFNet(model_name=model_name, h=height, w=width)
     dummy_input = torch.randn(1, 3, height, width, device="cpu")
     tmp_onnx_path = os.path.join(".", model_name + ".onnx")
     torch.onnx.export(
