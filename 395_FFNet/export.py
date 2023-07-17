@@ -36,14 +36,14 @@ MODELS = [
 download_path = os.path.join(".", "model_weights")
 os.makedirs(download_path, exist_ok=True)
 
-# for model in MODELS:
-#     download_url = "https://github.com/Qualcomm-AI-research/FFNet/releases/download/models/" + model
-#     file_path = os.path.join(".", "model_weights", model)
-#     urlData = requests.get(download_url).content
-#     with open(file_path ,mode='wb') as f:
-#         f.write(urlData)
-#     shutil.unpack_archive(file_path, download_path)
-#     os.remove(file_path)
+for model in MODELS:
+    download_url = "https://github.com/Qualcomm-AI-research/FFNet/releases/download/models/" + model
+    file_path = os.path.join(".", "model_weights", model)
+    urlData = requests.get(download_url).content
+    with open(file_path ,mode='wb') as f:
+        f.write(urlData)
+    shutil.unpack_archive(file_path, download_path)
+    os.remove(file_path)
 
 SEG_MODEL_NAME = {
     ("segmentation_ffnet101_dAAA", (1024, 2048)),
