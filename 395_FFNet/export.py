@@ -46,6 +46,22 @@ for model in MODELS:
     os.remove(file_path)
 
 SEG_MODEL_NAME = {
+    ("segmentation_ffnet101_AAA", (1024, 2048)),
+    ("segmentation_ffnet50_AAA", (1024, 2048)),
+    ("segmentation_ffnet150_AAA", (1024, 2048)),
+    ("segmentation_ffnet134_AAA", (1024, 2048)),
+    ("segmentation_ffnet86_AAA", (1024, 2048)),
+    ("segmentation_ffnet56_AAA", (1024, 2048)),
+    ("segmentation_ffnet34_AAA", (1024, 2048)),
+    ("segmentation_ffnet150_ABB", (1024, 2048)),
+    ("segmentation_ffnet86_ABB", (1024, 2048)),
+    ("segmentation_ffnet56_ABB", (1024, 2048)),
+    ("segmentation_ffnet34_ABB", (1024, 2048)),
+    ("segmentation_ffnet150S_BBB", (1024, 2048)),
+    ("segmentation_ffnet86S_BBB", (1024, 2048)),
+    ("segmentation_ffnet122N_CBB", (1024, 2048)),
+    ("segmentation_ffnet74N_CBB", (1024, 2048)),
+    ("segmentation_ffnet46N_CBB", (1024, 2048)),
     ("segmentation_ffnet101_dAAA", (1024, 2048)),
     ("segmentation_ffnet50_dAAA", (1024, 2048)),
     ("segmentation_ffnet150_dAAA", (1024, 2048)),
