@@ -19,7 +19,8 @@ def parse_args():
 
 
 def preprocess(
-    img: np.ndarray, input_size: Tuple[int, int] = (192, 256)
+    img: np.ndarray,
+    input_size: Tuple[int, int] = (192, 256),
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Do preprocessing for RTMPose model inference.
 
@@ -35,14 +36,16 @@ def preprocess(
     """
     # get shape of image
     img_shape = img.shape[:2]
-    bbox = np.array([0, 0, img_shape[1], img_shape[0]])
     # get center and scale
-    center, scale = bbox_xyxy2cs(bbox, padding=1.25)
+    img_wh = np.asarray([img_shape[1], img_shape[0]], dtype=np.float32)
+    center = img_wh * 0.5
+    scale = img_wh * 1.25
+
     # do affine transformation
     resized_img, scale = top_down_affine(input_size, scale, center, img)
     # normalize image
-    mean = np.array([123.675, 116.28, 103.53])
-    std = np.array([58.395, 57.12, 57.375])
+    mean = np.array([123.675, 116.28, 103.53], dtype=np.float32)
+    std = np.array([58.395, 57.12, 57.375], dtype=np.float32)
     resized_img = (resized_img - mean) / std
     return resized_img
 
@@ -63,8 +66,11 @@ def build_session(onnx_file: str, device: str = 'cpu') -> ort.InferenceSession:
     return sess
 
 
-# def inference(sess: ort.InferenceSession, resized_img: np.ndarray) -> np.ndarray:
-def inference(sess: ort.InferenceSession, resized_img: np.ndarray, img: np.ndarray) -> np.ndarray:
+def inference(
+    sess: ort.InferenceSession,
+    resized_img: np.ndarray,
+    img: np.ndarray
+) -> np.ndarray:
     """Inference RTMPose model.
 
     Args:
@@ -75,7 +81,7 @@ def inference(sess: ort.InferenceSession, resized_img: np.ndarray, img: np.ndarr
         outputs (np.ndarray): Output of RTMPose model.
     """
     # build input
-    input = [resized_img.transpose(2, 0, 1)]
+    input = resized_img.transpose(2, 0, 1)[np.newaxis, ...]
 
     # build output
     sess_input = {
@@ -90,63 +96,6 @@ def inference(sess: ort.InferenceSession, resized_img: np.ndarray, img: np.ndarr
     outputs = sess.run(sess_output, sess_input)
 
     return outputs
-
-def bbox_xyxy2cs(
-    bbox: np.ndarray,
-    padding: float = 1.
-) -> Tuple[np.ndarray, np.ndarray]:
-    """Transform the bbox format from (x,y,w,h) into (center, scale)
-
-    Args:
-        bbox (ndarray): Bounding box(es) in shape (4,) or (n, 4), formatted
-            as (left, top, right, bottom)
-        padding (float): BBox padding factor that will be multilied to scale.
-            Default: 1.0
-
-    Returns:
-        tuple: A tuple containing center and scale.
-        - np.ndarray[float32]: Center (x, y) of the bbox in shape (2,) or
-            (n, 2)
-        - np.ndarray[float32]: Scale (w, h) of the bbox in shape (2,) or
-            (n, 2)
-    """
-    # convert single bbox from (4, ) to (1, 4)
-    dim = bbox.ndim
-    if dim == 1:
-        bbox = bbox[None, :]
-
-    # get bbox center and scale
-    x1, y1, x2, y2 = np.hsplit(bbox, [1, 2, 3])
-    center = np.hstack([x1 + x2, y1 + y2]) * 0.5
-    scale = np.hstack([x2 - x1, y2 - y1]) * padding
-
-    if dim == 1:
-        center = center[0]
-        scale = scale[0]
-
-    return center, scale
-
-
-def _fix_aspect_ratio(
-    bbox_scale: np.ndarray,
-    aspect_ratio: float
-) -> np.ndarray:
-    """Extend the scale to match the given aspect ratio.
-
-    Args:
-        scale (np.ndarray): The image scale (w, h) in shape (2, )
-        aspect_ratio (float): The ratio of ``w/h``
-
-    Returns:
-        np.ndarray: The reshaped image scale in (2, )
-    """
-    w, h = np.hsplit(bbox_scale, [1])
-    bbox_scale = np.where(
-        w > h * aspect_ratio,
-        np.hstack([w, w / aspect_ratio]),
-        np.hstack([h * aspect_ratio, h])
-    )
-    return bbox_scale
 
 
 def _rotate_point(pt: np.ndarray, angle_rad: float) -> np.ndarray:
@@ -209,31 +158,45 @@ def get_warp_matrix(
     Returns:
         np.ndarray: A 2x3 transformation matrix
     """
-    shift = np.array(shift)
+    shift = np.array(shift, dtype=np.float32)
     src_w = scale[0]
     dst_w = output_size[0]
     dst_h = output_size[1]
     # compute transformation matrix
     rot_rad = np.deg2rad(rot)
-    src_dir = _rotate_point(np.array([0., src_w * -0.5]), rot_rad)
-    dst_dir = np.array([0., dst_w * -0.5])
+    src_dir = _rotate_point(np.array([0., src_w * -0.5], dtype=np.float32), rot_rad)
+    dst_dir = np.array([0., dst_w * -0.5], dtype=np.float32)
     # get four corners of the src rectangle in the original image
-    src = np.zeros((3, 2), dtype=np.float32)
-    src[0, :] = center + scale * shift
-    src[1, :] = center + src_dir + scale * shift
-    src[2, :] = _get_3rd_point(src[0, :], src[1, :])
+    src_dim0 = center + scale * shift
+    src_dim1 = center + src_dir + scale * shift
+    src = np.concatenate(
+        [
+            [src_dim0],
+            [src_dim1],
+            [_get_3rd_point(src_dim0, src_dim1)],
+        ],
+        axis=0,
+        dtype=np.float32,
+    )
     # get four corners of the dst rectangle in the input image
-    dst = np.zeros((3, 2), dtype=np.float32)
-    dst[0, :] = [dst_w * 0.5, dst_h * 0.5]
-    dst[1, :] = np.array([dst_w * 0.5, dst_h * 0.5]) + dst_dir
-    dst[2, :] = _get_3rd_point(dst[0, :], dst[1, :])
+    dst_dim0 = np.asarray([dst_w * 0.5, dst_h * 0.5], dtype=np.float32)
+    dst_dim1 = np.array([dst_w * 0.5, dst_h * 0.5], dtype=np.float32) + dst_dir
+    dst = np.concatenate(
+        [
+            [dst_dim0],
+            [dst_dim1],
+            [_get_3rd_point(dst_dim0, dst_dim1)],
+        ],
+        axis=0,
+        dtype=np.float32,
+    )
 
     if inv:
-        warp_mat = cv2.getAffineTransform(np.float32(dst), np.float32(src))
+        warp_mat = cv2.getAffineTransform(dst, src)
     else:
-        warp_mat = cv2.getAffineTransform(np.float32(src), np.float32(dst))
+        warp_mat = cv2.getAffineTransform(src, dst)
 
-    return warp_mat
+    return warp_mat.astype(np.float32)
 
 
 def top_down_affine(
@@ -259,7 +222,13 @@ def top_down_affine(
     warp_size = (int(w), int(h))
 
     # reshape bbox to fixed aspect ratio
-    bbox_scale = _fix_aspect_ratio(bbox_scale, aspect_ratio=w / h)
+    bbox_w = bbox_scale[0:1]
+    bbox_h = bbox_scale[1:2]
+    w_div_075 = bbox_w / 0.75 # 0.75 = model_input_width / model_inut_height
+    h_mul_075 = bbox_h * 0.75 # 0.75 = model_input_width / model_inut_height
+    w_scaled = np.maximum(h_mul_075, bbox_w)
+    h_scaled = np.maximum(w_div_075, bbox_h)
+    bbox_scale = np.concatenate([w_scaled, h_scaled], axis=0)
 
     # get the affine matrix
     center = bbox_center
@@ -273,18 +242,73 @@ def top_down_affine(
     return resized_img, bbox_scale
 
 # default color
-skeleton = [(15, 13), (13, 11), (16, 14), (14, 12), (11, 12), (5, 11),
-            (6, 12), (5, 6), (5, 7), (6, 8), (7, 9), (8, 10), (1, 2),
-            (0, 1), (0, 2), (1, 3), (2, 4), (3, 5), (4, 6), (15, 17),
-            (15, 18), (15, 19), (16, 20), (16, 21), (16, 22), (91, 92),
-            (92, 93), (93, 94), (94, 95), (91, 96), (96, 97), (97, 98),
-            (98, 99), (91, 100), (100, 101), (101, 102), (102, 103),
-            (91, 104), (104, 105), (105, 106), (106, 107), (91, 108),
-            (108, 109), (109, 110), (110, 111), (112, 113), (113, 114),
-            (114, 115), (115, 116), (112, 117), (117, 118), (118, 119),
-            (119, 120), (112, 121), (121, 122), (122, 123), (123, 124),
-            (112, 125), (125, 126), (126, 127), (127, 128), (112, 129),
-            (129, 130), (130, 131), (131, 132)]
+skeleton = [
+    (15, 13),
+    (13, 11),
+    (16, 14),
+    (14, 12),
+    (11, 12),
+    (5, 11),
+    (6, 12),
+    (5, 6),
+    (5, 7),
+    (6, 8),
+    (7, 9),
+    (8, 10),
+    (1, 2),
+    (0, 1),
+    (0, 2),
+    (1, 3),
+    (2, 4),
+    (3, 5),
+    (4, 6),
+    (15, 17),
+    (15, 18),
+    (15, 19),
+    (16, 20),
+    (16, 21),
+    (16, 22),
+    (91, 92),
+    (92, 93),
+    (93, 94),
+    (94, 95),
+    (91, 96),
+    (96, 97),
+    (97, 98),
+    (98, 99),
+    (91, 100),
+    (100, 101),
+    (101, 102),
+    (102, 103),
+    (91, 104),
+    (104, 105),
+    (105, 106),
+    (106, 107),
+    (91, 108),
+    (108, 109),
+    (109, 110),
+    (110, 111),
+    (112, 113),
+    (113, 114),
+    (114, 115),
+    (115, 116),
+    (112, 117),
+    (117, 118),
+    (118, 119),
+    (119, 120),
+    (112, 121),
+    (121, 122),
+    (122, 123),
+    (123, 124),
+    (112, 125),
+    (125, 126),
+    (126, 127),
+    (127, 128),
+    (112, 129),
+    (129, 130),
+    (130, 131),
+    (131, 132)
+]
 palette = [
     [51, 153, 255],
     [0, 255, 0],
