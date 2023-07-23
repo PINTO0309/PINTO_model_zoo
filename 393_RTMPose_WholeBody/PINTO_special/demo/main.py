@@ -342,14 +342,15 @@ def visualize(
     Args:
         img (np.ndarray): Input image in shape.
         keypoints (np.ndarray): Keypoints in image.
-        scores (np.ndarray): Model predict scores.
-        thr (float): Threshold for visualize.
+        score_threshold (float): Threshold for visualize.
 
     Returns:
         img (np.ndarray): Visualized image.
     """
     debug_image = copy.deepcopy(image)
     # draw keypoints and skeleton
+    # keypoints: [person_count, 133, 3]
+    # keypoint: [133, [x, y, score]]
     for keypoint in keypoints:
         for (u, v), color in zip(skeleton, link_color):
             score_u = keypoint[u, 2]
@@ -391,7 +392,7 @@ def main():
     # save to local
     cv2.imwrite(args.save_path, debug_image)
     cv2.imshow('debug_image', debug_image)
-    if cv2.waitKey(0):  # ESC
+    if cv2.waitKey(0):  # Any Key
         pass
 
 if __name__ == '__main__':
