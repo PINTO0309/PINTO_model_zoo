@@ -363,6 +363,16 @@ def visualize(
                     2,
                     cv2.LINE_AA,
                 )
+        _ = [
+            cv2.circle(
+                debug_image,
+                (point[0].astype(np.int32), point[1].astype(np.int32)),
+                1,
+                palette[color],
+                1,
+                cv2.LINE_AA
+            ) for point, color in zip(keypoint, point_color) if point[2] > score_threshold
+        ]
     return debug_image
 
 def main():
