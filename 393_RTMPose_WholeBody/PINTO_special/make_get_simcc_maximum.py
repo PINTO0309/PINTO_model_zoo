@@ -158,7 +158,7 @@ MODELS = [
 ]
 for model_name in MODELS:
     model_name_splits = model_name.split('_')
-    combined_graph = combine(
+    combine(
         srcop_destop = [
             ['simcc_x', 'post_simcc_x', 'simcc_y', 'post_simcc_y']
         ],
