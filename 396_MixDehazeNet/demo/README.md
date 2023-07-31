@@ -1,6 +1,6 @@
 # Demo projects
 
-## SCANet with ONNX Runtime in Python
+## MixDehazeNet with ONNX Runtime in Python
 
 - movie
 
@@ -8,14 +8,18 @@
 
 - script
   ```bash
-  python demo_SCANet_onnx.py
+  python demo_MixDihazeNet_onnx.py \
+  --model mixdehazenet_haze4k_l_360x640.onnx
   ```
 
-- result
+- Haze4K_L
 
-  https://user-images.githubusercontent.com/33194443/233796949-dcb4a9e0-3ed2-4c7a-80ea-e51c96c80351.mp4
 
-- bonus video - SCANet + LaneSOD
+- Indoor_L
 
-  https://user-images.githubusercontent.com/33194443/233812964-eb4b7242-f3b4-477c-8f57-117d0e9ecf7f.mp4
+
+- Indoor_B
+
+
+- Outdoor_L
 
