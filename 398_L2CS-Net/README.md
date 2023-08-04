@@ -1,3 +1,3 @@
 # Note
 
-![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/9169a104-15ee-401f-81a2-bc1118b48585)
+https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/5a7a879c-c77c-4196-9eda-16f34271bd0f
