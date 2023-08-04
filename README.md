@@ -528,6 +528,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |374|LaneSOD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/374_LaneSOD)|||||||||||⚫|Lane Segmentation|
 |378|P2PNet_tfkeras|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/378_P2PNet_tfkeras)|⚫|⚫|||||||||⚫||
 |388|LightGlue|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/388_LightGlue)|||||||||||⚫||
+|398|L2CS-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/398_L2CS-Net)|⚫|⚫|⚫||⚫||||||⚫|Gaze Pose 448x448|
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)
