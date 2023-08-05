@@ -62,7 +62,7 @@ class RetinaFaceONNX(object):
     def __call__(
         self,
         image: np.ndarray,
-    ) -> Tuple[np.ndarray, np.ndarray]:
+    ) -> np.ndarray:
         """
 
         Parameters
@@ -72,11 +72,6 @@ class RetinaFaceONNX(object):
 
         Returns
         -------
-        face_boxes: np.ndarray
-            Predicted face boxes: [facecount, y1, x1, y2, x2]
-
-        face_scores: np.ndarray
-            Predicted face box scores: [facecount, score]
         """
         temp_image = copy.deepcopy(image)
 
