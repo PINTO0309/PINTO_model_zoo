@@ -32,7 +32,7 @@ class RetinaFaceONNX(object):
         Parameters
         ----------
         model_path: Optional[str]
-            ONNX file path for YOLOv7
+            ONNX file path
 
         providers: Optional[List]
             Name of onnx execution providers
