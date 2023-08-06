@@ -72,6 +72,8 @@ class RetinaFaceONNX(object):
 
         Returns
         -------
+        batchno_classid_score_x1y1x2y2_landms: np.ndarray
+            [N, [batchno, classid, score, x1, y1, x2, y2, landms0, ..., landms9]]
         """
         temp_image = copy.deepcopy(image)
 
@@ -221,6 +223,8 @@ def main():
 
         # Face Detection
         start_time = time.time()
+        # batchno_classid_score_x1y1x2y2_landms:
+        # [N, [batchno, classid, score, x1, y1, x2, y2, landmsX0, landmsY0, ..., landmsX9, landmsY9]]
         batchno_classid_score_x1y1x2y2_landms = detector(debug_image)
         elapsed_time = time.time() - start_time
 
