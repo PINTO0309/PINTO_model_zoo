@@ -27,3 +27,6 @@
 - Run - CUDA
 
   https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/7edd3a68-7a66-45da-821c-64d0bbee72e1
+
+  https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/2f6f883f-c93c-4b1e-bd34-c26de80eb423
+
