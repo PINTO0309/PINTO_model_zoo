@@ -149,7 +149,7 @@ class L2CSNetONNX(object):
             'CPUExecutionProvider',
         ],
     ):
-        """L2CSNetONNX
+        """L2CSNETONNX
 
         Parameters
         ----------
@@ -193,7 +193,7 @@ class L2CSNetONNX(object):
         Parameters
         ----------
         image: np.ndarray
-            Face image
+            Face images
 
         Returns
         -------
@@ -244,13 +244,10 @@ class L2CSNetONNX(object):
         resized_images = []
 
         for image in images:
-            # Normalization + BGR->RGB
-            resized_image = cv2.resize(
-                image,
-                (
-                    int(self.input_shapes[0][3]),
-                    int(self.input_shapes[0][2]),
-                )
+            # Resize (Keep aspect ratio) + Normalization + BGR->RGB
+            resized_image = resize_and_pad(
+                img=image,
+                size=(448,448),
             )
             resized_image = np.divide(resized_image, 255.0)
             resized_image = (resized_image - self.mean) / self.std
@@ -293,6 +290,53 @@ def draw_gaze(
         tipLength=0.18,
     )
     return image_out
+
+def resize_and_pad(
+    img: np.ndarray,
+    size: Tuple,
+    pad_color=0,
+):
+    h, w = img.shape[:2]
+    sw, sh = size
+    # interpolation method
+    if h > sh or w > sw: # shrinking image
+        interp = cv2.INTER_AREA
+    else: # stretching image
+        interp = cv2.INTER_CUBIC
+    # aspect ratio of image
+    aspect = w/h  # if on Python 2, you might need to cast as a float: float(w)/h
+    # compute scaling and pad sizing
+    if aspect > 1: # horizontal image
+        new_w = sw
+        new_h = np.round(new_w/aspect).astype(int)
+        pad_vert = (sh-new_h)/2
+        pad_top, pad_bot = np.floor(pad_vert).astype(int), np.ceil(pad_vert).astype(int)
+        pad_left, pad_right = 0, 0
+    elif aspect < 1: # vertical image
+        new_h = sh
+        new_w = np.round(new_h*aspect).astype(int)
+        pad_horz = (sw-new_w)/2
+        pad_left, pad_right = np.floor(pad_horz).astype(int), np.ceil(pad_horz).astype(int)
+        pad_top, pad_bot = 0, 0
+    else: # square image
+        new_h, new_w = sh, sw
+        pad_left, pad_right, pad_top, pad_bot = 0, 0, 0, 0
+    # set pad color
+    # color image but only one color provided
+    if len(img.shape) is 3 and not isinstance(pad_color, (list, tuple, np.ndarray)):
+        pad_color = [pad_color]*3
+    # scale and pad
+    scaled_img = cv2.resize(img, (new_w, new_h), interpolation=interp)
+    scaled_img = cv2.copyMakeBorder(
+        scaled_img,
+        pad_top,
+        pad_bot,
+        pad_left,
+        pad_right,
+        borderType=cv2.BORDER_CONSTANT,
+        value=pad_color,
+    )
+    return scaled_img
 
 
 def main():
