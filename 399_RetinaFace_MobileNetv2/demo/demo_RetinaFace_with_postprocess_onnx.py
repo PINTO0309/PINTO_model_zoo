@@ -14,7 +14,7 @@ import onnxruntime
 class RetinaFaceONNX(object):
     def __init__(
         self,
-        model_path: Optional[str] = 'retinaface_mbn025_with_postprocess_480x640_max1000.onnx',
+        model_path: Optional[str] = 'retinaface_mbn025_with_postprocess_480x640_max1000_th0.70.onnx',
         providers: Optional[List] = [
             (
                 'TensorrtExecutionProvider', {
@@ -152,7 +152,7 @@ def main():
         '-m',
         '--model',
         type=str,
-        default='retinaface_mbn025_with_postprocess_480x640_max1000.onnx',
+        default='retinaface_mbn025_with_postprocess_480x640_max1000_th0.70.onnx',
     )
     parser.add_argument(
         '-p',
