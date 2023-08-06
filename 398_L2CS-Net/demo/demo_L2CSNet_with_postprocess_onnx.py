@@ -275,7 +275,7 @@ def draw_gaze(
     """Draw gaze angle on given image with a given eye positions."""
     image_out = image_in
     (h, w) = image_in.shape[:2]
-    length = w/2
+    length = w / 2.5
     pos = (int(a+c / 2.0), int(b+d / 2.0))
     if len(image_out.shape) == 2 or image_out.shape[2] == 1:
         image_out = cv2.cvtColor(image_out, cv2.COLOR_GRAY2BGR)
