@@ -71,6 +71,8 @@ class RetinaFaceONNX(object):
 
         Returns
         -------
+        batchno_classid_score_x1y1x2y2_landms: np.ndarray
+            [facecount, [batchno, classid, score, x1, y1, x2, y2, landmsX0, landmsY0, ..., landmsX9, landmsY9]]
         """
         temp_image = copy.deepcopy(image)
 
