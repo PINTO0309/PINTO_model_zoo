@@ -147,7 +147,7 @@ class L2CSNetONNX(object):
             'CPUExecutionProvider',
         ],
     ):
-        """L2CSNETONNX
+        """L2CSNetONNX
 
         Parameters
         ----------
@@ -191,7 +191,7 @@ class L2CSNetONNX(object):
         Parameters
         ----------
         image: np.ndarray
-            Entire image
+            Face image
 
         Returns
         -------
