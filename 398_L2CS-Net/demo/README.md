@@ -24,6 +24,6 @@
     -p {cpu,cuda,tensorrt}, --provider {cpu,cuda,tensorrt}
   ```
 
-- Run
+- Run - CUDA
 
   https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/7edd3a68-7a66-45da-821c-64d0bbee72e1
