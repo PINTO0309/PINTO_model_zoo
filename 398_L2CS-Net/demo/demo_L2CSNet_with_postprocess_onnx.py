@@ -39,7 +39,7 @@ class RetinaFaceONNX(object):
         # Model loading
         session_option = onnxruntime.SessionOptions()
         session_option.log_severity_level = 3
-        session_option.intra_op_num_threads = psutil.cpu_count(logical=True) - 1
+        session_option.intra_op_num_threads = psutil.cpu_count(logical=True) // 2 - 1
         self.onnx_session = onnxruntime.InferenceSession(
             model_path,
             sess_options=session_option,
@@ -160,7 +160,7 @@ class L2CSNetONNX(object):
         # Model loading
         session_option = onnxruntime.SessionOptions()
         session_option.log_severity_level = 3
-        session_option.intra_op_num_threads = psutil.cpu_count(logical=True) - 1
+        session_option.intra_op_num_threads = psutil.cpu_count(logical=True) // 2 - 1
         self.onnx_session = \
             onnxruntime.InferenceSession(
                 model_path,
