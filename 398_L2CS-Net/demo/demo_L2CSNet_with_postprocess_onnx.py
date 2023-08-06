@@ -245,10 +245,11 @@ class L2CSNetONNX(object):
 
         for image in images:
             # Resize (Keep aspect ratio) + Normalization + BGR->RGB
-            resized_image = resize_and_pad(
-                img=image,
-                size=(448,448),
-            )
+            resized_image = \
+                resize_and_pad(
+                    img=image,
+                    size=tuple(self.input_shapes[0][2:]),
+                )
             resized_image = np.divide(resized_image, 255.0)
             resized_image = (resized_image - self.mean) / self.std
             resized_image = resized_image[..., ::-1]
@@ -323,7 +324,7 @@ def resize_and_pad(
         pad_left, pad_right, pad_top, pad_bot = 0, 0, 0, 0
     # set pad color
     # color image but only one color provided
-    if len(img.shape) is 3 and not isinstance(pad_color, (list, tuple, np.ndarray)):
+    if len(img.shape) == 3 and not isinstance(pad_color, (list, tuple, np.ndarray)):
         pad_color = [pad_color]*3
     # scale and pad
     scaled_img = cv2.resize(img, (new_w, new_h), interpolation=interp)
