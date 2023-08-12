@@ -247,6 +247,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |392|STCFormer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/392_STCFormer)|⚫|⚫|||||||||⚫|2D->3D|
 |393|RTMPose_WholeBody|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/393_RTMPose_WholeBody)|⚫|⚫|⚫||⚫||||||⚫|2D|
 |394|RTMPose_Animal|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/394_RTMPose_Animal)|⚫|⚫|⚫||⚫||||||⚫|2D|
+|402|trt_pose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/402_trt_pose)|||||||||||⚫|2D|
 ### 7. Depth Estimation from Monocular/Stereo Images
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
