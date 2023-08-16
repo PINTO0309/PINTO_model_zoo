@@ -342,6 +342,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |369|Segment_Anything|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/369_Segment_Anything)|||||||||||⚫||
 |380|Skin-Clothes-Hair-Segmentation-using-SMP|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/380_Skin-Clothes-Hair-Segmentation-using-SMP)|⚫|⚫|||||||||⚫||
 |391|MagicTouch|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/391_MagicTouch)|⚫|⚫|||⚫||||||⚫|MediaPipe|
+|405|MagicTouch|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/405_Ear_Segmentation)|||||||||||⚫|Ear|
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
