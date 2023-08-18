@@ -533,9 +533,10 @@ I have been working on quantization of various models as a hobby, but I have ski
 |373|LiteTrack|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/373_LiteTrack)|⚫|⚫|||||||||⚫|Tracking|
 |374|LaneSOD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/374_LaneSOD)|||||||||||⚫|Lane Segmentation|
 |378|P2PNet_tfkeras|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/378_P2PNet_tfkeras)|⚫|⚫|||||||||⚫||
-|388|LightGlue|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/388_LightGlue)|||||||||||⚫||
+|388|LightGlue|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/388_LightGlue)|||||||||||⚫|Keypoint Matching|
 |398|L2CS-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/398_L2CS-Net)|⚫|⚫|⚫||⚫||||||⚫|Gaze Pose 448x448|
 |401|CLRerNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/401_CLRerNet)|||||||||||⚫|Lane Detection|
+|406|DeDoDe|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/406_DeDoDe)|⚫|⚫|||||||||⚫|Keypoint Detection, Description, Matching|
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)
