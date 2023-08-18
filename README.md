@@ -537,6 +537,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |398|L2CS-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/398_L2CS-Net)|⚫|⚫|⚫||⚫||||||⚫|Gaze Pose 448x448|
 |401|CLRerNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/401_CLRerNet)|||||||||||⚫|Lane Detection|
 |406|DeDoDe|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/406_DeDoDe)|⚫|⚫|||||||||⚫|Keypoint Detection, Description, Matching|
+|407|Generalizing_Gaze_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/407_Generalizing_Gaze_Estimation)|⚫|⚫|||||||||⚫|Gaze Pose 160x160|
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)
