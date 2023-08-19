@@ -1,5 +1,7 @@
 # Note
 
+https://github.com/PINTO0309/PINTO_model_zoo/tree/main/399_RetinaFace_MobileNetv2
+
 https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/7965e865-edaf-4d63-b31b-f647e22e9901
 
 ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/69590401-f351-46fa-90b8-1280df3281fc)
