@@ -12,6 +12,20 @@ CLASSES=80
 python make_boxes_scores.py -o ${OPSET} -b ${BATCHES} -x ${BOXES} -c ${CLASSES}
 python make_cxcywh_y1x1y2x2.py -o ${OPSET} -b ${BATCHES} -x ${BOXES}
 
+sor4onnx \
+--input_onnx_file_path boxes_scores_${BOXES}.onnx \
+--old_new "/Constant" "boxes_scores_Constant" \
+--mode full \
+--search_mode prefix_match \
+--output_onnx_file_path boxes_scores_${BOXES}.onnx
+
+sor4onnx \
+--input_onnx_file_path cxcywh_y1x1y2x2_${BOXES}.onnx \
+--old_new "/Constant" "cxcywh_y1x1y2x2_Constant" \
+--mode full \
+--search_mode prefix_match \
+--output_onnx_file_path cxcywh_y1x1y2x2_${BOXES}.onnx
+
 snc4onnx \
 --input_onnx_file_paths boxes_scores_${BOXES}.onnx cxcywh_y1x1y2x2_${BOXES}.onnx \
 --srcop_destop boxes_cxcywh cxcywh \
@@ -148,6 +162,8 @@ python -m tf2onnx.convert \
 sor4onnx \
 --input_onnx_file_path nms_score_gather_nd.onnx \
 --old_new ":0" "" \
+--mode full \
+--search_mode partial_match \
 --output_onnx_file_path nms_score_gather_nd.onnx
 
 sor4onnx \
@@ -206,6 +222,8 @@ python -m tf2onnx.convert \
 sor4onnx \
 --input_onnx_file_path nms_box_gather_nd.onnx \
 --old_new ":0" "" \
+--mode full \
+--search_mode partial_match \
 --output_onnx_file_path nms_box_gather_nd.onnx
 
 sor4onnx \
@@ -242,7 +260,7 @@ onnxsim nms_box_gather_nd.onnx nms_box_gather_nd.onnx
 
 ################################################### Cleaning
 rm nms_score_gather_nd.onnx
-rm nms_yolov7_5040.onnx
+rm nms_yolov7_${BOXES}.onnx
 
 
 ################################################### nms_yolov7_xxx_nd + nms_final_batch_nums_final_class_nums_final_box_nums
