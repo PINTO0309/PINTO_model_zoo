@@ -12,10 +12,10 @@ class Model(nn.Module):
         super(Model, self).__init__()
 
     def forward(self, cxcywh):
-        x1 = (cxcywh[..., 0] - cxcywh[..., 2] / 2)[..., np.newaxis]  # top left x
-        y1 = (cxcywh[..., 1] - cxcywh[..., 3] / 2)[..., np.newaxis]  # top left y
-        x2 = (cxcywh[..., 0] + cxcywh[..., 2] / 2)[..., np.newaxis]  # bottom right x
-        y2 = (cxcywh[..., 1] + cxcywh[..., 3] / 2)[..., np.newaxis]  # bottom right y
+        x1 = (cxcywh[..., 0:1] - cxcywh[..., 2:3] / 2)  # top left x
+        y1 = (cxcywh[..., 1:2] - cxcywh[..., 3:4] / 2)  # top left y
+        x2 = (cxcywh[..., 0:1] + cxcywh[..., 2:3] / 2)  # bottom right x
+        y2 = (cxcywh[..., 1:2] + cxcywh[..., 3:4] / 2)  # bottom right y
         x1y1x2y2 = torch.cat([x1,y1,x2,y2], dim=2)
         return x1y1x2y2
 

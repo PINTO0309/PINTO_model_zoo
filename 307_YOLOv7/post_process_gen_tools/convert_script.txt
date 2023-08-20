@@ -26,6 +26,13 @@ sor4onnx \
 --search_mode prefix_match \
 --output_onnx_file_path cxcywh_y1x1y2x2_${BOXES}.onnx
 
+sor4onnx \
+--input_onnx_file_path cxcywh_y1x1y2x2_${BOXES}.onnx \
+--old_new "/Slice" "cxcywh_y1x1y2x2_Slice" \
+--mode full \
+--search_mode prefix_match \
+--output_onnx_file_path cxcywh_y1x1y2x2_${BOXES}.onnx
+
 snc4onnx \
 --input_onnx_file_paths boxes_scores_${BOXES}.onnx cxcywh_y1x1y2x2_${BOXES}.onnx \
 --srcop_destop boxes_cxcywh cxcywh \
@@ -275,7 +282,7 @@ snc4onnx \
 ################################################### nms_yolov7_${BOXES}_split + nms_box_gather_nd
 snc4onnx \
 --input_onnx_file_paths nms_yolov7_${BOXES}_split.onnx nms_box_gather_nd.onnx \
---srcop_destop main01_y1x1y2x2 gn_boxes final_box_nums gn_box_selected_indices \
+--srcop_destop x1y1x2y2 gn_boxes final_box_nums gn_box_selected_indices \
 --output_onnx_file_path nms_yolov7_${BOXES}_merged.onnx
 
 onnxsim nms_yolov7_${BOXES}_merged.onnx nms_yolov7_${BOXES}_merged.onnx

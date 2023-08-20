@@ -31,6 +31,7 @@ class Model(nn.Module):
         box_scores = x[..., 4:5] # [n, boxes, 1]
         class_scores = x[..., 5:] # [n, boxes, 80]
         scores = box_scores * class_scores
+        scores = torch.sqrt(scores)
         scores = scores.permute(0,2,1)
         return boxes, scores
 

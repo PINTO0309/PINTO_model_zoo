@@ -44,12 +44,12 @@ if __name__ == "__main__":
         f=onnx_file,
         opset_version=OPSET,
         input_names=['cat_batch','cat_classid','cat_x1y1x2y2'],
-        output_names=['batchno_classid_y1x1y2x2'],
+        output_names=['batchno_classid_x1y1x2y2'],
         dynamic_axes={
             'cat_batch': {0: 'N'},
             'cat_classid': {0: 'N'},
             'cat_x1y1x2y2': {0: 'N'},
-            'batchno_classid_y1x1y2x2': {0: 'N'},
+            'batchno_classid_x1y1x2y2': {0: 'N'},
         }
     )
     model_onnx1 = onnx.load(onnx_file)
