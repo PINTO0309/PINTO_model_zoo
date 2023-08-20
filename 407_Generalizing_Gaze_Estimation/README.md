@@ -2,9 +2,17 @@
 
 https://github.com/PINTO0309/PINTO_model_zoo/tree/main/399_RetinaFace_MobileNetv2
 
-https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/0a861aa6-3c1e-4b86-8f04-e697d3d53366
+- RetinaFace MovileNetV2, Score threshold=0.7
 
-https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/7965e865-edaf-4d63-b31b-f647e22e9901
+  https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/0a861aa6-3c1e-4b86-8f04-e697d3d53366
+
+  https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/7965e865-edaf-4d63-b31b-f647e22e9901
+
+- RetinaFace MovileNetV2, Score threshold=0.3
+
+  https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/d715d2bb-b50c-4042-8fd7-9cbd50fb7d84
+
+
 
 ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/69590401-f351-46fa-90b8-1280df3281fc)
 
