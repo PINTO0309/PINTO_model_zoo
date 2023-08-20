@@ -222,7 +222,7 @@ class GazeHandler():
     def __init__(
         self,
         detector,
-        model_path='generalizing_gaze_estimation_with_weak_supervision_from_synthetic_views_1x3x160x160.onnx',
+        model_path='generalizing_gaze_estimation_with_weak_supervision_from_synthetic_views_Nx3x160x160.onnx',
         res_eyes_path='assets/eyes3d.pkl',
         providers: Optional[List] = [
             (
@@ -235,6 +235,7 @@ class GazeHandler():
             'CUDAExecutionProvider',
             'CPUExecutionProvider',
         ],
+        enable_3d_rendering = False,
     ):
         self.detector = detector
 
@@ -266,6 +267,7 @@ class GazeHandler():
         self.output_names = [
             output.name for output in self.onnx_session.get_outputs()
         ]
+        self.enable_3d_rendering = enable_3d_rendering
 
     def draw_item(self, eimg, item):
         #bbox, kps, eye_kps = item
@@ -277,19 +279,20 @@ class GazeHandler():
             _eye[:,0] = _eye[:,1].copy()
             _eye[:,1] = tmp
 
-        # for _eye in [eye_l, eye_r]:
-        #     _kps = _eye[self.iris_idx_481,:].astype(np.int32)
-        #     for l in range(_kps.shape[0]):
-        #         color = (0, 255, 0)
-        #         cv2.circle(eimg, (_kps[l][1], _kps[l][0]), 4, color, 4)
-        #     for _tri in self.tri481:
-        #         color = (0, 0, 255)
-        #         for k in range(3):
-        #             ix = _tri[k]
-        #             iy = _tri[(k+1)%3]
-        #             x = _eye[ix,:2].astype(np.int32)[::-1]
-        #             y = _eye[iy,:2].astype(np.int32)[::-1]
-        #             cv2.line(eimg, x, y, color, 1)
+        if self.enable_3d_rendering:
+            for _eye in [eye_l, eye_r]:
+                _kps = _eye[self.iris_idx_481,:].astype(np.int32)
+                for l in range(_kps.shape[0]):
+                    color = (0, 255, 0)
+                    cv2.circle(eimg, (_kps[l][1], _kps[l][0]), 4, color, 4)
+                for _tri in self.tri481:
+                    color = (0, 0, 255)
+                    for k in range(3):
+                        ix = _tri[k]
+                        iy = _tri[(k+1)%3]
+                        x = _eye[ix,:2].astype(np.int32)[::-1]
+                        y = _eye[iy,:2].astype(np.int32)[::-1]
+                        cv2.line(eimg, x, y, color, 1)
 
         theta_x_l, theta_y_l, vec_l = angles_and_vec_from_eye(eye_l, self.iris_idx_481)
         theta_x_r, theta_y_r, vec_r = angles_and_vec_from_eye(eye_r, self.iris_idx_481)
@@ -300,7 +303,7 @@ class GazeHandler():
         eye_pos_left = eye_l[self.iris_idx_481].mean(axis=0)[[0, 1]]
         eye_pos_right = eye_r[self.iris_idx_481].mean(axis=0)[[0, 1]]
 
-        ## pred ---
+        ## pred
         gaze_pred = np.array([theta_x_l, theta_y_l])
         dx = 0.4*diag * np.sin(gaze_pred[1])
         dy = 0.4*diag * np.sin(gaze_pred[0])
@@ -310,9 +313,8 @@ class GazeHandler():
         y[1] += dy
         x = x.astype(np.int32)
         y = y.astype(np.int32)
-        # color = (0,255,255)
         color = (0,255,0)
-        cv2.line(eimg, x, y, color, 2)
+        cv2.line(eimg, x, y, color, 5)
 
         gaze_pred = np.array([theta_x_r, theta_y_r])
         dx = 0.4*diag * np.sin(gaze_pred[1])
@@ -323,9 +325,8 @@ class GazeHandler():
         y[1] += dy
         x = x.astype(np.int32)
         y = y.astype(np.int32)
-        # color = (0,255,255)
         color = (0,255,0)
-        cv2.line(eimg, x, y, color, 2)
+        cv2.line(eimg, x, y, color, 5)
         return eimg
 
     def draw_on(self, eimg, results):
@@ -350,6 +351,9 @@ class GazeHandler():
             return results
         image_width = img.shape[1]
         image_height = img.shape[0]
+        face_imgs = []
+        face_kps = []
+        Ms = []
         for face in batchno_classid_score_x1y1x2y2_landms:
             x_min = max(int(face[3]), 0)
             y_min = max(int(face[4]), 0)
@@ -361,27 +365,34 @@ class GazeHandler():
             kps_right_eye = np.asarray([int(face[7]), int(face[8])], dtype=np.int32) # [x, y]
             kps_left_eye = np.asarray([int(face[9]), int(face[10])], dtype=np.int32) # [x, y]
             width = x_max - x_min
-            center = (kps_left_eye + kps_right_eye) / 2.0 # (x + x) / 2
+            center = (kps_left_eye + kps_right_eye) / 2.0 # (lx + rx) / 2, (ly + ry) / 2
 
             _size = max(width/1.5, np.abs(kps_right_eye[0] - kps_left_eye[0]) ) * 1.5
             rotate = 0
             _scale = self.input_size  / _size
             aimg, M = transform(img, center, self.input_size, _scale, rotate)
             aimg = cv2.cvtColor(aimg, cv2.COLOR_BGR2RGB)
-            input = aimg.copy()
-            input = np.transpose(input, (2, 0, 1))
-            input = np.expand_dims(input, 0).astype(np.float32)
-            imgs = (input / 255.0 - 0.5) / 0.5
-            opred = \
-                self.onnx_session.run(
-                    self.output_names,
-                    {input_name: imgs for input_name in self.input_names},
-                )[0][0]
 
+            face_imgs.append(aimg)
+            face_kps.append(kps)
+            Ms.append(M)
+
+        input_face_images = np.asarray(face_imgs, dtype=np.float32)
+        input_face_images = input_face_images.transpose([0,3,1,2])
+        input_face_images = (input_face_images / 255.0 - 0.5) / 0.5
+
+        opreds = \
+            self.onnx_session.run(
+                self.output_names,
+                {input_name: input_face_images for input_name in self.input_names},
+            )[0]
+
+        for opred, face_kp, M in zip(opreds, face_kps, Ms):
             IM = cv2.invertAffineTransform(M)
             pred = trans_points(opred, IM)
-            result = (bbox, kps, pred)
+            result = (bbox, face_kp, pred)
             results.append(result)
+
         return results
 
 
@@ -410,7 +421,7 @@ def main():
         '-pm',
         '--predictor_model',
         type=str,
-        default='generalizing_gaze_estimation_with_weak_supervision_from_synthetic_views_1x3x160x160.onnx',
+        default='generalizing_gaze_estimation_with_weak_supervision_from_synthetic_views_Nx3x160x160.onnx',
     )
     parser.add_argument(
         '-p',
@@ -418,6 +429,11 @@ def main():
         type=str,
         default='cuda',
         choices=['cpu','cuda','tensorrt'],
+    )
+    parser.add_argument(
+        '-etr',
+        '--enable_3d_rendering',
+        action='store_true',
     )
     args = parser.parse_args()
 
@@ -447,6 +463,7 @@ def main():
             'CUDAExecutionProvider',
             'CPUExecutionProvider',
         ]
+    enable_3d_rendering: bool = args.enable_3d_rendering
 
     cap = cv2.VideoCapture(cap_device)
     cap_width = 640
@@ -470,6 +487,7 @@ def main():
         detector=detector,
         model_path=args.predictor_model,
         providers=providers,
+        enable_3d_rendering=enable_3d_rendering,
     )
     while True:
         # Capture read
@@ -480,11 +498,10 @@ def main():
         debug_image = copy.deepcopy(frame)
         debug_image = cv2.resize(debug_image, (640,480))
         results = handler.get(debug_image)
-        if len(results)==0:
-            continue
-        debug_image = handler.draw_on(debug_image, results)
+        if len(results) > 0:
+            debug_image = handler.draw_on(debug_image, results)
         video_writer.write(debug_image)
-        cv2.imshow('RetinaFace MobileNetv2', debug_image)
+        cv2.imshow('Generalizing Gaze Estimation', debug_image)
         key = cv2.waitKey(1) \
             if args.movie is None or args.movie[-4:] == '.mp4' else cv2.waitKey(0)
         if key == 27:  # ESC
