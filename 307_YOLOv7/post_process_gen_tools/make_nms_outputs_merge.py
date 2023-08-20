@@ -49,7 +49,7 @@ if __name__ == "__main__":
             'cat_batch': {0: 'N'},
             'cat_classid': {0: 'N'},
             'cat_x1y1x2y2': {0: 'N'},
-            'batchno_classid_x1y1x2y2': {0: 'N'},
+            'batchno_classid_y1x1y2x2': {0: 'N'},
         }
     )
     model_onnx1 = onnx.load(onnx_file)
