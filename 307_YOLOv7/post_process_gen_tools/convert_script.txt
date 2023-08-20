@@ -275,7 +275,7 @@ snc4onnx \
 ################################################### nms_yolov7_${BOXES}_split + nms_box_gather_nd
 snc4onnx \
 --input_onnx_file_paths nms_yolov7_${BOXES}_split.onnx nms_box_gather_nd.onnx \
---srcop_destop main01_y1x1y2x2 gn_boxes sub01_final_box_nums gn_box_selected_indices \
+--srcop_destop main01_y1x1y2x2 gn_boxes final_box_nums gn_box_selected_indices \
 --output_onnx_file_path nms_yolov7_${BOXES}_merged.onnx
 
 onnxsim nms_yolov7_${BOXES}_merged.onnx nms_yolov7_${BOXES}_merged.onnx
