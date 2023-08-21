@@ -1,6 +1,7 @@
 import cv2
 import argparse
 import copy
+import time
 import psutil
 import onnxruntime
 import numpy as np
@@ -2224,7 +2225,7 @@ class GazeHandler():
         cv2.line(eimg, x, y, color, 5)
         return eimg
 
-    def draw_on(self, eimg, results):
+    def draw_on(self, eimg, results, elapsed_time):
         face_sizes = [ (x[0][2] - x[0][0]) for x in results]
         max_index = np.argmax(face_sizes)
         max_face_size = face_sizes[max_index]
@@ -2237,6 +2238,19 @@ class GazeHandler():
             eye_kps *= rescale
             eimg = self.draw_item(eimg, eye_kps)
         eimg = cv2.resize(eimg, (oimg.shape[1], oimg.shape[0]))
+        # Inference elapsed time
+        cv2.putText(
+            eimg,
+            "Elapsed Time : " + '{:.1f}'.format(elapsed_time * 1000) + "ms",
+            (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 3,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            eimg,
+            "Elapsed Time : " + '{:.1f}'.format(elapsed_time * 1000) + "ms",
+            (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2,
+            cv2.LINE_AA,
+        )
         return eimg
 
     def get(self, img):
@@ -2392,9 +2406,13 @@ def main():
 
         debug_image = copy.deepcopy(frame)
         debug_image = cv2.resize(debug_image, (640,480))
+
+        start_time = time.time()
         results = handler.get(debug_image)
+        elapsed_time = time.time() - start_time
+
         if len(results) > 0:
-            debug_image = handler.draw_on(debug_image, results)
+            debug_image = handler.draw_on(debug_image, results, elapsed_time)
         video_writer.write(debug_image)
         cv2.imshow('Generalizing Gaze Estimation', debug_image)
         key = cv2.waitKey(1) \
