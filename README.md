@@ -443,6 +443,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |396|MixDehazeNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/396_MixDehazeNet)|||||||||||⚫|DeHaize|
 |400|CSRNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/400_CSRNet)|||||||||||⚫|Low-light Image Enhancement|
 |404|HDR-Transformer|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/404_HDR-Transformer)|||||||||||⚫||
+|409|nighttime_dehaze|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/)|||||||||||⚫|DeHaze|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
