@@ -215,6 +215,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |387|YuNetV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/387_YuNetV2)|⚫|⚫|⚫||⚫||||||⚫|640x640|
 |390|BlendshapeV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/390_BlendshapeV2)|⚫|⚫|||||||||⚫|1x146x2,Nx146x2,MediaPipe|
 |399|RetinaFace_MobileNetv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/399_RetinaFace_MobileNetv2)|||||||||||⚫||
+|410|FaceMeshV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/410_FaceMeshV2)|⚫|⚫|||||||||⚫|MediaPipe|
 ### 5. 2D/3D Hand Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
