@@ -2211,6 +2211,10 @@ class GazeHandler():
         y = y.astype(np.int32)
         color = (0,255,0)
         cv2.line(eimg, x, y, color, 5)
+        # Yaw, Pitch
+        yaw_deg_l = theta_y_l * (180 / np.pi)
+        pitch_deg_l = -(theta_x_l * (180 / np.pi))
+
 
         gaze_pred = np.array([theta_x_r, theta_y_r])
         dx = 0.4*diag * np.sin(gaze_pred[1])
@@ -2223,7 +2227,10 @@ class GazeHandler():
         y = y.astype(np.int32)
         color = (0,255,0)
         cv2.line(eimg, x, y, color, 5)
-        return eimg
+        # Yaw, Pitch
+        yaw_deg_r = theta_y_r * (180 / np.pi)
+        pitch_deg_r = -(theta_x_r * (180 / np.pi))
+        return eimg, yaw_deg_l, pitch_deg_l, yaw_deg_r, pitch_deg_r
 
     def draw_on(self, eimg, results, elapsed_time):
         face_sizes = [ (x[0][2] - x[0][0]) for x in results]
@@ -2236,8 +2243,58 @@ class GazeHandler():
             _, _, eye_kps = pred
             eye_kps = eye_kps.copy()
             eye_kps *= rescale
-            eimg = self.draw_item(eimg, eye_kps)
+            eimg, yaw_deg_l, pitch_deg_l, yaw_deg_r, pitch_deg_r = self.draw_item(eimg, eye_kps)
         eimg = cv2.resize(eimg, (oimg.shape[1], oimg.shape[0]))
+        # Yaw, Pitch
+        cv2.putText(
+            eimg,
+            f"L-Yaw  : {yaw_deg_l:5.2f}",
+            (int(eimg.shape[1]-200), 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 3,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            eimg,
+            f"L-Yaw  : {yaw_deg_l:5.2f}",
+            (int(eimg.shape[1]-200), 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            eimg,
+            f"L-Pitch : {pitch_deg_l:5.2f}",
+            (int(eimg.shape[1]-200), 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 3,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            eimg,
+            f"L-Pitch : {pitch_deg_l:5.2f}",
+            (int(eimg.shape[1]-200), 60), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            eimg,
+            f"R-Yaw  : {yaw_deg_r:5.2f}",
+            (int(eimg.shape[1]-200), 90), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 3,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            eimg,
+            f"R-Yaw  : {yaw_deg_r:5.2f}",
+            (int(eimg.shape[1]-200), 90), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            eimg,
+            f"R-Pitch : {pitch_deg_r:5.2f}",
+            (int(eimg.shape[1]-200), 120), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 3,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            eimg,
+            f"R-Pitch : {pitch_deg_r:5.2f}",
+            (int(eimg.shape[1]-200), 120), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2,
+            cv2.LINE_AA,
+        )
+
         # Inference elapsed time
         cv2.putText(
             eimg,
