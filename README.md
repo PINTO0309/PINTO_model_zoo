@@ -543,6 +543,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |406|DeDoDe|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/406_DeDoDe)|⚫|⚫|||||||||⚫|Keypoint Detection, Description, Matching|
 |407|Generalizing_Gaze_Estimation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/407_Generalizing_Gaze_Estimation)|⚫|⚫|||||||||⚫|Gaze Pose 160x160|
 |408|UAED|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/408_UAED)|||||||||||⚫|Edge Detectopm|
+|413|DocShadow|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/413_DocShadow)|⚫||||||||||⚫|Document Shadow Removal|
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)
