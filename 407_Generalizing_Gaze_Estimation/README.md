@@ -2,6 +2,8 @@
 
 https://github.com/PINTO0309/PINTO_model_zoo/tree/main/399_RetinaFace_MobileNetv2
 
+https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/97285f11-e731-4d00-8b77-27d5e6c3f367
+
 - RetinaFace MovileNetV2, Score threshold=0.7
 
   https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/0a861aa6-3c1e-4b86-8f04-e697d3d53366
