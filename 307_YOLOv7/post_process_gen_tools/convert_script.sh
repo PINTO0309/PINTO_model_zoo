@@ -4,6 +4,7 @@
 # && pip install -U onnx \
 # && python3 -m pip install -U onnx_graphsurgeon --index-url https://pypi.ngc.nvidia.com
 
+MODEL_NAME=yolov7
 OPSET=11
 BATCHES=1
 BOXES=5040
@@ -107,7 +108,7 @@ soc4onnx \
 snc4onnx \
 --input_onnx_file_paths 03_boxes_y1x1y2x2_scores_${BOXES}.onnx 07_${OP}${OPSET}.onnx \
 --srcop_destop scores scores_var y1x1y2x2 boxes_var \
---output_onnx_file_path 08_nms_yolov7_${BOXES}.onnx
+--output_onnx_file_path 08_nms_${MODEL_NAME}_${BOXES}.onnx
 
 
 ################################################### Myriad workaround Mul
@@ -142,20 +143,20 @@ snc4onnx \
 
 ################################################### NonMaxSuppression + Myriad workaround Mul
 snc4onnx \
---input_onnx_file_paths 08_nms_yolov7_${BOXES}.onnx 09_${OP}${OPSET}_workaround.onnx \
+--input_onnx_file_paths 08_nms_${MODEL_NAME}_${BOXES}.onnx 09_${OP}${OPSET}_workaround.onnx \
 --srcop_destop selected_indices workaround_mul_a \
---output_onnx_file_path 11_nms_yolov7_${BOXES}.onnx \
+--output_onnx_file_path 11_nms_${MODEL_NAME}_${BOXES}.onnx \
 --disable_onnxsim
 
 ################################################### N batch NMS
 sbi4onnx \
---input_onnx_file_path 11_nms_yolov7_${BOXES}.onnx \
---output_onnx_file_path 12_nms_yolov7_${BOXES}_batch.onnx \
+--input_onnx_file_path 11_nms_${MODEL_NAME}_${BOXES}.onnx \
+--output_onnx_file_path 12_nms_${MODEL_NAME}_${BOXES}_batch.onnx \
 --initialization_character_string batch
 
 sio4onnx \
---input_onnx_file_path 12_nms_yolov7_${BOXES}_batch.onnx \
---output_onnx_file_path 12_nms_yolov7_${BOXES}_batch.onnx \
+--input_onnx_file_path 12_nms_${MODEL_NAME}_${BOXES}_batch.onnx \
+--output_onnx_file_path 12_nms_${MODEL_NAME}_${BOXES}_batch.onnx \
 --input_names "predictions" \
 --input_shapes "batch" ${BOXES} 85 \
 --output_names "x1y1x2y2" \
@@ -225,21 +226,21 @@ sio4onnx \
 
 ################################################### NonMaxSuppression + Score GatherND
 snc4onnx \
---input_onnx_file_paths 11_nms_yolov7_${BOXES}.onnx 13_nms_score_gather_nd.onnx \
+--input_onnx_file_paths 11_nms_${MODEL_NAME}_${BOXES}.onnx 13_nms_score_gather_nd.onnx \
 --srcop_destop scores gn_scores workaround_mul_out gn_selected_indices \
---output_onnx_file_path 15_nms_yolov7_${BOXES}_nd.onnx
+--output_onnx_file_path 15_nms_${MODEL_NAME}_${BOXES}_nd.onnx
 
-onnxsim 15_nms_yolov7_${BOXES}_nd.onnx 15_nms_yolov7_${BOXES}_nd.onnx
-onnxsim 15_nms_yolov7_${BOXES}_nd.onnx 15_nms_yolov7_${BOXES}_nd.onnx
+onnxsim 15_nms_${MODEL_NAME}_${BOXES}_nd.onnx 15_nms_${MODEL_NAME}_${BOXES}_nd.onnx
+onnxsim 15_nms_${MODEL_NAME}_${BOXES}_nd.onnx 15_nms_${MODEL_NAME}_${BOXES}_nd.onnx
 
 
 snc4onnx \
---input_onnx_file_paths 12_nms_yolov7_${BOXES}_batch.onnx 14_nms_score_gather_nd_batch.onnx \
+--input_onnx_file_paths 12_nms_${MODEL_NAME}_${BOXES}_batch.onnx 14_nms_score_gather_nd_batch.onnx \
 --srcop_destop scores gn_scores workaround_mul_out gn_selected_indices \
---output_onnx_file_path 16_nms_yolov7_${BOXES}_nd_batch.onnx
+--output_onnx_file_path 16_nms_${MODEL_NAME}_${BOXES}_nd_batch.onnx
 
-onnxsim 16_nms_yolov7_${BOXES}_nd_batch.onnx 16_nms_yolov7_${BOXES}_nd_batch.onnx
-onnxsim 16_nms_yolov7_${BOXES}_nd_batch.onnx 16_nms_yolov7_${BOXES}_nd_batch.onnx
+onnxsim 16_nms_${MODEL_NAME}_${BOXES}_nd_batch.onnx 16_nms_${MODEL_NAME}_${BOXES}_nd_batch.onnx
+onnxsim 16_nms_${MODEL_NAME}_${BOXES}_nd_batch.onnx 16_nms_${MODEL_NAME}_${BOXES}_nd_batch.onnx
 
 
 
@@ -308,38 +309,38 @@ sio4onnx \
 --output_shapes "N" 4
 
 
-################################################### nms_yolov7_xxx_nd + nms_final_batch_nums_final_class_nums_final_box_nums
+################################################### nms_${MODEL_NAME}_xxx_nd + nms_final_batch_nums_final_class_nums_final_box_nums
 snc4onnx \
---input_onnx_file_paths 15_nms_yolov7_${BOXES}_nd.onnx 17_nms_final_batch_nums_final_class_nums_final_box_nums.onnx \
+--input_onnx_file_paths 15_nms_${MODEL_NAME}_${BOXES}_nd.onnx 17_nms_final_batch_nums_final_class_nums_final_box_nums.onnx \
 --srcop_destop selected_indices bc_input \
 --op_prefixes_after_merging main01 sub01 \
---output_onnx_file_path 20_nms_yolov7_${BOXES}_split.onnx
+--output_onnx_file_path 20_nms_${MODEL_NAME}_${BOXES}_split.onnx
 
 snc4onnx \
---input_onnx_file_paths 16_nms_yolov7_${BOXES}_nd_batch.onnx 17_nms_final_batch_nums_final_class_nums_final_box_nums.onnx \
+--input_onnx_file_paths 16_nms_${MODEL_NAME}_${BOXES}_nd_batch.onnx 17_nms_final_batch_nums_final_class_nums_final_box_nums.onnx \
 --srcop_destop workaround_mul_out bc_input \
 --op_prefixes_after_merging main01 sub01 \
---output_onnx_file_path 21_nms_yolov7_${BOXES}_split_batch.onnx
+--output_onnx_file_path 21_nms_${MODEL_NAME}_${BOXES}_split_batch.onnx
 
 
 
-################################################### nms_yolov7_${BOXES}_split + nms_box_gather_nd
+################################################### nms_${MODEL_NAME}_${BOXES}_split + nms_box_gather_nd
 snc4onnx \
---input_onnx_file_paths 20_nms_yolov7_${BOXES}_split.onnx 18_nms_box_gather_nd.onnx \
+--input_onnx_file_paths 20_nms_${MODEL_NAME}_${BOXES}_split.onnx 18_nms_box_gather_nd.onnx \
 --srcop_destop x1y1x2y2 gn_boxes final_box_nums gn_box_selected_indices \
---output_onnx_file_path 22_nms_yolov7_${BOXES}_merged.onnx
+--output_onnx_file_path 22_nms_${MODEL_NAME}_${BOXES}_merged.onnx
 
-onnxsim 22_nms_yolov7_${BOXES}_merged.onnx 22_nms_yolov7_${BOXES}_merged.onnx
-onnxsim 22_nms_yolov7_${BOXES}_merged.onnx 22_nms_yolov7_${BOXES}_merged.onnx
+onnxsim 22_nms_${MODEL_NAME}_${BOXES}_merged.onnx 22_nms_${MODEL_NAME}_${BOXES}_merged.onnx
+onnxsim 22_nms_${MODEL_NAME}_${BOXES}_merged.onnx 22_nms_${MODEL_NAME}_${BOXES}_merged.onnx
 
 
 snc4onnx \
---input_onnx_file_paths 21_nms_yolov7_${BOXES}_split_batch.onnx 19_nms_box_gather_nd_batch.onnx \
+--input_onnx_file_paths 21_nms_${MODEL_NAME}_${BOXES}_split_batch.onnx 19_nms_box_gather_nd_batch.onnx \
 --srcop_destop x1y1x2y2 gn_boxes final_box_nums gn_box_selected_indices \
---output_onnx_file_path 23_nms_yolov7_${BOXES}_merged_batch.onnx
+--output_onnx_file_path 23_nms_${MODEL_NAME}_${BOXES}_merged_batch.onnx
 
-onnxsim 23_nms_yolov7_${BOXES}_merged_batch.onnx 23_nms_yolov7_${BOXES}_merged_batch.onnx
-onnxsim 23_nms_yolov7_${BOXES}_merged_batch.onnx 23_nms_yolov7_${BOXES}_merged_batch.onnx
+onnxsim 23_nms_${MODEL_NAME}_${BOXES}_merged_batch.onnx 23_nms_${MODEL_NAME}_${BOXES}_merged_batch.onnx
+onnxsim 23_nms_${MODEL_NAME}_${BOXES}_merged_batch.onnx 23_nms_${MODEL_NAME}_${BOXES}_merged_batch.onnx
 
 
 
@@ -347,40 +348,40 @@ onnxsim 23_nms_yolov7_${BOXES}_merged_batch.onnx 23_nms_yolov7_${BOXES}_merged_b
 
 ################################################### nms output op name Cleaning
 sor4onnx \
---input_onnx_file_path 22_nms_yolov7_${BOXES}_merged.onnx \
+--input_onnx_file_path 22_nms_${MODEL_NAME}_${BOXES}_merged.onnx \
 --old_new "main01_final_scores" "final_scores" \
---output_onnx_file_path 22_nms_yolov7_${BOXES}_merged.onnx \
+--output_onnx_file_path 22_nms_${MODEL_NAME}_${BOXES}_merged.onnx \
 --mode outputs
 
 sor4onnx \
---input_onnx_file_path 22_nms_yolov7_${BOXES}_merged.onnx \
+--input_onnx_file_path 22_nms_${MODEL_NAME}_${BOXES}_merged.onnx \
 --old_new "sub01_final_batch_nums" "final_batch_nums" \
---output_onnx_file_path 22_nms_yolov7_${BOXES}_merged.onnx \
+--output_onnx_file_path 22_nms_${MODEL_NAME}_${BOXES}_merged.onnx \
 --mode outputs
 
 sor4onnx \
---input_onnx_file_path 22_nms_yolov7_${BOXES}_merged.onnx \
+--input_onnx_file_path 22_nms_${MODEL_NAME}_${BOXES}_merged.onnx \
 --old_new "sub01_final_class_nums" "final_class_nums" \
---output_onnx_file_path 22_nms_yolov7_${BOXES}_merged.onnx \
+--output_onnx_file_path 22_nms_${MODEL_NAME}_${BOXES}_merged.onnx \
 --mode outputs
 
 
 sor4onnx \
---input_onnx_file_path 23_nms_yolov7_${BOXES}_merged_batch.onnx \
+--input_onnx_file_path 23_nms_${MODEL_NAME}_${BOXES}_merged_batch.onnx \
 --old_new "main01_final_scores" "final_scores" \
---output_onnx_file_path 23_nms_yolov7_${BOXES}_merged_batch.onnx \
+--output_onnx_file_path 23_nms_${MODEL_NAME}_${BOXES}_merged_batch.onnx \
 --mode outputs
 
 sor4onnx \
---input_onnx_file_path 23_nms_yolov7_${BOXES}_merged_batch.onnx \
+--input_onnx_file_path 23_nms_${MODEL_NAME}_${BOXES}_merged_batch.onnx \
 --old_new "sub01_final_batch_nums" "final_batch_nums" \
---output_onnx_file_path 23_nms_yolov7_${BOXES}_merged_batch.onnx \
+--output_onnx_file_path 23_nms_${MODEL_NAME}_${BOXES}_merged_batch.onnx \
 --mode outputs
 
 sor4onnx \
---input_onnx_file_path 23_nms_yolov7_${BOXES}_merged_batch.onnx \
+--input_onnx_file_path 23_nms_${MODEL_NAME}_${BOXES}_merged_batch.onnx \
 --old_new "sub01_final_class_nums" "final_class_nums" \
---output_onnx_file_path 23_nms_yolov7_${BOXES}_merged_batch.onnx \
+--output_onnx_file_path 23_nms_${MODEL_NAME}_${BOXES}_merged_batch.onnx \
 --mode outputs
 
 
@@ -397,28 +398,28 @@ onnxsim 24_nms_batchno_classid_x1y1x2y2_cat.onnx 24_nms_batchno_classid_x1y1x2y2
 
 ################################################### merge
 snc4onnx \
---input_onnx_file_paths 22_nms_yolov7_${BOXES}_merged.onnx 24_nms_batchno_classid_x1y1x2y2_cat.onnx \
+--input_onnx_file_paths 22_nms_${MODEL_NAME}_${BOXES}_merged.onnx 24_nms_batchno_classid_x1y1x2y2_cat.onnx \
 --srcop_destop final_batch_nums cat_batch final_class_nums cat_classid final_boxes cat_x1y1x2y2 \
---output_onnx_file_path 30_nms_yolov7_${BOXES}.onnx
+--output_onnx_file_path 30_nms_${MODEL_NAME}_${BOXES}.onnx
 
 sor4onnx \
---input_onnx_file_path 30_nms_yolov7_${BOXES}.onnx \
+--input_onnx_file_path 30_nms_${MODEL_NAME}_${BOXES}.onnx \
 --old_new "final_scores" "score" \
---output_onnx_file_path 30_nms_yolov7_${BOXES}.onnx \
+--output_onnx_file_path 30_nms_${MODEL_NAME}_${BOXES}.onnx \
 --mode outputs
 
 
 
 ################################################### merge
 snc4onnx \
---input_onnx_file_paths 23_nms_yolov7_${BOXES}_merged_batch.onnx 24_nms_batchno_classid_x1y1x2y2_cat.onnx \
+--input_onnx_file_paths 23_nms_${MODEL_NAME}_${BOXES}_merged_batch.onnx 24_nms_batchno_classid_x1y1x2y2_cat.onnx \
 --srcop_destop final_batch_nums cat_batch final_class_nums cat_classid final_boxes cat_x1y1x2y2 \
---output_onnx_file_path 31_nms_yolov7_N_${BOXES}.onnx
+--output_onnx_file_path 31_nms_${MODEL_NAME}_N_${BOXES}.onnx
 
 sor4onnx \
---input_onnx_file_path 31_nms_yolov7_N_${BOXES}.onnx \
+--input_onnx_file_path 31_nms_${MODEL_NAME}_N_${BOXES}.onnx \
 --old_new "final_scores" "score" \
---output_onnx_file_path 31_nms_yolov7_N_${BOXES}.onnx \
+--output_onnx_file_path 31_nms_${MODEL_NAME}_N_${BOXES}.onnx \
 --mode outputs
 
 
@@ -429,19 +430,19 @@ rm 1*.onnx
 rm 2*.onnx
 
 
-################################################### YOLOv7 + Post-Process
+################################################### ${MODEL_NAME} + Post-Process
 # H=256
 # W=320
 # snc4onnx \
-# --input_onnx_file_paths yolov7_${H}x${W}.onnx 30_nms_yolov7_${BOXES}.onnx \
+# --input_onnx_file_paths ${MODEL_NAME}_${H}x${W}.onnx 30_nms_${MODEL_NAME}_${BOXES}.onnx \
 # --srcop_destop output predictions \
-# --output_onnx_file_path yolov7_post_${H}x${W}.onnx
-# onnxsim yolov7_post_${H}x${W}.onnx yolov7_post_${H}x${W}.onnx
-# onnxsim yolov7_post_${H}x${W}.onnx yolov7_post_${H}x${W}.onnx
+# --output_onnx_file_path ${MODEL_NAME}_post_${H}x${W}.onnx
+# onnxsim ${MODEL_NAME}_post_${H}x${W}.onnx ${MODEL_NAME}_post_${H}x${W}.onnx
+# onnxsim ${MODEL_NAME}_post_${H}x${W}.onnx ${MODEL_NAME}_post_${H}x${W}.onnx
 
 # snc4onnx \
-# --input_onnx_file_paths yolov7-tiny_${H}x${W}.onnx 30_nms_yolov7_${BOXES}.onnx \
+# --input_onnx_file_paths ${MODEL_NAME}-tiny_${H}x${W}.onnx 30_nms_${MODEL_NAME}_${BOXES}.onnx \
 # --srcop_destop output predictions \
-# --output_onnx_file_path yolov7-tiny_post_${H}x${W}.onnx
-# onnxsim yolov7-tiny_post_${H}x${W}.onnx yolov7-tiny_post_${H}x${W}.onnx
-# onnxsim yolov7-tiny_post_${H}x${W}.onnx yolov7-tiny_post_${H}x${W}.onnx
+# --output_onnx_file_path ${MODEL_NAME}-tiny_post_${H}x${W}.onnx
+# onnxsim ${MODEL_NAME}-tiny_post_${H}x${W}.onnx ${MODEL_NAME}-tiny_post_${H}x${W}.onnx
+# onnxsim ${MODEL_NAME}-tiny_post_${H}x${W}.onnx ${MODEL_NAME}-tiny_post_${H}x${W}.onnx
