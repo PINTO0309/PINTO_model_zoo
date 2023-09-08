@@ -70,7 +70,7 @@ if __name__ == "__main__":
 
     model = Model()
 
-    MODEL = f'boxes_scores'
+    MODEL = f'01_boxes_scores'
     OPSET=args.opset
     BATCHES = args.batches
     BOXES = args.boxes

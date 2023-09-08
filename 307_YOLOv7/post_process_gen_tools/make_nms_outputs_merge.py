@@ -29,7 +29,7 @@ if __name__ == "__main__":
 
     model = Model()
 
-    MODEL = f'nms_batchno_classid_x1y1x2y2_cat'
+    MODEL = f'24_nms_batchno_classid_x1y1x2y2_cat'
 
     onnx_file = f"{MODEL}.onnx"
     OPSET=args.opset

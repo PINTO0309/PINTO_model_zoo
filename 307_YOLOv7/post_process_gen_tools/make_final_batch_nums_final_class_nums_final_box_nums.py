@@ -12,8 +12,8 @@ class Model(nn.Module):
         super(Model, self).__init__()
 
     def forward(self, x):
-        batch_nums = x[:, 0][:, np.newaxis] # batch number
-        class_nums = x[:, 1][:, np.newaxis] # class ids
+        batch_nums = x[:, 0:1] # batch number
+        class_nums = x[:, 1:2] # class ids
         box_nums = x[:, [0,2]] # batch number + box number
         return batch_nums, class_nums, box_nums
 
@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
     model = Model()
 
-    MODEL = f'nms_final_batch_nums_final_class_nums_final_box_nums'
+    MODEL = f'17_nms_final_batch_nums_final_class_nums_final_box_nums'
     OPSET=args.opset
 
     onnx_file = f"{MODEL}.onnx"

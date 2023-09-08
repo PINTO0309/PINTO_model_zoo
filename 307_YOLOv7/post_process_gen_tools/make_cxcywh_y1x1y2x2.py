@@ -48,7 +48,7 @@ if __name__ == "__main__":
 
     model = Model()
 
-    MODEL = f'cxcywh_y1x1y2x2'
+    MODEL = f'02_cxcywh_y1x1y2x2'
     OPSET=args.opset
     BATCHES = args.batches
     BOXES = args.boxes
