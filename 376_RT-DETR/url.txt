@@ -1,4 +1,5 @@
 https://github.com/PaddlePaddle/PaddleDetection/tree/develop/configs/rtdetr
+https://github.com/lyuwenyu/RT-DETR
 
 https://zenn.dev/pinto0309/scraps/63167cc8709f0b
 
