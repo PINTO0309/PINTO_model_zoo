@@ -242,6 +242,7 @@ def main():
                 2,
             )
             # Landms
+            ## right_eye
             cv2.circle(
                 debug_image,
                 (
@@ -252,6 +253,7 @@ def main():
                 (0, 0, 255),
                 4,
             )
+            ## left_eye
             cv2.circle(
                 debug_image,
                 (
@@ -262,6 +264,7 @@ def main():
                 (0, 255, 255),
                 4,
             )
+            ## nose
             cv2.circle(
                 debug_image,
                 (
@@ -272,6 +275,7 @@ def main():
                 (255, 0, 255),
                 4,
             )
+            ## right_side_of_mouth
             cv2.circle(
                 debug_image,
                 (
@@ -282,6 +286,7 @@ def main():
                 (0, 255, 0),
                 4,
             )
+            ## left_side_of_mouth
             cv2.circle(
                 debug_image,
                 (
