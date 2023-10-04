@@ -393,13 +393,13 @@ sor4onnx \
 ################################################### nms output merge
 python make_nms_outputs_merge.py
 
-onnxsim 24_nms_batchno_classid_x1y1x2y2_cat.onnx 24_nms_batchno_classid_x1y1x2y2_cat.onnx
+onnxsim 24_nms_batchno_classid_x1y1x2y2_score_cat.onnx 24_nms_batchno_classid_x1y1x2y2_score_cat.onnx
 
 
 ################################################### merge
 snc4onnx \
---input_onnx_file_paths 22_nms_${MODEL_NAME}_${BOXES}_merged.onnx 24_nms_batchno_classid_x1y1x2y2_cat.onnx \
---srcop_destop final_batch_nums cat_batch final_class_nums cat_classid final_boxes cat_x1y1x2y2 \
+--input_onnx_file_paths 22_nms_${MODEL_NAME}_${BOXES}_merged.onnx 24_nms_batchno_classid_x1y1x2y2_score_cat.onnx \
+--srcop_destop final_batch_nums cat_batch final_class_nums cat_classid final_boxes cat_x1y1x2y2 final_scores cat_score \
 --output_onnx_file_path 30_nms_${MODEL_NAME}_${BOXES}.onnx
 
 sor4onnx \
@@ -412,8 +412,8 @@ sor4onnx \
 
 ################################################### merge
 snc4onnx \
---input_onnx_file_paths 23_nms_${MODEL_NAME}_${BOXES}_merged_batch.onnx 24_nms_batchno_classid_x1y1x2y2_cat.onnx \
---srcop_destop final_batch_nums cat_batch final_class_nums cat_classid final_boxes cat_x1y1x2y2 \
+--input_onnx_file_paths 23_nms_${MODEL_NAME}_${BOXES}_merged_batch.onnx 24_nms_batchno_classid_x1y1x2y2_score_cat.onnx \
+--srcop_destop final_batch_nums cat_batch final_class_nums cat_classid final_boxes cat_x1y1x2y2 final_scores cat_score \
 --output_onnx_file_path 31_nms_${MODEL_NAME}_N_${BOXES}.onnx
 
 sor4onnx \
@@ -425,9 +425,9 @@ sor4onnx \
 
 
 ################################################### Cleaning
-rm 0*.onnx
-rm 1*.onnx
-rm 2*.onnx
+# rm 0*.onnx
+# rm 1*.onnx
+# rm 2*.onnx
 
 
 ################################################### ${MODEL_NAME} + Post-Process
