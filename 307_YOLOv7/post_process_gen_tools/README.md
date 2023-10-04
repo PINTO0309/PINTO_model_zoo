@@ -4,17 +4,13 @@
   
     * 5 = [center_x, center_y, width, height, score]
 - OUTPUTS
-  - `batchno_classid_x1y1x2y2`: `int64 [final_boxes_count, 6]`
+  - `batchno_classid_x1y1x2y2_score`: `float32 [final_boxes_count, 7]`
 
     * NMS boxes
     * final_boxes_count (N) ≠ batches
-    * 6 = [batch_no, classid, x1, y1, x2, y2]
-  - `score`: `float32 [final_boxes_count, 1]`
-  
-    * NMS box scores
-    * final_boxes_count (N) ≠ batches
+    * 7 = [batch_no, classid, x1, y1, x2, y2, score]
 
-![nms_yolov7_5040 onnx](https://user-images.githubusercontent.com/33194443/178084831-eaab28b4-cda8-4528-9e7f-f0b9d0dc7ca5.png)
+![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/9d4fecdf-c90e-4e0a-99a5-9c3e61a4cf41)
 
 # How to generate post-processing ONNX
 Simply change the following parameters and run all shells.
