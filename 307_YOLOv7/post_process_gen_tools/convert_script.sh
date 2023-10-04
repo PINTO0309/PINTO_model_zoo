@@ -158,7 +158,7 @@ sio4onnx \
 --input_onnx_file_path 12_nms_${MODEL_NAME}_${BOXES}_batch.onnx \
 --output_onnx_file_path 12_nms_${MODEL_NAME}_${BOXES}_batch.onnx \
 --input_names "predictions" \
---input_shapes "batch" ${BOXES} 85 \
+--input_shapes "batch" ${BOXES} $((CLASSES+5)) \
 --output_names "x1y1x2y2" \
 --output_names "workaround_mul_out" \
 --output_shapes "batch" ${BOXES} 4 \
