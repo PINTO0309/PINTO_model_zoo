@@ -12,9 +12,9 @@ class Model(nn.Module):
         super(Model, self).__init__()
 
     def forward(self, x):
-        batch_nums = x[:, 0:1] # batch number
-        class_nums = x[:, 1:2] # class ids
-        box_nums = x[:, [0,2]] # batch number + box number
+        batch_nums = x[:, 0:1].to(torch.float32) # batch number
+        class_nums = x[:, 1:2].to(torch.float32) # class ids
+        box_nums = x[:, [0,2]].to(torch.float32) # batch number + box number
         return batch_nums, class_nums, box_nums
 
 
