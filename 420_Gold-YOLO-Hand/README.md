@@ -1,6 +1,6 @@
 # Note
 
-The absence of ultra-close range annotations in the training dataset results in a significant decrease in recognition rate at close distances of a few tens of centimeters.
+The absence of ultra-close range annotations in the training dataset results in a significant decrease in recognition rate at close distances of a few tens of centimeters. Instead, it detects very strongly at medium to long range. It is much more resistant to blurring than past lightweight models.
 
 ```
 Score threshold: 0.50
