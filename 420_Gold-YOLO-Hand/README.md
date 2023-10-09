@@ -1,13 +1,19 @@
 # Note
 
-The absence of ultra-close range annotations in the training dataset results in a significant decrease in recognition rate at close distances of a few tens of centimeters. Instead, it detects very strongly at medium to long range. It is much more resistant to blurring than past lightweight models. There is a bit too much over-detection, but it would be possible to exclude useless detection results when combined with the lightweight and robust skeletal detection of the bottom-up approach.
-
 ```
 USB Camera: 640x480
 Score threshold: 0.50
 IoU threshold: 0.05
 ```
 
-https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/136b892d-a59b-4493-9b99-02d40609db49
+- M size
+
+  https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/94664116-ea56-416d-ad54-d43ef85c10d1
+
+- N size
+
+  https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/4a1b4d95-0213-4036-abd3-95335181c112
+
+
 
 ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/489b0a47-740d-4063-9992-d1b648220c23)
