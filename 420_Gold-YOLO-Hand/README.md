@@ -12,8 +12,6 @@ IoU threshold: 0.05
 
 - N size
 
-  https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/4a1b4d95-0213-4036-abd3-95335181c112
-
-
+  https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/6f87fa11-e9c0-4196-b89c-0d11ba863015
 
 ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/489b0a47-740d-4063-9992-d1b648220c23)
