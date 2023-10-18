@@ -348,3 +348,21 @@ onnxsim movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx movenet_multipose
 sit4onnx -if movenet_multipose_lightning_${H}x${W}_p${PERSONS}.onnx -oep cpu
 
 rm movenet_multipose_lightning_${H}x${W}_p${PERSONS}.json
+
+
+
+############################################################################### Merge post-process
+snc4onnx \
+--input_onnx_file_paths movenet_multipose_lightning_512x896_p2.onnx post_process_p2.onnx \
+--output_onnx_file_path movenet_multipose_lightning_512x896_p2_post.onnx \
+--srcop_destop output pp_input
+
+snc4onnx \
+--input_onnx_file_paths movenet_multipose_lightning_512x896_p5.onnx post_process_p5.onnx \
+--output_onnx_file_path movenet_multipose_lightning_512x896_p5_post.onnx \
+--srcop_destop output pp_input
+
+snc4onnx \
+--input_onnx_file_paths movenet_multipose_lightning_512x896_p10.onnx post_process_p10.onnx \
+--output_onnx_file_path movenet_multipose_lightning_512x896_p10_post.onnx \
+--srcop_destop output pp_input
