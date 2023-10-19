@@ -5,7 +5,7 @@
 # && python3 -m pip install -U onnx_graphsurgeon --index-url https://pypi.ngc.nvidia.com
 
 MODEL_NAME=gold_yolo_n_hand
-SUFFIX="0423_0.2295_1x3x"
+SUFFIX="0333_0.4040_1x3x"
 OPSET=11
 BATCHES=1
 CLASSES=1
@@ -93,12 +93,14 @@ do
     --attributes value int64 [20] \
     --output_onnx_file_path 04_Constant_max_output_boxes_per_class.onnx
 
+    # N: iou_threshold_const=0.40, score_threshold_const=0.25
+
     sog4onnx \
     --op_type Constant \
     --opset ${OPSET} \
     --op_name iou_threshold_const \
     --output_variables iou_threshold float32 [1] \
-    --attributes value float32 [0.05] \
+    --attributes value float32 [0.40] \
     --output_onnx_file_path 05_Constant_iou_threshold.onnx
 
     sog4onnx \
@@ -106,7 +108,7 @@ do
     --opset ${OPSET} \
     --op_name score_threshold_const \
     --output_variables score_threshold float32 [1] \
-    --attributes value float32 [0.50] \
+    --attributes value float32 [0.25] \
     --output_onnx_file_path 06_Constant_score_threshold.onnx
 
 

@@ -12,29 +12,29 @@ from typing import Tuple, Optional, List
 class GoldYOLOONNX(object):
     def __init__(
         self,
-        model_path: Optional[str] = 'gold_yolo_m_hand_post_0465_0.2501_1x3x480x640.onnx',
-        class_score_th: Optional[float] = 0.50,
+        model_path: Optional[str] = 'gold_yolo_n_hand_post_0333_0.4040_1x3x480x640.onnx',
+        class_score_th: Optional[float] = 0.35,
         providers: Optional[List] = [
-            (
-                'TensorrtExecutionProvider', {
-                    'trt_engine_cache_enable': True,
-                    'trt_engine_cache_path': '.',
-                    'trt_fp16_enable': True,
-                }
-            ),
+            # (
+            #     'TensorrtExecutionProvider', {
+            #         'trt_engine_cache_enable': True,
+            #         'trt_engine_cache_path': '.',
+            #         'trt_fp16_enable': True,
+            #     }
+            # ),
             'CUDAExecutionProvider',
             'CPUExecutionProvider',
         ],
     ):
-        """YOLOv7ONNX
+        """GoldYOLOONNX
 
         Parameters
         ----------
         model_path: Optional[str]
-            ONNX file path for YOLOv7
+            ONNX file path for GoldYOLO
 
         class_score_th: Optional[float]
-            Score threshold. Default: 0.25
+            Score threshold. Default: 0.35
 
         providers: Optional[List]
             Name of onnx execution providers
@@ -217,19 +217,27 @@ class GoldYOLOONNX(object):
         return np.asarray(result_boxes), np.asarray(result_scores)
 
 
+def is_parsable_to_int(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
+
+
 def main():
     parser = ArgumentParser()
     parser.add_argument(
         '-m',
         '--model',
         type=str,
-        default='gold_yolo_m_hand_post_0465_0.2501_1x3x480x640.onnx',
+        default='gold_yolo_n_hand_post_0333_0.4040_1x3x480x640.onnx',
     )
     parser.add_argument(
         '-v',
         '--video',
-        type=int,
-        default=0,
+        type=str,
+        default="0",
     )
     args = parser.parse_args()
 
@@ -237,7 +245,9 @@ def main():
         model_path=args.model,
     )
 
-    cap = cv2.VideoCapture(args.video)
+    cap = cv2.VideoCapture(
+        int(args.video) if is_parsable_to_int(args.video) else args.video
+    )
     cap_fps = cap.get(cv2.CAP_PROP_FPS)
     w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
