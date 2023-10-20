@@ -4,11 +4,11 @@
   
   ```
   USB Camera: 640x480
-  Score threshold: 0.50
-  IoU threshold: 0.05
+  Score threshold: 0.40
+  IoU threshold: 0.25
   ```
 
-  https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/3cddb83d-c911-497f-ae13-2dcf0e8570e5
+  https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/1f4024f3-cbf6-403e-9868-9af2bc4a4866
 
 - N size
   
