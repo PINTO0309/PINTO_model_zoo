@@ -94,6 +94,7 @@ do
     --output_onnx_file_path 04_Constant_max_output_boxes_per_class.onnx
 
     # N: iou_threshold_const=0.40, score_threshold_const=0.25
+    # M: iou_threshold_const=0.40, score_threshold_const=0.25
 
     sog4onnx \
     --op_type Constant \
