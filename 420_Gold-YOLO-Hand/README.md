@@ -20,6 +20,14 @@
 
   https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/d98c8fdb-3f6e-4a5f-9b8a-dc21a63c5e34
 
+- N, S, M, L test
+  |MODEL|MODEL|
+  |:-:|:-:|
+  |N|S|
+  |M|L|
+
+  https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/4f29b20a-4557-4345-a219-410e31f563ca
+
 - Image
 
   ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/489b0a47-740d-4063-9992-d1b648220c23)
