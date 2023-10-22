@@ -202,10 +202,10 @@ class GoldYOLOONNX(object):
 
             if len(boxes_keep) > 0:
                 for box, score in zip(boxes_keep, scores_keep):
-                    x_min = max(int(box[2]), 0)
-                    y_min = max(int(box[3]), 0)
-                    x_max = min(int(box[4]), image_width)
-                    y_max = min(int(box[5]), image_height)
+                    x_min = int(max(box[2], 0) * image_width / self.input_shapes[0][3])
+                    y_min = int(max(box[3], 0) * image_height / self.input_shapes[0][2])
+                    x_max = int(min(box[4], self.input_shapes[0][3]) * image_width / self.input_shapes[0][3])
+                    y_max = int(min(box[5], self.input_shapes[0][2]) * image_height / self.input_shapes[0][2])
 
                     result_boxes.append(
                         [x_min, y_min, x_max, y_max]
