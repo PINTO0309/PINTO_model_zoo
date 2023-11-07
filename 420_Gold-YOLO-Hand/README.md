@@ -13,7 +13,7 @@
   
   ```
   USB Camera: 640x480
-  Score threshold: 0.40
+  Score threshold: 0.35
   IoU threshold: 0.25
   ```
 
@@ -23,7 +23,7 @@
   
   ```
   USB Camera: 640x480
-  Score threshold: 0.40
+  Score threshold: 0.35
   IoU threshold: 0.25
   ```
 
