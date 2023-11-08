@@ -219,6 +219,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |410|FaceMeshV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/410_FaceMeshV2)|⚫|⚫|⚫||⚫||⚫||||⚫|MediaPipe|
 |414|STAR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/414_STAR)|⚫|⚫|⚫||⚫||⚫||||⚫||
 |421|Gold-YOLO-Head|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/421_Gold-YOLO-Head)|||||||||||⚫|Head (not Face)|
+|423|6DRepNet360|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/423_6DRepNet360)|||||||||||⚫|6D HeadPose, FullRange, 224x224|
 ### 5. 2D/3D Hand Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
