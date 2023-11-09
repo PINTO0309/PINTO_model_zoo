@@ -6,6 +6,8 @@
 
   https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/f7829345-d2f3-4aab-a401-569f003bb550
 
+  ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/f4433475-3586-4b5c-9b03-53b134d9183e)
+
 - Head - N
   ```
    Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.507
