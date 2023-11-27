@@ -171,6 +171,8 @@ I have been working on quantization of various models as a hobby, but I have ski
 |376|RT-DETR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/376_RT-DETR)|||||||||||⚫|ResNet50,ResNet101,HgNetv2-L,HgNetv2-X|
 |386|naruto_handsign_detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/386_naruto_handsign_detection)|⚫|⚫|⚫||⚫||||||⚫||
 |422|Gold-YOLO-Head-Hand|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/422_Gold-YOLO-Head-Hand)|||||||||||⚫|Head,Hand|
+|424|Gold-YOLO-Body|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/424_Gold-YOLO-Body)|||||||||||⚫|Body|
+|425|Gold-YOLO-Body-Head-Hand|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/425_Gold-YOLO-Body-Head-Hand)|||||||||||⚫|Body,Head,Hand|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
