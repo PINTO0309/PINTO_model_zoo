@@ -103,4 +103,5 @@
     }
     ```
   - Gold-YOLO
+
     https://github.com/huawei-noah/Efficient-Computing/tree/master/Detection/Gold-YOLO
