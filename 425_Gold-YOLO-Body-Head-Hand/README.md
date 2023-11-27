@@ -17,6 +17,14 @@ Lightweight human detection model generated using a high-quality human dataset. 
                Total: 14,667 images
     ```
     ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/22b56779-928b-44d8-944c-25431b83e24f)
+- Annotation
+  Halfway compromises are never acceptable.
+  ![000000000544](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/557b932b-767b-4f8c-87f5-75f403fa9c50)
+
+  ![000000002470](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/c1809eeb-7b2c-41de-a519-9834c804c656)
+
+  ![icon_design drawio (3)](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/72740ed3-ae9f-4ab7-9b20-bea62c58c7ac)
+
 - Test
   - Python 3.10
   - onnxruntime-gpu v1.16.1 (TensorRT Execution Provider Enabled Binary)
