@@ -91,7 +91,7 @@
   Epoch: 339 | mAP@0.5: 0.7393661924683652 | mAP@0.50:0.95: 0.5093183767567647
   ```
 
-- Cited
+## Cited
   - COCO-Hand
     ```
     @article{Hand-CNN,
