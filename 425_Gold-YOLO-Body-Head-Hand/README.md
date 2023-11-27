@@ -1,4 +1,5 @@
 # Note (Body + Head + Hand)
+Lightweight human detection model generated using a high-quality human dataset. I annotated all the data by myself. Extreme resistance to Blur and occlusion. In addition, the recognition rate at short, medium, and long distances has been greatly enhanced.
 
 - Dataset
   - COCO-Hand (14,667 Images, 66,903 labels, All re-annotated manually)
@@ -21,7 +22,7 @@
   - numpy 1.24.3
   - TensorRT 8.5.3-1+cuda11.8
 
-  with CUDA. TensorRT not used. Approximately twice as fast with TensorRT enabled.
+  With CUDA. TensorRT not used. Approximately twice as fast with TensorRT enabled. (250 FPS)
 
   https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/de3f24db-051d-4c84-8348-2369b084c589
 
