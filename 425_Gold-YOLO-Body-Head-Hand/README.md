@@ -3,6 +3,7 @@
 - Dataset
   - COCO-Hand (14,667 Images, 66,903 labels, All re-annotated manually)
   - http://vision.cs.stonybrook.edu/~supreeth/COCO-Hand.zip
+  - I am adding my own enhancement data to COCO-Hand and re-annotating all images.
     ```
     body_label_count: 30,729 labels
     head_label_count: 26,268 labels
