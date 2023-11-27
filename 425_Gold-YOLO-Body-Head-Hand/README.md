@@ -1,5 +1,5 @@
 # Note (Body + Head + Hand)
-Lightweight human detection model generated using a high-quality human dataset. I annotated all the data by myself. Extreme resistance to Blur and occlusion. In addition, the recognition rate at short, medium, and long distances has been greatly enhanced.
+Lightweight human detection model generated using a high-quality human dataset. I annotated all the data by myself. Extreme resistance to Blur and occlusion. In addition, the recognition rate at short, medium, and long distances has been greatly enhanced. The camera's resistance to darkness and halation has been greatly improved.
 
 - Dataset
   - COCO-Hand (14,667 Images, 66,903 labels, All re-annotated manually)
