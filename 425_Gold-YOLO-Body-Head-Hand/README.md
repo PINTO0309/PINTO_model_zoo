@@ -18,6 +18,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
     ```
     ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/22b56779-928b-44d8-944c-25431b83e24f)
 - Annotation
+
   Halfway compromises are never acceptable.
 
   ![000000000544](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/557b932b-767b-4f8c-87f5-75f403fa9c50)
