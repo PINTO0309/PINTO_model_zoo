@@ -89,7 +89,7 @@ class GoldYOLOONNX(object):
         Returns
         -------
         boxes: np.ndarray
-            Predicted boxes: [N, y1, x1, y2, x2]
+            Predicted boxes: [N, x1, y1, x2, y2]
 
         scores: np.ndarray
             Predicted box scores: [N, score]
@@ -177,7 +177,7 @@ class GoldYOLOONNX(object):
         Returns
         -------
         result_boxes: np.ndarray
-            Predicted boxes: [N, y1, x1, y2, x2]
+            Predicted boxes: [N, x1, y1, x2, y2]
 
         result_scores: np.ndarray
             Predicted box confs: [N, score]
@@ -190,7 +190,7 @@ class GoldYOLOONNX(object):
             N -> Number of boxes detected
             batchno -> always 0: BatchNo.0
 
-        batchno_classid_y1x1y2x2_score: float32[N,7]
+        batchno_classid_x1y1x2y2_score: float32[N,7]
         """
         result_boxes = []
         result_scores = []
