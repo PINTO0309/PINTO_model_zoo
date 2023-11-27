@@ -90,3 +90,17 @@
   Results saved to runs/train/gold_yolo-l
   Epoch: 339 | mAP@0.5: 0.7393661924683652 | mAP@0.50:0.95: 0.5093183767567647
   ```
+
+- Cited
+  - COCO-Hand
+    ```
+    @article{Hand-CNN,
+      title={Contextual Attention for Hand Detection in the Wild},
+      author={Supreeth Narasimhaswamy and Zhengwei Wei and Yang Wang and Justin Zhang and Minh Hoai},
+      booktitle={International Conference on Computer Vision (ICCV)},
+      year={2019},
+      url={https://arxiv.org/pdf/1904.04882.pdf}
+    }
+    ```
+  - Gold-YOLO
+    https://github.com/huawei-noah/Efficient-Computing/tree/master/Detection/Gold-YOLO
