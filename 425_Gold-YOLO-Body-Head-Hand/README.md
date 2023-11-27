@@ -120,7 +120,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
   @software{Gold-YOLO-Body-Head-Hand,
     author={Katsuya, Hyodo},
     title={Lightweight human detection model generated using a high-quality human dataset.},
-    url={https://github.com/PINTO0309/PINTO_model_zoo/425_Gold-YOLO-Body-Head-Hand},
+    url={https://github.com/PINTO0309/PINTO_model_zoo/tree/main/425_Gold-YOLO-Body-Head-Hand},
     year={2023},
     month={11}
   }
