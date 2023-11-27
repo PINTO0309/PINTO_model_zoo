@@ -14,12 +14,14 @@
                Total: 14,667 images
     ```
     ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/22b56779-928b-44d8-944c-25431b83e24f)
-- Test (with CUDA. TensorRT not used. Approximately twice as fast with TensorRT enabled.)
+- Test
   - Python 3.10
   - onnxruntime-gpu v1.16.1 (TensorRT Execution Provider Enabled Binary)
   - opencv-contrib-python 4.8.0.76
   - numpy 1.24.3
   - TensorRT 8.5.3-1+cuda11.8
+
+    with CUDA. TensorRT not used. Approximately twice as fast with TensorRT enabled.
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/de3f24db-051d-4c84-8348-2369b084c589
 
