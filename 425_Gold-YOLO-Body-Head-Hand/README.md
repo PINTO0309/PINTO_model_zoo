@@ -9,8 +9,8 @@
     head_label_count: 26,268 labels
     hand_label_count: 18,087 labels
     ===============================
-              Total: 66,903 labels
-              Total: 14,667 images
+               Total: 66,903 labels
+               Total: 14,667 images
     ```
     ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/22b56779-928b-44d8-944c-25431b83e24f)
 - Test (CUDA, TensorRT not used. Approximately twice as fast with TensorRT enabled.)
