@@ -42,7 +42,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
   ![000000000764](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/ec57bec0-6655-499f-a78a-072082da38ac)
 
-- Head - N
+- Body-Head-Hand - N
   ```
   Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.443
   Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.689
@@ -60,7 +60,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
   Epoch: 462 | mAP@0.5: 0.6892104619015829 | mAP@0.50:0.95: 0.4427396559181031
   ```
 
-- Head - S
+- Body-Head-Hand - S
   ```
   Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.460
   Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.704
@@ -78,7 +78,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
   Epoch: 456 | mAP@0.5: 0.7040425163160517 | mAP@0.50:0.95: 0.46049785564440426
   ```
 
-- Head - M
+- Body-Head-Hand - M
   ```
   Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.500
   Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.738
@@ -96,7 +96,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
   Epoch: 488 | mAP@0.5: 0.7378339081274632 | mAP@0.50:0.95: 0.5004409472223532
   ```
 
-- Head - L
+- Body-Head-Hand - L
   ```
   Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.509
   Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.739
