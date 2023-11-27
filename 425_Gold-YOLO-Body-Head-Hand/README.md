@@ -114,6 +114,18 @@ Lightweight human detection model generated using a high-quality human dataset. 
   Epoch: 339 | mAP@0.5: 0.7393661924683652 | mAP@0.50:0.95: 0.5093183767567647
   ```
 
+## Cite
+  If this work has contributed in any way to your research or business, I would be happy to be cited in your literature.
+  ```
+  @software{Gold-YOLO-Body-Head-Hand,
+    author={Katsuya, Hyodo},
+    title={Lightweight human detection model generated using a high-quality human dataset.},
+    url={https://github.com/PINTO0309/PINTO_model_zoo/425_Gold-YOLO-Body-Head-Hand},
+    year={2023},
+    month={11}
+  }
+  ```
+
 ## Cited
   I am very grateful for their excellent work.
   - COCO-Hand
