@@ -141,3 +141,14 @@ Lightweight human detection model generated using a high-quality human dataset. 
   - Gold-YOLO
 
     https://github.com/huawei-noah/Efficient-Computing/tree/master/Detection/Gold-YOLO
+
+    ```
+    @misc{wang2023goldyolo,
+      title={Gold-YOLO: Efficient Object Detector via Gather-and-Distribute Mechanism}, 
+      author={Chengcheng Wang and Wei He and Ying Nie and Jianyuan Guo and Chuanjian Liu and Kai Han and Yunhe Wang},
+      year={2023},
+      eprint={2309.11331},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+    }
+    ```
