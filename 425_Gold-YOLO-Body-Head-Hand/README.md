@@ -21,11 +21,11 @@
   - numpy 1.24.3
   - TensorRT 8.5.3-1+cuda11.8
 
-    with CUDA. TensorRT not used. Approximately twice as fast with TensorRT enabled.
+  with CUDA. TensorRT not used. Approximately twice as fast with TensorRT enabled.
 
-    https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/de3f24db-051d-4c84-8348-2369b084c589
+  https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/de3f24db-051d-4c84-8348-2369b084c589
 
-    ![000000000764](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/ec57bec0-6655-499f-a78a-072082da38ac)
+  ![000000000764](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/ec57bec0-6655-499f-a78a-072082da38ac)
 
 - Head - N
   ```
