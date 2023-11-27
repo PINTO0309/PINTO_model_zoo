@@ -129,6 +129,9 @@ Lightweight human detection model generated using a high-quality human dataset. 
 ## Cited
   I am very grateful for their excellent work.
   - COCO-Hand
+
+    https://vision.cs.stonybrook.edu/~supreeth/
+  
     ```
     @article{Hand-CNN,
       title={Contextual Attention for Hand Detection in the Wild},
