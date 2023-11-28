@@ -41,17 +41,41 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
   - 640x480 CUDA RTX3070
 
+    ```bash
+    python demo/demo_goldyolo_onnx.py \
+    -m gold_yolo_n_body_head_hand_post_0461_0.4428_1x3x480x640.onnx \
+    -v 0
+    ```
+
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/de3f24db-051d-4c84-8348-2369b084c589
 
   - 320x256 CPU Corei9
+
+    ```bash
+    python demo/demo_goldyolo_onnx.py \
+    -m gold_yolo_n_body_head_hand_post_0461_0.4428_1x3x256x320.onnx \
+    -v 0
+    ```
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/97c33beb-58d8-401e-b2fa-2e24e195fddd
 
   - 160x128 CPU Corei9
 
+    ```bash
+    python demo/demo_goldyolo_onnx.py \
+    -m gold_yolo_n_body_head_hand_post_0461_0.4428_1x3x128x160.onnx \
+    -v 0
+    ```
+
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/2d73c77f-bdfd-4b10-9d7a-27ca1f038e96
 
   - Still image
+
+    ```bash
+    python demo/demo_goldyolo_onnx_image.py \
+    -m gold_yolo_n_body_head_hand_post_0461_0.4428_1x3x480x640.onnx \
+    -i images_folder
+    ```
 
     ![000000000764](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/ec57bec0-6655-499f-a78a-072082da38ac)
 
