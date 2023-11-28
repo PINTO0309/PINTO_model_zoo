@@ -39,6 +39,15 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
   With CUDA. TensorRT not used. Approximately twice as fast with TensorRT enabled. (250 FPS)
 
+  ```
+  usage: demo_goldyolo_onnx.py [-h] [-m MODEL] [-v VIDEO]
+  
+  options:
+    -h, --help            show this help message and exit
+    -m MODEL, --model MODEL
+    -v VIDEO, --video VIDEO
+  ```
+
   - 640x480 CUDA RTX3070
 
     ```bash
@@ -70,6 +79,16 @@ Lightweight human detection model generated using a high-quality human dataset. 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/2d73c77f-bdfd-4b10-9d7a-27ca1f038e96
 
   - Still image
+
+    ```
+    usage: demo_goldyolo_onnx_image.py [-h] [-m MODEL] [-i IMAGES_PATH] [-o OUTPUT_PATH]
+    
+    options:
+      -h, --help            show this help message and exit
+      -m MODEL, --model MODEL
+      -i IMAGES_PATH, --images_path IMAGES_PATH
+      -o OUTPUT_PATH, --output_path OUTPUT_PATH
+    ```
 
     ```bash
     python demo/demo_goldyolo_onnx_image.py \
