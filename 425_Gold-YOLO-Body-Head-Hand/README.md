@@ -46,7 +46,9 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/97c33beb-58d8-401e-b2fa-2e24e195fddd
 
-  ![000000000764](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/ec57bec0-6655-499f-a78a-072082da38ac)
+  - Still image
+
+    ![000000000764](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/ec57bec0-6655-499f-a78a-072082da38ac)
 
 - Body-Head-Hand - N
   ```
