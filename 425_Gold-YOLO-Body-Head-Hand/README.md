@@ -38,7 +38,13 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
   With CUDA. TensorRT not used. Approximately twice as fast with TensorRT enabled. (250 FPS)
 
-  https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/de3f24db-051d-4c84-8348-2369b084c589
+  - 640x480 CUDA RTX3070
+
+    https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/de3f24db-051d-4c84-8348-2369b084c589
+
+  - 320x256 CPU Corei9
+
+    https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/97c33beb-58d8-401e-b2fa-2e24e195fddd
 
   ![000000000764](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/ec57bec0-6655-499f-a78a-072082da38ac)
 
