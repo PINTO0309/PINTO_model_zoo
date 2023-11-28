@@ -134,7 +134,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
   ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/05e528b7-6ace-4878-94f0-ad86ac46324e)
 
-## Cite
+## Citiation
   If this work has contributed in any way to your research or business, I would be happy to be cited in your literature.
   ```
   @software{Gold-YOLO-Body-Head-Hand,
