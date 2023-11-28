@@ -54,6 +54,8 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
     ![000000000764](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/ec57bec0-6655-499f-a78a-072082da38ac)
 
+    ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/4e8582a9-f223-4bb8-a244-85a6f83832a7)
+
 - Body-Head-Hand - N
   ```
   Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.443
