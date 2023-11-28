@@ -3,7 +3,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
 `Head` does not mean `Face`. Thus, the entire head is detected rather than a narrow region of the face. This makes it possible to detect all 360° head orientations.
 
-- Dataset
+## 1. Dataset
   - COCO-Hand (14,667 Images, 66,903 labels, All re-annotated manually)
   - http://vision.cs.stonybrook.edu/~supreeth/COCO-Hand.zip
   - I am adding my own enhancement data to COCO-Hand and re-annotating all images. In other words, only COCO images were cited and no annotation data were cited.
@@ -17,7 +17,8 @@ Lightweight human detection model generated using a high-quality human dataset. 
                Total: 14,667 images
     ```
     ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/22b56779-928b-44d8-944c-25431b83e24f)
-- Annotation
+
+## 2. Annotation
 
   Halfway compromises are never acceptable.
 
@@ -29,7 +30,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
   ![icon_design drawio (3)](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/72740ed3-ae9f-4ab7-9b20-bea62c58c7ac)
 
-- Test
+## 3. Test
   - Python 3.10
   - onnxruntime-gpu v1.16.1 (TensorRT Execution Provider Enabled Binary)
   - opencv-contrib-python 4.8.0.76
@@ -134,7 +135,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
   ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/05e528b7-6ace-4878-94f0-ad86ac46324e)
 
-## Citiation
+## 4. Citiation
   If this work has contributed in any way to your research or business, I would be happy to be cited in your literature.
   ```
   @software{Gold-YOLO-Body-Head-Hand,
@@ -146,7 +147,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
   }
   ```
 
-## Cited
+## 5. Cited
   I am very grateful for their excellent work.
   - COCO-Hand
 
