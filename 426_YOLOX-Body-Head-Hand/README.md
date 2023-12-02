@@ -142,7 +142,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 ## 4. Citiation
   If this work has contributed in any way to your research or business, I would be happy to be cited in your literature.
   ```
-  @software{YOLOX-YOLO-Body-Head-Hand,
+  @software{YOLOX-Body-Head-Hand,
     author={Katsuya Hyodo},
     title={Lightweight human detection model generated using a high-quality human dataset},
     url={https://github.com/PINTO0309/PINTO_model_zoo/tree/main/426_YOLOX-Body-Head-Hand},
