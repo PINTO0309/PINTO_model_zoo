@@ -179,6 +179,12 @@ Lightweight human detection model generated using a high-quality human dataset. 
       year={2021}
     }
     ```
+  - YOLOX-Colaboratory-Training-Sample
+
+    高橋かずひと https://github.com/Kazuhito00
+
+    https://github.com/Kazuhito00/YOLOX-Colaboratory-Training-Sample
+
 
 ## 6. TODO
 - [ ] Synthesize and retrain the dataset to further improve model performance. [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco)
