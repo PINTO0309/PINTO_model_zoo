@@ -192,11 +192,13 @@ Lightweight human detection model generated using a high-quality human dataset. 
   Because I add my own post-processing to the end of the model, which can be inferred by TensorRT, CUDA, and CPU, the benchmarked inference speed is the end-to-end processing speed including all pre-processing and post-processing. EfficientNMS in TensorRT is very slow and should be offloaded to the CPU.
 
   - NMS default parameter
+
     |param|value|note|
     |:-|-:|:-|
     |max_output_boxes_per_class|20|Maximum number of outputs per class of one type. `20` indicates that the maximum number of people detected is `20`, the maximum number of heads detected is `20`, and the maximum number of hands detected is `20`.|
     |iou_threshold|0.40|A value indicating the percentage of occlusion allowed for multiple bounding boxes of the same class. `0.40` is excluded from the detection results if, for example, two bounding boxes overlap in more than 41% of the area. The smaller the value, the more occlusion is tolerated, but over-detection may increase.|
     |score_threshold|0.25|Bounding box confidence threshold.|
+
   - Change NMS parameters
 
     Use **[PINTO0309/sam4onnx](https://github.com/PINTO0309/sam4onnx)** to rewrite the `NonMaxSuppression` parameter in the ONNX file.
@@ -233,6 +235,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
     --input_constants main01_score_threshold float32 [0.15]
     ```
   - Post-processing structure
+
     ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/0135a005-8a79-4358-bd90-a468d44851ac)
 
 ## 4. Citiation
