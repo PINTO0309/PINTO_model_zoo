@@ -173,7 +173,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
   Because I add my own post-processing to the end of the model, which can be inferred by TensorRT, CUDA, and CPU, the benchmarked inference speed is the end-to-end processing speed including all pre-processing and post-processing. EfficientNMS in TensorRT is very slow and should be offloaded to the CPU.
 
-  ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/db5d5e1f-056c-45ea-9250-07559a7f57f1)
+  ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/0135a005-8a79-4358-bd90-a468d44851ac)
 
 ## 4. Citiation
   If this work has contributed in any way to your research or business, I would be happy to be cited in your literature.
