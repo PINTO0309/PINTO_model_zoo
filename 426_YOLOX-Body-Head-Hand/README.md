@@ -87,6 +87,14 @@ Lightweight human detection model generated using a high-quality human dataset. 
   Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.365
   Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.632
   Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.729
+  per class AP:
+  | class   | AP     | class   | AP     | class   | AP     |
+  |:--------|:-------|:--------|:-------|:--------|:-------|
+  | body    | 40.246 | head    | 48.986 | hand    | 33.368 |
+  per class AR:
+  | class   | AR     | class   | AR     | class   | AR     |
+  |:--------|:-------|:--------|:-------|:--------|:-------|
+  | body    | 47.787 | head    | 53.635 | hand    | 43.406 |
   ```
 
 - Body-Head-Hand - Tiny
@@ -103,6 +111,14 @@ Lightweight human detection model generated using a high-quality human dataset. 
   Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.395
   Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.662
   Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.759
+  per class AP:
+  | class   | AP     | class   | AP     | class   | AP     |
+  |:--------|:-------|:--------|:-------|:--------|:-------|
+  | body    | 45.713 | head    | 51.339 | hand    | 38.687 |
+  per class AR:
+  | class   | AR     | class   | AR     | class   | AR     |
+  |:--------|:-------|:--------|:-------|:--------|:-------|
+  | body    | 52.068 | head    | 55.533 | hand    | 46.514 |
   ```
 
 - Body-Head-Hand - S
@@ -119,6 +135,14 @@ Lightweight human detection model generated using a high-quality human dataset. 
   Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.425
   Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.726
   Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.836
+  per class AP:
+  | class   | AP     | class   | AP     | class   | AP     |
+  |:--------|:-------|:--------|:-------|:--------|:-------|
+  | body    | 51.932 | head    | 54.617 | hand    | 42.914 |
+  per class AR:
+  | class   | AR     | class   | AR     | class   | AR     |
+  |:--------|:-------|:--------|:-------|:--------|:-------|
+  | body    | 57.897 | head    | 58.626 | hand    | 50.448 |
   ```
 
 - Body-Head-Hand - M
@@ -135,6 +159,14 @@ Lightweight human detection model generated using a high-quality human dataset. 
   Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.437
   Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.751
   Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.885
+  per class AP:
+  | class   | AP     | class   | AP     | class   | AP     |
+  |:--------|:-------|:--------|:-------|:--------|:-------|
+  | body    | 55.937 | head    | 55.622 | hand    | 46.220 |
+  per class AR:
+  | class   | AR     | class   | AR     | class   | AR     |
+  |:--------|:-------|:--------|:-------|:--------|:-------|
+  | body    | 61.114 | head    | 59.494 | hand    | 52.181 |
   ```
 
 - Post-Process
