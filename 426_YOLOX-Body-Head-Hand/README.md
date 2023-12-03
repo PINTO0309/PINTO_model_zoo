@@ -49,6 +49,16 @@ Lightweight human detection model generated using a high-quality human dataset. 
     -v VIDEO, --video VIDEO
     -ep {cpu,cuda,tensorrt}, --execution_provider {cpu,cuda,tensorrt}
   ```
+  - 640x480 TensorRT
+
+    ```bash
+    python demo/demo_yolox_onnx.py \
+    -m yolox_m_body_head_hand_post_0299_0.5263_1x3x480x640.onnx \
+    -v 0 \
+    -ep tensorrt
+    ```
+
+    https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/7017bc13-4bf4-4df4-855e-67af3344e3c3
 
   - 320x256 CPU Corei9
 
