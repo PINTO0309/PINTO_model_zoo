@@ -143,6 +143,12 @@ Lightweight human detection model generated using a high-quality human dataset. 
   Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.874
   Results saved to runs/train/gold_yolo-s
   Epoch: 456 | mAP@0.5: 0.7040425163160517 | mAP@0.50:0.95: 0.46049785564440426
+
+  Class Labeled_images Labels P@.5iou R@.5iou F1@.5iou mAP@.5 mAP@.5:.95
+  all              486   8858   0.852    0.65    0.738  0.704      0.460
+  body             486   3747   0.848    0.63    0.723  0.669      0.455
+  head             475   3269   0.919    0.69    0.788  0.730      0.511
+  hand             483   1842   0.814    0.65    0.723  0.712      0.415
   ```
 
 - Body-Head-Hand - M
