@@ -198,6 +198,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
     |iou_threshold|0.40|A value indicating the percentage of occlusion allowed for multiple bounding boxes of the same class. `0.40` is excluded from the detection results if, for example, two bounding boxes overlap in more than 41% of the area. The smaller the value, the more occlusion is tolerated, but over-detection may increase.|
     |score_threshold|0.25|Bounding box confidence threshold.|
   - Change NMS parameters
+
     Use **[PINTO0309/sam4onnx](https://github.com/PINTO0309/sam4onnx)** to rewrite the `NonMaxSuppression` parameter in the ONNX file.
     ```bash
     pip install onnxsim==0.4.33 \
