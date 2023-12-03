@@ -208,7 +208,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
     && pip install tensorflow==2.14.0
 
     ### max_output_boxes_per_class
-    ### Example of changing the maximum number of detections per class to 100
+    ### Example of changing the maximum number of detections per class to 100.
     sam4onnx \
     --op_name main01_nonmaxsuppression11 \
     --input_onnx_file_path yolox_s_body_head_hand_post_0299_0.4983_1x3x256x320.onnx \
@@ -216,6 +216,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
     --input_constants main01_max_output_boxes_per_class int64 [100]
 
     ### iou_threshold
+    ### Example of changing the allowable area of occlusion to 20%.
     sam4onnx \
     --op_name main01_nonmaxsuppression11 \
     --input_onnx_file_path yolox_s_body_head_hand_post_0299_0.4983_1x3x256x320.onnx \
@@ -223,6 +224,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
     --input_constants main01_iou_threshold float32 [0.20]
 
     ### score_threshold
+    ### Example of changing the bounding box score threshold to 15%.
     sam4onnx \
     --op_name main01_nonmaxsuppression11 \
     --input_onnx_file_path yolox_s_body_head_hand_post_0299_0.4983_1x3x256x320.onnx \
