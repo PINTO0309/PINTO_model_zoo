@@ -41,12 +41,13 @@ Lightweight human detection model generated using a high-quality human dataset. 
   - TensorRT 8.5.3-1+cuda11.8
 
   ```
-  usage: demo_yolox_onnx.py [-h] [-m MODEL] [-v VIDEO]
+  usage: demo_yolox_onnx.py [-h] [-m MODEL] [-v VIDEO] [-ep {cpu,cuda,tensorrt}]
 
   options:
     -h, --help            show this help message and exit
     -m MODEL, --model MODEL
     -v VIDEO, --video VIDEO
+    -ep {cpu,cuda,tensorrt}, --execution_provider {cpu,cuda,tensorrt}
   ```
 
   - 320x256 CPU Corei9

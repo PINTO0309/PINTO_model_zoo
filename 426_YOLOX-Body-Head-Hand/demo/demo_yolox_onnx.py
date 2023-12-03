@@ -6,7 +6,7 @@ import time
 import numpy as np
 import onnxruntime
 from argparse import ArgumentParser
-from typing import Tuple, Optional, List
+from typing import Tuple, Optional, List, Dict
 
 
 class YOLOXONNX(object):
@@ -15,14 +15,14 @@ class YOLOXONNX(object):
         model_path: Optional[str] = 'yolox_s_body_head_hand_post_0299_0.4983_1x3x256x320.onnx',
         class_score_th: Optional[float] = 0.35,
         providers: Optional[List] = [
-            # (
-            #     'TensorrtExecutionProvider', {
-            #         'trt_engine_cache_enable': True,
-            #         'trt_engine_cache_path': '.',
-            #         'trt_fp16_enable': True,
-            #     }
-            # ),
-            # 'CUDAExecutionProvider',
+            (
+                'TensorrtExecutionProvider', {
+                    'trt_engine_cache_enable': True,
+                    'trt_engine_cache_path': '.',
+                    'trt_fp16_enable': True,
+                }
+            ),
+            'CUDAExecutionProvider',
             'CPUExecutionProvider',
         ],
     ):
@@ -242,10 +242,41 @@ def main():
         type=str,
         default="0",
     )
+    parser.add_argument(
+        '-ep',
+        '--execution_provider',
+        type=str,
+        choices=['cpu', 'cuda', 'tensorrt'],
+        default='cpu',
+    )
     args = parser.parse_args()
+
+    providers: List[Tuple[str, Dict] | str] = None
+    if args.execution_provider == 'cpu':
+        providers = [
+            'CPUExecutionProvider',
+        ]
+    elif args.execution_provider == 'cuda':
+        providers = [
+            'CUDAExecutionProvider',
+            'CPUExecutionProvider',
+        ]
+    elif args.execution_provider == 'tensorrt':
+        providers = [
+            (
+                'TensorrtExecutionProvider', {
+                    'trt_engine_cache_enable': True,
+                    'trt_engine_cache_path': '.',
+                    'trt_fp16_enable': True,
+                }
+            ),
+            'CUDAExecutionProvider',
+            'CPUExecutionProvider',
+        ]
 
     model = YOLOXONNX(
         model_path=args.model,
+        providers=providers,
     )
 
     cap = cv2.VideoCapture(
