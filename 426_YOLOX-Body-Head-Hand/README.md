@@ -35,7 +35,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
 ## 3. Test
   - Python 3.10
-  - onnxruntime-gpu v1.16.1 (TensorRT Execution Provider Enabled Binary)
+  - onnxruntime-gpu v1.16.1 (TensorRT Execution Provider Enabled Binary. See: [onnxruntime-gpu v1.16.1 + CUDA 11.8 + TensorRT 8.5.3 build (RTX3070)](https://zenn.dev/pinto0309/scraps/20afd3c58b30bf))
   - opencv-contrib-python 4.8.0.76
   - numpy 1.24.3
   - TensorRT 8.5.3-1+cuda11.8
