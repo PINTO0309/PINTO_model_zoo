@@ -298,5 +298,6 @@ Lightweight human detection model generated using a high-quality human dataset. 
     volume={},
     number={},
     pages={1-6},
-    doi={10.1109/EUVIP58404.2023.10323035}}
+    doi={10.1109/EUVIP58404.2023.10323035}
+  }
   ```
