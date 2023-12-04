@@ -241,7 +241,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
 ## 4. Citiation
   If this work has contributed in any way to your research or business, I would be happy to be cited in your literature.
-  ```
+  ```bibtex
   @software{YOLOX-Body-Head-Hand,
     author={Katsuya Hyodo},
     title={Lightweight human detection model generated using a high-quality human dataset},
@@ -258,7 +258,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
     https://vision.cs.stonybrook.edu/~supreeth/
 
-    ```
+    ```bibtex
     @article{Hand-CNN,
       title={Contextual Attention for Hand Detection in the Wild},
       author={Supreeth Narasimhaswamy and Zhengwei Wei and Yang Wang and Justin Zhang and Minh Hoai},
@@ -271,7 +271,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
     https://github.com/Megvii-BaseDetection/YOLOX
 
-    ```
+    ```bibtex
     @article{yolox2021,
       title={YOLOX: Exceeding YOLO Series in 2021},
       author={Ge, Zheng and Liu, Songtao and Wang, Feng and Li, Zeming and Sun, Jian},
@@ -289,7 +289,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 ## 6. TODO
 - [ ] Synthesize and retrain the dataset to further improve model performance. [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco)
   ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/69603b9b-ab9f-455c-a9c9-c818edc41dba)
-  ```
+  ```bibtex
   @INPROCEEDINGS{10323035,
     author={Beghdadi, Ayman and Beghdadi, Azeddine and Mallem, Malik and Beji, Lotfi and Cheikh, Faouzi Alaya},
     booktitle={2023 11th European Workshop on Visual Information Processing (EUVIP)},
