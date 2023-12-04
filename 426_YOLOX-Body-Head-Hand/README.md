@@ -40,6 +40,13 @@ Lightweight human detection model generated using a high-quality human dataset. 
   - numpy 1.24.3
   - TensorRT 8.5.3-1+cuda11.8
 
+  ```bash
+  pip uninstall onnxruntime onnxruntime-gpu
+
+  pip install onnxruntime opencv-contrib-python numpy
+  or
+  pip install onnxruntime-gpu opencv-contrib-python numpy
+  ```
   ```
   usage: demo_yolox_onnx.py [-h] [-m MODEL] [-v VIDEO] [-ep {cpu,cuda,tensorrt}]
 
@@ -184,7 +191,54 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
   Because I add my own post-processing to the end of the model, which can be inferred by TensorRT, CUDA, and CPU, the benchmarked inference speed is the end-to-end processing speed including all pre-processing and post-processing. EfficientNMS in TensorRT is very slow and should be offloaded to the CPU.
 
-  ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/0135a005-8a79-4358-bd90-a468d44851ac)
+  - NMS default parameter
+
+    |param|value|note|
+    |:-|-:|:-|
+    |max_output_boxes_per_class|20|Maximum number of outputs per class of one type. `20` indicates that the maximum number of people detected is `20`, the maximum number of heads detected is `20`, and the maximum number of hands detected is `20`.|
+    |iou_threshold|0.40|A value indicating the percentage of occlusion allowed for multiple bounding boxes of the same class. `0.40` is excluded from the detection results if, for example, two bounding boxes overlap in more than 41% of the area. The smaller the value, the more occlusion is tolerated, but over-detection may increase.|
+    |score_threshold|0.25|Bounding box confidence threshold.|
+
+  - Change NMS parameters
+
+    Use **[PINTO0309/sam4onnx](https://github.com/PINTO0309/sam4onnx)** to rewrite the `NonMaxSuppression` parameter in the ONNX file.
+
+    For example,
+    ```bash
+    pip install onnxsim==0.4.33 \
+    && pip install -U simple-onnx-processing-tools \
+    && pip install -U onnx \
+    && python -m pip install -U onnx_graphsurgeon \
+        --index-url https://pypi.ngc.nvidia.com \
+    && pip install tensorflow==2.14.0
+
+    ### max_output_boxes_per_class
+    ### Example of changing the maximum number of detections per class to 100.
+    sam4onnx \
+    --op_name main01_nonmaxsuppression11 \
+    --input_onnx_file_path yolox_s_body_head_hand_post_0299_0.4983_1x3x256x320.onnx \
+    --output_onnx_file_path yolox_s_body_head_hand_post_0299_0.4983_1x3x256x320.onnx \
+    --input_constants main01_max_output_boxes_per_class int64 [100]
+
+    ### iou_threshold
+    ### Example of changing the allowable area of occlusion to 20%.
+    sam4onnx \
+    --op_name main01_nonmaxsuppression11 \
+    --input_onnx_file_path yolox_s_body_head_hand_post_0299_0.4983_1x3x256x320.onnx \
+    --output_onnx_file_path yolox_s_body_head_hand_post_0299_0.4983_1x3x256x320.onnx \
+    --input_constants main01_iou_threshold float32 [0.20]
+
+    ### score_threshold
+    ### Example of changing the bounding box score threshold to 15%.
+    sam4onnx \
+    --op_name main01_nonmaxsuppression11 \
+    --input_onnx_file_path yolox_s_body_head_hand_post_0299_0.4983_1x3x256x320.onnx \
+    --output_onnx_file_path yolox_s_body_head_hand_post_0299_0.4983_1x3x256x320.onnx \
+    --input_constants main01_score_threshold float32 [0.15]
+    ```
+  - Post-processing structure
+
+    ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/0135a005-8a79-4358-bd90-a468d44851ac)
 
 ## 4. Citiation
   If this work has contributed in any way to your research or business, I would be happy to be cited in your literature.
