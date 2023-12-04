@@ -102,6 +102,17 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/8a15e0d6-5f75-4246-adf5-478cb45d74b6
 
+  - 640x384 TensorRT
+
+    ```bash
+    python demo/demo_yolox_onnx.py \
+    -m yolox_m_body_head_hand_post_0299_0.5263_1x3x384x640.onnx \
+    -v pexels_videos_2670_640x360.mp4 \
+    -ep tensorrt
+    ```
+
+    https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/c10ad469-a99e-4ea3-9b71-047a3d19d9f8
+
 - Body-Head-Hand - Nano
   ```
   Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.409
