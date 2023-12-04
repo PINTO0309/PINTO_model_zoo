@@ -202,6 +202,8 @@ Lightweight human detection model generated using a high-quality human dataset. 
   - Change NMS parameters
 
     Use **[PINTO0309/sam4onnx](https://github.com/PINTO0309/sam4onnx)** to rewrite the `NonMaxSuppression` parameter in the ONNX file.
+
+    For example,
     ```bash
     pip install onnxsim==0.4.33 \
     && pip install -U simple-onnx-processing-tools \
