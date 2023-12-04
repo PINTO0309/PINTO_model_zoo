@@ -209,8 +209,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
     && pip install -U simple-onnx-processing-tools \
     && pip install -U onnx \
     && python -m pip install -U onnx_graphsurgeon \
-        --index-url https://pypi.ngc.nvidia.com \
-    && pip install tensorflow==2.14.0
+        --index-url https://pypi.ngc.nvidia.com
 
     ### max_output_boxes_per_class
     ### Example of changing the maximum number of detections per class to 100.
