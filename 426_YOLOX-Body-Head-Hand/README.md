@@ -301,3 +301,6 @@ Lightweight human detection model generated using a high-quality human dataset. 
     doi={10.1109/EUVIP58404.2023.10323035}
   }
   ```
+
+## 7. License
+[Apache License Version 2.0](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/426_YOLOX-Body-Head-Hand/LICENSE)
