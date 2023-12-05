@@ -277,6 +277,8 @@ Lightweight human detection model generated using a high-quality human dataset. 
     ```
   - Post-processing structure
 
+    PyTorch alone cannot generate this post-processing.
+
     ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/0135a005-8a79-4358-bd90-a468d44851ac)
 
 ## 4. Citiation
