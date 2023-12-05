@@ -93,6 +93,12 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
   - 640x384 CUDA
 
+    |NMS param|value|
+    |:-|-:|
+    |max_output_boxes_per_class|100|
+    |iou_threshold|0.5|
+    |score_threshold|0.25|
+
     ```bash
     python demo/demo_yolox_onnx.py \
     -m yolox_m_body_head_hand_post_0299_0.5263_1x3x384x640.onnx \
@@ -103,6 +109,12 @@ Lightweight human detection model generated using a high-quality human dataset. 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/8a15e0d6-5f75-4246-adf5-478cb45d74b6
 
   - 640x384 TensorRT
+
+    |NMS param|value|
+    |:-|-:|
+    |max_output_boxes_per_class|100|
+    |iou_threshold|0.5|
+    |score_threshold|0.25|
 
     ```bash
     python demo/demo_yolox_onnx.py \
