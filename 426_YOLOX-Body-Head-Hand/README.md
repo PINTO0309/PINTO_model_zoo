@@ -79,12 +79,6 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
   - 160x128 CPU Corei9
 
-    |NMS param|value|
-    |:-|-:|
-    |max_output_boxes_per_class|20|
-    |iou_threshold|0.4|
-    |score_threshold|0.25|
-
     ```bash
     python demo/demo_yolox_onnx.py \
     -m yolox_s_body_head_hand_post_0299_0.4983_1x3x128x160.onnx \
@@ -94,6 +88,12 @@ Lightweight human detection model generated using a high-quality human dataset. 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/9be1e3e0-afba-45b7-8f4f-24f4fb7e9340
 
   - [Gold-YOLO-n 320x256 CPU](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/425_Gold-YOLO-Body-Head-Hand) vs YOLOX-Nano 320x256 CPU
+
+    |NMS param|value|
+    |:-|-:|
+    |max_output_boxes_per_class|20|
+    |iou_threshold|0.4|
+    |score_threshold|0.25|
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/9444e5ab-a8d3-4290-81e7-7d1701abca16
 
