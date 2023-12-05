@@ -92,7 +92,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
     |NMS param|value|
     |:-|-:|
     |max_output_boxes_per_class|20|
-    |iou_threshold|0.4|
+    |iou_threshold|0.40|
     |score_threshold|0.25|
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/9444e5ab-a8d3-4290-81e7-7d1701abca16
@@ -102,7 +102,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
     |NMS param|value|
     |:-|-:|
     |max_output_boxes_per_class|100|
-    |iou_threshold|0.5|
+    |iou_threshold|0.50|
     |score_threshold|0.25|
 
     ```bash
@@ -119,7 +119,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
     |NMS param|value|
     |:-|-:|
     |max_output_boxes_per_class|100|
-    |iou_threshold|0.5|
+    |iou_threshold|0.50|
     |score_threshold|0.25|
 
     ```bash
