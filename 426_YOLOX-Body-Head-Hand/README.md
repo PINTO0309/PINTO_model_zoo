@@ -79,6 +79,12 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
   - 160x128 CPU Corei9
 
+    |NMS param|value|
+    |:-|-:|
+    |max_output_boxes_per_class|20|
+    |iou_threshold|0.4|
+    |score_threshold|0.25|
+
     ```bash
     python demo/demo_yolox_onnx.py \
     -m yolox_s_body_head_hand_post_0299_0.4983_1x3x128x160.onnx \
