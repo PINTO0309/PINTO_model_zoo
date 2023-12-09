@@ -293,6 +293,17 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
     ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/0135a005-8a79-4358-bd90-a468d44851ac)
 
+- [TFLite] ARMv8.2 XNNPACK Float16 boost
+
+  https://github.com/PINTO0309/onnx2tf/tree/main#cli-parameter
+
+  https://blog.tensorflow.org/2023/11/half-precision-inference-doubles-on-device-inference-performance.html
+
+  ```
+  pip install -U onnx2tf
+  onnx2tf -i yolox_n_body_head_hand_post_0461_0.4428_1x3x256x320.onnx -eatfp16
+  ```
+
 ## 4. Citiation
   If this work has contributed in any way to your research or business, I would be happy to be cited in your literature.
   ```bibtex
