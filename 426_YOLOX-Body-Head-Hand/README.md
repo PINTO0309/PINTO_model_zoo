@@ -297,6 +297,8 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
   https://github.com/PINTO0309/onnx2tf/tree/main#cli-parameter
 
+  https://github.com/PINTO0309/onnx2tf/pull/553
+
   https://blog.tensorflow.org/2023/11/half-precision-inference-doubles-on-device-inference-performance.html
 
   ```
