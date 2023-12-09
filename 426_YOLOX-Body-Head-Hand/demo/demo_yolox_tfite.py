@@ -39,18 +39,11 @@ class YOLOXTFLite(object):
         self.input_names = [
             input['name'] for input in input_details
         ]
-        self.input_indexes = [
-            input['index'] for input in input_details
-        ]
-
         self.output_shapes = [
             output['shape'] for output in output_details
         ]
         self.output_names = [
             output['name'] for output in output_details
-        ]
-        self.output_indexes = [
-            output['index'] for output in output_details
         ]
         self.model: SignatureRunner = self.interpreter.get_signature_runner()
 
