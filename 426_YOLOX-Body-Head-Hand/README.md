@@ -131,6 +131,22 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/c10ad469-a99e-4ea3-9b71-047a3d19d9f8
 
+  - 320x256 CPU RaspberryPi4 Bookworm CLI mode, TFLite XNNPACK, 4 threads
+
+    [yolox_n_body_head_hand_post_0461_0.4428_1x3x256x320_integer_quant.tflite.zip](https://github.com/PINTO0309/PINTO_model_zoo/files/13623092/yolox_n_body_head_hand_post_0461_0.4428_1x3x256x320_integer_quant.tflite.zip)
+
+    ```bash
+    33.4ms/pred
+    ```
+
+  - 160x128 CPU RaspberryPi4 Bookworm CLI mode, TFLite XNNPACK, 4 threads
+
+    [yolox_n_body_head_hand_post_0461_0.4428_1x3x128x160_integer_quant.tflite.zip](https://github.com/PINTO0309/PINTO_model_zoo/files/13623093/yolox_n_body_head_hand_post_0461_0.4428_1x3x128x160_integer_quant.tflite.zip)
+
+    ```bash
+    9.4ms/pred
+    ```
+
 - Body-Head-Hand - Nano
   ```
   Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.409
