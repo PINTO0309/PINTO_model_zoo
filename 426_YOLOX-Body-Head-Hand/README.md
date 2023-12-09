@@ -304,6 +304,16 @@ Lightweight human detection model generated using a high-quality human dataset. 
   onnx2tf -i yolox_n_body_head_hand_post_0461_0.4428_1x3x256x320.onnx -eatfp16
   ```
 
+  This is result in macbook.
+
+  - Chip: Apple M1 Pro (ArmV8 processor)
+  - Python 3.9
+  - Tensorflow 2.15.0 (from pip install tensorflow==2.15.0)
+
+    <img width="811" alt="image" src="https://github.com/PINTO0309/onnx2tf/assets/74748700/51799aff-b006-46e1-a372-bd8b2195b854">
+    
+  Regarding on x86, AVX2 is necessary and rebuild python package in PyPI seems be NOT enabled AVX2. According to the blog, AVX2 emulation in x86 is for precision check and its is slow.
+
 ## 4. Citiation
   If this work has contributed in any way to your research or business, I would be happy to be cited in your literature.
   ```bibtex
