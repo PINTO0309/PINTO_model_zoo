@@ -141,7 +141,7 @@ class YOLOXONNX(object):
         resized_image: np.ndarray
             Resized and normalized image.
         """
-        # Normalization + BGR->RGB
+        # Resize + Transpose
         resized_image = cv2.resize(
             image,
             (
