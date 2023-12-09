@@ -309,6 +309,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
   - Chip: Apple M1 Pro (ArmV8 processor)
   - Python 3.9
   - Tensorflow 2.15.0 (from pip install tensorflow==2.15.0)
+  - YOLOX-S
 
     <img width="811" alt="image" src="https://github.com/PINTO0309/onnx2tf/assets/74748700/51799aff-b006-46e1-a372-bd8b2195b854">
     
