@@ -48,18 +48,22 @@ Lightweight human detection model generated using a high-quality human dataset. 
   pip install onnxruntime-gpu opencv-contrib-python numpy
   ```
   ```
-  usage: demo_yolox_onnx.py [-h] [-m MODEL] [-v VIDEO] [-ep {cpu,cuda,tensorrt}]
+  usage: demo_yolox_onnx_tfite.py [-h] [-m MODEL] [-v VIDEO] [-ep {cpu,cuda,tensorrt}]
 
   options:
-    -h, --help            show this help message and exit
+    -h, --help
+      show this help message and exit
     -m MODEL, --model MODEL
+      ONNX/TFLite file path for YOLOX.
     -v VIDEO, --video VIDEO
+      Video file path or camera index.
     -ep {cpu,cuda,tensorrt}, --execution_provider {cpu,cuda,tensorrt}
+      Execution provider for ONNXRuntime.
   ```
   - 640x480 TensorRT
 
     ```bash
-    python demo/demo_yolox_onnx.py \
+    python demo/demo_yolox_onnx_tfite.py \
     -m yolox_m_body_head_hand_post_0299_0.5263_1x3x480x640.onnx \
     -v 0 \
     -ep tensorrt
@@ -70,7 +74,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
   - 320x256 CPU Corei9
 
     ```bash
-    python demo/demo_yolox_onnx.py \
+    python demo/demo_yolox_onnx_tfite.py \
     -m yolox_s_body_head_hand_post_0299_0.4983_1x3x256x320.onnx \
     -v 0
     ```
@@ -80,7 +84,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
   - 160x128 CPU Corei9
 
     ```bash
-    python demo/demo_yolox_onnx.py \
+    python demo/demo_yolox_onnx_tfite.py \
     -m yolox_s_body_head_hand_post_0299_0.4983_1x3x128x160.onnx \
     -v 0
     ```
@@ -106,7 +110,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
     |score_threshold|0.25|
 
     ```bash
-    python demo/demo_yolox_onnx.py \
+    python demo/demo_yolox_onnx_tfite.py \
     -m yolox_m_body_head_hand_post_0299_0.5263_1x3x384x640.onnx \
     -v pexels_videos_2670_640x360.mp4 \
     -ep cuda
@@ -123,13 +127,29 @@ Lightweight human detection model generated using a high-quality human dataset. 
     |score_threshold|0.25|
 
     ```bash
-    python demo/demo_yolox_onnx.py \
+    python demo/demo_yolox_onnx_tfite.py \
     -m yolox_m_body_head_hand_post_0299_0.5263_1x3x384x640.onnx \
     -v pexels_videos_2670_640x360.mp4 \
     -ep tensorrt
     ```
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/c10ad469-a99e-4ea3-9b71-047a3d19d9f8
+
+  - 320x256 TFLite XNNPACK CPU x86/x64
+
+    |NMS param|value|
+    |:-|-:|
+    |max_output_boxes_per_class|20|
+    |iou_threshold|0.40|
+    |score_threshold|0.25|
+
+    ```bash
+    python demo/demo_yolox_onnx_tfite.py \
+    -m yolox_n_body_head_hand_post_0461_0.4428_1x3x256x320_float32.tflite \
+    -v 0
+    ```
+
+    https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/f09aa66b-e6c9-4c4e-a886-e80748a48882
 
   - 320x256 INT8 CPU RaspberryPi4 Bookworm CLI mode, TFLite XNNPACK, 4 threads
 
@@ -315,7 +335,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
   - CPU inference
 
     <img width="811" alt="image" src="https://github.com/PINTO0309/onnx2tf/assets/74748700/51799aff-b006-46e1-a372-bd8b2195b854">
-    
+
   Regarding on x86, AVX2 is necessary and rebuild python package in PyPI seems be NOT enabled AVX2. According to the blog, AVX2 emulation in x86 is for precision check and its is slow.
 
 ## 4. Citiation
