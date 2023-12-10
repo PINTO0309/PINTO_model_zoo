@@ -39,13 +39,18 @@ Lightweight human detection model generated using a high-quality human dataset. 
   - opencv-contrib-python 4.8.0.76
   - numpy 1.24.3
   - TensorRT 8.5.3-1+cuda11.8
+  - TensorFlow v2.15.0+
 
   ```bash
+  # ONNX
   pip uninstall onnxruntime onnxruntime-gpu
 
   pip install onnxruntime opencv-contrib-python numpy
   or
   pip install onnxruntime-gpu opencv-contrib-python numpy
+
+  # TFLite
+  pip install tensorflow
   ```
   ```
   usage: demo_yolox_onnx_tfite.py [-h] [-m MODEL] [-v VIDEO] [-ep {cpu,cuda,tensorrt}]
