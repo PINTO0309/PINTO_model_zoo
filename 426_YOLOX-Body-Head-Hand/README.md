@@ -293,6 +293,31 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
     ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/0135a005-8a79-4358-bd90-a468d44851ac)
 
+- [TFLite] ARMv8.2 XNNPACK Float16 boost
+
+  https://github.com/PINTO0309/onnx2tf/tree/main#cli-parameter
+
+  https://github.com/PINTO0309/onnx2tf/pull/553
+
+  https://blog.tensorflow.org/2023/11/half-precision-inference-doubles-on-device-inference-performance.html
+
+  ```
+  pip install -U onnx2tf
+  onnx2tf -i yolox_n_body_head_hand_post_0461_0.4428_1x3x256x320.onnx -eatfp16
+  ```
+
+  This is result in macbook.
+
+  - Chip: Apple M1 Pro (ArmV8 processor, ARMv8.6A)
+  - Python 3.9
+  - Tensorflow 2.15.0 (from pip install tensorflow==2.15.0)
+  - YOLOX-S 640x640
+  - CPU inference
+
+    <img width="811" alt="image" src="https://github.com/PINTO0309/onnx2tf/assets/74748700/51799aff-b006-46e1-a372-bd8b2195b854">
+    
+  Regarding on x86, AVX2 is necessary and rebuild python package in PyPI seems be NOT enabled AVX2. According to the blog, AVX2 emulation in x86 is for precision check and its is slow.
+
 ## 4. Citiation
   If this work has contributed in any way to your research or business, I would be happy to be cited in your literature.
   ```bibtex
