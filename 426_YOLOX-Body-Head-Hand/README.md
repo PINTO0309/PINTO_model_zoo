@@ -164,6 +164,8 @@ Lightweight human detection model generated using a high-quality human dataset. 
     |iou_threshold|0.40|
     |score_threshold|0.25|
 
+    https://github.com/PINTO0309/TensorflowLite-bin
+
     ```bash
     python demo/demo_yolox_onnx_tfite.py \
     -m yolox_n_body_head_hand_post_0461_0.4428_1x3x128x256_float32.tflite \
