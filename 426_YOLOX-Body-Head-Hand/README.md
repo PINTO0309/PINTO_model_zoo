@@ -157,7 +157,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/f09aa66b-e6c9-4c4e-a886-e80748a48882
 
-  - 160x128 TFLite XNNPACK CPU RaspberryPi4
+  - 160x128 TFLite XNNPACK CPU RaspberryPi4 Bookworm GUI mode
 
     |NMS param|value|
     |:-|-:|
