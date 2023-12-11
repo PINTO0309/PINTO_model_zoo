@@ -156,6 +156,22 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/f09aa66b-e6c9-4c4e-a886-e80748a48882
 
+  - 160x128 TFLite XNNPACK CPU RaspberryPi4
+
+    |NMS param|value|
+    |:-|-:|
+    |max_output_boxes_per_class|20|
+    |iou_threshold|0.40|
+    |score_threshold|0.25|
+
+    ```bash
+    python demo/demo_yolox_onnx_tfite.py \
+    -m yolox_n_body_head_hand_post_0461_0.4428_1x3x128x256_float32.tflite \
+    -v 0
+    ```
+
+    https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/1013816e-4665-41b8-abd7-e479d32f7763
+
   - 320x256 INT8 CPU RaspberryPi4 Bookworm CLI mode, TFLite XNNPACK, 4 threads
 
     ```bash
