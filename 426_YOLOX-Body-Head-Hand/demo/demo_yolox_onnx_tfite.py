@@ -114,7 +114,6 @@ class AbstractModel(ABC):
                     providers=providers,
                 )
             self._providers = self._interpreter.get_providers()
-
             self._input_shapes = [
                 input.shape for input in self._interpreter.get_inputs()
             ]
@@ -132,31 +131,13 @@ class AbstractModel(ABC):
             self._h_index = 2
             self._w_index = 3
 
-        elif self._runtime == 'tflite_runtime':
-            from tflite_runtime.interpreter import Interpreter # type: ignore
-            self._interpreter = Interpreter(model_path=model_path)
-            self._input_details = self._interpreter.get_input_details()
-            self._output_details = self._interpreter.get_output_details()
-            self._input_shapes = [
-                input.get('shape', None) for input in self._input_details
-            ]
-            self._input_names = [
-                input.get('name', None) for input in self._input_details
-            ]
-            self._output_shapes = [
-                output.get('shape', None) for output in self._output_details
-            ]
-            self._output_names = [
-                output.get('name', None) for output in self._output_details
-            ]
-            self._model = self._interpreter.get_signature_runner()
-            self._swap = (0, 1, 2)
-            self._h_index = 1
-            self._w_index = 2
-
-        elif self._runtime == 'tensorflow':
-            import tensorflow as tf # type: ignore
-            self._interpreter = tf.lite.Interpreter(model_path=model_path)
+        elif self._runtime in ['tflite_runtime', 'tensorflow']:
+            if self._runtime == 'tflite_runtime':
+                from tflite_runtime.interpreter import Interpreter # type: ignore
+                self._interpreter = Interpreter(model_path=model_path)
+            elif self._runtime == 'tensorflow':
+                import tensorflow as tf # type: ignore
+                self._interpreter = tf.lite.Interpreter(model_path=model_path)
             self._input_details = self._interpreter.get_input_details()
             self._output_details = self._interpreter.get_output_details()
             self._input_shapes = [
