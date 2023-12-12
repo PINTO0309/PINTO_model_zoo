@@ -211,6 +211,12 @@ Lightweight human detection model generated using a high-quality human dataset. 
     134.0ms/pred
     ```
 
+  - 160x128 Float32 CPU RaspberryPi Zero 2W Bullseye aarch64 GUI mode, 4 threads
+
+    ```bash
+    115.0ms/pred
+    ```
+
 - Body-Head-Hand - Nano
   ```
   Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.409
