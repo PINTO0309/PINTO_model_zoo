@@ -50,7 +50,22 @@ Lightweight human detection model generated using a high-quality human dataset. 
   or
   pip install onnxruntime-gpu opencv-contrib-python numpy
 
-  # TFLite
+  # For ARM. tflite_runtime
+  TFVER=2.15.0.post1
+  
+  PYVER=310
+  or
+  PYVER=311
+  
+  ARCH=aarch64
+  or
+  ARCH=armhf
+
+  pip install \
+  --no-cache-dir \
+  https://github.com/PINTO0309/TensorflowLite-bin/releases/download/v${TFVER}/tflite_runtime-${TFVER/-/}-cp${PYVER}-none-linux_${ARCH}.whl
+
+  # For x86/x64. TensorFlow
   pip install tensorflow
   ```
   ```
