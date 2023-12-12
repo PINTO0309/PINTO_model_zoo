@@ -69,18 +69,6 @@ Lightweight human detection model generated using a high-quality human dataset. 
   pip install tensorflow
   ```
   ```
-  usage: demo_yolox_onnx_tfite.py [-h] [-m MODEL] [-v VIDEO] [-ep {cpu,cuda,tensorrt}]
-
-  options:
-    -h, --help
-      show this help message and exit
-    -m MODEL, --model MODEL
-      ONNX/TFLite file path for YOLOX.
-    -v VIDEO, --video VIDEO
-      Video file path or camera index.
-    -ep {cpu,cuda,tensorrt}, --execution_provider {cpu,cuda,tensorrt}
-      Execution provider for ONNXRuntime.
-
   usage: demo_yolox_onnx_tfite.py [-h] [-m MODEL] [-v VIDEO] [-ep {cpu,cuda,tensorrt}] [-dvw]
   
   options:
