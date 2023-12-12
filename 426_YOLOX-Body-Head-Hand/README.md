@@ -169,7 +169,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
     ```bash
     python demo/demo_yolox_onnx_tfite.py \
-    -m yolox_n_body_head_hand_post_0461_0.4428_1x3x128x256_float32.tflite \
+    -m yolox_n_body_head_hand_post_0461_0.4428_1x3x128x160_float32.tflite \
     -v 0
     ```
 
