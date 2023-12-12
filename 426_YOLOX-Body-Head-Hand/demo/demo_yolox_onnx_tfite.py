@@ -335,8 +335,6 @@ class YOLOX(AbstractModel):
         result_boxes: List[Box]
             Predicted boxes: [classid, score, x1, y1, x2, y2]
         """
-        image_height = image.shape[0]
-        image_width = image.shape[1]
 
         """
         Detector is
