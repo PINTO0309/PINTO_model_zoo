@@ -433,6 +433,15 @@ def main():
         default='cpu',
         help='Execution provider for ONNXRuntime.',
     )
+    parser.add_argument(
+        '-dvw',
+        '--disable_video_writer',
+        action='store_true',
+        help=\
+            'Disable video writer. '+
+            'Eliminates the file I/O load associated with automatic recording to MP4. '+
+            'Devices that use a MicroSD card or similar for main storage can speed up overall processing.',
+    )
     args = parser.parse_args()
 
     # runtime check
@@ -489,16 +498,19 @@ def main():
     cap = cv2.VideoCapture(
         int(video) if is_parsable_to_int(video) else video
     )
-    cap_fps = cap.get(cv2.CAP_PROP_FPS)
-    w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-    h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
-    video_writer = cv2.VideoWriter(
-        filename='output.mp4',
-        fourcc=fourcc,
-        fps=cap_fps,
-        frameSize=(w, h),
-    )
+    disable_video_writer: bool = args.disable_video_writer
+    video_writer = None
+    if not disable_video_writer:
+        cap_fps = cap.get(cv2.CAP_PROP_FPS)
+        w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
+        video_writer = cv2.VideoWriter(
+            filename='output.mp4',
+            fourcc=fourcc,
+            fps=cap_fps,
+            frameSize=(w, h),
+        )
 
     while cap.isOpened():
         res, image = cap.read()
@@ -586,12 +598,13 @@ def main():
             break
 
         cv2.imshow("test", debug_image)
-        video_writer.write(debug_image)
+        if video_writer is not None:
+            video_writer.write(debug_image)
 
-    if video_writer:
+    if video_writer is not None:
         video_writer.release()
 
-    if cap:
+    if cap is not None:
         cap.release()
 
 if __name__ == "__main__":
