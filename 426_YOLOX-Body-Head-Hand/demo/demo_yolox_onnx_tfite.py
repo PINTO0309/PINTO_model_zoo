@@ -8,6 +8,7 @@ import cv2
 import time
 import numpy as np
 from enum import Enum
+from dataclasses import dataclass
 from argparse import ArgumentParser
 from typing import Tuple, Optional, List, Dict
 import importlib.util
@@ -43,6 +44,15 @@ class Color(Enum):
 
     def __call__(self, s):
         return str(self) + str(s) + str(Color.RESET)
+
+@dataclass(frozen=False)
+class Box():
+    classid: int
+    score: float
+    x1: int
+    y1: int
+    x2: int
+    y2: int
 
 class AbstractModel(ABC):
     """AbstractModel
@@ -209,7 +219,7 @@ class AbstractModel(ABC):
         *,
         image: np.ndarray,
         boxes: np.ndarray,
-    ) -> Tuple[np.ndarray, np.ndarray]:
+    ) -> List[Box]:
         pass
 
 class YOLOX(AbstractModel):
@@ -247,7 +257,7 @@ class YOLOX(AbstractModel):
     def __call__(
         self,
         image: np.ndarray,
-    ) -> Tuple[np.ndarray, np.ndarray]:
+    ) -> List[Box]:
         """YOLOX
 
         Parameters
@@ -277,13 +287,13 @@ class YOLOX(AbstractModel):
         boxes = outputs[0]
 
         # PostProcess
-        result_boxes, result_scores = \
+        result_boxes = \
             self._postprocess(
                 image=temp_image,
                 boxes=boxes,
             )
 
-        return result_boxes, result_scores
+        return result_boxes
 
     def _preprocess(
         self,
@@ -328,7 +338,7 @@ class YOLOX(AbstractModel):
         self,
         image: np.ndarray,
         boxes: np.ndarray,
-    ):
+    ) -> List[Box]:
         """_postprocess
 
         Parameters
@@ -341,11 +351,8 @@ class YOLOX(AbstractModel):
 
         Returns
         -------
-        result_boxes: np.ndarray
-            Predicted boxes: [N, x1, y1, x2, y2]
-
-        result_scores: np.ndarray
-            Predicted box confs: [N, score]
+        result_boxes: List[Box]
+            Predicted boxes: [classid, score, x1, y1, x2, y2]
         """
         image_height = image.shape[0]
         image_width = image.shape[1]
@@ -360,8 +367,7 @@ class YOLOX(AbstractModel):
         image_height = image.shape[0]
         image_width = image.shape[1]
 
-        result_boxes = []
-        result_scores = []
+        result_boxes: List[Box] = []
 
         if len(boxes) > 0:
             scores = boxes[:, 2:3]
@@ -371,19 +377,22 @@ class YOLOX(AbstractModel):
 
             if len(boxes_keep) > 0:
                 for box, score in zip(boxes_keep, scores_keep):
-                    class_id = int(box[1])
                     x_min = int(max(0, box[3]) * image_width / self._input_shapes[0][self._w_index])
                     y_min = int(max(0, box[4]) * image_height / self._input_shapes[0][self._h_index])
                     x_max = int(min(box[5], self._input_shapes[0][self._w_index]) * image_width / self._input_shapes[0][self._w_index])
                     y_max = int(min(box[6], self._input_shapes[0][self._h_index]) * image_height / self._input_shapes[0][self._h_index])
                     result_boxes.append(
-                        [x_min, y_min, x_max, y_max, class_id]
-                    )
-                    result_scores.append(
-                        score
+                        Box(
+                            classid=int(box[1]),
+                            score=float(score),
+                            x1=x_min,
+                            y1=y_min,
+                            x2=x_max,
+                            y2=y_max,
+                        )
                     )
 
-        return np.asarray(result_boxes), np.asarray(result_scores)
+        return result_boxes
 
 
 def is_parsable_to_int(s):
@@ -518,9 +527,11 @@ def main():
             break
 
         debug_image = copy.deepcopy(image)
+        # debug_image_h = debug_image.shape[0]
+        debug_image_w = debug_image.shape[1]
 
         start_time = time.perf_counter()
-        boxes, scores = model(debug_image)
+        boxes = model(debug_image)
         elapsed_time = time.perf_counter() - start_time
         cv2.putText(
             debug_image,
@@ -543,35 +554,34 @@ def main():
             cv2.LINE_AA,
         )
 
-        for box, score in zip(boxes, scores):
-            classid: int = box[4]
+        for box in boxes:
             color = (255,255,255)
-            if classid == 0:
+            if box.classid == 0:
                 color = (255,0,0)
-            elif classid == 1:
+            elif box.classid == 1:
                 color = (0,0,255)
-            elif classid == 2:
+            elif box.classid == 2:
                 color = (0,255,0)
             cv2.rectangle(
                 debug_image,
-                (box[0], box[1]),
-                (box[2], box[3]),
+                (box.x1, box.y1),
+                (box.x2, box.y2),
                 (255,255,255),
                 2,
             )
             cv2.rectangle(
                 debug_image,
-                (box[0], box[1]),
-                (box[2], box[3]),
+                (box.x1, box.y1),
+                (box.x2, box.y2),
                 color,
                 1,
             )
             cv2.putText(
                 debug_image,
-                f'{score[0]:.2f}',
+                f'{box.score:.2f}',
                 (
-                    box[0] if box[0]+50 < debug_image.shape[1] else debug_image.shape[1]-50,
-                    box[1]-10 if box[1]-25 > 0 else 20
+                    box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
+                    box.y1-10 if box.y1-25 > 0 else 20
                 ),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 0.7,
@@ -581,10 +591,10 @@ def main():
             )
             cv2.putText(
                 debug_image,
-                f'{score[0]:.2f}',
+                f'{box.score:.2f}',
                 (
-                    box[0] if box[0]+50 < debug_image.shape[1] else debug_image.shape[1]-50,
-                    box[1]-10 if box[1]-25 > 0 else 20
+                    box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
+                    box.y1-10 if box.y1-25 > 0 else 20
                 ),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 0.7,
