@@ -39,7 +39,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
   - opencv-contrib-python 4.8.0.76
   - numpy 1.24.3
   - TensorRT 8.5.3-1+cuda11.8
-  - tflite-runtime v2.15.0+
+  - [tflite-runtime](https://github.com/PINTO0309/TensorflowLite-bin) v2.15.0+
   - TensorFlow v2.15.0+
 
   ```bash
