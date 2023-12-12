@@ -43,12 +43,15 @@ Lightweight human detection model generated using a high-quality human dataset. 
   - TensorFlow v2.15.0+
 
   ```bash
-  # ONNX ##############################################
+  # Common ############################################
+  pip install opencv-contrib-python numpy
+
+  # For ONNX ##########################################
   pip uninstall onnxruntime onnxruntime-gpu
 
-  pip install onnxruntime opencv-contrib-python numpy
+  pip install onnxruntime
   or
-  pip install onnxruntime-gpu opencv-contrib-python numpy
+  pip install onnxruntime-gpu
 
   # For ARM. tflite_runtime ###########################
   TFVER=2.15.0.post1
