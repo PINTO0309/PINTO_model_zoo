@@ -80,6 +80,21 @@ Lightweight human detection model generated using a high-quality human dataset. 
       Video file path or camera index.
     -ep {cpu,cuda,tensorrt}, --execution_provider {cpu,cuda,tensorrt}
       Execution provider for ONNXRuntime.
+
+  usage: demo_yolox_onnx_tfite.py [-h] [-m MODEL] [-v VIDEO] [-ep {cpu,cuda,tensorrt}] [-dvw]
+  
+  options:
+    -h, --help
+      show this help message and exit
+    -m MODEL, --model MODEL
+      ONNX/TFLite file path for YOLOX.
+    -v VIDEO, --video VIDEO
+      Video file path or camera index.
+    -ep {cpu,cuda,tensorrt}, --execution_provider {cpu,cuda,tensorrt}
+      Execution provider for ONNXRuntime.
+    -dvw, --disable_video_writer
+      Eliminates the file I/O load associated with automatic recording to MP4.
+      Devices that use a MicroSD card or similar for main storage can speed up overall processing.
   ```
   - 640x480 TensorRT
 
