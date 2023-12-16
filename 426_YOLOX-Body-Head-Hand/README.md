@@ -227,6 +227,9 @@ The advantage of being able to detect hands with high accuracy is that it makes 
     ```bash
     81ms/pred
     ```
+    ```
+    python demo/demo_yolox-ti_tflite.py
+    ```
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/ba690884-9b94-4356-8a43-82a1161ea5b1
 
