@@ -405,6 +405,12 @@ The advantage of being able to detect hands with high accuracy is that it makes 
 
   Regarding on x86, AVX2 is necessary and rebuild python package in PyPI seems be NOT enabled AVX2. According to the blog, AVX2 emulation in x86 is for precision check and its is slow.
 
+- INT8 quantization ([YOLOX-ti-lite](https://github.com/TexasInstruments/edgeai-yolox))
+
+  In my experience, YOLOX has a very large accuracy degradation during quantization due to its structure. The reasons for this and the workaround are examined in detail by TexasInstruments. I have summarized the main points below on how to minimize accuracy degradation during quantization through my own practice. I just put into practice what TexasInstruments suggested, but the degrade in accuracy during quantization was extremely small. Note, however, that the results of the Float16 mixed-precision training before quantization are significantly degraded in accuracy due to the change in activation function to `ReLU` and many other workarounds, as well as the completely different data sets being benchmarked.
+
+  https://github.com/PINTO0309/onnx2tf?tab=readme-ov-file#7-if-the-accuracy-of-the-int8-quantized-model-degrades-significantly
+
 ## 4. Citiation
   If this work has contributed in any way to your research or business, I would be happy to be cited in your literature.
   ```bibtex
