@@ -220,13 +220,13 @@ Lightweight human detection model generated using a high-quality human dataset. 
     115.0ms/pred
     ```
 
-  - 160x128 INT8 CPU RaspberryPi Zero 2 W Bullseye aarch64 GUI mode, TFLite XNNPACK, 4 threads
+  - 160x128 INT8 CPU RaspberryPi Zero 2 W Bullseye aarch64 GUI mode, 4 threads
 
     ```bash
-    105.0ms/pred
+    81ms/pred
     ```
 
-    https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/2a0ed1f2-dffd-465c-a50f-c7c578e35cef
+    https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/ba690884-9b94-4356-8a43-82a1161ea5b1
 
 - Body-Head-Hand - Nano
   ```
