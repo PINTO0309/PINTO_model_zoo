@@ -196,13 +196,13 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/1013816e-4665-41b8-abd7-e479d32f7763
 
-  - 320x256 INT8 CPU RaspberryPi4 Bookworm CLI mode, TFLite XNNPACK, 4 threads
+  - 320x256 INT8 CPU RaspberryPi4 Bookworm CLI mode, 4 threads
 
     ```bash
     33.4ms/pred
     ```
 
-  - 160x128 INT8 CPU RaspberryPi4 Bookworm CLI mode, TFLite XNNPACK, 4 threads
+  - 160x128 INT8 CPU RaspberryPi4 Bookworm CLI mode, 4 threads
 
     ```bash
     9.4ms/pred
