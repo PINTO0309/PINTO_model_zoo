@@ -382,6 +382,8 @@ The advantage of being able to detect hands with high accuracy is that it makes 
 
 - [TFLite] ARMv8.2 XNNPACK Float16 boost
 
+  If you have an ARM CPU with an ARMv8.2 or higher version instruction set, you can use Float16 tflite committed in this repository to infer twice as fast as in the past. This is due to the significant contribution of XNNPACK.
+
   https://github.com/PINTO0309/onnx2tf/tree/main#cli-parameter
 
   https://github.com/PINTO0309/onnx2tf/pull/553
