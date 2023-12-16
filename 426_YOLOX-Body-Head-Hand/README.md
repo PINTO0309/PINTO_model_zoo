@@ -10,6 +10,12 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
   https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/ab4c4b1b-6e51-416a-948f-809b3d06eafd
 
+The advantage of being able to detect hands with high accuracy is that it makes it possible to detect key points on the fingers as correctly as possible.
+
+  https://github.com/PINTO0309/hand_landmark
+
+  https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/b240f9af-4f17-4b02-ba62-2b12838510ce
+
 ## 1. Dataset
   - COCO-Hand (14,667 Images, 66,903 labels, All re-annotated manually)
   - http://vision.cs.stonybrook.edu/~supreeth/COCO-Hand.zip
