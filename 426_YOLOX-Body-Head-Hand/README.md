@@ -178,7 +178,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/f09aa66b-e6c9-4c4e-a886-e80748a48882
 
-  - 160x128 TFLite XNNPACK CPU RaspberryPi4 Bookworm GUI mode
+  - 160x128 Float32 TFLite XNNPACK CPU RaspberryPi4 Bookworm GUI mode
 
     |NMS param|value|
     |:-|-:|
@@ -196,31 +196,23 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/1013816e-4665-41b8-abd7-e479d32f7763
 
-  - 320x256 INT8 CPU RaspberryPi4 Bookworm CLI mode, 4 threads
+  - 160x128 INT8 TFLite CPU RaspberryPi4 Bookworm GUI mode, 4 threads
 
-    ```bash
-    33.4ms/pred
-    ```
+    https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/df34dd58-8181-42c8-b03b-5aca93ed35ee
 
-  - 160x128 INT8 CPU RaspberryPi4 Bookworm CLI mode, 4 threads
-
-    ```bash
-    9.4ms/pred
-    ```
-
-  - 160x128 Float32 CPU RaspberryPi Zero 2 W Bullseye armhf GUI mode, 4 threads
+  - 160x128 Float32 TFLite CPU RaspberryPi Zero 2 W Bullseye armhf GUI mode, 4 threads
 
     ```bash
     134.0ms/pred
     ```
 
-  - 160x128 Float16 CPU RaspberryPi Zero 2 W Bullseye aarch64 GUI mode, 4 threads
+  - 160x128 Float16 TFLite CPU RaspberryPi Zero 2 W Bullseye aarch64 GUI mode, 4 threads
 
     ```bash
     115.0ms/pred
     ```
 
-  - 160x128 INT8 CPU RaspberryPi Zero 2 W Bullseye aarch64 GUI mode, 4 threads
+  - 160x128 INT8 CPU TFLite RaspberryPi Zero 2 W Bullseye aarch64 GUI mode, 4 threads
 
     ```bash
     81ms/pred
