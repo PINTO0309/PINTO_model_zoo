@@ -200,7 +200,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/df34dd58-8181-42c8-b03b-5aca93ed35ee
 
-  - 160x128 Float32 TFLite CPU RaspberryPi Zero 2 W Bullseye armhf GUI mode, 4 threads
+  - 160x128 Float16 TFLite CPU RaspberryPi Zero 2 W Bullseye armhf GUI mode, 4 threads
 
     ```bash
     134.0ms/pred
@@ -212,7 +212,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
     115.0ms/pred
     ```
 
-  - 160x128 INT8 CPU TFLite RaspberryPi Zero 2 W Bullseye aarch64 GUI mode, 4 threads
+  - 160x128 INT8 TFLite CPU RaspberryPi Zero 2 W Bullseye aarch64 GUI mode, 4 threads
 
     ```bash
     81ms/pred
