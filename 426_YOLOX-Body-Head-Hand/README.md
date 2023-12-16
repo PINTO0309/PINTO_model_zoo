@@ -6,6 +6,10 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
 `Head` does not mean `Face`. Thus, the entire head is detected rather than a narrow region of the face. This makes it possible to detect all 360° head orientations.
 
+  https://github.com/PINTO0309/PINTO_model_zoo/tree/main/423_6DRepNet360
+
+  https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/ab4c4b1b-6e51-416a-948f-809b3d06eafd
+
 ## 1. Dataset
   - COCO-Hand (14,667 Images, 66,903 labels, All re-annotated manually)
   - http://vision.cs.stonybrook.edu/~supreeth/COCO-Hand.zip
