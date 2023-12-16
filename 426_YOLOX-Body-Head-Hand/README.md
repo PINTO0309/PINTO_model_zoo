@@ -32,6 +32,9 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
                Total: 14,667 images
     ```
     ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/22b56779-928b-44d8-944c-25431b83e24f)
+  - The process of work and verification can be seen in my working notes below. However, a detailed explanation is not given.
+
+    https://zenn.dev/pinto0309/scraps/11300d816ab1b3
 
 ## 2. Annotation
 
