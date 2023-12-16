@@ -10,7 +10,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
   https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/ab4c4b1b-6e51-416a-948f-809b3d06eafd
 
-The advantage of being able to detect hands with high accuracy is that it makes it possible to detect key points on the fingers as correctly as possible.
+The advantage of being able to detect hands with high accuracy is that it makes it possible to detect key points on the fingers as correctly as possible. Since the MediaPipe tflite files are converted to ONNX for processing, the performance of keypoint detection is not very high. It is assumed that information can be acquired quite robustly when combined with a highly accurate keypoint detection model focused on the hand region. It would be realistic to use the distance in the Z direction, which represents depth, in combination with physical information such as ToF, rather than relying on model estimation.
 
   https://github.com/PINTO0309/hand_landmark
 
