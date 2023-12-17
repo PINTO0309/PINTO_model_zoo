@@ -238,6 +238,8 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/ba690884-9b94-4356-8a43-82a1161ea5b1
 
+    ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/7e01e98c-9d71-4c3b-9663-a0743af49b64)
+
 - Body-Head-Hand - Nano
   ```
   Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.409
