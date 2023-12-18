@@ -468,6 +468,10 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
 
     https://github.com/TexasInstruments/edgeai-yolox
 
+  - yolox-ti-lite_tflite
+
+    https://github.com/motokimura/yolox-ti-lite_tflite
+
   - YOLOX-Colaboratory-Training-Sample
 
     高橋かずひと https://github.com/Kazuhito00
