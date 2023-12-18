@@ -9,8 +9,8 @@ from typing import List
 
 # params
 # WEIGHTS = "yolox_ti_body_head_hand_n_1x3x128x160_uint8.onnx"
-WEIGHTS = "yolox_ti_body_head_hand_n_1x3x256x320_uint8.onnx"
-# WEIGHTS = "yolox_ti_body_head_hand_n_1x3x480x640_uint8.onnx"
+# WEIGHTS = "yolox_ti_body_head_hand_n_1x3x256x320_uint8.onnx"
+WEIGHTS = "yolox_ti_body_head_hand_n_1x3x480x640_uint8.onnx"
 NUM_CLASSES = 3
 SCORE_THRESHOLD = 0.60
 IOU_THRESHOLD = 0.4
