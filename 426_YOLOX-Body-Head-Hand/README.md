@@ -50,6 +50,7 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
 
 ## 3. Test
   - Python 3.10
+  - onnx 1.14.1+
   - onnxruntime-gpu v1.16.1 (TensorRT Execution Provider Enabled Binary. See: [onnxruntime-gpu v1.16.1 + CUDA 11.8 + TensorRT 8.5.3 build (RTX3070)](https://zenn.dev/pinto0309/scraps/20afd3c58b30bf))
   - opencv-contrib-python 4.8.0.76
   - numpy 1.24.3
@@ -59,7 +60,7 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
 
   ```bash
   # Common ############################################
-  pip install opencv-contrib-python numpy
+  pip install opencv-contrib-python numpy onnx
 
   # For ONNX ##########################################
   pip uninstall onnxruntime onnxruntime-gpu
