@@ -102,6 +102,7 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
       Eliminates the file I/O load associated with automatic recording to MP4.
       Devices that use a MicroSD card or similar for main storage can speed up overall processing.
   ```
+
   - 640x480 TensorRT
 
     ```bash
@@ -112,6 +113,14 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
     ```
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/7017bc13-4bf4-4df4-855e-67af3344e3c3
+
+  - 640x480 CPU Corei9, UINT8 quantized ONNX + OpenCV DNN module (Not using onnxruntime)
+
+    ```bash
+    python demo/demo_yolox-ti_onnx.py
+    ```
+
+    https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/00bd7cec-66b5-495e-9096-942a0dd085f5
 
   - 320x256 CPU Corei9
 
