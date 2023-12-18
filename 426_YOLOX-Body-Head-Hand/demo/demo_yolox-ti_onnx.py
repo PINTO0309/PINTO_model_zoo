@@ -1,24 +1,21 @@
 """
-This demo code is designed to run a lightweight model for edge devices
-at high speed instead of degrading accuracy due to INT8 quantization.
-
-runtime: https://github.com/PINTO0309/TensorflowLite-bin
 code cited from: https://qiita.com/UnaNancyOwen/items/650d79c88a58a3cc30ce
 """
 import cv2
+import onnx
 import time
 import numpy as np
 from typing import List
 
 # params
-# WEIGHTS = "yolox_ti_body_head_hand_n_1x3x128x160_bgr_uint8.tflite"
-WEIGHTS = "yolox_ti_body_head_hand_n_1x3x256x320_bgr_uint8.tflite"
-# WEIGHTS = "yolox_ti_body_head_hand_n_1x3x480x640_bgr_uint8.tflite"
+# WEIGHTS = "yolox_ti_body_head_hand_n_1x3x128x160_uint8.onnx"
+WEIGHTS = "yolox_ti_body_head_hand_n_1x3x256x320_uint8.onnx"
+# WEIGHTS = "yolox_ti_body_head_hand_n_1x3x480x640_uint8.onnx"
 NUM_CLASSES = 3
-SCORE_THRESHOLD = 0.50
+SCORE_THRESHOLD = 0.60
 IOU_THRESHOLD = 0.4
-CAP_WIDTH = 320
-CAP_HEIGHT = 240
+CAP_WIDTH = 640
+CAP_HEIGHT = 480
 
 # detection model class for yolox
 class DetectionModel:
@@ -30,31 +27,41 @@ class DetectionModel:
     ):
         self.__initialize(weight=weight)
 
+    # set preferable backend
+    def _setPreferableBackend(self, backend):
+        self._interpreter.setPreferableBackend(backend)
+
+    # set preferable target
+    def _setPreferableTarget(self, target):
+        self._interpreter.setPreferableTarget(target)
+
     # initialize
     def __initialize(
         self,
         *,
         weight: str,
     ):
-        from tflite_runtime.interpreter import Interpreter # type: ignore
-        self._interpreter = Interpreter(model_path=weight)
-        self._input_details = self._interpreter.get_input_details()
-        self._output_details = self._interpreter.get_output_details()
+        onnx_model = onnx.load(f=weight)
         self._input_shapes = [
-            input.get('shape', None) for input in self._input_details
+            [dim.dim_value for dim in onnx_model.graph.input[0].type.tensor_type.shape.dim]
         ]
         self._input_names = [
-            input.get('name', None) for input in self._input_details
+            input.name for input in onnx_model.graph.input
         ]
         self._output_shapes = [
-            output.get('shape', None) for output in self._output_details
+            [dim.dim_value for dim in onnx_model.graph.output[0].type.tensor_type.shape.dim]
         ]
         self._output_names = [
-            output.get('name', None) for output in self._output_details
+            output.name for output in onnx_model.graph.output
         ]
-        self._model = self._interpreter.get_signature_runner()
-        self._h_index = 1
-        self._w_index = 2
+        del onnx_model
+
+        self._interpreter = cv2.dnn.readNet(weight)
+        self._setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
+        self._setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
+        self._model = self._interpreter
+        self._h_index = 2
+        self._w_index = 3
         strides = [8, 16, 32]
         self.grids, self.expanded_strides = \
             self.__create_grids_and_expanded_strides(strides=strides)
@@ -92,17 +99,11 @@ class DetectionModel:
         iou_threshold: float,
     ):
         self.image_shape = image.shape
-        prep_image, resize_ratio_w, resize_ratio_h = self.__preprocess(image=image)
-        datas = {
-            f'{input_name}': input_data \
-                for input_name, input_data in zip(self._input_names, [np.asarray([prep_image], dtype=np.uint8)])
-        }
-        outputs = [
-            output for output in \
-                self._model(
-                    **datas
-                ).values()
-        ][0]
+        input_blob, resize_ratio_w, resize_ratio_h = self.__preprocess(image=image)
+        self._model.setInput(input_blob)
+        output_layer = self._model.getUnconnectedOutLayersNames()[0] # "output"
+        outputs = self._model.forward(output_layer)
+
         boxes, scores, class_ids = \
             self.__postprocess(
                 output_blob=outputs,
@@ -132,7 +133,16 @@ class DetectionModel:
                 image,
                 dsize=(self._input_shapes[0][self._w_index], self._input_shapes[0][self._h_index])
             )
-        return resized_image, resize_ratio_w, resize_ratio_h
+        input_blob = \
+            cv2.dnn.blobFromImage(
+                image=resized_image,
+                scalefactor=1.0,
+                size=(self._input_shapes[0][self._w_index], self._input_shapes[0][self._h_index]),
+                mean=(0.0, 0.0, 0.0),
+                swapRB=False,
+                crop=False,
+            )
+        return input_blob, resize_ratio_w, resize_ratio_h
 
     # postprocess
     def __postprocess(

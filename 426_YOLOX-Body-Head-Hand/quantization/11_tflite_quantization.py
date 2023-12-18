@@ -2,9 +2,9 @@ import numpy as np
 import tensorflow as tf
 
 """
-onnx2tf -i yolox_ti_body_head_hand_n_1x3x128x160.onnx -coion -osd
-onnx2tf -i yolox_ti_body_head_hand_n_1x3x256x320.onnx -coion -osd
-onnx2tf -i yolox_ti_body_head_hand_n_1x3x480x640.onnx -coion -osd
+onnx2tf -i yolox_ti_body_head_hand_s_post_1x3x128x160.onnx -coion -osd
+onnx2tf -i yolox_ti_body_head_hand_s_post_1x3x256x320.onnx -coion -osd
+onnx2tf -i yolox_ti_body_head_hand_s_post_1x3x480x640.onnx -coion -osd
 """
 
 RESOLUTIONS = [
@@ -49,11 +49,11 @@ for H, W in RESOLUTIONS:
     converter.inference_input_type = tf.uint8
     # converter.inference_output_type = tf.int8
     tflite_quant_model = converter.convert()
-    with open(f'saved_model_{H}x{W}/yolox_ti_body_head_hand_n_1x3x{H}x{W}_bgr_uint8.tflite', 'wb') as w:
+    with open(f'saved_model_{H}x{W}/yolox_ti_body_head_hand_s_post_1x3x{H}x{W}_bgr_uint8.tflite', 'wb') as w:
         w.write(tflite_quant_model)
 
 """
-tfliteiorewriter -i saved_model_128x160/yolox_ti_body_head_hand_n_1x3x128x160_bgr_uint8.tflite
-tfliteiorewriter -i saved_model_256x320/yolox_ti_body_head_hand_n_1x3x256x320_bgr_uint8.tflite
-tfliteiorewriter -i saved_model_480x640/yolox_ti_body_head_hand_n_1x3x480x640_bgr_uint8.tflite
+tfliteiorewriter -i saved_model_128x160/yolox_ti_body_head_hand_s_post_1x3x128x160_bgr_uint8.tflite
+tfliteiorewriter -i saved_model_256x320/yolox_ti_body_head_hand_s_post_1x3x256x320_bgr_uint8.tflite
+tfliteiorewriter -i saved_model_480x640/yolox_ti_body_head_hand_s_post_1x3x480x640_bgr_uint8.tflite
 """
