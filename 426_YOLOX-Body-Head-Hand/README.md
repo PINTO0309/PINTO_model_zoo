@@ -71,11 +71,11 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
 
   # For ARM. tflite_runtime ###########################
   TFVER=2.15.0.post1
-  
+
   PYVER=310
   or
   PYVER=311
-  
+
   ARCH=aarch64
   or
   ARCH=armhf
@@ -89,7 +89,7 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
   ```
   ```
   usage: demo_yolox_onnx_tfite.py [-h] [-m MODEL] [-v VIDEO] [-ep {cpu,cuda,tensorrt}] [-dvw]
-  
+
   options:
     -h, --help
       show this help message and exit
@@ -118,7 +118,7 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
   - 640x480 CPU Corei9, UINT8 quantized ONNX + OpenCV DNN module (Not using onnxruntime)
 
     ```bash
-    python demo/demo_yolox-ti_onnx.py
+    python demo/demo_yolox-ti_onnx_opencvdnn.py
     ```
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/00bd7cec-66b5-495e-9096-942a0dd085f5
