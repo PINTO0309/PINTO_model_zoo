@@ -177,10 +177,6 @@ class AbstractModel(ABC):
             self._h_index = 1
             self._w_index = 2
 
-        strides = [8, 16, 32]
-        self.grids, self.expanded_strides = \
-            self._create_grids_and_expanded_strides(strides=strides)
-
     @abstractmethod
     def __call__(
         self,
@@ -227,6 +223,8 @@ class AbstractModel(ABC):
     ) -> List[Box]:
         pass
 
+
+class YOLOX(AbstractModel):
     def _create_grids_and_expanded_strides(
         self,
         *,
@@ -246,34 +244,6 @@ class AbstractModel(ABC):
         expanded_strides = np.concatenate(expanded_strides, 1)
         return grids, expanded_strides
 
-    def _nms(
-        self,
-        *,
-        boxes: np.ndarray,
-        scores: np.ndarray,
-        class_ids: np.ndarray,
-    ):
-        indices = \
-            cv2.dnn.NMSBoxesBatched(
-                bboxes=boxes,
-                scores=scores,
-                class_ids=class_ids,
-                score_threshold=self._score_threshold,
-                nms_threshold=self._iou_threshold,
-            ) # OpenCV 4.7.0 or later
-        keep_boxes = []
-        keep_scores = []
-        keep_class_ids = []
-        for index in indices:
-            keep_boxes.append(boxes[index])
-            keep_scores.append(scores[index])
-            keep_class_ids.append(class_ids[index])
-        if len(keep_boxes) > 0:
-            keep_boxes = np.vectorize(int)(keep_boxes)
-        return keep_boxes, keep_scores, keep_class_ids
-
-
-class YOLOX(AbstractModel):
     def __init__(
         self,
         *,
@@ -306,6 +276,9 @@ class YOLOX(AbstractModel):
             iou_threshold=iou_threshold,
             providers=providers,
         )
+        self.strides = [8, 16, 32]
+        self.grids, self.expanded_strides = \
+            self._create_grids_and_expanded_strides(strides=self.strides)
 
     def __call__(
         self,
@@ -408,6 +381,14 @@ class YOLOX(AbstractModel):
         output_blob[..., 2:4] = np.exp(output_blob[..., 2:4]) * self.expanded_strides
         predictions: np.ndarray = output_blob[0]
         boxes = predictions[:, :4]
+        """boxes: [N,cx,cy,w,h]
+            ┌───────┐
+            │       │
+            │[cx,cy]| h
+            │       │
+            └───────┘
+                w
+        """
         boxes_xywh = np.ones_like(boxes)
         boxes[:, 0] = boxes[:, 0] / resize_ratio_w
         boxes[:, 1] = boxes[:, 1] / resize_ratio_h
@@ -431,15 +412,25 @@ class YOLOX(AbstractModel):
             └───────┘
                 w
         """
-        boxes_xywh_keep, scores_keep, class_ids_keep = \
-            self._nms(
-                boxes=boxes_xywh,
+        indices = \
+            cv2.dnn.NMSBoxesBatched(
+                bboxes=boxes_xywh,
                 scores=scores,
                 class_ids=class_ids,
-            )
+                score_threshold=self._score_threshold,
+                nms_threshold=self._iou_threshold,
+            ) # OpenCV 4.7.0 or later
+        boxes_xywh_keep = []
+        scores_keep = []
+        class_ids_keep = []
+        for index in indices:
+            boxes_xywh_keep.append(boxes_xywh[index])
+            scores_keep.append(scores[index])
+            class_ids_keep.append(class_ids[index])
+        if len(boxes_xywh_keep) > 0:
+            boxes_xywh_keep = np.vectorize(int)(boxes_xywh_keep)
 
         result_boxes: List[Box] = []
-
         if len(boxes_xywh_keep) > 0:
             """box: [x,y,w,h]
             [x,y]
