@@ -87,22 +87,58 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
   # For x86/x64. TensorFlow ############################
   pip install tensorflow
   ```
-  ```
-  usage: demo_yolox_onnx_tfite.py [-h] [-m MODEL] [-v VIDEO] [-ep {cpu,cuda,tensorrt}] [-dvw]
-
-  options:
-    -h, --help
-      show this help message and exit
-    -m MODEL, --model MODEL
-      ONNX/TFLite file path for YOLOX.
-    -v VIDEO, --video VIDEO
-      Video file path or camera index.
-    -ep {cpu,cuda,tensorrt}, --execution_provider {cpu,cuda,tensorrt}
-      Execution provider for ONNXRuntime.
-    -dvw, --disable_video_writer
-      Eliminates the file I/O load associated with automatic recording to MP4.
-      Devices that use a MicroSD card or similar for main storage can speed up overall processing.
-  ```
+  - Demonstration of models with built-in post-processing (Float32/Float16)
+    ```
+    usage:
+      demo_yolox_onnx_tfite.py \
+      [-h] \
+      [-m MODEL] \
+      [-v VIDEO] \
+      [-ep {cpu,cuda,tensorrt}] \
+      [-dvw]
+  
+    options:
+      -h, --help
+        show this help message and exit
+      -m MODEL, --model MODEL
+        ONNX/TFLite file path for YOLOX.
+      -v VIDEO, --video VIDEO
+        Video file path or camera index.
+      -ep {cpu,cuda,tensorrt}, --execution_provider {cpu,cuda,tensorrt}
+        Execution provider for ONNXRuntime.
+      -dvw, --disable_video_writer
+        Eliminates the file I/O load associated with automatic recording to MP4.
+        Devices that use a MicroSD card or similar for main storage can speed up overall processing.
+    ```
+  - Demonstration of a model without built-in post-processing (UINT8/INT8)
+    ```
+    usage:
+      demo_yolox-ti_onnx_tflite.py \
+      [-h] \
+      [-m MODEL] \
+      [-st SCORE_THRESHOLD] \
+      [-it IOU_THRESHOLD] \
+      [-v VIDEO] \
+      [-ep {cpu,cuda}] \
+      [-dvw]
+    
+    options:
+      -h, --help
+        show this help message and exit
+      -m MODEL, --model MODEL
+        ONNX/TFLite file path for YOLOX.
+      -st SCORE_THRESHOLD, --score_threshold SCORE_THRESHOLD
+        NMS score threshold.
+      -it IOU_THRESHOLD, --iou_threshold IOU_THRESHOLD
+        NMS IoU threshold.
+      -v VIDEO, --video VIDEO
+        Video file path or camera index.
+      -ep {cpu,cuda}, --execution_provider {cpu,cuda}
+        Execution provider for ONNXRuntime.
+      -dvw, --disable_video_writer
+        Disable video writer. Eliminates the file I/O load associated with automatic recording to MP4.
+        Devices that use a MicroSD card or similar for main storage can speed up overall processing.
+    ```
 
   - 640x480 TensorRT
 
