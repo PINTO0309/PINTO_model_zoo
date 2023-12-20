@@ -243,7 +243,9 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
     81ms/pred
     ```
     ```
-    python demo/demo_yolox-ti_tflite.py
+    python demo/demo_yolox-ti_onnx_tflite.py \
+    -m yolox_ti_body_head_hand_n_1x3x128x160_bgr_uint8.tflite \
+    -v 0
     ```
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/ba690884-9b94-4356-8a43-82a1161ea5b1
