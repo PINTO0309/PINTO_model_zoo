@@ -58,35 +58,36 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
   - [tflite-runtime](https://github.com/PINTO0309/TensorflowLite-bin) v2.15.0+
   - TensorFlow v2.15.0+
 
-  ```bash
-  # Common ############################################
-  pip install opencv-contrib-python numpy onnx
+    ```bash
+    # Common ############################################
+    pip install opencv-contrib-python numpy onnx
+  
+    # For ONNX ##########################################
+    pip uninstall onnxruntime onnxruntime-gpu
+  
+    pip install onnxruntime
+    or
+    pip install onnxruntime-gpu
+  
+    # For ARM. tflite_runtime ###########################
+    TFVER=2.15.0.post1
+  
+    PYVER=310
+    or
+    PYVER=311
+  
+    ARCH=aarch64
+    or
+    ARCH=armhf
+  
+    pip install \
+    --no-cache-dir \
+    https://github.com/PINTO0309/TensorflowLite-bin/releases/download/v${TFVER}/tflite_runtime-${TFVER/-/}-cp${PYVER}-none-linux_${ARCH}.whl
+  
+    # For x86/x64. TensorFlow ############################
+    pip install tensorflow
+    ```
 
-  # For ONNX ##########################################
-  pip uninstall onnxruntime onnxruntime-gpu
-
-  pip install onnxruntime
-  or
-  pip install onnxruntime-gpu
-
-  # For ARM. tflite_runtime ###########################
-  TFVER=2.15.0.post1
-
-  PYVER=310
-  or
-  PYVER=311
-
-  ARCH=aarch64
-  or
-  ARCH=armhf
-
-  pip install \
-  --no-cache-dir \
-  https://github.com/PINTO0309/TensorflowLite-bin/releases/download/v${TFVER}/tflite_runtime-${TFVER/-/}-cp${PYVER}-none-linux_${ARCH}.whl
-
-  # For x86/x64. TensorFlow ############################
-  pip install tensorflow
-  ```
   - Demonstration of models with built-in post-processing (Float32/Float16)
     ```
     usage:
