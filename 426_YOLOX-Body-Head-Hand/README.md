@@ -133,7 +133,7 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/00bd7cec-66b5-495e-9096-942a0dd085f5
 
-  - 320x256 CPU Corei9
+  - 320x256 CPU Corei9, Float32 ONNX + onnxruntime
 
     ```bash
     python demo/demo_yolox_onnx_tfite.py \
@@ -143,7 +143,7 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
 
     https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/5d14b76e-daea-473f-8730-e3b0da0d0164
 
-  - 160x128 CPU Corei9
+  - 160x128 CPU Corei9, Float32 ONNX + onnxruntime
 
     ```bash
     python demo/demo_yolox_onnx_tfite.py \
