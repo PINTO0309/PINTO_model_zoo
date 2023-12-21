@@ -111,7 +111,7 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
         Eliminates the file I/O load associated with automatic recording to MP4.
         Devices that use a MicroSD card or similar for main storage can speed up overall processing.
     ```
-  - Demonstration of a model without built-in post-processing (UINT8/INT8)
+  - Demonstration of a model without built-in post-processing (UINT8/INT8/Float32/Float16)
     ```
     usage:
       demo_yolox-ti_onnx_tflite.py \
