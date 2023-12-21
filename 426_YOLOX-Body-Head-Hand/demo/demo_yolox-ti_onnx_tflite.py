@@ -1,7 +1,12 @@
+#!/usr/bin/env python
+
 """
 This demo code is designed to run a lightweight model for edge devices
 at high speed instead of degrading accuracy due to INT8 quantization.
+Automatic determination of the runtime that should be executed based
+on the file extension.
 
+runtime: https://github.com/microsoft/onnxruntime
 runtime: https://github.com/PINTO0309/TensorflowLite-bin
 """
 from __future__ import annotations

@@ -1,5 +1,13 @@
 #!/usr/bin/env python
 
+"""
+This demo code is for evaluation of an end-to-end model with
+post-processing merged. Automatic determination of the runtime
+that should be executed based on the file extension.
+
+runtime: https://github.com/microsoft/onnxruntime
+runtime: https://github.com/PINTO0309/TensorflowLite-bin
+"""
 from __future__ import annotations
 import os
 import sys
@@ -74,6 +82,13 @@ class AbstractModel(ABC):
     _h_index = 2
     _w_index = 3
 
+    # onnx
+    _onnx_dtypes_to_np_dtypes = {
+        "tensor(float)": np.float32,
+        "tensor(uint8)": np.uint8,
+        "tensor(int8)": np.int8,
+    }
+
     # tflite
     _input_details = None
     _output_details = None
@@ -120,6 +135,9 @@ class AbstractModel(ABC):
             self._input_names = [
                 input.name for input in self._interpreter.get_inputs()
             ]
+            self._input_dtypes = [
+                self._onnx_dtypes_to_np_dtypes[input.type] for input in self._interpreter.get_inputs()
+            ]
             self._output_shapes = [
                 output.shape for output in self._interpreter.get_outputs()
             ]
@@ -145,6 +163,9 @@ class AbstractModel(ABC):
             ]
             self._input_names = [
                 input.get('name', None) for input in self._input_details
+            ]
+            self._input_dtypes = [
+                input.get('dtype', None) for input in self._input_details
             ]
             self._output_shapes = [
                 output.get('shape', None) for output in self._output_details
@@ -263,7 +284,7 @@ class YOLOX(AbstractModel):
             )
 
         # Inference
-        inferece_image = np.asarray([resized_image], dtype=np.float32)
+        inferece_image = np.asarray([resized_image], dtype=self._input_dtypes[0])
         outputs = super().__call__(input_datas=[inferece_image])
         boxes = outputs[0]
 
