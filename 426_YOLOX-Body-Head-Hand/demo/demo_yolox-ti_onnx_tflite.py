@@ -23,7 +23,6 @@ from typing import Tuple, Optional, List, Dict
 import importlib.util
 from abc import ABC, abstractmethod
 
-
 class Color(Enum):
     BLACK          = '\033[30m'
     RED            = '\033[31m'
