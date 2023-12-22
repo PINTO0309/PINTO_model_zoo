@@ -1,4 +1,4 @@
-# Note (Body + Head + Hand)
+# Gold-YOLO-Body-Head-Hand
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10229410.svg)](https://doi.org/10.5281/zenodo.10229410)
 
