@@ -413,6 +413,26 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
 
 - Body-Head-Hand - X
   ```
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.556
+  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.829
+  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.586
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.389
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.734
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.886
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.164
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.484
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.603
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.463
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.778
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.912
+  per class AP:
+  | class   | AP     | class   | AP     | class   | AP     |
+  |:--------|:-------|:--------|:-------|:--------|:-------|
+  | body    | 60.640 | head    | 56.730 | hand    | 49.516 |
+  per class AR:
+  | class   | AR     | class   | AR     | class   | AR     |
+  |:--------|:-------|:--------|:-------|:--------|:-------|
+  | body    | 65.332 | head    | 60.171 | hand    | 55.462 |
   ```
 
 - Post-Process
