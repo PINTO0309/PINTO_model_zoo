@@ -293,98 +293,126 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
 
 - Body-Head-Hand - Nano
   ```
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.409
-  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.717
-  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.407
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.277
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.554
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.687
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.411
+  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.721
+  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.409
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.278
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.557
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.692
   Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.135
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.380
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.483
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.365
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.632
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.729
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.382
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.495
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.374
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.647
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.738
   per class AP:
   | class   | AP     | class   | AP     | class   | AP     |
   |:--------|:-------|:--------|:-------|:--------|:-------|
-  | body    | 40.246 | head    | 48.986 | hand    | 33.368 |
+  | body    | 40.412 | head    | 49.183 | hand    | 33.564 |
   per class AR:
   | class   | AR     | class   | AR     | class   | AR     |
   |:--------|:-------|:--------|:-------|:--------|:-------|
-  | body    | 47.787 | head    | 53.635 | hand    | 43.406 |
+  | body    | 48.985 | head    | 54.212 | hand    | 45.345 |
   ```
 
 - Body-Head-Hand - Tiny
   ```
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.452
-  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.756
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.455
+  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.762
   Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.473
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.317
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.601
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.718
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.318
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.606
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.723
   Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.143
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.410
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.514
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.395
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.662
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.759
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.412
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.525
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.405
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.674
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.768
   per class AP:
   | class   | AP     | class   | AP     | class   | AP     |
   |:--------|:-------|:--------|:-------|:--------|:-------|
-  | body    | 45.713 | head    | 51.339 | hand    | 38.687 |
+  | body    | 45.962 | head    | 51.465 | hand    | 38.975 |
   per class AR:
   | class   | AR     | class   | AR     | class   | AR     |
   |:--------|:-------|:--------|:-------|:--------|:-------|
-  | body    | 52.068 | head    | 55.533 | hand    | 46.514 |
+  | body    | 53.025 | head    | 56.050 | hand    | 48.280 |
   ```
 
 - Body-Head-Hand - S
   ```
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.498
-  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.790
-  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.522
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.343
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.672
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.806
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.500
+  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.793
+  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.525
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.344
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.674
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.809
   Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.154
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.443
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.557
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.425
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.726
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.836
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.445
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.566
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.432
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.735
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.844
   per class AP:
   | class   | AP     | class   | AP     | class   | AP     |
   |:--------|:-------|:--------|:-------|:--------|:-------|
-  | body    | 51.932 | head    | 54.617 | hand    | 42.914 |
+  | body    | 52.107 | head    | 54.694 | hand    | 43.127 |
   per class AR:
   | class   | AR     | class   | AR     | class   | AR     |
   |:--------|:-------|:--------|:-------|:--------|:-------|
-  | body    | 57.897 | head    | 58.626 | hand    | 50.448 |
+  | body    | 58.811 | head    | 59.010 | hand    | 51.898 |
   ```
 
 - Body-Head-Hand - M
   ```
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.526
-  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.809
-  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.556
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.361
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.703
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.860
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.528
+  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.812
+  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.558
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.362
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.705
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.863
   Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.160
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.464
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.576
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.437
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.751
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.885
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.466
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.586
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.447
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.760
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.890
   per class AP:
   | class   | AP     | class   | AP     | class   | AP     |
   |:--------|:-------|:--------|:-------|:--------|:-------|
-  | body    | 55.937 | head    | 55.622 | hand    | 46.220 |
+  | body    | 56.232 | head    | 55.763 | hand    | 46.546 |
   per class AR:
   | class   | AR     | class   | AR     | class   | AR     |
   |:--------|:-------|:--------|:-------|:--------|:-------|
-  | body    | 61.114 | head    | 59.494 | hand    | 52.181 |
+  | body    | 62.242 | head    | 59.877 | hand    | 53.642 |
+  ```
+
+- Body-Head-Hand - L
+  ```
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.542
+  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.816
+  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.569
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.374
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.720
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.879
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.162
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.474
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.593
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.452
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.769
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.904
+  per class AP:
+  | class   | AP     | class   | AP     | class   | AP     |
+  |:--------|:-------|:--------|:-------|:--------|:-------|
+  | body    | 57.914 | head    | 56.578 | hand    | 48.080 |
+  per class AR:
+  | class   | AR     | class   | AR     | class   | AR     |
+  |:--------|:-------|:--------|:-------|:--------|:-------|
+  | body    | 63.232 | head    | 60.400 | hand    | 54.363 |
+  ```
+
+- Body-Head-Hand - X
+  ```
   ```
 
 - Post-Process
