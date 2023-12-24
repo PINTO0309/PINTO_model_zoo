@@ -259,6 +259,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |394|RTMPose_Animal|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/394_RTMPose_Animal)|⚫|⚫|⚫||⚫||||||⚫|2D|
 |402|trt_pose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/402_trt_pose)|||||||||||⚫|2D|
 |412|pytorch_cpn|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/412_pytorch_cpn)|⚫|⚫|||||||||⚫|2D|
+|427|RTMPose_Hand|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/427_RTMPose_Hand)|||||||||||⚫|2D|
 ### 7. Depth Estimation from Monocular/Stereo Images
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
