@@ -501,6 +501,7 @@ def main():
     model = YOLOX(
         runtime=runtime,
         model_path=model_file,
+        class_score_th=0.35,
         providers=providers,
     )
 
