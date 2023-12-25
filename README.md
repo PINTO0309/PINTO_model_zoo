@@ -557,6 +557,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |408|UAED|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/408_UAED)|||||||||||⚫|Edge Detectopm|
 |413|DocShadow|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/413_DocShadow)|⚫||||||||||⚫|Document Shadow Removal|
 |416|GeoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/416_GeoNet)|⚫||||||||||⚫|MonoDepth, CameraPose, OpticalFlow|
+|428|ISR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/428_ISR)|||||||||||⚫|Person ReID|
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)
