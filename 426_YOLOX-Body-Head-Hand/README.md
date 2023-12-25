@@ -141,6 +141,23 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
         Devices that use a MicroSD card or similar for main storage can speed up overall processing.
     ```
 
+  - 1280x736 TensorRT
+
+    |NMS param|value|
+    |:-|-:|
+    |max_output_boxes_per_class|100|
+    |iou_threshold|0.50|
+    |score_threshold|0.05|
+
+    ```bash
+    python demo/demo_yolox_onnx_tfite.py \
+    -m yolox_x_body_head_hand_0102_0.5533_post_1x3x736x1280.onnx \
+    -v 0 \
+    -ep tensorrt
+    ```
+
+    https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/f9cd63e5-62e8-4ab8-a035-1e2c8299f864
+
   - 640x480 TensorRT
 
     ```bash
