@@ -240,7 +240,7 @@ class ISR(AbstractModel):
         model_path: Optional[str] = 'isr_2x3x224x224_11.onnx',
         providers: Optional[List] = None,
     ):
-        """YOLOX
+        """ISR
 
         Parameters
         ----------
@@ -249,9 +249,6 @@ class ISR(AbstractModel):
 
         model_path: Optional[str]
             ONNX/TFLite file path for YOLOX
-
-        class_score_th: Optional[float]
-            Score threshold. Default: 0.35
 
         providers: Optional[List]
             Providers for ONNXRuntime.
