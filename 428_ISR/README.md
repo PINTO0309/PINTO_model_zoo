@@ -16,6 +16,37 @@
   opset=11
   ```
 
+- test
+  ```
+  usage: demo_isr_onnx_tfite.py \
+  [-h] \
+  [-m MODEL] \
+  [-i1 IMAGE1] \
+  [-i2 IMAGE2] \
+  [-ep {cpu,cuda,tensorrt}]
+  
+  options:
+    -h, --help            show this help message and exit
+    -m MODEL, --model MODEL
+                          ONNX/TFLite file path for YOLOX.
+    -i1 IMAGE1, --image1 IMAGE1
+                          Base image file.
+    -i2 IMAGE2, --image2 IMAGE2
+                          Target image file.
+    -ep {cpu,cuda,tensorrt}, --execution_provider {cpu,cuda,tensorrt}
+                          Execution provider for ONNXRuntime.
+
+
+  python demo/demo_isr_onnx_tfite.py -m isr_2x3x224x224_11.onnx -i1 1.png -i2 2.png
+  The similarity is 0.511 Elapsed time: 113.86ms
+  
+  python demo/demo_isr_onnx_tfite.py -m isr_2x3x224x224_11.onnx -i1 1.png -i2 3.png
+  The similarity is 0.764 Elapsed time: 113.91ms
+  
+  python demo/demo_isr_onnx_tfite.py -m isr_2x3x224x224_11.onnx -i1 1.png -i2 4.png
+  The similarity is 0.725 Elapsed time: 156.75ms
+  ```
+
 - Benchmark
 
   ```
