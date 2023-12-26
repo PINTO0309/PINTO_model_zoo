@@ -253,6 +253,7 @@ class ISR(AbstractModel):
         ----------
         base_image: np.ndarray
             Entire image
+
         target_image: np.ndarray
             Entire image
 
@@ -269,7 +270,6 @@ class ISR(AbstractModel):
             self._preprocess(
                 base_image=temp_base_image,
                 target_image=temp_target_image,
-
             )
 
         # Inference
