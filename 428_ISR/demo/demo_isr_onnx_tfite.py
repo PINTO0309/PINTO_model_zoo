@@ -226,7 +226,7 @@ class ISR(AbstractModel):
         Parameters
         ----------
         runtime: Optional[str]
-            Runtime for YOLOX. Default: onnx
+            Runtime for ISR. Default: onnx
 
         model_path: Optional[str]
             ONNX/TFLite file path for YOLOX
@@ -286,7 +286,10 @@ class ISR(AbstractModel):
 
         Parameters
         ----------
-        image: np.ndarray
+        base_image: np.ndarray
+            Entire image
+
+        target_image: np.ndarray
             Entire image
 
         swap: tuple
