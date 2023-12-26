@@ -229,7 +229,7 @@ class ISR(AbstractModel):
             Runtime for ISR. Default: onnx
 
         model_path: Optional[str]
-            ONNX/TFLite file path for YOLOX
+            ONNX/TFLite file path for ISR
 
         providers: Optional[List]
             Providers for ONNXRuntime.
@@ -244,6 +244,7 @@ class ISR(AbstractModel):
 
     def __call__(
         self,
+        *,
         base_image: np.ndarray,
         target_image: np.ndarray,
     ) -> np.ndarray:
@@ -279,6 +280,7 @@ class ISR(AbstractModel):
 
     def _preprocess(
         self,
+        *,
         base_image: np.ndarray,
         target_image: np.ndarray,
     ) -> np.ndarray:
@@ -306,8 +308,8 @@ class ISR(AbstractModel):
         # Resize + Transpose
         resized_base_image: np.ndarray = \
             cv2.resize(
-                base_image,
-                (
+                src=base_image,
+                dsize=(
                     int(self._input_shapes[0][self._w_index]),
                     int(self._input_shapes[0][self._h_index]),
                 )
@@ -316,8 +318,8 @@ class ISR(AbstractModel):
         resized_base_image = resized_base_image.transpose(self._swap)
         resized_target_image: np.ndarray = \
             cv2.resize(
-                target_image,
-                (
+                src=target_image,
+                dsize=(
                     int(self._input_shapes[0][self._w_index]),
                     int(self._input_shapes[0][self._h_index]),
                 )
@@ -366,7 +368,7 @@ def main():
         '--model',
         type=str,
         default='isr_2x3x224x224_11.onnx',
-        help='ONNX/TFLite file path for YOLOX.',
+        help='ONNX/TFLite file path for ISR.',
     )
     parser.add_argument(
         '-i1',
