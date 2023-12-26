@@ -268,7 +268,7 @@ class ISR(AbstractModel):
         self,
         base_image: np.ndarray,
         target_image: np.ndarray,
-    ) -> List[Box]:
+    ) -> np.ndarray:
         """ISR
 
         Parameters
