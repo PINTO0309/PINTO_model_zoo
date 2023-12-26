@@ -16,7 +16,6 @@ import cv2
 import time
 import numpy as np
 from enum import Enum
-from dataclasses import dataclass
 from argparse import ArgumentParser
 from typing import Tuple, Optional, List, Dict
 import importlib.util
