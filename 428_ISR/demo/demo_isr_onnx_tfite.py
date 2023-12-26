@@ -53,15 +53,6 @@ class Color(Enum):
     def __call__(self, s):
         return str(self) + str(s) + str(Color.RESET)
 
-@dataclass(frozen=False)
-class Box():
-    classid: int
-    score: float
-    x1: int
-    y1: int
-    x2: int
-    y2: int
-
 class AbstractModel(ABC):
     """AbstractModel
     Base class of the model.
@@ -223,15 +214,6 @@ class AbstractModel(ABC):
     ) -> np.ndarray:
         raise NotImplementedError()
 
-    @abstractmethod
-    def _postprocess(
-        self,
-        *,
-        image: np.ndarray,
-        boxes: np.ndarray,
-    ) -> List[Box]:
-        raise NotImplementedError()
-
 class ISR(AbstractModel):
     def __init__(
         self,
@@ -350,13 +332,6 @@ class ISR(AbstractModel):
         stacked_image = (stacked_image / 255.0 - self._mean) / self._std
         stacked_image = stacked_image.astype(self._input_dtypes[0])
         return stacked_image
-
-    def _postprocess(
-        self,
-        image: np.ndarray,
-        boxes: np.ndarray,
-    ) -> List[Box]:
-        pass
 
 
 def is_parsable_to_int(s):
