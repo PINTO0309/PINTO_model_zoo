@@ -1,4 +1,5 @@
 # Note
+[ICCV2023 Oral] Identity-Seeking Self-Supervised Representation Learning for Generalizable Person Re-identification.
 
 - Citation Repository
 
