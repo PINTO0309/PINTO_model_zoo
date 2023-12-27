@@ -374,14 +374,14 @@ def main():
         '-i1',
         '--image1',
         type=str,
-        default="1.png",
+        default="00030.jpg",
         help='Base image file.',
     )
     parser.add_argument(
         '-i2',
         '--image2',
         type=str,
-        default="2.png",
+        default="00031.jpg",
         help='Target image file.',
     )
     parser.add_argument(
