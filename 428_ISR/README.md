@@ -39,15 +39,16 @@
   [-ep {cpu,cuda,tensorrt}]
   
   options:
-    -h, --help            show this help message and exit
+    -h, --help
+      show this help message and exit
     -m MODEL, --model MODEL
-                          ONNX/TFLite file path for YOLOX.
+      ONNX/TFLite file path for ISR.
     -i1 IMAGE1, --image1 IMAGE1
-                          Base image file.
+      Base image file.
     -i2 IMAGE2, --image2 IMAGE2
-                          Target image file.
+      Target image file.
     -ep {cpu,cuda,tensorrt}, --execution_provider {cpu,cuda,tensorrt}
-                          Execution provider for ONNXRuntime.
+      Execution provider for ONNXRuntime.
 
 
   python demo/demo_isr_onnx_tfite.py -m isr_2x3x224x224_11.onnx -i1 1.png -i2 2.png
