@@ -20,6 +20,14 @@
   opset=11
   ```
 
+- similarity
+  
+  |image1|image2|
+  |:-:|:-:|
+  |![00030](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/1bbfff7c-407a-4f24-a71b-56e888aff0f2)|![00031](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/a3c3704c-ed3c-4c9c-922f-37b0a6ced3e8)|
+  
+  ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/6d7f5127-70f2-4c0a-a5c3-8dc83cfeef8d)
+
 - test
   ```
   usage: demo_isr_onnx_tfite.py \
