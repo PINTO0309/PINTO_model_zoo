@@ -29,7 +29,7 @@
   
   ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/6d7f5127-70f2-4c0a-a5c3-8dc83cfeef8d)
 
-- test
+- test - When inferring with TensorRT, the output value is Nan and it breaks down. (TensorRT 8.5.3)
   ```
   usage: demo_isr_onnx_tfite.py \
   [-h] \
