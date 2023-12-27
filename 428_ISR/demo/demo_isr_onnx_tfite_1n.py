@@ -80,6 +80,8 @@ class AbstractModel(ABC):
         "tensor(float)": np.float32,
         "tensor(uint8)": np.uint8,
         "tensor(int8)": np.int8,
+        "tensor(int64)": np.int64,
+        "tensor(int32)": np.int32,
     }
 
     # tflite
@@ -218,7 +220,7 @@ class ISR(AbstractModel):
         self,
         *,
         runtime: Optional[str] = 'onnx',
-        model_path: Optional[str] = 'isr_2x3x224x224_11.onnx',
+        model_path: Optional[str] = 'isr_Nx3x224x224_11.onnx',
         providers: Optional[List] = None,
     ):
         """ISR
@@ -246,7 +248,7 @@ class ISR(AbstractModel):
         self,
         *,
         base_image: np.ndarray,
-        target_image: np.ndarray,
+        target_images: List[np.ndarray],
     ) -> np.ndarray:
         """ISR
 
@@ -264,26 +266,26 @@ class ISR(AbstractModel):
             similarity
         """
         temp_base_image = copy.deepcopy(base_image)
-        temp_target_image = copy.deepcopy(target_image)
+        temp_target_images = copy.deepcopy(target_images)
 
         # PreProcess
-        inferece_image = \
+        stacked_images = \
             self._preprocess(
                 base_image=temp_base_image,
-                target_image=temp_target_image,
+                target_images=temp_target_images,
             )
 
         # Inference
-        outputs = super().__call__(input_datas=[inferece_image])
-        similarity = np.squeeze(outputs[0])
+        outputs = super().__call__(input_datas=[stacked_images])
+        similarity = outputs[0]
         return similarity
 
     def _preprocess(
         self,
         *,
         base_image: np.ndarray,
-        target_image: np.ndarray,
-    ) -> np.ndarray:
+        target_images: List[np.ndarray],
+    ) -> Tuple[np.ndarray, int, int]:
         """_preprocess
 
         Parameters
@@ -291,7 +293,7 @@ class ISR(AbstractModel):
         base_image: np.ndarray
             Entire image
 
-        target_image: np.ndarray
+        target_image: List[np.ndarray]
             Entire image
 
         swap: tuple
@@ -302,8 +304,8 @@ class ISR(AbstractModel):
 
         Returns
         -------
-        resized_image: np.ndarray
-            Resized and normalized image.
+        stacked_images: np.ndarray
+            Resized and normalized image. [1+N, 3, H, W]
         """
         # Resize + Transpose
         resized_base_image: np.ndarray = \
@@ -316,26 +318,33 @@ class ISR(AbstractModel):
             )
         resized_base_image = resized_base_image[..., ::-1]
         resized_base_image = resized_base_image.transpose(self._swap)
-        resized_target_image: np.ndarray = \
-            cv2.resize(
-                src=target_image,
-                dsize=(
-                    int(self._input_shapes[0][self._w_index]),
-                    int(self._input_shapes[0][self._h_index]),
+
+        resized_target_images_np: np.ndarray = None
+        resized_target_images_list: List[np.ndarray] = []
+        for target_image in target_images:
+            resized_target_image: np.ndarray = \
+                cv2.resize(
+                    src=target_image,
+                    dsize=(
+                        int(self._input_shapes[0][self._w_index]),
+                        int(self._input_shapes[0][self._h_index]),
+                    )
                 )
-            )
-        resized_target_image = resized_target_image[..., ::-1]
-        resized_target_image = resized_target_image.transpose(self._swap)
-        stacked_image = \
+            resized_target_image = resized_target_image[..., ::-1]
+            resized_target_image = resized_target_image.transpose(self._swap)
+            resized_target_images_list.append(resized_target_image)
+        resized_target_images_np = np.asarray(resized_target_images_list)
+
+        stacked_images = \
             np.vstack(
                 [
                     resized_base_image[np.newaxis, ...],
-                    resized_target_image[np.newaxis, ...],
+                    resized_target_images_np,
                 ]
             )
-        stacked_image = (stacked_image / 255.0 - self._mean) / self._std
-        stacked_image = stacked_image.astype(self._input_dtypes[0])
-        return stacked_image
+        stacked_images = (stacked_images / 255.0 - self._mean) / self._std
+        stacked_images = stacked_images.astype(self._input_dtypes[0])
+        return stacked_images
 
 
 def is_parsable_to_int(s):
@@ -367,22 +376,21 @@ def main():
         '-m',
         '--model',
         type=str,
-        default='isr_2x3x224x224_11.onnx',
+        default='isr_1Nx3x224x224_11.onnx',
         help='ONNX/TFLite file path for ISR.',
     )
     parser.add_argument(
-        '-i1',
-        '--image1',
+        '-bi',
+        '--base_image',
         type=str,
-        default="00030.jpg",
         help='Base image file.',
     )
     parser.add_argument(
-        '-i2',
-        '--image2',
+        '-tis',
+        '--target_images',
         type=str,
-        default="00031.jpg",
-        help='Target image file.',
+        nargs='+',
+        help='Target image files.',
     )
     parser.add_argument(
         '-ep',
@@ -413,8 +421,8 @@ def main():
             print(Color.RED('ERROR: https://github.com/PINTO0309/TensorflowLite-bin'))
             print(Color.RED('ERROR: https://github.com/tensorflow/tensorflow'))
             sys.exit(0)
-    base_image_file: str = args.image1
-    target_image_file: str = args.image2
+    base_image_file: str = args.base_image
+    target_image_files: str = args.target_images
     execution_provider: str = args.execution_provider
     providers: List[Tuple[str, Dict] | str] = None
     if execution_provider == 'cpu':
@@ -446,33 +454,45 @@ def main():
         providers=providers,
     )
 
+    target_images: List[np.ndarray] = []
+
     base_image: np.ndarray = cv2.imread(base_image_file)
-    target_image: np.ndarray = cv2.imread(target_image_file)
+
+    for target_image_file in target_image_files:
+        target_image: np.ndarray = cv2.imread(target_image_file)
+        target_images.append(target_image)
 
     start_time = time.perf_counter()
-    similarity = \
+    similarities = \
         model(
             base_image=base_image,
-            target_image=target_image,
+            target_images=target_images,
         )
     elapsed_time = time.perf_counter() - start_time
 
-    print(f'{Color.GREEN("The similarity is")} {similarity:.3f} {Color.GREEN("Elapsed time:")} {elapsed_time*1000:.2f}ms' )
+    for idx, n in enumerate(similarities):
+        similarity_str = ""
+        for m in n:
+            similarity_str = f"{similarity_str}{m:.3f} "
+        print(f'Base.{idx+1}: {Color.GREEN("The similarities are")} {similarity_str}')
+    print(f'{Color.GREEN("Elapsed time:")} {elapsed_time*1000:.2f}ms' )
 
 if __name__ == "__main__":
     main()
 
 """
-# CPU: opset=11
-The similarity is 0.725 Elapsed time: 158.13ms
-# CPU: opset=18
-The similarity is 0.725 Elapsed time: 156.46ms
+# 1.png vs 2.png
+The similarity is 0.511 Elapsed time: 157.37ms
+# 1.png vs 3.png
+The similarity is 0.764 Elapsed time: 157.37ms
+# 1.png vs 4.png
+The similarity is 0.725 Elapsed time: 158.05ms
 
-# CUDA: opset=11
-The similarity is 0.725 Elapsed time: 65.16ms
-# CUDA: opset=18
-The similarity is 0.725 Elapsed time: 65.15ms
+# CPU: 1.png vs 2.png, 3.png, 4.png
+Base.1: The similarities are 0.511 0.764 0.725
+Elapsed time: 213.46ms
 
-# TensorRT: opset=11
-The similarity is 0.999 Elapsed time: 8.06ms
+# CUDA: 1.png vs 2.png, 3.png, 4.png
+Base.1: The similarities are 0.511 0.764 0.725
+Elapsed time: 113.07ms
 """

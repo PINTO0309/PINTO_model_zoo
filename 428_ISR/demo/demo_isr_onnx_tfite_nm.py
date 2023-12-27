@@ -220,7 +220,7 @@ class ISR(AbstractModel):
         self,
         *,
         runtime: Optional[str] = 'onnx',
-        model_path: Optional[str] = 'isr_2x3x224x224_11.onnx',
+        model_path: Optional[str] = 'isr_NMx3x224x224_11.onnx',
         providers: Optional[List] = None,
     ):
         """ISR
@@ -304,14 +304,11 @@ class ISR(AbstractModel):
 
         Returns
         -------
-        resized_images: np.ndarray
-            Resized and normalized image. [N+M, 3, H, W]
+        stacked_images_N: np.ndarray
+            Resized and normalized image. [N, 3, H, W]
 
-        base_images_num: np.ndarray
-            base image count. [N]
-
-        target_images_num: np.ndarray
-            target image count. [M]
+        stacked_images_M: np.ndarray
+            Resized and normalized image. [M, 3, H, W]
         """
         # Resize + Transpose
         resized_base_images_np: np.ndarray = None
@@ -348,16 +345,16 @@ class ISR(AbstractModel):
         resized_target_images_np = np.asarray(resized_target_images_list)
         target_images_num = len(resized_target_images_np)
 
-        stacked_image = \
+        stacked_images = \
             np.vstack(
                 [
                     resized_base_images_np,
                     resized_target_images_np,
                 ]
             )
-        stacked_image = (stacked_image / 255.0 - self._mean) / self._std
-        stacked_image = stacked_image.astype(self._input_dtypes[0])
-        return stacked_image[0:base_images_num, ...], stacked_image[base_images_num:base_images_num+target_images_num, ...]
+        stacked_images = (stacked_images / 255.0 - self._mean) / self._std
+        stacked_images = stacked_images.astype(self._input_dtypes[0])
+        return stacked_images[0:base_images_num, ...], stacked_images[base_images_num:base_images_num+target_images_num, ...]
 
 
 def is_parsable_to_int(s):
@@ -498,17 +495,13 @@ if __name__ == "__main__":
     main()
 
 """
-# 1.png vs 3.png
-The similarity is 0.764 Elapsed time: 157.95ms
-# 1.png vs 4.png
-The similarity is 0.725 Elapsed time: 143.22ms
-# 2.png vs 3.png
-The similarity is 0.630 Elapsed time: 114.80ms
-# 2.png vs 4.png
-The similarity is 0.566 Elapsed time: 140.58ms
+# CPU:
+Base.1: The similarities are 0.511 0.764 0.725
+Base.2: The similarities are 1.000 0.630 0.566
+Elapsed time: 319.38ms
 
-# 1.png vs 3.png 1.png vs 4.png
-The similarities are 0.764 0.725
-# 2.png vs 3.png 2.png vs 4.png
-The similarities are 0.630 0.566
+# CUDA:
+Base.1: The similarities are 0.511 0.764 0.725
+Base.2: The similarities are 1.000 0.631 0.566
+Elapsed time: 120.10ms
 """
