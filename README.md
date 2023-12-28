@@ -97,7 +97,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |191|anti-spoof-mn3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/191_anti-spoof-mn3)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|128x128|
 |192|open-closed-eye-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/192_open-closed-eye-0001)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|32x32|
 |194|face_recognizer_fast|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/194_face_recognizer_fast)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|112x112|
-|195|person_reid_youtu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/195_person_reid_youtu)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|256x128|
+|195|person_reid_youtu|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/195_person_reid_youtu)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|256x128, ReID|
 |199|NSFW|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/199_NSFW)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|224x224|
 |244|FINNger|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/244_FINNger)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|96x96|
 |256|SFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/256_SFace)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|112x112|
@@ -107,6 +107,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |317|MobileOne|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/317_MobileOne)|||||||||||⚫|224x224|
 |346|facial_expression_recognition_mobilefacenet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/346_facial_expression_recognition_mobilefacenet)|⚫|⚫|⚫|⚫||⚫|||||⚫|112x112|
 |379|PP-LCNetV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/379_PP-LCNetV2)|⚫|⚫|||||||||⚫|224x224|
+|429|OSNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/429_OSNet)|||||||||||⚫|256x128, ReID|
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
