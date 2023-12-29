@@ -82,7 +82,7 @@ Torchreid is a library for deep-learning person re-identification, written in Py
 |ibn_ms_m_c|0.439|0.575|0.701|0.616|0.432|
 |ibn_x1_0_duke_256x128_amsgrad_ep150_stp60_lr0|0.423|0.507|0.703|0.639|0.425|
 |ibn_x1_0_imagenet|0.549|0.536|0.761|0.720|0.495|
-|ibn_x1_0_market1501_256x128_amsgrad_ep150_stp60_lr0|0.361|0.713|0.759|0.763|0.460|
+|ibn_x1_0_market1501_256x128_amsgrad_ep150_stp60_lr0|**0.361**|**0.713**|**0.759**|**0.763**|**0.460**|
 |ibn_x1_0_msmt17_combineall_256x128_amsgrad_ep150_stp60_lr0|0.329|0.387|0.728|0.403|0.273|
 |ms_d_c|**0.389**|**0.531**|**0.685**|**0.650**|**0.457**|
 |ms_d_m|0.435|0.542|0.649|0.607|0.489|
