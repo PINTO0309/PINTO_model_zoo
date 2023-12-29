@@ -69,11 +69,11 @@ MODELS = [
 # [base_image_file, target_image_file]
 TEST_IMAGES = [
     ["00030.jpg", "00031.jpg"], # ↓
+    ["00030.jpg", "1.png"], # ↓
+    ["00031.jpg", "2.png"], # ↓
     ["1.png", "2.png"], # ↑
     ["1.png", "3.png"], # ↑
     ["1.png", "4.png"], # ↑
-    ["00030.jpg", "1.png"], # ↓
-    ["00031.jpg", "2.png"], # ↓
 ]
 
 class Color(Enum):
@@ -436,7 +436,7 @@ def is_package_installed(package_name: str):
 
 def main():
     md_str = ""
-    md_str = md_str + "|Model|00030 vs 00031|1 vs 2|1 vs 3|1 vs 4|00030 vs 1|00031 vs 2|\n"
+    md_str = md_str + "|Model|00030 vs 00031|00030 vs 1|00031 vs 2|1 vs 2|1 vs 3|1 vs 4|\n"
     md_str = md_str + "|:-|-:|-:|-:|-:|-:|-:|\n"
 
     for model_file in tqdm(MODELS):
