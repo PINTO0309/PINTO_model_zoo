@@ -40,6 +40,10 @@ Torchreid is a library for deep-learning person re-identification, written in Py
 |30 vs 1⬇️|![00030](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/893ed42c-4a63-4779-97e2-2af9ae57a79f)|![1](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/8afb01a8-f7c4-483f-9387-62e59d715693)|
 |31 vs 2⬇️|![00031](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/030faa0d-b5a3-457e-8402-698f8bfea769)|![2](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/c6854b42-25af-42da-b8b0-59f85ee2fb78)|
 
+```bash
+python validation.py
+```
+
 |Model|30 vs 31⬇️|1 vs 2⏫|1 vs 3⏫|1 vs 4⏫|30 vs 1⬇️|31 vs 2⬇️|
 |:-|-:|-:|-:|-:|-:|-:|
 |**1. mlfn**|||||||
