@@ -84,7 +84,7 @@ Torchreid is a library for deep-learning person re-identification, written in Py
 |ibn_x1_0_imagenet|0.549|0.536|0.761|0.720|0.495|
 |ibn_x1_0_market1501_256x128_amsgrad_ep150_stp60_lr0|0.361|0.713|0.759|0.763|0.460|
 |ibn_x1_0_msmt17_combineall_256x128_amsgrad_ep150_stp60_lr0|0.329|0.387|0.728|0.403|0.273|
-|ms_d_c|0.389|0.531|0.685|0.650|0.457|
+|ms_d_c|**0.389**|**0.531**|**0.685**|**0.650**|**0.457**|
 |ms_d_m|0.435|0.542|0.649|0.607|0.489|
 |ms_m_c|0.426|0.641|0.746|0.726|0.407|
 |x0_25_duke_256x128_amsgrad_ep180_stp80_lr0|0.370|0.535|0.755|0.693|0.500|
@@ -106,7 +106,7 @@ Torchreid is a library for deep-learning person re-identification, written in Py
 |x1_0_imagenet|0.589|0.520|0.693|0.644|0.554|
 |x1_0_market_256x128_amsgrad_ep150_stp60_lr0|0.349|0.746|0.882|0.801|0.514|
 |x1_0_msmt17_256x128_amsgrad_ep150_stp60_lr0|0.438|0.526|0.655|0.638|0.438|
-|x1_0_msmt17_combineall_256x128_amsgrad_ep150_stp60_lr0|0.341|0.476|0.686|0.504|0.285|
+|x1_0_msmt17_combineall_256x128_amsgrad_ep150_stp60_lr0|**0.341**|**0.476**|**0.686**|**0.504**|**0.285**|
 |**4. resnet50**||||||
 |fc512_msmt_xent|0.821|0.835|0.859|0.890|0.808|
 |msmt17_combineall_256x128_amsgrad_ep150_stp60_lr0|0.418|0.593|0.810|0.752|0.373|
