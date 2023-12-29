@@ -51,6 +51,14 @@ Torchreid is a library for deep-learning person re-identification, written in Py
 
 ## 4. Similarity validation
 
+||image.1|image.2|
+|:-|:-:|:-:|
+|30 vs 31⬇️|![00030](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/b2249f44-cd26-49da-8796-25e12f2831fe)|![00031](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/030faa0d-b5a3-457e-8402-698f8bfea769)|
+|1 vs 2⏫|![1](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/82854902-c63b-4b24-859d-23661fe65f0c)|![2](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/c6854b42-25af-42da-b8b0-59f85ee2fb78)|
+|1 vs 3⏫|![1](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/49f09597-94c8-4130-aa43-b4f3971ed9a7)|![3](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/79ba35d2-88de-4534-9bf5-c1c64d36c279)|
+|1 vs 4⏫|![1](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/8fae11e3-1a46-4907-85b4-f9a9d3257e47)|![4](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/c32a10d9-bb67-484f-8483-4c7080e70312)|
+|30 vs 1⬇️|![00030](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/893ed42c-4a63-4779-97e2-2af9ae57a79f)|![1](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/8afb01a8-f7c4-483f-9387-62e59d715693)|
+
 |Model|30 vs 31⬇️|1 vs 2⏫|1 vs 3⏫|1 vs 4⏫|30 vs 1⬇️|
 |:-|-:|-:|-:|-:|-:|
 |**1. mlfn**||||||
@@ -92,7 +100,7 @@ Torchreid is a library for deep-learning person re-identification, written in Py
 |x0_25_market_256x128_amsgrad_ep180_stp80_lr0|0.385|0.695|0.835|0.866|0.533|
 |x0_25_msmt17_256x128_amsgrad_ep180_stp80_lr0|0.352|0.536|0.728|0.563|0.380|
 |x0_25_msmt17_combineall_256x128_amsgrad_ep150_stp60_lr0|0.338|0.453|0.683|0.615|0.329|
-|x0_5_duke_256x128_amsgrad_ep180_stp80_lr0|0.314|0.637|0.776|0.744|0.431|
+|x0_5_duke_256x128_amsgrad_ep180_stp80_lr0|**0.314**|**0.637**|**0.776**|**0.744**|**0.431**|
 |x0_5_imagenet|0.572|0.585|0.712|0.643|0.567|
 |x0_5_market_256x128_amsgrad_ep180_stp80_lr0|0.302|0.741|0.885|0.869|0.442|
 |x0_5_msmt17_256x128_amsgrad_ep180_stp80_lr0|0.405|0.621|0.711|0.663|0.402|
