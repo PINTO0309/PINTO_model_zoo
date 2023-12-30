@@ -44,7 +44,7 @@ Torchreid is a library for deep-learning person re-identification, written in Py
 python validation.py
 ```
 
-|Model|30 vs 31⬇️|30 vs 1⬇️|31 vs 2⬇️|1 vs 2⏫|1 vs 3⏫|1 vs 4⏫|
+|Model|30<br>vs<br>31<br>⬇️|30<br>vs<br>1<br>⬇️|31<br>vs<br>2<br>⬇️|1<br>vs<br>2<br>⏫|1<br>vs<br>3<br>⏫|1<br>vs<br>4<br>⏫|
 |:-|-:|-:|-:|-:|-:|-:|
 |**1. mlfn**|||||||
 |9cb5a267|0.521|0.558|0.609|0.609|0.725|0.740|
