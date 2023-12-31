@@ -6,12 +6,20 @@ import cv2
 from tqdm import tqdm
 import numpy as np
 from enum import Enum
-from typing import Tuple, Optional, List, Dict
+from typing import Tuple, Optional, List
 import importlib.util
 from abc import ABC, abstractmethod
 
 MODELS = [
+    "mot17_sbs_S50_NMx3x256x128_post.onnx",
+    "mot17_sbs_S50_NMx3x288x128_post.onnx",
+    "mot17_sbs_S50_NMx3x320x128_post.onnx",
+    "mot17_sbs_S50_NMx3x352x128_post.onnx",
     "mot17_sbs_S50_NMx3x384x128_post.onnx",
+    "mot20_sbs_S50_NMx3x256x128_post.onnx",
+    "mot20_sbs_S50_NMx3x288x128_post.onnx",
+    "mot20_sbs_S50_NMx3x320x128_post.onnx",
+    "mot20_sbs_S50_NMx3x352x128_post.onnx",
     "mot20_sbs_S50_NMx3x384x128_post.onnx",
 ]
 

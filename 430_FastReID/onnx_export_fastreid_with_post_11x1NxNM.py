@@ -42,6 +42,10 @@ for model, config in MODELS:
 
     RESOLUTION = [
         [384,128],
+        [352,128],
+        [320,128],
+        [288,128],
+        [256,128],
     ]
 
     for H, W in RESOLUTION:
@@ -69,60 +73,60 @@ for model, config in MODELS:
         model_simp, check = simplify(model_onnx2)
         onnx.save(model_simp, onnx_file)
 
-    onnx_file = f"{model}_1Nx3x{H}x{W}_post.onnx"
-    x = torch.randn(1, 3, H, W).cpu()
-    y = torch.randn(1, 3, H, W).cpu()
-    torch.onnx.export(
-        reid_model,
-        args=(x,y),
-        f=onnx_file,
-        opset_version=11,
-        input_names=['base_image', 'target_images'],
-        output_names=['similarities'],
-        dynamic_axes={
-            'target_images' : {0: 'N'},
-            'similarities' : {1: 'N'},
-        }
-    )
-    model_onnx1 = onnx.load(onnx_file)
-    model_onnx1 = onnx.shape_inference.infer_shapes(model_onnx1)
-    onnx.save(model_onnx1, onnx_file)
-    model_onnx2 = onnx.load(onnx_file)
-    model_simp, check = simplify(model_onnx2)
-    onnx.save(model_simp, onnx_file)
-    model_onnx2 = onnx.load(onnx_file)
-    model_simp, check = simplify(model_onnx2)
-    onnx.save(model_simp, onnx_file)
-    model_onnx2 = onnx.load(onnx_file)
-    model_simp, check = simplify(model_onnx2)
-    onnx.save(model_simp, onnx_file)
+        onnx_file = f"{model}_1Nx3x{H}x{W}_post.onnx"
+        x = torch.randn(1, 3, H, W).cpu()
+        y = torch.randn(1, 3, H, W).cpu()
+        torch.onnx.export(
+            reid_model,
+            args=(x,y),
+            f=onnx_file,
+            opset_version=11,
+            input_names=['base_image', 'target_images'],
+            output_names=['similarities'],
+            dynamic_axes={
+                'target_images' : {0: 'N'},
+                'similarities' : {1: 'N'},
+            }
+        )
+        model_onnx1 = onnx.load(onnx_file)
+        model_onnx1 = onnx.shape_inference.infer_shapes(model_onnx1)
+        onnx.save(model_onnx1, onnx_file)
+        model_onnx2 = onnx.load(onnx_file)
+        model_simp, check = simplify(model_onnx2)
+        onnx.save(model_simp, onnx_file)
+        model_onnx2 = onnx.load(onnx_file)
+        model_simp, check = simplify(model_onnx2)
+        onnx.save(model_simp, onnx_file)
+        model_onnx2 = onnx.load(onnx_file)
+        model_simp, check = simplify(model_onnx2)
+        onnx.save(model_simp, onnx_file)
 
-    onnx_file = f"{model}_NMx3x{H}x{W}_post.onnx"
-    x = torch.randn(1, 3, H, W).cpu()
-    y = torch.randn(1, 3, H, W).cpu()
-    torch.onnx.export(
-        reid_model,
-        args=(x,y),
-        f=onnx_file,
-        opset_version=11,
-        input_names=['base_images', 'target_images'],
-        output_names=['similarities'],
-        dynamic_axes={
-            'base_images' : {0: 'N'},
-            'target_images' : {0: 'M'},
-            'similarities' : {0: 'N', 1: 'M'},
-        }
-    )
-    model_onnx1 = onnx.load(onnx_file)
-    model_onnx1 = onnx.shape_inference.infer_shapes(model_onnx1)
-    onnx.save(model_onnx1, onnx_file)
-    model_onnx2 = onnx.load(onnx_file)
-    model_simp, check = simplify(model_onnx2)
-    onnx.save(model_simp, onnx_file)
-    model_onnx2 = onnx.load(onnx_file)
-    model_simp, check = simplify(model_onnx2)
-    onnx.save(model_simp, onnx_file)
-    model_onnx2 = onnx.load(onnx_file)
-    model_simp, check = simplify(model_onnx2)
-    onnx.save(model_simp, onnx_file)
+        onnx_file = f"{model}_NMx3x{H}x{W}_post.onnx"
+        x = torch.randn(1, 3, H, W).cpu()
+        y = torch.randn(1, 3, H, W).cpu()
+        torch.onnx.export(
+            reid_model,
+            args=(x,y),
+            f=onnx_file,
+            opset_version=11,
+            input_names=['base_images', 'target_images'],
+            output_names=['similarities'],
+            dynamic_axes={
+                'base_images' : {0: 'N'},
+                'target_images' : {0: 'M'},
+                'similarities' : {0: 'N', 1: 'M'},
+            }
+        )
+        model_onnx1 = onnx.load(onnx_file)
+        model_onnx1 = onnx.shape_inference.infer_shapes(model_onnx1)
+        onnx.save(model_onnx1, onnx_file)
+        model_onnx2 = onnx.load(onnx_file)
+        model_simp, check = simplify(model_onnx2)
+        onnx.save(model_simp, onnx_file)
+        model_onnx2 = onnx.load(onnx_file)
+        model_simp, check = simplify(model_onnx2)
+        onnx.save(model_simp, onnx_file)
+        model_onnx2 = onnx.load(onnx_file)
+        model_simp, check = simplify(model_onnx2)
+        onnx.save(model_simp, onnx_file)
 
