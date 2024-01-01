@@ -21,6 +21,8 @@ MODELS = [
     "mot20_sbs_S50_NMx3x320x128_post.onnx",
     "mot20_sbs_S50_NMx3x352x128_post.onnx",
     "mot20_sbs_S50_NMx3x384x128_post.onnx",
+    "osnet_x1_0_msmt17_combineall_256x128_amsgrad_ep150_stp60_lr0_NMx3x256x128.onnx",
+    "resnet50_msmt17_combineall_256x128_amsgrad_ep150_stp60_lr0_NMx3x256x128.onnx",
 ]
 
 # [base_image_file, target_image_file]
