@@ -58,3 +58,7 @@ python validation.py
   |**OSNet**|||||||
   |osnet_x1_0_msmt17_combineall_256x128_amsgrad_NMx3x256x128|0.341|0.285|0.265|0.476|0.686|0.504|
   |resnet50_msmt17_combineall_256x128_amsgrad_NMx3x256x128|0.418|0.373|0.329|0.593|0.810|0.752|
+
+## 5. BoT-SORT Implementation by onnxruntime + TensorRT only
+
+https://github.com/PINTO0309/BoT-SORT-ONNX-TensorRT
