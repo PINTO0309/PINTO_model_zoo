@@ -62,3 +62,5 @@ python validation.py
 ## 5. BoT-SORT Implementation by onnxruntime + TensorRT only
 
 https://github.com/PINTO0309/BoT-SORT-ONNX-TensorRT
+
+https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/0862d659-511d-4be1-8258-f090b39cc51f
