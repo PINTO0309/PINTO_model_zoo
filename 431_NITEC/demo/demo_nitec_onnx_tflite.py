@@ -4,7 +4,7 @@
 runtime: https://github.com/microsoft/onnxruntime
 
 pip install onnxruntime or pip install onnxruntime-gpu
-pip install lap==0.4.0 scipy==1.10.1 opencv-contrib-python==4.9.0.80
+pip install opencv-contrib-python==4.9.0.80
 """
 from __future__ import annotations
 import os
