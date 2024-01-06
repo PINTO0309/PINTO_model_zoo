@@ -47,7 +47,16 @@ Expected color order is `BGR`.
 ### 1. Intel original
 The net outputs a blob with the shape `1, 256, 1, 1`, containing a row-vector of 256 floating point values. Outputs on different images are comparable in cosine distance.
 ### 2. PINTO custom
-The net outputs a blob with the shape `1, 256` or `N, 256`, containing a row-vector of 256 floating point values. Outputs on different images are comparable in cosine distance.
+1. Model without post-processing
+
+    The net outputs with the shape `1, 256` or `N, 256`, containing a row-vector of 256 floating point values. Outputs on different images are comparable in cosine distance.
+
+2. Model with post-processing
+
+    The net outputs with the shape `N, 256 (feature vector)` and `N, M (cosine distance)`.
+
+    ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/7949432d-95ae-46d1-83be-88266b945716)
+
 
 ## Demo usage
 
