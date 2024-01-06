@@ -44,8 +44,10 @@ Input image, name: `0` , shape: `1, 3, 128, 128` in the format `B, C, H, W`, whe
 Expected color order is `BGR`.
 
 ## Outputs
-
+### 1. Intel original
 The net outputs a blob with the shape `1, 256, 1, 1`, containing a row-vector of 256 floating point values. Outputs on different images are comparable in cosine distance.
+### 2. PINTO custom
+The net outputs a blob with the shape `1, 256` or `N, 256`, containing a row-vector of 256 floating point values. Outputs on different images are comparable in cosine distance.
 
 ## Demo usage
 
