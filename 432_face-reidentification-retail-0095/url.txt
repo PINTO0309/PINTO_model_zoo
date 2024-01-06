@@ -1,0 +1,8 @@
+https://github.com/openvinotoolkit/open_model_zoo/tree/master/models/intel/face-reidentification-retail-0095
+https://github.com/openvinotoolkit/open_model_zoo/tree/master/demos/face_recognition_demo/python
+https://github.com/yas-sim/person-detect-reidentification
+
+https://github.com/PINTO0309/openvino2tensorflow
+https://github.com/PINTO0309/onnx2tf
+https://github.com/PINTO0309/simple-onnx-processing-tools
+
