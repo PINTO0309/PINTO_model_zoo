@@ -9,3 +9,7 @@ NITEC: Versatile Hand-Annotated Eye Contact Dataset for Ego-Vision Interaction (
 
 ## 2. Demo
 
+https://github.com/PINTO0309/NITEC-ONNX-TensorRT
+
+https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/7a003677-e3ea-4f93-b346-151473669c5f
+
