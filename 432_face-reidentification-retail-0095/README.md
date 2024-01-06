@@ -6,7 +6,7 @@ This is a lightweight network for the face re-identification scenario. It is bas
 
 ## Example
 
-![](./assets/face-reidentification-retail-0095.png)
+![face-reidentification-retail-0095](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/4efdc70a-503b-43e3-b18b-b918981ef781)
 
 ## Specification
 
