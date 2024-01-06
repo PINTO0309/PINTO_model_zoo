@@ -109,6 +109,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |379|PP-LCNetV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/379_PP-LCNetV2)|⚫|⚫|||||||||⚫|224x224|
 |429|OSNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/429_OSNet)|||||||||||⚫|256x128, ReID|
 |430|FastReID|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/430_FastReID)|||||||||||⚫|384x128, ReID|
+|431|NITEC|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/431_NITEC)|||||||||||⚫|224x224, Gaze Estimation|
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
