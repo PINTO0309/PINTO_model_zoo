@@ -66,5 +66,11 @@ The model can be used in the following demos provided by the Open Model Zoo to s
 * [Smart Classroom C++ Demo](../../../demos/smart_classroom_demo/cpp/README.md)
 * [Smart Classroom C++ G-API Demo](../../../demos/smart_classroom_demo/cpp_gapi/README.md)
 
+## Validation
+
+|Base|1|2|3|4|5|6|7|8|9|0|
+|:-|-:|-:|-:|-:|-:|-:|-:|-:|-:|-:|
+|**0**|0.243|0.029|0.000|0.000|0.000|0.047|0.337|0.181|0.022|1.000|
+
 ## Legal Information
 [*] Other names and brands may be claimed as the property of others.
