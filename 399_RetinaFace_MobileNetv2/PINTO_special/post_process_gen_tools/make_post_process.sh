@@ -518,7 +518,7 @@ do
     --input_json_path 19_nms_retinaface_1x${BOXES}x4.json \
     --output_onnx_file_path 19_nms_retinaface_1x${BOXES}x4.onnx
 
-    rm 19_nms_retinaface_1x12600x4.json
+    rm 19_nms_retinaface_1x${BOXES}x4.json
 
 
     ################################################### pre-NMS
