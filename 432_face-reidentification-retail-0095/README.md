@@ -68,6 +68,10 @@ The model can be used in the following demos provided by the Open Model Zoo to s
 
 ## Validation
 
+```bash
+python demo/validation.py
+```
+
 |Pattern|Base image|Target image|Pattern|Base image|Target image|
 |:-:|:-:|:-:|:-:|:-:|:-:|
 |0 vs 1|![12_Group_Group_12_Group_Group_12_10_0000](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/65d639b6-d2ff-4684-9ad2-ba048380b603)|![12_Group_Group_12_Group_Group_12_10_0001](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/aaba96d9-3d2f-4ecf-a6ad-858b80c0ea22)|0 vs 6|![12_Group_Group_12_Group_Group_12_10_0000](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/65d639b6-d2ff-4684-9ad2-ba048380b603)|![12_Group_Group_12_Group_Group_12_10_0006](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/01c77b03-3435-49fb-a3c9-a1a7807cec04)|
@@ -75,8 +79,6 @@ The model can be used in the following demos provided by the Open Model Zoo to s
 |0 vs 3|![12_Group_Group_12_Group_Group_12_10_0000](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/65d639b6-d2ff-4684-9ad2-ba048380b603)|![12_Group_Group_12_Group_Group_12_10_0003](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/8affc28f-c0d0-4c87-87db-3aafa759f4a6)|0 vs 8|![12_Group_Group_12_Group_Group_12_10_0000](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/65d639b6-d2ff-4684-9ad2-ba048380b603)|![12_Group_Group_12_Group_Group_12_10_0008](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/70208791-eb52-4701-b532-4b72fe8defb4)|
 |0 vs 4|![12_Group_Group_12_Group_Group_12_10_0000](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/65d639b6-d2ff-4684-9ad2-ba048380b603)|![12_Group_Group_12_Group_Group_12_10_0004](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/438f84d7-56e8-4e07-9b56-26d9d5cac990)|0 vs 9|![12_Group_Group_12_Group_Group_12_10_0000](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/65d639b6-d2ff-4684-9ad2-ba048380b603)|![12_Group_Group_12_Group_Group_12_10_0009](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/d79eaca0-8178-4ac9-a6f6-238137344608)|
 |0 vs 5|![12_Group_Group_12_Group_Group_12_10_0000](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/65d639b6-d2ff-4684-9ad2-ba048380b603)|![12_Group_Group_12_Group_Group_12_10_0005](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/f22d41c5-4b11-4bf1-ab96-22792fa33054)|0 vs 0|![12_Group_Group_12_Group_Group_12_10_0000](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/65d639b6-d2ff-4684-9ad2-ba048380b603)|![12_Group_Group_12_Group_Group_12_10_0000](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/9d16227f-8b70-4950-a584-fb86617fa252)|
-
-
 
 |Base|1|2|3|4|5|6|7|8|9|0|
 |:-|-:|-:|-:|-:|-:|-:|-:|-:|-:|-:|
