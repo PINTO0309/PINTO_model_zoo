@@ -53,7 +53,7 @@ The net outputs a blob with the shape `1, 256, 1, 1`, containing a row-vector of
 
 2. Model with post-processing
 
-    The net outputs with the shape `N, 256 (feature vector)` and `N, M (cosine distance)`.
+    The net outputs with the shape `N, 256 (feature vector)` and `N, M (cosine distance)`. Normalized features and COS similarity are output.
 
     ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/7949432d-95ae-46d1-83be-88266b945716)
 
