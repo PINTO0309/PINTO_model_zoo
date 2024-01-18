@@ -55,7 +55,6 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
   - opencv-contrib-python 4.9.0.80
   - numpy 1.24.3
   - TensorRT 8.5.3-1+cuda11.8
-  - TensorFlow v2.15.0+
 
     ```bash
     # Common ############################################
