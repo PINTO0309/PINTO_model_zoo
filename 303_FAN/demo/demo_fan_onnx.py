@@ -487,8 +487,7 @@ class FAN(AbstractModel):
                 landmark[..., 1] = landmark[..., 1] * abs(face_box.y2 - face_box.y1) / (self._input_shapes[0][self._h_index] / 4)
                 landmark[..., 0] = landmark[..., 0] + face_box.x1
                 landmark[..., 1] = landmark[..., 1] + face_box.y1
-            landmarks = landmarks.astype(np.int32)
-        return landmarks
+        return landmarks.astype(np.float32)
 
 
 def is_parsable_to_int(s):
@@ -654,7 +653,9 @@ def main():
 
         for one_face_landmarks in landmarks:
             for landmark in one_face_landmarks:
-                cv2.circle(debug_image, (int(landmark[0]), int(landmark[1])), 1, (0, 255, 0), 2)
+                score: float = landmark[2]
+                if score > 0.35:
+                    cv2.circle(debug_image, (int(landmark[0]), int(landmark[1])), 1, (0, 255, 0), 2)
 
         cv2.putText(debug_image, f'{elapsed_time*1000:.2f} ms', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2, cv2.LINE_AA)
         cv2.putText(debug_image, f'{elapsed_time*1000:.2f} ms', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (13, 150, 196), 1, cv2.LINE_AA)
