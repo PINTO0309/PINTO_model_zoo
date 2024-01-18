@@ -52,10 +52,9 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
   - Python 3.10
   - onnx 1.14.1+
   - onnxruntime-gpu v1.16.1 (TensorRT Execution Provider Enabled Binary. See: [onnxruntime-gpu v1.16.1 + CUDA 11.8 + TensorRT 8.5.3 build (RTX3070)](https://zenn.dev/pinto0309/scraps/20afd3c58b30bf))
-  - opencv-contrib-python 4.8.0.76
+  - opencv-contrib-python 4.9.0.80
   - numpy 1.24.3
   - TensorRT 8.5.3-1+cuda11.8
-  - [tflite-runtime](https://github.com/PINTO0309/TensorflowLite-bin) v2.15.0+
   - TensorFlow v2.15.0+
 
     ```bash
@@ -68,24 +67,6 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
     pip install onnxruntime
     or
     pip install onnxruntime-gpu
-
-    # For ARM. tflite_runtime ###########################
-    TFVER=2.15.0.post1
-
-    PYVER=310
-    or
-    PYVER=311
-
-    ARCH=aarch64
-    or
-    ARCH=armhf
-
-    pip install \
-    --no-cache-dir \
-    https://github.com/PINTO0309/TensorflowLite-bin/releases/download/v${TFVER}/tflite_runtime-${TFVER/-/}-cp${PYVER}-none-linux_${ARCH}.whl
-
-    # For x86/x64. TensorFlow ############################
-    pip install tensorflow
     ```
 
   - Demonstration of models with built-in post-processing (Float32/Float16)
@@ -121,6 +102,8 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
     -ep tensorrt
     ```
 
+    https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/af43a3a6-e4ad-4996-a1ef-596b11583533
+
   - 640x480 TensorRT - Intense motion blur
 
     ```bash
@@ -129,6 +112,8 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
     -v 0 \
     -ep tensorrt
     ```
+
+    https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/30f57057-a051-4981-a04b-4ddbe71ffdb4
 
 - YOLOX-Body-Head-Hand-Face - Nano
   ```
