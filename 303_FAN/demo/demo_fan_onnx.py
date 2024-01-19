@@ -651,11 +651,12 @@ def main():
 
         elapsed_time = time.perf_counter() - start_time
 
-        for one_face_landmarks in landmarks:
-            for landmark in one_face_landmarks:
-                score: float = landmark[2]
-                if score > 0.35:
-                    cv2.circle(debug_image, (int(landmark[0]), int(landmark[1])), 1, (0, 255, 0), 2)
+        _ = [
+            cv2.circle(debug_image, (int(landmark[0]), int(landmark[1])), 1, (0, 255, 0), 2) \
+                for one_face_landmarks in landmarks \
+                    for landmark in one_face_landmarks \
+                        if landmark[2] > 0.35
+        ]
 
         cv2.putText(debug_image, f'{elapsed_time*1000:.2f} ms', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2, cv2.LINE_AA)
         cv2.putText(debug_image, f'{elapsed_time*1000:.2f} ms', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (13, 150, 196), 1, cv2.LINE_AA)
