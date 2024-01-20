@@ -383,7 +383,7 @@ class PeppaPig(AbstractModel):
         Returns
         -------
         result_landmarks: np.ndarray
-            Predicted boxes: [N, 68, 2]
+            Predicted boxes: [N, 98, 3]
         """
         temp_image = copy.deepcopy(image)
 
@@ -470,7 +470,7 @@ class PeppaPig(AbstractModel):
         Parameters
         ----------
         landmarks: np.ndarray
-            landmarks. [batch, 68, 2]
+            landmarks. [batch, 98, 3]
 
         face_boxes: List[Box]
 
@@ -479,7 +479,7 @@ class PeppaPig(AbstractModel):
         Returns
         -------
         landmarks: np.ndarray
-            Predicted landmarks: [batch, 68, 2]
+            Predicted landmarks: [batch, 98, 3]
         """
         if len(landmarks) > 0:
             for landmark, face_box in zip(landmarks, face_boxes):
