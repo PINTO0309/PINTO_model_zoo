@@ -44,18 +44,47 @@ onnx_export() {
     --mode outputs \
     --search_mode prefix_match \
     --output_onnx_file_path ${FILE_NAME}.onnx
+    sor4onnx \
+    --input_onnx_file_path ${FILE_NAME}.onnx \
+    --old_new "MobilenetV1/displacement_bwd_2/BiasAdd" "displacement_bwd" \
+    --mode outputs \
+    --search_mode prefix_match \
+    --output_onnx_file_path ${FILE_NAME}.onnx
+    sor4onnx \
+    --input_onnx_file_path ${FILE_NAME}.onnx \
+    --old_new "MobilenetV1/displacement_fwd_2/BiasAdd" "displacement_fwd" \
+    --mode outputs \
+    --search_mode prefix_match \
+    --output_onnx_file_path ${FILE_NAME}.onnx
+    sor4onnx \
+    --input_onnx_file_path ${FILE_NAME}.onnx \
+    --old_new "float_segments_raw_output___16:0" "float_segments_raw_output" \
+    --mode full \
+    --search_mode prefix_match \
+    --output_onnx_file_path ${FILE_NAME}.onnx
+    sor4onnx \
+    --input_onnx_file_path ${FILE_NAME}.onnx \
+    --old_new "float_segments_raw_output___12:0" "float_segments_raw_output" \
+    --mode full \
+    --search_mode prefix_match \
+    --output_onnx_file_path ${FILE_NAME}.onnx
+    sne4onnx \
+    --input_onnx_file_path ${FILE_NAME}.onnx \
+    --input_op_names input \
+    --output_op_names displacement_bwd displacement_fwd heatmaps long_offsets part_heatmaps part_offsets float_segments_raw_output short_offsets \
+    --output_onnx_file_path ${FILE_NAME}.onnx
 }
 
 MODEL=bodypix
 MODEL_TYPES=(
-    "resnet50/stride16"
-    "resnet50/stride32"
-    "mobilenet050/stride8"
-    "mobilenet050/stride16"
-    "mobilenet075/stride8"
-    "mobilenet075/stride16"
-    "mobilenet100/stride8"
-    "mobilenet100/stride16"
+    "resnet50/stride16 16"
+    "resnet50/stride32 32"
+    "mobilenet050/stride8 8"
+    "mobilenet050/stride16 16"
+    "mobilenet075/stride8 8"
+    "mobilenet075/stride16 16"
+    "mobilenet100/stride8 8"
+    "mobilenet100/stride16 16"
 )
 RESOLUTIONS=(
     "128 160"
@@ -100,7 +129,9 @@ RESOLUTIONS=(
 # ONNX export
 for((i=0; i<${#MODEL_TYPES[@]}; i++))
 do
-    MODEL_TYPE=(`echo ${MODEL_TYPES[i]}`)
+    TYPE=(`echo ${MODEL_TYPES[i]}`)
+    MODEL_TYPE=${TYPE[0]}
+    STRIDES=${TYPE[1]}
     FILE_NAME="${MODEL}_${MODEL_TYPE//\//_}_1x3xHxW"
     onnx_export
 done
@@ -108,20 +139,37 @@ done
 # Fixed resolution
 for((i=0; i<${#MODEL_TYPES[@]}; i++))
 do
-    MODEL_TYPE=(`echo ${MODEL_TYPES[i]}`)
+    TYPE=(`echo ${MODEL_TYPES[i]}`)
+    MODEL_TYPE=${TYPE[0]}
+    STRIDES=${TYPE[1]}
 
     for((j=0; j<${#RESOLUTIONS[@]}; j++))
     do
         RESOLUTION=(`echo ${RESOLUTIONS[j]}`)
         H=${RESOLUTION[0]}
         W=${RESOLUTION[1]}
+        OH=$(( H / STRIDES ))
+        OW=$(( W / STRIDES ))
 
         FILE_NAME="${MODEL}_${MODEL_TYPE//\//_}"
 
-        onnxsim ${FILE_NAME}_1x3xHxW.onnx ${FILE_NAME}_1x${H}x${W}.onnx \
+        onnxsim ${FILE_NAME}_1x3xHxW.onnx ${FILE_NAME}_1x3x${H}x${W}.onnx \
         --overwrite-input-shape "input:1,3,${H},${W}"
 
-        mv ${FILE_NAME}_1x${H}x${W}.onnx saved_model_${MODEL_TYPE}/
+        sog4onnx \
+        --op_type Transpose \
+        --opset 11 \
+        --op_name segment_trans \
+        --input_variables segment_trans_input float32 [1,1,${OH},${OW}] \
+        --attributes perm int64 [0,2,3,1] \
+        --output_variables segments float32 [1,${OH},${OW},1]
+
+        snc4onnx \
+        --input_onnx_file_paths ${FILE_NAME}_1x3x${H}x${W}.onnx Transpose.onnx \
+        --output_onnx_file_path ${FILE_NAME}_1x3x${H}x${W}.onnx \
+        --srcop_destop float_segments_raw_output segment_trans_input
+
+        mv ${FILE_NAME}_1x3x${H}x${W}.onnx saved_model_${MODEL_TYPE}/
     done
     mv ${FILE_NAME}_1x3xHxW.onnx saved_model_${MODEL_TYPE}/
 done
