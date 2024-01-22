@@ -452,9 +452,9 @@ class PeppaPig(AbstractModel):
                             int(self._input_shapes[0][self._h_index]),
                         )
                     )
+                resized_face_image = resized_face_image[..., ::-1]
                 face_images.append(resized_face_image)
             face_images_np = np.asarray(face_images, dtype=np.float32)
-            face_images_np = face_images_np[..., ::-1]
             face_images_np = (face_images_np / 255.0 - self._mean) / self._std
             face_images_np = face_images_np.transpose(self._swap)
             face_images_np = face_images_np.astype(self._input_dtypes[0])
