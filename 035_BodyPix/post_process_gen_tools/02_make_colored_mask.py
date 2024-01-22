@@ -16,13 +16,22 @@ class Model(nn.Module):
         resized_h = self.strides * part_heatmaps_input.shape[2]
         resized_w = self.strides * part_heatmaps_input.shape[3]
 
-        resized_part_heatmaps = \
-            torch.nn.functional.interpolate(
-                part_heatmaps_input,
-                size=(resized_h, resized_w),
-                mode='bilinear',
-                align_corners=True,
-            )
+        if resized_h <= resized_w:
+            resized_part_heatmaps = \
+                torch.nn.functional.interpolate(
+                    part_heatmaps_input,
+                    size=(resized_h, resized_w),
+                    mode='bilinear',
+                    align_corners=True,
+                )
+        else:
+            resized_part_heatmaps = \
+                torch.nn.functional.interpolate(
+                    part_heatmaps_input,
+                    scale_factor=self.strides,
+                    mode='bilinear',
+                    align_corners=True,
+                )
         sigmoid_part_heatmaps = torch.sigmoid(resized_part_heatmaps)
         argmax_part_heatmaps = torch.argmax(sigmoid_part_heatmaps, dim=1, keepdim=True)
         zero_mask_values = torch.zeros_like(argmax_part_heatmaps)

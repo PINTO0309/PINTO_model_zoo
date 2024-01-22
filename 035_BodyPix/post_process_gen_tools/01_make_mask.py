@@ -17,13 +17,23 @@ class Model(nn.Module):
         resized_h = self.strides * segments.shape[2]
         resized_w = self.strides * segments.shape[3]
 
-        resized_segments = \
-            torch.nn.functional.interpolate(
-                segments,
-                size=(resized_h, resized_w),
-                mode='bilinear',
-                align_corners=True,
-            )
+        if resized_h <= resized_w:
+            resized_segments = \
+                torch.nn.functional.interpolate(
+                    segments,
+                    size=(resized_h, resized_w),
+                    mode='bilinear',
+                    align_corners=True,
+                )
+        else:
+            resized_segments = \
+                torch.nn.functional.interpolate(
+                    segments,
+                    scale_factor=self.strides,
+                    mode='bilinear',
+                    align_corners=True,
+                )
+            self.threshold = 0.20
         sigmoid_segments = torch.sigmoid(resized_segments)
         mask_one_channel = torch.where(sigmoid_segments < self.threshold, torch.tensor(0.0, dtype=torch.float32), torch.tensor(255.0, dtype=torch.float32))
 
