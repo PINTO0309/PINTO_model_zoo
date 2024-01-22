@@ -71,11 +71,12 @@ onnx_export() {
     sne4onnx \
     --input_onnx_file_path ${FILE_NAME}.onnx \
     --input_op_names input \
-    --output_op_names displacement_bwd displacement_fwd heatmaps long_offsets part_heatmaps part_offsets float_segments_raw_output short_offsets \
+    --output_op_names heatmaps part_heatmaps float_segments_raw_output short_offsets \
     --output_onnx_file_path ${FILE_NAME}.onnx
 }
 
 MODEL=bodypix
+MASK_SCORE_THRESHOLD=0.60
 MODEL_TYPES=(
     "resnet50/stride16 16"
     "resnet50/stride32 32"
@@ -124,6 +125,11 @@ RESOLUTIONS=(
     "576 1024"
     "640 640"
     "736 1280"
+    "160 96"
+    "192 128"
+    "224 160"
+    "256 192"
+    "384 288"
 )
 
 # ONNX export
@@ -153,6 +159,7 @@ do
 
         FILE_NAME="${MODEL}_${MODEL_TYPE//\//_}"
 
+        # main
         onnxsim ${FILE_NAME}_1x3xHxW.onnx ${FILE_NAME}_1x3x${H}x${W}.onnx \
         --overwrite-input-shape "input:1,3,${H},${W}"
 
@@ -169,9 +176,86 @@ do
         --output_onnx_file_path ${FILE_NAME}_1x3x${H}x${W}.onnx \
         --srcop_destop float_segments_raw_output segment_trans_input
 
-        mv ${FILE_NAME}_1x3x${H}x${W}.onnx saved_model_${MODEL_TYPE}/
+        # post-process
+        python 01_make_mask.py -o 11 -b 1 -sh ${OH} -sw ${OW} -s ${STRIDES} -t ${MASK_SCORE_THRESHOLD}
+        python 02_make_colored_mask.py -o 11 -b 1 -sh ${OH} -sw ${OW} -s ${STRIDES}
+        python 04_make_pose_keypoints.py -o 11 -b 1 -sh ${OH} -sw ${OW} -s ${STRIDES}
+
+        sor4onnx \
+        --input_onnx_file_path 01_segment_mask_1x3x${H}x${W}.onnx \
+        --old_new "/" "01/" \
+        --mode full \
+        --search_mode prefix_match \
+        --output_onnx_file_path 01_segment_mask_1x3x${H}x${W}.onnx
+        sor4onnx \
+        --input_onnx_file_path 01_segment_mask_1x3x${H}x${W}.onnx \
+        --old_new "onnx::" "01_" \
+        --mode full \
+        --search_mode prefix_match \
+        --output_onnx_file_path 01_segment_mask_1x3x${H}x${W}.onnx
+
+        sor4onnx \
+        --input_onnx_file_path 02_colored_segment_mask_1x3x${H}x${W}.onnx \
+        --old_new "/" "02/" \
+        --mode full \
+        --search_mode prefix_match \
+        --output_onnx_file_path 02_colored_segment_mask_1x3x${H}x${W}.onnx
+        sor4onnx \
+        --input_onnx_file_path 02_colored_segment_mask_1x3x${H}x${W}.onnx \
+        --old_new "onnx::" "02_" \
+        --mode full \
+        --search_mode prefix_match \
+        --output_onnx_file_path 02_colored_segment_mask_1x3x${H}x${W}.onnx
+
+        snc4onnx \
+        --input_onnx_file_paths 01_segment_mask_1x3x${H}x${W}.onnx 02_colored_segment_mask_1x3x${H}x${W}.onnx \
+        --output_onnx_file_path 03_segment_mask_colored_mask.onnx \
+        --srcop_destop mask_for_colored_output mask_for_colored_input
+
+        sor4onnx \
+        --input_onnx_file_path 03_segment_mask_colored_mask.onnx \
+        --old_new "01/Less" "mask_score_threshold_less" \
+        --mode full \
+        --search_mode prefix_match \
+        --output_onnx_file_path 03_segment_mask_colored_mask.onnx
+
+        sor4onnx \
+        --input_onnx_file_path 03_segment_mask_colored_mask.onnx \
+        --old_new "01/Constant_6_output_0" "mask_score_threshold" \
+        --mode full \
+        --search_mode prefix_match \
+        --output_onnx_file_path 03_segment_mask_colored_mask.onnx
+
+        onnxsim 03_segment_mask_colored_mask.onnx 03_segment_mask_colored_mask.onnx
+
+        sor4onnx \
+        --input_onnx_file_path 04_pose_keypoints_1x3x${H}x${W}.onnx \
+        --old_new "/" "04/" \
+        --mode full \
+        --search_mode prefix_match \
+        --output_onnx_file_path 04_pose_keypoints_1x3x${H}x${W}.onnx
+
+        # merge
+        snc4onnx \
+        --input_onnx_file_paths ${FILE_NAME}_1x3x${H}x${W}.onnx 03_segment_mask_colored_mask.onnx \
+        --output_onnx_file_path ${FILE_NAME}_1x3x${H}x${W}.onnx \
+        --srcop_destop part_heatmaps part_heatmaps_input segments mask_input
+
+        snc4onnx \
+        --input_onnx_file_paths ${FILE_NAME}_1x3x${H}x${W}.onnx 04_pose_keypoints_1x3x${H}x${W}.onnx \
+        --output_onnx_file_path ${FILE_NAME}_1x3x${H}x${W}.onnx \
+        --srcop_destop heatmaps heatmaps_input short_offsets offsets_input
+
+        onnxsim ${FILE_NAME}_1x3x${H}x${W}.onnx ${FILE_NAME}_1x3x${H}x${W}.onnx
+
+        mv ${FILE_NAME}_1x3x${H}x${W}.onnx "saved_model_${MODEL_TYPE}/"
+        rm Transpose.onnx
+        rm 01_*.onnx
+        rm 02_*.onnx
+        rm 03_*.onnx
+        rm 04_*.onnx
     done
-    mv ${FILE_NAME}_1x3xHxW.onnx saved_model_${MODEL_TYPE}/
+    mv ${FILE_NAME}_1x3xHxW.onnx "saved_model_${MODEL_TYPE}/"
 done
 
 
