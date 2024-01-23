@@ -1,1 +1,0 @@
-edgetpu_compiler -s face_detection_front_128_full_integer_quant.tflite
