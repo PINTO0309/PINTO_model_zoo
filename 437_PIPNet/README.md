@@ -1,6 +1,6 @@
 # Note
 
-It is a simple demo including face detection and face aligment, and some optimizations were made to make the result better.
+Pixel-in-Pixel Net: Towards Efficient Facial Landmark Detection in the Wild
 
 ## 1. Citation Repository
 
@@ -10,7 +10,7 @@ It is a simple demo including face detection and face aligment, and some optimiz
 ## 2. Demo
 
 ```bash
-python demo/demo_peppapig_onnx.py -v 0
+python demo/demo_pipnet_onnx.py -v 0
 ```
 
-https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/a73152c9-b5bb-4423-bb65-db9a22cfcc90
+https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/9d345fd4-1725-48f9-9383-8f1c3c129a2b
