@@ -13,4 +13,4 @@ STAR Loss: Reducing Semantic Ambiguity in Facial Landmark Detection.
 python demo/demo_star_onnx.py -v 0
 ```
 
-
+https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/5e785608-45d9-4358-918f-c09981b6aedb
