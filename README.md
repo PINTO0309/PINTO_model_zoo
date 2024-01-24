@@ -324,6 +324,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |384|TCMonoDepth|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/384_TCMonoDepth)|||||||||||⚫|Mono|
 |397|MiDaSv3.1|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/397_MiDaSv3.1)|||||||||||⚫|Mono|
 |415|High-frequency-Stereo-Matching-Network|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/415_High-frequency-Stereo-Matching-Network)|||||||||||⚫|Stereo|
+|439|Depth-Anything|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/439_Depth-Anything)|||||||||||⚫|Mono|
 ### 8. Semantic Segmentation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
