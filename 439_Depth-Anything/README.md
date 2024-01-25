@@ -12,7 +12,7 @@ Depth Anything: Unleashing the Power of Large-Scale Unlabeled Data
 ## 2. Demo
 
 ```bash
-python demo/demo_depthanything_onnx.py -v 0
+python demo/demo_depthanything_onnx_tfite.py -v 0
 ```
 
 - PINTO test S -> B -> L
