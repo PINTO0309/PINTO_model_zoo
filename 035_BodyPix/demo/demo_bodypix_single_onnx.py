@@ -233,6 +233,15 @@ class AbstractModel(ABC):
     ) -> List[Box]:
         pass
 
+    @property
+    def input_shapes(self) -> List[List[int]]:
+        return self._input_shapes
+
+    @property
+    def input_size(self) -> Tuple[int, int]:
+        shape = self.input_shapes[0]
+        return shape[self._w_index], shape[self._h_index]
+
 
 class BodyPix(AbstractModel):
     def __init__(
@@ -580,6 +589,13 @@ def main():
         # keypoints_classidscorexy: [N, 4] [keypoint_classid, score, x, y]
         foreground_mask_zero_or_255, colored_mask_classid, keypoints_classidscorexy = model_bodypix(debug_image)
 
+        # resize if necessary to match original size
+        if foreground_mask_zero_or_255.shape[0] != h or foreground_mask_zero_or_255.shape[1] != w:
+            foreground_mask_zero_or_255 = cv2.resize(foreground_mask_zero_or_255, (w, h))
+
+        if colored_mask_classid.shape[0] != h or colored_mask_classid.shape[1] != w:
+            colored_mask_classid = cv2.resize(colored_mask_classid, (w, h))
+
         # Fine-tune position of mask image
         number_of_fine_tuning_pixels: int = model_bodypix.strides // 2
         if number_of_fine_tuning_pixels > 0:
@@ -607,6 +623,11 @@ def main():
         # Eliminate duplicate detection of neighboring keypoints
         if len(keypoints_classidscorexy) > 0:
             keypoints_classidscorexy = extract_max_score_points_unique(keypoints_classidscorexy)
+
+            # scale key-points location to original image
+            input_size = np.array([1, 1, *model_bodypix.input_size])
+            original_size = np.array([1, 1, debug_image_w, debug_image_h])
+            keypoints_classidscorexy[:] = keypoints_classidscorexy[:] / input_size * original_size
 
         elapsed_time = time.perf_counter() - start_time
 
