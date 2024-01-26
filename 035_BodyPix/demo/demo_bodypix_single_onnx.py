@@ -144,6 +144,37 @@ class AbstractModel(ABC):
             self._h_index = 1
             self._w_index = 2
 
+        elif self._runtime == 'openvino':
+            import openvino as ov  # type: ignore
+
+            core = ov.Core()
+            model = core.read_model(model=model_path)
+
+            compiled_model = core.compile_model(model=model, device_name="AUTO")
+
+            self._interpreter = compiled_model
+            # self._providers = self._interpreter.get_providers()
+            self._input_shapes = [
+                list(input.shape) for input in self._interpreter.inputs
+            ]
+            self._input_names = [
+                input.node.friendly_name for input in self._interpreter.inputs
+            ]
+            self._input_dtypes = [
+                input.element_type.to_dtype().type for input in self._interpreter.inputs
+            ]
+            self._output_shapes = [
+                list(output.shape) for output in self._interpreter.outputs
+            ]
+            self._output_names = [
+                output.node.friendly_name for output in self._interpreter.outputs
+            ]
+            self._model = compiled_model
+            self._swap = (2, 0, 1)
+            self._h_index = 2
+            self._w_index = 3
+            self.strides: int = 0
+
     @abstractmethod
     def __call__(
         self,
@@ -163,6 +194,7 @@ class AbstractModel(ABC):
                     )
             ]
             return outputs
+
         elif self._runtime in ['tflite_runtime', 'tensorflow']:
             outputs = [
                 output for output in \
@@ -170,6 +202,17 @@ class AbstractModel(ABC):
                         **datas
                     ).values()
             ]
+            return outputs
+
+        elif self._runtime == 'openvino':
+            infer_request = self._model.create_infer_request()
+
+            infer_request.infer(inputs=datas)
+
+            infer_request.start_async()
+            infer_request.wait()
+
+            outputs = [infer_request.get_output_tensor(i).data for i in range(len(self._output_names))]
             return outputs
 
     @abstractmethod
@@ -451,6 +494,13 @@ def main():
         default='tensorrt',
     )
     parser.add_argument(
+        '-rt',
+        '--runtime',
+        type=str,
+        choices=['onnx', 'openvino', 'tflite', 'tensorflow'],
+        default='onnx',
+    )
+    parser.add_argument(
         '-s',
         '--strides',
         type=int,
@@ -489,6 +539,7 @@ def main():
     model_bodypix = \
         BodyPix(
             model_path=args.bodypix_model,
+            runtime=args.runtime,
             providers=providers,
             strides=args.strides
         )
