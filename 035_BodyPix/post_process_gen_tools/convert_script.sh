@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # pip install tensorflowjs -U --no-deps
-# pip install openvino2tensorflow -U --no-deps
 # pip install tf2onnx -U --no-deps
 # pip install onnxsim==0.4.33
 
