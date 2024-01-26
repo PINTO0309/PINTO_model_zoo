@@ -198,6 +198,7 @@ class BodyPix(AbstractModel):
         runtime: Optional[str] = 'onnx',
         model_path: Optional[str] = 'bodypix_resnet50_stride16_1x3x480x640.onnx',
         providers: Optional[List] = None,
+        strides: Optional[int] = None
     ):
         """BodyPix
 
@@ -220,12 +221,16 @@ class BodyPix(AbstractModel):
         self._swap = (2,0,1)
         self._mean = np.asarray([0.0, 0.0, 0.0])
         self._std = np.asarray([1.0, 1.0, 1.0])
-        import onnx
-        model_proto = onnx.load(f=model_path)
-        float_segments_raw_output = [v for v in model_proto.graph.value_info if v.name == 'float_segments_raw_output']
-        if len(float_segments_raw_output) >= 1:
-            w = float_segments_raw_output[0].type.tensor_type.shape.dim[-1].dim_value
-            self.strides = self._input_shapes[0][self._w_index] // w
+        self.strides = strides
+
+        # find strides
+        if self.strides is None:
+            import onnx
+            model_proto = onnx.load(f=model_path)
+            float_segments_raw_output = [v for v in model_proto.graph.value_info if v.name == 'float_segments_raw_output']
+            if len(float_segments_raw_output) >= 1:
+                w = float_segments_raw_output[0].type.tensor_type.shape.dim[-1].dim_value
+                self.strides = self._input_shapes[0][self._w_index] // w
 
     def __call__(
         self,
@@ -445,6 +450,12 @@ def main():
         choices=['cpu', 'cuda', 'tensorrt'],
         default='tensorrt',
     )
+    parser.add_argument(
+        '-s',
+        '--strides',
+        type=int,
+        default=None,
+    )
     args = parser.parse_args()
 
     providers: List[Tuple[str, Dict] | str] = None
@@ -474,6 +485,7 @@ def main():
         BodyPix(
             model_path=args.bodypix_model,
             providers=providers,
+            strides=args.strides
         )
 
     cap = cv2.VideoCapture(
