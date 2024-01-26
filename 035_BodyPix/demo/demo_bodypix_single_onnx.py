@@ -470,11 +470,6 @@ def main():
             'CPUExecutionProvider',
         ]
 
-    # model_yolox = \
-    #     YOLOX(
-    #         model_path=args.detection_model,
-    #         providers=providers,
-    #     )
     model_bodypix = \
         BodyPix(
             model_path=args.bodypix_model,
