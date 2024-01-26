@@ -624,6 +624,10 @@ def main():
         if len(keypoints_classidscorexy) > 0:
             keypoints_classidscorexy = extract_max_score_points_unique(keypoints_classidscorexy)
 
+            # only get unique values to avoid duplicate keypoints indices
+            _, unique_indices = np.unique(keypoints_classidscorexy[:, 0], return_index=True)
+            keypoints_classidscorexy = keypoints_classidscorexy[unique_indices]
+
             # scale key-points location to original image
             input_size = np.array([1, 1, *model_bodypix.input_size])
             original_size = np.array([1, 1, debug_image_w, debug_image_h])
