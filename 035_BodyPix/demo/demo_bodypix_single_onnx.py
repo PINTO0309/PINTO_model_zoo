@@ -490,7 +490,7 @@ def main():
         '-ep',
         '--execution_provider',
         type=str,
-        choices=['cpu', 'cuda', 'tensorrt', 'dml'],
+        choices=['cpu', 'cuda', 'tensorrt', 'dml', 'coreml'],
         default='tensorrt',
     )
     parser.add_argument(
@@ -511,6 +511,11 @@ def main():
     providers: List[Tuple[str, Dict] | str] = None
     if args.execution_provider == 'cpu':
         providers = [
+            'CPUExecutionProvider',
+        ]
+    elif args.execution_provider == 'coreml':
+        providers = [
+            'CoreMLExecutionProvider',
             'CPUExecutionProvider',
         ]
     elif args.execution_provider == 'dml':
