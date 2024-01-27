@@ -2,7 +2,9 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10229410.svg)](https://doi.org/10.5281/zenodo.10229410)
 
-Lightweight human detection model generated using a high-quality human dataset. I annotated all the data by myself. Extreme resistance to blur and occlusion. In addition, the recognition rate at short, medium, and long distances has been greatly enhanced. The camera's resistance to darkness and halation has been greatly improved. **The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.**
+Lightweight human detection model generated using a high-quality human dataset. I annotated all the data by myself. Extreme resistance to blur and occlusion. In addition, the recognition rate at short, medium, and long distances has been greatly enhanced. The camera's resistance to darkness and halation has been greatly improved.
+
+**The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.**
 
 |image|image|
 |:-:|:-:|
@@ -356,6 +358,20 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
     }
     ```
 
+  - Synthesize and retrain the dataset to further improve model performance. [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco)
+    ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/69603b9b-ab9f-455c-a9c9-c818edc41dba)
+    ```bibtex
+    @INPROCEEDINGS{10323035,
+      author={Beghdadi, Ayman and Beghdadi, Azeddine and Mallem, Malik and Beji, Lotfi and Cheikh, Faouzi Alaya},
+      booktitle={2023 11th European Workshop on Visual Information Processing (EUVIP)},
+      title={CD-COCO: A Versatile Complex Distorted COCO Database for Scene-Context-Aware Computer Vision},
+      year={2023},
+      volume={},
+      number={},
+      pages={1-6},
+      doi={10.1109/EUVIP58404.2023.10323035}
+    }
+
   - YOLOX-ti-lite
 
     https://github.com/TexasInstruments/edgeai-yolox
@@ -372,19 +388,7 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
 
 
 ## 6. TODO
-- [x] Synthesize and retrain the dataset to further improve model performance. [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco)
-  ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/69603b9b-ab9f-455c-a9c9-c818edc41dba)
-  ```bibtex
-  @INPROCEEDINGS{10323035,
-    author={Beghdadi, Ayman and Beghdadi, Azeddine and Mallem, Malik and Beji, Lotfi and Cheikh, Faouzi Alaya},
-    booktitle={2023 11th European Workshop on Visual Information Processing (EUVIP)},
-    title={CD-COCO: A Versatile Complex Distorted COCO Database for Scene-Context-Aware Computer Vision},
-    year={2023},
-    volume={},
-    number={},
-    pages={1-6},
-    doi={10.1109/EUVIP58404.2023.10323035}
-  }
+- [x] 
   ```
 
 ## 7. License
