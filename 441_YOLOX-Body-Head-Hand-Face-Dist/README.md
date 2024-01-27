@@ -396,4 +396,4 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
     https://github.com/Kazuhito00/YOLOX-Colaboratory-Training-Sample
 
 ## 6. License
-[Apache License Version 2.0](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/426_YOLOX-Body-Head-Hand/LICENSE)
+[Apache License Version 2.0](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/441_YOLOX-Body-Head-Hand-Face-Dist/LICENSE)
