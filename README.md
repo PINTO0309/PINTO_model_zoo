@@ -179,6 +179,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |425|Gold-YOLO-Body-Head-Hand|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/425_Gold-YOLO-Body-Head-Hand)|||||||||||⚫|Body,Head,Hand|
 |426|YOLOX-Body-Head-Hand|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/426_YOLOX-Body-Head-Hand)|⚫|⚫|⚫||||||||⚫|Body,Head,Hand, tflite float16 XNNPACK boost (ARMv8.2)|
 |434|YOLOX-Body-Head-Hand-Face|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/434_YOLOX-Body-Head-Hand-Face)|||||||||||⚫|Body,Head,Hand,Face|
+|441|YOLOX-Body-Head-Hand-Face-Dist|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/441_YOLOX-Body-Head-Hand-Face-Dist)|||||||||||⚫|Body,Head,Hand,Face,Complex Distorted|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
