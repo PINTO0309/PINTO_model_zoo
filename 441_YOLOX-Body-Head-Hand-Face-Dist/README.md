@@ -6,7 +6,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
 **The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise. Compared to the [434_YOLOX-Body-Head-Hand-Face](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/434_YOLOX-Body-Head-Hand-Face) model, almost all models have a `1.0 ~ 4.0` point improvement in mAP.**
 
-|image|image|
+|Detection results|Detection results|
 |:-:|:-:|
 |![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/a71357c6-cdc2-4f36-a5f1-7333a1ac36c7)|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/067d9643-6411-4db3-bbe9-95a27ad682e4)|
 |![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/034ff9a5-a56b-4b8d-b3e6-20bab12b60e8)|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/11f727aa-2e96-4a7f-b8b7-cd2acd6f4564)|
