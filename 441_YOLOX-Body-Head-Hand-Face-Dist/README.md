@@ -4,6 +4,14 @@
 
 Lightweight human detection model generated using a high-quality human dataset. I annotated all the data by myself. Extreme resistance to blur and occlusion. In addition, the recognition rate at short, medium, and long distances has been greatly enhanced. The camera's resistance to darkness and halation has been greatly improved. **The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.**
 
+|image|image|
+|:-:|:-:|
+|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/a71357c6-cdc2-4f36-a5f1-7333a1ac36c7)|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/067d9643-6411-4db3-bbe9-95a27ad682e4)|
+|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/034ff9a5-a56b-4b8d-b3e6-20bab12b60e8)|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/11f727aa-2e96-4a7f-b8b7-cd2acd6f4564)|
+|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/51588d5a-695f-48c8-86f4-3c222e91fe4e)|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/c418a376-b448-456e-ac7f-214079b70c50)|
+|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/07a55486-61cd-48b5-9c4a-0c225eef5f8c)|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/a1ba522e-a847-4288-a26a-e8194830b961)|
+|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/717bcb7a-e183-43b4-8d54-23161e407884)|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/2c0aba98-1bf3-4292-8616-67b03c265eee)|
+
 `Head` does not mean `Face`. Thus, the entire head is detected rather than a narrow region of the face. This makes it possible to detect all 360° head orientations.
 
   https://github.com/PINTO0309/PINTO_model_zoo/tree/main/423_6DRepNet360
