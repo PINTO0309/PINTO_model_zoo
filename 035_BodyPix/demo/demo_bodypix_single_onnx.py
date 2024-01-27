@@ -144,6 +144,37 @@ class AbstractModel(ABC):
             self._h_index = 1
             self._w_index = 2
 
+        elif self._runtime == 'openvino':
+            import openvino as ov  # type: ignore
+
+            core = ov.Core()
+            model = core.read_model(model=model_path)
+
+            compiled_model = core.compile_model(model=model, device_name="AUTO")
+
+            self._interpreter = compiled_model
+            # self._providers = self._interpreter.get_providers()
+            self._input_shapes = [
+                list(input.shape) for input in self._interpreter.inputs
+            ]
+            self._input_names = [
+                input.node.friendly_name for input in self._interpreter.inputs
+            ]
+            self._input_dtypes = [
+                input.element_type.to_dtype().type for input in self._interpreter.inputs
+            ]
+            self._output_shapes = [
+                list(output.shape) for output in self._interpreter.outputs
+            ]
+            self._output_names = [
+                output.node.friendly_name for output in self._interpreter.outputs
+            ]
+            self._model = compiled_model
+            self._swap = (2, 0, 1)
+            self._h_index = 2
+            self._w_index = 3
+            self.strides: int = 0
+
     @abstractmethod
     def __call__(
         self,
@@ -163,6 +194,7 @@ class AbstractModel(ABC):
                     )
             ]
             return outputs
+
         elif self._runtime in ['tflite_runtime', 'tensorflow']:
             outputs = [
                 output for output in \
@@ -170,6 +202,17 @@ class AbstractModel(ABC):
                         **datas
                     ).values()
             ]
+            return outputs
+
+        elif self._runtime == 'openvino':
+            infer_request = self._model.create_infer_request()
+
+            infer_request.infer(inputs=datas)
+
+            infer_request.start_async()
+            infer_request.wait()
+
+            outputs = [infer_request.get_output_tensor(i).data for i in range(len(self._output_names))]
             return outputs
 
     @abstractmethod
@@ -190,160 +233,15 @@ class AbstractModel(ABC):
     ) -> List[Box]:
         pass
 
-class YOLOX(AbstractModel):
-    def __init__(
-        self,
-        *,
-        runtime: Optional[str] = 'onnx',
-        model_path: Optional[str] = 'yolox_x_body_head_hand_face_0076_0.5228_post_1x3x480x640.onnx',
-        class_score_th: Optional[float] = 0.35,
-        providers: Optional[List] = None,
-    ):
-        """YOLOX
+    @property
+    def input_shapes(self) -> List[List[int]]:
+        return self._input_shapes
 
-        Parameters
-        ----------
-        runtime: Optional[str]
-            Runtime for YOLOX. Default: onnx
+    @property
+    def input_size(self) -> Tuple[int, int]:
+        shape = self.input_shapes[0]
+        return shape[self._w_index], shape[self._h_index]
 
-        model_path: Optional[str]
-            ONNX/TFLite file path for YOLOX
-
-        class_score_th: Optional[float]
-            Score threshold. Default: 0.35
-
-        providers: Optional[List]
-            Providers for ONNXRuntime.
-        """
-        super().__init__(
-            runtime=runtime,
-            model_path=model_path,
-            class_score_th=class_score_th,
-            providers=providers,
-        )
-
-    def __call__(
-        self,
-        image: np.ndarray,
-    ) -> List[Box]:
-        """YOLOX
-
-        Parameters
-        ----------
-        image: np.ndarray
-            Entire image
-
-        Returns
-        -------
-        result_boxes: List[Box]
-            Predicted boxes: [N, classid, score, x1, y1, x2, y2]
-        """
-        temp_image = copy.deepcopy(image)
-        # PreProcess
-        resized_image = \
-            self._preprocess(
-                temp_image,
-            )
-        # Inference
-        inferece_image = np.asarray([resized_image], dtype=self._input_dtypes[0])
-        outputs = super().__call__(input_datas=[inferece_image])
-        boxes = outputs[0]
-        # PostProcess
-        result_boxes = \
-            self._postprocess(
-                image=temp_image,
-                boxes=boxes,
-            )
-        return result_boxes
-
-    def _preprocess(
-        self,
-        image: np.ndarray,
-    ) -> np.ndarray:
-        """_preprocess
-
-        Parameters
-        ----------
-        image: np.ndarray
-            Entire image
-
-        Returns
-        -------
-        resized_image: np.ndarray
-            Resized and normalized image.
-        """
-        # Resize + Transpose
-        resized_image = cv2.resize(
-            image,
-            (
-                int(self._input_shapes[0][self._w_index]),
-                int(self._input_shapes[0][self._h_index]),
-            )
-        )
-        resized_image = resized_image.transpose(self._swap)
-        resized_image = \
-            np.ascontiguousarray(
-                resized_image,
-                dtype=np.float32,
-            )
-        return resized_image
-
-    def _postprocess(
-        self,
-        image: np.ndarray,
-        boxes: np.ndarray,
-    ) -> List[Box]:
-        """_postprocess
-
-        Parameters
-        ----------
-        image: np.ndarray
-            Entire image.
-
-        boxes: np.ndarray
-            float32[N, 7]
-
-        Returns
-        -------
-        result_boxes: List[Box]
-            Predicted boxes: [classid, score, x1, y1, x2, y2]
-        """
-
-        """
-        Detector is
-            N -> Number of boxes detected
-            batchno -> always 0: BatchNo.0
-
-        batchno_classid_score_x1y1x2y2: float32[N,7]
-        """
-        image_height = image.shape[0]
-        image_width = image.shape[1]
-
-        result_boxes: List[Box] = []
-
-        if len(boxes) > 0:
-            scores = boxes[:, 2:3]
-            keep_idxs = scores[:, 0] > self._class_score_th
-            scores_keep = scores[keep_idxs, :]
-            boxes_keep = boxes[keep_idxs, :]
-
-            if len(boxes_keep) > 0:
-                for box, score in zip(boxes_keep, scores_keep):
-                    x_min = int(max(0, box[3]) * image_width / self._input_shapes[0][self._w_index])
-                    y_min = int(max(0, box[4]) * image_height / self._input_shapes[0][self._h_index])
-                    x_max = int(min(box[5], self._input_shapes[0][self._w_index]) * image_width / self._input_shapes[0][self._w_index])
-                    y_max = int(min(box[6], self._input_shapes[0][self._h_index]) * image_height / self._input_shapes[0][self._h_index])
-                    result_boxes.append(
-                        Box(
-                            classid=int(box[1]),
-                            score=float(score),
-                            x1=x_min,
-                            y1=y_min,
-                            x2=x_max,
-                            y2=y_max,
-                        )
-                    )
-        return result_boxes
 
 class BodyPix(AbstractModel):
     def __init__(
@@ -352,6 +250,7 @@ class BodyPix(AbstractModel):
         runtime: Optional[str] = 'onnx',
         model_path: Optional[str] = 'bodypix_resnet50_stride16_1x3x480x640.onnx',
         providers: Optional[List] = None,
+        strides: Optional[int] = None
     ):
         """BodyPix
 
@@ -374,12 +273,16 @@ class BodyPix(AbstractModel):
         self._swap = (2,0,1)
         self._mean = np.asarray([0.0, 0.0, 0.0])
         self._std = np.asarray([1.0, 1.0, 1.0])
-        import onnx
-        model_proto = onnx.load(f=model_path)
-        float_segments_raw_output = [v for v in model_proto.graph.value_info if v.name == 'float_segments_raw_output']
-        if len(float_segments_raw_output) >= 1:
-            w = float_segments_raw_output[0].type.tensor_type.shape.dim[-1].dim_value
-            self.strides = self._input_shapes[0][self._w_index] // w
+        self.strides = strides
+
+        # find strides
+        if self.strides is None:
+            import onnx
+            model_proto = onnx.load(f=model_path)
+            float_segments_raw_output = [v for v in model_proto.graph.value_info if v.name == 'float_segments_raw_output']
+            if len(float_segments_raw_output) >= 1:
+                w = float_segments_raw_output[0].type.tensor_type.shape.dim[-1].dim_value
+                self.strides = self._input_shapes[0][self._w_index] // w
 
     def __call__(
         self,
@@ -581,12 +484,6 @@ def affine_transform(image: np.ndarray, width: int, height: int, dx:int, dy:int)
 def main():
     parser = ArgumentParser()
     parser.add_argument(
-        '-dm',
-        '--detection_model',
-        type=str,
-        default='yolox_x_body_head_hand_face_0076_0.5228_post_1x3x480x640.onnx',
-    )
-    parser.add_argument(
         '-bm',
         '--bodypix_model',
         type=str,
@@ -602,14 +499,37 @@ def main():
         '-ep',
         '--execution_provider',
         type=str,
-        choices=['cpu', 'cuda', 'tensorrt'],
+        choices=['cpu', 'cuda', 'tensorrt', 'dml', 'coreml'],
         default='tensorrt',
+    )
+    parser.add_argument(
+        '-rt',
+        '--runtime',
+        type=str,
+        choices=['onnx', 'openvino', 'tflite', 'tensorflow'],
+        default='onnx',
+    )
+    parser.add_argument(
+        '-s',
+        '--strides',
+        type=int,
+        default=None,
     )
     args = parser.parse_args()
 
     providers: List[Tuple[str, Dict] | str] = None
     if args.execution_provider == 'cpu':
         providers = [
+            'CPUExecutionProvider',
+        ]
+    elif args.execution_provider == 'coreml':
+        providers = [
+            'CoreMLExecutionProvider',
+            'CPUExecutionProvider',
+        ]
+    elif args.execution_provider == 'dml':
+        providers = [
+            'DmlExecutionProvider',
             'CPUExecutionProvider',
         ]
     elif args.execution_provider == 'cuda':
@@ -630,15 +550,12 @@ def main():
             'CPUExecutionProvider',
         ]
 
-    # model_yolox = \
-    #     YOLOX(
-    #         model_path=args.detection_model,
-    #         providers=providers,
-    #     )
     model_bodypix = \
         BodyPix(
             model_path=args.bodypix_model,
+            runtime=args.runtime,
             providers=providers,
+            strides=args.strides
         )
 
     cap = cv2.VideoCapture(
@@ -672,6 +589,13 @@ def main():
         # keypoints_classidscorexy: [N, 4] [keypoint_classid, score, x, y]
         foreground_mask_zero_or_255, colored_mask_classid, keypoints_classidscorexy = model_bodypix(debug_image)
 
+        # resize if necessary to match original size
+        if foreground_mask_zero_or_255.shape[0] != h or foreground_mask_zero_or_255.shape[1] != w:
+            foreground_mask_zero_or_255 = cv2.resize(foreground_mask_zero_or_255, (w, h))
+
+        if colored_mask_classid.shape[0] != h or colored_mask_classid.shape[1] != w:
+            colored_mask_classid = cv2.resize(colored_mask_classid, (w, h))
+
         # Fine-tune position of mask image
         number_of_fine_tuning_pixels: int = model_bodypix.strides // 2
         if number_of_fine_tuning_pixels > 0:
@@ -699,6 +623,15 @@ def main():
         # Eliminate duplicate detection of neighboring keypoints
         if len(keypoints_classidscorexy) > 0:
             keypoints_classidscorexy = extract_max_score_points_unique(keypoints_classidscorexy)
+
+            # only get unique values to avoid duplicate keypoints indices
+            _, unique_indices = np.unique(keypoints_classidscorexy[:, 0], return_index=True)
+            keypoints_classidscorexy = keypoints_classidscorexy[unique_indices]
+
+            # scale key-points location to original image
+            input_size = np.array([1, 1, *model_bodypix.input_size])
+            original_size = np.array([1, 1, debug_image_w, debug_image_h])
+            keypoints_classidscorexy[:] = keypoints_classidscorexy[:] / input_size * original_size
 
         elapsed_time = time.perf_counter() - start_time
 
