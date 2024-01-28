@@ -7,13 +7,18 @@ Lightweight human detection model generated using a high-quality human dataset. 
 **The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise. Compared to the [434_YOLOX-Body-Head-Hand-Face](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/434_YOLOX-Body-Head-Hand-Face) model, almost all models have a `1.0 ~ 4.0` point improvement in mAP.**
 
 - Global distortions
+  - Noise
+  - Contrast
+  - Compression
+  - Photorealistic Rain
+  - Photorealistic Haze
+  - Motion-Blur
+  - Defoc-Blur
+  - BAckLit
 - Local distortions
   - Local motion blur
   - Local defocus blur
   - Local backlight illumination
-- Atmospheric distortions
-  - Photorealistic rain
-  - Photorealistic haze
 
 |Detection results|Detection results|
 |:-:|:-:|
