@@ -373,9 +373,8 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
     }
     ```
 
-  - Synthesize and retrain the dataset to further improve model performance.
-
-    [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco)
+  - [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco)
+    
     ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/69603b9b-ab9f-455c-a9c9-c818edc41dba)
     ```bibtex
     @INPROCEEDINGS{10323035,
