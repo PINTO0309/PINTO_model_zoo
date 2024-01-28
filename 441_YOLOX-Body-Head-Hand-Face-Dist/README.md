@@ -337,7 +337,7 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
   ```bibtex
   @software{YOLOX-Body-Head-Hand-Face-Dist,
     author={Katsuya Hyodo},
-    title={Lightweight human detection model generated using a high-quality human dataset (Body-Head-Hand-Face)},
+    title={Lightweight human detection model generated using a high-quality human dataset (Body-Head-Hand-Face) and Complex Distorted COCO database for Scene-Context-Aware computer vision},
     url={https://github.com/PINTO0309/PINTO_model_zoo/tree/main/441_YOLOX-Body-Head-Hand-Face-Dist},
     year={2024},
     month={1},
