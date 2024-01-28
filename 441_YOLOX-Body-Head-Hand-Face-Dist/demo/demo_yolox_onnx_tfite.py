@@ -463,14 +463,12 @@ def main():
         '-v',
         '--video',
         type=str,
-        default="0",
         help='Video file path or camera index.',
     )
     group_v_or_i.add_argument(
         '-i',
         '--images_dir',
         type=str,
-        default="",
         help='jpg, png images folder path.',
     )
     parser.add_argument(
@@ -548,7 +546,7 @@ def main():
     file_paths: List[str] = None
     cap = None
     video_writer = None
-    if images_dir != "":
+    if images_dir is not None:
         file_paths = list_image_files(dir_path=images_dir)
     else:
         cap = cv2.VideoCapture(
