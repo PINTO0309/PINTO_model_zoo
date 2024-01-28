@@ -360,18 +360,6 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
       url={https://arxiv.org/pdf/1904.04882.pdf}
     }
     ```
-  - YOLOX
-
-    https://github.com/Megvii-BaseDetection/YOLOX
-
-    ```bibtex
-    @article{yolox2021,
-      title={YOLOX: Exceeding YOLO Series in 2021},
-      author={Ge, Zheng and Liu, Songtao and Wang, Feng and Li, Zeming and Sun, Jian},
-      journal={arXiv preprint arXiv:2107.08430},
-      year={2021}
-    }
-    ```
 
   - [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco)
     
@@ -387,6 +375,20 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
       pages={1-6},
       doi={10.1109/EUVIP58404.2023.10323035}
     }
+    ```
+
+  - YOLOX
+
+    https://github.com/Megvii-BaseDetection/YOLOX
+
+    ```bibtex
+    @article{yolox2021,
+      title={YOLOX: Exceeding YOLO Series in 2021},
+      author={Ge, Zheng and Liu, Songtao and Wang, Feng and Li, Zeming and Sun, Jian},
+      journal={arXiv preprint arXiv:2107.08430},
+      year={2021}
+    }
+    ```
 
   - YOLOX-ti-lite
 
