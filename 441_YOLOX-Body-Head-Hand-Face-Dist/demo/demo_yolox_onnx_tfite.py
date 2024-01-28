@@ -488,6 +488,15 @@ def main():
             'Eliminates the file I/O load associated with automatic recording to MP4. '+
             'Devices that use a MicroSD card or similar for main storage can speed up overall processing.',
     )
+    parser.add_argument(
+        '-dwk',
+        '--disable_waitKey',
+        action='store_true',
+        help=\
+            'Disable cv2.waitKey(). '+
+            'When you want to process a batch of still images, '+
+            ' disable key-input wait and process them continuously.',
+    )
     args = parser.parse_args()
 
     # runtime check
@@ -509,8 +518,9 @@ def main():
             print(Color.RED('ERROR: https://github.com/PINTO0309/TensorflowLite-bin'))
             print(Color.RED('ERROR: https://github.com/tensorflow/tensorflow'))
             sys.exit(0)
-    images_dir: str = args.images_dir
     video: str = args.video
+    images_dir: str = args.images_dir
+    disable_waitKey: bool = args.disable_waitKey
     execution_provider: str = args.execution_provider
     providers: List[Tuple[str, Dict] | str] = None
     if execution_provider == 'cpu':
@@ -650,7 +660,7 @@ def main():
 
         cv2.imshow("test", debug_image)
 
-        key = cv2.waitKey(1) if file_paths is None else cv2.waitKey(0)
+        key = cv2.waitKey(1) if file_paths is None or disable_waitKey else cv2.waitKey(0)
         if key == 27: # ESC
             break
 
