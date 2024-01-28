@@ -14,11 +14,11 @@ Lightweight human detection model generated using a high-quality human dataset. 
   - Photorealistic Haze
   - Motion-Blur
   - Defoc-Blur
-  - BAckLit
+  - Backlight illumination
 - Local distortions
-  - Local motion blur
-  - Local defocus blur
-  - Local backlight illumination
+  - Motion-Blur
+  - Defoc-Blur
+  - Backlight illumination
 
 |Detection results|Detection results|
 |:-:|:-:|
