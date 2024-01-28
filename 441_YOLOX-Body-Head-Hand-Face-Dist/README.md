@@ -100,8 +100,9 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
       [-h] \
       [-m MODEL] \
       (-v VIDEO | -i IMAGES_DIR) \
-      [-ep {cpu,cuda,tensorrt}]
-      [-dvw]
+      [-ep {cpu,cuda,tensorrt}] \
+      [-dvw] \
+      [-dwk]
 
     options:
       -h, --help
@@ -119,6 +120,9 @@ The method of detecting 133 skeletal keypoints at once gives the impression that
         Disable video writer. Eliminates the file I/O load associated with automatic
         recording to MP4. Devices that use a MicroSD card or similar for main
         storage can speed up overall processing.
+      -dwk, --disable_waitKey
+        Disable cv2.waitKey(). When you want to process a batch of still images,
+        disable key-input wait and process them continuously.
     ```
 
 - YOLOX-Body-Head-Hand-Face-Dist - Nano
