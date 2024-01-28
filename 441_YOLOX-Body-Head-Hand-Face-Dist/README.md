@@ -13,11 +13,11 @@ Lightweight human detection model generated using a high-quality human dataset. 
   - Photorealistic Rain
   - Photorealistic Haze
   - Motion-Blur
-  - Defoc-Blur
+  - Defocus-Blur
   - Backlight illumination
 - Local distortions
   - Motion-Blur
-  - Defoc-Blur
+  - Defocus-Blur
   - Backlight illumination
 
 |Detection results|Detection results|
