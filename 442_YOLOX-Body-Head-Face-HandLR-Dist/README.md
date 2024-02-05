@@ -27,9 +27,10 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/2ddbe50c-ce0d-4bd9-a1f0-b6b7007ace07
 
 ## 1. Dataset
-  - COCO-Hand (14,667 Images, 66,903 labels, All re-annotated manually)
+  - COCO-Hand (14,667 images, 66,903 labels, All re-annotated manually)
   - http://vision.cs.stonybrook.edu/~supreeth/COCO-Hand.zip
   - [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) (14,667 Images, 66,903 labels, All re-annotated manually)
+  - +α 4,888 images, xxx labels. (Counting is already a pain in the ass.)
   - I am adding my own enhancement data to COCO-Hand and re-annotating all images. In other words, only COCO images were cited and no annotation data were cited.
   - I have no plans to publish my own dataset.
     ```
