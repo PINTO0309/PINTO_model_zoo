@@ -34,18 +34,6 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   - +α Distorted Left-Hand/Right-Hand 4,888 images, xxx labels. (Counting is already a pain in the ass. All re-annotated manually)
   - I am adding my own enhancement data to COCO-Hand and re-annotating all images. In other words, only COCO images were cited and no annotation data were cited.
   - I have no plans to publish my own dataset.
-    ```
-    body_label_count: 30,729 labels
-    head_label_count: 26,268 labels
-    hand_label_count: 18,087 labels
-    ===============================
-               Total: 66,903 labels
-               Total: 14,667 images
-    ```
-    ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/22b56779-928b-44d8-944c-25431b83e24f)
-  - The process of work and verification can be seen in my working notes below. However, a detailed explanation is not given.
-
-    https://zenn.dev/pinto0309/scraps/11300d816ab1b3
 
 ## 2. Annotation
 
