@@ -195,6 +195,28 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   ```
 - YOLOX-Body-Head-Hand-Face-Dist - M
   ```
+   Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.499
+   Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.796
+   Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.523
+   Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.353
+   Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.706
+   Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.829
+   Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.209
+   Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.505
+   Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.567
+   Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.444
+   Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.763
+   Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.866
+  per class AP:
+  | class   | AP     | class     | AP     | class      | AP     |
+  |:--------|:-------|:----------|:-------|:-----------|:-------|
+  | body    | 59.372 | head      | 57.107 | face       | 49.782 |
+  | hand    | 49.081 | hand_left | 42.296 | hand_right | 41.915 |
+  per class AR:
+  | class   | AR     | class     | AR     | class      | AR     |
+  |:--------|:-------|:----------|:-------|:-----------|:-------|
+  | body    | 63.833 | head      | 61.064 | face       | 54.233 |
+  | hand    | 54.206 | hand_left | 53.359 | hand_right | 53.326 |
   ```
 - YOLOX-Body-Head-Hand-Face-Dist - L
   ```
