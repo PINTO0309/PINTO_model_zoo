@@ -22,7 +22,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   - Defocus-Blur
   - Backlight illumination
 
-- Very strong tolerance for fast hand gestures, but the left-right decision when facing backward is quite challenging. Additional rule-based logic synthesizing face and head orientation would be needed to robustly correct the results. Alternatively, the simplest way to improve robustness would be to tie key points on the wrist output from a less accurate but very lightweight skeletal detection model.
+- Very strong tolerance for fast hand gestures, but the left-right decision when facing backward is quite challenging. Additional rule-based logic synthesizing face and head orientation would be needed to robustly correct the results. Alternatively, the simplest way to improve robustness would be to tie key points on the wrist output from a less accurate but very lightweight pose estimation model.　The `Hand` class, which is trained as a superclass of `Left-Hand` and `Right-Hand`, is much more accurate than the results of detecting both hands individually, so it is recommended to merge it with the `Hand` results when combined with pose estimation.
 
   https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/2ddbe50c-ce0d-4bd9-a1f0-b6b7007ace07
 
