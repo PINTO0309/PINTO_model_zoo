@@ -6,7 +6,7 @@ Lightweight human detection model generated using a high-quality human dataset. 
 
 **In addition, the ability to detect the left and right hands was added.**
 
-The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise. Compared to the [434_YOLOX-Body-Head-Hand-Face](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/434_YOLOX-Body-Head-Hand-Face) model, almost all models have a `1.0 ~ 4.0` point improvement in mAP.
+The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise. Compared to the [434_YOLOX-Body-Head-Hand-Face](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/434_YOLOX-Body-Head-Hand-Face) model, almost all models have a `1.0 ~ 4.0` point improvement in mAP.　In addition, the annotation of the hand dataset has been improved, resulting in better detection accuracy than [441_YOLOX-Body-Head-Hand-Face-Dist](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/441_YOLOX-Body-Head-Hand-Face-Dist).
 
 - Global distortions
   - Noise
