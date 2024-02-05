@@ -57,6 +57,15 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
   ![icon_design drawio (3)](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/72740ed3-ae9f-4ab7-9b20-bea62c58c7ac)
 
+  |Class Name|Class ID|
+  |:-|-:|
+  |Body|0|
+  |Head|1|
+  |Face|2|
+  |Hand|3|
+  |Left-Hand|4|
+  |Right-Hand|5|
+
 ## 3. Test
   - Python 3.10
   - onnx 1.14.1+
