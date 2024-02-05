@@ -30,8 +30,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   - COCO-Hand (14,667 images, 66,903 labels, All re-annotated manually)
   - http://vision.cs.stonybrook.edu/~supreeth/COCO-Hand.zip
   - [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) (14,667 Images, 66,903 labels, All re-annotated manually)
-  - +α Left-Hand/Right-Hand 4,888 images, xxx labels. (Counting is already a pain in the ass.)
-  - +α Distorted Left-Hand/Right-Hand 4,888 images, xxx labels. (Counting is already a pain in the ass.)
+  - +α Left-Hand/Right-Hand 4,888 images, xxx labels. (Counting is already a pain in the ass. All re-annotated manually)
+  - +α Distorted Left-Hand/Right-Hand 4,888 images, xxx labels. (Counting is already a pain in the ass. All re-annotated manually)
   - I am adding my own enhancement data to COCO-Hand and re-annotating all images. In other words, only COCO images were cited and no annotation data were cited.
   - I have no plans to publish my own dataset.
     ```
