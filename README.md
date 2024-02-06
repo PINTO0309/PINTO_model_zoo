@@ -234,6 +234,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |435|MobileFaceNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/435_MobileFaceNet)|||||||||||⚫|Face Alignment,112x112|
 |436|Peppa_Pig_Face_Landmark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/436_Peppa_Pig_Face_Landmark)|||||||||||⚫|Face Alignment,128x128,256x256|
 |437|PIPNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/437_PIPNet)|||||||||||⚫|Face Alignment,256x256|
+|443|Opal23_HeadPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/443_Opal23_HeadPose)|||||||||||⚫|6D HeadPose, FullRange, 128x128|
 ### 5. 2D/3D Hand Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
