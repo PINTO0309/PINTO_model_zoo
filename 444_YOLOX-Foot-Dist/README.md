@@ -51,7 +51,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   |:-|-:|
   |Foot|0|
 
-  ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/f748f748-c1bc-47ff-8001-061188ef352b)
+  ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/e3ddef0a-3151-4c25-b71e-7ed09dfb9567)
 
 ## 3. Test
   - Python 3.10
