@@ -24,11 +24,19 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
 - Highly accurate detection results
 
+  Objects up to a minimum size of `4x3` pixels can be detected. However, it is difficult to classify left and right hands for an object of that size and is classified as `Unknown`.
+
   ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/3c0e3d1f-e3b2-443c-bfa5-99a7a1827dd0)
+
+  Strong detection even when feet are heavily shielded by grass.
 
   ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/52be36d7-7eeb-45ba-8da5-0f5782796329)
 
+  It strongly detects even if Gaussian noise is added with an intensity that would not be possible in the real world.
+
   ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/7eca8477-8273-44b4-9569-a8d7b56ecbd5)
+
+  Simultaneous acquisition of hand and foot context has greatly improved the performance of distinguishing between limbs.
 
   ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/b2da4e8c-a999-479d-8fa8-372ff171ef1f)
 
