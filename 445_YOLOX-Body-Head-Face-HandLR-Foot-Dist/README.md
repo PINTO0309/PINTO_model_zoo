@@ -40,7 +40,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   - I am adding my own enhancement data to COCO-Hand and re-annotating all images. In other words, only COCO images were cited and no annotation data were cited.
   - I have no plans to publish my own dataset.
   - Annotation quantity
-    ```json
+    ```
     TOTAL: 10,064 images
     TOTAL: 244,388 labels
 
