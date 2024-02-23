@@ -4,6 +4,8 @@
 
 Lightweight human detection models generated on high-quality human data sets. It can detect objects with high accuracy and speed in a total of seven classes: `whole body`, `head`, `face`, `hands`, `left hand`, `right hand`, and `foot(feet)`. Even the classification problem is being attempted to be solved by object detection. There is no need to perform any complex affine transformations or other processing for pre-processing and post-processing of input images. In addition, the resistance to Motion Blur, Gaussian noise, contrast noise, backlighting, and halation is quite strong because it was trained only on images with added photometric noise for all images in the MS-COCO subset of the image set. In addition, about half of the image sets were annotated with the aspect ratio of the original image substantially destroyed. I manually annotated all images in the dataset by myself. The model is intended to use real-world video for inference and has enhanced resistance to all kinds of noise. Probably stronger than any known model.
 
+Do not be ruled by the curse of mAP.
+
 The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.
 
 - Global distortions
