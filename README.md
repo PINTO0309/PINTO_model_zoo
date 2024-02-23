@@ -182,6 +182,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |441|YOLOX-Body-Head-Hand-Face-Dist|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/441_YOLOX-Body-Head-Hand-Face-Dist)|||||||||||⚫|Body,Head,Hand,Face,Complex Distorted|
 |442|YOLOX-Body-Head-Face-HandLR-Dist|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/442_YOLOX-Body-Head-Face-HandLR-Dist)|||||||||||⚫|Body,Head,Hands,Left-Hand,Right-Hand,Face,Complex Distorted|
 |444|YOLOX-Foot-Dist|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/444_YOLOX-Foot-Dist)|||||||||||⚫|Foot,Complex Distorted|
+|445|YOLOX-Body-Head-Face-HandLR-Foot-Dist|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/445_YOLOX-Body-Head-Face-HandLR-Foot-Dist)|||||||||||⚫|Body,Head,Face,Hands,Left-Hand,Right-Hand,Foot,Complex Distorted|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
