@@ -26,7 +26,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
   **I don't evaluate by Cherry-picked data, Best-case data or Biased data at all. Therefore, only difficult images and situations in which the model is most prone to detection errors are used for validation.**
 
-  Objects up to a minimum size of `4x3` pixels can be detected. However, it is difficult to classify left and right hands for an object of that size and is classified as `Unknown`. The detection of the male head in the center somehow fails.
+  Objects up to a minimum size of `4x3` pixels can be detected. However, it is difficult to classify left and right hands for an object of that size and is classified as `Unknown`. The detection of the male head in the center somehow fails. Failure to detect a woman in white on the dog's head.
 
   ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/3c0e3d1f-e3b2-443c-bfa5-99a7a1827dd0)
 
