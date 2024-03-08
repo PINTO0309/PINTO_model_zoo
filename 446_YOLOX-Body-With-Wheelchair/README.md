@@ -4,6 +4,8 @@
 
 Lightweight human detection models generated on high-quality human data sets. It can detect objects with high accuracy.
 
+https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/b506d06c-8a17-4a19-aeaf-e584d74d2097
+
 ## 1. Test
   - Python 3.10
   - onnx 1.14.1+
