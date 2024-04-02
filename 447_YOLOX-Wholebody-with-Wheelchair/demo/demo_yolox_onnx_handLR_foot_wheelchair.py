@@ -573,6 +573,13 @@ def main():
             'When you want to process a batch of still images, '+
             ' disable key-input wait and process them continuously.',
     )
+    parser.add_argument(
+        '-dlr',
+        '--disable_left_and_right_hand_discrimination_mode',
+        action='store_true',
+        help=\
+            'Disable left and right hand discrimination mode.',
+    )
     args = parser.parse_args()
 
     # runtime check
@@ -597,6 +604,7 @@ def main():
     video: str = args.video
     images_dir: str = args.images_dir
     disable_waitKey: bool = args.disable_waitKey
+    disable_left_and_right_hand_discrimination_mode: bool = args.disable_left_and_right_hand_discrimination_mode
     execution_provider: str = args.execution_provider
     providers: List[Tuple[str, Dict] | str] = None
     if execution_provider == 'cpu':
@@ -692,15 +700,19 @@ def main():
                 # Face
                 color = (0,200,255)
             elif classid == 4:
-                # Hands
-                if box.handedness == 0:
-                    # Left-Hand
-                    color = (0,128,0)
-                elif box.handedness == 1:
-                    # Right-Hand
-                    color = (255,0,255)
+                if not disable_left_and_right_hand_discrimination_mode:
+                    # Hands
+                    if box.handedness == 0:
+                        # Left-Hand
+                        color = (0,128,0)
+                    elif box.handedness == 1:
+                        # Right-Hand
+                        color = (255,0,255)
+                    else:
+                        # Unknown
+                        color = (0,255,0)
                 else:
-                    # Unknown
+                    # Hands
                     color = (0,255,0)
             elif classid == 7:
                 # Foot
@@ -709,7 +721,7 @@ def main():
             if classid not in [1, 3]:
                 cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 3)
                 cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 2)
-                if classid == 4:
+                if not disable_left_and_right_hand_discrimination_mode and classid == 4:
                     handedness_txt = 'Left' if box.handedness == 0 else 'Right' if box.handedness == 1 else 'Unknown'
                     cv2.putText(
                         debug_image,
