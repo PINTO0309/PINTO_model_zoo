@@ -202,6 +202,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   | body    | 53.056 | head      | 54.960 | face       | 48.086 |
   | hand    | 46.050 | hand_left | 44.556 | hand_right | 44.685 |
   | foot    | 40.043 |           |        |            |        |
+  ```
 - YOLOX-Body-Head-Face-HandLR-Foot-Dist - S
   ```
   Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.420
