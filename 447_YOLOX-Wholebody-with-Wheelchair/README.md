@@ -6,6 +6,10 @@ Lightweight human detection models generated on high-quality human data sets. It
 
 Don't be ruled by the curse of mAP.
 
+https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/db7350e2-603e-42a8-8525-18a0d279d96e
+
+https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/125728c0-15fa-447f-b8ad-fb195650171b
+
 The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.
 
 - Global distortions
