@@ -227,6 +227,30 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   ```
 - YOLOX-Wholebody-with-Wheelchair - M
   ```
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.522
+  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.806
+  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.546
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.349
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.676
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.836
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.251
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.529
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.588
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.440
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.741
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.871
+  per class AP:
+  | class      | AP     | class                | AP     | class     | AP     |
+  |:-----------|:-------|:---------------------|:-------|:----------|:-------|
+  | body       | 58.522 | body_with_wheelchair | 82.192 | head      | 56.705 |
+  | face       | 48.626 | hand                 | 47.981 | hand_left | 42.161 |
+  | hand_right | 41.366 | foot                 | 39.761 |           |        |
+  per class AR:
+  | class      | AR     | class                | AR     | class     | AR     |
+  |:-----------|:-------|:---------------------|:-------|:----------|:-------|
+  | body       | 63.327 | body_with_wheelchair | 87.020 | head      | 61.033 |
+  | face       | 53.470 | hand                 | 53.218 | hand_left | 52.649 |
+  | hand_right | 52.140 | foot                 | 47.287 |           |        |
   ```
 - YOLOX-Wholebody-with-Wheelchair - L
   ```
