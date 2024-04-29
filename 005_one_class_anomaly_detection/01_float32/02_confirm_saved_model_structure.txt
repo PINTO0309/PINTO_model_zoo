@@ -1,1 +1,0 @@
-$ saved_model_cli show --dir ./saved_model --all
