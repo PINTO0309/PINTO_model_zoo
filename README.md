@@ -225,7 +225,6 @@ I have been working on quantization of various models as a hobby, but I have ski
 |311|HHP-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/311_HHP-Net)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|6D HeadPose,No-LICENSE|
 |319|ACR-Loss|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/319_ACR-Loss)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|Face Alignment|
 |322|YOLOv7_Head|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/322_YOLOv7_Head)|||||||||||⚫|PINTO's custom models|
-|345|YOLOv8|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/345_YOLOv8)|||||||||||⚫||
 |383|DirectMHP|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/383_DirectMHP)|⚫|⚫|||||||||⚫||
 |387|YuNetV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/387_YuNetV2)|⚫|⚫|⚫||⚫||||||⚫|640x640|
 |390|BlendshapeV2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/390_BlendshapeV2)|⚫|⚫|||||||||⚫|1x146x2,Nx146x2,MediaPipe|
