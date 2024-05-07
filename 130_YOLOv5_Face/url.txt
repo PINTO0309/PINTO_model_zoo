@@ -1,3 +1,0 @@
-https://github.com/deepcam-cn/yolov5-face
-https://github.com/PINTO0309/openvino2tensorflow
-

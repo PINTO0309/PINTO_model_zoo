@@ -1,8 +1,0 @@
-https://github.com/ultralytics/yolov5/releases/tag/v2.0
-https://github.com/ultralytics/yolov5/issues/891
-
-https://github.com/daquexian/onnx-simplifier.git
-https://github.com/linhaoqi027/yolov5_openvino_sdk.git
-
-
-https://github.com/karanjakhar/yolov5-export-to-cpu

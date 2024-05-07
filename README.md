@@ -132,7 +132,6 @@ I have been working on quantization of various models as a hobby, but I have ski
 |054|KNIFT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/054_KNIFT)|⚫|⚫|⚫|||⚫|⚫||||⚫|MediaPipe|
 |056|TextBoxes++ with dense blocks, separable convolution and Focal Loss|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/056_TextBoxes%2B%2B)|⚫|⚫|⚫|||⚫|⚫|⚫||⚫|⚫||
 |058|keras-retinanet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/058_keras-retinanet)|⚫|⚫||||⚫|⚫||⚫|⚫|⚫|resnet50_coco_best_v2.1.0.h5,320x320|
-|059|Yolov5|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/059_yolov5)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
 |072|NanoDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/072_NanoDet)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|[issue #274](https://github.com/google-coral/edgetpu/issues/274)|
 |073|RetinaNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/073_RetinaNet)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |074|Yolact|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/074_Yolact)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
@@ -149,7 +148,6 @@ I have been working on quantization of various models as a hobby, but I have ski
 |174|PP-PicoDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/174_PP-PicoDet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|S/M/L,320x320/416x416/640x640|
 |178|vehicle-detection-0200|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/178_vehicle-detection-0200)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|256x256,PriorBoxClustered->ndarray(0.npy)|
 |179|person-detection-0202|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/179_person-detection-0202)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|512x512,PriorBoxClustered->ndarray(0.npy)|
-|180|YOLOv5-Lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/180_YOLOv5-Lite)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|S:640x640,TensorRT rtx3070 Float16|
 |183|pedestrian-detection-adas-0002|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/183_pedestrian-detection-adas-0002)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|384x672,PriorBox->ndarray(0.npy)|
 |184|pedestrian-and-vehicle-detector-adas-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/184_pedestrian-and-vehicle-detector-adas-0001)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|384x672,PriorBox->ndarray(0.npy)|
 |185|person-vehicle-bike-detection-crossroad-0078|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/185_person-vehicle-bike-detection-crossroad-0078)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|1024x1024,PriorBoxClustered->ndarray(0.npy)|
@@ -165,7 +163,6 @@ I have been working on quantization of various models as a hobby, but I have ski
 |307|YOLOv7|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/307_YOLOv7)|⚫|⚫|⚫||⚫|⚫|⚫||⚫||⚫|YOLOv7,YOLOv7-tiny|
 |308|FastestDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/308_FastestDet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫|180x320,256x320,320x480,352x352,352x640,480x640,736x1280|
 |329|YOLOX-PAI|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/329_YOLOX-PAI)|||||||||||⚫||
-|331|YOLOv5L6_Ball|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/331_YOLOv5L6_Ball)|||||||||||⚫||
 |332|CrowdDet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/332_CrowdDet)|||||||||||⚫||
 |334|DAMO-YOLO|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/334_DAMO-YOLO)|||||||||||⚫||
 |336|PP-YOLOE-Plus|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/336_PP-YOLOE-Plus)|||||||||||⚫||
@@ -208,7 +205,6 @@ I have been working on quantization of various models as a hobby, but I have ski
 |096|RetinaFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/096_RetinaFace)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |106|WHENet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/106_WHENet)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫||⚫|Real-time Fine-Grained Estimation for Wide Range Head Pose|
 |129|SCRFD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/129_SCRFD)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|⚫|All types|
-|130|YOLOv5_Face|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/130_YOLOv5_Face)|⚫|⚫||||⚫|⚫|⚫|⚫||⚫|yolov5n_0.5,yolov5n_face,yolov5s_face/256x320,480x640,736x1280|
 |134|head-pose-estimation-adas-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/134_head-pose-estimation-adas-0001)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|60x60|
 |144|YuNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/144_YuNet)|⚫|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|120x160|
 |227|face-detection-adas-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/227_face-detection-adas-0001)|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|⚫|384x672,PriorBox->ndarray(0.npy)|
