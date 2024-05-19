@@ -329,4 +329,4 @@ https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/b506d06c-8a17-4a19-
     https://github.com/Kazuhito00/YOLOX-Colaboratory-Training-Sample
 
 ## 6. License
-[Apache License Version 2.0](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/445_YOLOX-Body-Head-Face-HandLR-Foot-Dist/LICENSE)
+[Apache License Version 2.0](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/446_YOLOX-Body-With-Wheelchair/LICENSE)
