@@ -50,18 +50,18 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
     train - 70,378 labels
       {
-        "eye": 19379,
-        "nose": 18385,
-        "mouth": 14898,
-        "ear": 17716
+        "eye": 19,379,
+        "nose": 18,385,
+        "mouth": 14,898,
+        "ear": 17,716
       }
 
     val - 18,391 labels
       {
-        "eye": 4999,
-        "nose": 4925,
-        "mouth": 3875,
-        "ear": 4592
+        "eye": 4,999,
+        "nose": 4,925,
+        "mouth": 3,875,
+        "ear": 4,592
       }
     ```
 
