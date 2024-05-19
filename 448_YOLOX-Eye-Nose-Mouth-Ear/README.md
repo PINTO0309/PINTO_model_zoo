@@ -346,7 +346,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   ```bibtex
   @software{YOLOX-Eye-Nose-Mouth-Ear,
     author={Katsuya Hyodo},
-    title={Lightweight human detection models generated on high-quality human data sets. It can detect objects with high accuracy and speed in a total of seven classes: eye, nose, mouth, ear.},
+    title={Lightweight human detection models generated on high-quality human data sets. It can detect objects with high accuracy and speed in a total of four classes: eye, nose, mouth, ear.},
     url={https://github.com/PINTO0309/PINTO_model_zoo/tree/main/448_YOLOX-Eye-Nose-Mouth-Ear},
     year={2024},
     month={5},
