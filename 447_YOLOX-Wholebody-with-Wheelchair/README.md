@@ -378,7 +378,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   ```bibtex
   @software{YOLOX-Wholebody-with-Wheelchair,
     author={Katsuya Hyodo},
-    title={Lightweight human detection models generated on high-quality human data sets. It can detect objects with high accuracy and speed in a total of seven classes: whole body, whole body with wheelchair, head, face, hands, left hand, right hand, and foot(feet).},
+    title={Lightweight human detection models generated on high-quality human data sets. It can detect objects with high accuracy and speed in a total of eight classes: whole body, whole body with wheelchair, head, face, hands, left hand, right hand, and foot(feet).},
     url={https://github.com/PINTO0309/PINTO_model_zoo/tree/main/447_YOLOX-Wholebody-with-Wheelchair},
     year={2024},
     month={4},
