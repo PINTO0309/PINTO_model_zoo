@@ -10,6 +10,8 @@ Don't be ruled by the curse of mAP.
 
   https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/4ecba76a-b61d-46ca-a38c-40a905fb70c4
 
+  https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/83307ecc-11e8-48b7-ae1c-487776a267c6
+
   ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/2b2c10b9-c075-4a74-b4d6-b4ebbb2a1baa)
 
   ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/53ce1a12-6093-4af8-9578-539c845186d6)
