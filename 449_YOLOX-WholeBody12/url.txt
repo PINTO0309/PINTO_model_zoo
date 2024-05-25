@@ -1,0 +1,8 @@
+https://github.com/Megvii-BaseDetection/YOLOX
+https://github.com/TexasInstruments/edgeai-yolox
+https://github.com/Kazuhito00/YOLOX-Colaboratory-Training-Sample
+
+https://github.com/PINTO0309/onnx2tf
+https://github.com/PINTO0309/simple-onnx-processing-tools
+https://github.com/PINTO0309/tflite-input-output-rewriter
+
