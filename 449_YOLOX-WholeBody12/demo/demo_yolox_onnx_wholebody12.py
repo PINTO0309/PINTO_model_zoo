@@ -376,7 +376,7 @@ class YOLOX(AbstractModel):
                             y2=y_max,
                             cx=cx,
                             cy=cy,
-                            handedness=-1 if classid not in [9, 10] else classid - 5, # -1: None, 0: Left, 1: Right
+                            handedness=-1 if classid not in [9, 10] else classid - 9, # -1: None, 0: Left, 1: Right
                         )
                     )
                 # Left and right hand merge
