@@ -571,7 +571,7 @@ def main():
         help=\
             'Disable cv2.waitKey(). '+
             'When you want to process a batch of still images, '+
-            ' disable key-input wait and process them continuously.',
+            'disable key-input wait and process them continuously.',
     )
     parser.add_argument(
         '-dlr',
