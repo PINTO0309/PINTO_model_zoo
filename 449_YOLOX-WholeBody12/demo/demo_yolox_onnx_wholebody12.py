@@ -431,10 +431,10 @@ class YOLOX(AbstractModel):
                                 best_distance = distance
                                 best_score = target_obj.score
             if most_relevant_obj:
-                if most_relevant_obj.classid == 5:
+                if most_relevant_obj.classid == 9:
                     base_obj.handedness = 0
                     most_relevant_obj.is_hand_used = True
-                elif most_relevant_obj.classid == 6:
+                elif most_relevant_obj.classid == 10:
                     base_obj.handedness = 1
                     most_relevant_obj.is_hand_used = True
                 else:
