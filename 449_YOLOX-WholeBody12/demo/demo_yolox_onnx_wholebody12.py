@@ -380,9 +380,9 @@ class YOLOX(AbstractModel):
                         )
                     )
                 # Left and right hand merge
-                # classid: 4 -> Hand
-                #   classid: 5 -> Left-Hand
-                #   classid: 6 -> Right-Hand
+                # classid: 8 -> Hand
+                #   classid: 9 -> Left-Hand
+                #   classid: 10 -> Right-Hand
                 # 1. Calculate Left-Hand and Right-Hand IoUs for Hand detection results
                 # 2. Connect either the Left-Hand or the Right-Hand with the highest score and the highest IoU with the Hand.
                 # 3. Exclude Left-Hand and Right-Hand from detection results
