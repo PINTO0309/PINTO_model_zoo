@@ -733,7 +733,7 @@ def main():
             if classid not in [1, 3]:
                 cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 3)
                 cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 2)
-                if not disable_left_and_right_hand_discrimination_mode and classid == 4:
+                if not disable_left_and_right_hand_discrimination_mode and classid == 8:
                     handedness_txt = 'Left' if box.handedness == 0 else 'Right' if box.handedness == 1 else 'Unknown'
                     cv2.putText(
                         debug_image,
