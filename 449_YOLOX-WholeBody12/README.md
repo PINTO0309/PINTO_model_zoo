@@ -14,7 +14,7 @@ The main contributions of this model are summarized below.
 - Maintains detection power in backlit or very dark environments
 - Maintains detection in very bright environments
 - Detection of very small objects such as 4x4 pixels
-
+- Strong occlusion resistance
 
 Don't be ruled by the curse of mAP.
 
