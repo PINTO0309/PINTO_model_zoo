@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 from __future__ import annotations
+import warnings
+warnings.filterwarnings('ignore')
 import os
 import sys
 import copy
@@ -117,6 +119,7 @@ class AbstractModel(ABC):
         # Model loading
         if self._runtime == 'onnx':
             import onnxruntime # type: ignore
+            onnxruntime.set_default_logger_severity(3) # ERROR
             session_option = onnxruntime.SessionOptions()
             session_option.log_severity_level = 3
             self._interpreter = \
