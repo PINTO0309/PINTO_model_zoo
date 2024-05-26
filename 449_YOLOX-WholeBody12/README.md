@@ -4,6 +4,8 @@
 
 Lightweight human detection models generated on high-quality human data sets. It can detect objects with high accuracy and speed in a total of 12 classes: `Body`, `BodyWithWheelchair`, `Head`, `Face`, `Eye`, `Nose`, `Mouth`, `Ear`, `Hand`, `Hand-Left`, `Hand-Right`, `Foot(Feet)`. The resistance to Motion Blur, Gaussian noise, contrast noise, backlighting, and halation is quite strong because it was trained only on images with added photometric noise for all images in the MS-COCO subset of the image set. In addition, about half of the image set was annotated by me with the aspect ratio of the original image substantially destroyed. I manually annotated all images in the dataset by myself. The model is intended to use real-world video for inference and has enhanced resistance to all kinds of noise. Probably stronger than any known model. However, the quality of the known data set and my data set are so different that an accurate comparison of accuracy is not possible.
 
+Dense features can be extracted by capturing all the key points of a face in a 2D plane, instead of capturing them in points as in RetinaFace and FaceAlignment. This is an extremely powerful capability for many tasks such as 6D Gaze Estimation, FacePose, HeadPose, and facial expression estimation.
+
 Don't be ruled by the curse of mAP.
 
 - Sample
