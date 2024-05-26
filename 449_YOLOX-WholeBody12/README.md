@@ -6,6 +6,16 @@ Lightweight human detection models generated on high-quality human data sets. It
 
 Dense features can be extracted by capturing all the key points of a face in a 2D plane, instead of capturing them in points as in RetinaFace and FaceAlignment. This is an extremely powerful capability for many tasks such as 6D Gaze Estimation, Blink Detection, FacePose, HeadPose, Gender and age estimation, facial expression estimation, and Segmentation of human body parts. It can estimate the state of a person, which cannot be accurately estimated from super sparse density information like Pose estimation. In addition, since all processing is completed by the object detection model alone, it is now possible to eliminate all cumbersome pre-processing and post-processing, as well as the pipeline of exchanging partial images that combine multiple models.
 
+The main contributions of this model are summarized below.
+- High-density information extraction
+- Elimination of cumbersome pipelines
+- Ultra robustness to environmental noise
+- Robustness to high intensity blur due to fast camera or human body movement
+- Maintains detection power in backlit or very dark environments
+- Maintains detection in very bright environments
+- Detection of very small objects such as 4x4 pixels
+
+
 Don't be ruled by the curse of mAP.
 
 - Sample
