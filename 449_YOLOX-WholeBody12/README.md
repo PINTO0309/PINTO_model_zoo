@@ -138,7 +138,9 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
       [-ep {cpu,cuda,tensorrt}] \
       [-dvw] \
       [-dwk] \
-      [-dlr]
+      [-dlr] \
+      [-oan] \
+      [-oac]
 
     options:
       -h, --help
@@ -161,6 +163,11 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
         disable key-input wait and process them continuously.
       -dlr, --disable_left_and_right_hand_discrimination_mode
         Disable left and right hand discrimination mode.
+      -oan, --output_annotation
+        Output annotation txt file in YOLO format.
+      -oac, --output_annotation_classids
+        List of class IDs to output to annotation txt file.
+        Default: [0, 1, 2, 3, 4, 5, 6, 7, 8, 11]
     ```
 
 - YOLOX-WholeBody12 - Nano (Not usable due to missing parameters)
