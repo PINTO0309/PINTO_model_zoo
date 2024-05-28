@@ -583,6 +583,22 @@ def main():
         help=\
             'Disable left and right hand discrimination mode.',
     )
+    parser.add_argument(
+        '-oan',
+        '--output_annotation',
+        action='store_true',
+        help=\
+            'Output annotation txt file in YOLO format.',
+    )
+    parser.add_argument(
+        '-oac',
+        '--output_annotation_classids',
+        nargs='*',
+        type=int,
+        default=[0, 1, 2, 3, 4, 5, 6, 7, 8, 11],
+        help=\
+            'List of class IDs to output to annotation txt file.',
+    )
     args = parser.parse_args()
 
     # runtime check
@@ -608,6 +624,8 @@ def main():
     images_dir: str = args.images_dir
     disable_waitKey: bool = args.disable_waitKey
     disable_left_and_right_hand_discrimination_mode: bool = args.disable_left_and_right_hand_discrimination_mode
+    output_annotation: bool = args.output_annotation
+    output_annotation_classids: List[int] = args.output_annotation_classids
     execution_provider: str = args.execution_provider
     providers: List[Tuple[str, Dict] | str] = None
     if execution_provider == 'cpu':
@@ -799,6 +817,19 @@ def main():
             #     1,
             #     cv2.LINE_AA,
             # )
+
+        # Analyze detection results and save to a text file
+        if output_annotation:
+            txt_path = f"{os.path.splitext(file_paths[file_paths_count])[0]}.txt"
+            with open(txt_path, 'w') as f:
+                for box in boxes:
+                    if box.classid in output_annotation_classids:
+                        x_center = ((box.x1 + box.x2) / 2) / image.shape[1]
+                        y_center = ((box.y1 + box.y2) / 2) / image.shape[0]
+                        width = abs(box.x2 - box.x1) / image.shape[1]
+                        height = abs(box.y2 - box.y1) / image.shape[0]
+                        classid = box.classid
+                        f.write(f'{int(classid)} {x_center} {y_center} {width} {height}\n')
 
         if file_paths is not None:
             basename = os.path.basename(file_paths[file_paths_count])
