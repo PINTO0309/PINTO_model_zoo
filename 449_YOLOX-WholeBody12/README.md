@@ -28,6 +28,8 @@ Don't be ruled by the curse of mAP.
 
   ![frameE_000018](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/c31ecd8c-cc73-4d22-b6cd-9c6ca6accf4d)
 
+  ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/1dde0c2e-df86-4704-86c5-cc2cc9b46c90)
+
 The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.
 
 - Global distortions
