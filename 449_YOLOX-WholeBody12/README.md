@@ -18,7 +18,7 @@ The main contributions of this model are summarized below.
 
 Don't be ruled by the curse of mAP.
 
-- Sample
+- Sample - e2e inference speed with integrated pre-processing, inference, and post-processing
 
   https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/3419e611-65c9-4beb-94b4-1a8788694557
 
