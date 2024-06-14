@@ -141,6 +141,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
       -ep {cpu,cuda,tensorrt}, \
           --execution_provider {cpu,cuda,tensorrt}
         Execution provider for ONNXRuntime.
+      -it {fp16,int8}, --inference_type {fp16,int8}
+        Inference type. Default: fp16
       -dvw, --disable_video_writer
         Disable video writer. Eliminates the file I/O load associated with automatic
         recording to MP4. Devices that use a MicroSD card or similar for main
