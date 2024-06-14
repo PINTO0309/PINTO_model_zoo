@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 from __future__ import annotations
+import warnings
+warnings.filterwarnings('ignore')
 import os
 import sys
 import copy
@@ -117,6 +119,7 @@ class AbstractModel(ABC):
         # Model loading
         if self._runtime == 'onnx':
             import onnxruntime # type: ignore
+            onnxruntime.set_default_logger_severity(3) # ERROR
             session_option = onnxruntime.SessionOptions()
             session_option.log_severity_level = 3
             self._interpreter = \
@@ -126,6 +129,7 @@ class AbstractModel(ABC):
                     providers=providers,
                 )
             self._providers = self._interpreter.get_providers()
+            print(f'{Color.GREEN("Enabled ONNX ExecutionProviders: ")}{self._providers}')
             self._input_shapes = [
                 input.shape for input in self._interpreter.get_inputs()
             ]
@@ -226,7 +230,7 @@ class YOLOX(AbstractModel):
         self,
         *,
         runtime: Optional[str] = 'onnx',
-        model_path: Optional[str] = 'yolox_x_body_head_face_handLR_dist_0164_0.5470_post_1x3x480x640.onnx',
+        model_path: Optional[str] = 'yolox_x_wholebody_with_wheelchair_ti_post_0250_1x3x384x672.onnx',
         class_score_th: Optional[float] = 0.35,
         providers: Optional[List] = None,
     ):
@@ -556,6 +560,14 @@ def main():
         help='Execution provider for ONNXRuntime.',
     )
     parser.add_argument(
+        '-it',
+        '--inference_type',
+        type=str,
+        choices=['fp16', 'int8'],
+        default='fp16',
+        help='Inference type. Default: fp16',
+    )
+    parser.add_argument(
         '-dvw',
         '--disable_video_writer',
         action='store_true',
@@ -584,6 +596,7 @@ def main():
 
     # runtime check
     model_file: str = args.model
+    model_dir_path = os.path.dirname(model_file)
     model_ext: str = os.path.splitext(model_file)[1][1:].lower()
     runtime: str = None
     if model_ext == 'onnx':
@@ -606,6 +619,8 @@ def main():
     disable_waitKey: bool = args.disable_waitKey
     disable_left_and_right_hand_discrimination_mode: bool = args.disable_left_and_right_hand_discrimination_mode
     execution_provider: str = args.execution_provider
+    inference_type: str = args.inference_type
+    inference_type = inference_type.lower()
     providers: List[Tuple[str, Dict] | str] = None
     if execution_provider == 'cpu':
         providers = [
@@ -619,13 +634,21 @@ def main():
     elif execution_provider == 'tensorrt':
         providers = [
             (
-                'TensorrtExecutionProvider', {
-                    'trt_engine_cache_enable': True,
-                    'trt_engine_cache_path': '.',
-                    'trt_fp16_enable': True,
-                }
+                "TensorrtExecutionProvider",
+                {
+                    'trt_engine_cache_enable': True, # .engine, .profile export
+                    'trt_engine_cache_path': f'{model_dir_path}',
+                    # 'trt_max_workspace_size': 4e9, # Maximum workspace size for TensorRT engine (1e9 ≈ 1GB)
+                } | \
+                {
+                    "trt_int8_enable": True,
+                    "trt_int8_calibration_table_name": "calibration.flatbuffers",
+                } if inference_type == 'int8' else \
+                {
+                    "trt_fp16_enable": True,
+                },
             ),
-            'CUDAExecutionProvider',
+            "CUDAExecutionProvider",
             'CPUExecutionProvider',
         ]
 
