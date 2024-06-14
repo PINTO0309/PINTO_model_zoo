@@ -312,6 +312,29 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   | face       | 54.998 | hand                 | 55.928 | hand_left | 55.133 |
   | hand_right | 54.651 | foot                 | 49.474 |           |        |
   ```
+- YOLOX-Wholebody-with-Wheelchair - X - For INT8/Custom YOLOX
+
+  [onnxruntime v1.16.1+, TensorRT Excecution Provide to investigate INT8 calibration method and calibration table generation and inference method](https://zenn.dev/pinto0309/scraps/42587e1074fc53)   
+  ```
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.508
+  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.799
+  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.532
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.344
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.654
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.802
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.247
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.515
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.571
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.432
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.714
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.837
+  per class mAP:
+  | class      | AP     | class                | AP     | class     | AP     |
+  |:-----------|:-------|:---------------------|:-------|:----------|:-------|
+  | body       | 55.762 | body_with_wheelchair | 76.449 | head      | 56.602 |
+  | face       | 49.527 | hand                 | 47.172 | hand_left | 41.942 |
+  | hand_right | 41.063 | foot                 | 37.921 |           |        |
+  ```
 
 - Post-Process
 
