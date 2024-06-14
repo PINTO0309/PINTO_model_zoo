@@ -126,6 +126,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
       [-m MODEL] \
       (-v VIDEO | -i IMAGES_DIR) \
       [-ep {cpu,cuda,tensorrt}] \
+      [-it] \
       [-dvw] \
       [-dwk]
 
