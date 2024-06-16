@@ -93,6 +93,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
   Halfway compromises are never acceptable.
 
+  https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/82655591-4297-49aa-b14e-838da95d096d
+
   ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/c0150a2a-7971-46c3-89f1-2d7d5aa1adf8)
 
   |Class Name|Class ID|
