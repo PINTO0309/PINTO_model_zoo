@@ -63,7 +63,7 @@ do
     BOXES=${RESOLUTION[2]}
 
     ################################################### Grids
-    python make_grids.py -o ${OPSET} -x ${BOXES} -c ${CLASSES} -ih ${H} -iw ${W}
+    python make_grids.py -o ${OPSET} -x ${BOXES} -c ${CLASSES} -ih ${H} -iw ${W} -b ${BATCHES}
 
     ################################################### Boxes + Scores
     python make_boxes_scores.py -o ${OPSET} -b ${BATCHES} -x ${BOXES} -c ${CLASSES}

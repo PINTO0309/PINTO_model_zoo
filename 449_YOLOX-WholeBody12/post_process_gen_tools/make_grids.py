@@ -83,6 +83,13 @@ if __name__ == "__main__":
         default=16,
         help='classes'
     )
+    parser.add_argument(
+        '-b',
+        '--batches',
+        type=int,
+        default=1,
+        help='batches'
+    )
     args = parser.parse_args()
 
     image_height: int = args.image_height
@@ -90,13 +97,14 @@ if __name__ == "__main__":
     strides: List[int] = args.strides
     boxes: int = args.boxes
     classes: int = args.classes
+    batches: int = args.batches
     model = Model(img_size=[image_height, image_width], strides=strides)
 
     MODEL = f'01_grid'
     OPSET=args.opset
 
     onnx_file = f"{MODEL}_{boxes}.onnx"
-    x = torch.randn(1, boxes, classes+5)
+    x = torch.randn(batches, boxes, classes+5)
 
     torch.onnx.export(
         model,
