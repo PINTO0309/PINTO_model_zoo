@@ -227,7 +227,7 @@ class AbstractModel(ABC):
         image: np.ndarray,
         swap: Optional[Tuple[int,int,int]] = (2, 0, 1),
     ) -> np.ndarray:
-        pass
+        raise NotImplementedError()
 
     @abstractmethod
     def _postprocess(
@@ -236,7 +236,7 @@ class AbstractModel(ABC):
         image: np.ndarray,
         boxes: np.ndarray,
     ) -> List[Box]:
-        pass
+        raise NotImplementedError()
 
 class YOLOv9(AbstractModel):
     def __init__(
