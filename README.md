@@ -113,6 +113,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |432|face-reidentification-retail-0095|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/432_face-reidentification-retail-0095)|⚫|⚫|||||||||⚫|128x128, FaceReID|
 |451|DAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/451_DAN)|||||||||||⚫|224x224, Facial Expression|
 |452|FairFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/452_FairFace)|||||||||||⚫|224x224, Face Attribute|
+|453|FairDAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/453_FairDAN)|||||||||||⚫|224x224, Face Attribute + Facial Expression|
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
