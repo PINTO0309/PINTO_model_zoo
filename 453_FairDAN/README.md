@@ -41,3 +41,22 @@ options:
 https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/925a8ba6-9a2f-44c5-9378-dbd84458f8ce
 
 ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/e7b69a59-6089-4ec0-9559-683f46835a53)
+
+```mermaid
+graph TD;
+  INPUT(["INPUT"]) -.-> BGR-Image("BGR-Image")
+  BGR-Image -.-> YOLOv9 -.-> Faces("Faces");
+  Faces -.-> Prep[["BGR to RGB
+Crop
+Resize 224x224
+Normalization"]];
+  BGR-Image -.-> Prep;
+  Prep -.-> FairDAN;
+  FairDAN -.-> Attributes("Attributes") -.-> Boxes;
+  YOLOv9 -.-> Heads("Heads") -.-> Boxes("Boxes");
+  YOLOv9 -.-> Bodies("Bodies") -.-> Boxes("Boxes");
+  YOLOv9 -.-> Bodywithwheelchair("Bodies with Wheelchair") -.-> Boxes("Boxes");
+  YOLOv9 -.-> HandsLR("HandsLR") -.-> Boxes("Boxes");
+  YOLOv9 -.-> Foots("Foots") -.-> Boxes("Boxes");
+  Boxes -.-> View[["View Edit"]] -.-> OUTPUT(["OUTPUT"])
+```
