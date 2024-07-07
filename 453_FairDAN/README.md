@@ -42,6 +42,15 @@ https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/925a8ba6-9a2f-44c5-
 
 ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/e7b69a59-6089-4ec0-9559-683f46835a53)
 
+- FairDAN AffectNet8 labels
+
+  |Attributes|Values|
+  |:-|:-|
+  |race|`Male`, `Female`|
+  |gender|`White`, `Black`, `Latino Hispanic`, `East Asian`, `Southeast Asian`, `Indian`, `Middle Eastern`|
+  |age|`0-2`, `3-9`, `10-19`, `20-29`, `30-39`, `40-49`, `50-59`, `60-69`, `70+`|
+  |emotion|`Neutral`, `Happy`, `Sad`, `Surprise`, `Fear`, `Disgust`, `Anger`, `Contempt`|
+
 ```mermaid
 graph TD;
   INPUT(["INPUT"]) -.-> BGR-Image("BGR-Image")
