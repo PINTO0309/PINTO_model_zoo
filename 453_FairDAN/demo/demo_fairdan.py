@@ -63,6 +63,10 @@ class Box():
     cy: int
     handedness: int = -1 # -1: Unknown, 0: Left, 1: Right
     is_hand_used: bool = False
+    race: str = ''
+    gender: str = ''
+    age: str = ''
+    emotion: str = ''
 
 class AbstractModel(ABC):
     """AbstractModel
@@ -881,170 +885,59 @@ def main():
         face_boxes = [box for box in boxes if box.classid == 3]
 
         if len(face_boxes) > 0:
-            attributes: List[List[str, str, str]] = attributes_model(
-                images=[debug_image[face_box.y1:face_box.y2, face_box.x1: face_box.x2, :] for face_box in face_boxes],
-            )
-
-            for box, attribute in zip(face_boxes, attributes):
-                classid: int = box.classid
+            attributes: List[List[str, str, str]] = \
+                attributes_model(
+                    images=[debug_image[face_box.y1:face_box.y2, face_box.x1: face_box.x2, :] for face_box in face_boxes],
+                )
+            for face_box, attribute in zip(face_boxes, attributes):
                 race, gender, age, emotion = attribute
-                color = (255,255,255)
-                if classid == 0:
-                    # Body
-                    color = (255,0,0)
-                elif classid == 1:
-                    # Body-With-Wheelchair
-                    color = (0,200,255)
-                elif classid == 2:
-                    # Head
-                    color = (0,0,255)
-                elif classid == 3:
-                    # Face
-                    color = (0,200,255)
-                elif classid == 4:
-                    if not disable_left_and_right_hand_discrimination_mode:
-                        # Hands
-                        if box.handedness == 0:
-                            # Left-Hand
-                            color = (0,128,0)
-                        elif box.handedness == 1:
-                            # Right-Hand
-                            color = (255,0,255)
-                        else:
-                            # Unknown
-                            color = (0,255,0)
+                face_box.race = race
+                face_box.gender = gender
+                face_box.age = age
+                face_box.emotion = emotion
+
+        for box in boxes:
+            classid: int = box.classid
+            color = (255,255,255)
+            if classid == 0:
+                # Body
+                color = (255,0,0)
+            elif classid == 1:
+                # Body-With-Wheelchair
+                color = (0,200,255)
+            elif classid == 2:
+                # Head
+                color = (0,0,255)
+            elif classid == 3:
+                # Face
+                color = (0,200,255)
+            elif classid == 4:
+                if not disable_left_and_right_hand_discrimination_mode:
+                    # Hands
+                    if box.handedness == 0:
+                        # Left-Hand
+                        color = (0,128,0)
+                    elif box.handedness == 1:
+                        # Right-Hand
+                        color = (255,0,255)
                     else:
-                        # Hands
+                        # Unknown
                         color = (0,255,0)
-                elif classid == 7:
-                    # Foot
-                    color = (0,0,255)
-
-                if classid not in [1, 3]:
-                    cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 3)
-                    cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 2)
-                    if not disable_left_and_right_hand_discrimination_mode and classid == 4:
-                        handedness_txt = 'Left' if box.handedness == 0 else 'Right' if box.handedness == 1 else 'Unknown'
-                        cv2.putText(
-                            debug_image,
-                            f'{handedness_txt}',
-                            (
-                                box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
-                                box.y1-10 if box.y1-25 > 0 else 20
-                            ),
-                            cv2.FONT_HERSHEY_SIMPLEX,
-                            0.7,
-                            (255, 255, 255),
-                            2,
-                            cv2.LINE_AA,
-                        )
-                        cv2.putText(
-                            debug_image,
-                            f'{handedness_txt}',
-                            (
-                                box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
-                                box.y1-10 if box.y1-25 > 0 else 20
-                            ),
-                            cv2.FONT_HERSHEY_SIMPLEX,
-                            0.7,
-                            color,
-                            1,
-                            cv2.LINE_AA,
-                        )
                 else:
-                    draw_dashed_rectangle(
-                        image=debug_image,
-                        top_left=(box.x1, box.y1),
-                        bottom_right=(box.x2, box.y2),
-                        color=color,
-                        thickness=2,
-                        dash_length=10
-                    )
+                    # Hands
+                    color = (0,255,0)
+            elif classid == 7:
+                # Foot
+                color = (0,0,255)
 
+            if classid not in [1, 3]:
+                cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 3)
+                cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 2)
+                if not disable_left_and_right_hand_discrimination_mode and classid == 4:
+                    handedness_txt = 'Left' if box.handedness == 0 else 'Right' if box.handedness == 1 else 'Unknown'
                     cv2.putText(
                         debug_image,
-                        f'{race}',
-                        (
-                            box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
-                            box.y1-85 if box.y1-100 > 0 else 20
-                        ),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.7,
-                        (255, 255, 255),
-                        2,
-                        cv2.LINE_AA,
-                    )
-                    cv2.putText(
-                        debug_image,
-                        f'{race}',
-                        (
-                            box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
-                            box.y1-85 if box.y1-100 > 0 else 20
-                        ),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.7,
-                        (0,0,255),
-                        1,
-                        cv2.LINE_AA,
-                    )
-
-                    cv2.putText(
-                        debug_image,
-                        f'{gender}',
-                        (
-                            box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
-                            box.y1-60 if box.y1-75 > 0 else 20
-                        ),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.7,
-                        (255, 255, 255),
-                        2,
-                        cv2.LINE_AA,
-                    )
-                    cv2.putText(
-                        debug_image,
-                        f'{gender}',
-                        (
-                            box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
-                            box.y1-60 if box.y1-75 > 0 else 20
-                        ),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.7,
-                        (0,0,255),
-                        1,
-                        cv2.LINE_AA,
-                    )
-
-                    cv2.putText(
-                        debug_image,
-                        f'{age}',
-                        (
-                            box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
-                            box.y1-35 if box.y1-50 > 0 else 20
-                        ),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.7,
-                        (255, 255, 255),
-                        2,
-                        cv2.LINE_AA,
-                    )
-                    cv2.putText(
-                        debug_image,
-                        f'{age}',
-                        (
-                            box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
-                            box.y1-35 if box.y1-50 > 0 else 20
-                        ),
-                        cv2.FONT_HERSHEY_SIMPLEX,
-                        0.7,
-                        (0,0,255),
-                        1,
-                        cv2.LINE_AA,
-                    )
-
-                    cv2.putText(
-                        debug_image,
-                        f'{emotion}',
+                        f'{handedness_txt}',
                         (
                             box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
                             box.y1-10 if box.y1-25 > 0 else 20
@@ -1057,17 +950,148 @@ def main():
                     )
                     cv2.putText(
                         debug_image,
-                        f'{emotion}',
+                        f'{handedness_txt}',
                         (
                             box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
                             box.y1-10 if box.y1-25 > 0 else 20
                         ),
                         cv2.FONT_HERSHEY_SIMPLEX,
                         0.7,
-                        (0,0,255),
+                        color,
                         1,
                         cv2.LINE_AA,
                     )
+            else:
+                draw_dashed_rectangle(
+                    image=debug_image,
+                    top_left=(box.x1, box.y1),
+                    bottom_right=(box.x2, box.y2),
+                    color=color,
+                    thickness=2,
+                    dash_length=10
+                )
+
+                cv2.rectangle(
+                    debug_image,
+                    (
+                        box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
+                        box.y1-115 if box.y1-130 > 0 else 20,
+                    ),
+                    (
+                        box.x1+200 if box.x1+50 < debug_image_w else debug_image_w-50,
+                        box.y1-5,
+                    ),
+                    (255,255,255),
+                    cv2.FILLED,
+                )
+
+                cv2.putText(
+                    debug_image,
+                    f'{box.race}',
+                    (
+                        box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
+                        box.y1-90 if box.y1-105 > 0 else 20
+                    ),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.7,
+                    (255, 255, 255),
+                    2,
+                    cv2.LINE_AA,
+                )
+                cv2.putText(
+                    debug_image,
+                    f'{box.race}',
+                    (
+                        box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
+                        box.y1-90 if box.y1-105 > 0 else 20
+                    ),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.7,
+                    (0,0,0),
+                    1,
+                    cv2.LINE_AA,
+                )
+
+                cv2.putText(
+                    debug_image,
+                    f'{box.gender}',
+                    (
+                        box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
+                        box.y1-65 if box.y1-80 > 0 else 20
+                    ),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.7,
+                    (255, 255, 255),
+                    2,
+                    cv2.LINE_AA,
+                )
+                cv2.putText(
+                    debug_image,
+                    f'{box.gender}',
+                    (
+                        box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
+                        box.y1-65 if box.y1-80 > 0 else 20
+                    ),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.7,
+                    (0,0,0),
+                    1,
+                    cv2.LINE_AA,
+                )
+
+                cv2.putText(
+                    debug_image,
+                    f'{box.age}',
+                    (
+                        box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
+                        box.y1-40 if box.y1-55 > 0 else 20
+                    ),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.7,
+                    (255, 255, 255),
+                    2,
+                    cv2.LINE_AA,
+                )
+                cv2.putText(
+                    debug_image,
+                    f'{box.age}',
+                    (
+                        box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
+                        box.y1-40 if box.y1-55 > 0 else 20
+                    ),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.7,
+                    (0,0,0),
+                    1,
+                    cv2.LINE_AA,
+                )
+
+                cv2.putText(
+                    debug_image,
+                    f'{box.emotion}',
+                    (
+                        box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
+                        box.y1-15 if box.y1-30 > 0 else 20
+                    ),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.7,
+                    (255, 255, 255),
+                    2,
+                    cv2.LINE_AA,
+                )
+                cv2.putText(
+                    debug_image,
+                    f'{box.emotion}',
+                    (
+                        box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
+                        box.y1-15 if box.y1-30 > 0 else 20
+                    ),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.7,
+                    (0,0,0),
+                    1,
+                    cv2.LINE_AA,
+                )
 
         if file_paths is not None:
             basename = os.path.basename(file_paths[file_paths_count])
