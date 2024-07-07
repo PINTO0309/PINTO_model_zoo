@@ -47,8 +47,8 @@ graph TD;
   INPUT(["INPUT"]) -.-> BGR-Image("BGR-Image")
   BGR-Image -.-> YOLOv9 -.-> Faces("Faces");
   Faces -.-> Prep[["Crop
-BGR to RGB
 Resize 224x224
+BGR to RGB
 Normalization"]];
   BGR-Image -.-> Prep;
   Prep -.-> FairDAN;
