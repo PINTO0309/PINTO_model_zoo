@@ -981,7 +981,7 @@ def main():
                         box.x1+200 if box.x1+50 < debug_image_w else debug_image_w-50,
                         box.y1-5,
                     ),
-                    (255,255,255),
+                    (255,240,240),
                     cv2.FILLED,
                 )
 
