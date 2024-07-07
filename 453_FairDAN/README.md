@@ -46,8 +46,8 @@ https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/925a8ba6-9a2f-44c5-
 graph TD;
   INPUT(["INPUT"]) -.-> BGR-Image("BGR-Image")
   BGR-Image -.-> YOLOv9 -.-> Faces("Faces");
-  Faces -.-> Prep[["BGR to RGB
-Crop
+  Faces -.-> Prep[["Crop
+BGR to RGB
 Resize 224x224
 Normalization"]];
   BGR-Image -.-> Prep;
