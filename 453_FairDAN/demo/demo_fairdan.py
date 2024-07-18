@@ -885,7 +885,7 @@ def main():
         face_boxes = [box for box in boxes if box.classid == 3]
 
         if len(face_boxes) > 0:
-            attributes: List[List[str, str, str]] = \
+            attributes: List[List[str, str, str, str]] = \
                 attributes_model(
                     images=[debug_image[face_box.y1:face_box.y2, face_box.x1: face_box.x2, :] for face_box in face_boxes],
                 )
