@@ -22,14 +22,6 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   - Defocus-Blur
   - Backlight illumination
 
-- Highly accurate detection results
-
-  **I don't evaluate by Cherry-picked data, Best-case data or Biased data at all. Therefore, only difficult images and situations in which the model is most prone to detection errors are used for validation.**
-
-  - Real-time - YOLOv9-E End-to-End (Pre-process/Post-Process) ONNX + TensorRT + USB Camera
-
-  - Still images
-
 ## 1. Dataset
   - COCO-Hand http://vision.cs.stonybrook.edu/~supreeth/COCO-Hand.zip
   - [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco)
