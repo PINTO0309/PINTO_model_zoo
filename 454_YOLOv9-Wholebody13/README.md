@@ -52,6 +52,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   |Hand-Right|11|
   |Foot (Feet)|12|
 
+  ![image](https://github.com/user-attachments/assets/6c0f6738-a557-487d-a3db-228bf21eebb0)
+
 ## 3. Test
   - Python 3.10
   - onnx 1.14.1+
