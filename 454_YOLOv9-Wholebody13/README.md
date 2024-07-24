@@ -22,6 +22,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   - Defocus-Blur
   - Backlight illumination
 
+![crutches](https://github.com/user-attachments/assets/3f0e4faa-ecfe-4dc0-acf0-07c8dbb1c535)
+
 ## 1. Dataset
   - COCO-Hand http://vision.cs.stonybrook.edu/~supreeth/COCO-Hand.zip
   - [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco)
