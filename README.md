@@ -188,6 +188,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |448|YOLOX-Eye-Nose-Mouth-Ear|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/448_YOLOX-Eye-Nose-Mouth-Ear)|||||||||||⚫||
 |449|YOLOX-WholeBody12|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/449_YOLOX-WholeBody12)|||||||||||⚫|Body,BodyWithWheelchair,Head,Face,Eye,Nose,Mouth,Ear,Hand,Hand-Left,Hand-Right,Foot|
 |450|YOLOv9-Wholebody-with-Wheelchair|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/YOLOv9-Wholebody-with-Wheelchair)|||||||||||⚫|Wholebody with WheelChair|
+|454|YOLOv9-Wholebody13|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/YOLOv9-Wholebody13)|||||||||||⚫|Body,BodyWithWheelchair,BodyWithCrutches,Head,Face,Eye,Nose,Mouth,Ear,Hand,Hand-Left,Hand-Right,Foot|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
