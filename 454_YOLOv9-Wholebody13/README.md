@@ -203,6 +203,24 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 - YOLOv9-Wholebody13 - C - Swish/SiLU
   ```
                  Class Images Instances     P     R mAP50 mAP50-95
+                   all   2385     69591 0.861 0.676 0.761    0.553
+                  body   2385     12199 0.850 0.832 0.874    0.716
+  body_with_wheelchair   2385       182 0.898 0.934 0.968    0.892
+    body_with_crutches   2385       103 0.967 0.942 0.974    0.937
+                  head   2385     10343 0.880 0.870 0.909    0.694
+                  face   2385      5561 0.900 0.833 0.875    0.676
+                   eye   2385      5211 0.778 0.347 0.452    0.197
+                  nose   2385      4818 0.856 0.537 0.624    0.363
+                 mouth   2385      3936 0.810 0.468 0.553    0.277
+                   ear   2385      4874 0.802 0.505 0.576    0.331
+                  hand   2385      7791 0.909 0.646 0.820    0.569
+             hand_left   2385      3938 0.869 0.581 0.749    0.524
+            hand_right   2385      3853 0.870 0.570 0.736    0.516
+                  foot   2385      6782 0.805 0.720 0.777    0.499
+  ```
+- YOLOv9-Wholebody13 - E - Swish/SiLU
+  ```
+                 Class Images Instances     P     R mAP50 mAP50-95
                    all   2385     69591 0.886 0.723 0.806    0.607
                   body   2385     12199 0.890 0.859 0.904    0.773
   body_with_wheelchair   2385       182 0.924 0.951 0.974    0.911
@@ -217,20 +235,6 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
              hand_left   2385      3938 0.899 0.622 0.789    0.587
             hand_right   2385      3853 0.882  0.61 0.780    0.576
                   foot   2385      6782 0.850 0.778 0.837    0.574
-  ```
-- YOLOv9-Wholebody13 - E - Swish/SiLU
-  ```
-               Class Images Instances     mAP50-95
-                                      YOLOX-X YOLOv9-E
-                 all   2117     48988   0.554    0.660
-                Body   2117     11624   0.614    0.748
-  BodyWithWheelchair   2117       153   0.871    0.865
-                Head   2117      9936   0.585    0.723
-                Face   2117      5653   0.506    0.675
-                Hand   2117      7525   0.513    0.606
-           Hand-Left   2117      3739   0.456    0.571
-          Hand-Right   2117      3786   0.449    0.573
-                Foot   2117      6572   0.431    0.523
   ```
 
 - Pre-Process
