@@ -4,7 +4,7 @@
 
 Lightweight human detection models generated on high-quality human data sets. It can detect objects with high accuracy and speed in a total of 3 classes: `Body`, `Male`, `Female`. Even the classification problem is being attempted to be solved by object detection. There is no need to perform any complex affine transformations or other processing for pre-processing and post-processing of input images. In addition, the resistance to Motion Blur, Gaussian noise, contrast noise, backlighting, and halation is quite strong because it was trained only on images with added photometric noise for all images in the MS-COCO subset of the image set. In addition, about half of the image set was annotated by me with the aspect ratio of the original image substantially destroyed. I manually annotated all images in the dataset by myself. The model is intended to use real-world video for inference and has enhanced resistance to all kinds of noise. Probably stronger than any known model. However, the quality of the known data set and my data set are so different that an accurate comparison of accuracy is not possible.
 
-This model does not use facial features, but only whole-body features to estimate gender. In other words, gender can be estimated even when the face is not perfectly visible backward. This model is transfer learning using YOLOv9-Wholebody13 weights.
+This model does not use facial features, but only whole-body features to estimate gender. In other words, gender can be estimated even when the body is turned backwards and the face cannot be seen at all. This model is transfer learning using YOLOv9-Wholebody13 weights.
 
 |Sample.1|Sample.2|
 |:-:|:-:|
