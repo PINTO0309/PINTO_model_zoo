@@ -6,9 +6,9 @@ Lightweight human detection models generated on high-quality human data sets. It
 
 This model does not use facial features, but only whole-body features to estimate gender. In other words, gender can be estimated even when the face is not perfectly visible backward.
 
-![image](https://github.com/user-attachments/assets/9deea5c3-3799-41b3-bfd0-44686756e415)
-
-![image](https://github.com/user-attachments/assets/b461e250-92f2-4982-91dd-9fb775e3da4a)
+|Sample.1|Sample.2|
+|:-:|:-:|
+|![image](https://github.com/user-attachments/assets/9deea5c3-3799-41b3-bfd0-44686756e415)|![image](https://github.com/user-attachments/assets/b461e250-92f2-4982-91dd-9fb775e3da4a)|
 
 Don't be ruled by the curse of mAP.
 
