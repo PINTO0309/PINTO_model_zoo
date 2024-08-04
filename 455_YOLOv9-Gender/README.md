@@ -6,9 +6,10 @@ Lightweight human detection models generated on high-quality human data sets. It
 
 This model does not use facial features, but only whole-body features to estimate gender. In other words, gender can be estimated even when the body is turned backwards and the face cannot be seen at all. This model is transfer learning using YOLOv9-Wholebody13 weights.
 
-|Sample.1|Sample.2|
+|Sample|Sample|
 |:-:|:-:|
 |![image](https://github.com/user-attachments/assets/9deea5c3-3799-41b3-bfd0-44686756e415)|![image](https://github.com/user-attachments/assets/b461e250-92f2-4982-91dd-9fb775e3da4a)|
+|![000000090862](https://github.com/user-attachments/assets/9a7ee3ae-a4d1-4872-9924-577b0c2c231d)|![000000089648](https://github.com/user-attachments/assets/b977937c-5f46-41e4-8a78-e7a711a1bd23)|
 
 Don't be ruled by the curse of mAP.
 
