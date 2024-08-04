@@ -80,7 +80,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
       [-ep {cpu,cuda,tensorrt}] \
       [-it] \
       [-dvw] \
-      [-dwk]
+      [-dwk] \
+      [-dgm]
 
     options:
       -h, --help
@@ -103,6 +104,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
       -dwk, --disable_waitKey
         Disable cv2.waitKey(). When you want to process a batch of still images,
         disable key-input wait and process them continuously.
+      -dgm, --disable_gender_discrimination_mode
+        Disable gender discrimination mode.
     ```
 
 - YOLOv9-Gender - N - Swish/SiLU (PINTO original implementation, 2.4 MB)

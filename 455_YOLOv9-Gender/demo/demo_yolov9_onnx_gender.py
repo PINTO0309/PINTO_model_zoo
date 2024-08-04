@@ -59,8 +59,8 @@ class Box():
     y2: int
     cx: int
     cy: int
-    handedness: int = -1 # -1: Unknown, 0: Left, 1: Right
-    is_hand_used: bool = False
+    gender: int = -1 # -1: Unknown, 0: Male, 1: Female
+    is_used: bool = False
 
 class AbstractModel(ABC):
     """AbstractModel
@@ -275,6 +275,7 @@ class YOLOv9(AbstractModel):
     def __call__(
         self,
         image: np.ndarray,
+        disable_gender_discrimination_mode: bool,
     ) -> List[Box]:
         """
 
@@ -283,7 +284,7 @@ class YOLOv9(AbstractModel):
         image: np.ndarray
             Entire image
 
-        disable_left_and_right_hand_discrimination_mode: bool
+        disable_gender_discrimination_mode: bool
 
         Returns
         -------
@@ -305,6 +306,7 @@ class YOLOv9(AbstractModel):
             self._postprocess(
                 image=temp_image,
                 boxes=boxes,
+                disable_gender_discrimination_mode=disable_gender_discrimination_mode,
             )
         return result_boxes
 
@@ -343,6 +345,7 @@ class YOLOv9(AbstractModel):
         self,
         image: np.ndarray,
         boxes: np.ndarray,
+        disable_gender_discrimination_mode: bool,
     ) -> List[Box]:
         """_postprocess
 
@@ -354,7 +357,7 @@ class YOLOv9(AbstractModel):
         boxes: np.ndarray
             float32[N, 7]
 
-        disable_left_and_right_hand_discrimination_mode: bool
+        disable_gender_discrimination_mode: bool
 
         Returns
         -------
@@ -391,10 +394,92 @@ class YOLOv9(AbstractModel):
                             y2=y_max,
                             cx=cx,
                             cy=cy,
-                            handedness=-1 #if classid not in [10, 11] else classid - 10, # -1: None, 0: Left, 1: Right
+                            gender=-1 # -1: Unknown, 0: Male, 1: Female
                         )
                     )
+                # Male, Female merge
+                # classid: 0 -> Body
+                #   classid: 1 -> Male
+                #   classid: 2 -> Female
+                # 1. Calculate Male and Female IoUs for Body detection results
+                # 2. Connect either the Male or the Female with the highest score and the highest IoU with the Body.
+                # 3. Exclude Male and Female from detection results
+                if not disable_gender_discrimination_mode:
+                    body_boxes = [box for box in result_boxes if box.classid == 0]
+                    gender_boxes = [box for box in result_boxes if box.classid in [1, 2]]
+                    self._find_most_relevant_body(base_objs=body_boxes, target_objs=gender_boxes)
+                result_boxes = [box for box in result_boxes if box.classid not in [1, 2]]
         return result_boxes
+
+
+    def _find_most_relevant_body(
+        self,
+        *,
+        base_objs: List[Box],
+        target_objs: List[Box],
+    ):
+        for base_obj in base_objs:
+            most_relevant_obj: Box = None
+            best_score = 0.0
+            best_iou = 0.0
+            best_distance = float('inf')
+            for target_obj in target_objs:
+                if target_obj is not None and not target_obj.is_used:
+                    # Prioritize high-score objects
+                    if target_obj.score >= best_score:
+                        # IoU Calculation
+                        iou: float = \
+                            self._calculate_iou(
+                                base_obj=base_obj,
+                                target_obj=target_obj,
+                            )
+                        # Adopt object with highest IoU
+                        if iou > best_iou:
+                            most_relevant_obj = target_obj
+                            best_iou = iou
+                            # Calculate the Euclidean distance between the center coordinates
+                            # of the base and the center coordinates of the target
+                            best_distance = ((base_obj.cx - target_obj.cx)**2 + (base_obj.cy - target_obj.cy)**2)**0.5
+                            best_score = target_obj.score
+                        elif iou > 0.0 and iou == best_iou:
+                            # Calculate the Euclidean distance between the center coordinates
+                            # of the base and the center coordinates of the target
+                            distance = ((base_obj.cx - target_obj.cx)**2 + (base_obj.cy - target_obj.cy)**2)**0.5
+                            if distance < best_distance:
+                                most_relevant_obj = target_obj
+                                best_distance = distance
+                                best_score = target_obj.score
+            if most_relevant_obj:
+                if most_relevant_obj.classid == 1:
+                    base_obj.gender = 0
+                    most_relevant_obj.is_used = True
+                elif most_relevant_obj.classid == 2:
+                    base_obj.gender = 1
+                    most_relevant_obj.is_used = True
+                else:
+                    base_obj.gender = -1
+
+    def _calculate_iou(
+        self,
+        *,
+        base_obj: Box,
+        target_obj: Box,
+    ) -> float:
+        # Calculate areas of overlap
+        inter_xmin = max(base_obj.x1, target_obj.x1)
+        inter_ymin = max(base_obj.y1, target_obj.y1)
+        inter_xmax = min(base_obj.x2, target_obj.x2)
+        inter_ymax = min(base_obj.y2, target_obj.y2)
+        # If there is no overlap
+        if inter_xmax <= inter_xmin or inter_ymax <= inter_ymin:
+            return 0.0
+        # Calculate area of overlap and area of each bounding box
+        inter_area = (inter_xmax - inter_xmin) * (inter_ymax - inter_ymin)
+        area1 = (base_obj.x2 - base_obj.x1) * (base_obj.y2 - base_obj.y1)
+        area2 = (target_obj.x2 - target_obj.x1) * (target_obj.y2 - target_obj.y1)
+        # Calculate IoU
+        iou = inter_area / float(area1 + area2 - inter_area)
+        return iou
 
 def list_image_files(dir_path: str) -> List[str]:
     path = Path(dir_path)
@@ -514,6 +599,13 @@ def main():
             'When you want to process a batch of still images, '+
             ' disable key-input wait and process them continuously.',
     )
+    parser.add_argument(
+        '-dgm',
+        '--disable_gender_discrimination_mode',
+        action='store_true',
+        help=\
+            'Disable gender discrimination mode.',
+    )
     args = parser.parse_args()
 
     # runtime check
@@ -539,6 +631,7 @@ def main():
     video: str = args.video
     images_dir: str = args.images_dir
     disable_waitKey: bool = args.disable_waitKey
+    disable_gender_discrimination_mode: bool = args.disable_gender_discrimination_mode
     execution_provider: str = args.execution_provider
     inference_type: str = args.inference_type
     inference_type = inference_type.lower()
@@ -592,7 +685,7 @@ def main():
     model = YOLOv9(
         runtime=runtime,
         model_path=model_file,
-        class_score_th=0.55,
+        class_score_th=0.75,
         providers=providers,
     )
 
@@ -637,7 +730,10 @@ def main():
         debug_image_w = debug_image.shape[1]
 
         start_time = time.perf_counter()
-        boxes = model(image=debug_image)
+        boxes = model(
+            image=debug_image,
+            disable_gender_discrimination_mode=disable_gender_discrimination_mode,
+        )
         elapsed_time = time.perf_counter() - start_time
         if file_paths is None:
             cv2.putText(debug_image, f'{elapsed_time*1000:.2f} ms', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2, cv2.LINE_AA)
@@ -647,26 +743,36 @@ def main():
             classid: int = box.classid
             color = (255,255,255)
             if classid == 0:
-                # Body
-                color = (0,255,0)
-            elif classid == 1:
-                # male
-                color = (255,0,0)
-            elif classid == 2:
-                # female
-                color = (0,0,255)
-            elif classid == 3:
-                # unknown
-                color = (0,200,255)
+                if not disable_gender_discrimination_mode:
+                    # Body
+                    if box.gender == 0:
+                        # Male
+                        color = (255,0,0)
+                    elif box.gender == 1:
+                        # Female
+                        color = (0,0,255)
+                    else:
+                        # Unknown
+                        color = (0,255,0)
+                else:
+                    # Body
+                    color = (0,255,0)
 
-            if classid not in [0, 3]:
+            if classid not in [1,2]:
                 cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 3)
                 cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 2)
 
-                gender_txt = 'Male' if box.classid == 1 else 'Female'
+                gender_txt = ''
+                if box.gender == -1:
+                    gender_txt = ''
+                elif box.gender == 0:
+                    gender_txt = 'Male'
+                elif box.gender == 1:
+                    gender_txt = 'Female'
+
                 cv2.putText(
                     debug_image,
-                    f'{gender_txt}: {box.score:.2f}',
+                    f'{gender_txt}',
                     (
                         box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
                         box.y1-10 if box.y1-25 > 0 else 20
@@ -679,7 +785,7 @@ def main():
                 )
                 cv2.putText(
                     debug_image,
-                    f'{gender_txt}: {box.score:.2f}',
+                    f'{gender_txt}',
                     (
                         box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
                         box.y1-10 if box.y1-25 > 0 else 20
