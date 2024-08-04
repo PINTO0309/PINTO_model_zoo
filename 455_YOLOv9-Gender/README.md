@@ -45,7 +45,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   |Body|0|Detection accuracy is higher than `Male` and `Female` bounding boxes.|
   |Male|1|Bounding box coordinates are shared with `Body`. It is defined as a subclass of `Body` as a superclass.|
   |Female|2|Bounding box coordinates are shared with `Body`. It is defined as a subclass of `Body` as a superclass.|
-  |(Unknown)|3|It is not included in the classes output from the model because it uses tricks that are ignored during training. I use them as annotation-only labels for fairly small objects or when noise effects make it impossible for me to visually determine.|
+  |(Unknown)|3|It is not included in the classes output from the model because it uses tricks that are ignored during training. I use them as annotation-only labels for fairly small objects or when noise effects make it impossible for me to visually determine. 14,288 labels.|
 
   ![image](https://github.com/user-attachments/assets/52b0514c-96a1-468a-aa54-af0de916854f)
 
