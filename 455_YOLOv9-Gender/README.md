@@ -6,6 +6,8 @@ Lightweight human detection models generated on high-quality human data sets. It
 
 This model does not use facial features, but only whole-body features to estimate gender. In other words, gender can be estimated even when the body is turned backwards and the face cannot be seen at all. This model is transfer learning using YOLOv9-Wholebody13 weights.
 
+**If the angle of depression or elevation of the image is large, or if the distance to the target is approximately 5 meters or more, the estimation results will fluctuate significantly.**
+
 Don't be ruled by the curse of mAP.
 
 |Sample|Sample|
