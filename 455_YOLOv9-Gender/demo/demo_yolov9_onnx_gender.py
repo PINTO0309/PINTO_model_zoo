@@ -275,7 +275,7 @@ class YOLOv9(AbstractModel):
     def __call__(
         self,
         image: np.ndarray,
-        disable_gender_discrimination_mode: bool,
+        disable_gender_identification_mode: bool,
     ) -> List[Box]:
         """
 
@@ -284,7 +284,7 @@ class YOLOv9(AbstractModel):
         image: np.ndarray
             Entire image
 
-        disable_gender_discrimination_mode: bool
+        disable_gender_identification_mode: bool
 
         Returns
         -------
@@ -306,7 +306,7 @@ class YOLOv9(AbstractModel):
             self._postprocess(
                 image=temp_image,
                 boxes=boxes,
-                disable_gender_discrimination_mode=disable_gender_discrimination_mode,
+                disable_gender_identification_mode=disable_gender_identification_mode,
             )
         return result_boxes
 
@@ -345,7 +345,7 @@ class YOLOv9(AbstractModel):
         self,
         image: np.ndarray,
         boxes: np.ndarray,
-        disable_gender_discrimination_mode: bool,
+        disable_gender_identification_mode: bool,
     ) -> List[Box]:
         """_postprocess
 
@@ -357,7 +357,7 @@ class YOLOv9(AbstractModel):
         boxes: np.ndarray
             float32[N, 7]
 
-        disable_gender_discrimination_mode: bool
+        disable_gender_identification_mode: bool
 
         Returns
         -------
@@ -404,7 +404,7 @@ class YOLOv9(AbstractModel):
                 # 1. Calculate Male and Female IoUs for Body detection results
                 # 2. Connect either the Male or the Female with the highest score and the highest IoU with the Body.
                 # 3. Exclude Male and Female from detection results
-                if not disable_gender_discrimination_mode:
+                if not disable_gender_identification_mode:
                     body_boxes = [box for box in result_boxes if box.classid == 0]
                     gender_boxes = [box for box in result_boxes if box.classid in [1, 2]]
                     self._find_most_relevant_body(base_objs=body_boxes, target_objs=gender_boxes)
@@ -549,7 +549,7 @@ def main():
         '-m',
         '--model',
         type=str,
-        default='yolov9_s_gender_post_0200_1x3x480x640.onnx',
+        default='yolov9_e_gender_post_0200_1x3x480x640.onnx',
         help='ONNX/TFLite file path for YOLOv9.',
     )
     group_v_or_i = parser.add_mutually_exclusive_group(required=True)
@@ -601,10 +601,10 @@ def main():
     )
     parser.add_argument(
         '-dgm',
-        '--disable_gender_discrimination_mode',
+        '--disable_gender_identification_mode',
         action='store_true',
         help=\
-            'Disable gender discrimination mode.',
+            'Disable gender identification mode.',
     )
     args = parser.parse_args()
 
@@ -631,7 +631,7 @@ def main():
     video: str = args.video
     images_dir: str = args.images_dir
     disable_waitKey: bool = args.disable_waitKey
-    disable_gender_discrimination_mode: bool = args.disable_gender_discrimination_mode
+    disable_gender_identification_mode: bool = args.disable_gender_identification_mode
     execution_provider: str = args.execution_provider
     inference_type: str = args.inference_type
     inference_type = inference_type.lower()
@@ -685,7 +685,7 @@ def main():
     model = YOLOv9(
         runtime=runtime,
         model_path=model_file,
-        class_score_th=0.75,
+        class_score_th=0.70,
         providers=providers,
     )
 
@@ -703,7 +703,7 @@ def main():
             cap_fps = cap.get(cv2.CAP_PROP_FPS)
             w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
             h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-            fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+            fourcc = cv2.VideoWriter.fourcc(*'mp4v')
             video_writer = cv2.VideoWriter(
                 filename='output.mp4',
                 fourcc=fourcc,
@@ -732,18 +732,42 @@ def main():
         start_time = time.perf_counter()
         boxes = model(
             image=debug_image,
-            disable_gender_discrimination_mode=disable_gender_discrimination_mode,
+            disable_gender_identification_mode=disable_gender_identification_mode,
         )
         elapsed_time = time.perf_counter() - start_time
         if file_paths is None:
             cv2.putText(debug_image, f'{elapsed_time*1000:.2f} ms', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2, cv2.LINE_AA)
             cv2.putText(debug_image, f'{elapsed_time*1000:.2f} ms', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 1, cv2.LINE_AA)
 
+        # Mode text
+        mode_text = 'Disable GenderMode' if disable_gender_identification_mode else 'Enable GenderMode'
+        cv2.putText(
+            debug_image,
+            f'{mode_text}',
+            (debug_image_w-240, 30),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.7,
+            (255, 255, 255),
+            2,
+            cv2.LINE_AA,
+        )
+        cv2.putText(
+            debug_image,
+            f'{mode_text}',
+            (debug_image_w-240, 30),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.7,
+            (0,200,255) if disable_gender_identification_mode else (255,0,0),
+            1,
+            cv2.LINE_AA,
+        )
+
+        # Draw bounding boxes
         for box in boxes:
             classid: int = box.classid
             color = (255,255,255)
             if classid == 0:
-                if not disable_gender_discrimination_mode:
+                if not disable_gender_identification_mode:
                     # Body
                     if box.gender == 0:
                         # Male
@@ -753,14 +777,27 @@ def main():
                         color = (0,0,255)
                     else:
                         # Unknown
-                        color = (0,255,0)
+                        color = (0,200,255)
                 else:
                     # Body
-                    color = (0,255,0)
+                    color = (0,200,255)
 
-            if classid not in [1,2]:
-                cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 3)
-                cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 2)
+                if not disable_gender_identification_mode:
+                    if box.gender == -1:
+                        draw_dashed_rectangle(
+                            image=debug_image,
+                            top_left=(box.x1, box.y1),
+                            bottom_right=(box.x2, box.y2),
+                            color=color,
+                            thickness=2,
+                            dash_length=10
+                        )
+                    else:
+                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 3)
+                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 2)
+                else:
+                    cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 3)
+                    cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 2)
 
                 gender_txt = ''
                 if box.gender == -1:
@@ -770,6 +807,7 @@ def main():
                 elif box.gender == 1:
                     gender_txt = 'Female'
 
+                # Attributes text
                 cv2.putText(
                     debug_image,
                     f'{gender_txt}',
@@ -796,16 +834,6 @@ def main():
                     1,
                     cv2.LINE_AA,
                 )
-            else:
-                # draw_dashed_rectangle(
-                #     image=debug_image,
-                #     top_left=(box.x1, box.y1),
-                #     bottom_right=(box.x2, box.y2),
-                #     color=color,
-                #     thickness=2,
-                #     dash_length=10
-                # )
-                pass
 
             # cv2.putText(
             #     debug_image,
@@ -846,6 +874,8 @@ def main():
         key = cv2.waitKey(1) if file_paths is None or disable_waitKey else cv2.waitKey(0)
         if key == 27: # ESC
             break
+        elif key == 115: # S, mode switch
+            disable_gender_identification_mode = not disable_gender_identification_mode
 
     if video_writer is not None:
         video_writer.release()
