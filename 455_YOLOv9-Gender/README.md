@@ -138,9 +138,6 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
     male   2386      7157 0.823 0.727 0.804    0.689
   female   2386      2988 0.736 0.637 0.715    0.606
   ```
-- YOLOv9-Gender - M - Swish/SiLU
-  ```
-  ```
 - YOLOv9-Gender - C - Swish/SiLU
   ```
   ```
