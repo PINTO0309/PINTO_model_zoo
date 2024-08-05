@@ -131,7 +131,12 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   female   2386      2988 0.647 0.514 0.587    0.476
   ```
 - YOLOv9-Gender - S - Swish/SiLU
-  ```
+    ```
+   Class Images Instances     P     R mAP50 mAP50-95
+     all   2386     23317 0.820 0.719 0.799    0.663
+    body   2386     13172 0.900 0.792 0.876    0.695
+    male   2386      7157 0.823 0.727 0.804    0.689
+  female   2386      2988 0.736 0.637 0.715    0.606
   ```
 - YOLOv9-Gender - M - Swish/SiLU
   ```
