@@ -198,6 +198,23 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   ```
 - YOLOv9-Wholebody15 - C - Swish/SiLU
   ```
+                 Class Images Instances     P     R mAP50 mAP50-95
+                   all   2384     82623 0.867 0.677 0.762    0.578
+                  body   2384     12642 0.888 0.831 0.881    0.746
+                  male   2384      7035 0.835 0.736 0.806    0.733
+                female   2384      2897 0.766 0.677 0.745    0.672
+  body_with_wheelchair   2384       213 0.895 0.925 0.968    0.880
+    body_with_crutches   2384       112 0.922 0.902 0.928    0.908
+                  head   2384     10719 0.903 0.865 0.910    0.710
+                  face   2384      6152 0.919 0.825 0.875    0.680
+                   eye   2384      5402 0.806 0.364 0.458    0.198
+                  nose   2384      5229 0.877 0.533 0.601    0.346
+                 mouth   2384      4150 0.807 0.485 0.559    0.278
+                   ear   2384      5005 0.826 0.523 0.601    0.343
+                  hand   2384      8079 0.929 0.631 0.821    0.585
+             hand_left   2384      4061 0.910 0.571 0.754    0.544
+            hand_right   2384      4018 0.889 0.564 0.744    0.538
+                  foot   2384      6909 0.825 0.717 0.781    0.506
   ```
 - YOLOv9-Wholebody15 - E - Swish/SiLU
   ```
