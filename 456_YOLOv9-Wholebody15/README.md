@@ -8,7 +8,7 @@ This model does not use facial features, but only whole-body features to estimat
 
 Don't be ruled by the curse of mAP.
 
-|Sample|Sample|
+|Sample `Score threshold >= 0.35`|Sample `Score threshold >= 0.35`|
 |:-:|:-:|
 |![image](https://github.com/user-attachments/assets/38b1e829-b9a4-43d6-a31f-f426995ee266)|![image](https://github.com/user-attachments/assets/284cade2-972d-4822-a274-e71217d13281)|
 |![image](https://github.com/user-attachments/assets/0996bfeb-f92c-4a5e-bb0f-c2686a13b9e2)|![image](https://github.com/user-attachments/assets/39c84ea5-4edf-45e0-b5e2-6292254d483d)|
