@@ -150,9 +150,6 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
             hand_right   2384      4018 0.627 0.275 0.381    0.217
                   foot   2384      6909 0.596 0.411 0.451    0.233
   ```
-- YOLOv9-Wholebody15 - N - ReLU (PINTO original implementation, 2.4 MB)
-  ```
-  ```
 - YOLOv9-Wholebody15 - T - Swish/SiLU
   ```
                  Class Images Instances     P     R mAP50 mAP50-95
