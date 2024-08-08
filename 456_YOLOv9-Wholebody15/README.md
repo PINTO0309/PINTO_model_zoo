@@ -71,11 +71,11 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
 ## 3. Test
   - Python 3.10
-  - onnx 1.14.1+
-  - onnxruntime-gpu v1.16.1 (TensorRT Execution Provider Enabled Binary. See: [onnxruntime-gpu v1.16.1 + CUDA 11.8 + TensorRT 8.5.3 build (RTX3070)](https://zenn.dev/pinto0309/scraps/20afd3c58b30bf))
-  - opencv-contrib-python 4.9.0.80+
+  - onnx 1.16.1+
+  - onnxruntime-gpu v1.18.1 (TensorRT Execution Provider Enabled Binary. See: [onnxruntime-gpu v1.18.1 + CUDA 12.5 + TensorRT 10.2.0 build (RTX3070)](https://zenn.dev/pinto0309/scraps/801db283883c38)
+  - opencv-contrib-python 4.10.0.84+
   - numpy 1.24.3
-  - TensorRT 8.5.3-1+cuda11.8
+  - TensorRT 10.2.0.19-1+cuda12.5
 
     ```bash
     # Common ############################################
