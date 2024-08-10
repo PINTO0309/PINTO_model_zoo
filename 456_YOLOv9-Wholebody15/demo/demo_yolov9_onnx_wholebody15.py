@@ -447,6 +447,17 @@ class YOLOv9(AbstractModel):
                 result_boxes = [box for box in result_boxes if box.classid not in [12, 13]]
         return result_boxes
 
+    def _are_points_close_enough(
+        self,
+        *,
+        cx1: int,
+        cy1: int,
+        cx2: int,
+        cy2: int,
+    ):
+        # Returns True only when the distance between two points is less than 10 pixels
+        distance = np.sqrt((cx2 - cx1) ** 2 + (cy2 - cy1) ** 2)
+        return distance <= 10.0
 
     def _find_most_relevant_obj(
         self,
@@ -460,7 +471,10 @@ class YOLOv9(AbstractModel):
             best_iou = 0.0
             best_distance = float('inf')
             for target_obj in target_objs:
-                if target_obj is not None and not target_obj.is_used:
+                if target_obj is not None \
+                    and not target_obj.is_used \
+                    and self._are_points_close_enough(cx1=base_obj.cx, cy1=base_obj.cy, cx2=target_obj.cx, cy2=target_obj.cy):
+
                     # Prioritize high-score objects
                     if target_obj.score >= best_score:
                         # IoU Calculation
