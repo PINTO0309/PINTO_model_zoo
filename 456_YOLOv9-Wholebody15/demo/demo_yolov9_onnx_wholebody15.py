@@ -454,10 +454,11 @@ class YOLOv9(AbstractModel):
         cy1: int,
         cx2: int,
         cy2: int,
+        euclidean_distance: float,
     ):
-        # Returns True only when the distance between two points is less than 10 pixels
+        # Returns True only when the distance between two points is less than {euclidean_distance}
         distance = np.sqrt((cx2 - cx1) ** 2 + (cy2 - cy1) ** 2)
-        return distance <= 10.0
+        return distance <= euclidean_distance
 
     def _find_most_relevant_obj(
         self,
@@ -473,7 +474,7 @@ class YOLOv9(AbstractModel):
             for target_obj in target_objs:
                 if target_obj is not None \
                     and not target_obj.is_used \
-                    and self._are_points_close_enough(cx1=base_obj.cx, cy1=base_obj.cy, cx2=target_obj.cx, cy2=target_obj.cy):
+                    and self._are_points_close_enough(cx1=base_obj.cx, cy1=base_obj.cy, cx2=target_obj.cx, cy2=target_obj.cy, euclidean_distance=10.0):
 
                     # Prioritize high-score objects
                     if target_obj.score >= best_score:
