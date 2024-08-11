@@ -447,19 +447,6 @@ class YOLOv9(AbstractModel):
                 result_boxes = [box for box in result_boxes if box.classid not in [12, 13]]
         return result_boxes
 
-    def _are_points_close_enough(
-        self,
-        *,
-        cx1: int,
-        cy1: int,
-        cx2: int,
-        cy2: int,
-        euclidean_distance: float,
-    ):
-        # Returns True only when the distance between two points is less than {euclidean_distance}
-        distance = np.sqrt((cx2 - cx1) ** 2 + (cy2 - cy1) ** 2)
-        return distance <= euclidean_distance
-
     def _find_most_relevant_obj(
         self,
         *,
@@ -471,11 +458,11 @@ class YOLOv9(AbstractModel):
             best_score = 0.0
             best_iou = 0.0
             best_distance = float('inf')
-            for target_obj in target_objs:
-                if target_obj is not None \
-                    and not target_obj.is_used \
-                    and self._are_points_close_enough(cx1=base_obj.cx, cy1=base_obj.cy, cx2=target_obj.cx, cy2=target_obj.cy, euclidean_distance=10.0):
 
+            for target_obj in target_objs:
+                distance = ((base_obj.cx - target_obj.cx)**2 + (base_obj.cy - target_obj.cy)**2)**0.5
+                # Process only unused objects with center Euclidean distance less than or equal to 10.0
+                if not target_obj.is_used and distance <= 10.0:
                     # Prioritize high-score objects
                     if target_obj.score >= best_score:
                         # IoU Calculation
@@ -490,12 +477,11 @@ class YOLOv9(AbstractModel):
                             best_iou = iou
                             # Calculate the Euclidean distance between the center coordinates
                             # of the base and the center coordinates of the target
-                            best_distance = ((base_obj.cx - target_obj.cx)**2 + (base_obj.cy - target_obj.cy)**2)**0.5
+                            best_distance = distance
                             best_score = target_obj.score
                         elif iou > 0.0 and iou == best_iou:
                             # Calculate the Euclidean distance between the center coordinates
                             # of the base and the center coordinates of the target
-                            distance = ((base_obj.cx - target_obj.cx)**2 + (base_obj.cy - target_obj.cy)**2)**0.5
                             if distance < best_distance:
                                 most_relevant_obj = target_obj
                                 best_distance = distance
