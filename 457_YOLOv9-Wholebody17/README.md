@@ -6,6 +6,8 @@ Lightweight human detection models generated on high-quality human data sets. It
 
 This model does not use facial features, but only whole-body features to estimate generation/gender. In other words, generation/gender can be estimated even when the body is turned backwards and the face cannot be seen at all. This model is transfer learning using YOLOv9-Wholebody15 weights.
 
+Because the MS-COCO image set contains very few images of children, the accuracy of child estimation is not sufficient.
+
 Don't be ruled by the curse of mAP.
 
 |input|output `Score threshold >= 0.35`|
