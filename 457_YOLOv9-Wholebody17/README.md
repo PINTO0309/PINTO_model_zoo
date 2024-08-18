@@ -162,6 +162,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   ```
 - YOLOv9-Wholebody17 - T - ReLU
   ```
+  WIP
   ```
 - YOLOv9-Wholebody17 - S - Swish/SiLU
   ```
@@ -187,6 +188,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   ```
 - YOLOv9-Wholebody17 - C - Swish/SiLU
   ```
+  WIP
   ```
 - YOLOv9-Wholebody17 - E - Swish/SiLU
   ```
