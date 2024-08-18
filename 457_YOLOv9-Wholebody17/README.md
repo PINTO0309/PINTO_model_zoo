@@ -51,6 +51,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
   ![image](https://github.com/user-attachments/assets/bf80b1dc-0656-427c-a793-b3d6bfe417e5)
 
+  ![image](https://github.com/user-attachments/assets/765600a1-552d-4de9-afcc-663f6fcc1e9d)
+
   |Class Name|Class ID|Remarks|
   |:-|-:|:-|
   |Body|0|Detection accuracy is higher than `Adult`, `Child`, `Male` and `Female` bounding boxes. It is the sum of `Adult`, `Child`, `Male`, and `Female`.|
