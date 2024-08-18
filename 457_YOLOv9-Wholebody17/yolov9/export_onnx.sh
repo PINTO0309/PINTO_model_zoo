@@ -51,37 +51,37 @@ RESOLUTIONS=(
     "384 672"
 )
 
-# python reparameterization${RELUS}.py \
-# --type ${TYPE} \
-# --cfg ./models/detect/gelan-${TYPE}${RELU}.yaml \
-# --weights ${MODEL_PATH} \
-# --save ${MODEL_NAME}${RELUS}.pt
+python reparameterization${RELUS}.py \
+--type ${TYPE} \
+--cfg ./models/detect/gelan-${TYPE}${RELU}.yaml \
+--weights ${MODEL_PATH} \
+--save ${MODEL_NAME}${RELUS}.pt
 
-# for((i=0; i<${#RESOLUTIONS[@]}; i++))
-# do
-#     RESOLUTION=(`echo ${RESOLUTIONS[i]}`)
-#     H=${RESOLUTION[0]}
-#     W=${RESOLUTION[1]}
+for((i=0; i<${#RESOLUTIONS[@]}; i++))
+do
+    RESOLUTION=(`echo ${RESOLUTIONS[i]}`)
+    H=${RESOLUTION[0]}
+    W=${RESOLUTION[1]}
 
-#     python export.py \
-#     --data data/original.yaml \
-#     --weights ${MODEL_NAME}${RELUS}.pt \
-#     --imgsz ${H} ${W} \
-#     --batch-size 1 \
-#     --device cpu \
-#     --opset 13 \
-#     --include onnx
+    python export.py \
+    --data data/original.yaml \
+    --weights ${MODEL_NAME}${RELUS}.pt \
+    --imgsz ${H} ${W} \
+    --batch-size 1 \
+    --device cpu \
+    --opset 13 \
+    --include onnx
 
-#     mv ${MODEL_NAME}${RELUS}.onnx ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx
+    mv ${MODEL_NAME}${RELUS}.onnx ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx
 
-#     sng4onnx \
-#     --input_onnx_file_path ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx \
-#     --output_onnx_file_path ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx
+    sng4onnx \
+    --input_onnx_file_path ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx \
+    --output_onnx_file_path ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx
 
-#     onnxsim ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx
-#     onnxsim ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx
-#     onnxsim ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx
-# done
+    onnxsim ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx
+    onnxsim ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx
+    onnxsim ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx
+done
 
 python export.py \
 --data data/original.yaml \
