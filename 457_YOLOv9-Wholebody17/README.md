@@ -51,7 +51,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
   |Class Name|Class ID|Remarks|
   |:-|-:|:-|
-  |Body|0|Detection accuracy is higher than `Male` and `Female` bounding boxes. It is the sum of `Male`, and `Female`.|
+  |Body|0|Detection accuracy is higher than `Adult`, `Child`, `Male` and `Female` bounding boxes. It is the sum of `Adult`, `Child`, `Male`, and `Female`.|
   |Adult|1|Bounding box coordinates are shared with `Body`. It is defined as a subclass of `Body` as a superclass.|
   |Child|2|Bounding box coordinates are shared with `Body`. It is defined as a subclass of `Body` as a superclass.|
   |Male|3|Bounding box coordinates are shared with `Body`. It is defined as a subclass of `Body` as a superclass.|
