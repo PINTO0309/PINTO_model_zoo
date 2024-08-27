@@ -24,8 +24,8 @@ Lightweight human detection model generated using a high-quality human dataset. 
 |:-:|:-:|
 |![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/a71357c6-cdc2-4f36-a5f1-7333a1ac36c7)|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/067d9643-6411-4db3-bbe9-95a27ad682e4)|
 |![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/034ff9a5-a56b-4b8d-b3e6-20bab12b60e8)|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/11f727aa-2e96-4a7f-b8b7-cd2acd6f4564)|
-|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/51588d5a-695f-48c8-86f4-3c222e91fe4e)|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/c418a376-b448-456e-ac7f-214079b70c50)|
-|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/07a55486-61cd-48b5-9c4a-0c225eef5f8c)|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/a1ba522e-a847-4288-a26a-e8194830b961)|
+|![image](https://github.com/user-attachments/assets/095dd2e6-50b0-451a-9ea1-a20ef2e2dcdf)![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/51588d5a-695f-48c8-86f4-3c222e91fe4e)|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/c418a376-b448-456e-ac7f-214079b70c50)|
+|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/07a55486-61cd-48b5-9c4a-0c225eef5f8c)|![image](https://github.com/user-attachments/assets/9a9fae0d-c946-4de9-b54e-04b91a5b6da1)![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/a1ba522e-a847-4288-a26a-e8194830b961)|
 |![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/717bcb7a-e183-43b4-8d54-23161e407884)|![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/e9bdf21e-93f7-4203-89c7-b605c7305fa1)|
 
 `Head` does not mean `Face`. Thus, the entire head is detected rather than a narrow region of the face. This makes it possible to detect all 360° head orientations.
