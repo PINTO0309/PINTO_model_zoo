@@ -18,6 +18,8 @@ Don't be ruled by the curse of mAP.
 
 https://github.com/user-attachments/assets/5f054e24-2b16-454e-9a64-b137974c442f
 
+https://github.com/user-attachments/assets/02910e07-9896-481c-9d72-9a5fa3c5c840
+
 - The `g` key on the keyboard can be used to enable or disable the gender recognition mode.
 - The `h` key on the keyboard can be used to enable or disable the hand recognition mode.
 
