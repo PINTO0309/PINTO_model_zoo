@@ -45,6 +45,8 @@ options:
 
 https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/925a8ba6-9a2f-44c5-9378-dbd84458f8ce
 
+- Merging two models, FairFace and DAN
+
 ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/e7b69a59-6089-4ec0-9559-683f46835a53)
 
 - FairDAN AffectNet8 labels
