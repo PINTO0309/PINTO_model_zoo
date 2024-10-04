@@ -30,8 +30,6 @@ Don't be ruled by the curse of mAP.
 
 https://github.com/user-attachments/assets/bd484aa5-681f-4075-ae6f-da464fc56c4a
 
-- The `h` key on the keyboard can be used to enable or disable the hand recognition mode.
-
 The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.
 
 - Global distortions
