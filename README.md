@@ -192,6 +192,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |455|YOLOv9-Gender|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/455_YOLOv9-Gender)|||||||||||⚫|Body,Male,Female|
 |456|YOLOv9-Wholebody15|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/456_YOLOv9-Wholebody15)|||||||||||⚫|Body,Male,Female,BodyWithWheelchair,BodyWithCrutches,Head,Face,Eye,Nose,Mouth,Ear,Hand,Hand-Left,Hand-Right,Foot|
 |457|YOLOv9-Wholebody17|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/457_YOLOv9-Wholebody17)|||||||||||⚫|Body,Male,Adult,Child,Female,BodyWithWheelchair,BodyWithCrutches,Head,Face,Eye,Nose,Mouth,Ear,Hand,Hand-Left,Hand-Right,Foot|
+|458|YOLOv9-Discrete-HeadPose-Yaw|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/458_YOLOv9-Discrete-HeadPose-Yaw)|||||||||||⚫|Head,Front,Right-Front,Right-Side,Right-Back,Back,Left-Back,Left-Side,Left-Front|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
