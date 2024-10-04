@@ -4,6 +4,20 @@
 
 Lightweight human detection models generated on high-quality human data sets. It can detect objects with high accuracy and speed in a total of 9 classes: `Head`, `Front`, `Right-Front`, `Right-Side`, `Right-Back`, `Back`, `Left-Back`, `Left-Side`, `Left-Front`. Even the classification problem is being attempted to be solved by object detection. There is no need to perform any complex affine transformations or other processing for pre-processing and post-processing of input images. In addition, the resistance to Motion Blur, Gaussian noise, contrast noise, backlighting, and halation is quite strong because it was trained only on images with added photometric noise for all images in the MS-COCO subset of the image set. In addition, about half of the image set was annotated by me with the aspect ratio of the original image substantially destroyed. I manually annotated all images in the dataset by myself. The model is intended to use real-world video for inference and has enhanced resistance to all kinds of noise. Probably stronger than any known model. However, the quality of the known data set and my data set are so different that an accurate comparison of accuracy is not possible.
 
+
+This model addresses the following weaknesses of conventional HeadPose estimation models:
+1. Breaks down quickly when the head is cut off outside the viewing angle
+2. Pitch direction estimation is very weak
+3. Estimated values ​​diverge around yaw +90° and -90°
+4. Estimation accuracy is very low for yaw +90° to +180° and -90° to -180°
+5. Estimation results are rough in all directions
+6. Estimation is almost never successful beyond the shooting distance of 2m to 3m
+7. Very vulnerable to environmental noise
+8. Estimation is unstable when the depression and elevation angles of the subject and camera are large
+9. Inference performance does not scale
+10. Computational cost cannot be selected
+11. Requires the use of fully connected layers, which are computationally very expensive
+
 This model is transfer learning using YOLOv9-Wholebody17 weights.
 
 Don't be ruled by the curse of mAP.
