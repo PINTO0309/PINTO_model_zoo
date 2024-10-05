@@ -22,7 +22,7 @@ This model is transfer learning using YOLOv9-Wholebody17 weights.
 
 Don't be ruled by the curse of mAP.
 
-|input|output `Score threshold >= 0.35`|
+|output `Score threshold >= 0.35`|output `Score threshold >= 0.35`|
 |:-:|:-:|
 |![image](https://github.com/user-attachments/assets/23faae78-c23d-4c18-a418-8563fbf80d13)|![image](https://github.com/user-attachments/assets/ef11707f-a0f4-4561-94bd-93477841fe2a)|
 |![image](https://github.com/user-attachments/assets/f83ac867-9f9f-417a-ba96-33348936e017)|![image](https://github.com/user-attachments/assets/e28b1b7f-ab75-4cc8-adf2-38e289b32818)|
