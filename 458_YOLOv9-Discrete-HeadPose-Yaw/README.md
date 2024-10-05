@@ -140,7 +140,17 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
 - YOLOv9-Discrete-HeadPose-Yaw - N - Swish/SiLU (PINTO original implementation, 2.4 MB)
   ```
-  WIP
+        Class Images Instances     P     R mAP50 mAP50-95
+          all   1777     18736 0.555 0.423 0.430    0.320
+         head   1777      9368 0.817 0.754 0.802    0.541
+        front   1777      1911 0.593 0.408 0.425    0.331
+  right-front   1777      1558 0.557 0.477 0.493    0.378
+   right-side   1777      1048 0.577 0.482 0.491    0.371
+   right-back   1777       688 0.498 0.369 0.340    0.250
+         back   1777       467 0.347 0.208 0.176    0.133
+    left-back   1777       592 0.459 0.338 0.311    0.235
+    left-side   1777      1129 0.603 0.466 0.497    0.381
+   left-front   1777      1975 0.541 0.308 0.338    0.263
   ```
 - YOLOv9-Discrete-HeadPose-Yaw - T - Swish/SiLU
   ```
