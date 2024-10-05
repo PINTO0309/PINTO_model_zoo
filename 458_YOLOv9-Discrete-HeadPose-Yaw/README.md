@@ -7,8 +7,6 @@ Lightweight human detection models generated on high-quality human data sets. It
 
 This model addresses the following weaknesses of conventional HeadPose estimation models:
 
-The problems with existing models can be broadly divided into two categories: architecture problems and data problems.
-
 1. Breaks down quickly when the head is cut off outside the viewing angle
 2. Pitch direction estimation is very weak
 3. Estimated values ​​diverge around yaw +90° and -90°
@@ -22,6 +20,8 @@ The problems with existing models can be broadly divided into two categories: ar
 11. Requires the use of fully connected layers, which are computationally very expensive
 12. Extremely vulnerable to occlusion
 13. Public datasets such as the CMU Panoptic Dataset are created with fixed camera lens parameters, distance to object, background, lighting, and camera orientation, resulting in a severe lack of variation in the image sets. In addition, many of the datasets are taken in conditions that are too clean and contain very little of the noise that can occur in real-world conditions.
+
+The problems with existing models can be broadly divided into two categories: architecture problems and data problems.
 
 This model is transfer learning using YOLOv9-Wholebody17 weights.
 
