@@ -18,6 +18,7 @@ This model addresses the following weaknesses of conventional HeadPose estimatio
 10. Computational cost cannot be selected
 11. Requires the use of fully connected layers, which are computationally very expensive
 12. Extremely vulnerable to occlusion
+13. Public datasets such as the CMU Panoptic Dataset are created with fixed camera lens parameters, distance to object, background, lighting, and camera orientation, resulting in a severe lack of variation in the image sets
 
 This model is transfer learning using YOLOv9-Wholebody17 weights.
 
