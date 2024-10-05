@@ -17,6 +17,7 @@ This model addresses the following weaknesses of conventional HeadPose estimatio
 9. Inference performance does not scale
 10. Computational cost cannot be selected
 11. Requires the use of fully connected layers, which are computationally very expensive
+12. Extremely vulnerable to occlusion
 
 This model is transfer learning using YOLOv9-Wholebody17 weights.
 
