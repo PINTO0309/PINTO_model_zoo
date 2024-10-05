@@ -28,6 +28,7 @@ Don't be ruled by the curse of mAP.
 |![image](https://github.com/user-attachments/assets/23faae78-c23d-4c18-a418-8563fbf80d13)|![image](https://github.com/user-attachments/assets/ef11707f-a0f4-4561-94bd-93477841fe2a)|
 |![image](https://github.com/user-attachments/assets/f83ac867-9f9f-417a-ba96-33348936e017)|![image](https://github.com/user-attachments/assets/e28b1b7f-ab75-4cc8-adf2-38e289b32818)|
 |![image](https://github.com/user-attachments/assets/755b8402-7185-43b2-9201-7123d1523017)|![image](https://github.com/user-attachments/assets/f3212024-f3e3-43a4-8592-32a35427329d)|
+|![image](https://github.com/user-attachments/assets/19dd2a9a-75ba-4a9d-9d6d-72a1554cb632)||
 
 https://github.com/user-attachments/assets/bd484aa5-681f-4075-ae6f-da464fc56c4a
 
