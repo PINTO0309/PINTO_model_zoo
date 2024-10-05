@@ -6,6 +6,9 @@ Lightweight human detection models generated on high-quality human data sets. It
 
 
 This model addresses the following weaknesses of conventional HeadPose estimation models:
+
+The problems with existing models can be broadly divided into two categories: architecture problems and data problems.
+
 1. Breaks down quickly when the head is cut off outside the viewing angle
 2. Pitch direction estimation is very weak
 3. Estimated values ​​diverge around yaw +90° and -90°
