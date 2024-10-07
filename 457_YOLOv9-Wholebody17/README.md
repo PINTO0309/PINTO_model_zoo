@@ -399,7 +399,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
     https://github.com/levipereira/yolov9-qat
 
 ## 6. License
-[GPLv3](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/457_YOLOv9-Wholebody17/LICENSE)
+[GPLv3](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/458_YOLOv9-Discrete-HeadPose-Yaw/LICENSE)
 
 ## 7. Next Challenge
 - Discrete Head Pose Object Detection (8 classes)
