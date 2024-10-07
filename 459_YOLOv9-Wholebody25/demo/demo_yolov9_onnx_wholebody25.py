@@ -734,7 +734,7 @@ def main():
         '--disable_generation_identification_mode',
         action='store_true',
         help=\
-            'Disable generation identification mode.',
+            'Disable generation identification mode. (Press N on the keyboard to switch modes)',
     )
     parser.add_argument(
         '-dgm',
@@ -1176,6 +1176,8 @@ def main():
         key = cv2.waitKey(1) if file_paths is None or disable_waitKey else cv2.waitKey(0)
         if key == 27: # ESC
             break
+        elif key == 110: # N, mode switch
+            disable_generation_identification_mode = not disable_generation_identification_mode
         elif key == 103: # G, mode switch
             disable_gender_identification_mode = not disable_gender_identification_mode
         elif key == 112: # P, mode switch
