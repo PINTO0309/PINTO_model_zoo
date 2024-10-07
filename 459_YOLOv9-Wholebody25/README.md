@@ -52,8 +52,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   |Child|2|Bounding box coordinates are shared with `Body`. It is defined as a subclass of `Body` as a superclass.|
   |Male|3|Bounding box coordinates are shared with `Body`. It is defined as a subclass of `Body` as a superclass.|
   |Female|4|Bounding box coordinates are shared with `Body`. It is defined as a subclass of `Body` as a superclass.|
-  |Body_with_Wheelchair|5|Bounding box coordinates are shared with `Body`. It is defined as a subclass of `Body` as a superclass.|
-  |Body_with_Crutches|6|Bounding box coordinates are shared with `Body`. It is defined as a subclass of `Body` as a superclass.|
+  |Body_with_Wheelchair|5||
+  |Body_with_Crutches|6||
   |Head|7|Detection accuracy is higher than `Front`, `Right_Front`, `Right_Side`, `Right_Back`, `Back`, `Left_Back`, `Left_Side` and `Left_Front` bounding boxes. It is the sum of `Front`, `Right_Front`, `Right_Side`, `Right_Back`, `Back`, `Left_Back`, `Left_Side` and `Left_Front`.|
   |Front|8|Bounding box coordinates are shared with `Head`. It is defined as a subclass of `Head` as a superclass.|
   |Right_Front|9|Bounding box coordinates are shared with `Head`. It is defined as a subclass of `Head` as a superclass.|
