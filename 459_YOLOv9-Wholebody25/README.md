@@ -8,12 +8,14 @@ This model is transfer learning using YOLOv9-Wholebody17 weights.
 
 Don't be ruled by the curse of mAP.
 
-|output `Score threshold >= 0.35`|output `Score threshold >= 0.35`|
+|input|output<br>`Object score threshold >= 0.35`<br>`Attributes score threshold >= 0.75`|
 |:-:|:-:|
-|||
-|||
-|||
-|||
+|![image](https://github.com/user-attachments/assets/dd0027dd-c998-4297-9efe-4aae802a7783)|![image](https://github.com/user-attachments/assets/5adf1fc0-4a96-40ee-b241-469b71fbb867)|
+|![image](https://github.com/user-attachments/assets/436a2cfa-776d-48b8-93c7-90a1dbb9da29)|![image](https://github.com/user-attachments/assets/9e6dd578-7ca2-4903-bbec-9f0f1b1ca583)|
+|![image](https://github.com/user-attachments/assets/5e3372ec-e80d-40fe-8378-fbfc2a9c1a8a)|![image](https://github.com/user-attachments/assets/e7fddd99-d424-47d4-9526-0cbdcc07d18e)|
+|![image](https://github.com/user-attachments/assets/1fa6132b-26b1-4748-8640-3bd7c5aa057e)|![image](https://github.com/user-attachments/assets/91dd67ff-2ded-460a-868f-eca0a1bcb8d9)|
+|![image](https://github.com/user-attachments/assets/1bd51ec6-775c-4f35-89a7-be055af03609)|![image](https://github.com/user-attachments/assets/208fe0c0-4a48-44f6-8f77-ec1d35e024ba)|
+|![image](https://github.com/user-attachments/assets/54d9547c-6e6b-4f78-a244-2cd257a2cf6b)|![image](https://github.com/user-attachments/assets/2a75b535-315f-4406-90a4-6131fff009a8)|
 
 The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.
 
