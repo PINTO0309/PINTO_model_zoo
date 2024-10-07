@@ -104,7 +104,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   - Demonstration of models with built-in post-processing (Float32/Float16)
     ```
     usage:
-      demo_yolov9_discrete_head_pose_yaw.py \
+      demo_yolov9_onnx_wholebody25.py \
       [-h] \
       [-m MODEL] \
       (-v VIDEO | -i IMAGES_DIR) \
@@ -112,7 +112,10 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
       [-it] \
       [-dvw] \
       [-dwk] \
-      [-dhp] \
+      [-dnm] \
+      [-dgm] \
+      [-dlr] \
+      [-dhm] \
       [-oyt]
 
     options:
@@ -136,8 +139,14 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
       -dwk, --disable_waitKey
         Disable cv2.waitKey(). When you want to process a batch of still images,
         disable key-input wait and process them continuously.
-      -dhp, --disable_headpose_identification_mode
-        Disable headpose identification mode.
+      -dnm, --disable_generation_identification_mode
+        Disable generation identification mode.
+      -dgm, --disable_gender_identification_mode
+        Disable gender identification mode. (Press G on the keyboard to switch modes)
+      -dlr, --disable_left_and_right_hand_identification_mode
+        Disable left and right hand identification mode. (Press H on the keyboard to switch modes)
+      -dhm, --disable_headpose_identification_mode
+        Disable HeadPose identification mode. (Press P on the keyboard to switch modes)
       -oyt, --output_yolo_format_text
         Output YOLO format texts and images.
     ```
