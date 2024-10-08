@@ -49,6 +49,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
   ![image](https://github.com/user-attachments/assets/ca0b0b44-4280-49aa-b257-fca8429b3337)
 
+  Please feel free to change the head direction label as you wish. There is no correlation between the model's behavior and the meaning of the label text.
+
   ![image](https://github.com/user-attachments/assets/765600a1-552d-4de9-afcc-663f6fcc1e9d) ![image](https://github.com/user-attachments/assets/15b7693a-5ffb-4c2b-9cc2-cc3022f858bb)
 
   |Class Name|Class ID|Remarks|
