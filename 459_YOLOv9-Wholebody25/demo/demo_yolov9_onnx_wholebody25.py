@@ -394,9 +394,11 @@ class YOLOv9(AbstractModel):
         boxes: np.ndarray
             float32[N, 7]. [instances, [batchno, classid, score, x1, y1, x2, y2]].
 
-        disable_left_and_right_hand_identification_mode: bool
+        disable_generation_identification_mode: bool
 
         disable_gender_identification_mode: bool
+
+        disable_left_and_right_hand_identification_mode: bool
 
         disable_headpose_identification_mode: bool
 
