@@ -1042,9 +1042,9 @@ def main():
             elif box.gender == 1:
                 gender_txt = 'F'
 
-            headpose_txt = BOX_COLORS[box.head_pose][1] if box.head_pose != -1 else ''
-
             attr_txt = f'{generation_txt}({gender_txt})' if gender_txt != '' else f'{generation_txt}'
+
+            headpose_txt = BOX_COLORS[box.head_pose][1] if box.head_pose != -1 else ''
             attr_txt = f'{attr_txt} {headpose_txt}' if headpose_txt != '' else f'{attr_txt}'
 
             cv2.putText(
