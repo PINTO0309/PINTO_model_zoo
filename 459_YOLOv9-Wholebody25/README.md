@@ -140,13 +140,17 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
         Disable cv2.waitKey(). When you want to process a batch of still images,
         disable key-input wait and process them continuously.
       -dnm, --disable_generation_identification_mode
-        Disable generation identification mode. (Press N on the keyboard to switch modes)
+        Disable generation identification mode.
+        (Press N on the keyboard to switch modes)
       -dgm, --disable_gender_identification_mode
-        Disable gender identification mode. (Press G on the keyboard to switch modes)
+        Disable gender identification mode.
+        (Press G on the keyboard to switch modes)
       -dlr, --disable_left_and_right_hand_identification_mode
-        Disable left and right hand identification mode. (Press H on the keyboard to switch modes)
+        Disable left and right hand identification mode.
+        (Press H on the keyboard to switch modes)
       -dhm, --disable_headpose_identification_mode
-        Disable HeadPose identification mode. (Press P on the keyboard to switch modes)
+        Disable HeadPose identification mode.
+        (Press P on the keyboard to switch modes)
       -oyt, --output_yolo_format_text
         Output YOLO format texts and images.
     ```
