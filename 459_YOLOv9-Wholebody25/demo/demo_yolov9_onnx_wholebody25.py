@@ -355,12 +355,6 @@ class YOLOv9(AbstractModel):
         image: np.ndarray
             Entire image
 
-        swap: tuple
-            HWC to CHW: (2,0,1)
-            CHW to HWC: (1,2,0)
-            HWC to HWC: (0,1,2)
-            CHW to CHW: (0,1,2)
-
         Returns
         -------
         resized_image: np.ndarray
@@ -372,7 +366,6 @@ class YOLOv9(AbstractModel):
                 image,
                 dtype=np.float32,
             )
-
         return image
 
     def _postprocess(
