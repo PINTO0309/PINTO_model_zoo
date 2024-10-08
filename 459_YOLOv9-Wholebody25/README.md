@@ -12,7 +12,7 @@ Don't be ruled by the curse of mAP.
 
 https://github.com/user-attachments/assets/c8f5fb1a-e411-4d2b-a080-4cfc4bcce5af
 
-|input|output<br>`Object score threshold >= 0.35`<br>`Attributes score threshold >= 0.75`|
+|input|output<br>`Objects score threshold >= 0.35`<br>`Attributes score threshold >= 0.75`|
 |:-:|:-:|
 |![image](https://github.com/user-attachments/assets/dd0027dd-c998-4297-9efe-4aae802a7783)|![image](https://github.com/user-attachments/assets/5adf1fc0-4a96-40ee-b241-469b71fbb867)|
 |![image](https://github.com/user-attachments/assets/436a2cfa-776d-48b8-93c7-90a1dbb9da29)|![image](https://github.com/user-attachments/assets/9e6dd578-7ca2-4903-bbec-9f0f1b1ca583)|
