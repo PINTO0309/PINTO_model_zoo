@@ -264,5 +264,9 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
     }
     ```
 
+  - PINTO Custom RT-DETRv2 (Drastically change the training parameters and optimize the model structure)
+
+    https://github.com/PINTO0309/RT-DETR
+
 ## 6. License
 [Apache2.0](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/460_RT-DETRv2-Wholebody25/LICENSE)
