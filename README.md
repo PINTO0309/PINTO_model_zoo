@@ -194,6 +194,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |457|YOLOv9-Wholebody17|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/457_YOLOv9-Wholebody17)|||||||||||⚫|Body,Male,Adult,Child,Female,BodyWithWheelchair,BodyWithCrutches,Head,Face,Eye,Nose,Mouth,Ear,Hand,Hand-Left,Hand-Right,Foot|
 |458|YOLOv9-Discrete-HeadPose-Yaw|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/458_YOLOv9-Discrete-HeadPose-Yaw)|||||||||||⚫|Head,Front,Right-Front,Right-Side,Right-Back,Back,Left-Back,Left-Side,Left-Front|
 |459|YOLOv9-Wholebody25|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/459_YOLOv9-Wholebody25)|||||||||||⚫|Body,Adult,Child,Male,Female,Body_with_Wheelchair,Body_with_Crutches,Head,Front,Right_Front,Right_Side,Right_Back,Back,Left_Back,Left_Side,Left_Front,Face,Eye,Nose,Mouth,Ear,Hand,Hand_Left,Hand_Right,Foot|
+|460|RT-DETRv2-Wholebody25|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/460_RT-DETRv2-Wholebody25)|||||||||||⚫|Body,Adult,Child,Male,Female,Body_with_Wheelchair,Body_with_Crutches,Head,Front,Right_Front,Right_Side,Right_Back,Back,Left_Back,Left_Side,Left_Front,Face,Eye,Nose,Mouth,Ear,Hand,Hand_Left,Hand_Right,Foot|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
