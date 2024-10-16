@@ -10,7 +10,13 @@ The aim is to estimate head pose direction with minimal computational cost using
 
 Don't be ruled by the curse of mAP.
 
-https://github.com/user-attachments/assets/646ab997-f901-4626-88fe-d274a12c9fda
+- Difficulty: Normal
+
+  https://github.com/user-attachments/assets/646ab997-f901-4626-88fe-d274a12c9fda
+
+- Difficulty: Super Hard
+
+  https://github.com/user-attachments/assets/bb19455d-8c3f-4bfa-abe8-143f16b93388
 
 |output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|
 |:-:|:-:|
