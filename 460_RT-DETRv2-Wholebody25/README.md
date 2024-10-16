@@ -105,6 +105,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
     ```
 
   - Demonstration of models with built-in post-processing (Float32/Float16)
+  - `score_threshold` is a very rough value set for testing purposes, so please adjust it to your liking.
     ```
     usage:
       demo_rtdetrv2_onnx_wholebody25.py \
