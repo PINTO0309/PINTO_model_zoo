@@ -197,7 +197,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
   To ensure fair benchmark comparisons with YOLOX, `BGR to RGB conversion processing` and `normalization by division by 255.0` are added to the model input section.
 
-  ![image](https://github.com/PINTO0309/PINTO_model_zoo/assets/33194443/ae7e86be-267e-4abf-8325-efe39add32db)
+  ![image](https://github.com/user-attachments/assets/9098f12d-6b04-497f-947e-02bc77855f51)
 
 ## 4. Citiation
   If this work has contributed in any way to your research or business, I would be happy to be cited in your literature.
