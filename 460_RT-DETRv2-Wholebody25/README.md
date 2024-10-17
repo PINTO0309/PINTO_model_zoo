@@ -31,6 +31,7 @@ Don't be ruled by the curse of mAP.
 |![image](https://github.com/user-attachments/assets/0063bdd0-1317-40e5-b44b-dd01468436c2)|![image](https://github.com/user-attachments/assets/c9ea9f7c-e0db-4884-9734-dc6b79db5d05)|
 |![image](https://github.com/user-attachments/assets/70c57a45-a8ce-47dc-9bdd-6cca10d1b16a)|![image](https://github.com/user-attachments/assets/19aefce8-61d7-4294-bf3d-865529cae228)|
 |![image](https://github.com/user-attachments/assets/258805da-6578-4b05-b3d9-67850a027a03)|![image](https://github.com/user-attachments/assets/5114a254-f410-4db7-a61c-2391b8ccfbfb)|
+|![image](https://github.com/user-attachments/assets/a2629dd0-73f3-4115-a198-32562b206a7a)|![image](https://github.com/user-attachments/assets/e4c4bd6d-dc33-4d44-9be1-55c57a113ad3)|
 
 The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.
 
