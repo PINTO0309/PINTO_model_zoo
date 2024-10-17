@@ -13,7 +13,7 @@ import numpy as np
 from enum import Enum
 from pathlib import Path
 from dataclasses import dataclass
-from argparse import ArgumentParser
+from argparse import ArgumentParser, ArgumentTypeError
 from typing import Tuple, Optional, List, Dict
 import importlib.util
 from abc import ABC, abstractmethod
@@ -674,6 +674,13 @@ def draw_dashed_rectangle(
 
 def main():
     parser = ArgumentParser()
+
+    def check_positive(value):
+        ivalue = int(value)
+        if ivalue < 2:
+            raise ArgumentTypeError(f"Invalid Value: {ivalue}. Please specify an integer of 2 or greater.")
+        return ivalue
+
     parser.add_argument(
         '-m',
         '--model',
@@ -777,6 +784,14 @@ def main():
         help=\
             'Output YOLO format texts and images.',
     )
+    parser.add_argument(
+        '-bblw',
+        '--bounding_box_line_width',
+        type=check_positive,
+        default=2,
+        help=\
+            'Bounding box line width.',
+    )
     args = parser.parse_args()
 
     # runtime check
@@ -809,6 +824,7 @@ def main():
     output_yolo_format_text: bool = args.output_yolo_format_text
     execution_provider: str = args.execution_provider
     inference_type: str = args.inference_type
+    bounding_box_line_width: int = args.bounding_box_line_width
     inference_type = inference_type.lower()
     providers: List[Tuple[str, Dict] | str] = None
 
@@ -889,6 +905,8 @@ def main():
 
     file_paths_count = -1
     movie_frame_count = 0
+    white_line_width = bounding_box_line_width
+    colored_line_width = white_line_width - 1
     while True:
         image: np.ndarray = None
         if file_paths is not None:
@@ -1003,8 +1021,8 @@ def main():
                             dash_length=10
                         )
                     else:
-                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 3)
-                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 2)
+                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), white_line_width)
+                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, colored_line_width)
 
                 elif classid == 7:
                     if box.head_pose == -1:
@@ -1017,8 +1035,8 @@ def main():
                             dash_length=10
                         )
                     else:
-                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 3)
-                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 2)
+                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), white_line_width)
+                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, colored_line_width)
 
                 elif classid == 21:
                     if box.handedness == -1:
@@ -1031,12 +1049,12 @@ def main():
                             dash_length=10
                         )
                     else:
-                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 3)
-                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 2)
+                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), white_line_width)
+                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, colored_line_width)
 
             else:
-                cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 3)
-                cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 2)
+                cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), white_line_width)
+                cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, colored_line_width)
 
             # Attributes text
             generation_txt = ''

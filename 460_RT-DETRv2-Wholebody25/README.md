@@ -133,7 +133,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
       [-dgm] \
       [-dlr] \
       [-dhm] \
-      [-oyt]
+      [-oyt] \
+      [-bblw]
 
     options:
       -h, --help
@@ -174,6 +175,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
         (Press P on the keyboard to switch modes)
       -oyt, --output_yolo_format_text
         Output YOLO format texts and images.
+      -bblw BOUNDING_BOX_LINE_WIDTH, --bounding_box_line_width BOUNDING_BOX_LINE_WIDTH
+        Bounding box line width.
     ```
 
 - RT-DETRv2-Wholebody25 - S (rtdetrv2_r18vd_120e_wholebody25) - 1,250 query
