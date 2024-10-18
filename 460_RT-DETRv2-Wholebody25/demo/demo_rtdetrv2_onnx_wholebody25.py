@@ -790,7 +790,7 @@ def main():
         type=check_positive,
         default=2,
         help=\
-            'Bounding box line width.',
+            'Bounding box line width. Default: 2',
     )
     args = parser.parse_args()
 
