@@ -177,7 +177,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
       -oyt, --output_yolo_format_text
         Output YOLO format texts and images.
       -bblw BOUNDING_BOX_LINE_WIDTH, --bounding_box_line_width BOUNDING_BOX_LINE_WIDTH
-        Bounding box line width.
+        Bounding box line width. Default: 2
     ```
 
 - RT-DETRv2-Wholebody25 - S (rtdetrv2_r18vd_120e_wholebody25) - 1,250 query
