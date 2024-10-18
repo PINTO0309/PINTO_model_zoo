@@ -117,6 +117,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
   - Demonstration of models with built-in post-processing (Float32/Float16)
   - `score_threshold` is a very rough value set for testing purposes, so feel free to adjust it to your liking. The default threshold is probably too low.
+  - There is a lot of information being rendered into the image, so if you want to compare performance with other models it is best to run the demo with `-dnm`, `-dgm`, `-dlr` and `-dhm`.
 
     ```
     usage:
