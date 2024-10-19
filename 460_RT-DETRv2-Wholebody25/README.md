@@ -14,7 +14,7 @@ Don't be ruled by the curse of mAP.
 
   https://github.com/user-attachments/assets/646ab997-f901-4626-88fe-d274a12c9fda
 
-- Difficulty: Normal
+- Difficulty: Normal https://www2.nhk.or.jp/archives/movies/?id=D0002160854_00000
 
   https://github.com/user-attachments/assets/5b47f128-4e27-4a71-bcb4-19507fe8be27
 
