@@ -14,6 +14,8 @@ Don't be ruled by the curse of mAP.
 
   https://github.com/user-attachments/assets/646ab997-f901-4626-88fe-d274a12c9fda
 
+  https://github.com/user-attachments/assets/5b47f128-4e27-4a71-bcb4-19507fe8be27
+
 - Difficulty: Super Hard https://www2.nhk.or.jp/archives/movies/?id=D0002080169_00000
   - The depression and elevation angles are quite large.
   - People move quickly. (Intense motion blur)
