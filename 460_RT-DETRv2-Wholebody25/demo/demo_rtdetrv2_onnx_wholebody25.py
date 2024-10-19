@@ -391,7 +391,7 @@ class RTDETRv2(AbstractModel):
             Entire image.
 
         boxes: np.ndarray
-            float32[N, 7]. [instances, [batchno, classid, score, x1, y1, x2, y2]].
+            float32[N, 6]. [instances, [classid, x1, y1, x2, y2, score]].
 
         disable_left_and_right_hand_identification_mode: bool
 
