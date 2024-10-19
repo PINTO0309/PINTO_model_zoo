@@ -38,6 +38,13 @@ Don't be ruled by the curse of mAP.
 
   ![image](https://github.com/user-attachments/assets/314d3c85-6555-47b7-aaaa-2591c699167a)
 
+- Difficulty: Normal (800x898 x2)
+
+  Therefore, when using RT-DETRv2 and high-resolution images with aspect ratios that deviate significantly from 1:1, accuracy can be dramatically improved by simply dividing the images and performing inference in two batches so as to maintain the aspect ratio as much as possible. The figure below shows the results of inference in two batches, splitting the image into two parts, left and right, at 800x898 in size.
+
+  |batch.1|batch.2|
+  |:-:|:-:|
+  |![sample_1](https://github.com/user-attachments/assets/dc86c0ec-3e01-4a69-80f2-8a1efa6ab041)|![sample_2](https://github.com/user-attachments/assets/c65049ec-bad2-4bef-bb38-25c4c9c473d1)|
 
 |output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|
 |:-:|:-:|
