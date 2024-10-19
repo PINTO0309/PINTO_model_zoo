@@ -26,6 +26,12 @@ Don't be ruled by the curse of mAP.
 
   https://github.com/user-attachments/assets/bb19455d-8c3f-4bfa-abe8-143f16b93388
 
+- Difficulty: Super Hard (1600x898 -> 640x640)
+
+  A major weakness of RT-DETR is that it cannot process anything other than its internal processing resolution of 640x640, so if an image with an unnecessarily large resolution is used, faces in the background will be scaled down to a size of less than one pixel. Therefore, if you use an image of an unnecessarily large size such as 1600x898, as in the image below, people in the rear will be almost impossible to detect.
+
+  ![sample](https://github.com/user-attachments/assets/94aa6f51-2062-408a-89c7-714550fb92e4)
+
 |output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|
 |:-:|:-:|
 |![image](https://github.com/user-attachments/assets/2b310a9f-1203-4db4-9dc8-2129532e3f0d)|![image](https://github.com/user-attachments/assets/c99fb457-a813-4792-b773-84787298a359)|
