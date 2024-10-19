@@ -46,6 +46,11 @@ Don't be ruled by the curse of mAP.
   |:-:|:-:|
   |![sample_1](https://github.com/user-attachments/assets/dc86c0ec-3e01-4a69-80f2-8a1efa6ab041)|![sample_2](https://github.com/user-attachments/assets/c65049ec-bad2-4bef-bb38-25c4c9c473d1)|
 
+  An even more important point to note is that the current 1,250-query RT-DETRv2 can only output bounding boxes for a maximum of 50 to 100 people. The image above probably contains around 300 people, so we would not be able to measure the true detection performance of Transformer unless we expanded it to 5,000 queries. After debugging, we found that 1,250 bounding boxes exceeded the score threshold, meaning that we were unable to output all objects that were within the range of our detection capability. This means that the system is ignoring objects that could have been detected and only outputting 1,250.
+
+  ![image](https://github.com/user-attachments/assets/df4b93ff-30ed-4e77-baf9-8670a20bc807)
+
+
 - Difficulty: Super Hard (Score threshold 0.35)
 
   https://www.pakutaso.com/20240833234post-51997.html
