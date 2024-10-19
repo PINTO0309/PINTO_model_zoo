@@ -52,6 +52,13 @@ Don't be ruled by the curse of mAP.
 
   ![image](https://github.com/user-attachments/assets/a39a9ba7-ac3a-4199-bbd2-b6beed7b072b)
 
+- Difficulty: Normal
+
+  Cited: https://github.com/Kazuhito00/RT-DETR-ONNX-Sample
+
+  |Pure MS-COCO trained|Self-annotated MS-COCO trained|
+  |:-:|:-:|
+  |![image](https://github.com/user-attachments/assets/360c40d6-b3f7-42b1-93fa-103ce1ae5f13)|![image](https://github.com/user-attachments/assets/5293e3ad-cbc1-4e0d-bca0-7e894ab80988)|
 
 |output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|
 |:-:|:-:|
