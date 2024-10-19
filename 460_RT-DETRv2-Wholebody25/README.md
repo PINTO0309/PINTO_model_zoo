@@ -46,6 +46,13 @@ Don't be ruled by the curse of mAP.
   |:-:|:-:|
   |![sample_1](https://github.com/user-attachments/assets/dc86c0ec-3e01-4a69-80f2-8a1efa6ab041)|![sample_2](https://github.com/user-attachments/assets/c65049ec-bad2-4bef-bb38-25c4c9c473d1)|
 
+- Difficulty: Super Hard (Score threshold 0.35)
+
+  https://www.pakutaso.com/20240833234post-51997.html
+
+  ![image](https://github.com/user-attachments/assets/a39a9ba7-ac3a-4199-bbd2-b6beed7b072b)
+
+
 |output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|
 |:-:|:-:|
 |![image](https://github.com/user-attachments/assets/2b310a9f-1203-4db4-9dc8-2129532e3f0d)|![image](https://github.com/user-attachments/assets/c99fb457-a813-4792-b773-84787298a359)|
