@@ -32,6 +32,13 @@ Don't be ruled by the curse of mAP.
 
   ![sample](https://github.com/user-attachments/assets/94aa6f51-2062-408a-89c7-714550fb92e4)
 
+  The figure below shows the results of inference on the same image using a CNN with only 1MB. We can see that the performance of RT-DETRv2, which has an input resolution fixed at 640x640, is overwhelmingly lower than that of the 1MB CNN.
+
+  Cited: https://github.com/biubug6/Face-Detector-1MB-with-landmark
+
+  ![image](https://github.com/user-attachments/assets/314d3c85-6555-47b7-aaaa-2591c699167a)
+
+
 |output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|
 |:-:|:-:|
 |![image](https://github.com/user-attachments/assets/2b310a9f-1203-4db4-9dc8-2129532e3f0d)|![image](https://github.com/user-attachments/assets/c99fb457-a813-4792-b773-84787298a359)|
