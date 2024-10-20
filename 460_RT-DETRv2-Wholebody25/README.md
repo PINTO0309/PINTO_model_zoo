@@ -346,3 +346,10 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
 ## 6. License
 [Apache2.0](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/460_RT-DETRv2-Wholebody25/LICENSE)
+
+## 7. Next challenge
+- `shoulder`, `elbow`, `knee`
+- I would like to verify the hypothesis that the correlation between the positions of each part is embedded as weights in the CNN and Transformer.
+- Therefore, we reduce the 2D visible information in the area enclosed by the annotation label box to the limit and investigate how the model behaves when only the 3x3 pixel label box is annotated.
+
+  ![image](https://github.com/user-attachments/assets/25675c7a-b20b-48ba-93fe-f24d54b7cf2b)
