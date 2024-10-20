@@ -26,6 +26,17 @@ Don't be ruled by the curse of mAP.
 
   https://github.com/user-attachments/assets/bb19455d-8c3f-4bfa-abe8-143f16b93388
 
+- Difficulty: Super Ultra Hard (Score threshold 0.35)
+  - Heavy Rain.
+  - High intensity halation.
+  - People move quickly. (Intense motion blur)
+  - The image quality is quite poor and there is a lot of noise. (Quality taken around 2003)
+  - The brightness is quite dark.
+  
+  https://www2.nhk.or.jp/archives/movies/?id=D0002040195_00000
+
+  https://github.com/user-attachments/assets/cd7037ff-dee1-4b63-ad5d-c838ee639218
+
 - Difficulty: Super Hard (1600x898 -> 640x640)
 
   A major weakness of RT-DETR is that it cannot process anything other than its internal processing resolution of 640x640, so if an image with an unnecessarily large resolution is used, faces in the background will be scaled down to a size of less than one pixel. Therefore, if you use an image of an unnecessarily large size such as 1600x898, as in the image below, people in the rear will be almost impossible to detect. If you want accurate detection at higher resolutions, you will need to pre-train the model at a higher resolution setting, such as 1600x898.
