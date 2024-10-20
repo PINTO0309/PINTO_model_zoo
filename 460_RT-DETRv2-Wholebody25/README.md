@@ -14,15 +14,19 @@ Don't be ruled by the curse of mAP.
 
   https://github.com/user-attachments/assets/646ab997-f901-4626-88fe-d274a12c9fda
 
-- Difficulty: Normal https://www2.nhk.or.jp/archives/movies/?id=D0002160854_00000
+- Difficulty: Normal
+
+  https://www2.nhk.or.jp/archives/movies/?id=D0002160854_00000
 
   https://github.com/user-attachments/assets/5b47f128-4e27-4a71-bcb4-19507fe8be27
 
-- Difficulty: Super Hard https://www2.nhk.or.jp/archives/movies/?id=D0002080169_00000
+- Difficulty: Super Hard
   - The depression and elevation angles are quite large.
   - People move quickly. (Intense motion blur)
   - The image quality is quite poor and there is a lot of noise. (Quality taken around 1993)
   - The brightness is quite dark.
+
+  https://www2.nhk.or.jp/archives/movies/?id=D0002080169_00000
 
   https://github.com/user-attachments/assets/bb19455d-8c3f-4bfa-abe8-143f16b93388
 
