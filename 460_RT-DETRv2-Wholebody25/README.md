@@ -74,18 +74,20 @@ Don't be ruled by the curse of mAP.
 
   |Pure MS-COCO trained|Self-annotated MS-COCO trained|
   |:-:|:-:|
-  |![image](https://github.com/user-attachments/assets/360c40d6-b3f7-42b1-93fa-103ce1ae5f13)|![image](https://github.com/user-attachments/assets/5293e3ad-cbc1-4e0d-bca0-7e894ab80988)|
+  |![image](https://github.com/user-attachments/assets/0318bf9d-9815-40ea-885a-cdc7e526056d)|![image](https://github.com/user-attachments/assets/5293e3ad-cbc1-4e0d-bca0-7e894ab80988)|
 
-|output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|
-|:-:|:-:|
-|![image](https://github.com/user-attachments/assets/2b310a9f-1203-4db4-9dc8-2129532e3f0d)|![image](https://github.com/user-attachments/assets/c99fb457-a813-4792-b773-84787298a359)|
-|![image](https://github.com/user-attachments/assets/fe6df76e-ce43-49c9-af58-4340c4b9502e)|![image](https://github.com/user-attachments/assets/faf65954-3d4b-4d4c-93c1-9b2573a9858a)|
-|![image](https://github.com/user-attachments/assets/e2cbd298-6072-4e28-bd3f-b150a704d4af)|![image](https://github.com/user-attachments/assets/711b73f1-2863-4298-b646-2ad2d527b327)|
-|![image](https://github.com/user-attachments/assets/d6e66287-cb5b-4806-8bd0-3781750ada3b)|![image](https://github.com/user-attachments/assets/e1c7f9d1-8752-4fa0-8219-48f222846fc3)|
-|![image](https://github.com/user-attachments/assets/0063bdd0-1317-40e5-b44b-dd01468436c2)|![image](https://github.com/user-attachments/assets/c9ea9f7c-e0db-4884-9734-dc6b79db5d05)|
-|![image](https://github.com/user-attachments/assets/70c57a45-a8ce-47dc-9bdd-6cca10d1b16a)|![image](https://github.com/user-attachments/assets/19aefce8-61d7-4294-bf3d-865529cae228)|
-|![image](https://github.com/user-attachments/assets/258805da-6578-4b05-b3d9-67850a027a03)|![image](https://github.com/user-attachments/assets/5114a254-f410-4db7-a61c-2391b8ccfbfb)|
-|![image](https://github.com/user-attachments/assets/a2629dd0-73f3-4115-a198-32562b206a7a)|![image](https://github.com/user-attachments/assets/e4c4bd6d-dc33-4d44-9be1-55c57a113ad3)|
+- Other results
+
+  |output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|
+  |:-:|:-:|
+  |![image](https://github.com/user-attachments/assets/2b310a9f-1203-4db4-9dc8-2129532e3f0d)|![image](https://github.com/user-attachments/assets/c99fb457-a813-4792-b773-84787298a359)|
+  |![image](https://github.com/user-attachments/assets/fe6df76e-ce43-49c9-af58-4340c4b9502e)|![image](https://github.com/user-attachments/assets/faf65954-3d4b-4d4c-93c1-9b2573a9858a)|
+  |![image](https://github.com/user-attachments/assets/e2cbd298-6072-4e28-bd3f-b150a704d4af)|![image](https://github.com/user-attachments/assets/711b73f1-2863-4298-b646-2ad2d527b327)|
+  |![image](https://github.com/user-attachments/assets/d6e66287-cb5b-4806-8bd0-3781750ada3b)|![image](https://github.com/user-attachments/assets/e1c7f9d1-8752-4fa0-8219-48f222846fc3)|
+  |![image](https://github.com/user-attachments/assets/0063bdd0-1317-40e5-b44b-dd01468436c2)|![image](https://github.com/user-attachments/assets/c9ea9f7c-e0db-4884-9734-dc6b79db5d05)|
+  |![image](https://github.com/user-attachments/assets/70c57a45-a8ce-47dc-9bdd-6cca10d1b16a)|![image](https://github.com/user-attachments/assets/19aefce8-61d7-4294-bf3d-865529cae228)|
+  |![image](https://github.com/user-attachments/assets/258805da-6578-4b05-b3d9-67850a027a03)|![image](https://github.com/user-attachments/assets/5114a254-f410-4db7-a61c-2391b8ccfbfb)|
+  |![image](https://github.com/user-attachments/assets/a2629dd0-73f3-4115-a198-32562b206a7a)|![image](https://github.com/user-attachments/assets/e4c4bd6d-dc33-4d44-9be1-55c57a113ad3)|
 
 The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.
 
