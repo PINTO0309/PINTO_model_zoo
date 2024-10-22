@@ -65,6 +65,20 @@ Don't be ruled by the curse of mAP.
 
   ![image](https://github.com/user-attachments/assets/df4b93ff-30ed-4e77-baf9-8670a20bc807)
 
+- Difficulty: Super Hard (1600x898 -> 640x640, 2,500 query)
+
+  The results were a bit unexpected: when we generated a model with 2,500 queries and ran inference on the same images, the accuracy was actually significantly lower than when we ran the model with 1,250 queries. In other words, I can say the following two points.
+
+  1. A large increase in the number of queries has a negative impact
+  2. Keeping aspect ratios as close to 1:1 as possible maintains performance
+
+  ![sample](https://github.com/user-attachments/assets/cc3e9349-6cbf-47bd-9263-0315d020faf5)
+
+  Just to be safe, I have also included the results of inference performed by splitting the image into two halves, left and right. The accuracy is also clearly reduced here.
+
+  |batch.1|batch.2|
+  |:-:|:-:|
+  |![sample_1](https://github.com/user-attachments/assets/67ec992b-e9c6-4677-b8db-ccde87e14961)|![sample_2](https://github.com/user-attachments/assets/5c7860fc-c810-441c-9fb2-1130eb595baf)|
 
 - Difficulty: Super Hard (Score threshold 0.35)
 
