@@ -437,3 +437,6 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
 ## 7. Next Challenge
 - Pitch x5 classes
+
+## 8. Practical application
+1. https://github.com/PINTO0309/yolov9-wholebody25-tensorflowjs-web-test
