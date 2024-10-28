@@ -694,6 +694,14 @@ def main():
                 draw_axis(debug_image, yaw_deg, pitch_deg, roll_deg, tdx=float(cx), tdy=float(cy), size=abs(x2-x1)//2)
         else:
             elapsed_time = time.time() - start_time
+            if enable_log:
+                log_row = []
+                now = datetime.datetime.now()
+                timestamp = now.strftime("%Y%m%d%H%M%S") + f'{now.microsecond // 1000:03d}'
+                log_row.append(timestamp)
+                while len(log_row) < (max_logging_instances * 2 + 1):
+                    log_row.append('')
+                log_writer.write_row(log_row)
 
         # fps = 1 / elapsed_time
         # cv2.putText(
