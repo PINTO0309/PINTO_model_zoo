@@ -502,14 +502,14 @@ def main():
         int(args.video) if is_parsable_to_int(args.video) else args.video
     )
     cap_fps = cap.get(cv2.CAP_PROP_FPS)
-    w = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-    h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    image_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    image_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
     video_writer = cv2.VideoWriter(
         filename='output.mp4',
         fourcc=fourcc,
         fps=cap_fps,
-        frameSize=(w, h),
+        frameSize=(image_width, image_height),
     )
 
     head_tracker = HeadTracker(max_distance=50, max_lost=30)
@@ -607,7 +607,7 @@ def main():
                 )
 
                 looking_camera_txt = ''
-                is_looking = 1 if is_looking_at_camera_with_angles(tracked_head.box, yaw_deg, pitch_deg) else 0
+                is_looking = 1 if is_looking_at_camera_with_angles(tracked_head.box, yaw_deg, pitch_deg, image_width, image_height) else 0
                 if is_looking:
                     looking_camera_txt = 'Looking'
                 else:
