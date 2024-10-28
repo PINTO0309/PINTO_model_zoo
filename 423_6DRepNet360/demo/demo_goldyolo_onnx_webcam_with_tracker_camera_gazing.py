@@ -504,7 +504,7 @@ def main():
     cap_fps = cap.get(cv2.CAP_PROP_FPS)
     image_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     image_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
+    fourcc = cv2.VideoWriter.fourcc('m', 'p', '4', 'v')
     video_writer = cv2.VideoWriter(
         filename='output.mp4',
         fourcc=fourcc,
