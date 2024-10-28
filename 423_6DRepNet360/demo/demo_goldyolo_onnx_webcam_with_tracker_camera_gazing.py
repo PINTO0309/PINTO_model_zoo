@@ -43,15 +43,15 @@ class TrackedBox:
 
 class HeadTracker:
     def __init__(self, max_distance=50, max_lost=30, looking_duration=90):
-        self.tracked_heads: List[TrackedBox] = []
-        self.next_id = 1
+        self.tracked_heads: dict[int, TrackedBox] = {}  # 辞書に変更
+        self.next_id = 0
         self.max_distance = max_distance  # 中心点同士の距離の閾値
         self.max_lost = max_lost  # オブジェクトを見失っても保持するフレーム数
-        self.looking_duration = looking_duration # 注視判定時間
+        self.looking_duration = looking_duration  # 注視判定時間
 
     def update_trackers(self, head_boxes: List[Box]):
         # 現在追跡中のオブジェクトの中心点を取得
-        tracked_centroids = [(t.id, (t.box.cx, t.box.cy)) for t in self.tracked_heads]
+        tracked_centroids = [(t.id, (t.box.cx, t.box.cy)) for t in self.tracked_heads.values()]
         # 新しく検出されたバウンディングボックスの中心点を取得
         new_centroids = [(box.cx, box.cy) for box in head_boxes]
 
@@ -60,20 +60,27 @@ class HeadTracker:
 
         # 対応したトラッカーを更新
         for tracked_idx, new_idx in matched:
-            self.tracked_heads[tracked_idx].box = head_boxes[new_idx]
-            self.tracked_heads[tracked_idx].lost = 0  # 見失いカウンタをリセット
+            tracked_id = tracked_centroids[tracked_idx][0]
+            self.tracked_heads[tracked_id].box = head_boxes[new_idx]
+            self.tracked_heads[tracked_id].lost = 0  # 見失いカウンタをリセット
 
         # 対応しなかったトラッカーをカウントアップ、見失いが多いものを削除
         for tracked_idx in unmatched_tracked:
-            self.tracked_heads[tracked_idx].lost += 1
-        self.tracked_heads = [t for t in self.tracked_heads if t.lost <= self.max_lost]
+            tracked_id = tracked_centroids[tracked_idx][0]
+            self.tracked_heads[tracked_id].lost += 1
+            if self.tracked_heads[tracked_id].lost > self.max_lost:
+                del self.tracked_heads[tracked_id]  # 追跡対象から削除
 
         # 新しい検出結果を追加
         for new_idx in unmatched_new:
-            self.tracked_heads.append(TrackedBox(box=head_boxes[new_idx], id=self.next_id, looking_duration=self.looking_duration))
+            self.tracked_heads[self.next_id] = TrackedBox(
+                box=head_boxes[new_idx],
+                id=self.next_id,
+                looking_duration=self.looking_duration
+            )
             self.next_id += 1
 
-        return self.tracked_heads
+        return list(self.tracked_heads.values())
 
     def match_objects(self, tracked_centroids, new_centroids):
         matched = []
@@ -105,16 +112,18 @@ class HeadTracker:
         return matched, unmatched_tracked, unmatched_new
 
     def stack_looking_history(self, tracked_id: int, state: bool):
-        self.tracked_heads[tracked_id].looking_history_long.append(state)
-        self.tracked_heads[tracked_id].looking_history_short.append(state)
+        if tracked_id in self.tracked_heads:
+            self.tracked_heads[tracked_id].looking_history_long.append(state)
+            self.tracked_heads[tracked_id].looking_history_short.append(state)
 
     def get_state_start(self, tracked_id: int) -> bool:
-        state_interval, state_start, state_end = \
-            state_verdict(
+        if tracked_id in self.tracked_heads:
+            state_interval, state_start, state_end = state_verdict(
                 long_tracking_history=self.tracked_heads[tracked_id].looking_history_long,
                 short_tracking_history=self.tracked_heads[tracked_id].looking_history_short,
             )
-        return state_start
+            return state_start
+        return False
 
 class GoldYOLOONNX(object):
     def __init__(
@@ -636,8 +645,8 @@ def main():
 
                 looking_camera_txt = ''
                 is_looking = 1 if is_looking_at_camera_with_angles(tracked_head.box, yaw_deg, pitch_deg, image_width, image_height) else 0
-                head_tracker.stack_looking_history(tracked_head.id - 1, True if is_looking == 1 else False)
-                is_looking_start = head_tracker.get_state_start(tracked_head.id - 1)
+                head_tracker.stack_looking_history(tracked_head.id, True if is_looking == 1 else False)
+                is_looking_start = head_tracker.get_state_start(tracked_head.id)
 
                 if is_looking_start:
                     looking_camera_txt = 'Looking'
