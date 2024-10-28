@@ -4,6 +4,8 @@ from __future__ import annotations
 import os
 import copy
 import cv2
+import csv
+import datetime
 import time
 import numpy as np
 import onnxruntime
@@ -405,6 +407,19 @@ def main():
         type=str,
         default="0",
     )
+    parser.add_argument(
+        '-l',
+        '--enable_log',
+        action='store_true',
+        help='Enable CSV logging of detection results.',
+    )
+    parser.add_argument(
+        '-mi',
+        '--max_logging_instances',
+        type=int,
+        default=20,
+        help='Max logging instances.',
+    )
     args = parser.parse_args()
 
     model = GoldYOLOONNX(
@@ -449,6 +464,19 @@ def main():
 
     head_tracker = HeadTracker(max_distance=50, max_lost=30)
 
+    enable_log: bool = args.enable_log
+    max_logging_instances: int = args.max_logging_instances
+
+    if enable_log:
+        csv_file = open('log.csv', mode='w', newline='')
+        csv_writer = csv.writer(csv_file)
+        header_row = ['timestamp']
+        for idx in range(max_logging_instances):
+            header_row = header_row + [f'head_{idx+1}'] + [f'looking_{idx+1}']
+        csv_writer.writerow(header_row)
+    else:
+        csv_writer = None
+
     while cap.isOpened():
         res, image = cap.read()
         if not res:
@@ -489,7 +517,6 @@ def main():
                 cropped_image_rgb: np.ndarray = cropped_image_bgr[..., ::-1]
                 normalized_image_rgb: np.ndarray = (cropped_image_rgb / 255.0 - mean) / std
                 normalized_image_rgb = normalized_image_rgb.transpose(2,0,1)
-                # normalized_image_rgb: np.ndarray = normalized_image_rgb[np.newaxis, ...]
                 normalized_image_rgb: np.ndarray = normalized_image_rgb.astype(np.float32)
 
                 x1y1x2y2cxcys.append([box.x1, box.y1, box.x2, box.y2, box.cx, box.cy])
@@ -532,10 +559,22 @@ def main():
                 )
 
                 looking_camera_txt = ''
-                if is_looking_at_camera_with_angles(box, yaw_deg, pitch_deg):
+                is_looking = 1 if is_looking_at_camera_with_angles(tracked_head.box, yaw_deg, pitch_deg) else 0
+                if is_looking:
                     looking_camera_txt = 'Looking'
                 else:
                     looking_camera_txt = ''
+
+                if enable_log:
+                    log_row = []
+                    now = datetime.datetime.now()
+                    timestamp = now.strftime("%Y%m%d%H%M%S") + f'{now.microsecond // 1000:03d}'
+                    log_row.append(timestamp)
+                    log_row.append(f'{tracked_head.id}')
+                    log_row.append(f'{is_looking}')
+                    while len(log_row) < (max_logging_instances + 1):
+                        log_row.append('')
+                    csv_writer.writerow(log_row)
 
                 cv2.putText(
                     debug_image,
