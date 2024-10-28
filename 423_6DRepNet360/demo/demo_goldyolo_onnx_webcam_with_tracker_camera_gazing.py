@@ -10,10 +10,12 @@ import time
 import numpy as np
 import onnxruntime
 from argparse import ArgumentParser
-from typing import Tuple, Optional, List
+from collections import deque
+from typing import Tuple, Optional, List, Deque
 from math import cos, sin
 from scipy.spatial import distance
 from dataclasses import dataclass
+from bbalg import state_verdict
 
 @dataclass(frozen=False)
 class Box():
@@ -33,13 +35,19 @@ class TrackedBox:
     box: Box
     id: int
     lost: int = 0  # 追跡を見失ったフレーム数
+    looking_duration: int = 90 # 30 frame * 3 sec
+    looking_duration_long: int = looking_duration * 2 # 30 frame * 6 sec
+    looking_duration_short: int = looking_duration # 30 frame * 3 sec
+    looking_history_long = deque(maxlen=looking_duration_long)
+    looking_history_short = deque(maxlen=looking_duration_short)
 
 class HeadTracker:
-    def __init__(self, max_distance=50, max_lost=30):
+    def __init__(self, max_distance=50, max_lost=30, looking_duration=90):
         self.tracked_heads: List[TrackedBox] = []
         self.next_id = 1
         self.max_distance = max_distance  # 中心点同士の距離の閾値
         self.max_lost = max_lost  # オブジェクトを見失っても保持するフレーム数
+        self.looking_duration = looking_duration # 注視判定時間
 
     def update_trackers(self, head_boxes: List[Box]):
         # 現在追跡中のオブジェクトの中心点を取得
@@ -62,7 +70,7 @@ class HeadTracker:
 
         # 新しい検出結果を追加
         for new_idx in unmatched_new:
-            self.tracked_heads.append(TrackedBox(box=head_boxes[new_idx], id=self.next_id))
+            self.tracked_heads.append(TrackedBox(box=head_boxes[new_idx], id=self.next_id, looking_duration=self.looking_duration))
             self.next_id += 1
 
         return self.tracked_heads
@@ -95,6 +103,18 @@ class HeadTracker:
                         unmatched_new.remove(min_distance_idx)
 
         return matched, unmatched_tracked, unmatched_new
+
+    def stack_looking_history(self, tracked_id: int, state: bool):
+        self.tracked_heads[tracked_id].looking_history_long.append(state)
+        self.tracked_heads[tracked_id].looking_history_short.append(state)
+
+    def get_state_start(self, tracked_id: int) -> bool:
+        state_interval, state_start, state_end = \
+            state_verdict(
+                long_tracking_history=self.tracked_heads[tracked_id].looking_history_long,
+                short_tracking_history=self.tracked_heads[tracked_id].looking_history_short,
+            )
+        return state_start
 
 class GoldYOLOONNX(object):
     def __init__(
@@ -470,6 +490,13 @@ def main():
         default=18000,
         help='Max logging rows. Default: 18000 (10 min)',
     )
+    parser.add_argument(
+        '-ld',
+        '--looking_duration',
+        type=int,
+        default=3,
+        help='Looking duration. Default: 3 (3 sec)',
+    )
     args = parser.parse_args()
 
     model = GoldYOLOONNX(
@@ -512,11 +539,12 @@ def main():
         frameSize=(image_width, image_height),
     )
 
-    head_tracker = HeadTracker(max_distance=50, max_lost=30)
-
     enable_log: bool = args.enable_log
     max_logging_instances: int = args.max_logging_instances
     max_logging_rows: int = args.max_logging_rows
+    looking_duration: int = args.looking_duration
+
+    head_tracker = HeadTracker(max_distance=50, max_lost=30, looking_duration=int(looking_duration * cap_fps))
 
     log_writer: LogWriter = None
     if enable_log:
@@ -608,7 +636,10 @@ def main():
 
                 looking_camera_txt = ''
                 is_looking = 1 if is_looking_at_camera_with_angles(tracked_head.box, yaw_deg, pitch_deg, image_width, image_height) else 0
-                if is_looking:
+                head_tracker.stack_looking_history(tracked_head.id - 1, True if is_looking == 1 else False)
+                is_looking_start = head_tracker.get_state_start(tracked_head.id - 1)
+
+                if is_looking_start:
                     looking_camera_txt = 'Looking'
                 else:
                     looking_camera_txt = ''
@@ -619,7 +650,7 @@ def main():
                     timestamp = now.strftime("%Y%m%d%H%M%S") + f'{now.microsecond // 1000:03d}'
                     log_row.append(timestamp)
                     log_row.append(f'{tracked_head.id}')
-                    log_row.append(f'{is_looking}')
+                    log_row.append(f'{is_looking_start}')
                     while len(log_row) < (max_logging_instances * 2 + 1):
                         log_row.append('')
                     log_writer.write_row(log_row)
