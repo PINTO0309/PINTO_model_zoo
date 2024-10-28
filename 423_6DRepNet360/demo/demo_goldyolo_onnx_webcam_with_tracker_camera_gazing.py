@@ -305,7 +305,6 @@ class GoldYOLOONNX(object):
                     )
         return result_boxes
 
-
 def is_parsable_to_int(s):
     try:
         int(s)
@@ -393,6 +392,50 @@ def is_looking_at_camera_with_angles(
     else:
         return False
 
+class LogWriter:
+    def __init__(self, base_filename, max_lines=18000, header_row=None):
+        self.base_filename = base_filename
+        self.max_lines = max_lines
+        self.current_line_count = 0  # ログ行のカウント（ヘッダを除外）
+        self.current_file_index = 1
+        self.log_file = None
+        self.csv_writer = None
+        self.header_row = header_row  # ヘッダ行
+        self.start_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+
+        # 初回のログファイルを開く
+        self._open_new_file()
+
+    def _open_new_file(self):
+        if self.log_file:
+            self.log_file.close()
+
+        # タイムスタンプと連番を含む新しいファイル名を生成
+        filename = f"{self.start_time}_{self.current_file_index:03d}_{self.base_filename}"
+        self.log_file = open(filename, mode='w', newline='')
+        self.csv_writer = csv.writer(self.log_file)
+        self.current_line_count = 0  # 新しいファイルではログ行を0からスタート
+        self.current_file_index += 1
+
+        # 新しいファイルごとにヘッダ行を出力
+        if self.header_row:
+            self.csv_writer.writerow(self.header_row)
+
+    def write_row(self, row):
+        """ログ行を書き込み、行カウントを更新"""
+        if self.current_line_count >= self.max_lines:
+            # 最大行数に達したら新しいファイルを開き、ヘッダを書き込む
+            self._open_new_file()
+
+        # ログ行を書き込み、行カウントを増やす
+        self.csv_writer.writerow(row)
+        self.current_line_count += 1
+
+    def close(self):
+        """ファイルを閉じる"""
+        if self.log_file:
+            self.log_file.close()
+
 def main():
     parser = ArgumentParser()
     parser.add_argument(
@@ -418,7 +461,14 @@ def main():
         '--max_logging_instances',
         type=int,
         default=20,
-        help='Max logging instances.',
+        help='Max logging instances. Default: 20',
+    )
+    parser.add_argument(
+        '-mr',
+        '--max_logging_rows',
+        type=int,
+        default=18000,
+        help='Max logging rows. Default: 18000 (10 min)',
     )
     args = parser.parse_args()
 
@@ -466,16 +516,14 @@ def main():
 
     enable_log: bool = args.enable_log
     max_logging_instances: int = args.max_logging_instances
+    max_logging_rows: int = args.max_logging_rows
 
+    log_writer: LogWriter = None
     if enable_log:
-        csv_file = open('log.csv', mode='w', newline='')
-        csv_writer = csv.writer(csv_file)
         header_row = ['timestamp']
         for idx in range(max_logging_instances):
-            header_row = header_row + [f'head_{idx+1}'] + [f'looking_{idx+1}']
-        csv_writer.writerow(header_row)
-    else:
-        csv_writer = None
+            header_row += [f'head_{idx+1}', f'looking_{idx+1}']
+        log_writer = LogWriter(base_filename="log.csv", max_lines=max_logging_rows, header_row=header_row)
 
     while cap.isOpened():
         res, image = cap.read()
@@ -572,9 +620,9 @@ def main():
                     log_row.append(timestamp)
                     log_row.append(f'{tracked_head.id}')
                     log_row.append(f'{is_looking}')
-                    while len(log_row) < (max_logging_instances + 1):
+                    while len(log_row) < (max_logging_instances * 2 + 1):
                         log_row.append('')
-                    csv_writer.writerow(log_row)
+                    log_writer.write_row(log_row)
 
                 cv2.putText(
                     debug_image,
@@ -634,6 +682,9 @@ def main():
         key = cv2.waitKey(1)
         if key == 27: # ESC
             break
+
+    if enable_log:
+        log_writer.close()
 
     if video_writer:
         video_writer.release()
