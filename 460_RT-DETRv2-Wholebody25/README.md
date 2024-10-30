@@ -53,6 +53,12 @@ Don't be ruled by the curse of mAP.
 
   ![image](https://github.com/user-attachments/assets/314d3c85-6555-47b7-aaaa-2591c699167a)
 
+  The detection results of YOLOv9-E that I created with the NMS limiter disabled are shown in the figure below.
+
+  Cited: https://github.com/PINTO0309/PINTO_model_zoo/tree/main/459_YOLOv9-Wholebody25
+
+  ![0009](https://github.com/user-attachments/assets/a14c08c9-49c7-41a5-bf9c-a049947e4c54)
+
 - Difficulty: Normal (800x898 x2)
 
   Therefore, when using RT-DETRv2 and high-resolution images with aspect ratios that deviate significantly from 1:1, accuracy can be dramatically improved by simply dividing the images and performing inference in two batches so as to maintain the aspect ratio as much as possible. The figure below shows the results of inference in two batches, splitting the image into two parts, left and right, at 800x898 in size.
