@@ -12,6 +12,10 @@ Don't be ruled by the curse of mAP.
 
 https://github.com/user-attachments/assets/c8f5fb1a-e411-4d2b-a080-4cfc4bcce5af
 
+https://github.com/biubug6/Face-Detector-1MB-with-landmark/blob/master/img/sample.jpg
+
+![0009](https://github.com/user-attachments/assets/419cda8d-a4ae-4b79-a62b-27ee00ea4f32)
+
 |input|output<br>`Objects score threshold >= 0.35`<br>`Attributes score threshold >= 0.75`|
 |:-:|:-:|
 |![image](https://github.com/user-attachments/assets/dd0027dd-c998-4297-9efe-4aae802a7783)|![image](https://github.com/user-attachments/assets/5adf1fc0-4a96-40ee-b241-469b71fbb867)|
