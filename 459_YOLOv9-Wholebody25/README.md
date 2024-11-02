@@ -14,6 +14,8 @@ https://github.com/user-attachments/assets/c8f5fb1a-e411-4d2b-a080-4cfc4bcce5af
 
 ![0009](https://github.com/user-attachments/assets/419cda8d-a4ae-4b79-a62b-27ee00ea4f32)
 
+![0007](https://github.com/user-attachments/assets/b0fe1807-fae0-44a4-ab4e-62da97b4ab58)
+
 https://github.com/biubug6/Face-Detector-1MB-with-landmark/blob/master/img/sample.jpg
 
 |param|value|
