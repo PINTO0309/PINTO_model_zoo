@@ -59,7 +59,7 @@ Don't be ruled by the curse of mAP.
 
   ![0009](https://github.com/user-attachments/assets/a14c08c9-49c7-41a5-bf9c-a049947e4c54)
 
-  ![image](https://github.com/user-attachments/assets/40254ffb-3c62-4cec-bf4c-81a1b4bfd167)
+  ![0007](https://github.com/user-attachments/assets/22405164-99de-4152-a5f3-a47088d54229)
 
 - Difficulty: Normal (800x898 x2)
 
