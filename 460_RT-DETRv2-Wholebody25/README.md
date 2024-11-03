@@ -141,7 +141,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
   Halfway compromises are never acceptable. I added `2,611` annotations to the following `480x360` image. The trick to annotation is to not miss a single object and not compromise on a single pixel. The ultimate methodology is to `try your best`.
 
-  https://github.com/user-attachments/assets/11345c45-07d0-4723-bae6-7717469c783c
+  https://github.com/user-attachments/assets/32f150fe-ebf7-4374-9f0d-f1130badcfc1
 
   Please feel free to change the head direction label as you wish. There is no correlation between the model's behavior and the meaning of the label text.
 
