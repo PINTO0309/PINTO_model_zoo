@@ -449,7 +449,9 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 [GPLv3](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/459_YOLOv9-Wholebody25/LICENSE)
 
 ## 7. Next Challenge
-- Pitch x5 classes
+- Shoulder, Elbow, Knee
+
+  https://github.com/user-attachments/assets/a15d4bc3-b593-4261-874f-7214dc8fd3c7
 
 ## 8. Practical application
 1. https://github.com/PINTO0309/yolov9-wholebody25-tensorflowjs-web-test
