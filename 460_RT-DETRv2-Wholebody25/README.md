@@ -390,3 +390,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 - Therefore, we reduce the 2D visible information in the area enclosed by the annotation label box to the limit and investigate how the model behaves when only the 3x3 pixel label box is annotated.
 
   ![image](https://github.com/user-attachments/assets/25675c7a-b20b-48ba-93fe-f24d54b7cf2b)
+
+- A state of provisional implementation
+
+  https://github.com/user-attachments/assets/38c55669-2acf-46b4-a9c4-819349880854
+
