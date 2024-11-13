@@ -127,11 +127,15 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
       [-it] \
       [-dvw] \
       [-dwk] \
+      [-ost] \
+      [-ast] \
       [-dnm] \
       [-dgm] \
       [-dlr] \
       [-dhm] \
-      [-oyt]
+      [-drc] \
+      [-oyt] \
+      [-bblw]
 
     options:
       -h, --help
@@ -154,6 +158,10 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
       -dwk, --disable_waitKey
         Disable cv2.waitKey(). When you want to process a batch of still images,
         disable key-input wait and process them continuously.
+      -ost OBJECT_SOCRE_THRESHOLD, --object_socre_threshold OBJECT_SOCRE_THRESHOLD
+        The detection score threshold for object detection. Default: 0.35
+      -ast ATTRIBUTE_SOCRE_THRESHOLD, --attribute_socre_threshold ATTRIBUTE_SOCRE_THRESHOLD
+        The attribute score threshold for object detection. Default: 0.70
       -dnm, --disable_generation_identification_mode
         Disable generation identification mode.
         (Press N on the keyboard to switch modes)
@@ -166,8 +174,12 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
       -dhm, --disable_headpose_identification_mode
         Disable HeadPose identification mode.
         (Press P on the keyboard to switch modes)
+      -drc [DISABLE_RENDER_CLASSIDS ...], --disable_render_classids [DISABLE_RENDER_CLASSIDS ...]
+        Class ID to disable bounding box drawing. List[int]. e.g. -drc 17 18 19
       -oyt, --output_yolo_format_text
         Output YOLO format texts and images.
+      -bblw BOUNDING_BOX_LINE_WIDTH, --bounding_box_line_width BOUNDING_BOX_LINE_WIDTH
+        Bounding box line width. Default: 2
     ```
 
 - YOLOv9-Wholebody25 - N - Swish/SiLU (PINTO original implementation, 2.4 MB)

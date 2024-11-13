@@ -13,7 +13,7 @@ import numpy as np
 from enum import Enum
 from pathlib import Path
 from dataclasses import dataclass
-from argparse import ArgumentParser
+from argparse import ArgumentParser, ArgumentTypeError
 from typing import Tuple, Optional, List, Dict
 import importlib.util
 from abc import ABC, abstractmethod
@@ -670,6 +670,13 @@ def draw_dashed_rectangle(
 
 def main():
     parser = ArgumentParser()
+
+    def check_positive(value):
+        ivalue = int(value)
+        if ivalue < 2:
+            raise ArgumentTypeError(f"Invalid Value: {ivalue}. Please specify an integer of 2 or greater.")
+        return ivalue
+
     parser.add_argument(
         '-m',
         '--model',
@@ -725,6 +732,22 @@ def main():
             ' disable key-input wait and process them continuously.',
     )
     parser.add_argument(
+        '-ost',
+        '--object_socre_threshold',
+        type=float,
+        default=0.35,
+        help=\
+            'The detection score threshold for object detection. Default: 0.35',
+    )
+    parser.add_argument(
+        '-ast',
+        '--attribute_socre_threshold',
+        type=float,
+        default=0.75,
+        help=\
+            'The attribute score threshold for object detection. Default: 0.70',
+    )
+    parser.add_argument(
         '-dnm',
         '--disable_generation_identification_mode',
         action='store_true',
@@ -753,11 +776,28 @@ def main():
             'Disable HeadPose identification mode. (Press P on the keyboard to switch modes)',
     )
     parser.add_argument(
+        '-drc',
+        '--disable_render_classids',
+        type=int,
+        nargs="*",
+        default=[],
+        help=\
+            'Class ID to disable bounding box drawing. List[int]. e.g. -drc 17 18 19',
+    )
+    parser.add_argument(
         '-oyt',
         '--output_yolo_format_text',
         action='store_true',
         help=\
             'Output YOLO format texts and images.',
+    )
+    parser.add_argument(
+        '-bblw',
+        '--bounding_box_line_width',
+        type=check_positive,
+        default=2,
+        help=\
+            'Bounding box line width. Default: 2',
     )
     args = parser.parse_args()
 
@@ -784,14 +824,18 @@ def main():
     video: str = args.video
     images_dir: str = args.images_dir
     disable_waitKey: bool = args.disable_waitKey
+    object_socre_threshold: float = args.object_socre_threshold
+    attribute_socre_threshold: float = args.attribute_socre_threshold
     disable_generation_identification_mode: bool = args.disable_generation_identification_mode
     disable_gender_identification_mode: bool = args.disable_gender_identification_mode
     disable_left_and_right_hand_identification_mode: bool = args.disable_left_and_right_hand_identification_mode
     disable_headpose_identification_mode: bool = args.disable_headpose_identification_mode
+    disable_render_classids: List[int] = args.disable_render_classids
     output_yolo_format_text: bool = args.output_yolo_format_text
     execution_provider: str = args.execution_provider
     inference_type: str = args.inference_type
     inference_type = inference_type.lower()
+    bounding_box_line_width: int = args.bounding_box_line_width
     providers: List[Tuple[str, Dict] | str] = None
 
     if execution_provider == 'cpu':
@@ -842,8 +886,8 @@ def main():
     model = YOLOv9(
         runtime=runtime,
         model_path=model_file,
-        obj_class_score_th=0.35,
-        attr_class_score_th=0.70,
+        obj_class_score_th=object_socre_threshold,
+        attr_class_score_th=attribute_socre_threshold,
         providers=providers,
     )
 
@@ -871,6 +915,8 @@ def main():
 
     file_paths_count = -1
     movie_frame_count = 0
+    white_line_width = bounding_box_line_width
+    colored_line_width = white_line_width - 1
     while True:
         image: np.ndarray = None
         if file_paths is not None:
@@ -907,6 +953,9 @@ def main():
         for box in boxes:
             classid: int = box.classid
             color = (255,255,255)
+
+            if classid in disable_render_classids:
+                continue
 
             if classid == 0:
                 # Body
@@ -985,8 +1034,8 @@ def main():
                             dash_length=10
                         )
                     else:
-                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 3)
-                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 2)
+                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), white_line_width)
+                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, colored_line_width)
 
                 elif classid == 7:
                     if box.head_pose == -1:
@@ -999,8 +1048,8 @@ def main():
                             dash_length=10
                         )
                     else:
-                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 3)
-                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 2)
+                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), white_line_width)
+                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, colored_line_width)
 
                 elif classid == 21:
                     if box.handedness == -1:
@@ -1013,12 +1062,12 @@ def main():
                             dash_length=10
                         )
                     else:
-                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 3)
-                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 2)
+                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), white_line_width)
+                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, colored_line_width)
 
             else:
-                cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 3)
-                cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 2)
+                cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), white_line_width)
+                cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, colored_line_width)
 
             # Attributes text
             generation_txt = ''
