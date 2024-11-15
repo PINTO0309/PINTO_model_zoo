@@ -210,9 +210,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
 ## 4. Cited
   I am very grateful for their excellent work.
-  - MS-COCO
-
-    https://cocodataset.org/#download
+  - [MS-COCO](https://cocodataset.org/#download)
 
   - [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco)
 
