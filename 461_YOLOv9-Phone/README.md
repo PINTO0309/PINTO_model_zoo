@@ -112,22 +112,22 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
         Output YOLO format texts and images.
     ```
 
-- YOLOv9-Wholebody25 - N - Swish/SiLU (PINTO original implementation, 2.4 MB)
+- YOLOv9-Phone - N - Swish/SiLU (PINTO original implementation, 2.4 MB)
   ```
   Class Images Instances     P     R mAP50 mAP50-95
     all   2007      2676 0.706 0.517 0.582    0.389
   ```
-- YOLOv9-Wholebody25 - T - Swish/SiLU
+- YOLOv9-Phone - T - Swish/SiLU
   ```
   Class Images Instances     P     R mAP50 mAP50-95
     all   2007      2676 0.792 0.647 0.711    0.505
   ```
-- YOLOv9-Wholebody25 - S - Swish/SiLU
+- YOLOv9-Phone - S - Swish/SiLU
   ```
   Class Images Instances     P     R mAP50 mAP50-95
     all   2007      2676 0.885 0.704 0.792    0.590
   ```
-- YOLOv9-Wholebody25 - E - Swish/SiLU
+- YOLOv9-Phone - E - Swish/SiLU
   ```
   Class Images Instances     P     R mAP50 mAP50-95
     all   2007      2676 0.896 0.732 0.805    0.612
