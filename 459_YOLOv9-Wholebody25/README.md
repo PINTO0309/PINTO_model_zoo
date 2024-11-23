@@ -471,5 +471,10 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
   ![image](https://github.com/user-attachments/assets/ca974fef-b4aa-47a5-b9db-8594be8de0a8)
 
+- Steps and final goal
+
+  ![image](https://github.com/user-attachments/assets/d5974b9e-018b-4739-99ae-1e5f879c0c3f)
+
+
 ## 8. Practical application
 1. https://github.com/PINTO0309/yolov9-wholebody25-tensorflowjs-web-test
