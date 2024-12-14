@@ -6,7 +6,7 @@ Gaze-LLE provides a streamlined gaze architecture that learns only a lightweight
 
 - Single person test - `gazelle_dinov2_vitb14_inout_1x3x448x448_1xNx4.onnx`
 
-  https://github.com/user-attachments/assets/42f4d6fc-b21f-4ed4-b7c3-17d6462eaab4
+  https://github.com/user-attachments/assets/b8d45d91-55b4-41fe-b177-ab3497026967
 
 ## 1. Test
   - Python 3.10
