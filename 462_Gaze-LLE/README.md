@@ -2,7 +2,7 @@
 
 Gaze-LLE provides a streamlined gaze architecture that learns only a lightweight gaze decoder on top of a frozen, pretrained visual encoder (DINOv2). Gaze-LLE learns 1-2 orders of magnitude fewer parameters than prior works and doesn't require any extra input modalities like depth and pose!
 
-- Single person test
+- Single person test - `gazelle_dinov2_vitb14_inout_1x3x448x448_1xNx4.onnx`
 
   https://github.com/user-attachments/assets/42f4d6fc-b21f-4ed4-b7c3-17d6462eaab4
 
