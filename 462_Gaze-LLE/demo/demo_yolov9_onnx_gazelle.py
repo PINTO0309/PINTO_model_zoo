@@ -852,7 +852,7 @@ def main():
         '-gm',
         '--gazelle_model',
         type=str,
-        default='gazelle_dinov2_vitb14_1x3x448x448_1xNx4.onnx',
+        default='gazelle_dinov2_vitb14_inout_1x3x448x448_1xNx4.onnx',
         help='ONNX/TFLite file path for Gaze-LLE.',
     )
     group_v_or_i = parser.add_mutually_exclusive_group(required=True)
@@ -1086,7 +1086,7 @@ def main():
             video_writer = cv2.VideoWriter(
                 filename='output.mp4',
                 fourcc=fourcc,
-                fps=15, # cap_fps
+                fps=cap_fps,
                 frameSize=(w, h),
             )
 
