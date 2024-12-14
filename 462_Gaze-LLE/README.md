@@ -106,3 +106,6 @@ Gaze-LLE provides a streamlined gaze architecture that learns only a lightweight
 
 ## 3. License
 [MIT](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/462_Gaze-LLE/LICENSE)
+
+## 4. Ref
+ONNX custom: https://github.com/PINTO0309/gazelle
