@@ -1365,6 +1365,22 @@ def main():
 
         # 重心 (centroid) を計算する関数
         def calculate_centroid(heatmap: np.ndarray) -> Tuple[int, int, float]:
+            """calculate_centroid
+
+            Parameters
+            ----------
+            heatmap: np.ndarray
+                One-channel entire image. [H, W]
+
+            Returns
+            -------
+            x: int
+                Peak X coordinate of the heat map score
+            y: int
+                Peak Y coordinate of the heat map score
+            score: float
+                Peak score for heat map score
+            """
             # 1. ピーク値を求める
             peak_value = np.max(heatmap)
             # 2. ピーク値との差の絶対値を計算
