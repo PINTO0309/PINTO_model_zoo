@@ -12,7 +12,7 @@ Gaze-LLE provides a streamlined gaze architecture that learns only a lightweight
 
 - Switch Heatmap mode (`A` key)
 
-  https://github.com/user-attachments/assets/8111b788-0be6-4d05-b8e9-608b6c79fde0
+  https://github.com/user-attachments/assets/e87bcd2f-5c21-43c0-8ac6-15d1efb711cc
 
 ## 1. Test
   - Python 3.10
