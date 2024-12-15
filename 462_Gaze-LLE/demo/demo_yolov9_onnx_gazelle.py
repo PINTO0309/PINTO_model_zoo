@@ -663,6 +663,7 @@ class GazeLLE(AbstractModel):
         self,
         image: np.ndarray,
         head_boxes: List[Box],
+        disable_attention_heatmap_mode: bool,
     ) -> Tuple[np.ndarray, np.ndarray]:
         """
 
@@ -673,6 +674,8 @@ class GazeLLE(AbstractModel):
 
         head_boxes: List[Box]
             Head boxes
+
+        disable_attention_heatmap_mode: bool
 
         Returns
         -------
@@ -699,16 +702,14 @@ class GazeLLE(AbstractModel):
         if len(outputs) == 2:
             inout = outputs[1]
         # PostProcess
-        result_image = \
+        result_image, resized_heatmatps = \
             self._postprocess(
                 image_bgr=temp_image,
                 heatmaps=heatmaps,
             )
-        image_height = temp_image.shape[0]
-        image_width = temp_image.shape[1]
-        heatmap_list = [cv2.resize(heatmap[..., None], (image_width, image_height)) for heatmap in heatmaps]
-        resized_heatmatp = np.asarray(heatmap_list)
-        return result_image, resized_heatmatp
+        if disable_attention_heatmap_mode:
+            result_image = image
+        return result_image, resized_heatmatps
 
     def _preprocess(
         self,
@@ -754,6 +755,8 @@ class GazeLLE(AbstractModel):
         -------
         result_image: uint8[image_height, image_width, 3]
             BGR
+        resized_heatmatps: uint8[image_height, image_width]
+            Single-channel
         """
         image_height = image_bgr.shape[0]
         image_width = image_bgr.shape[1]
@@ -768,7 +771,11 @@ class GazeLLE(AbstractModel):
         heatmaps_all.putalpha(128)
         image_rgba = Image.alpha_composite(Image.fromarray(image_rgb).convert("RGBA"), heatmaps_all)
         image_bgr = cv2.cvtColor(np.asarray(image_rgba)[..., [2,1,0,3]], cv2.COLOR_BGRA2BGR)
-        return image_bgr
+
+        heatmap_list = [cv2.resize(heatmap[..., None], (image_width, image_height)) for heatmap in heatmaps]
+        resized_heatmatps = np.asarray(heatmap_list)
+
+        return image_bgr, resized_heatmatps
 
 def list_image_files(dir_path: str) -> List[str]:
     path = Path(dir_path)
@@ -947,6 +954,13 @@ def main():
             'Disable HeadPose identification mode. (Press P on the keyboard to switch modes)',
     )
     parser.add_argument(
+        '-dah',
+        '--disable_attention_heatmap_mode',
+        action='store_true',
+        help=\
+            'Disable Attention Heatmap mode. (Press A on the keyboard to switch modes)',
+    )
+    parser.add_argument(
         '-drc',
         '--disable_render_classids',
         type=int,
@@ -1002,6 +1016,7 @@ def main():
     disable_gender_identification_mode: bool = args.disable_gender_identification_mode
     disable_left_and_right_hand_identification_mode: bool = args.disable_left_and_right_hand_identification_mode
     disable_headpose_identification_mode: bool = args.disable_headpose_identification_mode
+    disable_attention_heatmap_mode: bool = args.disable_attention_heatmap_mode
     disable_render_classids: List[int] = args.disable_render_classids
     output_yolo_format_text: bool = args.output_yolo_format_text
     execution_provider: str = args.execution_provider
@@ -1126,6 +1141,7 @@ def main():
             debug_image, heatmaps = gazelle_model(
                 image=debug_image,
                 head_boxes=head_boxes,
+                disable_attention_heatmap_mode=disable_attention_heatmap_mode,
             )
         elapsed_time = time.perf_counter() - start_time
 
@@ -1448,6 +1464,8 @@ def main():
             disable_headpose_identification_mode = not disable_headpose_identification_mode
         elif key == 104: # H, mode switch
             disable_left_and_right_hand_identification_mode = not disable_left_and_right_hand_identification_mode
+        elif key == 97: # A, mode switch
+            disable_attention_heatmap_mode = not disable_attention_heatmap_mode
 
     if video_writer is not None:
         video_writer.release()

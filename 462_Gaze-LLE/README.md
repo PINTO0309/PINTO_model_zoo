@@ -1,16 +1,16 @@
 # 462_Gaze-LLE
 
-## WIP
-
 Gaze-LLE provides a streamlined gaze architecture that learns only a lightweight gaze decoder on top of a frozen, pretrained visual encoder (DINOv2). Gaze-LLE learns 1-2 orders of magnitude fewer parameters than prior works and doesn't require any extra input modalities like depth and pose!
 
-- Single person test - `gazelle_dinov2_vitb14_inout_1x3x448x448_1xNx4.onnx`
+- Single person test - `gazelle_dinov2_vitb14_inout_1x3x448x448_1xNx4.onnx` + ONNX-TensorRT
 
   https://github.com/user-attachments/assets/b8d45d91-55b4-41fe-b177-ab3497026967
 
 - Gaze estimation test when facing backwards
 
   https://github.com/user-attachments/assets/12c5b44b-328c-4d32-b17c-182ddac564f3
+
+- Disable Heatmap
 
 ## 1. Test
   - Python 3.10
@@ -50,6 +50,7 @@ Gaze-LLE provides a streamlined gaze architecture that learns only a lightweight
     [-dgm]
     [-dlr]
     [-dhm]
+    [-dah]
     [-drc [DISABLE_RENDER_CLASSIDS ...]]
     [-oyt]
     [-bblw BOUNDING_BOX_LINE_WIDTH]
@@ -87,6 +88,8 @@ Gaze-LLE provides a streamlined gaze architecture that learns only a lightweight
         Disable left and right hand identification mode. (Press H on the keyboard to switch modes)
       -dhm, --disable_headpose_identification_mode
         Disable HeadPose identification mode. (Press P on the keyboard to switch modes)
+      -dah, --disable_attention_heatmap_mode
+        Disable Attention Heatmap mode. (Press A on the keyboard to switch modes)
       -drc [DISABLE_RENDER_CLASSIDS ...], --disable_render_classids [DISABLE_RENDER_CLASSIDS ...]
         Class ID to disable bounding box drawing. List[int]. e.g. -drc 17 18 19
       -oyt, --output_yolo_format_text
