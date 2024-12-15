@@ -1136,21 +1136,25 @@ def main():
         debug_image_w = debug_image.shape[1]
 
         start_time = time.perf_counter()
-        boxes = detection_model(
-            image=debug_image,
-            disable_generation_identification_mode=disable_generation_identification_mode,
-            disable_gender_identification_mode=disable_gender_identification_mode,
-            disable_left_and_right_hand_identification_mode=disable_left_and_right_hand_identification_mode,
-            disable_headpose_identification_mode=disable_headpose_identification_mode,
-        )
+        # YOLOv9
+        boxes = \
+            detection_model(
+                image=debug_image,
+                disable_generation_identification_mode=disable_generation_identification_mode,
+                disable_gender_identification_mode=disable_gender_identification_mode,
+                disable_left_and_right_hand_identification_mode=disable_left_and_right_hand_identification_mode,
+                disable_headpose_identification_mode=disable_headpose_identification_mode,
+            )
+        # Gaze-LLE
         head_boxes = [box for box in boxes if box.classid == 7]
         heatmaps = []
         if len(head_boxes) > 0:
-            debug_image, heatmaps = gazelle_model(
-                image=debug_image,
-                head_boxes=head_boxes,
-                disable_attention_heatmap_mode=disable_attention_heatmap_mode,
-            )
+            debug_image, heatmaps = \
+                gazelle_model(
+                    image=debug_image,
+                    head_boxes=head_boxes,
+                    disable_attention_heatmap_mode=disable_attention_heatmap_mode,
+                )
         elapsed_time = time.perf_counter() - start_time
 
         if file_paths is None:
