@@ -1419,7 +1419,7 @@ def main():
         for head_box, heatmap in zip(head_boxes, heatmaps):
             cx, cy, score = calculate_centroid(heatmap)
             if score >= 0.50:
-                cv2.line(debug_image, (head_box.cx, head_box.cy), (cx, cy), (255, 255, 255), thickness=2, lineType=cv2.LINE_AA)
+                cv2.line(debug_image, (head_box.cx, head_box.cy), (cx, cy), (255, 255, 255), thickness=3, lineType=cv2.LINE_AA)
                 cv2.line(debug_image, (head_box.cx, head_box.cy), (cx, cy), (0, 255, 0), thickness=2, lineType=cv2.LINE_AA)
                 cv2.circle(debug_image, (cx, cy), 4, (255, 255, 255), thickness=-1, lineType=cv2.LINE_AA)
                 cv2.circle(debug_image, (cx, cy), 3, (0, 0, 255), thickness=-1, lineType=cv2.LINE_AA)
