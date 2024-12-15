@@ -706,6 +706,7 @@ class GazeLLE(AbstractModel):
             self._postprocess(
                 image_bgr=temp_image,
                 heatmaps=heatmaps,
+                disable_attention_heatmap_mode=disable_attention_heatmap_mode,
             )
         if disable_attention_heatmap_mode:
             result_image = image
@@ -740,6 +741,7 @@ class GazeLLE(AbstractModel):
         self,
         image_bgr: np.ndarray,
         heatmaps: np.ndarray,
+        disable_attention_heatmap_mode: bool,
     ) -> np.ndarray:
         """_postprocess
 
@@ -751,26 +753,32 @@ class GazeLLE(AbstractModel):
         heatmaps: np.ndarray
             float32[heads, 64, 64]
 
+        disable_attention_heatmap_mode: bool
+
         Returns
         -------
         result_image: uint8[image_height, image_width, 3]
             BGR
+
         resized_heatmatps: uint8[image_height, image_width]
             Single-channel
         """
         image_height = image_bgr.shape[0]
         image_width = image_bgr.shape[1]
-        image_rgb = image_bgr[..., ::-1]
-        heatmaps_all: np.ndarray = np.sum(heatmaps, axis=0) # [64, 64]
-        heatmaps_all = heatmaps_all * 255
-        heatmaps_all = heatmaps_all.astype(np.uint8)
-        heatmaps_all = Image.fromarray(heatmaps_all).resize((image_width, image_height), Image.Resampling.BILINEAR)
-        heatmaps_all = plt.cm.jet(np.array(heatmaps_all) / 255.0)
-        heatmaps_all = (heatmaps_all[:, :, :3] * 255).astype(np.uint8)
-        heatmaps_all = Image.fromarray(heatmaps_all).convert("RGBA")
-        heatmaps_all.putalpha(128)
-        image_rgba = Image.alpha_composite(Image.fromarray(image_rgb).convert("RGBA"), heatmaps_all)
-        image_bgr = cv2.cvtColor(np.asarray(image_rgba)[..., [2,1,0,3]], cv2.COLOR_BGRA2BGR)
+        if not disable_attention_heatmap_mode:
+            image_rgb = image_bgr[..., ::-1]
+            heatmaps_all: np.ndarray = np.sum(heatmaps, axis=0) # [64, 64]
+            heatmaps_all = heatmaps_all * 255
+            heatmaps_all = heatmaps_all.astype(np.uint8)
+            heatmaps_all = Image.fromarray(heatmaps_all).resize((image_width, image_height), Image.Resampling.BILINEAR)
+            heatmaps_all = plt.cm.jet(np.array(heatmaps_all) / 255.0)
+            heatmaps_all = (heatmaps_all[:, :, :3] * 255).astype(np.uint8)
+            heatmaps_all = Image.fromarray(heatmaps_all).convert("RGBA")
+            heatmaps_all.putalpha(128)
+            image_rgba = Image.alpha_composite(Image.fromarray(image_rgb).convert("RGBA"), heatmaps_all)
+            image_bgr = cv2.cvtColor(np.asarray(image_rgba)[..., [2,1,0,3]], cv2.COLOR_BGRA2BGR)
+        else:
+            pass
 
         heatmap_list = [cv2.resize(heatmap[..., None], (image_width, image_height)) for heatmap in heatmaps]
         resized_heatmatps = np.asarray(heatmap_list)
