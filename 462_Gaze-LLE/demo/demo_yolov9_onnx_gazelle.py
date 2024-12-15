@@ -1415,6 +1415,7 @@ def main():
             y, x = np.unravel_index(max_index, heatmap.shape)
             return int(x), int(y), heatmap[y, x]
 
+        # Drawing of the point of gaze
         for head_box, heatmap in zip(head_boxes, heatmaps):
             cx, cy, score = calculate_centroid(heatmap)
             if score >= 0.50:
