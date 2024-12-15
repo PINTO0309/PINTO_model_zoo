@@ -6,6 +6,10 @@ Gaze-LLE provides a streamlined gaze architecture that learns only a lightweight
 
   https://github.com/user-attachments/assets/b8d45d91-55b4-41fe-b177-ab3497026967
 
+- Multi person test - `gazelle_dinov2_vitb14_inout_1x3x448x448_1xNx4.onnx` + ONNX-TensorRT
+
+  https://github.com/user-attachments/assets/91b30d6f-36dd-4278-95b1-471603e36f7c
+
 - Gaze estimation test when facing backwards
 
   https://github.com/user-attachments/assets/12c5b44b-328c-4d32-b17c-182ddac564f3
