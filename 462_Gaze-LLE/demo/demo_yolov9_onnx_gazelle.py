@@ -511,16 +511,6 @@ class YOLOv9(AbstractModel):
                     left_right_hand_boxes = [box for box in result_boxes if box.classid in [22, 23]]
                     self._find_most_relevant_obj(base_objs=hand_boxes, target_objs=left_right_hand_boxes)
                 result_boxes = [box for box in result_boxes if box.classid not in [22, 23]]
-
-                # Nose merge
-                # classid: 7 -> Head
-                #   classid: 18 -> Nose
-                # 1. Calculate Nose IoUs for Head detection results
-                # 2. Connect either the Nose with the highest score and the highest IoU with the Head.
-                head_boxes = [box for box in result_boxes if box.classid == 7]
-                nose_boxes = [box for box in result_boxes if box.classid in [18]]
-                self._find_most_relevant_obj(base_objs=head_boxes, target_objs=nose_boxes)
-                result_boxes = [box for box in result_boxes if box.classid not in [18]]
         return result_boxes
 
     def _find_most_relevant_obj(
