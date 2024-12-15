@@ -1406,13 +1406,9 @@ def main():
                 Peak score for heat map score
             """
             # 1. ピーク値を求める
-            peak_value = np.max(heatmap)
-            # 2. ピーク値との差の絶対値を計算
-            diff = np.abs(heatmap - peak_value)
-            # 3. 差が最小の要素のインデックスを取得（1Dインデックス）
-            min_index = np.argmin(diff)
-            # 4. 1Dインデックスを2Dインデックス (y, x) に変換
-            y, x = np.unravel_index(min_index, heatmap.shape)
+            max_index = np.argmax(heatmap)
+            # 2. 1Dインデックスを2Dインデックス (y, x) に変換
+            y, x = np.unravel_index(max_index, heatmap.shape)
             return int(x), int(y), heatmap[y, x]
 
         for head_box, heatmap in zip(head_boxes, heatmaps):
