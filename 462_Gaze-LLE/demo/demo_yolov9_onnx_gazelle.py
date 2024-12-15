@@ -698,8 +698,6 @@ class GazeLLE(AbstractModel):
                 heatmaps=heatmaps,
                 disable_attention_heatmap_mode=disable_attention_heatmap_mode,
             )
-        if disable_attention_heatmap_mode:
-            result_image = image
         return result_image, resized_heatmatps
 
     def _preprocess(
