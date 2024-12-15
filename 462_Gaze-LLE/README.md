@@ -10,7 +10,7 @@ Gaze-LLE provides a streamlined gaze architecture that learns only a lightweight
 
   https://github.com/user-attachments/assets/12c5b44b-328c-4d32-b17c-182ddac564f3
 
-- Switch Heatmap mode
+- Switch Heatmap mode (`A` key)
 
   https://github.com/user-attachments/assets/8111b788-0be6-4d05-b8e9-608b6c79fde0
 
