@@ -922,6 +922,14 @@ def main():
             'The attribute score threshold for object detection. Default: 0.70',
     )
     parser.add_argument(
+        '-cst',
+        '--centroid_socre_threshold',
+        type=float,
+        default=0.30,
+        help=\
+            'The heatmap centroid score threshold. Default: 0.30',
+    )
+    parser.add_argument(
         '-dnm',
         '--disable_generation_identification_mode',
         action='store_true',
@@ -1008,6 +1016,7 @@ def main():
     disable_waitKey: bool = args.disable_waitKey
     object_socre_threshold: float = args.object_socre_threshold
     attribute_socre_threshold: float = args.attribute_socre_threshold
+    centroid_socre_threshold: float = args.centroid_socre_threshold
     disable_generation_identification_mode: bool = args.disable_generation_identification_mode
     disable_gender_identification_mode: bool = args.disable_gender_identification_mode
     disable_left_and_right_hand_identification_mode: bool = args.disable_left_and_right_hand_identification_mode
@@ -1406,7 +1415,7 @@ def main():
         # Drawing of the point of gaze
         for head_box, heatmap in zip(head_boxes, heatmaps):
             cx, cy, score = calculate_centroid(heatmap)
-            if score >= 0.30:
+            if score >= centroid_socre_threshold:
                 cv2.line(debug_image, (head_box.cx, head_box.cy), (cx, cy), (255, 255, 255), thickness=3, lineType=cv2.LINE_AA)
                 cv2.line(debug_image, (head_box.cx, head_box.cy), (cx, cy), (0, 255, 0), thickness=2, lineType=cv2.LINE_AA)
                 cv2.circle(debug_image, (cx, cy), 4, (255, 255, 255), thickness=-1, lineType=cv2.LINE_AA)
