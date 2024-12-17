@@ -52,6 +52,7 @@ Gaze-LLE provides a streamlined gaze architecture that learns only a lightweight
     [-dwk]
     [-ost OBJECT_SOCRE_THRESHOLD]
     [-ast ATTRIBUTE_SOCRE_THRESHOLD]
+    [-cst CENTROID_SOCRE_THRESHOLD]
     [-dnm]
     [-dgm]
     [-dlr]
@@ -86,6 +87,8 @@ Gaze-LLE provides a streamlined gaze architecture that learns only a lightweight
         The detection score threshold for object detection. Default: 0.35
       -ast ATTRIBUTE_SOCRE_THRESHOLD, --attribute_socre_threshold ATTRIBUTE_SOCRE_THRESHOLD
         The attribute score threshold for object detection. Default: 0.70
+      -cst CENTROID_SOCRE_THRESHOLD, --centroid_socre_threshold CENTROID_SOCRE_THRESHOLD
+        The heatmap centroid score threshold. Default: 0.30
       -dnm, --disable_generation_identification_mode
         Disable generation identification mode. (Press N on the keyboard to switch modes)
       -dgm, --disable_gender_identification_mode
