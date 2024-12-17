@@ -124,3 +124,5 @@ Gaze-LLE provides a streamlined gaze architecture that learns only a lightweight
 
 ## 4. Ref
 ONNX custom: https://github.com/PINTO0309/gazelle
+Head Detection model 1: https://github.com/PINTO0309/PINTO_model_zoo/tree/main/459_YOLOv9-Wholebody25
+Head Detection model 2: https://github.com/PINTO0309/PINTO_model_zoo/tree/main/460_RT-DETRv2-Wholebody25
