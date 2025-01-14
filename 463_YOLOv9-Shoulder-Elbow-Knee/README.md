@@ -40,10 +40,10 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   - Backlight illumination
 
 ## 1. Dataset
-  - MS-COCO https://cocodataset.org/#download
+  - COCO-Hand http://vision.cs.stonybrook.edu/~supreeth/COCO-Hand.zip
   - [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco)
-
-  ![image](https://github.com/user-attachments/assets/47e3dee5-0981-429e-afc8-53afc4cde158)
+  - I am adding my own enhancement data to COCO-Hand and re-annotating all images. In other words, only COCO images were cited and no annotation data were cited.
+  - I have no plans to publish my own dataset.
 
 ## 2. Test
   - Python 3.10
