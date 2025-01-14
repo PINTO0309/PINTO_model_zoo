@@ -121,11 +121,13 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
         Output YOLO format texts and images.
     ```
 
-- YOLOv9-Shoulder-Elbow-Knee - N - Swish/SiLU (PINTO original implementation, 2.4 MB)
-  ```
-  ```
 - YOLOv9-Shoulder-Elbow-Knee - T - Swish/SiLU
   ```
+     Class     Images  Instances          P          R      mAP50   mAP50-95
+       all       1777      34445      0.603      0.359      0.400      0.158
+  shoulder       1777      16405      0.631      0.410      0.442      0.164
+     elbow       1777      10012      0.590      0.313      0.357      0.141
+      knee       1777       8028      0.588      0.355      0.400      0.167
   ```
 - YOLOv9-Shoulder-Elbow-Knee - S - Swish/SiLU
   ```
