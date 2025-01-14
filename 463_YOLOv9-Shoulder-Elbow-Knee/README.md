@@ -4,7 +4,7 @@
 
 Lightweight Shoulder/Elbow/Knee detection models. This model is implemented using only YOLOv9, and does not use any of the known 2D skeleton detection architectures, so the computational cost is very low. Instead of having a left and right concept, it has succeeded in minimizing the computational cost of key points. This does not use either the “Backbone” or “Head” of the skeleton detection. Therefore, it is possible to detect joints using only the pre- and post-processing of normal object detection. This model is trained to minimize the detection of humans in mascot costumes, mannequins, and synthetic images. In addition, in this model, full-body tights and competitive ski wear are not considered mascot costumes.
 
-- This model is a verification model for the first step in implementing a skeleton detection algorithm using only an object detection architecture. Ultimately, I am aiming to add skeletal detection capabilities to [YOLOv9-Wholebody25](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/459_YOLOv9-Wholebody25).
+- This model is a verification model for the first step in implementing a skeleton detection algorithm using only an object detection architecture. Ultimately, I am aiming to add skeletal detection capabilities to [YOLOv9-Wholebody25](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/459_YOLOv9-Wholebody25). At present, it is only trained using experimental data sets, so detection of close-range objects is unstable. This is expected to be resolved in `Wholebody28`.
 
   |Step.1|Step.2|
   |:-:|:-:|
@@ -67,23 +67,18 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
   - Demonstration of models with built-in post-processing (Float32/Float16)
     ```
-    usage:
-      demo_yolov9_onnx_phone.py \
-      [-h] \
-      [-m MODEL] \
-      (-v VIDEO | -i IMAGES_DIR) \
-      [-ep {cpu,cuda,tensorrt}] \
-      [-it] \
-      [-dvw] \
-      [-dwk] \
-      [-ost] \
-      [-ast] \
-      [-dnm] \
-      [-dgm] \
-      [-dlr] \
-      [-dhm] \
+    usage: demo_yolov9_onnx_sholder_elbow_knee.py
+      [-h]
+      [-m MODEL]
+      (-v VIDEO | -i IMAGES_DIR)
+      [-ep {cpu,cuda,tensorrt}]
+      [-it {fp16,int8}]
+      [-dvw]
+      [-dwk]
+      [-ost OBJECT_SOCRE_THRESHOLD]
+      [-kdm {dot,box}]
       [-oyt]
-
+    
     options:
       -h, --help
         show this help message and exit
@@ -93,30 +88,22 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
         Video file path or camera index.
       -i IMAGES_DIR, --images_dir IMAGES_DIR
         jpg, png images folder path.
-      -ep {cpu,cuda,tensorrt}, \
-          --execution_provider {cpu,cuda,tensorrt}
+      -ep {cpu,cuda,tensorrt}, --execution_provider {cpu,cuda,tensorrt}
         Execution provider for ONNXRuntime.
       -it {fp16,int8}, --inference_type {fp16,int8}
         Inference type. Default: fp16
       -dvw, --disable_video_writer
-        Disable video writer. Eliminates the file I/O load associated with automatic
-        recording to MP4. Devices that use a MicroSD card or similar for main
-        storage can speed up overall processing.
+        Disable video writer. Eliminates the file I/O load associated with automatic recording to MP4.
+        Devices that use a MicroSD card or similar for main storage can speed up overall processing.
       -dwk, --disable_waitKey
         Disable cv2.waitKey(). When you want to process a batch of still images,
         disable key-input wait and process them continuously.
-      -dnm, --disable_generation_identification_mode
-        Disable generation identification mode.
-        (Press N on the keyboard to switch modes)
-      -dgm, --disable_gender_identification_mode
-        Disable gender identification mode.
-        (Press G on the keyboard to switch modes)
-      -dlr, --disable_left_and_right_hand_identification_mode
-        Disable left and right hand identification mode.
-        (Press H on the keyboard to switch modes)
-      -dhm, --disable_headpose_identification_mode
-        Disable HeadPose identification mode.
-        (Press P on the keyboard to switch modes)
+      -ost OBJECT_SOCRE_THRESHOLD, --object_socre_threshold OBJECT_SOCRE_THRESHOLD
+        The detection score threshold for object detection.
+        Default: 0.35
+      -kdm {dot,box}, --keypoint_drawing_mode {dot,box}
+        Key Point Drawing Mode.
+        Default: dot
       -oyt, --output_yolo_format_text
         Output YOLO format texts and images.
     ```
