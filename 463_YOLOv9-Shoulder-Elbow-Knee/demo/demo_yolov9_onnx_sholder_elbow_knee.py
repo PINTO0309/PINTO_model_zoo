@@ -260,7 +260,7 @@ class YOLOv9(AbstractModel):
         self,
         *,
         runtime: Optional[str] = 'onnx',
-        model_path: Optional[str] = 'yolov9_e_wholebody25_post_0100_1x3x480x640.onnx',
+        model_path: Optional[str] = 'yolov9_e_sek_post_0100_1x3x480x640.onnx',
         obj_class_score_th: Optional[float] = 0.35,
         attr_class_score_th: Optional[float] = 0.70,
         providers: Optional[List] = None,
@@ -297,10 +297,6 @@ class YOLOv9(AbstractModel):
     def __call__(
         self,
         image: np.ndarray,
-        disable_generation_identification_mode: bool,
-        disable_gender_identification_mode: bool,
-        disable_left_and_right_hand_identification_mode: bool,
-        disable_headpose_identification_mode: bool,
     ) -> List[Box]:
         """
 
@@ -308,14 +304,6 @@ class YOLOv9(AbstractModel):
         ----------
         image: np.ndarray
             Entire image
-
-        disable_generation_identification_mode: bool
-
-        disable_gender_identification_mode: bool
-
-        disable_left_and_right_hand_identification_mode: bool
-
-        disable_headpose_identification_mode: bool
 
         Returns
         -------
@@ -337,10 +325,6 @@ class YOLOv9(AbstractModel):
             self._postprocess(
                 image=temp_image,
                 boxes=boxes,
-                disable_generation_identification_mode=disable_generation_identification_mode,
-                disable_gender_identification_mode=disable_gender_identification_mode,
-                disable_left_and_right_hand_identification_mode=disable_left_and_right_hand_identification_mode,
-                disable_headpose_identification_mode=disable_headpose_identification_mode,
             )
         return result_boxes
 
@@ -379,10 +363,6 @@ class YOLOv9(AbstractModel):
         self,
         image: np.ndarray,
         boxes: np.ndarray,
-        disable_generation_identification_mode: bool,
-        disable_gender_identification_mode: bool,
-        disable_left_and_right_hand_identification_mode: bool,
-        disable_headpose_identification_mode: bool,
     ) -> List[Box]:
         """_postprocess
 
@@ -393,12 +373,6 @@ class YOLOv9(AbstractModel):
 
         boxes: np.ndarray
             float32[N, 7]. [instances, [batchno, classid, score, x1, y1, x2, y2]].
-
-        disable_left_and_right_hand_identification_mode: bool
-
-        disable_gender_identification_mode: bool
-
-        disable_headpose_identification_mode: bool
 
         Returns
         -------
@@ -442,66 +416,6 @@ class YOLOv9(AbstractModel):
                             head_pose=-1, # -1: Unknown, 0: Front, 1: Right-Front, 2: Right-Side, 3: Right-Back, 4: Back, 5: Left-Back, 6: Left-Side, 7: Left-Front
                         )
                     )
-                # # Attribute filter
-                # result_boxes = [
-                #     box for box in result_boxes \
-                #         if (box.classid in [1,2,3,4,8,9,10,11,12,13,14,15] and box.score >= self._attr_class_score_th) or box.classid not in [1,2,3,4,8,9,10,11,12,13,14,15]
-                # ]
-
-                # # Adult, Child merge
-                # # classid: 0 -> Body
-                # #   classid: 1 -> Adult
-                # #   classid: 2 -> Child
-                # # 1. Calculate Adult and Child IoUs for Body detection results
-                # # 2. Connect either the Adult or the Child with the highest score and the highest IoU with the Body.
-                # # 3. Exclude Adult and Child from detection results
-                # if not disable_generation_identification_mode:
-                #     body_boxes = [box for box in result_boxes if box.classid == 0]
-                #     generation_boxes = [box for box in result_boxes if box.classid in [1, 2]]
-                #     self._find_most_relevant_obj(base_objs=body_boxes, target_objs=generation_boxes)
-                # result_boxes = [box for box in result_boxes if box.classid not in [1, 2]]
-                # # Male, Female merge
-                # # classid: 0 -> Body
-                # #   classid: 3 -> Male
-                # #   classid: 4 -> Female
-                # # 1. Calculate Male and Female IoUs for Body detection results
-                # # 2. Connect either the Male or the Female with the highest score and the highest IoU with the Body.
-                # # 3. Exclude Male and Female from detection results
-                # if not disable_gender_identification_mode:
-                #     body_boxes = [box for box in result_boxes if box.classid == 0]
-                #     gender_boxes = [box for box in result_boxes if box.classid in [3, 4]]
-                #     self._find_most_relevant_obj(base_objs=body_boxes, target_objs=gender_boxes)
-                # result_boxes = [box for box in result_boxes if box.classid not in [3, 4]]
-                # # HeadPose merge
-                # # classid: 7 -> Head
-                # #   classid:  8 -> Front
-                # #   classid:  9 -> Right-Front
-                # #   classid: 10 -> Right-Side
-                # #   classid: 11 -> Right-Back
-                # #   classid: 12 -> Back
-                # #   classid: 13 -> Left-Back
-                # #   classid: 14 -> Left-Side
-                # #   classid: 15 -> Left-Front
-                # # 1. Calculate HeadPose IoUs for Head detection results
-                # # 2. Connect either the HeadPose with the highest score and the highest IoU with the Head.
-                # # 3. Exclude HeadPose from detection results
-                # if not disable_headpose_identification_mode:
-                #     head_boxes = [box for box in result_boxes if box.classid == 7]
-                #     headpose_boxes = [box for box in result_boxes if box.classid in [8,9,10,11,12,13,14,15]]
-                #     self._find_most_relevant_obj(base_objs=head_boxes, target_objs=headpose_boxes)
-                # result_boxes = [box for box in result_boxes if box.classid not in [8,9,10,11,12,13,14,15]]
-                # # Left and right hand merge
-                # # classid: 21 -> Hand
-                # #   classid: 22 -> Left-Hand
-                # #   classid: 23 -> Right-Hand
-                # # 1. Calculate Left-Hand and Right-Hand IoUs for Hand detection results
-                # # 2. Connect either the Left-Hand or the Right-Hand with the highest score and the highest IoU with the Hand.
-                # # 3. Exclude Left-Hand and Right-Hand from detection results
-                # if not disable_left_and_right_hand_identification_mode:
-                #     hand_boxes = [box for box in result_boxes if box.classid == 21]
-                #     left_right_hand_boxes = [box for box in result_boxes if box.classid in [22, 23]]
-                #     self._find_most_relevant_obj(base_objs=hand_boxes, target_objs=left_right_hand_boxes)
-                # result_boxes = [box for box in result_boxes if box.classid not in [22, 23]]
         return result_boxes
 
     def _find_most_relevant_obj(
@@ -679,7 +593,7 @@ def main():
         '-m',
         '--model',
         type=str,
-        default='yolov9_e_wholebody25_post_0100_1x3x480x640.onnx',
+        default='yolov9_e_sek_post_0100_1x3x480x640.onnx',
         help='ONNX/TFLite file path for YOLOv9.',
     )
     group_v_or_i = parser.add_mutually_exclusive_group(required=True)
@@ -730,32 +644,20 @@ def main():
             ' disable key-input wait and process them continuously.',
     )
     parser.add_argument(
-        '-dnm',
-        '--disable_generation_identification_mode',
-        action='store_true',
+        '-ost',
+        '--object_socre_threshold',
+        type=float,
+        default=0.35,
         help=\
-            'Disable generation identification mode. (Press N on the keyboard to switch modes)',
+            'The detection score threshold for object detection. Default: 0.35',
     )
     parser.add_argument(
-        '-dgm',
-        '--disable_gender_identification_mode',
-        action='store_true',
-        help=\
-            'Disable gender identification mode. (Press G on the keyboard to switch modes)',
-    )
-    parser.add_argument(
-        '-dlr',
-        '--disable_left_and_right_hand_identification_mode',
-        action='store_true',
-        help=\
-            'Disable left and right hand identification mode. (Press H on the keyboard to switch modes)',
-    )
-    parser.add_argument(
-        '-dhm',
-        '--disable_headpose_identification_mode',
-        action='store_true',
-        help=\
-            'Disable HeadPose identification mode. (Press P on the keyboard to switch modes)',
+        '-kdm',
+        '--keypoint_drawing_mode',
+        type=str,
+        choices=['dot', 'box'],
+        default='dot',
+        help='Key Point Drawing Mode. Default: dot',
     )
     parser.add_argument(
         '-oyt',
@@ -789,10 +691,8 @@ def main():
     video: str = args.video
     images_dir: str = args.images_dir
     disable_waitKey: bool = args.disable_waitKey
-    disable_generation_identification_mode: bool = args.disable_generation_identification_mode
-    disable_gender_identification_mode: bool = args.disable_gender_identification_mode
-    disable_left_and_right_hand_identification_mode: bool = args.disable_left_and_right_hand_identification_mode
-    disable_headpose_identification_mode: bool = args.disable_headpose_identification_mode
+    object_socre_threshold: float = args.object_socre_threshold
+    keypoint_drawing_mode: str = args.keypoint_drawing_mode
     output_yolo_format_text: bool = args.output_yolo_format_text
     execution_provider: str = args.execution_provider
     inference_type: str = args.inference_type
@@ -847,7 +747,7 @@ def main():
     model = YOLOv9(
         runtime=runtime,
         model_path=model_file,
-        obj_class_score_th=0.35,
+        obj_class_score_th=object_socre_threshold,
         attr_class_score_th=0.70,
         providers=providers,
     )
@@ -897,10 +797,6 @@ def main():
         start_time = time.perf_counter()
         boxes = model(
             image=debug_image,
-            disable_generation_identification_mode=disable_generation_identification_mode,
-            disable_gender_identification_mode=disable_gender_identification_mode,
-            disable_left_and_right_hand_identification_mode=disable_left_and_right_hand_identification_mode,
-            disable_headpose_identification_mode=disable_headpose_identification_mode,
         )
         elapsed_time = time.perf_counter() - start_time
 
@@ -913,122 +809,6 @@ def main():
             classid: int = box.classid
             color = (255,255,255)
 
-            # if classid == 0:
-            #     # Body
-            #     if not disable_gender_identification_mode:
-            #         # Body
-            #         if box.gender == 0:
-            #             # Male
-            #             color = (255,0,0)
-            #         elif box.gender == 1:
-            #             # Female
-            #             color = (139,116,225)
-            #         else:
-            #             # Unknown
-            #             color = (0,200,255)
-            #     else:
-            #         # Body
-            #         color = (0,200,255)
-            # elif classid == 5:
-            #     # Body-With-Wheelchair
-            #     color = (0,200,255)
-            # elif classid == 6:
-            #     # Body-With-Crutches
-            #     color = (83,36,179)
-            # elif classid == 7:
-            #     # Head
-            #     if not disable_headpose_identification_mode:
-            #         color = BOX_COLORS[box.head_pose][0] if box.head_pose != -1 else (216,67,21)
-            #     else:
-            #         color = (0,0,255)
-            # elif classid == 16:
-            #     # Face
-            #     color = (0,200,255)
-            # elif classid == 17:
-            #     # Eye
-            #     color = (255,0,0)
-            # elif classid == 18:
-            #     # Nose
-            #     color = (0,255,0)
-            # elif classid == 19:
-            #     # Mouth
-            #     color = (0,0,255)
-            # elif classid == 20:
-            #     # Ear
-            #     color = (203,192,255)
-            # elif classid == 21:
-            #     if not disable_left_and_right_hand_identification_mode:
-            #         # Hands
-            #         if box.handedness == 0:
-            #             # Left-Hand
-            #             color = (0,128,0)
-            #         elif box.handedness == 1:
-            #             # Right-Hand
-            #             color = (255,0,255)
-            #         else:
-            #             # Unknown
-            #             color = (0,255,0)
-            #     else:
-            #         # Hands
-            #         color = (0,255,0)
-            # elif classid == 24:
-            #     # Foot
-            #     color = (250,0,136)
-            # elif classid == 25:
-            #     # Shoulder
-            #     color = (255,0,0)
-            # elif classid == 26:
-            #     # Elbow
-            #     color = (0,255,0)
-            # elif classid == 27:
-            #     # Knee
-            #     color = (0,0,255)
-
-            # if (classid == 0 and not disable_gender_identification_mode) \
-            #     or (classid == 7 and not disable_headpose_identification_mode) \
-            #     or (classid == 21 and not disable_left_and_right_hand_identification_mode):
-
-            #     if classid == 0:
-            #         if box.gender == -1:
-            #             draw_dashed_rectangle(
-            #                 image=debug_image,
-            #                 top_left=(box.x1, box.y1),
-            #                 bottom_right=(box.x2, box.y2),
-            #                 color=color,
-            #                 thickness=2,
-            #                 dash_length=10
-            #             )
-            #         else:
-            #             cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 2)
-            #             cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 1)
-
-            #     elif classid == 7:
-            #         if box.head_pose == -1:
-            #             draw_dashed_rectangle(
-            #                 image=debug_image,
-            #                 top_left=(box.x1, box.y1),
-            #                 bottom_right=(box.x2, box.y2),
-            #                 color=color,
-            #                 thickness=2,
-            #                 dash_length=10
-            #             )
-            #         else:
-            #             cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 2)
-            #             cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 1)
-
-            #     elif classid == 21:
-            #         if box.handedness == -1:
-            #             draw_dashed_rectangle(
-            #                 image=debug_image,
-            #                 top_left=(box.x1, box.y1),
-            #                 bottom_right=(box.x2, box.y2),
-            #                 color=color,
-            #                 thickness=2,
-            #                 dash_length=10
-            #             )
-            #         else:
-            #             cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 2)
-            #             cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 1)
             if classid == 0:
                 color = (255,0,0)
             elif classid == 1:
@@ -1036,123 +816,15 @@ def main():
             elif classid == 2:
                 color = (0,0,255)
             if classid in [0, 1, 2]:
-                cv2.circle(debug_image, (box.cx, box.cy), 6, (255,255,255), -1)
-                cv2.circle(debug_image, (box.cx, box.cy), 4, color, -1)
-                # cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 2)
-                # cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 1)
+                if keypoint_drawing_mode == 'dot':
+                    cv2.circle(debug_image, (box.cx, box.cy), 6, (255,255,255), -1)
+                    cv2.circle(debug_image, (box.cx, box.cy), 4, color, -1)
+                elif keypoint_drawing_mode == 'box':
+                    cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 2)
+                    cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 1)
             else:
                 cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 2)
                 cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 1)
-
-            # # Attributes text
-            # generation_txt = ''
-            # if box.generation == -1:
-            #     generation_txt = ''
-            # elif box.generation == 0:
-            #     generation_txt = 'Adult'
-            # elif box.generation == 1:
-            #     generation_txt = 'Child'
-
-            # gender_txt = ''
-            # if box.gender == -1:
-            #     gender_txt = ''
-            # elif box.gender == 0:
-            #     gender_txt = 'M'
-            # elif box.gender == 1:
-            #     gender_txt = 'F'
-
-            # attr_txt = f'{generation_txt}({gender_txt})' if gender_txt != '' else f'{generation_txt}'
-
-            # headpose_txt = BOX_COLORS[box.head_pose][1] if box.head_pose != -1 else ''
-            # attr_txt = f'{attr_txt} {headpose_txt}' if headpose_txt != '' else f'{attr_txt}'
-
-            # cv2.putText(
-            #     debug_image,
-            #     f'{attr_txt}',
-            #     (
-            #         box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
-            #         box.y1-10 if box.y1-25 > 0 else 20
-            #     ),
-            #     cv2.FONT_HERSHEY_SIMPLEX,
-            #     0.7,
-            #     (255, 255, 255),
-            #     2,
-            #     cv2.LINE_AA,
-            # )
-            # cv2.putText(
-            #     debug_image,
-            #     f'{attr_txt}',
-            #     (
-            #         box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
-            #         box.y1-10 if box.y1-25 > 0 else 20
-            #     ),
-            #     cv2.FONT_HERSHEY_SIMPLEX,
-            #     0.7,
-            #     color,
-            #     1,
-            #     cv2.LINE_AA,
-            # )
-
-            # handedness_txt = ''
-            # if box.handedness == -1:
-            #     handedness_txt = ''
-            # elif box.handedness == 0:
-            #     handedness_txt = 'L'
-            # elif box.handedness == 1:
-            #     handedness_txt = 'R'
-            # cv2.putText(
-            #     debug_image,
-            #     f'{handedness_txt}',
-            #     (
-            #         box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
-            #         box.y1-10 if box.y1-25 > 0 else 20
-            #     ),
-            #     cv2.FONT_HERSHEY_SIMPLEX,
-            #     0.7,
-            #     (255, 255, 255),
-            #     2,
-            #     cv2.LINE_AA,
-            # )
-            # cv2.putText(
-            #     debug_image,
-            #     f'{handedness_txt}',
-            #     (
-            #         box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
-            #         box.y1-10 if box.y1-25 > 0 else 20
-            #     ),
-            #     cv2.FONT_HERSHEY_SIMPLEX,
-            #     0.7,
-            #     color,
-            #     1,
-            #     cv2.LINE_AA,
-            # )
-
-            # cv2.putText(
-            #     debug_image,
-            #     f'{box.score:.2f}',
-            #     (
-            #         box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
-            #         box.y1-10 if box.y1-25 > 0 else 20
-            #     ),
-            #     cv2.FONT_HERSHEY_SIMPLEX,
-            #     0.7,
-            #     (255, 255, 255),
-            #     2,
-            #     cv2.LINE_AA,
-            # )
-            # cv2.putText(
-            #     debug_image,
-            #     f'{box.score:.2f}',
-            #     (
-            #         box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
-            #         box.y1-10 if box.y1-25 > 0 else 20
-            #     ),
-            #     cv2.FONT_HERSHEY_SIMPLEX,
-            #     0.7,
-            #     color,
-            #     1,
-            #     cv2.LINE_AA,
-            # )
 
         if file_paths is not None:
             basename = os.path.basename(file_paths[file_paths_count])
@@ -1195,14 +867,11 @@ def main():
         key = cv2.waitKey(1) if file_paths is None or disable_waitKey else cv2.waitKey(0)
         if key == 27: # ESC
             break
-        elif key == 110: # N, mode switch
-            disable_generation_identification_mode = not disable_generation_identification_mode
-        elif key == 103: # G, mode switch
-            disable_gender_identification_mode = not disable_gender_identification_mode
-        elif key == 112: # P, mode switch
-            disable_headpose_identification_mode = not disable_headpose_identification_mode
-        elif key == 104: # H, mode switch
-            disable_left_and_right_hand_identification_mode = not disable_left_and_right_hand_identification_mode
+        elif key == 107: # K, mode switch
+            if keypoint_drawing_mode == 'dot':
+                keypoint_drawing_mode = 'box'
+            elif keypoint_drawing_mode == 'box':
+                keypoint_drawing_mode = 'dot'
 
     if video_writer is not None:
         video_writer.release()
