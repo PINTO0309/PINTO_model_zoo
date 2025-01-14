@@ -655,7 +655,7 @@ def main():
         '-kdm',
         '--keypoint_drawing_mode',
         type=str,
-        choices=['dot', 'box'],
+        choices=['dot', 'box', 'both'],
         default='dot',
         help='Key Point Drawing Mode. Default: dot',
     )
@@ -816,10 +816,10 @@ def main():
             elif classid == 2:
                 color = (0,0,255)
             if classid in [0, 1, 2]:
-                if keypoint_drawing_mode == 'dot':
+                if keypoint_drawing_mode in ['dot', 'both']:
                     cv2.circle(debug_image, (box.cx, box.cy), 6, (255,255,255), -1)
                     cv2.circle(debug_image, (box.cx, box.cy), 4, color, -1)
-                elif keypoint_drawing_mode == 'box':
+                if keypoint_drawing_mode in ['box', 'both']:
                     cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), 2)
                     cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, 1)
             else:
@@ -871,6 +871,8 @@ def main():
             if keypoint_drawing_mode == 'dot':
                 keypoint_drawing_mode = 'box'
             elif keypoint_drawing_mode == 'box':
+                keypoint_drawing_mode = 'both'
+            elif keypoint_drawing_mode == 'both':
                 keypoint_drawing_mode = 'dot'
 
     if video_writer is not None:
