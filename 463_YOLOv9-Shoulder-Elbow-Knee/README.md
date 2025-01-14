@@ -26,6 +26,12 @@ Lightweight Shoulder/Elbow/Knee detection models. This model is implemented usin
   |![image](https://github.com/user-attachments/assets/213daafa-849f-43c3-bf11-7fcb3340e366)|![image](https://github.com/user-attachments/assets/2cf8fb77-a5f2-4bae-8820-e0a6bc531f62)|
   |![image](https://github.com/user-attachments/assets/ebd82e9d-4f0c-46a9-81f8-3b6c7575a925)|![image](https://github.com/user-attachments/assets/291ed615-c441-4526-89b7-09e41ac6cab7)|
 
+- Mode
+
+  |`dot`|`box`|`both`|
+  |:-:|:-:|:-:|
+  |![000000088214](https://github.com/user-attachments/assets/4380d722-e1b4-4ecf-86bb-637d869e73f3)|![000000088214](https://github.com/user-attachments/assets/9974aa0a-8c33-43a4-9313-8bc8e03bad8d)|![000000088214](https://github.com/user-attachments/assets/d1b2a840-63fc-4e59-912f-b11eed60c385)|
+
 The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.
 
 - Global distortions
