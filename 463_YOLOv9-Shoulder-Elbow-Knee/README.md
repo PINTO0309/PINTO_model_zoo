@@ -166,24 +166,24 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
     ### Example of changing the maximum number of detections per class to 100.
     sam4onnx \
     --op_name main01_nonmaxsuppression13 \
-    --input_onnx_file_path yolov9_e_phone_post_0100_1x3x480x640.onnx \
-    --output_onnx_file_path yolov9_e_phone_post_0100_1x3x480x640.onnx \
+    --input_onnx_file_path yolov9_e_sek_post_0100_1x3x480x640.onnx \
+    --output_onnx_file_path yolov9_e_sek_post_0100_1x3x480x640.onnx \
     --input_constants main01_max_output_boxes_per_class int64 [100]
 
     ### iou_threshold
     ### Example of changing the allowable area of occlusion to 20%.
     sam4onnx \
     --op_name main01_nonmaxsuppression13 \
-    --input_onnx_file_path yolov9_e_phone_post_0100_1x3x480x640.onnx \
-    --output_onnx_file_path yolov9_e_phone_post_0100_1x3x480x640.onnx \
+    --input_onnx_file_path yolov9_e_sek_post_0100_1x3x480x640.onnx \
+    --output_onnx_file_path yolov9_e_sek_post_0100_1x3x480x640.onnx \
     --input_constants main01_iou_threshold float32 [0.20]
 
     ### score_threshold
     ### Example of changing the bounding box score threshold to 15%.
     sam4onnx \
     --op_name main01_nonmaxsuppression13 \
-    --input_onnx_file_path yolov9_e_phone_post_0100_1x3x480x640.onnx \
-    --output_onnx_file_path yolov9_e_phone_post_0100_1x3x480x640.onnx \
+    --input_onnx_file_path yolov9_e_sek_post_0100_1x3x480x640.onnx \
+    --output_onnx_file_path yolov9_e_sek_post_0100_1x3x480x640.onnx \
     --input_constants main01_score_threshold float32 [0.15]
     ```
   - Post-processing structure
