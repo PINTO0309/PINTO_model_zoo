@@ -48,6 +48,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   - I am adding my own enhancement data to COCO-Hand and re-annotating all images. In other words, only COCO images were cited and no annotation data were cited.
   - I have no plans to publish my own dataset.
 
+    ![image](https://github.com/user-attachments/assets/af9325f4-25fa-4513-8d2a-6d5e2da25ee3)
+
 ## 2. Test
   - Python 3.10
   - onnx 1.16.1+
