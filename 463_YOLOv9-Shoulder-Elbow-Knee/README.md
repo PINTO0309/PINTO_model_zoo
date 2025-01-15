@@ -224,7 +224,19 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
 ## 4. Cited
   I am very grateful for their excellent work.
-  - [MS-COCO](https://cocodataset.org/#download)
+  - COCO-Hand
+
+    https://vision.cs.stonybrook.edu/~supreeth/
+
+    ```bibtex
+    @article{Hand-CNN,
+      title={Contextual Attention for Hand Detection in the Wild},
+      author={Supreeth Narasimhaswamy and Zhengwei Wei and Yang Wang and Justin Zhang and Minh Hoai},
+      booktitle={International Conference on Computer Vision (ICCV)},
+      year={2019},
+      url={https://arxiv.org/pdf/1904.04882.pdf}
+    }
+    ```
 
   - [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco)
 
