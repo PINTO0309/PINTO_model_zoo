@@ -87,7 +87,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
       [-dvw]
       [-dwk]
       [-ost OBJECT_SOCRE_THRESHOLD]
-      [-kdm {dot,box}]
+      [-kdm {dot,box,both}]
       [-oyt]
     
     options:
