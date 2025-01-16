@@ -120,13 +120,22 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
     ```
 
 - YOLOv9-Shoulder-Elbow-Knee - T - Swish/SiLU
-  ```
-     Class     Images  Instances          P          R      mAP50   mAP50-95
-       all       1777      34445      0.603      0.359      0.400      0.158
-  shoulder       1777      16405      0.631      0.410      0.442      0.164
-     elbow       1777      10012      0.590      0.313      0.357      0.141
-      knee       1777       8028      0.588      0.355      0.400      0.167
-  ```
+  - First Step
+    ```
+       Class     Images  Instances          P          R      mAP50   mAP50-95
+         all       1777      34445      0.603      0.359      0.400      0.158
+    shoulder       1777      16405      0.631      0.410      0.442      0.164
+       elbow       1777      10012      0.590      0.313      0.357      0.141
+        knee       1777       8028      0.588      0.355      0.400      0.167
+    ```
+  - Fine-tuning
+    ```
+       Class     Images  Instances          P          R      mAP50   mAP50-95
+         all       1777      33796      0.641      0.376      0.426      0.176
+    shoulder       1777      16307      0.666      0.421      0.463      0.182
+       elbow       1777       9753      0.629      0.328      0.379      0.155
+        knee       1777       7736      0.628      0.379      0.435      0.190
+    ```
 - YOLOv9-Shoulder-Elbow-Knee - S - Swish/SiLU
   ```
      Class     Images  Instances          P          R      mAP50   mAP50-95
