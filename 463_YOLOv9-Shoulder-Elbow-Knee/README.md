@@ -128,7 +128,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
        elbow       1777      10012      0.590      0.313      0.357      0.141
         knee       1777       8028      0.588      0.355      0.400      0.167
     ```
-  - Fine-tuning
+  -  Deliberate Leak
     ```
        Class     Images  Instances          P          R      mAP50   mAP50-95
          all       1777      33796      0.641      0.376      0.426      0.176
@@ -145,7 +145,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
        elbow       1777      10012      0.671      0.387      0.445      0.191
         knee       1777       8028      0.680      0.433      0.495      0.226
     ```
-  - Fine-tuning
+  - Deliberate Leak
     ```
        Class     Images  Instances          P          R      mAP50   mAP50-95
          all       1777      33796      0.742      0.458      0.532      0.251
@@ -162,7 +162,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
        elbow       1777      10012      0.752      0.451      0.526      0.251
         knee       1777       8028      0.756      0.492      0.568      0.283
     ```
-  - Fine-tuning
+  - Deliberate Leak
     ```
        Class     Images  Instances          P          R      mAP50   mAP50-95
          all       1777      33796      0.821      0.536      0.630      0.344
