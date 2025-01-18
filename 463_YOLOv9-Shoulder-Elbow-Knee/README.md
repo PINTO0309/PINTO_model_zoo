@@ -10,7 +10,7 @@ Lightweight Shoulder/Elbow/Knee detection models. This model is implemented usin
   |Step.1|Step.2|
   |:-:|:-:|
   |![image](https://github.com/user-attachments/assets/20f6bde0-10f1-474e-86f7-94ea7f89db4f)|![image](https://github.com/user-attachments/assets/7b07fbb8-2ca0-4107-82a6-133ae759f130)|
-  
+
   |Step.3|Step.4|
   |:-:|:-:|
   |![image](https://github.com/user-attachments/assets/5fca644c-a23a-41b3-b873-c238df51e476)|![image](https://github.com/user-attachments/assets/218b477b-5782-4f7a-ac78-0b4b826d3fb8)|
@@ -89,7 +89,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
       [-ost OBJECT_SOCRE_THRESHOLD]
       [-kdm {dot,box,both}]
       [-oyt]
-    
+
     options:
       -h, --help
         show this help message and exit
