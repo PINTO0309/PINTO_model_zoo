@@ -6,6 +6,10 @@
 
 Lightweight Shoulder/Elbow/Knee detection models. This model is implemented using only YOLOv9, and does not use any of the known 2D skeleton detection architectures, so the computational cost is very low. Instead of having a left and right concept, it has succeeded in minimizing the computational cost of key points. This does not use either the “Backbone” or “Head” of the skeleton detection. Therefore, it is possible to detect joints using only the pre- and post-processing of normal object detection. This model is trained to minimize the detection of humans in mascot costumes, mannequins, and synthetic images. In addition, in this model, full-body tights and competitive ski wear are not considered mascot costumes.
 
+- Realtime inference demo
+
+  https://github.com/user-attachments/assets/c4553ef2-985c-4279-a095-a5941dc3dfe3
+
 - This model is a verification model for the first step in implementing a skeleton detection algorithm using only an object detection architecture. Ultimately, I am aiming to add skeletal detection capabilities to [YOLOv9-Wholebody25](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/459_YOLOv9-Wholebody25).
   |Step.1|Step.2|
   |:-:|:-:|
