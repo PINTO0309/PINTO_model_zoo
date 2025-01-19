@@ -4,7 +4,7 @@ Gaze-LLE provides a streamlined gaze architecture that learns only a lightweight
 
 ---
 
-The reason the processing speed of the demo video appears to be around 30ms is because the heatmap rendering process using Pillow is slow. If you stop the heatmap rendering process by pressing the `A` key on the keyboard, the processing speed will increase to around 17ms. Of the 17ms, 10ms is the inference time for YOLOv9-E.
+The reason the processing speed of the demo video appears to be around 30ms is because the heatmap rendering process using Pillow is slow. If you stop the heatmap rendering process by pressing the `A` key on the keyboard, the processing speed will increase to around 17ms. Of the 17ms, 10ms is the inference time for YOLOv9-E. If it is important to increase processing speed, it would be better to use [YOLOv9-N or YOLOv9-T](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/459_YOLOv9-Wholebody25).
 
 - Single person test - `gazelle_dinov2_vitb14_inout_1x3x448x448_1xNx4.onnx` + ONNX-TensorRT
 
