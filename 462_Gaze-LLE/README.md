@@ -2,6 +2,8 @@
 
 Gaze-LLE provides a streamlined gaze architecture that learns only a lightweight gaze decoder on top of a frozen, pretrained visual encoder (DINOv2). Gaze-LLE learns 1-2 orders of magnitude fewer parameters than prior works and doesn't require any extra input modalities like depth and pose!
 
+The reason the processing speed of the demo video appears to be around 30ms is because the heatmap rendering process using Pillow is slow. If you stop the heatmap rendering process by pressing the `A` key on the keyboard, the processing speed will increase to around 17ms.
+
 - Single person test - `gazelle_dinov2_vitb14_inout_1x3x448x448_1xNx4.onnx` + ONNX-TensorRT
 
   https://github.com/user-attachments/assets/b8d45d91-55b4-41fe-b177-ab3497026967
