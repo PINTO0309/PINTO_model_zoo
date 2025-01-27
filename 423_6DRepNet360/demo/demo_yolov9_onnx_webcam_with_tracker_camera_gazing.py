@@ -74,19 +74,30 @@ class TrackedBox:
     box: Box
     id: int
     lost: int = 0  # 追跡を見失ったフレーム数
+
     looking_duration: int = 90 # 30 frame * 3 sec
     looking_duration_long: int = looking_duration * 2 # 30 frame * 6 sec
     looking_duration_short: int = looking_duration # 30 frame * 3 sec
     looking_history_long = deque(maxlen=looking_duration_long)
     looking_history_short = deque(maxlen=looking_duration_short)
 
+    headtilt_duration: int = 30 # 30 frame * 1 sec
+    headtilt_duration_long: int = headtilt_duration * 1 # 30 frame * 1 sec
+    headtilt_duration_short: int = headtilt_duration // 2 # 30 frame * 0.5 sec
+    headtilt_history_long = deque(maxlen=headtilt_duration_long)
+    headtilt_history_short = deque(maxlen=headtilt_duration_short)
+
 class HeadTracker:
-    def __init__(self, max_distance=50, max_lost=30, looking_duration=90):
+    def __init__(self, max_distance=50, max_lost=30, looking_duration=90, headtilt_duration=30):
         self.tracked_heads: dict[int, TrackedBox] = {}  # 辞書に変更
         self.next_id = 0
         self.max_distance = max_distance  # 中心点同士の距離の閾値
         self.max_lost = max_lost  # オブジェクトを見失っても保持するフレーム数
         self.looking_duration = looking_duration  # 注視判定時間
+        self.headtilt_duration = headtilt_duration  # 首かしげ判定時間
+        self.view_max_frames = 30 # 判定結果の表示時間 30frame
+        self.looking_view_frames = 0 # 注視判定結果の表示タイマー
+        self.headtilt_view_frames = 0 # 首かしげ判定結果の表示タイマー
 
     def update_trackers(self, head_boxes: List[Box]):
         # 現在追跡中のオブジェクトの中心点を取得
@@ -155,7 +166,12 @@ class HeadTracker:
             self.tracked_heads[tracked_id].looking_history_long.append(state)
             self.tracked_heads[tracked_id].looking_history_short.append(state)
 
-    def get_state_start(self, tracked_id: int) -> bool:
+    def stack_headtilt_history(self, tracked_id: int, state: bool):
+        if tracked_id in self.tracked_heads:
+            self.tracked_heads[tracked_id].headtilt_history_long.append(state)
+            self.tracked_heads[tracked_id].headtilt_history_short.append(state)
+
+    def get_looking_state_start(self, tracked_id: int) -> bool:
         if tracked_id in self.tracked_heads:
             state_interval, state_start, state_end = state_verdict(
                 long_tracking_history=self.tracked_heads[tracked_id].looking_history_long,
@@ -163,6 +179,37 @@ class HeadTracker:
             )
             return state_start
         return False
+
+    def get_headtilt_state_start(self, tracked_id: int) -> bool:
+        if tracked_id in self.tracked_heads:
+            state_interval, state_start, state_end = state_verdict(
+                long_tracking_history=self.tracked_heads[tracked_id].headtilt_history_long,
+                short_tracking_history=self.tracked_heads[tracked_id].headtilt_history_short,
+            )
+            return state_start
+        return False
+
+    def get_looking_view_text(self, is_looking_start: bool) -> str:
+        if is_looking_start:
+            self.looking_view_frames = self.view_max_frames
+            return 'Looking'
+        else:
+            if self.looking_view_frames > 0:
+                self.looking_view_frames = self.looking_view_frames - 1
+                return 'Looking'
+            else:
+                return ''
+
+    def get_headtilt_view_text(self, is_headtilt_start: bool) -> str:
+        if is_headtilt_start:
+            self.headtilt_view_frames = self.view_max_frames
+            return 'Tilt'
+        else:
+            if self.headtilt_view_frames > 0:
+                self.headtilt_view_frames = self.headtilt_view_frames - 1
+                return 'Tilt'
+            else:
+                return ''
 
 class AbstractModel(ABC):
     """AbstractModel
@@ -796,6 +843,85 @@ def is_looking_at_camera_with_angles(
     else:
         return False
 
+def euler_to_rotation_matrix(yaw, pitch, roll, degrees=True):
+    """
+    オイラー角 (yaw, pitch, roll) から回転行列を生成する。
+    - yaw: Y軸まわり回転
+    - pitch: X軸まわり回転
+    - roll: Z軸まわり回転
+    - degrees=True なら度数法入力をラジアンに変換
+    """
+    if degrees:
+        yaw = np.deg2rad(yaw)
+        pitch = np.deg2rad(pitch)
+        roll = np.deg2rad(roll)
+
+    cy, sy = np.cos(yaw),   np.sin(yaw)
+    cp, sp = np.cos(pitch), np.sin(pitch)
+    cr, sr = np.cos(roll),  np.sin(roll)
+
+    # Yaw 回転行列 (Y軸まわり)
+    R_yaw = np.array([
+        [ cy,  0, sy],
+        [  0,  1,  0],
+        [-sy,  0, cy]
+    ], dtype=float)
+
+    # Pitch 回転行列 (X軸まわり)
+    R_pitch = np.array([
+        [1,   0,    0 ],
+        [0,  cp,  -sp ],
+        [0,  sp,   cp ]
+    ], dtype=float)
+
+    # Roll 回転行列 (Z軸まわり)
+    R_roll = np.array([
+        [ cr, -sr,  0 ],
+        [ sr,  cr,  0 ],
+        [  0,   0,  1 ]
+    ], dtype=float)
+
+    # 最終的な回転行列 (回転順序に注意)
+    # ここでは R = R_roll * R_pitch * R_yaw の順に掛け合わせています
+    R = R_roll @ R_pitch @ R_yaw
+    return R
+
+def compute_head_tilt(yaw, pitch, roll, degrees=True) -> float:
+    """
+    オイラー角 (yaw, pitch, roll) から「頭部上方向ベクトル」と
+    カメラ座標系の上方向ベクトル (0,1,0) がなす角度（度数）を返す。
+    """
+    R = euler_to_rotation_matrix(yaw, pitch, roll, degrees=degrees)
+
+    # 頭部ローカル座標系での「上向きベクトル」
+    u_local = np.array([0, 1, 0], dtype=float)
+
+    # カメラ座標系に変換 (u_camera = R * u_local)
+    u_camera = R @ u_local
+
+    # カメラ座標系での「世界の上」ベクトル (0,1,0)
+    v_up = np.array([0, 1, 0], dtype=float)
+
+    # 2つのベクトルのなす角度 ( arccos((u・v)/(|u||v|)) )
+    dot_val = np.dot(u_camera, v_up)
+    norm_u = np.linalg.norm(u_camera)
+    norm_v = np.linalg.norm(v_up)
+
+    # arccos に与える値が浮動小数点誤差で [-1,1] を超えないようクリップする
+    cos_val = dot_val / (norm_u * norm_v)
+    cos_val = np.clip(cos_val, -1.0, 1.0)
+
+    angle_rad = np.arccos(cos_val)
+    angle_deg = np.rad2deg(angle_rad)
+    return angle_deg
+
+def is_headtilt_at_camera_with_angles(yaw, pitch, roll, tilt_threshold=15.0) -> bool:
+    angle_deg = compute_head_tilt(yaw=yaw, pitch=pitch, roll=roll)
+    if angle_deg > tilt_threshold:
+        return True
+    else:
+        return False
+
 class LogWriter:
     def __init__(self, base_filename, max_lines=18000, header_row=None):
         self.base_filename = base_filename
@@ -1121,15 +1247,16 @@ def main():
                     1,
                 )
 
-                looking_camera_txt = ''
-                is_looking = 1 if is_looking_at_camera_with_angles(tracked_head.box, yaw_deg, pitch_deg, image_width, image_height) else 0
-                head_tracker.stack_looking_history(tracked_head.id, True if is_looking == 1 else False)
-                is_looking_start = head_tracker.get_state_start(tracked_head.id)
+                is_looking = is_looking_at_camera_with_angles(tracked_head.box, yaw_deg, pitch_deg, image_width, image_height)
+                head_tracker.stack_looking_history(tracked_head.id, is_looking)
+                is_looking_start = head_tracker.get_looking_state_start(tracked_head.id)
 
-                if is_looking_start:
-                    looking_camera_txt = 'Looking'
-                else:
-                    looking_camera_txt = ''
+                is_headtilt = is_headtilt_at_camera_with_angles(yaw=yaw_deg, pitch=pitch_deg, roll=roll_deg)
+                head_tracker.stack_headtilt_history(tracked_head.id, is_headtilt)
+                is_headtilt_start = head_tracker.get_headtilt_state_start(tracked_head.id)
+
+                looking_camera_txt = head_tracker.get_looking_view_text(is_looking_start)
+                head_tilt_txt = head_tracker.get_headtilt_view_text(is_headtilt_start)
 
                 if enable_log:
                     log_row = []
@@ -1138,13 +1265,14 @@ def main():
                     log_row.append(timestamp)
                     log_row.append(f'{tracked_head.id}')
                     log_row.append(f'{is_looking_start}')
+                    log_row.append(f'{is_headtilt_start}')
                     while len(log_row) < (max_logging_instances * 2 + 1):
                         log_row.append('')
                     log_writer.write_row(log_row)
 
                 cv2.putText(
                     debug_image,
-                    f'{tracked_head.id:06} {looking_camera_txt}',
+                    f'{tracked_head.id:06} {looking_camera_txt} {head_tilt_txt}',
                     (
                         x1,
                         y1-10 if y1-10 > 0 else 10
@@ -1157,7 +1285,7 @@ def main():
                 )
                 cv2.putText(
                     debug_image,
-                    f'{tracked_head.id:06} {looking_camera_txt}',
+                    f'{tracked_head.id:06} {looking_camera_txt} {head_tilt_txt}',
                     (
                         x1,
                         y1-10 if y1-10 > 0 else 10
