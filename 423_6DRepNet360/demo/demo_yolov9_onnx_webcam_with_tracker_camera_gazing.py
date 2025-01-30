@@ -21,6 +21,7 @@ from dataclasses import dataclass
 from bbalg import state_verdict
 import importlib.util
 from abc import ABC, abstractmethod
+from datetime import datetime
 
 class Color(Enum):
     BLACK          = '\033[30m'
@@ -101,9 +102,9 @@ class HeadTracker:
 
     def update_trackers(self, head_boxes: List[Box]):
         # 現在追跡中のオブジェクトの中心点を取得
-        tracked_centroids = [(t.id, (t.box.cx, t.box.cy)) for t in self.tracked_heads.values()]
+        tracked_centroids: List[Tuple[int, Tuple[int, int]]] = [(t.id, (t.box.cx, t.box.cy)) for t in self.tracked_heads.values()]
         # 新しく検出されたバウンディングボックスの中心点を取得
-        new_centroids = [(box.cx, box.cy) for box in head_boxes]
+        new_centroids: List[Tuple[int, int]] = [(box.cx, box.cy) for box in head_boxes]
 
         # マッチング処理
         matched, unmatched_tracked, unmatched_new = self.match_objects(tracked_centroids, new_centroids)
@@ -132,7 +133,7 @@ class HeadTracker:
 
         return list(self.tracked_heads.values())
 
-    def match_objects(self, tracked_centroids, new_centroids):
+    def match_objects(self, tracked_centroids:  List[Tuple[int, Tuple[int, int]]], new_centroids: List[Tuple[int, int]]):
         matched = []
         unmatched_tracked = list(range(len(tracked_centroids)))
         unmatched_new = list(range(len(new_centroids)))
@@ -931,7 +932,7 @@ class LogWriter:
         self.log_file = None
         self.csv_writer = None
         self.header_row = header_row  # ヘッダ行
-        self.start_time = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
+        self.start_time = datetime.now().strftime("%Y%m%d%H%M%S")
 
         # 初回のログファイルを開く
         self._open_new_file()
@@ -1154,11 +1155,14 @@ def main():
     head_tracker = HeadTracker(max_distance=50, max_lost=30, looking_duration=int(looking_duration * cap_fps))
 
     log_writer: LogWriter = None
+    NUMBER_OF_COLUMNS_PER_LOG_PER_INSTANCE: int = 3
     if enable_log:
-        header_row = ['timestamp']
+        header_row = ['timestamp', 'frameno']
         for idx in range(max_logging_instances):
-            header_row += [f'head_{idx+1}', f'looking_{idx+1}']
+            header_row += [f'trackid_{idx+1}',  f'looking_{idx+1}', f'headtilt_{idx+1}',]
         log_writer = LogWriter(base_filename="log.csv", max_lines=max_logging_rows, header_row=header_row)
+
+    frame_no: int = 0 # ログ出力用動画フレーム番号
 
     while cap.isOpened():
         res, image = cap.read()
@@ -1178,6 +1182,11 @@ def main():
 
         boxes = [box for box in boxes if box.classid == 7] # Head
 
+        # ログ出力用タイムスタンプ取得
+        now = datetime.now()
+        timestamp = now.strftime("%Y%m%d%H%M%S") + f'{now.microsecond // 1000:03d}'
+
+        log_row = [timestamp, frame_no]
         if len(boxes) > 0:
             image_height = debug_image.shape[0]
             image_width = debug_image.shape[1]
@@ -1251,24 +1260,12 @@ def main():
                 head_tracker.stack_looking_history(tracked_head.id, is_looking)
                 is_looking_start = head_tracker.get_looking_state_start(tracked_head.id)
 
-                is_headtilt = is_headtilt_at_camera_with_angles(yaw=yaw_deg, pitch=pitch_deg, roll=roll_deg)
+                is_headtilt = is_headtilt_at_camera_with_angles(yaw=yaw_deg, pitch=pitch_deg, roll=roll_deg, tilt_threshold=12.0)
                 head_tracker.stack_headtilt_history(tracked_head.id, is_headtilt)
                 is_headtilt_start = head_tracker.get_headtilt_state_start(tracked_head.id)
 
                 looking_camera_txt = head_tracker.get_looking_view_text(is_looking_start)
                 head_tilt_txt = head_tracker.get_headtilt_view_text(is_headtilt_start)
-
-                if enable_log:
-                    log_row = []
-                    now = datetime.datetime.now()
-                    timestamp = now.strftime("%Y%m%d%H%M%S") + f'{now.microsecond // 1000:03d}'
-                    log_row.append(timestamp)
-                    log_row.append(f'{tracked_head.id}')
-                    log_row.append(f'{is_looking_start}')
-                    log_row.append(f'{is_headtilt_start}')
-                    while len(log_row) < (max_logging_instances * 2 + 1):
-                        log_row.append('')
-                    log_writer.write_row(log_row)
 
                 cv2.putText(
                     debug_image,
@@ -1298,15 +1295,30 @@ def main():
                 )
 
                 draw_axis(debug_image, yaw_deg, pitch_deg, roll_deg, tdx=float(cx), tdy=float(cy), size=abs(x2-x1)//2)
-        else:
+
+                # ログ出力
+                if enable_log:
+                    log_row.append(f'{tracked_head.id}')
+                    log_row.append(f'{is_looking_start}')
+                    log_row.append(f'{is_headtilt_start}')
+
+            # timestamp, frame_no, tracked_head.id, is_looking_start, is_headtilt_start, ... (tracked_head.id〜is_headtilt_start x20)
             if enable_log:
-                log_row = []
-                now = datetime.datetime.now()
-                timestamp = now.strftime("%Y%m%d%H%M%S") + f'{now.microsecond // 1000:03d}'
-                log_row.append(timestamp)
-                while len(log_row) < (max_logging_instances * 2 + 1):
+                while len(log_row) < (max_logging_instances * NUMBER_OF_COLUMNS_PER_LOG_PER_INSTANCE + 2):
                     log_row.append('')
                 log_writer.write_row(log_row)
+
+        else:
+            # ログ出力
+            if enable_log:
+                log_row = []
+                log_row.append(timestamp)
+                # timestamp, frame_no, tracked_head.id, is_looking_start, is_headtilt_start, ... (tracked_head.id〜is_headtilt_start x20)
+                while len(log_row) < (max_logging_instances * NUMBER_OF_COLUMNS_PER_LOG_PER_INSTANCE + 2):
+                    log_row.append('')
+                log_writer.write_row(log_row)
+
+        frame_no += 1 # ログ出力用フレーム番号
 
         elapsed_time = time.time() - start_time
         cv2.putText(debug_image, f'{elapsed_time*1000:.2f} ms', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2, cv2.LINE_AA)
