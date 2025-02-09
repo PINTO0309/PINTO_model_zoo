@@ -506,9 +506,6 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
 ## 7. Next Challenge
 - Wrist, Hip, Ankle
-
-  https://github.com/user-attachments/assets/a15d4bc3-b593-4261-874f-7214dc8fd3c7
-
 - Steps and final goal
 
   ![image](https://github.com/user-attachments/assets/d5974b9e-018b-4739-99ae-1e5f879c0c3f)
