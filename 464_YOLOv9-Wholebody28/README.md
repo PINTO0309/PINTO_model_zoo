@@ -172,49 +172,67 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
         Bounding box line width. Default: 2
     ```
 
-- YOLOv9-Wholebody28 - N - Swish/SiLU (PINTO original implementation, 2.4 MB)
+<details>
+<summary>YOLOv9-Wholebody28 - N - Swish/SiLU (PINTO original implementation, 2.4 MB)</summary>
+
 ```
 ```
-- YOLOv9-Wholebody28 - N - ReLU (PINTO original implementation, 2.4 MB)
+
+</details>
+<details>
+<summary>YOLOv9-Wholebody28 - N - ReLU (PINTO original implementation, 2.4 MB)</summary>
+
 ```
 ```
-- YOLOv9-Wholebody28 - T - Swish/SiLU
+
+</details>
+<details>
+<summary>YOLOv9-Wholebody28 - T - Swish/SiLU</summary>
+
   ```
-                   Class Images Instances     P     R mAP50 mAP50-95
-                     all   2438    140611 0.657 0.495 0.539    0.384
-                    body   2438     12600 0.852 0.666 0.759    0.597
-                   adult   2438      9595 0.802 0.660 0.725    0.600
-                   child   2438      1097 0.524 0.528 0.543    0.475
-                    male   2438      7183 0.730 0.674 0.721    0.601
-                  female   2438      2816 0.562 0.575 0.592    0.493
-    body_with_wheelchair   2438       196 0.816 0.857 0.887    0.745
-      body_with_crutches   2438       110 0.812 0.891 0.924    0.853
-                    head   2438     10664 0.858 0.812 0.864    0.622
-                   front   2438      1987 0.595 0.420 0.463    0.376
-             right-front   2438      2051 0.583 0.377 0.420    0.338
-              right-side   2438      1244 0.609 0.462 0.504    0.403
-              right-back   2438       869 0.527 0.440 0.451    0.353
-                    back   2438       519 0.368 0.287 0.237    0.184
-               left-back   2438       688 0.453 0.356 0.351    0.277
-               left-side   2438      1340 0.621 0.449 0.483    0.394
-              left-front   2438      1966 0.576 0.389 0.428    0.350
-                    face   2438      5980 0.844 0.784 0.831    0.573
-                     eye   2438      5535 0.666 0.272 0.335    0.135
-                    nose   2438      5221 0.741 0.423 0.495    0.253
-                   mouth   2438      4195 0.661 0.353 0.403    0.171
-                     ear   2438      5082 0.708 0.409 0.466    0.245
-                shoulder   2438     17271 0.551 0.350 0.359    0.134
-                   elbow   2438     10814 0.496 0.219 0.244    0.088
-                    hand   2438      8075 0.856 0.538 0.664    0.393
-               hand_left   2438      4020 0.696 0.421 0.524    0.320
-              hand_right   2438      4054 0.721 0.431 0.538    0.326
-                    knee   2438      8532 0.488 0.274 0.285    0.111
-                    foot   2438      6907 0.678 0.554 0.599    0.340
+                 Class Images Instances     P     R mAP50 mAP50-95
+                   all   2438    140611 0.657 0.495 0.539    0.384
+                  body   2438     12600 0.852 0.666 0.759    0.597
+                 adult   2438      9595 0.802 0.660 0.725    0.600
+                 child   2438      1097 0.524 0.528 0.543    0.475
+                  male   2438      7183 0.730 0.674 0.721    0.601
+                female   2438      2816 0.562 0.575 0.592    0.493
+  body_with_wheelchair   2438       196 0.816 0.857 0.887    0.745
+    body_with_crutches   2438       110 0.812 0.891 0.924    0.853
+                  head   2438     10664 0.858 0.812 0.864    0.622
+                 front   2438      1987 0.595 0.420 0.463    0.376
+           right-front   2438      2051 0.583 0.377 0.420    0.338
+            right-side   2438      1244 0.609 0.462 0.504    0.403
+            right-back   2438       869 0.527 0.440 0.451    0.353
+                  back   2438       519 0.368 0.287 0.237    0.184
+             left-back   2438       688 0.453 0.356 0.351    0.277
+             left-side   2438      1340 0.621 0.449 0.483    0.394
+            left-front   2438      1966 0.576 0.389 0.428    0.350
+                  face   2438      5980 0.844 0.784 0.831    0.573
+                   eye   2438      5535 0.666 0.272 0.335    0.135
+                  nose   2438      5221 0.741 0.423 0.495    0.253
+                 mouth   2438      4195 0.661 0.353 0.403    0.171
+                   ear   2438      5082 0.708 0.409 0.466    0.245
+              shoulder   2438     17271 0.551 0.350 0.359    0.134
+                 elbow   2438     10814 0.496 0.219 0.244    0.088
+                  hand   2438      8075 0.856 0.538 0.664    0.393
+             hand_left   2438      4020 0.696 0.421 0.524    0.320
+            hand_right   2438      4054 0.721 0.431 0.538    0.326
+                  knee   2438      8532 0.488 0.274 0.285    0.111
+                  foot   2438      6907 0.678 0.554 0.599    0.340
   ```
-- YOLOv9-Wholebody28 - T - ReLU
+
+</details>
+<details>
+<summary>YOLOv9-Wholebody28 - T - ReLU</summary>
+
 ```
 ```
-- YOLOv9-Wholebody28 - S - Swish/SiLU
+
+</details>
+<details>
+<summary>YOLOv9-Wholebody28 - S - Swish/SiLU</summary>
+
   ```
                  Class Images Instances     P     R mAP50 mAP50-95
                    all   2438    140381 0.752 0.563 0.633    0.465
@@ -247,7 +265,11 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
                   knee   2438      8756 0.566 0.381 0.410    0.175
                   foot   2438      7110 0.765 0.648 0.701    0.428
   ```
-- YOLOv9-Wholebody28 - S - ReLU
+
+</details>
+<details>
+<summary>YOLOv9-Wholebody28 - S - ReLU</summary>
+
   ```
                  Class Images Instances     P     R mAP50 mAP50-95
                    all   2438    140381 0.728 0.548 0.611    0.444
@@ -280,7 +302,11 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
                   knee   2438      8756 0.541 0.352 0.378    0.154
                   foot   2438      7110 0.740 0.621 0.673    0.402
   ```
-- YOLOv9-Wholebody28 - C - Swish/SiLU
+
+</details>
+<details>
+<summary>YOLOv9-Wholebody28 - C - Swish/SiLU</summary>
+
   ```
                  Class Images Instances     P     R mAP50 mAP50-95
                    all   2438    140381 0.829 0.608 0.705    0.541
@@ -313,7 +339,11 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
                   knee   2438      8756 0.651 0.453 0.497    0.235
                   foot   2438      7110 0.833 0.709 0.772    0.513
   ```
-- YOLOv9-Wholebody28 - C - ReLU
+
+</details>
+<details>
+<summary>YOLOv9-Wholebody28 - C - ReLU</summary>
+
   ```
                  Class Images Instances     P     R mAP50 mAP50-95
                    all   2438    140381 0.800 0.591 0.680    0.512
@@ -346,7 +376,11 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
                   knee   2438      8756 0.609 0.417 0.454    0.203
                   foot   2438      7110 0.809 0.683 0.742    0.475
   ```
-- YOLOv9-Wholebody28 - E - Swish/SiLU
+
+</details>
+<details>
+<summary>YOLOv9-Wholebody28 - E - Swish/SiLU</summary>
+
   ```
                  Class Images Instances     P     R mAP50 mAP50-95
                    all   2438    140381 0.855 0.638 0.741    0.584
@@ -379,7 +413,11 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
                   knee   2438      8756 0.668 0.504 0.550    0.279
                   foot   2438      7110 0.867 0.756 0.811    0.570
   ```
-- YOLOv9-Wholebody28 - E - ReLU
+
+</details>
+<details>
+<summary>YOLOv9-Wholebody28 - E - ReLU</summary>
+
   ```
                  Class Images Instances     P     R mAP50 mAP50-95
                    all   2438    140381 0.827 0.620 0.717    0.553
@@ -412,6 +450,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
                   knee   2438      8756 0.627 0.458 0.499    0.235
                   foot   2438      7110 0.829 0.731 0.788    0.531
   ```
+
+</details>
 
 - Pre-Process
 
