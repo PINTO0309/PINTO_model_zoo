@@ -80,7 +80,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   |Knee|26|Keypoints|
   |Foot (Feet)|27||
 
-  ![image](https://github.com/user-attachments/assets/49f9cbf3-3a9c-4666-84ae-d86148c34866)
+  ![image](https://github.com/user-attachments/assets/651764ae-7300-431d-8bb2-0a1f61ebac63)
 
 ## 3. Test
   - Python 3.10
