@@ -175,7 +175,13 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 - YOLOv9-Wholebody28 - N - Swish/SiLU (PINTO original implementation, 2.4 MB)
 ```
 ```
+- YOLOv9-Wholebody28 - N - ReLU (PINTO original implementation, 2.4 MB)
+```
+```
 - YOLOv9-Wholebody28 - T - Swish/SiLU
+```
+```
+- YOLOv9-Wholebody28 - T - ReLU
 ```
 ```
 - YOLOv9-Wholebody28 - S - Swish/SiLU
