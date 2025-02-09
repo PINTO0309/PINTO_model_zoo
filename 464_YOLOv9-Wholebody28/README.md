@@ -10,14 +10,12 @@ Don't be ruled by the curse of mAP.
 
 https://github.com/user-attachments/assets/7d5ceafb-12c3-476f-8077-f11c54b1de52
 
-|input|output<br>`Objects score threshold >= 0.35`<br>`Attributes score threshold >= 0.75`|
+|input|output<br>`Objects score threshold >= 0.35`<br>`Attributes score threshold >= 0.75`<br>`Keypoints score threshold >= 0.25`|
 |:-:|:-:|
-|![image](https://github.com/user-attachments/assets/dd0027dd-c998-4297-9efe-4aae802a7783)|![image](https://github.com/user-attachments/assets/5adf1fc0-4a96-40ee-b241-469b71fbb867)|
-|![image](https://github.com/user-attachments/assets/436a2cfa-776d-48b8-93c7-90a1dbb9da29)|![image](https://github.com/user-attachments/assets/9e6dd578-7ca2-4903-bbec-9f0f1b1ca583)|
-|![image](https://github.com/user-attachments/assets/5e3372ec-e80d-40fe-8378-fbfc2a9c1a8a)|![image](https://github.com/user-attachments/assets/e7fddd99-d424-47d4-9526-0cbdcc07d18e)|
-|![image](https://github.com/user-attachments/assets/1fa6132b-26b1-4748-8640-3bd7c5aa057e)|![image](https://github.com/user-attachments/assets/91dd67ff-2ded-460a-868f-eca0a1bcb8d9)|
-|![image](https://github.com/user-attachments/assets/1bd51ec6-775c-4f35-89a7-be055af03609)|![image](https://github.com/user-attachments/assets/208fe0c0-4a48-44f6-8f77-ec1d35e024ba)|
-|![image](https://github.com/user-attachments/assets/54d9547c-6e6b-4f78-a244-2cd257a2cf6b)|![image](https://github.com/user-attachments/assets/2a75b535-315f-4406-90a4-6131fff009a8)|
+|![000000003786](https://github.com/user-attachments/assets/a21ae3c3-4bea-4461-9ad3-ea1decb14f63)|![000000010082](https://github.com/user-attachments/assets/2654eac6-219e-4840-adad-5a1d24629b56)|
+|![000000061606](https://github.com/user-attachments/assets/9348193d-c871-445b-b19d-aa6244d5a543)|![000000064744](https://github.com/user-attachments/assets/c9a2935b-a7f8-4172-947c-fd158b35491e)|
+|![000000088214](https://github.com/user-attachments/assets/8b597dc4-9bc9-454a-96fc-c61914958097)|![000000088754](https://github.com/user-attachments/assets/def8dba4-7109-4908-a67a-f33053e585ce)|
+|![frameE_000031](https://github.com/user-attachments/assets/d6a774ae-b44a-43a4-bf78-034ec1522492)|![frameE_000071](https://github.com/user-attachments/assets/15b19dbc-bcaf-4b04-9262-38c4f08f78a6)|
 
 The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.
 
@@ -43,7 +41,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
 ## 2. Annotation
 
-  Halfway compromises are never acceptable. I added `2,611` annotations to the following `480x360` image. The trick to annotation is to not miss a single object and not compromise on a single pixel. The ultimate methodology is to `try your best`.
+  Halfway compromises are never acceptable. The trick to annotation is to not miss a single object and not compromise on a single pixel. The ultimate methodology is to `try your best`.
 
   https://github.com/user-attachments/assets/b701dede-e5ba-4daa-8aab-f4f565be294f
 
