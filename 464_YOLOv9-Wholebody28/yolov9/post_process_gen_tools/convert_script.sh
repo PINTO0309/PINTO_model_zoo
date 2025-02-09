@@ -12,7 +12,7 @@
 # && pip install tf-keras~=2.16 \
 # && pip install flatbuffers>=23.5.26
 
-TYPE=t
+TYPE=e
 # RELU= or RELU=-relu
 RELU=
 RELUS=$(echo ${RELU} | sed 's/-/_/g')
@@ -22,9 +22,9 @@ QATS=$(echo ${QAT} | sed 's/-/_/g')
 MODEL_NAME=yolov9_${TYPE}_wholebody28${RELUS}${QATS}
 SUFFIX="0100_1x3x"
 
-OPSET=13
+OPSET=13 # default: 13, for onnxruntime-web: 11
 BATCHES=1
-CLASSES=9
+CLASSES=28
 
 RESOLUTIONS=(
     "128 160 420"

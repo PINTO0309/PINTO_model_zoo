@@ -1,4 +1,4 @@
-TYPE=t
+TYPE=e
 # RELU= or RELU=-relu
 RELU=
 RELUS=$(echo ${RELU} | sed 's/-/_/g')
@@ -8,7 +8,8 @@ SUFFIX="0100_1x3x"
 # best-t-relu.pt
 # best-e.pt
 # best-e-relu.pt
-MODEL_PATH=best-${TYPE}.pt #best-${TYPE}${RELU}.pt
+MODEL_PATH=best-${TYPE}${RELU}.pt #best-${TYPE}${RELU}.pt
+OPSET=13 # default: 13, for onnxruntime-web: 11
 
 RESOLUTIONS=(
     "128 160"
@@ -69,7 +70,7 @@ do
     --imgsz ${H} ${W} \
     --batch-size 1 \
     --device cpu \
-    --opset 13 \
+    --opset ${OPSET} \
     --include onnx
 
     mv ${MODEL_NAME}${RELUS}.onnx ${MODEL_NAME}${RELUS}_${SUFFIX}${H}x${W}.onnx
@@ -87,7 +88,7 @@ python export.py \
 --data data/original.yaml \
 --weights ${MODEL_NAME}${RELUS}.pt \
 --device cpu \
---opset 13 \
+--opset ${OPSET} \
 --include onnx \
 --dynamic
 mv ${MODEL_NAME}${RELUS}.onnx ${MODEL_NAME}${RELUS}_Nx3HxW.onnx
