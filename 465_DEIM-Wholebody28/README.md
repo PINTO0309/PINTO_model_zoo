@@ -168,7 +168,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
       -h, --help
         show this help message and exit
       -m MODEL, --model MODEL
-        ONNX/TFLite file path for RT-DETRv2-Wholebody25.
+        ONNX/TFLite file path for DEIM-Wholebody28.
       -v VIDEO, --video VIDEO
         Video file path or camera index.
       -i IMAGES_DIR, --images_dir IMAGES_DIR
@@ -207,50 +207,25 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
         Bounding box line width. Default: 2
     ```
 
-- RT-DETRv2-Wholebody25 - S (rtdetrv2_r18vd_120e_wholebody25) - 1,250 query
+- DEIM-Wholebody28 - S - 1,250 query
   ```
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.602
-  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.802
-  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.653
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.432
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.731
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.867
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.330
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.615
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.694
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.553
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.820
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.924
   ```
-- RT-DETRv2-Wholebody25 - X (rtdetrv2_r101vd_6x_wholebody25) - 1,250 query
+- DEIM-Wholebody28 - X - 1,250 query
   ```
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.650
-  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.841
-  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.700
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.498
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.769
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.899
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.346
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.647
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.727
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.598
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.847
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.938
-  ```
-- RT-DETRv2-Wholebody25 - X (rtdetrv2_r101vd_6x_wholebody25) - 2,500 query
-  ```
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.621
-  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.820
-  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.668
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.454
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.757
-  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.894
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.341
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.627
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.713
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.580
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.839
-  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.941
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.660
+  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.832
+  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.705
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.479
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.835
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.922
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.343
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.655
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.718
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.575
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.888
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.956
+  Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.887
+  Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.763  
   ```
 
 - Pre-Process
@@ -262,10 +237,10 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 ## 4. Citiation
   If this work has contributed in any way to your research or business, I would be happy to be cited in your literature.
   ```bibtex
-  @software{RT-DETRv2-Wholebody25,
+  @software{DEIM-Wholebody28,
     author={Katsuya Hyodo},
     title={Lightweight human detection models generated on high-quality human data sets. It can detect objects with high accuracy and speed in a total of 25 classes: Body, Adult, Child, Male, Female, Body_with_Wheelchair, Body_with_Crutches, Head, Front, Right_Front, Right_Side, Right_Back, Back, Left_Back, Left_Side, Left_Front, Face, Eye, Nose, Mouth, Ear, Hand, Hand_Left, Hand_Right, Foot.},
-    url={https://github.com/PINTO0309/PINTO_model_zoo/tree/main/460_RT-DETRv2-Wholebody25},
+    url={https://github.com/PINTO0309/PINTO_model_zoo/tree/main/465_DEIM-Wholebody28},
     year={2024},
     month={10},
     doi={10.5281/zenodo.10229410}
@@ -304,37 +279,31 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
     }
     ```
 
-  - RT-DETRv2
+  - DEIM
 
-    https://github.com/lyuwenyu/RT-DETR
+    https://github.com/ShihuaHuang95/DEIM
 
     ```bibtex
-    @misc{lv2024rtdetrv2improvedbaselinebagoffreebies,
-          title={RT-DETRv2: Improved Baseline with Bag-of-Freebies for Real-Time Detection Transformer},
-          author={Wenyu Lv and Yian Zhao and Qinyao Chang and Kui Huang and Guanzhong Wang and Yi Liu},
+    @misc{huang2024deim,
+          title={DEIM: DETR with Improved Matching for Fast Convergence},
+          author={Shihua Huang, Zhichao Lu, Xiaodong Cun, Yongjun Yu, Xiao Zhou, and Xi Shen},
           year={2024},
-          eprint={2407.17140},
+          eprint={2412.04234},
           archivePrefix={arXiv},
-          primaryClass={cs.CV},
-          url={https://arxiv.org/abs/2407.17140},
+          primaryClass={cs.CV}
     }
     ```
 
-  - PINTO Custom RT-DETRv2 (Drastically change the training parameters and optimize the model structure)
+  - PINTO Custom DEIM (Drastically change the training parameters and optimize the model structure)
 
-    https://github.com/PINTO0309/RT-DETR
+    https://github.com/PINTO0309/DEIM
 
 ## 6. License
-[Apache2.0](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/460_RT-DETRv2-Wholebody25/LICENSE)
+[Apache2.0](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/465_DEIM-Wholebody28/LICENSE)
 
 ## 7. Next challenge
-- `shoulder`, `elbow`, `knee`
-- I would like to verify the hypothesis that the correlation between the positions of each part is embedded as weights in the CNN and Transformer.
-- Therefore, we reduce the 2D visible information in the area enclosed by the annotation label box to the limit and investigate how the model behaves when only the 3x3 pixel label box is annotated.
+- Wrist, Hip, Ankle
+- Steps and final goal
 
-  ![image](https://github.com/user-attachments/assets/25675c7a-b20b-48ba-93fe-f24d54b7cf2b)
-
-- A state of provisional implementation
-
-  https://github.com/user-attachments/assets/38c55669-2acf-46b4-a9c4-819349880854
+  ![image](https://github.com/user-attachments/assets/d5974b9e-018b-4739-99ae-1e5f879c0c3f)
 
