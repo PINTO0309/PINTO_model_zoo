@@ -82,7 +82,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
 ## 2. Annotation
 
-  Halfway compromises are never acceptable. I added `2,611` annotations to the following `480x360` image. The trick to annotation is to not miss a single object and not compromise on a single pixel. The ultimate methodology is to `try your best`.
+  The trick to annotation is to not miss a single object and not compromise on a single pixel. The ultimate methodology is to `try your best`.
 
   https://github.com/user-attachments/assets/32f150fe-ebf7-4374-9f0d-f1130badcfc1
 
