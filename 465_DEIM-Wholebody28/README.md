@@ -12,6 +12,8 @@ Don't be ruled by the curse of mAP.
 
 - Difficulty: Normal
 
+  https://github.com/user-attachments/assets/72a1f4c9-af44-4e76-ad6d-cda4c39f2d87
+
 - Difficulty: Normal
 
   https://www2.nhk.or.jp/archives/movies/?id=D0002160854_00000
