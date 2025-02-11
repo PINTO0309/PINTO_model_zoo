@@ -113,12 +113,15 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   |Nose|18||
   |Mouth|19||
   |Ear|20||
-  |Hand|21|Detection accuracy is higher than `Hand_Left` and `Hand_Right` bounding boxes. It is the sum of `Hand_Left`, and `Hand_Right`.|
-  |Hand_Left|22|Bounding box coordinates are shared with `Hand`. It is defined as a subclass of `Hand` as a superclass.|
-  |Hand_Right|23|Bounding box coordinates are shared with `Hand`. It is defined as a subclass of `Hand` as a superclass.|
-  |Foot (Feet)|24||
+  |Shoulder|21|Keypoints|
+  |Elbow|22|Keypoints|
+  |Hand|23|Detection accuracy is higher than `Hand_Left` and `Hand_Right` bounding boxes. It is the sum of `Hand_Left`, and `Hand_Right`.|
+  |Hand_Left|24|Bounding box coordinates are shared with `Hand`. It is defined as a subclass of `Hand` as a superclass.|
+  |Hand_Right|25|Bounding box coordinates are shared with `Hand`. It is defined as a subclass of `Hand` as a superclass.|
+  |Knee|26|Keypoints|
+  |Foot (Feet)|27||
 
-  ![image](https://github.com/user-attachments/assets/49f9cbf3-3a9c-4666-84ae-d86148c34866)
+  ![image](https://github.com/user-attachments/assets/651764ae-7300-431d-8bb2-0a1f61ebac63)
 
 ## 3. Test
   - RTX3070 (VRAM: 8GB)
