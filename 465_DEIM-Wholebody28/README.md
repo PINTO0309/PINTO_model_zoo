@@ -47,16 +47,16 @@ Don't be ruled by the curse of mAP.
 
 - Other results
 
-  |output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`1,250 query`|
+  |output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`Keypoints score threshold >= 0.35`<br>`1,250 query`|output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`Keypoints score threshold >= 0.35`<br>`1,250 query`|
   |:-:|:-:|
-  |![image](https://github.com/user-attachments/assets/2b310a9f-1203-4db4-9dc8-2129532e3f0d)|![image](https://github.com/user-attachments/assets/c99fb457-a813-4792-b773-84787298a359)|
-  |![image](https://github.com/user-attachments/assets/fe6df76e-ce43-49c9-af58-4340c4b9502e)|![image](https://github.com/user-attachments/assets/faf65954-3d4b-4d4c-93c1-9b2573a9858a)|
-  |![image](https://github.com/user-attachments/assets/e2cbd298-6072-4e28-bd3f-b150a704d4af)|![image](https://github.com/user-attachments/assets/711b73f1-2863-4298-b646-2ad2d527b327)|
-  |![image](https://github.com/user-attachments/assets/d6e66287-cb5b-4806-8bd0-3781750ada3b)|![image](https://github.com/user-attachments/assets/e1c7f9d1-8752-4fa0-8219-48f222846fc3)|
-  |![image](https://github.com/user-attachments/assets/0063bdd0-1317-40e5-b44b-dd01468436c2)|![image](https://github.com/user-attachments/assets/c9ea9f7c-e0db-4884-9734-dc6b79db5d05)|
-  |![image](https://github.com/user-attachments/assets/70c57a45-a8ce-47dc-9bdd-6cca10d1b16a)|![image](https://github.com/user-attachments/assets/19aefce8-61d7-4294-bf3d-865529cae228)|
-  |![image](https://github.com/user-attachments/assets/258805da-6578-4b05-b3d9-67850a027a03)|![image](https://github.com/user-attachments/assets/5114a254-f410-4db7-a61c-2391b8ccfbfb)|
-  |![image](https://github.com/user-attachments/assets/a2629dd0-73f3-4115-a198-32562b206a7a)|![image](https://github.com/user-attachments/assets/e4c4bd6d-dc33-4d44-9be1-55c57a113ad3)|
+  |![000000003786](https://github.com/user-attachments/assets/72eeaf52-2d2a-4496-bf37-eeeafa188f4a)|![000000005673](https://github.com/user-attachments/assets/830cf3d4-70db-4d40-875c-ad73c7a168c2)|
+  |![000000009420](https://github.com/user-attachments/assets/ac7cc347-97a1-4a88-8fba-7cd56fade0fa)|![000000010082](https://github.com/user-attachments/assets/fa046ee3-df14-4a46-b09d-2acaaf4080b5)|
+  |![000000010104](https://github.com/user-attachments/assets/6e7b5cb9-b64a-4c8a-b65f-3b55e04605f6)|![000000015778](https://github.com/user-attachments/assets/ba09ec7d-5ec9-4f73-a9a6-a35ca5547143)|
+  |![000000048658](https://github.com/user-attachments/assets/e94af5b6-7505-4acf-8fb2-ac1ae5820c0d)|![000000048893](https://github.com/user-attachments/assets/304dc1fc-c359-468c-9e29-af49faa9c3c1)|
+  |![000000061606](https://github.com/user-attachments/assets/fa58a170-c61a-4f6e-b75b-ab9e3f45cd5d)|![000000064824](https://github.com/user-attachments/assets/0d45ed94-0e80-4025-a261-aba6285070e4)|
+  |![000000065500](https://github.com/user-attachments/assets/df0c4b38-c47d-4ee2-9dd2-8c6debe1ccc6)|![000000066754](https://github.com/user-attachments/assets/73e5ce6d-0430-4697-86a9-6ad0ff654115)|
+  |![000000073470](https://github.com/user-attachments/assets/96fa0355-e2c4-43ef-a1ee-5cb3c448d95b)|![000000094388](https://github.com/user-attachments/assets/a63518fa-a8c4-46cc-9b1f-491a1822dcce)|
+  |![frameE_000002](https://github.com/user-attachments/assets/30f39b53-e5ff-4a21-ba69-e8e978691c5e)|![frameE_000071](https://github.com/user-attachments/assets/538c4869-b155-4f05-9fb9-c6e8f71b2a71)|
 
 The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.
 
