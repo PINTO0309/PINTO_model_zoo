@@ -221,6 +221,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
 - DEIM-Wholebody28 - S - 1,250 query
   ```
+  WIP
   ```
 - DEIM-Wholebody28 - X - 1,250 query
   ```
