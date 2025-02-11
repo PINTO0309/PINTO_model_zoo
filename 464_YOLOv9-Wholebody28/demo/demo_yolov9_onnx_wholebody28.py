@@ -1115,7 +1115,12 @@ def main():
                     if enable_face_mosaic:
                         w = int(abs(box.x2 - box.x1))
                         h = int(abs(box.y2 - box.y1))
-                        debug_image[box.y1:box.y2, box.x1:box.x2, :] = cv2.resize(cv2.resize(debug_image[box.y1:box.y2, box.x1:box.x2, :], (3,3)), (w,h))
+                        small_box = cv2.resize(debug_image[box.y1:box.y2, box.x1:box.x2, :], (3,3))
+                        normal_box = cv2.resize(small_box, (w,h))
+                        if normal_box.shape[0] != abs(box.y2 - box.y1) \
+                            or normal_box.shape[1] != abs(box.x2 - box.x1):
+                                normal_box = cv2.resize(small_box, (abs(box.x2 - box.x1), abs(box.y2 - box.y1)))
+                        debug_image[box.y1:box.y2, box.x1:box.x2, :] = normal_box
                     cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), white_line_width)
                     cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, colored_line_width)
 
