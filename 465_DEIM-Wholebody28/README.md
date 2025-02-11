@@ -12,13 +12,11 @@ Don't be ruled by the curse of mAP.
 
 - Difficulty: Normal
 
-  https://github.com/user-attachments/assets/646ab997-f901-4626-88fe-d274a12c9fda
-
 - Difficulty: Normal
 
   https://www2.nhk.or.jp/archives/movies/?id=D0002160854_00000
 
-  https://github.com/user-attachments/assets/5b47f128-4e27-4a71-bcb4-19507fe8be27
+  https://github.com/user-attachments/assets/b54d77e8-9ba2-4752-81c5-cdfdc1263101
 
 - Difficulty: Super Hard
   - The depression and elevation angles are quite large.
@@ -28,7 +26,7 @@ Don't be ruled by the curse of mAP.
 
   https://www2.nhk.or.jp/archives/movies/?id=D0002080169_00000
 
-  https://github.com/user-attachments/assets/bb19455d-8c3f-4bfa-abe8-143f16b93388
+  https://github.com/user-attachments/assets/ba45ac9b-ae1b-45be-a41c-de10f0f4ffa6
 
 - Difficulty: Super Ultra Hard (Score threshold 0.35)
   - Heavy Rain.
@@ -39,68 +37,13 @@ Don't be ruled by the curse of mAP.
 
   https://www2.nhk.or.jp/archives/movies/?id=D0002040195_00000
 
-  https://github.com/user-attachments/assets/cd7037ff-dee1-4b63-ad5d-c838ee639218
-
-- Difficulty: Super Hard (1600x898 -> 640x640)
-
-  A major weakness of RT-DETR is that it cannot process anything other than its internal processing resolution of 640x640, so if an image with an unnecessarily large resolution is used, faces in the background will be scaled down to a size of less than one pixel. Therefore, if you use an image of an unnecessarily large size such as 1600x898, as in the image below, people in the rear will be almost impossible to detect. If you want accurate detection at higher resolutions, you will need to pre-train the model at a higher resolution setting, such as 1600x898.
-
-  ![sample](https://github.com/user-attachments/assets/94aa6f51-2062-408a-89c7-714550fb92e4)
-
-  The figure below shows the results of inference on the same image using a CNN with only 1MB. We can see that the performance of RT-DETRv2, which has an input resolution fixed at 640x640, is overwhelmingly lower than that of the 1MB CNN.
-
-  Cited: https://github.com/biubug6/Face-Detector-1MB-with-landmark
-
-  ![image](https://github.com/user-attachments/assets/314d3c85-6555-47b7-aaaa-2591c699167a)
-
-  The detection results of YOLOv9-E that I created with the NMS limiter disabled are shown in the figure below.
-
-  Cited: https://github.com/PINTO0309/PINTO_model_zoo/tree/main/459_YOLOv9-Wholebody25
-
-  ![0009](https://github.com/user-attachments/assets/a14c08c9-49c7-41a5-bf9c-a049947e4c54)
-
-  ![0007](https://github.com/user-attachments/assets/22405164-99de-4152-a5f3-a47088d54229)
-
-- Difficulty: Normal (800x898 x2)
-
-  Therefore, when using RT-DETRv2 and high-resolution images with aspect ratios that deviate significantly from 1:1, accuracy can be dramatically improved by simply dividing the images and performing inference in two batches so as to maintain the aspect ratio as much as possible. The figure below shows the results of inference in two batches, splitting the image into two parts, left and right, at 800x898 in size.
-
-  |batch.1|batch.2|
-  |:-:|:-:|
-  |![sample_1](https://github.com/user-attachments/assets/dc86c0ec-3e01-4a69-80f2-8a1efa6ab041)|![sample_2](https://github.com/user-attachments/assets/c65049ec-bad2-4bef-bb38-25c4c9c473d1)|
-
-  An even more important point to note is that the current 1,250-query RT-DETRv2 can only output bounding boxes for a maximum of 50 to 100 people. The image above probably contains around 300 people, so I would not be able to measure the true detection performance of Transformer unless I expanded it to 5,000 queries. After debugging, I found that 1,250 bounding boxes exceeded the score threshold, meaning that we were unable to output all objects that were within the range of our detection capability. This means that the system is ignoring objects that could have been detected and only outputting 1,250.
-
-  ![image](https://github.com/user-attachments/assets/df4b93ff-30ed-4e77-baf9-8670a20bc807)
-
-- Difficulty: Super Hard (1600x898 -> 640x640, 2,500 query)
-
-  The results were a bit unexpected: when we generated a model with 2,500 queries and ran inference on the same images, the accuracy was actually significantly lower than when we ran the model with 1,250 queries. In other words, I can say the following two points.
-
-  1. A large increase in the number of queries has a negative impact
-  2. Keeping aspect ratios as close to 1:1 as possible maintains performance
-
-  ![sample](https://github.com/user-attachments/assets/cc3e9349-6cbf-47bd-9263-0315d020faf5)
-
-  Just to be safe, I have also included the results of inference performed by splitting the image into two halves, left and right. The accuracy is also clearly reduced here.
-
-  |batch.1|batch.2|
-  |:-:|:-:|
-  |![sample_1](https://github.com/user-attachments/assets/67ec992b-e9c6-4677-b8db-ccde87e14961)|![sample_2](https://github.com/user-attachments/assets/5c7860fc-c810-441c-9fb2-1130eb595baf)|
+  https://github.com/user-attachments/assets/b9ff6e7a-98d3-42b7-921d-72287b1fe2c1
 
 - Difficulty: Super Hard (Score threshold 0.35)
 
   https://www.pakutaso.com/20240833234post-51997.html
 
-  ![image](https://github.com/user-attachments/assets/a39a9ba7-ac3a-4199-bbd2-b6beed7b072b)
-
-- Difficulty: Normal
-
-  Cited: https://github.com/Kazuhito00/RT-DETR-ONNX-Sample
-
-  |Pure MS-COCO trained|Self-annotated MS-COCO trained|
-  |:-:|:-:|
-  |![image](https://github.com/user-attachments/assets/0318bf9d-9815-40ea-885a-cdc7e526056d)|![image](https://github.com/user-attachments/assets/5293e3ad-cbc1-4e0d-bca0-7e894ab80988)|
+  ![shikunHY5A3705_TP_V](https://github.com/user-attachments/assets/1e3e57ff-60b2-4799-9d42-86cb6a38836f)
 
 - Other results
 
