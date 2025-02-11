@@ -198,7 +198,8 @@ I have been working on quantization of various models as a hobby, but I have ski
 |460|RT-DETRv2-Wholebody25|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/460_RT-DETRv2-Wholebody25)|||||||||||⚫|Body,Adult,Child,Male,Female,Body_with_Wheelchair,Body_with_Crutches,Head,Front,Right_Front,Right_Side,Right_Back,Back,Left_Back,Left_Side,Left_Front,Face,Eye,Nose,Mouth,Ear,Hand,Hand_Left,Hand_Right,Foot|
 |461|YOLOv9-Phone|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/461_YOLOv9-Phone)|||||||||||⚫|Phone|
 |463|YOLOv9-Shoulder-Elbow-Knee|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/463_YOLOv9-Shoulder-Elbow-Knee)|||||||||||⚫|Shoulder,Elbow,Knee|
-|464|YOLOv9-Wholebody25|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/464_YOLOv9-Wholebody28)|||||||||||⚫|Body,Adult,Child,Male,Female,Body_with_Wheelchair,Body_with_Crutches,Head,Front,Right_Front,Right_Side,Right_Back,Back,Left_Back,Left_Side,Left_Front,Face,Eye,Nose,Mouth,Ear,Shoulder,Elbow,Hand,Hand_Left,Hand_Right,Knee,Foot|
+|464|YOLOv9-Wholebody28|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/464_YOLOv9-Wholebody28)|||||||||||⚫|Body,Adult,Child,Male,Female,Body_with_Wheelchair,Body_with_Crutches,Head,Front,Right_Front,Right_Side,Right_Back,Back,Left_Back,Left_Side,Left_Front,Face,Eye,Nose,Mouth,Ear,Shoulder,Elbow,Hand,Hand_Left,Hand_Right,Knee,Foot|
+|465|DEIM-Wholebody28|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/465_DEIM-Wholebody28)|||||||||||⚫|Body,Adult,Child,Male,Female,Body_with_Wheelchair,Body_with_Crutches,Head,Front,Right_Front,Right_Side,Right_Back,Back,Left_Back,Left_Side,Left_Front,Face,Eye,Nose,Mouth,Ear,Shoulder,Elbow,Hand,Hand_Left,Hand_Right,Knee,Foot|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
