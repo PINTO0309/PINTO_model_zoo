@@ -251,8 +251,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
     author={Katsuya Hyodo},
     title={Lightweight human detection models generated on high-quality human data sets. It can detect objects with high accuracy and speed in a total of 25 classes: Body, Adult, Child, Male, Female, Body_with_Wheelchair, Body_with_Crutches, Head, Front, Right_Front, Right_Side, Right_Back, Back, Left_Back, Left_Side, Left_Front, Face, Eye, Nose, Mouth, Ear, Hand, Hand_Left, Hand_Right, Foot.},
     url={https://github.com/PINTO0309/PINTO_model_zoo/tree/main/465_DEIM-Wholebody28},
-    year={2024},
-    month={10},
+    year={2025},
+    month={2},
     doi={10.5281/zenodo.10229410}
   }
   ```
