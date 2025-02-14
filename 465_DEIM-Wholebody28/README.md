@@ -225,7 +225,20 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
 - DEIM-Wholebody28 - S - 1,250 query
   ```
-  WIP
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.621
+  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.808
+  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.662
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.444
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.816
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.908
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.330
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.621
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.686
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.547
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.873
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.950
+  Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.884
+  Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.727
   ```
 - DEIM-Wholebody28 - X - 1,250 query
   ```
