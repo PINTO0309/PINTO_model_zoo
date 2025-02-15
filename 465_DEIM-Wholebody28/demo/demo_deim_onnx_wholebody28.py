@@ -501,6 +501,18 @@ class DEIM(AbstractModel):
                     left_right_hand_boxes = [box for box in result_boxes if box.classid in [24, 25]]
                     self._find_most_relevant_obj(base_objs=hand_boxes, target_objs=left_right_hand_boxes)
                 result_boxes = [box for box in result_boxes if box.classid not in [24, 25]]
+
+                # Keypoints NMS
+                # Suppression of overdetection
+                # classid: 21 -> Shoulder
+                # classid: 22 -> Elbow
+                # classid: 26 -> Knee
+                for target_classid in [21,22,26]:
+                    keypoints_boxes = [box for box in result_boxes if box.classid == target_classid]
+                    filtered_keypoints_boxes = self._nms(target_objs=keypoints_boxes, iou_threshold=0.20)
+                    result_boxes = [box for box in result_boxes if box.classid != target_classid]
+                    result_boxes = result_boxes + filtered_keypoints_boxes
+
         return result_boxes
 
     def _find_most_relevant_obj(
@@ -587,6 +599,52 @@ class DEIM(AbstractModel):
                 elif most_relevant_obj.classid == 25:
                     base_obj.handedness = 1
                     most_relevant_obj.is_used = True
+
+    def _nms(
+        self,
+        *,
+        target_objs: List[Box],
+        iou_threshold: float,
+    ):
+        filtered_objs: List[Box] = []
+
+        # 1. Sorted in order of highest score
+        #    key=lambda box: box.score to get the score, and reverse=True to sort in descending order
+        sorted_objs = sorted(target_objs, key=lambda box: box.score, reverse=True)
+
+        # 2. Scan the box list after sorting
+        while sorted_objs:
+            # Extract the first (highest score)
+            current_box = sorted_objs.pop(0)
+
+            # If you have already used it, skip it
+            if current_box.is_used:
+                continue
+
+            # Add to filtered_objs and set the use flag
+            filtered_objs.append(current_box)
+            current_box.is_used = True
+
+            # 3. Mark the boxes where the current_box and IOU are above the threshold as used or exclude them
+            remaining_boxes = []
+            for box in sorted_objs:
+                if not box.is_used:
+                    # Calculating IoU
+                    iou_value = self._calculate_iou(base_obj=current_box, target_obj=box)
+
+                    # If the IOU threshold is exceeded, it is considered to be the same object and is removed as a duplicate
+                    if iou_value >= iou_threshold:
+                        # Leave as used (exclude later)
+                        box.is_used = True
+                    else:
+                        # If the IOU threshold is not met, the candidate is still retained
+                        remaining_boxes.append(box)
+
+            # Only the remaining_boxes will be handled in the next loop
+            sorted_objs = remaining_boxes
+
+        # 4. Return the box that is left over in the end
+        return filtered_objs
 
     def _calculate_iou(
         self,
