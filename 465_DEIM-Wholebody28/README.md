@@ -200,9 +200,9 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
       -ost OBJECT_SOCRE_THRESHOLD, --object_socre_threshold OBJECT_SOCRE_THRESHOLD
         The detection score threshold for object detection. Default: 0.35
       -ast ATTRIBUTE_SOCRE_THRESHOLD, --attribute_socre_threshold ATTRIBUTE_SOCRE_THRESHOLD
-        The attribute score threshold for object detection. Default: 0.70
+        The attribute score threshold for object detection. Default: 0.75
       -kst KEYPOINT_THRESHOLD, --keypoint_threshold KEYPOINT_THRESHOLD
-        The keypoint score threshold for object detection. Default: 0.25
+        The keypoint score threshold for object detection. Default: 0.35
       -kdm {dot,box,both}, --keypoint_drawing_mode {dot,box,both}
         Key Point Drawing Mode. Default: dot
       -dnm, --disable_generation_identification_mode
