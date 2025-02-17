@@ -807,7 +807,7 @@ def main():
         type=float,
         default=0.75,
         help=\
-            'The attribute score threshold for object detection. Default: 0.70',
+            'The attribute score threshold for object detection. Default: 0.75',
     )
     parser.add_argument(
         '-kst',
