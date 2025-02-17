@@ -223,7 +223,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
         Bounding box line width. Default: 2
     ```
 
-- DEIM-Wholebody28 - S - 1,250 query
+- DEIM-Wholebody28 - S - 1,250 query - 41.6MB
   ```
   Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.621
   Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.808
@@ -240,7 +240,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.884
   Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.727
   ```
-- DEIM-Wholebody28 - X - 1,250 query
+- DEIM-Wholebody28 - X - 1,250 query - 247.8MB
   ```
   Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.660
   Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.832
