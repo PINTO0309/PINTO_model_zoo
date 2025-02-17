@@ -80,6 +80,13 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   - Defocus-Blur
   - Backlight illumination
 
+- Inference Speed
+
+  ||CUDA|TensorRT|
+  |:-:|:-:|:-:|
+  |S|14.40ms/pred<br>![image](https://github.com/user-attachments/assets/8e7b3a52-5b4f-43db-baba-d331e287467a)|3.98ms/pred<br>![image](https://github.com/user-attachments/assets/cf06d310-942c-4289-bfea-f06cd7ddabec)|
+  |X|37.11ms/pred<br>![image](https://github.com/user-attachments/assets/cb8bb496-7f03-4756-b304-cc13dd2360ba)|10.28ms/pred<br>![image](https://github.com/user-attachments/assets/7087f5dd-74c4-4539-ad47-fc80fc75d373)|
+
 ## 1. Dataset
   - COCO-Hand http://vision.cs.stonybrook.edu/~supreeth/COCO-Hand.zip
   - [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco)
