@@ -53,7 +53,7 @@ Don't be ruled by the curse of mAP.
 
 - Other results
 
-  |output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`Keypoints score threshold >= 0.35`<br>`1,250 query`|output<br>`Objects score threshold >= 0.65`<br>`Attributes score threshold >= 0.70`<br>`Keypoints score threshold >= 0.35`<br>`1,250 query`|
+  |output<br>`Objects score threshold >= 0.35`<br>`Attributes score threshold >= 0.75`<br>`Keypoints score threshold >= 0.35`<br>`1,250 query`|output<br>`Objects score threshold >= 0.35`<br>`Attributes score threshold >= 0.75`<br>`Keypoints score threshold >= 0.35`<br>`1,250 query`|
   |:-:|:-:|
   |![000000003786](https://github.com/user-attachments/assets/72eeaf52-2d2a-4496-bf37-eeeafa188f4a)|![000000005673](https://github.com/user-attachments/assets/830cf3d4-70db-4d40-875c-ad73c7a168c2)|
   |![000000009420](https://github.com/user-attachments/assets/ac7cc347-97a1-4a88-8fba-7cd56fade0fa)|![000000010082](https://github.com/user-attachments/assets/fa046ee3-df14-4a46-b09d-2acaaf4080b5)|
