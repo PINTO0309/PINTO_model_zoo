@@ -344,3 +344,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
   ![image](https://github.com/user-attachments/assets/d5974b9e-018b-4739-99ae-1e5f879c0c3f)
 
+- **[WIP]** Wholebody34 - Training data 300 images
+
+  ![image](https://github.com/user-attachments/assets/5456506b-b2dd-4109-80e0-012bac199a07)
+
+
