@@ -388,6 +388,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |391|MagicTouch|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/391_MagicTouch)|⚫|⚫|||⚫||||||⚫|MediaPipe|
 |405|Ear_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/405_Ear_Segmentation)|||||||||||⚫|Ear|
 |417|PopNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/417_PopNet)|||||||||||⚫|Saliency|
+|466|People_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/466_People_Segmentation)|||||||||||⚫|UNet|
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
