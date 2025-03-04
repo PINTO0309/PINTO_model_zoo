@@ -11,3 +11,15 @@ https://github.com/PINTO0309/people_segmentation
 ## Cited
 
 https://github.com/ternaus/people_segmentation
+
+```
+@software{Vladimir_People_Segmentation_using_2020,
+  author = {Vladimir, Iglovikov},
+  doi = {10.5281/zenodo.7708627},
+  month = oct,
+  title = {{People Segmentation using UNet}},
+  url = {https://github.com/ternaus/people_segmentation},
+  version = {0.0.4},
+  year = {2020}
+}
+```
