@@ -1,0 +1,9 @@
+https://github.com/GoGoDuck912/Self-Correction-Human-Parsing
+
+# ONNX/TensorRT optimization
+https://github.com/PINTO0309/Self-Correction-Human-Parsing
+
+https://github.com/PINTO0309/onnx2tf
+https://github.com/PINTO0309/simple-onnx-processing-tools
+https://github.com/PINTO0309/tflite-input-output-rewriter
+
