@@ -348,6 +348,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
   ![image](https://github.com/user-attachments/assets/5456506b-b2dd-4109-80e0-012bac199a07)
 
+  ![0024_000000000693](https://github.com/user-attachments/assets/204a99df-8b47-4bf7-a195-1d54c2767230)
+
 - **[WIP]** Pose Estimation using only YOLOv9 object detection architecture (Wholebody34)
 
   https://github.com/user-attachments/assets/79550b2d-02ab-4555-bb34-d645584f59bb
