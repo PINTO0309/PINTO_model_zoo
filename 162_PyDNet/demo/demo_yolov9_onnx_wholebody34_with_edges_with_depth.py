@@ -1020,14 +1020,14 @@ def main():
         '--enable_face_mosaic',
         action='store_true',
         help=\
-            'Enable face mosaic.',
+            'Enable face mosaic. (Press F on the keyboard to switch modes)',
     )
     parser.add_argument(
         '-edm',
         '--enable_depth_map_overlay',
         action='store_true',
         help=\
-            'Enable depth map overlay.',
+            'Enable depth map overlay. (Press D on the keyboard to switch modes)',
     )
     parser.add_argument(
         '-oyt',
@@ -1554,6 +1554,8 @@ def main():
                 keypoint_drawing_mode = 'both'
             elif keypoint_drawing_mode == 'both':
                 keypoint_drawing_mode = 'dot'
+        elif key == 102: # F, Face Mosaic mode switch
+            enable_face_mosaic = not enable_face_mosaic
         elif key == 100: # D, Depth map overlay mode switch
             enable_depth_map_overlay = not enable_depth_map_overlay
 
