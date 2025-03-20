@@ -460,8 +460,8 @@ class YOLOv9(AbstractModel):
                     y_max = int(min(box[6], self._input_shapes[0][self._h_index]) * image_height / self._input_shapes[0][self._h_index])
                     cx = (x_min + x_max) // 2
                     cy = (y_min + y_max) // 2
-                    crx1, crx2 = np.clip([cx - 2, cx + 3], 0, image_width)
-                    cry1, cry2 = np.clip([cy - 2, cy + 3], 0, image_height)
+                    crx1, crx2 = np.clip([cx - 3, cx + 3], 0, image_width)
+                    cry1, cry2 = np.clip([cy - 3, cy + 3], 0, image_height)
                     result_boxes.append(
                         Box(
                             classid=classid,
