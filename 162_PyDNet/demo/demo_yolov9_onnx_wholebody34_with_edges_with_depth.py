@@ -31,7 +31,8 @@ BOX_COLORS = [
     [(0, 188, 212),"Left-Front"],
 ]
 
-# 接合したいクラスのペア（左右があるので一部重複している）
+# The pairs of classes you want to join
+# (there is some overlap because there are left and right classes)
 EDGES = [
     (21, 22), (21, 22),  # collarbone -> shoulder (左右)
     (21, 23),            # collarbone -> solar_plexus
@@ -784,7 +785,7 @@ def draw_dashed_rectangle(
     draw_dashed_line(image, bl_br, top_left, color, thickness, dash_length)
 
 def distance_euclid(p1: Tuple[int,int], p2: Tuple[int,int]) -> float:
-    """2点 (x1, y1), (x2, y2) のユークリッド距離を返す"""
+    """Returns the Euclidean distance between two points (x1, y1) and (x2, y2)."""
     return math.hypot(p1[0]-p2[0], p1[1]-p2[1])
 
 def draw_skeleton(
@@ -793,13 +794,12 @@ def draw_skeleton(
     color=(0,255,255),
 ):
     """
-    与えられた boxes (各クラスIDの関節候補) を基に、EDGESで定義された親子を
-    「もっとも近い距離のペアから順番に」接合していく。ただし、
-    classid=0 (人物) のバウンディングボックス内にあるキーポイント同士のみを
-    接続対象とする。
+    Based on the given boxes (candidate joints for each class ID),
+    the parent-child relationships defined in EDGES are connected “in order from the pair with the closest distance”.
+    However, only the keypoints within the bounding box of classid=0 (person) are considered for connection.
     """
     # -------------------------
-    # 1) 人物ボックスに ID を付与する
+    # 1) Assign an ID to the person box
     # -------------------------
     person_boxes = [b for b in boxes if b.classid == 0]
     for i, pbox in enumerate(person_boxes):
@@ -807,9 +807,7 @@ def draw_skeleton(
         pbox.person_id = i
 
     # -------------------------------------------------
-    # 2) キーポイントがどの人物ボックスに属するか判断して person_id を記録
-    #    （複数人のバウンディングボックスが重なっている場合は、
-    #      先に見つかったものを採用、など適宜ルールを決める）
+    # 2) Determine which person box the keypoint belongs to and record the person_id
     # -------------------------------------------------
     keypoint_ids = {21,22,23,24,25,29,30,31,32}
     for box in boxes:
@@ -821,34 +819,24 @@ def draw_skeleton(
                     break
 
     # -------------------------
-    # 3) クラスIDごとに仕分け
+    # 3) Sorting by class ID
     # -------------------------
     classid_to_boxes: Dict[int, List[Box]] = {}
     for b in boxes:
         classid_to_boxes.setdefault(b.classid, []).append(b)
 
-    # スケルトンで繋ぎたいエッジ
-    EDGES = [
-        (21, 22), (21, 22),  # collarbone -> shoulder (左右)
-        (21, 23),            # collarbone -> solar_plexus
-        (22, 24), (22, 24),  # shoulder -> elbow (左右)
-        (24, 25), (24, 25),  # elbow -> wrist (左右)
-        (23, 29),            # solar_plexus -> abdomen
-        (29, 30), (29, 30),  # abdomen -> hip_joint (左右)
-        (30, 31), (30, 31),  # hip_joint -> knee (左右)
-        (31, 32), (31, 32),  # knee -> ankle (左右)
-    ]
+    # Edges to be connected in the skeleton
     edge_counts = Counter(EDGES)
 
-    # 結果のラインを入れる
+    # A list to put the resulting lines into
     lines_to_draw = []
 
-    # ユークリッド距離計算の簡易関数
+    # Convenience function for Euclidean distance calculation
     def distance_euclid(p1, p2):
         import math
         return math.hypot(p1[0]-p2[0], p1[1]-p2[1])
 
-    # 各 (pid, cid) ペアに対してグルーピング
+    # Grouping for each (pid, cid) pair
     for (pid, cid), repeat_count in edge_counts.items():
         parent_list = classid_to_boxes.get(pid, [])
         child_list  = classid_to_boxes.get(cid, [])
@@ -856,31 +844,33 @@ def draw_skeleton(
         if not parent_list or not child_list:
             continue
 
-        # 親クラスIDが21 or 29の時はEDGESに書かれている回数(=repeat_count)だけマッチ可
-        # それ以外は1回だけ
+        # If the parent class ID is 21 or 29,
+        # it can be matched the number of times (=repeat_count) written in EDGES.
+        # Other than that, just once
         for_parent = repeat_count if (pid in [21, 29]) else 1
 
-        parent_capacity = [for_parent]*len(parent_list)  # 親ごとに繋げる上限
+        # Maximum number of connections per parent
+        parent_capacity = [for_parent]*len(parent_list)
 
-        # 子は常に1回のみ
+        # There is always exactly one child
         child_used = [False] * len(child_list)
 
-        # 距離が小さいペアから順に確定していくために、全ペアの距離を計算
+        # Calculate the distances of all pairs to determine the pairs with the smallest distance first.
         pair_candidates = []
         for i, pbox in enumerate(parent_list):
             for j, cbox in enumerate(child_list):
-                # ここで "同じ person_id 同士であること" をチェック
+                # Here, check that "they have the same person_id"
                 if (pbox.person_id is not None) and (cbox.person_id is not None) and (pbox.person_id == cbox.person_id):
                     dist_3d = np.sqrt((pbox.cx - cbox.cx)**2 + (pbox.cy - cbox.cy)**2 + (pbox.cz - cbox.cz)**2)
                     pair_candidates.append((dist_3d, i, j))
 
-        # 距離の小さい順に並べ替え
+        # Sort by smallest distance
         pair_candidates.sort(key=lambda x: x[0])  # Sort by 3D distance
 
-        # 貪欲に割り当て
+        # Greedily allocate
         for _, i, j in pair_candidates:
             if parent_capacity[i] > 0 and (not child_used[j]):
-                # 親iがまだマッチ可能 & 子jが未使用ならマッチ確定
+                # If parent i is still matchable and child j is unused, then the match is confirmed
                 pbox: Box = parent_list[i]
                 cbox: Box = child_list[j]
                 lines_to_draw.append(((pbox.cx, pbox.cy), (cbox.cx, cbox.cy)))
@@ -888,7 +878,7 @@ def draw_skeleton(
                 child_used[j] = True
 
     # -------------------------
-    # 4) ラインを描画
+    # 4) Draw a line
     # -------------------------
     for (pt1, pt2) in lines_to_draw:
         cv2.line(image, pt1, pt2, color, thickness=2)
@@ -1033,6 +1023,13 @@ def main():
             'Enable face mosaic.',
     )
     parser.add_argument(
+        '-edm',
+        '--enable_depth_map_overlay',
+        action='store_true',
+        help=\
+            'Enable depth map overlay.',
+    )
+    parser.add_argument(
         '-oyt',
         '--output_yolo_format_text',
         action='store_true',
@@ -1082,6 +1079,7 @@ def main():
     disable_headpose_identification_mode: bool = args.disable_headpose_identification_mode
     disable_render_classids: List[int] = args.disable_render_classids
     enable_face_mosaic: bool = args.enable_face_mosaic
+    enable_depth_map_overlay: bool = args.enable_depth_map_overlay
     output_yolo_format_text: bool = args.output_yolo_format_text
     execution_provider: str = args.execution_provider
     inference_type: str = args.inference_type
@@ -1493,11 +1491,18 @@ def main():
         # Draw skeleton
         draw_skeleton(image=debug_image, boxes=boxes, color=(0, 255, 255))
 
+        # Depth map overlay
+        if enable_depth_map_overlay:
+            depth_colormap = cv2.applyColorMap((depth_map * 255).astype(np.uint8), cv2.COLORMAP_JET)
+            depth_colormap = cv2.cvtColor(depth_colormap, cv2.COLOR_RGB2BGR)
+            debug_image = cv2.addWeighted(debug_image, 0.6, depth_colormap, 0.4, 0)
+
         if file_paths is not None:
             basename = os.path.basename(file_paths[file_paths_count])
             os.makedirs('output', exist_ok=True)
             cv2.imwrite(f'output/{basename}', debug_image)
 
+        # Output YOLO annotations
         if file_paths is not None and output_yolo_format_text:
             os.makedirs('output', exist_ok=True)
             cv2.imwrite(f'output/{os.path.splitext(os.path.basename(file_paths[file_paths_count]))[0]}.png', image)
@@ -1549,6 +1554,8 @@ def main():
                 keypoint_drawing_mode = 'both'
             elif keypoint_drawing_mode == 'both':
                 keypoint_drawing_mode = 'dot'
+        elif key == 100: # D, Depth map overlay mode switch
+            enable_depth_map_overlay = not enable_depth_map_overlay
 
     if video_writer is not None:
         video_writer.release()
