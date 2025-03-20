@@ -84,6 +84,7 @@ class Box():
     y2: int
     cx: int
     cy: int
+    cz: int
     generation: int = -1 # -1: Unknown, 0: Adult, 1: Child
     gender: int = -1 # -1: Unknown, 0: Male, 1: Female
     handedness: int = -1 # -1: Unknown, 0: Left, 1: Right
@@ -440,6 +441,9 @@ class YOLOv9(AbstractModel):
 
         box_score_threshold: float = min([self._obj_class_score_th, self._attr_class_score_th, self._keypoint_th])
 
+        # 0.0-1.0 -> 0 - 255
+        result_depth = (depth.squeeze()* 255).astype(np.uint8)
+
         if len(boxes) > 0:
             scores = boxes[:, 2:3]
             keep_idxs = scores[:, 0] > box_score_threshold
@@ -456,6 +460,8 @@ class YOLOv9(AbstractModel):
                     y_max = int(min(box[6], self._input_shapes[0][self._h_index]) * image_height / self._input_shapes[0][self._h_index])
                     cx = (x_min + x_max) // 2
                     cy = (y_min + y_max) // 2
+                    crx1, crx2 = np.clip([cx - 2, cx + 3], 0, image_width)
+                    cry1, cry2 = np.clip([cy - 2, cy + 3], 0, image_height)
                     result_boxes.append(
                         Box(
                             classid=classid,
@@ -466,6 +472,7 @@ class YOLOv9(AbstractModel):
                             y2=y_max,
                             cx=cx,
                             cy=cy,
+                            cz=int(np.median(result_depth[cry1:cry2, crx1:crx2])),
                             generation=-1, # -1: Unknown, 0: Adult, 1: Child
                             gender=-1, # -1: Unknown, 0: Male, 1: Female
                             handedness=-1, # -1: Unknown, 0: Left, 1: Right
@@ -559,9 +566,6 @@ class YOLOv9(AbstractModel):
                     filtered_keypoints_boxes = self._nms(target_objs=keypoints_boxes, iou_threshold=0.20)
                     result_boxes = [box for box in result_boxes if box.classid != target_classid]
                     result_boxes = result_boxes + filtered_keypoints_boxes
-
-        # 0.0-1.0 -> 0 - 255
-        result_depth = (depth.squeeze()* 255).astype(np.uint8)
 
         return result_boxes, result_depth
 
@@ -786,9 +790,7 @@ def distance_euclid(p1: Tuple[int,int], p2: Tuple[int,int]) -> float:
 def draw_skeleton(
     image: np.ndarray,
     boxes: List[Box],
-    depth_map: np.ndarray,
     color=(0,255,255),
-    max_dist_threshold=500.0
 ):
     """
     与えられた boxes (各クラスIDの関節候補) を基に、EDGESで定義された親子を
@@ -869,11 +871,8 @@ def draw_skeleton(
             for j, cbox in enumerate(child_list):
                 # ここで "同じ person_id 同士であること" をチェック
                 if (pbox.person_id is not None) and (cbox.person_id is not None) and (pbox.person_id == cbox.person_id):
-                    depth_p = float(depth_map[pbox.cy, pbox.cx])
-                    depth_c = float(depth_map[cbox.cy, cbox.cx])
-                    dist_3d = np.sqrt((pbox.cx - cbox.cx)**2 + (pbox.cy - cbox.cy)**2 + (depth_p - depth_c)**2)
-                    if dist_3d <= max_dist_threshold:
-                        pair_candidates.append((dist_3d, i, j))
+                    dist_3d = np.sqrt((pbox.cx - cbox.cx)**2 + (pbox.cy - cbox.cy)**2 + (pbox.cz - cbox.cz)**2)
+                    pair_candidates.append((dist_3d, i, j))
 
         # 距離の小さい順に並べ替え
         pair_candidates.sort(key=lambda x: x[0])  # Sort by 3D distance
@@ -1492,7 +1491,7 @@ def main():
             # )
 
         # Draw skeleton
-        draw_skeleton(image=debug_image, boxes=boxes, depth_map=depth_map, color=(0, 255, 255), max_dist_threshold=300)
+        draw_skeleton(image=debug_image, boxes=boxes, color=(0, 255, 255))
 
         if file_paths is not None:
             basename = os.path.basename(file_paths[file_paths_count])
