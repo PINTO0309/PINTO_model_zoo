@@ -9,7 +9,7 @@ Real-time single image depth perception in the wild with handheld devices.
 
   ![image](https://github.com/user-attachments/assets/480704c5-7cbc-44fe-886a-ac3c94b125aa)
 
-- YOLOv9-PyDNet
+- YOLOv9-PyDNet (**Pose estimation not used**)
 
   ![000000012069](https://github.com/user-attachments/assets/8bdd6476-b02b-4bbe-aa94-a7c281aaf137)
 
