@@ -20,6 +20,9 @@ import importlib.util
 from collections import Counter
 from abc import ABC, abstractmethod
 
+
+AVERAGE_HEAD_WIDTH: float = 0.16 + 0.10 # 16cm + Margin Compensation
+
 BOX_COLORS = [
     [(216, 67, 21),"Front"],
     [(255, 87, 34),"Right-Front"],
@@ -1030,6 +1033,13 @@ def main():
             'Enable depth map overlay. (Press D on the keyboard to switch modes)',
     )
     parser.add_argument(
+        '-ehd',
+        '--enable_head_distance_measurement',
+        action='store_true',
+        help=\
+            'Enable Head distance measurement. (Press M on the keyboard to switch modes)',
+    )
+    parser.add_argument(
         '-oyt',
         '--output_yolo_format_text',
         action='store_true',
@@ -1043,6 +1053,14 @@ def main():
         default=2,
         help=\
             'Bounding box line width. Default: 2',
+    )
+    parser.add_argument(
+        '-chf',
+        '--camera_horizontal_fov',
+        type=int,
+        default=90,
+        help=\
+            'Camera horizontal FOV. Default: 90',
     )
     args = parser.parse_args()
 
@@ -1080,11 +1098,13 @@ def main():
     disable_render_classids: List[int] = args.disable_render_classids
     enable_face_mosaic: bool = args.enable_face_mosaic
     enable_depth_map_overlay: bool = args.enable_depth_map_overlay
+    enable_head_distance_measurement: bool = args.enable_head_distance_measurement
     output_yolo_format_text: bool = args.output_yolo_format_text
     execution_provider: str = args.execution_provider
     inference_type: str = args.inference_type
     inference_type = inference_type.lower()
     bounding_box_line_width: int = args.bounding_box_line_width
+    camera_horizontal_fov: int = args.camera_horizontal_fov
     providers: List[Tuple[str, Dict] | str] = None
 
     if execution_provider == 'cpu':
@@ -1461,6 +1481,45 @@ def main():
                 cv2.LINE_AA,
             )
 
+            # Head distance
+            if enable_head_distance_measurement and classid == 7:
+                focalLength: float = 0.0
+                if (camera_horizontal_fov > 90):
+                    # Fisheye Camera (Equidistant Model)
+                    focalLength = debug_image_w / (camera_horizontal_fov * (math.pi / 180))
+                else:
+                    # Normal camera (Pinhole Model)
+                    focalLength = debug_image_w / (2 * math.tan((camera_horizontal_fov / 2) * (math.pi / 180)))
+                # Meters
+                distance = (AVERAGE_HEAD_WIDTH * focalLength) / abs(box.x2 - box.x1)
+
+                cv2.putText(
+                    debug_image,
+                    f'{distance:.3f} m',
+                    (
+                        box.x1+5 if box.x1 < debug_image_w else debug_image_w-50,
+                        box.y1+20 if box.y1-5 > 0 else 20
+                    ),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.7,
+                    (255, 255, 255),
+                    2,
+                    cv2.LINE_AA,
+                )
+                cv2.putText(
+                    debug_image,
+                    f'{distance:.3f} m',
+                    (
+                        box.x1+5 if box.x1 < debug_image_w else debug_image_w-50,
+                        box.y1+20 if box.y1-15 > 0 else 20
+                    ),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.7,
+                    (10, 10, 10),
+                    1,
+                    cv2.LINE_AA,
+                )
+
             # cv2.putText(
             #     debug_image,
             #     f'{box.score:.2f}',
@@ -1558,6 +1617,8 @@ def main():
             enable_face_mosaic = not enable_face_mosaic
         elif key == 100: # D, Depth map overlay mode switch
             enable_depth_map_overlay = not enable_depth_map_overlay
+        elif key == 109: # M, Head distance measurement mode switch
+            enable_head_distance_measurement = not enable_head_distance_measurement
 
     if video_writer is not None:
         video_writer.release()
