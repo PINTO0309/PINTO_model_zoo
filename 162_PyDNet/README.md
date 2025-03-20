@@ -13,6 +13,8 @@ Real-time single image depth perception in the wild with handheld devices.
 
   ![000000012069](https://github.com/user-attachments/assets/8bdd6476-b02b-4bbe-aa94-a7c281aaf137)
 
+  https://github.com/user-attachments/assets/51c05192-02c0-4597-b8dd-e88dcb6bcd05
+
 # Demo
 
 https://github.com/PINTO0309/mobilePydnet/tree/onnx/single_inference
