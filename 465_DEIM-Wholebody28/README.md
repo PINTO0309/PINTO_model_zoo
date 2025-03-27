@@ -230,6 +230,23 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
         Bounding box line width. Default: 2
     ```
 
+- DEIM-Wholebody28 - N - 1,250 query - 15.4MB
+  ```
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.462
+  Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.656
+  Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.487
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.247
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.654
+  Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.832
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.282
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.508
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.567
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.385
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.764
+  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.899
+  Average Recall     (AR) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.802
+  Average Recall     (AR) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.590
+  ```
 - DEIM-Wholebody28 - S - 1,250 query - 41.6MB
   ```
   Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.621
