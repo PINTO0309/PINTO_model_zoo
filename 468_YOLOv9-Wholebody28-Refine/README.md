@@ -4,7 +4,7 @@
 
 Lightweight human detection models generated on high-quality human data sets. It can detect objects with high accuracy and speed in a total of 28 classes: `Body`, `Adult`, `Child`, `Male`, `Female`, `Body_with_Wheelchair`, `Body_with_Crutches`, `Head`, `Front`, `Right_Front`, `Right_Side`, `Right_Back`, `Back`, `Left_Back`, `Left_Side`, `Left_Front`, `Face`, `Eye`, `Nose`, `Mouth`, `Ear`, `Shoulder`, `Elbow`, `Hand`, `Hand_Left`, `Hand_Right`, `Knee`, `Foot`. Even the classification problem is being attempted to be solved by object detection. There is no need to perform any complex affine transformations or other processing for pre-processing and post-processing of input images. In addition, the resistance to Motion Blur, Gaussian noise, contrast noise, backlighting, and halation is quite strong because it was trained only on images with added photometric noise for all images in the MS-COCO subset of the image set. In addition, about half of the image set was annotated by me with the aspect ratio of the original image substantially destroyed. I manually annotated all images in the dataset by myself. The model is intended to use real-world video for inference and has enhanced resistance to all kinds of noise. Probably stronger than any known model. However, the quality of the known data set and my data set are so different that an accurate comparison of accuracy is not possible.
 
-**A notable feature of this model is that it can estimate the shoulder, elbow, and knee joints using only the object detection architecture. That is, I did not use any Pose Estimation architecture, nor did I use human joint keypoint data for training data. Therefore, it is now possible to estimate most of a person's parts, attributes, and keypoints through one-shot inference using a purely traditional simple object detection architecture. By not forcibly combining multiple architectures, inference performance is maximized and training costs are minimized. The difficulty of detecting the elbow is very high.**
+A notable feature of this model is that it can estimate the shoulder, elbow, and knee joints using only the object detection architecture. That is, I did not use any Pose Estimation architecture, nor did I use human joint keypoint data for training data. Therefore, it is now possible to estimate most of a person's parts, attributes, and keypoints through one-shot inference using a purely traditional simple object detection architecture. By not forcibly combining multiple architectures, inference performance is maximized and training costs are minimized. The difficulty of detecting the elbow is very high.
 
 This model is transfer learning using YOLOv9-Wholebody28 weights.
 
@@ -16,10 +16,8 @@ Don't be ruled by the curse of mAP.
 
 |output<br>`Objects score threshold >= 0.35`<br>`Attributes score threshold >= 0.75`<br>`Keypoints score threshold >= 0.25`|output<br>`Objects score threshold >= 0.35`<br>`Attributes score threshold >= 0.75`<br>`Keypoints score threshold >= 0.25`|
 |:-:|:-:|
-|![000000003786](https://github.com/user-attachments/assets/a21ae3c3-4bea-4461-9ad3-ea1decb14f63)|![000000010082](https://github.com/user-attachments/assets/2654eac6-219e-4840-adad-5a1d24629b56)|
-|![000000061606](https://github.com/user-attachments/assets/9348193d-c871-445b-b19d-aa6244d5a543)|![000000064744](https://github.com/user-attachments/assets/c9a2935b-a7f8-4172-947c-fd158b35491e)|
-|![000000088214](https://github.com/user-attachments/assets/8b597dc4-9bc9-454a-96fc-c61914958097)|![000000088754](https://github.com/user-attachments/assets/def8dba4-7109-4908-a67a-f33053e585ce)|
-|![frameE_000031](https://github.com/user-attachments/assets/d6a774ae-b44a-43a4-bf78-034ec1522492)|![frameE_000071](https://github.com/user-attachments/assets/15b19dbc-bcaf-4b04-9262-38c4f08f78a6)|
+|![image](https://github.com/user-attachments/assets/5f076df6-c772-4fba-be0f-2b3557477d2f)|![image](https://github.com/user-attachments/assets/61d3163b-1936-4740-991b-ecd7df141ab7)|
+|![image](https://github.com/user-attachments/assets/e550120f-cf49-4b63-8728-80c72b4bf5b9)|![image](https://github.com/user-attachments/assets/52b4c72d-b8e5-441b-b4f7-f072dee9fa9d)|
 
 The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.
 
