@@ -14,6 +14,8 @@ Don't be ruled by the curse of mAP.
 
   https://github.com/user-attachments/assets/71e43ff6-7980-4134-8ad2-f82ef6babdaa
 
+**This model, `YOLOv9-Wholebody28-Refine`, is a model that has been trained with a large number of additional annotations for objects in non-visible areas compared to `YOLOv9-Wholebody28`, thereby expanding its ability to estimate invisible parts. In particular, joint detection performance has been improved, which is a very important enhancement for acquiring skeleton detection capabilities that are planned for future support.**
+
 |output<br>`Objects score threshold >= 0.35`<br>`Attributes score threshold >= 0.75`<br>`Keypoints score threshold >= 0.25`|output<br>`Objects score threshold >= 0.35`<br>`Attributes score threshold >= 0.75`<br>`Keypoints score threshold >= 0.25`|
 |:-:|:-:|
 |![image](https://github.com/user-attachments/assets/5f076df6-c772-4fba-be0f-2b3557477d2f)|![image](https://github.com/user-attachments/assets/61d3163b-1936-4740-991b-ecd7df141ab7)|
