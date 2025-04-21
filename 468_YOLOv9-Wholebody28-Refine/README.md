@@ -107,6 +107,11 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
     ```
 
   - Demonstration of models with built-in post-processing (Float32/Float16)
+  
+    **Due to a bug in the INMSLayer introduced in TensorRT 9.x, ONNX files containing NMS cannot be transpilated to TensorRT Engine correctly. Therefore, when running the demo program with the `-ep tenosrrt` option, the demo code automatically purges all layers after NMS from the model body to avoid the TensorRT bug and perform inference correctly.**
+    |Structure|Model|
+    |:-:|:-:|
+    |![image](https://github.com/user-attachments/assets/4b3ed411-08cb-4c32-b633-b4909dc711f2)|![image](https://github.com/user-attachments/assets/55e7bee5-f58f-408a-bafa-d542f9ec8ca2)|
     ```
     usage:
       demo_yolov9_onnx_wholebody28.py \
