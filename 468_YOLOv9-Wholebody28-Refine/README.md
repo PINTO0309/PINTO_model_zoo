@@ -10,7 +10,7 @@ This model is transfer learning using YOLOv9-Wholebody28 weights.
 
 Don't be ruled by the curse of mAP.
 
-- TensorRT 10.9.0 + onnxruntime-gpu + YOLOv9-Wholebody28-Refine-X
+- TensorRT 10.9.0 + onnxruntime-gpu 1.22.0 + YOLOv9-Wholebody28-Refine-X
 
   https://github.com/user-attachments/assets/71e43ff6-7980-4134-8ad2-f82ef6babdaa
 
