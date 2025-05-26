@@ -4,7 +4,7 @@
   <img src="https://user-images.githubusercontent.com/33194443/104581604-2592cb00-56a2-11eb-9610-5eaa0afb6e1f.png" />
 </p>
 
- [![CodeQL](https://github.com/PINTO0309/PINTO_model_zoo/workflows/CodeQL/badge.svg)](https://github.com/PINTO0309/PINTO_model_zoo/actions?query=workflow%3ACodeQL) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10229410.svg)](https://doi.org/10.5281/zenodo.10229410)
+ [![CodeQL](https://github.com/PINTO0309/PINTO_model_zoo/workflows/CodeQL/badge.svg)](https://github.com/PINTO0309/PINTO_model_zoo/actions?query=workflow%3ACodeQL) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10229410.svg)](https://doi.org/10.5281/zenodo.10229410) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/PINTO0309/PINTO_model_zoo)
 
 **Please read the contents of the `LICENSE` file located directly under each folder before using the model. My model conversion scripts are released under the MIT license, but the license of the source model itself is subject to the license of the provider repository.**
 
