@@ -494,6 +494,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |409|nighttime_dehaze|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/409_nighttime_dehaze)|||||||||||⚫|DeHaze|
 |411|UDR-S2Former_deraining|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/411_UDR-S2Former_deraining)|||||||||||⚫|DeRain|
 |418|Diffusion-Low-Light|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/418_Diffusion-Low-Light)|⚫|⚫|||||||||⚫|Diffusion, Low-light Image Enhancement|
+|469|Face_Deblurring|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/469_Face_Deblurring)|||||||||||⚫|64x64, HxW|
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
