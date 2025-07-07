@@ -21,3 +21,7 @@ plt.show()
 https://github.com/PINTO0309/Face-Blurring-and-Deblurring
 
 https://github.com/PINTO0309/Face-Blurring-and-Deblurring/blob/onnx/model/faceDeblurring/Face_Deblurring.ipynb
+
+## Cited
+
+https://github.com/hrugved06/Face-Blurring-and-Deblurring
