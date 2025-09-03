@@ -391,6 +391,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |417|PopNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/417_PopNet)|||||||||||⚫|Saliency|
 |466|People_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/466_People_Segmentation)|||||||||||⚫|UNet|
 |467|Human_Parsing|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/467_Human_Parsing)|||||||||||⚫||
+|470|RHIS|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/470_RHIS)|||||||||||⚫|UNet+UNet|
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
