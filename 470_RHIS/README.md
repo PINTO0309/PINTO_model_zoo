@@ -4,6 +4,15 @@ A lightweight ROI-based hierarchical instance segmentation model for human detec
 
 Detectron/Detectron2, YOLO not used. However, you can always merge this with your favorite object detection model such as YOLO, DEIM, or RT-DETR to have an end-to-end instance segmentation model.
 
+## No pixel expansion
+
+|Images|Images|
+|:-:|:-:|
+|<img width="640" height="457" alt="000000049759_segmented" src="https://github.com/user-attachments/assets/56699f65-6dc7-430d-a2f3-007669a083c4" />|<img width="640" height="480" alt="000000025593_segmented" src="https://github.com/user-attachments/assets/f8eae65a-865a-47b8-8fdd-b66d484e1118" />|
+|<img width="640" height="427" alt="000000050380_segmented" src="https://github.com/user-attachments/assets/c7fcb3dd-91bb-4446-bf55-c9430d507e96" />|<img width="480" height="640" alt="000000074646_segmented" src="https://github.com/user-attachments/assets/d3954e37-546f-4eb3-a8c0-40ee9db518a9" />|
+
+## 1 pixel dilation
+
 |Images|Images|
 |:-:|:-:|
 |<img width="640" height="457" alt="000000049759_segmented" src="https://github.com/user-attachments/assets/f9ed44cc-ebb7-4464-bf33-0a27a3f2c022" />|<img width="640" height="480" alt="000000025593_segmented" src="https://github.com/user-attachments/assets/c8d9b506-9580-461e-a525-c09f919e3e3b" />|
