@@ -4,6 +4,8 @@ A lightweight ROI-based hierarchical instance segmentation model for human detec
 
 Detectron/Detectron2, YOLO not used. However, you can always merge this with your favorite object detection model such as YOLO, DEIM, or RT-DETR to have an end-to-end instance segmentation model.
 
+The input resolution of the image of this model can be freely reduced to a small size or increased to a high resolution depending on the hardware specifications.
+
 ## No pixel expansion
 
 |Images|Images|
