@@ -30,6 +30,8 @@ rois_unnormalized = np.array(
 )
 ```
 
+<img width="800" height="533" alt="RHIS Demo: masks_screenshot_06 09 2025" src="https://github.com/user-attachments/assets/d3feedba-3287-4106-85e7-310fd15ac4dc" />
+
 ## About sample images
 The sample image uses the image of "[PAKUTASO](https://www.pakutaso.com/)".<br>
 If you want to use the image itself for another purpose, you must follow the [userpolicy of PAKUTASO](https://www.pakutaso.com/userpolicy.html).
