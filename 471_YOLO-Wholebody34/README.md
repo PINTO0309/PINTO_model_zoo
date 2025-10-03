@@ -2,7 +2,8 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10229410.svg)](https://doi.org/10.5281/zenodo.10229410)
 
-⚠ The dataset I created became so large that YOLO no longer provided sufficient accuracy for my needs. Therefore, I recommend using the DEIMv2 model, which will be released soon. ⚠
+> [!WARNING]
+> **The dataset I created became so large that YOLO no longer provided sufficient accuracy for my needs. Therefore, I recommend using the DEIMv2 model, which will be released soon.**
 
 Lightweight human detection models generated on high-quality human data sets. It can detect objects with high accuracy and speed in a total of 34 classes: `body`, `adult`, `child`, `male`, `female`, `body_with_wheelchair`, `body_with_crutches`, `head`, `front`, `right-front`, `right-side`, `right-back`, `back`, `left-back`, `left-side`, `left-front`, `face`, `eye`, `nose`, `mouth`, `ear`, `collarbone`, `shoulder`, `solar_plexus`, `elbow`, `wrist`, `hand`, `hand_left`, `hand_right`, `abdomen`, `hip_joint`, `knee`, `ankle`, `foot`. Even the classification problem is being attempted to be solved by object detection. There is no need to perform any complex affine transformations or other processing for pre-processing and post-processing of input images. In addition, the resistance to Motion Blur, Gaussian noise, contrast noise, backlighting, and halation is quite strong because it was trained only on images with added photometric noise for all images in the MS-COCO subset of the image set. In addition, about half of the image set was annotated by me with the aspect ratio of the original image substantially destroyed. I manually annotated all images in the dataset by myself. The model is intended to use real-world video for inference and has enhanced resistance to all kinds of noise. Probably stronger than any known model. However, the quality of the known data set and my data set are so different that an accurate comparison of accuracy is not possible.
 
@@ -14,8 +15,8 @@ Don't be ruled by the curse of mAP.
 
 |output<br>`Objects score threshold >= 0.35`<br>`Attributes score threshold >= 0.75`<br>`Keypoints score threshold >= 0.25`|output<br>`Objects score threshold >= 0.35`<br>`Attributes score threshold >= 0.75`<br>`Keypoints score threshold >= 0.25`|
 |:-:|:-:|
-|||
-|||
+|![000000003786](https://github.com/user-attachments/assets/b9bc3a98-4322-4c6c-8003-7f4cb80a4aef)|![000000010082](https://github.com/user-attachments/assets/fdec507e-a6cf-46ef-a9dd-b1f851295b09)|
+|![000000010104](https://github.com/user-attachments/assets/e5f90f2d-31be-4a69-be62-1a6e81c429f3)|![000000014428](https://github.com/user-attachments/assets/4b6fc683-b450-4f52-ba20-06aa3eb28175)|
 
 The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.
 
@@ -43,6 +44,7 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
   Halfway compromises are never acceptable. The trick to annotation is to not miss a single object and not compromise on a single pixel. The ultimate methodology is to `try your best`.
 
+  <img width="958" height="850" alt="image" src="https://github.com/user-attachments/assets/cc423513-3136-48fa-a310-3d411d5ee3f4" />
 
 
   Please feel free to change the head direction label as you wish. There is no correlation between the model's behavior and the meaning of the label text.
