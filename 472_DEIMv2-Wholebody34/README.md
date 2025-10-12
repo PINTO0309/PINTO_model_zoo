@@ -15,9 +15,9 @@ Don't be ruled by the curse of mAP.
   |![000000009420](https://github.com/user-attachments/assets/a12b8f9d-0277-4a3c-8f06-faa58cfc06f8)|![000000014428](https://github.com/user-attachments/assets/f62fe90f-4933-4702-a0c3-438ded0790cd)|
   |![000000087933](https://github.com/user-attachments/assets/578af428-0d04-408f-ad59-786d6e21848d)|![000000048658](https://github.com/user-attachments/assets/f650f11e-afd5-4647-8615-f0b6dfbe26ec)|
 
-- USBCam realtime - DEIMv2-X - 1,750 query
+- USBCam realtime - DEIMv2-X - 680 query
 
-  https://github.com/user-attachments/assets/f6643d1d-e4a3-4d90-a673-0a82733294f1
+  https://github.com/user-attachments/assets/ffe4d775-7a14-4c98-af17-845ba0d7b452
 
 The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.
 
