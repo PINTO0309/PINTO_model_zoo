@@ -13,6 +13,7 @@ Don't be ruled by the curse of mAP.
   |Image|Image|
   |:-:|:-:|
   |![000000009420](https://github.com/user-attachments/assets/a12b8f9d-0277-4a3c-8f06-faa58cfc06f8)|![000000014428](https://github.com/user-attachments/assets/f62fe90f-4933-4702-a0c3-438ded0790cd)|
+  |![000000087933](https://github.com/user-attachments/assets/578af428-0d04-408f-ad59-786d6e21848d)|![000000048658](https://github.com/user-attachments/assets/f650f11e-afd5-4647-8615-f0b6dfbe26ec)|
 
 - USBCam realtime - DEIMv2-X - 1,750 query
 
