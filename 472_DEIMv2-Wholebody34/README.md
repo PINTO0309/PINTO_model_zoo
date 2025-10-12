@@ -179,6 +179,41 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 <summary>DEIMv2-Wholebody34 - Femto - 416x416 - 340 query</summary>
 
   ```
+  ┏━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┓
+  ┃Epoch┃Avg. Precision  ┃     %╇Avg. Recall     ┃     %┃
+  ┡━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━┩
+  │   27│AP @ .5:.95     │025.35╎AR maxDets   1  │019.05│
+  │   27│AP @     .5     │041.90╎AR maxDets  10  │033.47│
+  │   27│AP @    .75     │025.52╎AR maxDets 100  │035.01│
+  │   27│AP  (small)     │011.05╎AR     (small)  │018.86│
+  │   27│AP (medium)     │044.68╎AR    (medium)  │059.68│
+  │   27│AP  (large)     │066.36╎AR     (large)  │077.40│
+  └─────┴────────────────┴──────┴────────────────┴──────┘
+  Per-class mAP:
+  ┏━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┓
+  ┃ ID┃Name                     ┃     AP┃ ID┃Name                     ┃     AP┃
+  ┡━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━┩
+  │  0│body                     │ 0.4206│ 20│ear                      │ 0.1558│
+  │  1│adult                    │ 0.4340│ 21│collarbone               │ 0.0650│
+  │  2│child                    │ 0.3248│ 22│shoulder                 │ 0.1134│
+  │  3│male                     │ 0.4013│ 23│solar_plexus             │ 0.0433│
+  │  4│female                   │ 0.3069│ 24│elbow                    │ 0.0789│
+  │  5│body_with_wheelchair     │ 0.4803│ 25│wrist                    │ 0.0682│
+  │  6│body_with_crutches       │ 0.4859│ 26│hand                     │ 0.2965│
+  │  7│head                     │ 0.4403│ 27│hand_left                │ 0.2577│
+  │  8│front                    │ 0.3192│ 28│hand_right               │ 0.2538│
+  │  9│right-front              │ 0.3115│ 29│abdomen                  │ 0.1077│
+  │ 10│right-side               │ 0.3613│ 30│hip_joint                │ 0.0639│
+  │ 11│right-back               │ 0.2646│ 31│knee                     │ 0.0931│
+  │ 12│back                     │ 0.2162│ 32│ankle                    │ 0.0958│
+  │ 13│left-back                │ 0.2917│ 33│foot                     │ 0.2184│
+  │ 14│left-side                │ 0.3771│   │                         │       │
+  │ 15│left-front               │ 0.3418│   │                         │       │
+  │ 16│face                     │ 0.4349│   │                         │       │
+  │ 17│eye                      │ 0.1312│   │                         │       │
+  │ 18│nose                     │ 0.2124│   │                         │       │
+  │ 19│mouth                    │ 0.1530│   │                         │       │
+  └───┴─────────────────────────┴───────┴───┴─────────────────────────┴───────┘
   ```
 
 </details>
@@ -186,6 +221,41 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 <summary>DEIMv2-Wholebody34 - Pico - 640x640 - 340 query</summary>
 
   ```
+  ┏━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┓
+  ┃Epoch┃Avg. Precision  ┃     %╇Avg. Recall     ┃     %┃
+  ┡━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━┩
+  │   27│AP @ .5:.95     │036.93╎AR maxDets   1  │023.46│
+  │   27│AP @     .5     │056.62╎AR maxDets  10  │041.96│
+  │   27│AP @    .75     │038.40╎AR maxDets 100  │043.91│
+  │   27│AP  (small)     │019.46╎AR     (small)  │027.80│
+  │   27│AP (medium)     │059.35╎AR    (medium)  │068.64│
+  │   27│AP  (large)     │078.22╎AR     (large)  │082.95│
+  └─────┴────────────────┴──────┴────────────────┴──────┘
+  Per-class mAP:
+  ┏━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┓
+  ┃ ID┃Name                     ┃     AP┃ ID┃Name                     ┃     AP┃
+  ┡━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━┩
+  │  0│body                     │ 0.5335│ 20│ear                      │ 0.2548│
+  │  1│adult                    │ 0.5730│ 21│collarbone               │ 0.1273│
+  │  2│child                    │ 0.5669│ 22│shoulder                 │ 0.1780│
+  │  3│male                     │ 0.5698│ 23│solar_plexus             │ 0.0901│
+  │  4│female                   │ 0.5425│ 24│elbow                    │ 0.1600│
+  │  5│body_with_wheelchair     │ 0.6915│ 25│wrist                    │ 0.1587│
+  │  6│body_with_crutches       │ 0.6325│ 26│hand                     │ 0.4446│
+  │  7│head                     │ 0.5356│ 27│hand_left                │ 0.4117│
+  │  8│front                    │ 0.4032│ 28│hand_right               │ 0.4029│
+  │  9│right-front              │ 0.4036│ 29│abdomen                  │ 0.2023│
+  │ 10│right-side               │ 0.4766│ 30│hip_joint                │ 0.1411│
+  │ 11│right-back               │ 0.4023│ 31│knee                     │ 0.1728│
+  │ 12│back                     │ 0.3316│ 32│ankle                    │ 0.1778│
+  │ 13│left-back                │ 0.4099│ 33│foot                     │ 0.3259│
+  │ 14│left-side                │ 0.4745│   │                         │       │
+  │ 15│left-front               │ 0.4314│   │                         │       │
+  │ 16│face                     │ 0.5214│   │                         │       │
+  │ 17│eye                      │ 0.2357│   │                         │       │
+  │ 18│nose                     │ 0.3197│   │                         │       │
+  │ 19│mouth                    │ 0.2537│   │                         │       │
+  └───┴─────────────────────────┴───────┴───┴─────────────────────────┴───────┘
   ```
 
 </details>
@@ -193,6 +263,41 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 <summary>DEIMv2-Wholebody34 - N - 640x640 - 680 query</summary>
 
   ```
+  ┏━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┓
+  ┃Epoch┃Avg. Precision  ┃     %╇Avg. Recall     ┃     %┃
+  ┡━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━┩
+  │   27│AP @ .5:.95     │039.42╎AR maxDets   1  │024.44│
+  │   27│AP @     .5     │058.44╎AR maxDets  10  │044.64│
+  │   27│AP @    .75     │040.74╎AR maxDets 100  │048.41│
+  │   27│AP  (small)     │020.53╎AR     (small)  │031.69│
+  │   27│AP (medium)     │065.44╎AR    (medium)  │075.53│
+  │   27│AP  (large)     │085.69╎AR     (large)  │089.89│
+  └─────┴────────────────┴──────┴────────────────┴──────┘
+  Per-class mAP:
+  ┏━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┓
+  ┃ ID┃Name                     ┃     AP┃ ID┃Name                     ┃     AP┃
+  ┡━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━┩
+  │  0│body                     │ 0.5737│ 20│ear                      │ 0.2649│
+  │  1│adult                    │ 0.6062│ 21│collarbone               │ 0.1299│
+  │  2│child                    │ 0.5856│ 22│shoulder                 │ 0.1989│
+  │  3│male                     │ 0.6050│ 23│solar_plexus             │ 0.1055│
+  │  4│female                   │ 0.5495│ 24│elbow                    │ 0.1821│
+  │  5│body_with_wheelchair     │ 0.8026│ 25│wrist                    │ 0.1706│
+  │  6│body_with_crutches       │ 0.7307│ 26│hand                     │ 0.4862│
+  │  7│head                     │ 0.5493│ 27│hand_left                │ 0.4584│
+  │  8│front                    │ 0.4213│ 28│hand_right               │ 0.4517│
+  │  9│right-front              │ 0.4159│ 29│abdomen                  │ 0.2439│
+  │ 10│right-side               │ 0.4862│ 30│hip_joint                │ 0.1800│
+  │ 11│right-back               │ 0.3993│ 31│knee                     │ 0.2003│
+  │ 12│back                     │ 0.3306│ 32│ankle                    │ 0.1965│
+  │ 13│left-back                │ 0.4265│ 33│foot                     │ 0.3695│
+  │ 14│left-side                │ 0.4927│   │                         │       │
+  │ 15│left-front               │ 0.4330│   │                         │       │
+  │ 16│face                     │ 0.5429│   │                         │       │
+  │ 17│eye                      │ 0.2351│   │                         │       │
+  │ 18│nose                     │ 0.3177│   │                         │       │
+  │ 19│mouth                    │ 0.2623│   │                         │       │
+  └───┴─────────────────────────┴───────┴───┴─────────────────────────┴───────┘
   ```
 
 </details>
@@ -200,6 +305,41 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 <summary>DEIMv2-Wholebody34 - S - 640x640 - 1750 query</summary>
 
   ```
+  ┏━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┓
+  ┃Epoch┃Avg. Precision  ┃     %╇Avg. Recall     ┃     %┃
+  ┡━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━┩
+  │   27│AP @ .5:.95     │054.27╎AR maxDets   1  │029.00│
+  │   27│AP @     .5     │074.93╎AR maxDets  10  │054.87│
+  │   27│AP @    .75     │056.55╎AR maxDets 100  │061.57│
+  │   27│AP  (small)     │035.08╎AR     (small)  │047.44│
+  │   27│AP (medium)     │082.74╎AR    (medium)  │086.38│
+  │   27│AP  (large)     │096.02╎AR     (large)  │096.92│
+  └─────┴────────────────┴──────┴────────────────┴──────┘
+  Per-class mAP:
+  ┏━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┓
+  ┃ ID┃Name                     ┃     AP┃ ID┃Name                     ┃     AP┃
+  ┡━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━┩
+  │  0│body                     │ 0.6777│ 20│ear                      │ 0.4234│
+  │  1│adult                    │ 0.7226│ 21│collarbone               │ 0.2604│
+  │  2│child                    │ 0.7563│ 22│shoulder                 │ 0.3158│
+  │  3│male                     │ 0.7245│ 23│solar_plexus             │ 0.2770│
+  │  4│female                   │ 0.7101│ 24│elbow                    │ 0.3182│
+  │  5│body_with_wheelchair     │ 0.9078│ 25│wrist                    │ 0.3161│
+  │  6│body_with_crutches       │ 0.9146│ 26│hand                     │ 0.6750│
+  │  7│head                     │ 0.6560│ 27│hand_left                │ 0.6594│
+  │  8│front                    │ 0.5356│ 28│hand_right               │ 0.6512│
+  │  9│right-front              │ 0.5458│ 29│abdomen                  │ 0.4282│
+  │ 10│right-side               │ 0.6306│ 30│hip_joint                │ 0.3684│
+  │ 11│right-back               │ 0.5622│ 31│knee                     │ 0.3390│
+  │ 12│back                     │ 0.5139│ 32│ankle                    │ 0.3491│
+  │ 13│left-back                │ 0.5925│ 33│foot                     │ 0.5280│
+  │ 14│left-side                │ 0.6299│   │                         │       │
+  │ 15│left-front               │ 0.5555│   │                         │       │
+  │ 16│face                     │ 0.6441│   │                         │       │
+  │ 17│eye                      │ 0.3997│   │                         │       │
+  │ 18│nose                     │ 0.4583│   │                         │       │
+  │ 19│mouth                    │ 0.4040│   │                         │       │
+  └───┴─────────────────────────┴───────┴───┴─────────────────────────┴───────┘
   ```
 
 </details>
@@ -207,6 +347,41 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 <summary>DEIMv2-Wholebody34 - X - 640x640 - 340 query</summary>
 
   ```
+  ┏━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┓
+  ┃Epoch┃Avg. Precision  ┃     %╇Avg. Recall     ┃     %┃
+  ┡━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━┩
+  │    5│AP @ .5:.95     │054.65╎AR maxDets   1  │028.90│
+  │    5│AP @     .5     │075.99╎AR maxDets  10  │055.43│
+  │    5│AP @    .75     │057.05╎AR maxDets 100  │061.76│
+  │    5│AP  (small)     │036.13╎AR     (small)  │047.98│
+  │    5│AP (medium)     │080.43╎AR    (medium)  │084.84│
+  │    5│AP  (large)     │094.43╎AR     (large)  │095.79│
+  └─────┴────────────────┴──────┴────────────────┴──────┘
+  Per-class mAP:
+  ┏━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┓
+  ┃ ID┃Name                     ┃     AP┃ ID┃Name                     ┃     AP┃
+  ┡━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━┩
+  │  0│body                     │ 0.6888│ 20│ear                      │ 0.4536│
+  │  1│adult                    │ 0.7270│ 21│collarbone               │ 0.2497│
+  │  2│child                    │ 0.7752│ 22│shoulder                 │ 0.3224│
+  │  3│male                     │ 0.7273│ 23│solar_plexus             │ 0.2533│
+  │  4│female                   │ 0.7144│ 24│elbow                    │ 0.3242│
+  │  5│body_with_wheelchair     │ 0.9288│ 25│wrist                    │ 0.3363│
+  │  6│body_with_crutches       │ 0.9458│ 26│hand                     │ 0.6652│
+  │  7│head                     │ 0.6582│ 27│hand_left                │ 0.6589│
+  │  8│front                    │ 0.5356│ 28│hand_right               │ 0.6461│
+  │  9│right-front              │ 0.5528│ 29│abdomen                  │ 0.3966│
+  │ 10│right-side               │ 0.6269│ 30│hip_joint                │ 0.3362│
+  │ 11│right-back               │ 0.5538│ 31│knee                     │ 0.3463│
+  │ 12│back                     │ 0.5096│ 32│ankle                    │ 0.3549│
+  │ 13│left-back                │ 0.5854│ 33│foot                     │ 0.5433│
+  │ 14│left-side                │ 0.6274│   │                         │       │
+  │ 15│left-front               │ 0.5555│   │                         │       │
+  │ 16│face                     │ 0.6580│   │                         │       │
+  │ 17│eye                      │ 0.4130│   │                         │       │
+  │ 18│nose                     │ 0.4814│   │                         │       │
+  │ 19│mouth                    │ 0.4284│   │                         │       │
+  └───┴─────────────────────────┴───────┴───┴─────────────────────────┴───────┘
   ```
 
 </details>
@@ -214,6 +389,41 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 <summary>DEIMv2-Wholebody34 - X - 640x640 - 680 query</summary>
 
   ```
+  ┏━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┓
+  ┃Epoch┃Avg. Precision  ┃     %╇Avg. Recall     ┃     %┃
+  ┡━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━┩
+  │    5│AP @ .5:.95     │054.90╎AR maxDets   1  │028.93│
+  │    5│AP @     .5     │076.52╎AR maxDets  10  │055.50│
+  │    5│AP @    .75     │057.23╎AR maxDets 100  │062.07│
+  │    5│AP  (small)     │036.67╎AR     (small)  │048.45│
+  │    5│AP (medium)     │080.68╎AR    (medium)  │084.93│
+  │    5│AP  (large)     │094.48╎AR     (large)  │095.55│
+  └─────┴────────────────┴──────┴────────────────┴──────┘
+  Per-class mAP:
+  ┏━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┓
+  ┃ ID┃Name                     ┃     AP┃ ID┃Name                     ┃     AP┃
+  ┡━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━┩
+  │  0│body                     │ 0.6894│ 20│ear                      │ 0.4541│
+  │  1│adult                    │ 0.7354│ 21│collarbone               │ 0.2480│
+  │  2│child                    │ 0.7854│ 22│shoulder                 │ 0.3231│
+  │  3│male                     │ 0.7338│ 23│solar_plexus             │ 0.2500│
+  │  4│female                   │ 0.7201│ 24│elbow                    │ 0.3307│
+  │  5│body_with_wheelchair     │ 0.9228│ 25│wrist                    │ 0.3382│
+  │  6│body_with_crutches       │ 0.9354│ 26│hand                     │ 0.6691│
+  │  7│head                     │ 0.6559│ 27│hand_left                │ 0.6627│
+  │  8│front                    │ 0.5376│ 28│hand_right               │ 0.6506│
+  │  9│right-front              │ 0.5590│ 29│abdomen                  │ 0.3963│
+  │ 10│right-side               │ 0.6299│ 30│hip_joint                │ 0.3402│
+  │ 11│right-back               │ 0.5646│ 31│knee                     │ 0.3493│
+  │ 12│back                     │ 0.5184│ 32│ankle                    │ 0.3554│
+  │ 13│left-back                │ 0.5813│ 33│foot                     │ 0.5480│
+  │ 14│left-side                │ 0.6307│   │                         │       │
+  │ 15│left-front               │ 0.5565│   │                         │       │
+  │ 16│face                     │ 0.6611│   │                         │       │
+  │ 17│eye                      │ 0.4171│   │                         │       │
+  │ 18│nose                     │ 0.4832│   │                         │       │
+  │ 19│mouth                    │ 0.4314│   │                         │       │
+  └───┴─────────────────────────┴───────┴───┴─────────────────────────┴───────┘
   ```
 
 </details>
@@ -221,6 +431,41 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 <summary>DEIMv2-Wholebody34 - X - 640x640 - 1750 query</summary>
 
   ```
+  ┏━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┓
+  ┃Epoch┃Avg. Precision  ┃     %╇Avg. Recall     ┃     %┃
+  ┡━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━┩
+  │    6│AP @ .5:.95     │053.83╎AR maxDets   1  │028.56│
+  │    6│AP @     .5     │075.67╎AR maxDets  10  │054.63│
+  │    6│AP @    .75     │055.85╎AR maxDets 100  │061.57│
+  │    6│AP  (small)     │035.33╎AR     (small)  │047.79│
+  │    6│AP (medium)     │080.02╎AR    (medium)  │084.59│
+  │    6│AP  (large)     │093.83╎AR     (large)  │095.24│
+  └─────┴────────────────┴──────┴────────────────┴──────┘
+  Per-class mAP:
+  ┏━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┓
+  ┃ ID┃Name                     ┃     AP┃ ID┃Name                     ┃     AP┃
+  ┡━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━┩
+  │  0│body                     │ 0.6864│ 20│ear                      │ 0.4329│
+  │  1│adult                    │ 0.7306│ 21│collarbone               │ 0.2410│
+  │  2│child                    │ 0.7713│ 22│shoulder                 │ 0.3087│
+  │  3│male                     │ 0.7337│ 23│solar_plexus             │ 0.2403│
+  │  4│female                   │ 0.7178│ 24│elbow                    │ 0.3128│
+  │  5│body_with_wheelchair     │ 0.9276│ 25│wrist                    │ 0.3163│
+  │  6│body_with_crutches       │ 0.9487│ 26│hand                     │ 0.6577│
+  │  7│head                     │ 0.6470│ 27│hand_left                │ 0.6511│
+  │  8│front                    │ 0.5364│ 28│hand_right               │ 0.6389│
+  │  9│right-front              │ 0.5478│ 29│abdomen                  │ 0.3855│
+  │ 10│right-side               │ 0.6171│ 30│hip_joint                │ 0.3284│
+  │ 11│right-back               │ 0.5491│ 31│knee                     │ 0.3328│
+  │ 12│back                     │ 0.5182│ 32│ankle                    │ 0.3350│
+  │ 13│left-back                │ 0.5799│ 33│foot                     │ 0.5383│
+  │ 14│left-side                │ 0.6230│   │                         │       │
+  │ 15│left-front               │ 0.5461│   │                         │       │
+  │ 16│face                     │ 0.6443│   │                         │       │
+  │ 17│eye                      │ 0.3880│   │                         │       │
+  │ 18│nose                     │ 0.4631│   │                         │       │
+  │ 19│mouth                    │ 0.4053│   │                         │       │
+  └───┴─────────────────────────┴───────┴───┴─────────────────────────┴───────┘
   ```
 
 </details>
