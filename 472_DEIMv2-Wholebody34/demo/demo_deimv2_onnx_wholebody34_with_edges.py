@@ -1099,7 +1099,7 @@ def main():
                     # https://onnxruntime.ai/docs/execution-providers/TensorRT-ExecutionProvider.html#data-dependant-shape-dds-ops
                     # https://github.com/microsoft/onnxruntime/pull/22681/files
                     # https://github.com/microsoft/onnxruntime/pull/23893/files
-                    'trt_op_types_to_exclude': 'NonMaxSuppression,NonZero,RoiAlign"',
+                    'trt_op_types_to_exclude': 'NonMaxSuppression,NonZero,RoiAlign',
                 } | ep_type_params,
             ),
             "CUDAExecutionProvider",
