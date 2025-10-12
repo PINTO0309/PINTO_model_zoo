@@ -533,4 +533,4 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   https://github.com/PINTO0309/DEIMv2
 
 ## 6. License
-[MIT](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/472_DEIMv2-Wholebody34/LICENSE)
+[Apache2.0](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/472_DEIMv2-Wholebody34/LICENSE)
