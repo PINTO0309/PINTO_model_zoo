@@ -577,3 +577,6 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
 ## 6. License
 [Apache2.0](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/472_DEIMv2-Wholebody34/LICENSE)
+
+## 7. Next Challenge
+My challenge is finally reaching its final phase. It has taken me two years to get to this point. The next step is to complete the model by giving all joints, eyes, and ears a left-right concept. If we could classify the left and right sides of each part of a bilaterally symmetrical human body, 2D skeleton detection models would become unnecessary forever.
