@@ -384,7 +384,7 @@ class DEIMv2(AbstractModel):
         self,
         *,
         runtime: Optional[str] = 'onnx',
-        model_path: Optional[str] = 'deimv2_dinov3_x_wholebody34_1750query_n_batch.onnx',
+        model_path: Optional[str] = 'deimv2_dinov3_x_wholebody34_1750query_n_batch_640x640.onnx',
         obj_class_score_th: Optional[float] = 0.35,
         attr_class_score_th: Optional[float] = 0.70,
         keypoint_th: Optional[float] = 0.35,
@@ -987,7 +987,7 @@ def main():
         '-m',
         '--model',
         type=str,
-        default='deimv2_dinov3_x_wholebody34_1750query_n_batch.onnx',
+        default='deimv2_dinov3_x_wholebody34_1750query_n_batch_640x640.onnx',
         help='ONNX/TFLite file path for DEIMv2.',
     )
     group_v_or_i = parser.add_mutually_exclusive_group(required=True)
