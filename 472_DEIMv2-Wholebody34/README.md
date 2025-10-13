@@ -117,8 +117,8 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
     [-it {fp16,int8}] [-dvw] [-dwk] [-ost OBJECT_SOCRE_THRESHOLD]
     [-ast ATTRIBUTE_SOCRE_THRESHOLD] [-kst KEYPOINT_THRESHOLD]
     [-kdm {dot,box,both}] [-ebm] [-dnm] [-dgm] [-dlr] [-dhm]
-    [-drc [DISABLE_RENDER_CLASSIDS ...]] [-efm] [-oyt]
-    [-bblw BOUNDING_BOX_LINE_WIDTH]
+    [-drc [DISABLE_RENDER_CLASSIDS ...]] [-efm] [-dtk] [-dti] [-dhd]
+    [-oyt] [-bblw BOUNDING_BOX_LINE_WIDTH] [-chf CAMERA_HORIZONTAL_FOV]
 
     options:
       -h, --help
