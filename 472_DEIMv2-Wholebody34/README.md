@@ -183,37 +183,37 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   ┏━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┓
   ┃Epoch┃Avg. Precision  ┃     %╇Avg. Recall     ┃     %┃
   ┡━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━┩
-  │    3│AP @ .5:.95     │018.07╎AR maxDets   1  │016.03│
-  │    3│AP @     .5     │030.33╎AR maxDets  10  │026.21│
-  │    3│AP @    .75     │018.25╎AR maxDets 100  │026.65│
-  │    3│AP  (small)     │005.80╎AR     (small)  │010.79│
-  │    3│AP (medium)     │033.26╎AR    (medium)  │048.67│
-  │    3│AP  (large)     │055.51╎AR     (large)  │071.12│
+  │    3│AP @ .5:.95     │018.86╎AR maxDets   1  │016.27│
+  │    3│AP @     .5     │031.83╎AR maxDets  10  │027.61│
+  │    3│AP @    .75     │018.94╎AR maxDets 100  │028.81│
+  │    3│AP  (small)     │006.24╎AR     (small)  │012.74│
+  │    3│AP (medium)     │034.21╎AR    (medium)  │051.36│
+  │    3│AP  (large)     │056.93╎AR     (large)  │072.83│
   └─────┴────────────────┴──────┴────────────────┴──────┘
   Per-class mAP:
   ┏━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┓
   ┃ ID┃Name                     ┃     AP┃ ID┃Name                     ┃     AP┃
   ┡━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━┩
-  │  0│body                     │ 0.3311│ 20│ear                      │ 0.0886│
-  │  1│adult                    │ 0.3465│ 21│collarbone               │ 0.0340│
-  │  2│child                    │ 0.2297│ 22│shoulder                 │ 0.0699│
-  │  3│male                     │ 0.3203│ 23│solar_plexus             │ 0.0203│
-  │  4│female                   │ 0.2057│ 24│elbow                    │ 0.0392│
-  │  5│body_with_wheelchair     │ 0.4015│ 25│wrist                    │ 0.0278│
-  │  6│body_with_crutches       │ 0.4373│ 26│hand                     │ 0.1864│
-  │  7│head                     │ 0.3535│ 27│hand_left                │ 0.1506│
-  │  8│front                    │ 0.2393│ 28│hand_right               │ 0.1459│
-  │  9│right-front              │ 0.2247│ 29│abdomen                  │ 0.0607│
-  │ 10│right-side               │ 0.2722│ 30│hip_joint                │ 0.0307│
-  │ 11│right-back               │ 0.1864│ 31│knee                     │ 0.0467│
-  │ 12│back                     │ 0.1321│ 32│ankle                    │ 0.0498│
-  │ 13│left-back                │ 0.2007│ 33│foot                     │ 0.1410│
-  │ 14│left-side                │ 0.2812│   │                         │       │
-  │ 15│left-front               │ 0.2591│   │                         │       │
-  │ 16│face                     │ 0.3346│   │                         │       │
-  │ 17│eye                      │ 0.0658│   │                         │       │
-  │ 18│nose                     │ 0.1384│   │                         │       │
-  │ 19│mouth                    │ 0.0922│   │                         │       │
+  │  0│body                     │ 0.3446│ 20│ear                      │ 0.0933│
+  │  1│adult                    │ 0.3616│ 21│collarbone               │ 0.0343│
+  │  2│child                    │ 0.2368│ 22│shoulder                 │ 0.0734│
+  │  3│male                     │ 0.3333│ 23│solar_plexus             │ 0.0232│
+  │  4│female                   │ 0.2129│ 24│elbow                    │ 0.0413│
+  │  5│body_with_wheelchair     │ 0.4186│ 25│wrist                    │ 0.0288│
+  │  6│body_with_crutches       │ 0.4764│ 26│hand                     │ 0.1924│
+  │  7│head                     │ 0.3656│ 27│hand_left                │ 0.1559│
+  │  8│front                    │ 0.2497│ 28│hand_right               │ 0.1506│
+  │  9│right-front              │ 0.2349│ 29│abdomen                  │ 0.0644│
+  │ 10│right-side               │ 0.2805│ 30│hip_joint                │ 0.0326│
+  │ 11│right-back               │ 0.1898│ 31│knee                     │ 0.0489│
+  │ 12│back                     │ 0.1367│ 32│ankle                    │ 0.0517│
+  │ 13│left-back                │ 0.2111│ 33│foot                     │ 0.1450│
+  │ 14│left-side                │ 0.2908│   │                         │       │
+  │ 15│left-front               │ 0.2692│   │                         │       │
+  │ 16│face                     │ 0.3512│   │                         │       │
+  │ 17│eye                      │ 0.0712│   │                         │       │
+  │ 18│nose                     │ 0.1454│   │                         │       │
+  │ 19│mouth                    │ 0.0967│   │                         │       │
   └───┴─────────────────────────┴───────┴───┴─────────────────────────┴───────┘
   ```
 
