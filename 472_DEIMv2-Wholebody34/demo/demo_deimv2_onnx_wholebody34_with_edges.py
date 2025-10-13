@@ -15,10 +15,12 @@ from enum import Enum
 from pathlib import Path
 from dataclasses import dataclass
 from argparse import ArgumentParser, ArgumentTypeError
-from typing import Tuple, Optional, List, Dict
+from typing import Tuple, Optional, List, Dict, Any
 import importlib.util
 from collections import Counter
 from abc import ABC, abstractmethod
+
+AVERAGE_HEAD_WIDTH: float = 0.16 + 0.10 # 16cm + Margin Compensation
 
 BOX_COLORS = [
     [(216, 67, 21),"Front"],
@@ -92,6 +94,120 @@ class Box():
     head_pose: int = -1 # -1: Unknown, 0: Front, 1: Right-Front, 2: Right-Side, 3: Right-Back, 4: Back, 5: Left-Back, 6: Left-Side, 7: Left-Front
     is_used: bool = False
     person_id: int = -1
+    track_id: int = -1
+
+class SimpleSortTracker:
+    """Minimal SORT-style tracker based on IoU matching."""
+
+    def __init__(self, iou_threshold: float = 0.3, max_age: int = 30) -> None:
+        self.iou_threshold = iou_threshold
+        self.max_age = max_age
+        self.next_track_id = 1
+        self.tracks: List[Dict[str, Any]] = []
+        self.frame_index = 0
+
+    @staticmethod
+    def _iou(bbox_a: Tuple[int, int, int, int], bbox_b: Tuple[int, int, int, int]) -> float:
+        ax1, ay1, ax2, ay2 = bbox_a
+        bx1, by1, bx2, by2 = bbox_b
+
+        inter_x1 = max(ax1, bx1)
+        inter_y1 = max(ay1, by1)
+        inter_x2 = min(ax2, bx2)
+        inter_y2 = min(ay2, by2)
+
+        inter_w = max(0, inter_x2 - inter_x1)
+        inter_h = max(0, inter_y2 - inter_y1)
+        if inter_w == 0 or inter_h == 0:
+            return 0.0
+
+        inter_area = inter_w * inter_h
+        area_a = max(0, ax2 - ax1) * max(0, ay2 - ay1)
+        area_b = max(0, bx2 - bx1) * max(0, by2 - by1)
+        union = area_a + area_b - inter_area
+        if union <= 0:
+            return 0.0
+        return float(inter_area / union)
+
+    def update(self, boxes: List[Box]) -> None:
+        self.frame_index += 1
+
+        for box in boxes:
+            box.track_id = -1
+
+        if not boxes and not self.tracks:
+            return
+
+        iou_matrix = None
+        if self.tracks and boxes:
+            iou_matrix = np.zeros((len(self.tracks), len(boxes)), dtype=np.float32)
+            for t_idx, track in enumerate(self.tracks):
+                track_bbox = track['bbox']
+                for d_idx, box in enumerate(boxes):
+                    det_bbox = (box.x1, box.y1, box.x2, box.y2)
+                    iou_matrix[t_idx, d_idx] = self._iou(track_bbox, det_bbox)
+
+        matched_tracks: set[int] = set()
+        matched_detections: set[int] = set()
+        matches: List[Tuple[int, int]] = []
+
+        if iou_matrix is not None and iou_matrix.size > 0:
+            while True:
+                best_track = -1
+                best_det = -1
+                best_iou = self.iou_threshold
+                for t_idx in range(len(self.tracks)):
+                    if t_idx in matched_tracks:
+                        continue
+                    for d_idx in range(len(boxes)):
+                        if d_idx in matched_detections:
+                            continue
+                        iou = float(iou_matrix[t_idx, d_idx])
+                        if iou > best_iou:
+                            best_iou = iou
+                            best_track = t_idx
+                            best_det = d_idx
+                if best_track == -1:
+                    break
+                matched_tracks.add(best_track)
+                matched_detections.add(best_det)
+                matches.append((best_track, best_det))
+
+        for t_idx, d_idx in matches:
+            track = self.tracks[t_idx]
+            det_box = boxes[d_idx]
+            track['bbox'] = (det_box.x1, det_box.y1, det_box.x2, det_box.y2)
+            track['missed'] = 0
+            track['last_seen'] = self.frame_index
+            det_box.track_id = track['id']
+
+        surviving_tracks: List[Dict[str, Any]] = []
+        for idx, track in enumerate(self.tracks):
+            if idx in matched_tracks:
+                surviving_tracks.append(track)
+                continue
+            track['missed'] += 1
+            if track['missed'] <= self.max_age:
+                surviving_tracks.append(track)
+        self.tracks = surviving_tracks
+
+        for d_idx, det_box in enumerate(boxes):
+            if d_idx in matched_detections:
+                continue
+            track_id = self.next_track_id
+            self.next_track_id += 1
+            det_box.track_id = track_id
+            self.tracks.append(
+                {
+                    'id': track_id,
+                    'bbox': (det_box.x1, det_box.y1, det_box.x2, det_box.y2),
+                    'missed': 0,
+                    'last_seen': self.frame_index,
+                }
+            )
+
+        if not boxes:
+            return
 
 class AbstractModel(ABC):
     """AbstractModel
@@ -1005,6 +1121,27 @@ def main():
             'Enable face mosaic.',
     )
     parser.add_argument(
+        '-dtk',
+        '--disable_tracking',
+        action='store_true',
+        help=\
+            'Disable instance tracking. (Press R on the keyboard to switch modes)',
+    )
+    parser.add_argument(
+        '-dti',
+        '--disable_trackid_overlay',
+        action='store_true',
+        help=\
+            'Disable TrackID overlay. (Press T on the keyboard to switch modes)',
+    )
+    parser.add_argument(
+        '-dhd',
+        '--disable_head_distance_measurement',
+        action='store_true',
+        help=\
+            'Disable Head distance measurement. (Press M on the keyboard to switch modes)',
+    )
+    parser.add_argument(
         '-oyt',
         '--output_yolo_format_text',
         action='store_true',
@@ -1018,6 +1155,14 @@ def main():
         default=2,
         help=\
             'Bounding box line width. Default: 2',
+    )
+    parser.add_argument(
+        '-chf',
+        '--camera_horizontal_fov',
+        type=int,
+        default=90,
+        help=\
+            'Camera horizontal FOV. Default: 90',
     )
     args = parser.parse_args()
 
@@ -1053,11 +1198,15 @@ def main():
     disable_headpose_identification_mode: bool = args.disable_headpose_identification_mode
     disable_render_classids: List[int] = args.disable_render_classids
     enable_face_mosaic: bool = args.enable_face_mosaic
+    enable_tracking: bool = not args.disable_tracking
+    enable_trackid_overlay: bool = not args.disable_trackid_overlay
+    enable_head_distance_measurement: bool = not args.disable_head_distance_measurement
     output_yolo_format_text: bool = args.output_yolo_format_text
     execution_provider: str = args.execution_provider
     inference_type: str = args.inference_type
     inference_type = inference_type.lower()
     bounding_box_line_width: int = args.bounding_box_line_width
+    camera_horizontal_fov: int = args.camera_horizontal_fov
     providers: List[Tuple[str, Dict] | str] = None
 
     if execution_provider == 'cpu':
@@ -1145,6 +1294,9 @@ def main():
     movie_frame_count = 0
     white_line_width = bounding_box_line_width
     colored_line_width = white_line_width - 1
+    tracker = SimpleSortTracker()
+    track_color_cache: Dict[int, np.ndarray] = {}
+    tracking_enabled_prev = enable_tracking
     while True:
         image: np.ndarray = None
         if file_paths is not None:
@@ -1176,6 +1328,25 @@ def main():
         if file_paths is None:
             cv2.putText(debug_image, f'{elapsed_time*1000:.2f} ms', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2, cv2.LINE_AA)
             cv2.putText(debug_image, f'{elapsed_time*1000:.2f} ms', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 1, cv2.LINE_AA)
+
+        body_boxes = [box for box in boxes if box.classid == 0]
+        current_tracking_enabled = enable_tracking
+        if current_tracking_enabled:
+            if not tracking_enabled_prev:
+                tracker = SimpleSortTracker()
+                track_color_cache.clear()
+            tracker.update(body_boxes)
+            active_track_ids = {track['id'] for track in tracker.tracks}
+            stale_ids = [tid for tid in track_color_cache.keys() if tid not in active_track_ids]
+            for tid in stale_ids:
+                track_color_cache.pop(tid, None)
+        else:
+            if tracking_enabled_prev:
+                tracker = SimpleSortTracker()
+                track_color_cache.clear()
+            for box in boxes:
+                box.track_id = -1
+        tracking_enabled_prev = current_tracking_enabled
 
         # Draw bounding boxes
         for box in boxes:
@@ -1356,6 +1527,39 @@ def main():
                 cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), white_line_width)
                 cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, colored_line_width)
 
+            # TrackID text
+            if enable_trackid_overlay and classid == 0 and box.track_id > 0:
+                track_text = f'ID: {box.track_id}'
+                text_x = max(box.x1 - 5, 0)
+                text_y = box.y1 - 30
+                if text_y < 20:
+                    text_y = min(box.y2 + 25, debug_image_h - 10)
+                cached_color = track_color_cache.get(box.track_id)
+                if isinstance(cached_color, np.ndarray):
+                    text_color = tuple(int(np.clip(v, 0, 255)) for v in cached_color.tolist())
+                else:
+                    text_color = color if isinstance(color, tuple) else (0, 200, 255)
+                cv2.putText(
+                    debug_image,
+                    track_text,
+                    (text_x, text_y),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.6,
+                    (10, 10, 10),
+                    2,
+                    cv2.LINE_AA,
+                )
+                cv2.putText(
+                    debug_image,
+                    track_text,
+                    (text_x, text_y),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.6,
+                    text_color,
+                    1,
+                    cv2.LINE_AA,
+                )
+
             # Attributes text
             generation_txt = ''
             if box.generation == -1:
@@ -1438,6 +1642,45 @@ def main():
                 1,
                 cv2.LINE_AA,
             )
+
+            # Head distance
+            if enable_head_distance_measurement and classid == 7:
+                focalLength: float = 0.0
+                if (camera_horizontal_fov > 90):
+                    # Fisheye Camera (Equidistant Model)
+                    focalLength = debug_image_w / (camera_horizontal_fov * (math.pi / 180))
+                else:
+                    # Normal camera (Pinhole Model)
+                    focalLength = debug_image_w / (2 * math.tan((camera_horizontal_fov / 2) * (math.pi / 180)))
+                # Meters
+                distance = (AVERAGE_HEAD_WIDTH * focalLength) / abs(box.x2 - box.x1)
+
+                cv2.putText(
+                    debug_image,
+                    f'{distance:.3f} m',
+                    (
+                        box.x1+5 if box.x1 < debug_image_w else debug_image_w-50,
+                        box.y1+20 if box.y1-5 > 0 else 20
+                    ),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.7,
+                    (255, 255, 255),
+                    2,
+                    cv2.LINE_AA,
+                )
+                cv2.putText(
+                    debug_image,
+                    f'{distance:.3f} m',
+                    (
+                        box.x1+5 if box.x1 < debug_image_w else debug_image_w-50,
+                        box.y1+20 if box.y1-15 > 0 else 20
+                    ),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    0.7,
+                    (10, 10, 10),
+                    1,
+                    cv2.LINE_AA,
+                )
 
             # cv2.putText(
             #     debug_image,
@@ -1528,6 +1771,16 @@ def main():
                 keypoint_drawing_mode = 'both'
             elif keypoint_drawing_mode == 'both':
                 keypoint_drawing_mode = 'dot'
+        elif key == ord('r'): # 114, R, Tracking mode switch
+            enable_tracking = not enable_tracking
+            if enable_tracking and not enable_trackid_overlay:
+                enable_trackid_overlay = True
+        elif key == ord('t'): # 116, T, TrackID overlay mode switch
+            enable_trackid_overlay = not enable_trackid_overlay
+            if not enable_tracking:
+                enable_trackid_overlay = False
+        elif key == ord('m'): # 109, M, Head distance measurement mode switch
+            enable_head_distance_measurement = not enable_head_distance_measurement
 
     if video_writer is not None:
         video_writer.release()
