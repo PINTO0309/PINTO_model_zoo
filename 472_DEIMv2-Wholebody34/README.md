@@ -180,6 +180,41 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 <summary>DEIMv2-Wholebody34 - Atto - 320x320 - 340 query</summary>
 
   ```
+  ┏━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━┓
+  ┃Epoch┃Avg. Precision  ┃     %╇Avg. Recall     ┃     %┃
+  ┡━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━┩
+  │    3│AP @ .5:.95     │018.07╎AR maxDets   1  │016.03│
+  │    3│AP @     .5     │030.33╎AR maxDets  10  │026.21│
+  │    3│AP @    .75     │018.25╎AR maxDets 100  │026.65│
+  │    3│AP  (small)     │005.80╎AR     (small)  │010.79│
+  │    3│AP (medium)     │033.26╎AR    (medium)  │048.67│
+  │    3│AP  (large)     │055.51╎AR     (large)  │071.12│
+  └─────┴────────────────┴──────┴────────────────┴──────┘
+  Per-class mAP:
+  ┏━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┓
+  ┃ ID┃Name                     ┃     AP┃ ID┃Name                     ┃     AP┃
+  ┡━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━┩
+  │  0│body                     │ 0.3311│ 20│ear                      │ 0.0886│
+  │  1│adult                    │ 0.3465│ 21│collarbone               │ 0.0340│
+  │  2│child                    │ 0.2297│ 22│shoulder                 │ 0.0699│
+  │  3│male                     │ 0.3203│ 23│solar_plexus             │ 0.0203│
+  │  4│female                   │ 0.2057│ 24│elbow                    │ 0.0392│
+  │  5│body_with_wheelchair     │ 0.4015│ 25│wrist                    │ 0.0278│
+  │  6│body_with_crutches       │ 0.4373│ 26│hand                     │ 0.1864│
+  │  7│head                     │ 0.3535│ 27│hand_left                │ 0.1506│
+  │  8│front                    │ 0.2393│ 28│hand_right               │ 0.1459│
+  │  9│right-front              │ 0.2247│ 29│abdomen                  │ 0.0607│
+  │ 10│right-side               │ 0.2722│ 30│hip_joint                │ 0.0307│
+  │ 11│right-back               │ 0.1864│ 31│knee                     │ 0.0467│
+  │ 12│back                     │ 0.1321│ 32│ankle                    │ 0.0498│
+  │ 13│left-back                │ 0.2007│ 33│foot                     │ 0.1410│
+  │ 14│left-side                │ 0.2812│   │                         │       │
+  │ 15│left-front               │ 0.2591│   │                         │       │
+  │ 16│face                     │ 0.3346│   │                         │       │
+  │ 17│eye                      │ 0.0658│   │                         │       │
+  │ 18│nose                     │ 0.1384│   │                         │       │
+  │ 19│mouth                    │ 0.0922│   │                         │       │
+  └───┴─────────────────────────┴───────┴───┴─────────────────────────┴───────┘
   ```
 
 </details>
