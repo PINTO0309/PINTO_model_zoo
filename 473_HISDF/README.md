@@ -1,6 +1,6 @@
 # 473_HISDF
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10229410.svg)](https://doi.org/10.5281/zenodo.10229410)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17274823.svg)](https://doi.org/10.5281/zenodo.17274823)
 
 HISDF (Human Instance, Skeleton, and Depth Fusion) is a unified model that fuses human instance segmentation, skeletal structure estimation, and depth prediction to achieve holistic human perception from visual input.
 
