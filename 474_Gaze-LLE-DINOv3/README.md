@@ -1,9 +1,12 @@
 # 474_Gaze-LLE-DINOv3
 
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17413165.svg)](https://doi.org/10.5281/zenodo.17413165) ![GitHub License](https://img.shields.io/github/license/pinto0309/gazelle-dinov3)
 
 
 > [!Note]
+> **October 26, 2025 :** A checkpoint file `Atto`, `Femto`, `Pico`, `N` containing `GazeFollow`, `VideoAttentionTarget` trained weights and statistical information has been released.
+>
 > **October 23, 2025 :** A checkpoint file `.pt` containing `VideoAttentionTarget`'s trained weights and statistical information has been released.
 >
 > **October 22, 2025 :** A checkpoint file `.pt` containing `GazeFollow`'s trained weights and statistical information has been released.
@@ -444,6 +447,98 @@ is set to a positive value, and a teacher network is constructed with a separate
 get_gazelle_model call.
 
 ```
+############################################# Atto
+### distillation - GH200
+uv run python scripts/train_vat.py \
+--data_path data/videoattentiontarget \
+--model_name gazelle_hgnetv2_atto_inout \
+--exp_name gazelle_hgnetv2_atto_inout_distill \
+--init_ckpt ckpts/gazelle_hgnetv2_atto_distill.pt \
+--frame_sample_every 6 \
+--log_iter 50 \
+--max_epochs 65 \
+--batch_size 128 \
+--n_workers 60 \
+--lr_non_inout 1e-5 \
+--lr_inout 1e-2 \
+--inout_loss_lambda 1.0 \
+--use_amp \
+--grad_clip_norm 1.0 \
+--disable_sigmoid \
+--disable_progressive_unfreeze \
+--distill_teacher gazelle_dinov3_vitb16_inout \
+--distill_weight 0.3 \
+--distill_temp_end 4.0
+
+############################################# Femto
+### distillation - GH200
+uv run python scripts/train_vat.py \
+--data_path data/videoattentiontarget \
+--model_name gazelle_hgnetv2_femto_inout \
+--exp_name gazelle_hgnetv2_femto_inout_distill \
+--init_ckpt ckpts/gazelle_hgnetv2_femto_distill.pt \
+--frame_sample_every 6 \
+--log_iter 50 \
+--max_epochs 60 \
+--batch_size 128 \
+--n_workers 60 \
+--lr_non_inout 1e-5 \
+--lr_inout 1e-2 \
+--inout_loss_lambda 1.0 \
+--use_amp \
+--grad_clip_norm 1.0 \
+--disable_sigmoid \
+--disable_progressive_unfreeze \
+--distill_teacher gazelle_dinov3_vitb16_inout \
+--distill_weight 0.3 \
+--distill_temp_end 4.0
+
+############################################# Pico
+### distillation - GH200
+uv run python scripts/train_vat.py \
+--data_path data/videoattentiontarget \
+--model_name gazelle_hgnetv2_pico_inout \
+--exp_name gazelle_hgnetv2_pico_inout_distill \
+--init_ckpt ckpts/gazelle_hgnetv2_pico_distill.pt \
+--frame_sample_every 6 \
+--log_iter 50 \
+--max_epochs 50 \
+--batch_size 128 \
+--n_workers 60 \
+--lr_non_inout 1e-5 \
+--lr_inout 1e-2 \
+--inout_loss_lambda 1.0 \
+--use_amp \
+--grad_clip_norm 1.0 \
+--disable_sigmoid \
+--disable_progressive_unfreeze \
+--distill_teacher gazelle_dinov3_vitb16_inout \
+--distill_weight 0.3 \
+--distill_temp_end 4.0
+
+############################################# N
+### distillation - GH200
+uv run python scripts/train_vat.py \
+--data_path data/videoattentiontarget \
+--model_name gazelle_hgnetv2_n_inout \
+--exp_name gazelle_hgnetv2_n_inout_distill \
+--init_ckpt ckpts/gazelle_hgnetv2_n_distill.pt \
+--frame_sample_every 6 \
+--log_iter 50 \
+--max_epochs 50 \
+--batch_size 128 \
+--n_workers 60 \
+--lr_non_inout 1e-5 \
+--lr_inout 1e-2 \
+--inout_loss_lambda 1.0 \
+--use_amp \
+--grad_clip_norm 1.0 \
+--disable_sigmoid \
+--disable_progressive_unfreeze \
+--distill_teacher gazelle_dinov3_vitb16_inout \
+--distill_weight 0.3 \
+--distill_temp_end 4.0
+
 ############################################# S
 ### distillation - GH200
 uv run python scripts/train_vat.py \
@@ -595,10 +690,10 @@ High accuracy is not important to me at all. I'm only interested in whether the 
   |:-:|:-:|-:|-:|-:|:-:|:-:|
   |[Gaze-LLE (ViT-B)](https://arxiv.org/pdf/2412.09586)|88.80 M|0.9560|0.0450|0.1040|[Download](https://github.com/fkryan/gazelle/releases/download/v1.0.0/gazelle_dinov2_vitb14.pt)|---|
   |[Gaze-LLE (ViT-L)](https://arxiv.org/pdf/2412.09586)|302.90 M|0.9580|0.0410|0.0990|[Download](https://github.com/fkryan/gazelle/releases/download/v1.0.0/gazelle_dinov2_vitl14.pt)|---|
-  |Atto-distillation|2.93 M||||Download|Download|
-  |Femto-distillation|3.15 M||||Download|Download|
-  |Pico-distillation|3.51 M||||Download|Download|
-  |N-distillation|4.61 M||||Download|Download|
+  |Atto-distillation|2.93 M|0.9267|0.0826|0.1482|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_hgnetv2_atto_distill.pt)|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_hgnetv2_atto_distill_1x3x320x320_1xNx4.onnx)|
+  |Femto-distillation|3.15 M|0.9391|0.0656|0.1289|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_hgnetv2_femto_distill.pt)|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_hgnetv2_femto_distill_1x3x416x416_1xNx4.onnx)|
+  |Pico-distillation|3.51 M|0.9491|0.0544|0.1149|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_hgnetv2_pico_distill.pt)|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_hgnetv2_pico_distill_1x3x640x640_1xNx4.onnx)|
+  |N-distillation|4.61 M|0.9481|0.0549|0.1158|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_hgnetv2_n_distill.pt)|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_hgnetv2_n_distill_1x3x640x640_1xNx4.onnx)|
   |S-distillation|8.17 M|0.9545|0.0484|0.1118|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_dinov3_vit_tiny.pt)|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_dinov3_vit_tiny_1x3x640x640_1xNx4.onnx)|
   |M-distillation|12.37 M|0.9564|0.0462|0.1042|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_dinov3_vit_tinyplus.pt)|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_dinov3_vit_tinyplus_1x3x640x640_1xNx4.onnx)|
   |L-distillation|24.33 M|0.9593|0.0418|0.0992|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_dinov3_vits16.pt)|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_dinov3_vits16_1x3x640x640_1xNx4.onnx)|
@@ -617,6 +712,15 @@ High accuracy is not important to me at all. I'm only interested in whether the 
   |:-:|:-:|
   |<img width="1280" height="800" alt="benchmark_times_gazelle_dinov3_vits16_1x3x640x640_1xNx4" src="https://github.com/user-attachments/assets/c51e3c81-65ba-4216-8907-087d505eeaea" />|<img width="1280" height="800" alt="benchmark_times_gazelle_dinov3_vits16plus_1x3x640x640_1xNx4" src="https://github.com/user-attachments/assets/e59b053f-10e8-4b59-abe7-76b8858fc14f" />|
 
+  <img width="700" alt="benchmark_times_combined_2" src="https://github.com/user-attachments/assets/cb876564-f776-43c4-9547-6c2de220c2e1" />
+
+  |N|Pico|
+  |:-:|:-:|
+  |<img width="1280" height="800" alt="benchmark_times_gazelle_hgnetv2_n_distill_1x3x640x640_1xNx4" src="https://github.com/user-attachments/assets/cbef40a6-937f-4213-89b4-6403d9dd4b27" />|<img width="1280" height="800" alt="benchmark_times_gazelle_hgnetv2_pico_distill_1x3x640x640_1xNx4" src="https://github.com/user-attachments/assets/f5ddf1e5-25b2-4589-9cdb-727a59120620" />|
+
+  |Femto|Atto|
+  |:-:|:-:|
+  |<img width="1280" height="800" alt="benchmark_times_gazelle_hgnetv2_femto_distill_1x3x416x416_1xNx4" src="https://github.com/user-attachments/assets/233239dc-c35f-4285-bfed-f02a51fe511c" />|<img width="1280" height="800" alt="benchmark_times_gazelle_hgnetv2_atto_distill_1x3x320x320_1xNx4" src="https://github.com/user-attachments/assets/137a961b-6027-4ddc-88c8-25f8b74c55fa" />|
 
 - VideoAttentionTarget
 
@@ -624,10 +728,10 @@ High accuracy is not important to me at all. I'm only interested in whether the 
   |:-:|:-:|-:|-:|-:|:-:|:-:|
   |[Gaze-LLE (ViT-B)](https://arxiv.org/pdf/2412.09586)|88.80 M|0.9330|0.1070|0.8970|[Download](https://github.com/fkryan/gazelle/releases/download/v1.0.0/gazelle_dinov2_vitb14_inout.pt)|---|
   |[Gaze-LLE (ViT-L)](https://arxiv.org/pdf/2412.09586)|302.90 M|0.9370|0.1030|0.9030|[Download](https://github.com/fkryan/gazelle/releases/download/v1.0.0/gazelle_dinov2_vitl14_inout.pt)|---|
-  |Atto-distillation|2.93 M||||Download|Download|
-  |Femto-distillation|3.15 M||||Download|Download|
-  |Pico-distillation|3.51 M||||Download|Download|
-  |N-distillation|4.61 M||||Download|Download|
+  |Atto-distillation|2.93 M|0.9055|0.1523|0.8749|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_hgnetv2_atto_inout_distill.pt)|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_hgnetv2_atto_inout_distill_1x3x320x320_1xNx4.onnx)|
+  |Femto-distillation|3.15 M|0.9166|0.1372|0.8779|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_hgnetv2_femto_inout_distill.pt)|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_hgnetv2_femto_inout_distill_1x3x416x416_1xNx4.onnx)|
+  |Pico-distillation|3.51 M|0.9247|0.1245|0.8861|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_hgnetv2_pico_inout_distill.pt)|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_hgnetv2_pico_inout_distill_1x3x640x640_1xNx4.onnx)|
+  |N-distillation|4.61 M|0.9218|0.1258|0.9012|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_hgnetv2_n_inout_distill.pt)|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_hgnetv2_n_inout_distill_1x3x640x640_1xNx4.onnx)|
   |S-distillation|8.17 M|0.9286|0.1155|0.8945|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_dinov3_vit_tiny_inout.pt)|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_dinov3_vit_tiny_inout_1x3x640x640_1xNx4.onnx)|
   |M-distillation|12.37 M|0.9325|0.1133|0.8953|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_dinov3_vit_tinyplus_inout.pt)|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_dinov3_vit_tinyplus_inout_1x3x640x640_1xNx4.onnx)|
   |L-distillation|24.33 M|0.9347|0.1026|0.9011|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_dinov3_vits16_inout.pt)|[Download](https://github.com/PINTO0309/gazelle-dinov3/releases/download/weights/gazelle_dinov3_vits16_inout_1x3x640x640_1xNx4.onnx)|
