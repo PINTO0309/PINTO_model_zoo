@@ -63,4 +63,26 @@ If you find this project useful, please consider citing:
 4. https://github.com/hhj1897/face_detection - MIT License
 5. https://github.com/PINTO0309/Face_Mask_Augmentation - MIT License
 6. https://github.com/PINTO0309/PINTO_model_zoo/tree/main/472_DEIMv2-Wholebody34 - Apache 2.0
+    ```bibtex
+    @software{DEIMv2-Wholebody34,
+      author={Katsuya Hyodo},
+      title={Lightweight human detection models generated on high-quality human data sets. It can detect objects with high accuracy and speed in a total of 28 classes: body, adult, child, male, female, body_with_wheelchair, body_with_crutches, head, front, right-front, right-side, right-back, back, left-back, left-side, left-front, face, eye, nose, mouth, ear, collarbone, shoulder, solar_plexus, elbow, wrist, hand, hand_left, hand_right, abdomen, hip_joint, knee, ankle, foot.},
+      url={https://github.com/PINTO0309/PINTO_model_zoo/tree/main/472_DEIMv2-Wholebody34},
+      year={2025},
+      month={10},
+      doi={10.5281/zenodo.10229410}
+    }
+    ```
 7. https://github.com/PINTO0309/VSDLM - MIT License
+    ```bibtex
+    @software{hyodo2025vsdlm,
+      author    = {Katsuya Hyodo},
+      title     = {PINTO0309/VSDLM},
+      month     = {10},
+      year      = {2025},
+      publisher = {Zenodo},
+      doi       = {10.5281/zenodo.17494543},
+      url       = {https://github.com/PINTO0309/vsdlm},
+      abstract  = {Visual only speech detection by lip movement.},
+    }
+    ```
