@@ -118,6 +118,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |474|Gaze-LLE-DINOv3|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/474_Gaze-LLE-DINOv3)|||||||||||⚫|640x640,416x416,320x320, Attention|
 |475|VSDLM|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/475_VSDLM)|||||||||||⚫|30x48, Lip motion|
 |476|OCEC|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/476_OCEC)|||||||||||⚫|24x40, Wink/Blink|
+|477|PGC|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/477_PGC)|||||||||||⚫|32x32, Pointing|
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
