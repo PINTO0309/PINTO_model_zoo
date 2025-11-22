@@ -21,7 +21,7 @@ https://github.com/user-attachments/assets/f4a68c3a-ed66-4823-a910-e5719a665821
 |:-:|:-:|:-:|:-:|
 |<img width="48" height="48" alt="image" src="https://github.com/user-attachments/assets/c14e1566-6a2c-49fd-8835-2cdbafd9959c" />|<img width="48" height="48" alt="image" src="https://github.com/user-attachments/assets/a6dc9668-fa5b-46a3-8787-361dd7371e79" />|<img width="48" height="48" alt="image" src="https://github.com/user-attachments/assets/9e29ae46-c7e6-437f-8b5c-6c235478b2e5" />|<img width="48" height="48" alt="image" src="https://github.com/user-attachments/assets/165ff7e1-caf1-4948-93cb-2d45c93e4c66" />|
 
-<img width="400" alt="class_composition_pie" src="https://github.com/user-attachments/assets/ff3ddacb-7c25-4994-929a-258a9a22221e" />
+<img width="400" alt="class_composition_pie" src="https://github.com/user-attachments/assets/3d330d7d-23b9-46f4-bf1d-b8bf09051f07" />
 
 ## Arch
 
