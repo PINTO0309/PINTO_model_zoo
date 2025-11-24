@@ -122,6 +122,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |478|SC|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/478_SC)|||||||||||⚫|32x24, Sitting|
 |479|PUC|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/479_PUC)|||||||||||⚫|32x24, Phone Usage Classifier|
 |480|HSC|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/480_HSC)|||||||||||⚫|48x48, Happy smile classifier|
+|481|WHC|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/481_WHC)|||||||||||⚫|4x32x32,6x32x32,8x32x32, Waving Hand Classification|
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
