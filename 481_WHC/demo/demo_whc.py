@@ -49,10 +49,10 @@ EDGES = [
     (31, 32), (31, 32),  # knee -> ankle (left and right)
 ]
 
-BODY_LONG_HISTORY_SIZE = 10
-BODY_SHORT_HISTORY_SIZE = 6
-SMILING_LABEL = '!! Smiling !!'
-SMILING_COLOR = (0, 210, 0)  # readable green for smiling label/bounding boxes
+BODY_LONG_HISTORY_SIZE = 8
+BODY_SHORT_HISTORY_SIZE = 5
+WAVING_LABEL = '!! Waving !!'
+WAVING_COLOR = (0, 210, 0)  # readable green for waving label/bounding boxes
 
 class Color(Enum):
     BLACK          = '\033[30m'
@@ -105,9 +105,9 @@ class Box():
     body_prob_sitting: float = -1.0
     body_state: int = -1  # -1: Unknown, 0: not_sitting, 1: sitting
     body_label: str = ''
-    head_prob_smiling: float = -1.0
-    head_state: int = -1  # -1: Unknown, 0: not_smiling, 1: smiling
-    head_label: str = ''
+    hand_prob_waving: float = -1.0
+    hand_state: int = -1  # -1: Unknown, 0: not_waving, 1: waving
+    hand_label: str = ''
 
 
 class BodyStateHistory:
@@ -836,12 +836,12 @@ class DEIMv2(AbstractModel):
         iou = inter_area / float(area1 + area2 - inter_area)
         return iou
 
-class HSC(AbstractModel):
+class WHC(AbstractModel):
     def __init__(
         self,
         *,
         runtime: Optional[str] = 'onnx',
-        model_path: Optional[str] = 'hsc_l_48x48.onnx',
+        model_path: Optional[str] = 'whc_seq_3dcnn_4x32x32.onnx',
         providers: Optional[List] = None,
     ):
         super().__init__(
@@ -853,6 +853,32 @@ class HSC(AbstractModel):
             providers=providers,
         )
         self._input_height, self._input_width = self._resolve_input_size()
+        self.sequence_mode: str = "2d"  # one of: 2d, lstm, 3dcnn
+        self.sequence_len: int = 1
+        try:
+            input_shape = list(self._interpreter.get_inputs()[0].shape)
+            if len(input_shape) == 5:
+                if input_shape[1] in (3, None):
+                    self.sequence_mode = "3dcnn"  # (N, C, T, H, W)
+                    try:
+                        seq_val = int(input_shape[2])
+                        if seq_val > 0:
+                            self.sequence_len = seq_val
+                    except Exception:
+                        pass
+                elif input_shape[2] in (3, None):
+                    self.sequence_mode = "lstm"  # (N, T, C, H, W)
+                    try:
+                        seq_val = int(input_shape[1])
+                        if seq_val > 0:
+                            self.sequence_len = seq_val
+                    except Exception:
+                        pass
+        except Exception:
+            self.sequence_mode = "2d"
+        if self.sequence_mode != "2d" and self.sequence_len <= 1:
+            # Fall back to a small reasonable window for sequence models.
+            self.sequence_len = 4
 
     def _resolve_input_size(self) -> Tuple[int, int]:
         default_height, default_width = 32, 32
@@ -879,14 +905,29 @@ class HSC(AbstractModel):
         width = _safe_dim(input_shape[self._w_index], default_width)
         return height, width
 
-    def __call__(self, image: np.ndarray) -> float:
-        if image is None or image.size == 0:
-            raise ValueError('Input image for HSC is empty.')
-        resized_image = self._preprocess(image=image)
-        inference_image = np.asarray([resized_image], dtype=self._input_dtypes[0])
+    def __call__(self, image: Any) -> float:
+        if image is None:
+            raise ValueError('Input image for WHC is empty.')
+        if self.sequence_mode == "2d":
+            if image.size == 0:
+                raise ValueError('Input image for WHC is empty.')
+            resized_image = self._preprocess(image=image)
+            inference_image = np.asarray([resized_image], dtype=self._input_dtypes[0])
+        else:
+            frames = image if isinstance(image, (list, tuple)) else [image]
+            frames = frames[-self.sequence_len :]
+            processed = [self._preprocess(frame) for frame in frames if frame is not None and frame.size > 0]
+            if len(processed) < self.sequence_len:
+                raise ValueError('Insufficient frames for sequence WHC inference.')
+            stacked = np.stack(processed, axis=0)  # (T, C, H, W)
+            if self.sequence_mode == "3dcnn":
+                stacked = stacked.transpose(1, 0, 2, 3)  # (C, T, H, W)
+                inference_image = np.asarray([stacked], dtype=self._input_dtypes[0])  # (N, C, T, H, W)
+            else:
+                inference_image = np.asarray([stacked], dtype=self._input_dtypes[0])  # (N, T, C, H, W)
         outputs = super().__call__(input_datas=[inference_image])
-        prob_smiling = float(np.squeeze(outputs[0]))
-        return float(np.clip(prob_smiling, 0.0, 1.0))
+        prob_waving = float(np.squeeze(outputs[0]))
+        return float(np.clip(prob_waving, 0.0, 1.0))
 
     def _preprocess(
         self,
@@ -896,7 +937,7 @@ class HSC(AbstractModel):
         height = self._input_height
         width = self._input_width
         if height <= 0 or width <= 0:
-            raise ValueError('Invalid target size for HSC preprocessing.')
+            raise ValueError('Invalid target size for WHC preprocessing.')
         resized = cv2.resize(image, (width, height), interpolation=cv2.INTER_LINEAR)
         resized = resized.astype(np.float32) / 255.0
         resized = resized.transpose(self._swap)
@@ -1112,11 +1153,11 @@ def main():
         help='ONNX/TFLite file path for DEIMv2.',
     )
     parser.add_argument(
-        '-hm',
-        '--hsc_model',
+        '-wm',
+        '--whc_model',
         type=str,
-        default='hsc_l_48x48.onnx',
-        help='ONNX file path for the HSC smiling classifier.',
+        default='whc_seq_3dcnn_4x32x32.onnx',
+        help='ONNX file path for the WHC waving-hand classifier.',
     )
     group_v_or_i = parser.add_mutually_exclusive_group(required=True)
     group_v_or_i.add_argument(
@@ -1353,7 +1394,7 @@ def main():
     inference_type = inference_type.lower()
     bounding_box_line_width: int = args.bounding_box_line_width
     camera_horizontal_fov: int = args.camera_horizontal_fov
-    hsc_model_file: str = args.hsc_model
+    whc_model_file: str = args.whc_model
     providers: List[Tuple[str, Dict] | str] = None
 
     if execution_provider == 'cpu':
@@ -1414,12 +1455,11 @@ def main():
         keypoint_th=keypoint_threshold,
         providers=providers,
     )
-    hsc_classifier = HSC(
+    whc_classifier = WHC(
         runtime='onnx',
-        model_path=hsc_model_file,
+        model_path=whc_model_file,
         providers=providers,
     )
-    use_head_crops = Path(hsc_model_file).name == 'hsc_l_48x48.onnx'
 
     file_paths: List[str] = None
     cap = None
@@ -1449,7 +1489,8 @@ def main():
     colored_line_width = white_line_width - 1
     tracker = SimpleSortTracker()
     sitting_tracker = SimpleSortTracker()
-    head_tracker = SimpleSortTracker()
+    hand_tracker = SimpleSortTracker()
+    sequence_buffers: Dict[int, Deque[np.ndarray]] = {}
     track_color_cache: Dict[int, np.ndarray] = {}
     state_histories: Dict[int, BodyStateHistory] = {}
     def get_state_history(track_id: int) -> BodyStateHistory:
@@ -1487,9 +1528,14 @@ def main():
         )
         elapsed_time = time.perf_counter() - start_time
         body_boxes = [box for box in boxes if box.classid == 0]
-        head_boxes = [box for box in boxes if box.classid == 7]
-        target_boxes = head_boxes if use_head_crops else body_boxes
+        hand_boxes = [box for box in boxes if box.classid == 26]
+        # Assign stable track IDs to hands before classification so left/right remain independent.
+        hand_tracker.update(hand_boxes)
+        target_boxes = hand_boxes
         for box in target_boxes:
+            box.hand_prob_waving = -1.0
+            box.hand_state = 0
+            box.hand_label = ''
             crop = crop_image_with_margin(
                 image=image,
                 box=box,
@@ -1502,24 +1548,35 @@ def main():
                 continue
             rgb_crop = cv2.cvtColor(crop, cv2.COLOR_BGR2RGB)
             try:
-                prob_smiling = hsc_classifier(image=rgb_crop)
+                if whc_classifier.sequence_mode == "2d":
+                    prob_waving = whc_classifier(image=rgb_crop)
+                else:
+                    track_key = box.track_id if box.track_id > 0 else -1
+                    buf = sequence_buffers.get(track_key)
+                    if buf is None:
+                        buf = deque(maxlen=whc_classifier.sequence_len)
+                        sequence_buffers[track_key] = buf
+                    buf.append(rgb_crop)
+                    if len(buf) < whc_classifier.sequence_len:
+                        continue
+                    prob_waving = whc_classifier(image=list(buf))
+                box.hand_prob_waving = prob_waving
+                box.hand_state = 1 if prob_waving >= 0.50 else 0
             except Exception:
                 continue
-            box.head_prob_smiling = prob_smiling
-            box.head_state = 1 if prob_smiling >= 0.50 else 0
 
         sitting_tracker.update(body_boxes)
-        head_tracker.update(head_boxes)
+        hand_tracker.update(hand_boxes)
 
         state_boxes = target_boxes
-        state_tracker = head_tracker if use_head_crops else sitting_tracker
+        state_tracker = hand_tracker
         matched_state_track_ids: set[int] = set()
         for state_box in state_boxes:
             if state_box.track_id <= 0:
                 continue
             matched_state_track_ids.add(state_box.track_id)
             history = get_state_history(state_box.track_id)
-            detection_state = bool(state_box.head_state == 1)
+            detection_state = bool(state_box.hand_state == 1)
             history.append(detection_state)
             (
                 state_interval_judgment,
@@ -1531,11 +1588,11 @@ def main():
             )
             history.interval_active = state_interval_judgment
             if state_interval_judgment:
-                history.label = SMILING_LABEL
-            elif state_end_judgment:
+                history.label = WAVING_LABEL
+            else:
                 history.label = ''
-            state_box.head_label = history.label
-            state_box.head_state = 1 if history.interval_active else 0
+            state_box.hand_label = history.label
+            state_box.hand_state = 1 if history.interval_active else 0
 
         current_state_track_ids = {track['id'] for track in state_tracker.tracks}
         unmatched_state_track_ids = current_state_track_ids - matched_state_track_ids
@@ -1552,13 +1609,17 @@ def main():
             )
             history.interval_active = state_interval_judgment
             if state_interval_judgment:
-                history.label = SMILING_LABEL
-            elif state_end_judgment:
+                history.label = WAVING_LABEL
+            else:
                 history.label = ''
 
         stale_history_ids = [track_id for track_id in list(state_histories.keys()) if track_id not in current_state_track_ids]
         for track_id in stale_history_ids:
             state_histories.pop(track_id, None)
+        # Clean sequence buffers for dropped tracks
+        stale_seq_ids = [tid for tid in list(sequence_buffers.keys()) if tid not in current_state_track_ids and tid != -1]
+        for tid in stale_seq_ids:
+            sequence_buffers.pop(tid, None)
 
         if file_paths is None:
             cv2.putText(debug_image, f'{elapsed_time*1000:.2f} ms', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2, cv2.LINE_AA)
@@ -1594,19 +1655,14 @@ def main():
             if classid == 0:
                 # Body
                 if not disable_gender_identification_mode:
-                    # Body
                     if box.gender == 0:
-                        # Male
-                        color = (255,0,0)
+                        color = (255,0,0)  # Male
                     elif box.gender == 1:
-                        # Female
-                        color = (139,116,225)
+                        color = (139,116,225)  # Female
                     else:
-                        # Unknown
-                        color = (0,200,255) if box.head_state == 1 else (0,0,255)
+                        color = (0,0,255)
                 else:
-                    # Body
-                    color = (0,200,255) if box.head_state == 1 else (0,0,255)
+                    color = (0,0,255)
             elif classid == 5:
                 # Body-With-Wheelchair
                 color = (0,200,255)
@@ -1614,13 +1670,8 @@ def main():
                 # Body-With-Crutches
                 color = (83,36,179)
             elif classid == 7:
-                # Head
-                if not disable_headpose_identification_mode:
-                    color = BOX_COLORS[box.head_pose][0] if box.head_pose != -1 else (216,67,21)
-                else:
-                    color = (0,0,255)
-                if box.head_label:
-                    color = SMILING_COLOR
+                # Head (not used for waving classification)
+                color = (0,0,255)
             elif classid == 16:
                 # Face
                 color = (0,200,255)
@@ -1654,7 +1705,8 @@ def main():
                 color = (0,0,255)
             elif classid == 26:
                 # Hand
-                color = (0,255,0)
+                is_waving = box.hand_state == 1 or bool(box.hand_label)
+                color = WAVING_COLOR if is_waving else (0, 0, 255)
 
             elif classid == 29:
                 # abdomen
@@ -1674,7 +1726,6 @@ def main():
                 color = (250,0,136)
 
             if (classid == 0 and not disable_gender_identification_mode) \
-                or (classid == 7 and not disable_headpose_identification_mode) \
                 or (classid == 26 and not disable_left_and_right_hand_identification_mode) \
                 or classid == 16 \
                 or classid in [21,22,23,24,25,29,30,31,32]:
@@ -1682,21 +1733,6 @@ def main():
                 # Body
                 if classid == 0:
                     if box.gender == -1:
-                        draw_dashed_rectangle(
-                            image=debug_image,
-                            top_left=(box.x1, box.y1),
-                            bottom_right=(box.x2, box.y2),
-                            color=color,
-                            thickness=2,
-                            dash_length=10
-                        )
-                    else:
-                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), (255,255,255), white_line_width)
-                        cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, colored_line_width)
-
-                # Head
-                elif classid == 7:
-                    if box.head_pose == -1:
                         draw_dashed_rectangle(
                             image=debug_image,
                             top_left=(box.x1, box.y1),
@@ -1752,7 +1788,7 @@ def main():
                 cv2.rectangle(debug_image, (box.x1, box.y1), (box.x2, box.y2), color, colored_line_width)
 
             # TrackID text
-            if enable_trackid_overlay and classid in (0, 7) and box.track_id > 0:
+            if enable_trackid_overlay and classid in (0, 26) and box.track_id > 0:
                 track_text = f'ID: {box.track_id}'
                 text_x = max(box.x1 - 5, 0)
                 text_y = box.y1 - 30
@@ -1802,17 +1838,14 @@ def main():
                 gender_txt = 'F'
 
             attr_txt = f'{generation_txt}({gender_txt})' if gender_txt != '' else f'{generation_txt}'
-
-            headpose_txt = BOX_COLORS[box.head_pose][1] if box.head_pose != -1 else ''
-            attr_txt = f'{attr_txt} {headpose_txt}' if headpose_txt != '' else f'{attr_txt}'
-            smiling_label_active = classid in (0, 7) and bool(box.head_label)
-            if classid in (0, 7):
-                if box.head_label or (box.head_prob_smiling is not None and box.head_prob_smiling >= 0.0):
-                    attr_txt = f'{box.head_label} {box.head_prob_smiling:.3f}' if box.head_label else f'{box.head_prob_smiling:.3f}'
+            waving_label_active = classid == 26 and bool(box.hand_label)
+            if classid == 26:
+                if box.hand_label or (box.hand_prob_waving is not None and box.hand_prob_waving >= 0.0):
+                    attr_txt = f'{box.hand_label} {box.hand_prob_waving:.3f}' if box.hand_label else f'{box.hand_prob_waving:.3f}'
                 else:
                     attr_txt = ''
 
-            attr_color = SMILING_COLOR if smiling_label_active else color
+            attr_color = WAVING_COLOR if waving_label_active else (0, 0, 255)
             if attr_txt == '':
                 continue
             cv2.putText(
@@ -1842,78 +1875,39 @@ def main():
                 cv2.LINE_AA,
             )
 
-            handedness_txt = ''
-            if box.handedness == -1:
+            if classid == 26:
                 handedness_txt = ''
-            elif box.handedness == 0:
-                handedness_txt = 'L'
-            elif box.handedness == 1:
-                handedness_txt = 'R'
-            cv2.putText(
-                debug_image,
-                f'{handedness_txt}',
-                (
-                    box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
-                    box.y1-10 if box.y1-25 > 0 else 20
-                ),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                0.7,
-                (255, 255, 255),
-                2,
-                cv2.LINE_AA,
-            )
-            cv2.putText(
-                debug_image,
-                f'{handedness_txt}',
-                (
-                    box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
-                    box.y1-10 if box.y1-25 > 0 else 20
-                ),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                0.7,
-                color,
-                1,
-                cv2.LINE_AA,
-            )
-
-            # Head distance
-            if enable_head_distance_measurement and classid == 7:
-                focalLength: float = 0.0
-                if (camera_horizontal_fov > 90):
-                    # Fisheye Camera (Equidistant Model)
-                    focalLength = debug_image_w / (camera_horizontal_fov * (math.pi / 180))
-                else:
-                    # Normal camera (Pinhole Model)
-                    focalLength = debug_image_w / (2 * math.tan((camera_horizontal_fov / 2) * (math.pi / 180)))
-                # Meters
-                distance = (AVERAGE_HEAD_WIDTH * focalLength) / abs(box.x2 - box.x1)
-
-                cv2.putText(
-                    debug_image,
-                    f'{distance:.3f} m',
-                    (
-                        box.x1+5 if box.x1 < debug_image_w else debug_image_w-50,
-                        box.y1+20 if box.y1-5 > 0 else 20
-                    ),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.7,
-                    (255, 255, 255),
-                    2,
-                    cv2.LINE_AA,
-                )
-                cv2.putText(
-                    debug_image,
-                    f'{distance:.3f} m',
-                    (
-                        box.x1+5 if box.x1 < debug_image_w else debug_image_w-50,
-                        box.y1+20 if box.y1-15 > 0 else 20
-                    ),
-                    cv2.FONT_HERSHEY_SIMPLEX,
-                    0.7,
-                    (10, 10, 10),
-                    1,
-                    cv2.LINE_AA,
-                )
+                if box.handedness == 0:
+                    handedness_txt = 'L'
+                elif box.handedness == 1:
+                    handedness_txt = 'R'
+                if handedness_txt:
+                    cv2.putText(
+                        debug_image,
+                        f'{handedness_txt}',
+                        (
+                            box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
+                            box.y1-10 if box.y1-25 > 0 else 20
+                        ),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.7,
+                        (255, 255, 255),
+                        2,
+                        cv2.LINE_AA,
+                    )
+                    cv2.putText(
+                        debug_image,
+                        f'{handedness_txt}',
+                        (
+                            box.x1 if box.x1+50 < debug_image_w else debug_image_w-50,
+                            box.y1-10 if box.y1-25 > 0 else 20
+                        ),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                        0.7,
+                        color,
+                        1,
+                        cv2.LINE_AA,
+                    )
 
             # cv2.putText(
             #     debug_image,
