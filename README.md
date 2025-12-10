@@ -212,6 +212,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |471|YOLO-Wholebody34|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/471_YOLO-Wholebody34)|||||||||||⚫|body,adult,child,male,female,body_with_wheelchair,body_with_crutches,head,front,right-front,right-side,right-back,back,left-back,left-side,left-front,face,eye,nose,mouth,ear,collarbone,shoulder,solar_plexus,elbow,wrist,hand,hand_left,hand_right,abdomen,hip_joint,knee,ankle,foot|
 |472|DEIMv2-Wholebody34|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/472_DEIMv2-Wholebody34)|||||||||||⚫|body,adult,child,male,female,body_with_wheelchair,body_with_crutches,head,front,right-front,right-side,right-back,back,left-back,left-side,left-front,face,eye,nose,mouth,ear,collarbone,shoulder,solar_plexus,elbow,wrist,hand,hand_left,hand_right,abdomen,hip_joint,knee,ankle,foot|
 |473|HISDF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/473_HISDF)|||||||||||⚫|Object Detection x Depth Estimation x Pose Estimation x Instance Segmentation x Binary Segmentation|
+|482|UHD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/482_UHD)|||||||||||⚫|64x64, Object Detection, Human Detection|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
