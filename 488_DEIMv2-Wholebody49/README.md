@@ -24,7 +24,7 @@ Don't be ruled by the curse of mAP.
   |<img width="480" height="360" alt="000000000882" src="https://github.com/user-attachments/assets/ba4af102-7a24-4c65-9db9-6aec535e0504" />|<img width="480" height="360" alt="000000000984" src="https://github.com/user-attachments/assets/5e796342-b3ab-442e-9eb4-a9709d15865f" />|
   |<img width="480" height="360" alt="000000001292" src="https://github.com/user-attachments/assets/dce59efc-9262-40e9-9aff-d0c1d788b28f" />|<img width="480" height="360" alt="000000001958" src="https://github.com/user-attachments/assets/fecd727e-9d89-4e3b-891b-29c4907d9aa8" />|
 
-- Visualize the bounding box of a bone
+- Visualize the bounding box of a bone (This might be due to a pipeline bug, but the regularization for head estimation doesn't seem to be working properly. This happens occasionally.)
 
   <img width="480" height="360" alt="000000014428" src="https://github.com/user-attachments/assets/a593963a-4db7-40b6-8501-97e68459fa27" />
 
