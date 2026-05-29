@@ -29,6 +29,7 @@ Don't be ruled by the curse of mAP.
   2. Segmentation mask for a segmented area (right hip)
   3. Correct left/right classification of hands that are crossed
   4. The baby doll placed on the floor in the back left has not been detected
+  5. Detection of the solar plexus, which is covered by both hands
 
   <img width="480" height="360" alt="000000014428" src="https://github.com/user-attachments/assets/a593963a-4db7-40b6-8501-97e68459fa27" />
 
