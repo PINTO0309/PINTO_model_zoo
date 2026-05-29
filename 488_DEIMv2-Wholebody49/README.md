@@ -26,7 +26,7 @@ Don't be ruled by the curse of mAP.
 
 - Visualize the bounding box of a bone (This might be due to a pipeline bug, but the regularization for head estimation doesn't seem to be working properly. This happens occasionally.)
 
-  Below are some aspects of object detection architectures that you may have overlooked or deliberately avoided considering.
+  Below are some aspects of the potential of object detection architectures that may have been overlooked or intentionally avoided.
 
   1. Joint position estimation in invisible areas
   2. Segmentation mask for a segmented area (right hip)
