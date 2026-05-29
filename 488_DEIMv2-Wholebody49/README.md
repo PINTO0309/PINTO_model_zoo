@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10229410.svg)](https://doi.org/10.5281/zenodo.10229410)
 
-Unified multi-task model for detection, pose estimation, and instance segmentation. This model is an experimental model I created to evaluate the quality of annotation data I developed myself, and it is incomplete because the keypoints on the left and right sides of the lower body have not yet been labeled. Furthermore, this model was created to verify how accurately learning progresses when multi-task training is performed on data with completely different label properties.
+Unified multi-task model for detection, pose estimation, and instance segmentation.
 
 Lightweight human detection models generated on high-quality human data sets. It can detect objects with high accuracy and speed in a total of 49 classes. Even the classification problem is being attempted to be solved by object detection. There is no need to perform any complex affine transformations or other processing for pre-processing and post-processing of input images. In addition, the resistance to Motion Blur, Gaussian noise, contrast noise, backlighting, and halation is quite strong because it was trained only on images with added photometric noise for all images in the MS-COCO subset of the image set. In addition, about half of the image set was annotated by me with the aspect ratio of the original image substantially destroyed. I manually annotated all images in the dataset by myself. The model is intended to use real-world video for inference and has enhanced resistance to all kinds of noise. The quality of the known data set and my data set are so different that an accurate comparison of accuracy is not possible.
 
@@ -102,14 +102,23 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   |Hand_Right|34|Bounding box coordinates are shared with `Hand`. It is defined as a subclass of `Hand` as a superclass.|
   |Abdomen|35|Keypoints|
   |Hip_Joint|36|Keypoints|
-  |Knee|37|Keypoints|
-  |Ankle|38|Keypoints|
-  |Foot (Feet)|39||
+  |Hip_Joint_Left|37|Keypoints. Bounding box coordinates are shared with `Hip_Joint`. It is defined as a subclass of `Hip_Joint` as a superclass.|
+  |Hip_Joint_Right|38|Keypoints. Bounding box coordinates are shared with `Hip_Joint`. It is defined as a subclass of `Hip_Joint` as a superclass.|
+  |Knee|39|Keypoints|
+  |Knee_Left|40|Keypoints. Bounding box coordinates are shared with `Knee`. It is defined as a subclass of `Knee` as a superclass.|
+  |Knee_Right|41|Keypoints. Bounding box coordinates are shared with `Knee`. It is defined as a subclass of `Knee` as a superclass.|
+  |Ankle|42|Keypoints|
+  |Ankle_Left|43|Keypoints. Bounding box coordinates are shared with `Ankle`. It is defined as a subclass of `Ankle` as a superclass.|
+  |Ankle_Right|44|Keypoints. Bounding box coordinates are shared with `Ankle`. It is defined as a subclass of `Ankle` as a superclass.|
+  |Foot|45|Detection accuracy is higher than `Foot_Left` and `Foot_Right` bounding boxes. It is the sum of `Foot_Left`, and `Foot_Right`.|
+  |Foot_Left|46|Bounding box coordinates are shared with `Foot`. It is defined as a subclass of `Foot` as a superclass.|
+  |Foot_Right|47|Bounding box coordinates are shared with `Foot`. It is defined as a subclass of `Foot` as a superclass.|
+  |Bone|48|Bounding box used to support skeleton/bone line rendering between keypoints.|
 
 ## 3. Test
   - Python 3.10+
   - onnx 1.18.1+
-  - onnxruntime-gpu v1.22.0
+  - onnxruntime-gpu v1.22.0+
   - opencv-contrib-python 4.10.0.84+
   - numpy 1.24.6+
   - TensorRT 10.9.0.34-1+cuda12.8
@@ -128,32 +137,32 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
 
   - Demonstration of models
     ```
-    uv run python demo/wholebody40/demo_deimv2_torch_wholebody40_ins.py \
-    -r deimv2_dinov3_x_wholebody40_ins_s08_maskhead256x3_center_800query_masks.onnx \
-    --video 0 \
+    uv run python demo/demo_deimv2_onnx_torch_wholebody49_ins.py \
+    -r deimv2_dinov3_x_wholebody49_ins_s08_maskhead256x3_center_1240query_masks.onnx \
+    -v 0 \
     -o outputs/video \
     -d tensorrt \
-    --score_threshold 0.40 \
-    --mask_threshold 0.50 \
+    --score_threshold 0.35 \
+    --mask_threshold 0.5 \
     --disable_generation_identification_mode \
     --disable_gender_identification_mode \
+    --disable_left_and_right_label \
     --disable_headpose_identification_mode \
     --disable_head_distance_measurement \
+    --disable_tracking \
     --enable-masks \
-    --mask_bilateral_d 5 \
-    --mask_bilateral_sigma_color 1.0 \
-    --mask_bilateral_sigma_space 1.0
+    --enable_bone_drawing_mode
     ```
 
 ## 4. Citiation
   If this work has contributed in any way to your research or business, I would be happy to be cited in your literature.
   ```bibtex
-  @software{DEIMv2-Wholebody40,
+  @software{DEIMv2-Wholebody49,
     author={Katsuya Hyodo},
-    title={Unified multi-task model for detection, pose estimation, and instance segmentation. Lightweight human detection models generated on high-quality human data sets. It can detect objects with high accuracy and speed in a total of 40 classes: body, adult, child, male, female, body_with_wheelchair, body_with_crutches, head, front, right_front, right_side, right_back, back, left_back, left_side, left_front, face, eye, nose, mouth, ear, collarbone, shoulder, shoulder_left, shoulder_right, solar_plexus, elbow, elbow_left, elbow_right, wrist, wrist_left, wrist_right, hand, hand_left, hand_right, abdomen, hip_joint, knee, ankle, foot.},
-    url={https://github.com/PINTO0309/PINTO_model_zoo/tree/main/485_DEIMv2-Wholebody40},
+    title={Unified multi-task model for detection, pose estimation, and instance segmentation. 49 classes.},
+    url={https://github.com/PINTO0309/PINTO_model_zoo/tree/main/488_DEIMv2-Wholebody49},
     year={2026},
-    month={04},
+    month={05},
     doi={10.5281/zenodo.10229410}
   }
   ```
@@ -208,4 +217,4 @@ The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware com
   https://github.com/PINTO0309/DEIMv2
 
 ## 6. License
-[Apache2.0](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/485_DEIMv2-Wholebody40/LICENSE)
+[Apache2.0](https://github.com/PINTO0309/PINTO_model_zoo/blob/main/488_DEIMv2-Wholebody49/LICENSE)
