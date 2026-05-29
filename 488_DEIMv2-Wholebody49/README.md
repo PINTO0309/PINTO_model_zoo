@@ -25,6 +25,9 @@ Don't be ruled by the curse of mAP.
   |<img width="480" height="360" alt="000000001292" src="https://github.com/user-attachments/assets/dce59efc-9262-40e9-9aff-d0c1d788b28f" />|<img width="480" height="360" alt="000000001958" src="https://github.com/user-attachments/assets/fecd727e-9d89-4e3b-891b-29c4907d9aa8" />|
 
 - Visualize the bounding box of a bone (This might be due to a pipeline bug, but the regularization for head estimation doesn't seem to be working properly. This happens occasionally.)
+
+  Below are some aspects of object detection architectures that you may have overlooked or deliberately avoided considering.
+
   1. Joint position estimation in invisible areas
   2. Segmentation mask for a segmented area (right hip)
   3. Correct left/right classification of hands that are crossed
