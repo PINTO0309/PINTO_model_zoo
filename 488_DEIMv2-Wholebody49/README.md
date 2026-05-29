@@ -25,6 +25,10 @@ Don't be ruled by the curse of mAP.
   |<img width="480" height="360" alt="000000001292" src="https://github.com/user-attachments/assets/dce59efc-9262-40e9-9aff-d0c1d788b28f" />|<img width="480" height="360" alt="000000001958" src="https://github.com/user-attachments/assets/fecd727e-9d89-4e3b-891b-29c4907d9aa8" />|
 
 - Visualize the bounding box of a bone (This might be due to a pipeline bug, but the regularization for head estimation doesn't seem to be working properly. This happens occasionally.)
+  1. Joint position estimation in invisible areas
+  2. Segmentation mask for a segmented area (right hip)
+  3. Correct left/right classification of hands that are crossed
+  4. The baby doll placed on the floor in the back left has not been detected
 
   <img width="480" height="360" alt="000000014428" src="https://github.com/user-attachments/assets/a593963a-4db7-40b6-8501-97e68459fa27" />
 
