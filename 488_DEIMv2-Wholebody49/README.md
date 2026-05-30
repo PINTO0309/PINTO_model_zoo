@@ -62,8 +62,6 @@ Don't be ruled by the curse of mAP.
 
 - Realtime Demo - ObjectDetection + PoseEstimation + InstanceSegmentation
 
-  The mask is trained at a very small size of `80x80`, so the boundaries appear wavy.
-
   https://github.com/user-attachments/assets/7e7ef325-5890-4162-bd51-80bfc28b48ee
 
 The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.
