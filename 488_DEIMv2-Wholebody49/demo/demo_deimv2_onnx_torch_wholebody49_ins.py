@@ -2644,6 +2644,26 @@ class InferenceModel(nn.Module):
         )
 
 
+ONNX_MASK_PROB_EPS = 1e-6
+
+
+def resize_onnx_probability_masks(
+    probability_masks: torch.Tensor,
+    size: int | Sequence[int],
+    *,
+    mode: str = 'bilinear',
+    origin: str = 'topleft',
+) -> torch.Tensor:
+    mask_logits = torch.logit(probability_masks.clamp(ONNX_MASK_PROB_EPS, 1.0 - ONNX_MASK_PROB_EPS))
+    resized_logits = resize_masks(
+        mask_logits,
+        size=size,
+        mode=mode,
+        origin=origin,
+    )
+    return torch.sigmoid(resized_logits)
+
+
 class OnnxInferenceModel:
     def __init__(
         self,
@@ -2706,14 +2726,12 @@ class OnnxInferenceModel:
         resized_batches: List[torch.Tensor] = []
         for batch_idx in range(masks.shape[0]):
             batch_masks = torch.from_numpy(masks[batch_idx]).to(dtype=torch.float32)
-            batch_masks = resize_masks(
+            batch_masks = resize_onnx_probability_masks(
                 batch_masks.unsqueeze(1),
                 size=tuple(int(v) for v in orig_target_sizes[batch_idx, [1, 0]].tolist()),
                 mode=self.mask_resize_mode,
                 origin=self.mask_resize_origin,
             )
-            if self.mask_resize_mode == 'bicubic':
-                batch_masks = batch_masks.clamp(0.0, 1.0)
             resized_batches.append(batch_masks)
         return resized_batches
 
@@ -2728,14 +2746,12 @@ class OnnxInferenceModel:
             return {}
 
         batch_masks = torch.from_numpy(masks[unique_indices]).to(dtype=torch.float32)
-        resized_masks = resize_masks(
+        resized_masks = resize_onnx_probability_masks(
             batch_masks.unsqueeze(1),
             size=tuple(int(v) for v in orig_target_size[[1, 0]].tolist()),
             mode=self.mask_resize_mode,
             origin=self.mask_resize_origin,
         )
-        if self.mask_resize_mode == 'bicubic':
-            resized_masks = resized_masks.clamp(0.0, 1.0)
         return {
             source_idx: resized_masks[pos]
             for pos, source_idx in enumerate(unique_indices)
