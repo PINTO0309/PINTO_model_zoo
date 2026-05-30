@@ -12,6 +12,29 @@ Since the segmentation mask was trained with a fairly small size of `80x80`, you
 
 **In any case, don't have overly high expectations for the performance of this model.**
 
+The main aspects of the true potential of the object detection model that I verified with this model are as follows:
+
+1. The critical data density at which the parameters of the Transformer architecture saturate
+2. Can the hidden region be estimated using a bounding box?
+3. Classification of complex left-right crossings
+4. Possibility of handling high elevation and depression angles
+5. Inference tolerance to high Roll angles
+6. Resistance to real-world noise such as blur and darkness
+7. Estimated performance when only a small part of the body is visible in first-person view
+8. Instance isolation performance to prevent estimation results from mixing across instances in high-congestion situations
+9. Classification of head orientation in multiple directions without adding a special decoder
+10. Gender and age generation estimation based on the entire body, not just the face
+11. Classification of individuals using wheelchairs or crutches
+12. The effectiveness of learning by integrating three types of methods—object detection, skeleton detection, and instance segmentation—into a single architecture (The mathematical validity has not been evaluated)
+13. The minimum output size required for real-time inference with a single ancient GPU
+14. Deployability to edge devices
+15. Resolution for objects smaller than 1 pixel
+16. Estimation accuracy when using a fisheye camera
+17. This method estimates skeletal parts without incorporating constraints on distance and angle between skeletal keypoints into the learning pipeline
+18. Improving tolerance to scaling variance when a large number of images with intentionally distorted aspect ratios are included in the training data
+19. The model becomes unconvergent when a class is added from a completely different domain, entirely outside the context of "people." e.g. "phone"
+20. Evaluation of instance isolation performance using a bottom-up approach
+
 Don't be ruled by the curse of mAP.
 
 - Image files
