@@ -64,7 +64,7 @@ Don't be ruled by the curse of mAP.
 
   The mask is trained at a very small size of `80x80`, so the boundaries appear wavy.
 
-  https://github.com/user-attachments/assets/95902d00-c5c6-4db4-82b8-2c3325853785
+  https://github.com/user-attachments/assets/7e7ef325-5890-4162-bd51-80bfc28b48ee
 
 The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.
 
