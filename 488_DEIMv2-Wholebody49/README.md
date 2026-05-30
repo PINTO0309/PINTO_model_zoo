@@ -10,7 +10,7 @@ A notable feature of this model is that it can estimate the shoulder, elbow, and
 
 Since the segmentation mask was trained with a fairly small size of `80x80`, you shouldn't expect too much in terms of mask boundary accuracy. Furthermore, a bug in the training pipeline was discovered just before training was completed, resulting in the final generated weights being trained with insufficient precision tuning. Consequently, the weights corresponding to the optimal mAP values ​​were not saved in the final .pth file. I experimentally trained variants `S` and `N`, but they did not achieve the expected accuracy, so I do not recommend them.
 
-**In any case, don't have overly high expectations for the performance of this model.**
+**2026.05.30 I have found that generating .onnx from .pth and performing inference with CUDA or TensorRT using FP16 significantly degrades the quality of the segmentation mask. I will be making adjustments from various angles for a while, and may update the publicly released ONNX several times.**
 
 The main aspects of the true potential of the object detection model that I verified with this model are as follows:
 
