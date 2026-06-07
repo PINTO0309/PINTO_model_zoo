@@ -64,6 +64,12 @@ Don't be ruled by the curse of mAP.
 
   https://github.com/user-attachments/assets/7e7ef325-5890-4162-bd51-80bfc28b48ee
 
+- Realtime Demo - A test using extremely low-quality video footage taken in 1993
+
+  Terrible artifacts, high angle of view, fast-moving people, large crowd, intense blur, and the latter half of the video is too dark due to low exposure.
+
+  https://github.com/user-attachments/assets/f1d75e5a-6ba3-4002-a48a-9ce725936f7b
+
 The use of [CD-COCO: Complex Distorted COCO database for Scene-Context-Aware computer vision](https://github.com/aymanbegh/cd-coco) has also greatly improved resistance to various types of noise.
 
 - Global distortions
