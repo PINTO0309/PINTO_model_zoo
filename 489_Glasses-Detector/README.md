@@ -41,7 +41,7 @@ $\color{gray}{\textit{Note: }\text{refer to}}$ [Glasses Detector Features](https
     uv run python demo/demo_classification_sunglasses.py --camera 0
     ```
 
-    https://github.com/user-attachments/assets/80fda9bc-562b-446b-9255-61d42294de95
+    https://github.com/user-attachments/assets/852af769-ffae-4650-9429-35d8a748b055
 
 ## 2. Cited
   I am very grateful for their excellent work.
