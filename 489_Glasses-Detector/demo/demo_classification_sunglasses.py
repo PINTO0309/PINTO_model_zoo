@@ -108,8 +108,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--sunglasses-threshold",
         type=float,
-        default=0.5,
-        help="Score threshold used to color labels in camera mode. Defaults to 0.5.",
+        default=0.75,
+        help="Score threshold used to color labels in camera mode. Defaults to 0.75.",
     )
     parser.add_argument(
         "--mirror",
