@@ -126,6 +126,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |483|LVFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/483_LVFace)|||||||||||⚫|Nx3x112x112, Cosine similarity|
 |484|TransFace|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/484_TransFace)|||||||||||⚫|Nx3x112x112, Cosine similarity|
 |486|MWC|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/486_MWC)|||||||||||⚫|Nx3x48x48, Mask wearing classifier|
+|489|489_Glasses-Detector|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/489_Glasses-Detector)|||||||||||⚫|glasses|
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -217,6 +218,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |473|HISDF|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/473_HISDF)|||||||||||⚫|Object Detection x Depth Estimation x Pose Estimation x Instance Segmentation x Binary Segmentation|
 |482|UHD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/482_UHD)|||||||||||⚫|64x64, Object Detection, Human Detection|
 |485|DEIMv2-Wholebody40|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/485_DEIMv2-Wholebody40)|||||||||||⚫|40 classes|
+|489|489_Glasses-Detector|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/489_Glasses-Detector)|||||||||||⚫|glasses|
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -408,6 +410,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |466|People_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/466_People_Segmentation)|||||||||||⚫|UNet|
 |467|Human_Parsing|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/467_Human_Parsing)|||||||||||⚫||
 |470|RHIS|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/470_RHIS)|||||||||||⚫|UNet+UNet|
+|489|489_Glasses-Detector|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/489_Glasses-Detector)|||||||||||⚫|glasses|
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|

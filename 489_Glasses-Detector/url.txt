@@ -1,0 +1,6 @@
+- original
+https://github.com/mantasu/glasses-detector
+
+- uv, onnx custom
+https://github.com/PINTO0309/glasses-detector
+
