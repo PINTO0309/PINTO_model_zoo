@@ -16,6 +16,23 @@ $\color{gray}{\textit{Note: }\text{refer to}}$ [Glasses Detector Features](https
 
 </div>
 
+1. classification
+    1. anyglasses      # Datasets with any glasses as positives
+    2. eyeglasses      # Datasets with transparent glasses as positives
+    3. shadows         # Datasets with visible glasses frames shadows as positives
+    4. sunglasses      # Datasets with semi-transparent/opaque glasses as positives
+2. detection
+    1. eyes            # Datasets with bounding boxes for eye area
+    2. solo            # Datasets with bounding boxes for standalone glasses
+    3. worn            # Datasets with bounding boxes for worn glasses
+3. segmentation
+    1. frames          # Datasets with masks for glasses frames
+    2. full            # Datasets with masks for full glasses (frames + lenses)
+    3. legs            # Datasets with masks for glasses legs (part of frames)
+    4. lenses          # Datasets with masks for glasses lenses
+    5. shadows         # Datasets with masks for eyeglasses frames cast shadows
+    6. smart           # Datasets with masks for glasses frames and lenses if opaque
+
 ## 1. ONNX test
   - Installation
     https://github.com/PINTO0309/glasses-detector#installation
