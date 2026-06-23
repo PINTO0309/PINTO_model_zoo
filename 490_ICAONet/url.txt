@@ -1,0 +1,6 @@
+- original
+https://github.com/arnaldog12/icaonet
+
+- onnx/tflite custom
+https://github.com/PINTO0309/icaonet
+
