@@ -28,7 +28,7 @@ Phone Usage Classifier (PUC) is a three-class image classification pipeline for 
 
 ## Arch
 
-<img width="350" alt="puc_p_32x24" src="https://github.com/user-attachments/assets/82fd2a31-d6b5-4bbb-a099-ac51237d145c" />
+<img width="350" alt="puc_p_48x48" src="https://github.com/user-attachments/assets/4f4bacfd-5ac1-4af6-a68b-379377f3dc49" />
 
 ## Ultra-lightweight classification model series
 1. [VSDLM: Visual-only speech detection driven by lip movements](https://github.com/PINTO0309/VSDLM) - MIT License
