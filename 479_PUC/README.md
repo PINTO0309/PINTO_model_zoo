@@ -38,6 +38,10 @@ Phone Usage Classifier (PUC) is a three-class image classification pipeline for 
 5. [PUC: Phone Usage Classifier is a three-class image classification pipeline for understanding how people
 interact with smartphones](https://github.com/PINTO0309/PUC) - MIT License
 6. [HSC: Happy smile classifier](https://github.com/PINTO0309/HSC) - MIT License
+7. [WHC: Waving Hand Classification](https://github.com/PINTO0309/WHC) - MIT License
+8. [UHD: Ultra-lightweight human detection](https://github.com/PINTO0309/UHD) - MIT License
+9. [MWC: Mask wearing classifier](https://github.com/PINTO0309/MWC) - MIT License
+10. [SGC: Classification of wearing vs. not wearing sunglasses. 48x48.](https://github.com/PINTO0309/SGC) - MIT License
 
 ## Citation
 
