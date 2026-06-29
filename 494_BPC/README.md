@@ -1,6 +1,6 @@
 # 494_BPC
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21022946.svg)](https://doi.org/10.5281/zenodo.21022946) ![GitHub License](https://img.shields.io/github/license/pinto0309/BPC) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/PINTO0309/bpc)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21022946.svg)](https://doi.org/10.5281/zenodo.21022946) ![GitHub License](https://img.shields.io/github/license/PINTO0309/BPC) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/PINTO0309/bpc)
 
 Background Plain classification. 48x48.
 
