@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21022946.svg)](https://doi.org/10.5281/zenodo.21022946) ![GitHub License](https://img.shields.io/github/license/PINTO0309/BPC) [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/PINTO0309/bpc)
 
-Background Plain classification. 48x48.
+Binary classification of whether the background is simple or complex. 48x48.
 
 https://github.com/user-attachments/assets/bfeebfaa-3aec-429a-9f2a-f16ff2d0d907
 
@@ -116,6 +116,6 @@ If you find this project useful, please consider citing:
   publisher = {Zenodo},
   doi       = {10.5281/zenodo.21022946},
   url       = {https://github.com/PINTO0309/bpc},
-  abstract  = {Background Plain classification. 48x48.},
+  abstract  = {Binary classification of whether the background is simple or complex. 48x48.},
 }
 ```
