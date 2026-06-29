@@ -4,7 +4,7 @@
 
 Binary classification of whether the background is simple or complex. 48x48.
 
-https://github.com/user-attachments/assets/bfeebfaa-3aec-429a-9f2a-f16ff2d0d907
+https://github.com/user-attachments/assets/5980c05f-be9d-402a-b927-3c60fbd29107
 
 ## Classes
 
