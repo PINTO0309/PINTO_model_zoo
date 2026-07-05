@@ -537,9 +537,9 @@ class DEIMv2(AbstractModel):
         box_score_threshold: float = min([self._obj_class_score_th, self._attr_class_score_th, self._keypoint_th])
 
         if len(boxes) > 0:
-            scores = boxes[:, 5:6]
-            keep_idxs = scores[:, 0] > box_score_threshold
-            scores_keep = scores[keep_idxs, :]
+            scores = boxes[:, 5]
+            keep_idxs = scores > box_score_threshold
+            scores_keep = scores[keep_idxs]
             boxes_keep = boxes[keep_idxs, :]
 
             if len(boxes_keep) > 0:
