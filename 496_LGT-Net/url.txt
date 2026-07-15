@@ -1,0 +1,8 @@
+- original
+
+  https://github.com/zhigangjiang/LGT-Net
+
+- onnx custom
+
+  https://github.com/PINTO0309/LGT-Net
+
