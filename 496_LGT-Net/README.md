@@ -8,7 +8,7 @@
 <img width="1416" height="512" alt="demo1_onnx_cuda_pred" src="https://github.com/user-attachments/assets/27456e35-f7b8-4ba7-aeb4-627a803419a3" />
 <img width="1416" height="512" alt="demo_onnx_cuda_pred" src="https://github.com/user-attachments/assets/3e10955f-672e-460b-b706-112ae587e771" />
 
-## Demo
+## ONNX Demo
 
 https://github.com/PINTO0309/LGT-Net
 
