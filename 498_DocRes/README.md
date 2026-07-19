@@ -1,9 +1,8 @@
 # 498_DocRes
 
-<p align="center">
-<img src="images/motivation.jpg" width="400">
-</p>
+[DocRes: A Generalist Model Toward Unifying Document Image Restoration Tasks](https://arxiv.org/abs/2405.04408).
 
+<img width="2985" height="2259" alt="image" src="https://github.com/user-attachments/assets/0a81d9f9-35c9-4a00-aed5-d2e7301f1919" />
 
 - original
 
@@ -12,6 +11,10 @@
 - ONNX custom
 
   https://github.com/PINTO0309/DocRes
+
+## ONNX Demo
+
+https://github.com/PINTO0309/DocRes
 
 ## Environment setup
 
