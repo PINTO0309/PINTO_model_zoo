@@ -624,6 +624,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |492|Efficient-FIQA|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/492_Efficient-FIQA)|⚫|⚫|||||||⚫||⚫|Efficient Face Image Quality Assessment|
 |496|LGT-Net|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/496_LGT-Net)|||||||||||⚫|Indoor Panoramic Room Layout Estimation|
 |498|DocRes|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/498_DocRes)|||||||||||⚫|A Generalist Model Toward Unifying Document Image Restoration Tasks|
+|499|LINEA|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/499_LINEA)|||||||||||⚫|Fast and accurate line detection using scalable transformers|
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)
