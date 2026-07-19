@@ -22,8 +22,6 @@ LINEA: Fast and accurate line detection using scalable transformers
 </p>
 
 <p align="center">
-    📄 This is the official implementation of the paper:
-    <br>
     <a href="https://arxiv.org/abs/2505.16264">LINEA: Fast and accurate line detection using scalable transformers</a>
 </p>
 
