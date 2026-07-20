@@ -1,0 +1,5 @@
+- original
+  https://github.com/ant-research/scalelsd
+
+- ONNX custom
+  https://github.com/PINTO0309/scalelsd
