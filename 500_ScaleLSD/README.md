@@ -14,12 +14,12 @@
 
 </div>
 
-![teaser](assets/teaser.jpg)
+<img width="3226" height="1989" alt="image" src="https://github.com/user-attachments/assets/dea4a0d1-ab43-4b56-aacf-0c8f74109f15" />
 
 ## Original
 https://github.com/ant-research/scalelsd
 
-## ONNX custom
+## ONNX custom/demo
 https://github.com/PINTO0309/scalelsd
 
 ## ONNX export
