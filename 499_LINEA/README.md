@@ -64,6 +64,8 @@ We highlight two advantages of our proposed mechanism:
 
 </details>
 
+https://github.com/user-attachments/assets/14b4b9cf-6378-4482-b06f-d1af71fb5aa7
+
 ## Original
 
 https://github.com/SebastianJanampa/LINEA
