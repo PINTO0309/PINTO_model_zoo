@@ -6,8 +6,6 @@
 
 <a href="https://ant-research.github.io/scalelsd"><img src="https://img.shields.io/static/v1?label=Project%20Page&message=Github&color=blue&logo=github-pages"></a>&ensp;<a href="https://arxiv.org/abs/2506.09369"><img src="https://img.shields.io/badge/ArXiv-2506.09369-brightgreen"></a>&ensp;<a href="https://huggingface.co/cherubicxn/scalelsd"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Model_Card-Huggingface-orange"></a>
 
-
-
 [Zeran Ke](https://calmke.github.io/)<sup>1,2</sup>, [Bin Tan](https://icetttb.github.io/)<sup>2</sup>, [Xianwei Zheng](https://jszy.whu.edu.cn/zhengxianwei/zh_CN/index.htm)<sup>1</sup>,  [Yujun Shen](https://shenyujun.github.io/)<sup>2</sup>, [Tianfu Wu](https://research.ece.ncsu.edu/ivmcl/)<sup>3</sup>, [Nan Xue](https://xuenan.net/)<sup>2†</sup>
 
 <sup>1</sup>Wuhan University &ensp;&ensp;<sup>2</sup>Ant Group&ensp;&ensp;<sup>3</sup>NC State University
@@ -15,6 +13,8 @@
 </div>
 
 <img width="3226" height="1989" alt="image" src="https://github.com/user-attachments/assets/dea4a0d1-ab43-4b56-aacf-0c8f74109f15" />
+
+https://github.com/user-attachments/assets/c02438b9-2628-4106-9478-ab66922253c7
 
 ## Original
 https://github.com/ant-research/scalelsd
