@@ -14,6 +14,21 @@ LINEAE (**LINEA E**nhanced) is an experimental successor to [LINEA](https://gith
 
   https://github.com/user-attachments/assets/7ef0788c-a1cf-4030-8b89-258551c625ed
 
+- LINEAE-3XL ONNX (3.8 GB) + TensorRT FP16 + RTX3070
+  - To detect screws, it will likely be necessary to augment the dataset with data other than furniture.
+  - Since some detections are being made, it is immediately apparent that there is an overwhelming lack of data diversity.
+  - A key insight gained from this experiment is that data diversity is extremely important; the architecture does not matter at all.
+
+  https://github.com/user-attachments/assets/60cd5dcf-3319-4267-abb7-21fdaabd68f6
+
+- LINEAE-2XL ONNX (1.5 GB) + TensorRT BF16 + RTX3070
+  - Results of fine-tuning using only 300 images of screws of a fixed length.
+  - Although fine-tuning was performed with virtually no diversity in the training data for the screws, the model improved to the point where the screws could be clearly detected.
+  - By training a model on a large number of screws varying in length, thickness, and degree of crowding, it should be possible to detect the number, orientation, and length of the screws using LSD.
+  - This was a rough experiment conducted to assess the model's detection potential when fine-tuned using a mix of data that included sources other than the furniture dataset.
+
+  https://github.com/user-attachments/assets/ee20aa0b-e8c8-4bee-a86c-ed10f2bad371
+
 ## Demo
 
 - https://github.com/PINTO0309/LINEAE
@@ -39,6 +54,23 @@ python demo_lineae.py \
 --model lineae_n_1x3x640x640_1100.onnx \
 --execution-provider cpu \
 --score-threshold 0.2
+```
+For the `2XL` model specifically, BF16 must be specified during TensorRT FP16 inference because the final layer of the DINOv3 backbone diverges to NaN.
+```bash
+python demo_lineae.py \
+--input 0 \
+--model lineae_2xl_1x3x640x640_1100.onnx \
+--execution-provider tensorrt \
+--tensorrt-precision bf16 \
+--score-threshold 0.3
+```
+With the `3XL` model, no issues arise even with FP16 inference.
+```bash
+python demo_lineae.py \
+--input 0 \
+--model lineae_3xl_1x3x640x640_1100.onnx \
+--execution-provider tensorrt \
+--score-threshold 0.3
 ```
 
 ## Parameter inventory
