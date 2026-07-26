@@ -626,6 +626,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |498|DocRes|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/498_DocRes)|||||||||||⚫|A Generalist Model Toward Unifying Document Image Restoration Tasks|
 |499|LINEA|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/499_LINEA)|||||||||||⚫|Fast and accurate line detection using scalable transformers|
 |500|ScaleLSD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/500_ScaleLSD)|||||||||||⚫|Scalable Deep Line Segment Detection Streamlined|
+|501|LINEAE|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/501_LINEAE)|||||||||||⚫|Line Segment Detection|
 
 ## Sample.1 - Object detection by video file
 - RaspberryPi4 (CPU only)
