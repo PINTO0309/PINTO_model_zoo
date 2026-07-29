@@ -132,6 +132,8 @@ I have been working on quantization of various models as a hobby, but I have ski
 |494|BPC|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/494_BPC)|||||||||||⚫|Background Plain classification|
 |495|Comprehensive-Head-Classification|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/495_Comprehensive-Head-Classification)|⚫||||||||||⚫|Comprehensive head classification|
 |497|PPC|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/497_PPC)|||||||||||⚫|Binary classification to determine whether the subject is holding a smartphone|
+|502|PersonViT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/502_PersonViT)|||||||||||⚫|Person Re-Identification|
+
 ### 2. 2D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
