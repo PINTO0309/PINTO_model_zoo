@@ -1,0 +1,6 @@
+- Original
+https://github.com/hustvl/PersonViT
+
+- ONNX custom
+https://github.com/PINTO0309/PersonViT
+
