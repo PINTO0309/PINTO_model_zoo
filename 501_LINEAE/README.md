@@ -29,6 +29,32 @@ LINEAE (**LINEA E**nhanced) is an experimental successor to [LINEA](https://gith
 
   https://github.com/user-attachments/assets/ee20aa0b-e8c8-4bee-a86c-ed10f2bad371
 
+- LINEAE-2XL ONNX (1.5 GB) + TensorRT BF16 + RTX3070 - After fine-tuning with data from 100,000 composite screws
+  - Screw detection capabilities have been significantly improved by greatly enhancing data diversity.
+  - However, since the data was augmented solely with synthetic data, the detection performance does not yet reflect sufficient data diversity.
+  - It is necessary to consider factors such as the camera's angle of depression; the screw's color, length, thickness, and tip shape; and environmental noise, including lighting conditions and blur.
+  - The augmented dataset of 100,000 screws consists of a large volume of synthetic data featuring significant occlusion caused by overlapping screws.
+  - To further improve quality from this stage, the key is not simply to massively increase the volume of data, but to patiently augment the dataset—even if only in small increments—with real-world data representing patterns that are difficult to detect.
+  - I believe that simply adding 100 images containing a significant amount of real-world noise would likely lead to a marked improvement in accuracy.
+  - https://github.com/PINTO0309/LINEAE/releases/download/weights/lineae_2xl_1x3x640x640_1100_screw_ext.onnx
+
+  https://github.com/user-attachments/assets/790b7e90-82c9-4c35-969a-217444d9f886
+
+- LINEAE-2XL ONNX (1.5 GB) + TensorRT BF16 + RTX3070 - After fine-tuning with data from 200,000 composite screws
+  - I fine-tuned the model by adding a large number of realistic silver screws to the training data.
+  - Detection capabilities have clearly improved.
+  - Since noise padding via blurring is not used, detection becomes unstable if the camera is intentionally shaken.
+  - Despite the 640x480 VHD image quality, we are now able to detect screws with near-perfect accuracy.
+  - https://github.com/PINTO0309/LINEAE/releases/download/weights/lineae_2xl_1x3x640x640_1100_screw_ext2.onnx
+
+  https://github.com/user-attachments/assets/08a4c00a-8db1-4b45-87a6-84d1efd6686c
+
+  - The screw data generated via automatic synthesis is shown in the figure below.
+
+  |Non-overlapping annotations|Annotation overlay|
+  |:-:|:-:|
+  |<img width="640" height="640" alt="imgv2_val_000040" src="https://github.com/user-attachments/assets/94a8337a-fd92-4313-82ba-8f372ae1b837" />|<img width="640" height="640" alt="imgv2_val_000040" src="https://github.com/user-attachments/assets/3512e67e-789c-401f-ac01-3d3ec89c49eb" />|
+
 ## Demo
 
 - https://github.com/PINTO0309/LINEAE
@@ -94,7 +120,7 @@ python demo_lineae.py \
 | L       |         23.0 |                6.7 |      29.7 |   94.5 |65.00|71.48|74.00|57.67|63.93|66.46|
 | X       |         30.1 |                8.1 |      38.2 |  121.2 |65.94|72.32|74.72|62.22|68.49|71.01|
 | XL      |         88.4 |                8.1 |      96.5 |  306.3 |68.71|74.24|76.36|63.42|68.17|70.38|
-| 2XL     |        311.5 |               60.7 |     372.2 | 1173.6 |-|-|-|-|-|-|
+| 2XL     |        311.5 |               60.7 |     372.2 | 1173.6 |71.76|76.47|78.60|76.04|79.24|80.93|
 | 3XL     |        853.7 |              106.8 |     960.5 | 3043.2 |72.19|76.80|78.65|70.81|74.50|76.48|
 
 ## Licensing
