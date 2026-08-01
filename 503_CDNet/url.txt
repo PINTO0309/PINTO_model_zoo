@@ -1,0 +1,6 @@
+- Original
+https://github.com/solicucu/ReID
+
+- ONNX custom
+https://github.com/PINTO0309/ReID
+
