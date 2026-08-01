@@ -3,8 +3,10 @@
 PersonViT: Large-scale Self-supervised Vision Transformer for Person Re-Identification
 
 ## Results
-![PersonViT](pics/sota_pic.png)
-![PersonViT-tb](pics/sota_table.png)
+<img width="439" height="412" alt="image" src="https://github.com/user-attachments/assets/8ddee91a-8aa9-426d-a7f6-37615792d089" />
+
+<img width="1606" height="544" alt="image" src="https://github.com/user-attachments/assets/5c63d6d2-ba6e-489b-a632-a0f8238eff08" />
+
 
 ## Comparison with OSNet
 
