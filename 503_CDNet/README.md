@@ -3,6 +3,8 @@
 ### Paper
 [Combined Depth Space based Architecture Search for Person Re-identification](https://arxiv.org/abs/2104.04163)
 
+<img width="853" height="571" alt="image" src="https://github.com/user-attachments/assets/1e3f3171-1c70-4bc5-bad2-64e2d39a0243" />
+
 ### Models
 
 - results on ReID tasks
