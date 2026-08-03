@@ -63,7 +63,6 @@ One row per person box:
 
 - `batch_idx` is always `0.0` (the frame batch is 1).
 - Coordinates are clipped to the frame, then **normalized to [0, 1]** by the frame width/height. Passing pixel coordinates is a bug.
-- `ptrack` drops degenerate boxes (width < 4 px or height < 8 px) before building the tensor and returns zero vectors for them.
 - For a single TensorRT engine shape (no per-batch re-tuning), rows are zero-padded (`[0,0,0,0,0]`) up to a multiple of `batch_max` (default 64); only the first `N_real` output rows are consumed.
 
 **Worked example** — a 1920×1080 frame, person box
@@ -76,7 +75,7 @@ One row per person box:
 
 ## Output: `embeddings` — float32 `[N, 768]` (unnormalized)
 
-L2-normalize before using cosine similarity (`ptrack` also guards against non-finite rows):
+L2-normalize before using cosine similarity:
 
 ```python
 emb /= np.linalg.norm(emb, axis=1, keepdims=True) + 1e-9
