@@ -43,29 +43,73 @@ As a starting point, prefer OSNet x1.0 when latency and memory are the primary c
 
 ---
 
-## August 11, 2026: Significantly enhanced generalization performance
+## August 12, 2026: Significantly enhanced generalization performance
 
-### B-ain-aug -  ViT-B/16 + token-IN - 86.5M
+#### B-ain-aug -  ViT-B/16 + token-IN - 86.5M
 
-| dataset | queries | gallery | mAP | R1 | R5 | R10 |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| market | 3,368 | 15,913 | 0.9793 | 0.9875 | 0.9961 | 0.9982 |
-| msmt17 | 11,659 | 82,161 | 0.8999 | 0.9557 | 0.9804 | 0.9835 |
-| duke_occ | 2,210 | 17,661 | 0.9206 | 0.9471 | 0.9801 | 0.9851 |
-| cuhk03np | 1,400 | 5,332 | 0.9795 | 0.9793 | 0.9907 | 0.9964 |
-| occ_reid | 1,000 | 1,000 | 0.9970 | 1.0000 | 1.0000 | 1.0000 |
+- unified test set eval
 
-### S-ain-aug -  ViT-S/16 + token-IN - 22.0M
+  | Var | Backbone | Params | GFLOPs<br>@256x128 | Emb | mAP | Rank-1 | Rank-5 | Rank-10 |
+  | --- | --- | ---: | ---: | ---: | --- | ---: | ---: | ---: |
+  | B-ain-aug | ViT-B/16<br>+<br>token-IN | 86.5M | 11.35 | 768 | 93.4 | 96.9 | 98.1 | 98.6 |
 
-| dataset | queries | gallery | mAP | R1 | R5 | R10 |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| market | 3,368 | 15,913 | 0.9752 | 0.9857 | 0.9952 | 0.9979 |
-| msmt17 | 11,659 | 82,161 | 0.8886 | 0.9523 | 0.9798 | 0.9829 |
-| duke_occ | 2,210 | 17,661 | 0.9089 | 0.9394 | 0.9774 | 0.9860 |
-| cuhk03np | 1,400 | 5,332 | 0.9766 | 0.9786 | 0.9914 | 0.9971 |
-| occ_reid | 1,000 | 1,000 | 0.9962 | 0.9980 | 1.0000 | 1.0000 |
+- official dataset eval
 
-### T-ain-aug - OSNet-AIN x1.5 - 4.6M
+  | dataset | queries | gallery | mAP | R1 | R5 | R10 |
+  | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+  | market | 3,368 | 15,913 | 0.9857 | 0.9911 | 0.9979 | 0.9985 |
+  | msmt17 | 11,659 | 82,161 | 0.9317 | 0.9662 | 0.9846 | 0.9870 |
+  | duke_occ | 2,210 | 17,661 | 0.9461 | 0.9575 | 0.9824 | 0.9873 |
+  | cuhk03np | 1,400 | 5,332 | 0.9873 | 0.9886 | 0.9929 | 0.9971 |
+  | occ_reid | 1,000 | 1,000 | 0.9986 | 1.0000 | 1.0000 | 1.0000 |
+
+- official dataset style-shift eval - query only shifted
+
+  | condition | mAP | R1 | dmAP | dR1 |
+  | --- | ---: | ---: | ---: | ---: |
+  | clean | 0.9500 | 0.9728 | — | — |
+  | bright+30% | 0.9490 | 0.9726 | -0.0010 | -0.0003 |
+  | dark-30% | 0.9500 | 0.9729 | +0.0000 | +0.0001 |
+  | contrast-40% | 0.9500 | 0.9728 | +0.0000 | -0.0001 |
+  | contrast+40% | 0.9037 | 0.9364 | -0.0463 | -0.0364 |
+  | warm | 0.9111 | 0.9426 | -0.0389 | -0.0302 |
+  | cool | 0.9355 | 0.9640 | -0.0145 | -0.0088 |
+  | gamma0.6 | 0.9421 | 0.9686 | -0.0079 | -0.0042 |
+  | gamma1.6 | 0.9388 | 0.9676 | -0.0112 | -0.0052 |
+
+#### S-ain-aug -  ViT-S/16 + token-IN - 22.0M
+
+- unified test set eval
+
+  | Var | Backbone | Params | GFLOPs<br>@256x128 | Emb | mAP | Rank-1 | Rank-5 | Rank-10 |
+  | --- | --- | ---: | ---: | ---: | --- | ---: | ---: | ---: |
+  | S-ain-aug | ViT-S/16<br>+<br>token-IN | 22.0M | 2.94 | 384 | 92.7 | 96.9 | 98.1 | 98.5 |
+
+- official dataset eval
+
+  | dataset | queries | gallery | mAP | R1 | R5 | R10 |
+  | --- | ---: | ---: | ---: | ---: | ---: | ---: |
+  | market | 3,368 | 15,913 | 0.9825 | 0.9890 | 0.9979 | 0.9991 |
+  | msmt17 | 11,659 | 82,161 | 0.9190 | 0.9615 | 0.9828 | 0.9855 |
+  | duke_occ | 2,210 | 17,661 | 0.9374 | 0.9557 | 0.9819 | 0.9860 |
+  | cuhk03np | 1,400 | 5,332 | 0.9858 | 0.9879 | 0.9943 | 0.9986 |
+  | occ_reid | 1,000 | 1,000 | 0.9976 | 0.9990 | 0.9990 | 1.0000 |
+
+- official dataset style-shift eval - query only shifted
+
+  | condition | mAP | R1 | dmAP | dR1 |
+  | --- | ---: | ---: | ---: | ---: |
+  | clean | 0.9407 | 0.9693 | — | — |
+  | bright+30% | 0.9393 | 0.9678 | -0.0014 | -0.0015 |
+  | dark-30% | 0.9407 | 0.9695 | -0.0000 | +0.0002 |
+  | contrast-40% | 0.9407 | 0.9692 | -0.0000 | -0.0001 |
+  | contrast+40% | 0.8863 | 0.9255 | -0.0544 | -0.0438 |
+  | warm | 0.8983 | 0.9380 | -0.0425 | -0.0314 |
+  | cool | 0.9245 | 0.9598 | -0.0163 | -0.0095 |
+  | gamma0.6 | 0.9316 | 0.9639 | -0.0091 | -0.0054 |
+  | gamma1.6 | 0.9279 | 0.9628 | -0.0128 | -0.0065 |
+
+#### T-ain-aug - OSNet-AIN x1.5 - 4.6M
 
 | dataset | queries | gallery | mAP | R1 | R5 | R10 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -75,7 +119,7 @@ As a starting point, prefer OSNet x1.0 when latency and memory are the primary c
 | cuhk03np | 1,400 | 5,332 | 0.9776 | 0.9814 | 0.9936 | 0.9986 |
 | occ_reid | 1,000 | 1,000 | 0.9791 | 0.9840 | 0.9890 | 0.9980 |
 
-### N-ain-aug - OSNet-AIN x1.25 - 3.3M
+#### N-ain-aug - OSNet-AIN x1.25 - 3.3M
 
 | dataset | queries | gallery | mAP | R1 | R5 | R10 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -85,7 +129,7 @@ As a starting point, prefer OSNet x1.0 when latency and memory are the primary c
 | cuhk03np | 1,400 | 5,332 | 0.9793 | 0.9829 | 0.9936 | 0.9979 |
 | occ_reid | 1,000 | 1,000 | 0.9791 | 0.9790 | 0.9910 | 0.9960 |
 
-### P-ain-aug - OSNet-AIN x1.0 - 2.2M
+#### P-ain-aug - OSNet-AIN x1.0 - 2.2M
 
 | dataset | queries | gallery | mAP | R1 | R5 | R10 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -95,7 +139,7 @@ As a starting point, prefer OSNet x1.0 when latency and memory are the primary c
 | cuhk03np | 1,400 | 5,332 | 0.9752 | 0.9807 | 0.9936 | 0.9979 |
 | occ_reid | 1,000 | 1,000 | 0.9831 | 0.9850 | 0.9940 | 0.9970 |
 
-### osnet_ain_ms_d_c - 2.2M
+#### osnet_ain_ms_d_c - 2.2M
 
 | dataset | queries | gallery | mAP | R1 | R5 | R10 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
