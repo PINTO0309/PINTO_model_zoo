@@ -64,7 +64,7 @@ image = (image - 0.5) / 0.5
 images = np.transpose(image, (2, 0, 1))[None]
 
 session = ort.InferenceSession(
-    "onnx/personvit_msmt_vits16_e0220.onnx",
+    "personvit_vitb16_ain_unified_aug_n.onnx",
     providers=["CPUExecutionProvider"],
 )
 embeddings = session.run(["embeddings"], {"images": images})[0]
