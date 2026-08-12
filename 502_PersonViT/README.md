@@ -42,8 +42,33 @@ For a fair deployment comparison:
 As a starting point, prefer OSNet x1.0 when latency and memory are the primary constraints, PersonViT-S/16 when a moderate compute budget is available, and PersonViT-B/16 when retrieval accuracy is the priority. The final choice should be based on validation data collected from the actual deployment environment.
 
 ---
+---
+---
 
 ## August 12, 2026: Significantly enhanced generalization performance
+
+- Preprocessing: resize the RGB person crop to 256 x 128, scale pixels to `[0, 1]`, then normalize each channel with mean `[0.5, 0.5, 0.5]` and standard deviation `[0.5, 0.5, 0.5]`.
+- Output embeddings are L2 normalized.
+
+Example ONNX Runtime inference:
+
+```python
+import cv2
+import numpy as np
+import onnxruntime as ort
+
+image = cv2.imread("person.jpg")
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+image = cv2.resize(image, (128, 256)).astype(np.float32) / 255.0
+image = (image - 0.5) / 0.5
+images = np.transpose(image, (2, 0, 1))[None]
+
+session = ort.InferenceSession(
+    "onnx/personvit_msmt_vits16_e0220.onnx",
+    providers=["CPUExecutionProvider"],
+)
+embeddings = session.run(["embeddings"], {"images": images})[0]
+```
 
 #### B-ain-aug -  ViT-B/16 + token-IN - 86.5M
 
