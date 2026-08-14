@@ -106,6 +106,8 @@ embeddings = session.run(["embeddings"], {"images": images})[0]
 
 #### S-ain-aug -  ViT-S/16 + token-IN - 22.0M
 
+https://github.com/user-attachments/assets/821f4812-cfd5-402c-b4b5-fa5776ed1ce1
+
 - unified test set eval
 
   | Var | Backbone | Params | GFLOPs<br>@256x128 | Emb | mAP | Rank-1 | Rank-5 | Rank-10 |
