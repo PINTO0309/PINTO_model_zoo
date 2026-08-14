@@ -106,7 +106,11 @@ embeddings = session.run(["embeddings"], {"images": images})[0]
 
 #### S-ain-aug -  ViT-S/16 + token-IN - 22.0M
 
-https://github.com/user-attachments/assets/821f4812-cfd5-402c-b4b5-fa5776ed1ce1
+- [CrowdTrack](https://github.com/loseevaya/CrowdTrack) dataset test - Testing using video footage that was not included in the training data at all.
+
+  https://github.com/user-attachments/assets/821f4812-cfd5-402c-b4b5-fa5776ed1ce1
+  
+  https://github.com/user-attachments/assets/baf48f48-d22b-4d79-b2de-44cdb8b2a967
 
 - unified test set eval
 
