@@ -45,7 +45,7 @@ As a starting point, prefer OSNet x1.0 when latency and memory are the primary c
 ---
 ---
 
-## August 12, 2026: Significantly enhanced generalization performance
+## August 16, 2026: Significantly enhanced generalization performance
 
 - Preprocessing: resize the RGB person crop to 256 x 128, scale pixels to `[0, 1]`, then normalize each channel with mean `[0.5, 0.5, 0.5]` and standard deviation `[0.5, 0.5, 0.5]`.
 - Output embeddings are L2 normalized.
