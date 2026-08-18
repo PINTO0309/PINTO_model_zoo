@@ -106,6 +106,6 @@ python validation.py
 |msmt17_combineall_256x128_amsgrad_ep150_stp60_lr0|**0.418**|**0.373**|**0.330**|**0.593**|**0.810**|**0.752**|
 |**5. ViT**|||||||
 |personvit_vits16_ain_unified_aug_n (≧0.50)|**0.073**|**0.017**|**0.290**|**0.523**|**0.510**|**0.597**|
-|personvit_vitb16_ain_unified_aug_n (≧0.36)|0.265|0.155|0.349|0.367|0.707|0.620|
+|personvit_vitb16_ain_unified_aug_n (≧0.50)|0.265|0.155|0.349|0.367|0.707|0.620|
 
 
