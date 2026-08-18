@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from __future__ import annotations
+import os
 import copy
 import cv2
 from tqdm import tqdm
@@ -65,6 +66,26 @@ MODELS = [
     "resnet50_fc512_msmt_xent_NMx3x256x128.onnx",
     "resnet50_msmt17_combineall_256x128_amsgrad_ep150_stp60_lr0_NMx3x256x128.onnx",
 ]
+
+# Single-input models that output L2-normalized embeddings.
+# https://github.com/PINTO0309/PersonViT
+#   Input: images [N, 3, 256, 128], RGB, [0, 1] scaling, mean=0.5, std=0.5
+#   Output: embeddings [N, D] (L2 normalized)
+UNIFIED_MODELS = [
+    "osnet_x1_0_p_unified_n.onnx",
+    "personvit_vitb16_ain_unified_aug_n.onnx",
+    "personvit_vits16_ain_unified_aug_n.onnx",
+]
+
+# NOTE: the OSNet unified model outputs embeddings compressed into a narrow
+# cosine cone (different-person pairs still score ~0.7), so read its row by
+# the same/different ORDERING, not by absolute values - thresholds tuned for
+# the other models do not transfer. In deployment the cone is expanded with
+# embedding whitening, e' = normalize((e - mu) / sd), where mu/sd are running
+# statistics over a large multi-identity pool and the decision thresholds are
+# re-derived afterwards (ptrack exp050/exp060). The six test crops here span
+# only two identities - far too few for those statistics - so no whitening is
+# applied in this script.
 
 # [base_image_file, target_image_file]
 TEST_IMAGES = [
@@ -277,6 +298,8 @@ class OSNet(AbstractModel):
         runtime: Optional[str] = 'onnx',
         model_path: Optional[str] = 'osnet_ain_d_m_c_NMx3x256x128.onnx',
         providers: Optional[List] = None,
+        mean: Optional[np.ndarray] = np.array([0.485, 0.456, 0.406], dtype=np.float32),
+        std: Optional[np.ndarray] = np.array([0.229, 0.224, 0.225], dtype=np.float32),
     ):
         """OSNet
 
@@ -290,13 +313,19 @@ class OSNet(AbstractModel):
 
         providers: Optional[List]
             Providers for ONNXRuntime.
+
+        mean: Optional[np.ndarray]
+            Normalization mean. Default: ImageNet mean
+
+        std: Optional[np.ndarray]
+            Normalization std. Default: ImageNet std
         """
         super().__init__(
             runtime=runtime,
             model_path=model_path,
             providers=providers,
-            mean=np.array([0.485, 0.456, 0.406], dtype=np.float32),
-            std=np.array([0.229, 0.224, 0.225], dtype=np.float32),
+            mean=mean,
+            std=std,
         )
 
     def __call__(
@@ -411,6 +440,110 @@ class OSNet(AbstractModel):
         stacked_images = stacked_images.astype(self._input_dtypes[0])
         return stacked_images[0:base_images_num, ...], stacked_images[base_images_num:base_images_num+target_images_num, ...]
 
+class UnifiedReID(OSNet):
+    def __init__(
+        self,
+        *,
+        runtime: Optional[str] = 'onnx',
+        model_path: Optional[str] = 'osnet_x1_0_p_unified_n.onnx',
+        providers: Optional[List] = None,
+    ):
+        """UnifiedReID
+
+        Single-input ReID models that output L2-normalized embeddings.
+        https://github.com/PINTO0309/PersonViT
+
+        Parameters
+        ----------
+        runtime: Optional[str]
+            Runtime for UnifiedReID. Default: onnx
+
+        model_path: Optional[str]
+            ONNX/TFLite file path for UnifiedReID
+
+        providers: Optional[List]
+            Providers for ONNXRuntime.
+        """
+        super().__init__(
+            runtime=runtime,
+            model_path=model_path,
+            providers=providers,
+            mean=np.array([0.500, 0.500, 0.500], dtype=np.float32),
+            std=np.array([0.500, 0.500, 0.500], dtype=np.float32),
+        )
+
+    def __call__(
+        self,
+        *,
+        base_images: List[np.ndarray],
+        target_images: List[np.ndarray],
+    ) -> np.ndarray:
+        """UnifiedReID
+
+        Parameters
+        ----------
+        base_images: List[np.ndarray]
+            Entire image
+
+        target_images: List[np.ndarray]
+            Entire image
+
+        Returns
+        -------
+        similarity: np.ndarray
+            Cosine similarity. [N, M]
+        """
+        base_embeddings = self.embed(images=base_images)
+        target_embeddings = self.embed(images=target_images)
+        similarity = base_embeddings @ target_embeddings.T
+        return similarity
+
+    def embed(
+        self,
+        *,
+        images: List[np.ndarray],
+    ) -> np.ndarray:
+        """embed
+
+        Parameters
+        ----------
+        images: List[np.ndarray]
+            Entire image
+
+        Returns
+        -------
+        embeddings: np.ndarray
+            L2-normalized embeddings. [N, D]
+        """
+        temp_images = copy.deepcopy(images)
+
+        # PreProcess (Resize + BGR->RGB + Transpose + Normalize)
+        resized_images_list: List[np.ndarray] = []
+        for image in temp_images:
+            resized_image: np.ndarray = \
+                cv2.resize(
+                    src=image,
+                    dsize=(
+                        int(self._input_shapes[0][self._w_index]),
+                        int(self._input_shapes[0][self._h_index]),
+                    )
+                )
+            resized_image = resized_image[..., ::-1]
+            resized_image = resized_image.transpose(self._swap)
+            resized_images_list.append(resized_image)
+        images_np = np.asarray(resized_images_list)
+        images_np = (images_np / 255.0 - self._mean) / self._std
+        images_np = images_np.astype(self._input_dtypes[0])
+
+        # Inference
+        outputs = AbstractModel.__call__(self, input_datas=[images_np])
+        embeddings: np.ndarray = outputs[0]
+
+        # Output embeddings are L2 normalized, but re-normalize just in case.
+        embeddings = embeddings \
+            / np.maximum(np.linalg.norm(embeddings, axis=1, keepdims=True), 1e-9)
+        return embeddings
+
 def is_parsable_to_int(s):
     try:
         int(s)
@@ -439,8 +572,13 @@ def main():
     md_str = md_str + "|Model|00030 vs 00031|00030 vs 1|00031 vs 2|1 vs 2|1 vs 3|1 vs 4|\n"
     md_str = md_str + "|:-|-:|-:|-:|-:|-:|-:|\n"
 
-    for model_file in tqdm(MODELS):
-        model = OSNet(
+    for model_file in tqdm(MODELS + UNIFIED_MODELS):
+        if not os.path.isfile(model_file):
+            tqdm.write(f'{Color.YELLOW("Skip (not found):")} {model_file}')
+            continue
+
+        model_class = UnifiedReID if model_file in UNIFIED_MODELS else OSNet
+        model = model_class(
             runtime='onnx',
             model_path=model_file,
             providers=[
@@ -449,18 +587,43 @@ def main():
             ],
         )
 
-        sims: List[str] = []
-        for base_image_file, target_image_file in TEST_IMAGES:
-            base_image: np.ndarray = cv2.imread(base_image_file)
-            target_image: np.ndarray = cv2.imread(target_image_file)
-
-            similarities = \
-                model(
-                    base_images=[base_image],
-                    target_images=[target_image],
+        if model_file in UNIFIED_MODELS:
+            # Embed every unique test image once, then score the pairs.
+            image_files: List[str] = []
+            for base_image_file, target_image_file in TEST_IMAGES:
+                for image_file in [base_image_file, target_image_file]:
+                    if image_file not in image_files:
+                        image_files.append(image_file)
+            embeddings = \
+                model.embed(
+                    images=[cv2.imread(image_file) for image_file in image_files],
                 )
-            sims.append(f'{float(similarities):.3f}')
-        md_str = md_str + f"|{model_file}|{sims[0]}|{sims[1]}|{sims[2]}|{sims[3]}|{sims[4]}|{sims[5]}|\n"
+
+            def pair_sims(embs: np.ndarray) -> List[str]:
+                embedding_by_file: Dict[str, np.ndarray] = {
+                    image_file: embedding \
+                        for image_file, embedding in zip(image_files, embs)
+                }
+                return [
+                    f'{float(embedding_by_file[b] @ embedding_by_file[t]):.3f}' \
+                        for b, t in TEST_IMAGES
+                ]
+
+            sims = pair_sims(embeddings)
+            md_str = md_str + f"|{model_file}|{sims[0]}|{sims[1]}|{sims[2]}|{sims[3]}|{sims[4]}|{sims[5]}|\n"
+        else:
+            sims: List[str] = []
+            for base_image_file, target_image_file in TEST_IMAGES:
+                base_image: np.ndarray = cv2.imread(base_image_file)
+                target_image: np.ndarray = cv2.imread(target_image_file)
+
+                similarities = \
+                    model(
+                        base_images=[base_image],
+                        target_images=[target_image],
+                    )
+                sims.append(f'{float(np.squeeze(similarities)):.3f}')
+            md_str = md_str + f"|{model_file}|{sims[0]}|{sims[1]}|{sims[2]}|{sims[3]}|{sims[4]}|{sims[5]}|\n"
     print(md_str)
 
 if __name__ == "__main__":
