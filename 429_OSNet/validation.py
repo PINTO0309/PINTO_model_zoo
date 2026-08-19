@@ -72,20 +72,20 @@ MODELS = [
 #   Input: images [N, 3, 256, 128], RGB, [0, 1] scaling, mean=0.5, std=0.5
 #   Output: embeddings [N, D] (L2 normalized)
 UNIFIED_MODELS = [
-    "osnet_x1_0_p_unified_n.onnx",
+    "osnet_ain_x1_0_p_unified_aug_n.onnx",
     "personvit_vitb16_ain_unified_aug_n.onnx",
     "personvit_vits16_ain_unified_aug_n.onnx",
 ]
 
-# NOTE: the OSNet unified model outputs embeddings compressed into a narrow
-# cosine cone (different-person pairs still score ~0.7), so read its row by
-# the same/different ORDERING, not by absolute values - thresholds tuned for
-# the other models do not transfer. In deployment the cone is expanded with
-# embedding whitening, e' = normalize((e - mu) / sd), where mu/sd are running
-# statistics over a large multi-identity pool and the decision thresholds are
-# re-derived afterwards (ptrack exp050/exp060). The six test crops here span
-# only two identities - far too few for those statistics - so no whitening is
-# applied in this script.
+# NOTE: the -ain variants keep InstanceNormalization at inference (style
+# normalization at runtime), so their raw cosine is usable on cross-camera
+# crops like the test images here. On same-camera video pools the OSNet
+# unified family still compresses into a narrow cosine cone (different-person
+# p50 ~0.7); deployments like ptrack expand it with embedding whitening,
+# e' = normalize((e - mu) / sd), using running multi-identity pool statistics
+# and re-derived thresholds (ptrack exp050/exp060). The six test crops here
+# span only two identities - far too few for those statistics - so no
+# whitening is applied in this script.
 
 # [base_image_file, target_image_file]
 TEST_IMAGES = [

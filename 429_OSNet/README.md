@@ -13,7 +13,7 @@ Torchreid is a library for deep-learning person re-identification, written in Py
 ## 3. Code snippet for calculating `Cosine similarity` (`COS similarity`) from feature vectors
 
   `Cosine similarity` is calculated by dividing the inner product of two vectors by the product of their norms. However, since the vectors here are already normalized, simply computing the inner product results in the cosine similarity.
-  
+
   ```python
   import torch
   import torch.nn.functional as F
@@ -99,8 +99,8 @@ python validation.py
 |x1_0_imagenet|0.589|0.554|0.553|0.520|0.693|0.644|
 |x1_0_market_256x128_amsgrad_ep150_stp60_lr0|0.349|0.514|0.506|0.746|0.882|0.801|
 |x1_0_msmt17_256x128_amsgrad_ep150_stp60_lr0|0.438|0.438|0.447|0.526|0.655|0.638|
-|x1_0_msmt17_combineall_256x128_amsgrad_ep150_stp60_lr0|**0.341**|**0.285**|**0.265**|**0.476**|**0.686**|**0.504**|
-|osnet_x1_0_p_unified_n (≧0.80)|0.752|0.658|0.652|0.869|0.898|0.870|
+|x1_0_msmt17_combineall_256x128_amsgrad_ep150_stp60_lr0|0.341|0.285|0.265|0.476|0.686|0.504|
+|osnet_ain_x1_0_p_unified_aug_n (≧0.40)|**0.314**|**0.145**|**0.181**|**0.444**|**0.668**|**0.573**|
 |**4. resnet50**|||||||
 |fc512_msmt_xent|0.821|0.808|0.779|0.835|0.859|0.890|
 |msmt17_combineall_256x128_amsgrad_ep150_stp60_lr0|**0.418**|**0.373**|**0.330**|**0.593**|**0.810**|**0.752**|
