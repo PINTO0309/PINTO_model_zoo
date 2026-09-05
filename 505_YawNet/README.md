@@ -48,23 +48,23 @@ The dataset build produces detailed analysis plots under `data/yawpose/`. The sn
 
 **Yaw distribution (10° bins, stacked by source)** — `scripts/plot_yaw_distribution.py`. Full-circle coverage of the final 42,135 cleaned labels. On top of the original frontal-heavy sources (s001–s003), the balancing batches fill the rear hemisphere (s004), reinforce the hard rear 3/4-view ranges 120°–180° / 210°–270° (s005) and fill the 100°–120° valley (s006).
 
-![yawpose yaw distribution](docs/images/yaw_hist_bar.png)
+<img width="2100" height="750" alt="image" src="https://github.com/user-attachments/assets/4834bbbc-6a26-44e7-8a44-7dff895768a1" />
 
 **Yaw distribution (polar form)** — the same histogram on a circle: no direction around the full 360° is left empty, with the frontal peak (330°–30°) coming from the original sources.
 
-![yawpose yaw distribution (polar)](docs/images/yaw_hist_polar.png)
+<img width="1200" height="1200" alt="image" src="https://github.com/user-attachments/assets/4998b6b4-d226-4ea3-a533-0473c6f51b07" />
 
 **Yaw / pitch / roll distributions** — `scripts/plot_ypr_distribution.py`. Pitch (generation intent where available, sixdrepnet360 measurement otherwise) spans roughly ±120° including extreme upward/downward views; roll (sixdrepnet360 measurement; the generation intent is 0 for all sources) concentrates near 0.
 
-![yawpose yaw / pitch / roll distributions](docs/images/ypr_hist.png)
+<img width="2100" height="1800" alt="image" src="https://github.com/user-attachments/assets/f68126d4-f3bd-4be4-a666-2d443add9888" />
 
 **Projected distribution after planned additions** — `scripts/plan_augmentation.py` + `scripts/plot_projected_distribution.py`. The design tool for each balancing batch: hatched areas show the planned samples needed to raise every 10° bin to the target floor, before a generation batch is ordered.
 
-![yawpose projected yaw distribution](docs/images/yaw_hist_bar_projected.png)
+<img width="2100" height="750" alt="image" src="https://github.com/user-attachments/assets/beb3ddb4-48cd-4648-9214-068b7620c0a4" />
 
 **Full-range yaw evaluation vs SemiUHPE** — `scripts/eval_semiuhpe.py`. SemiUHPE's published weights evaluated on the same val split next to the distilled students, including per-rear-bin MAE (see §4 for the caveats on these numbers). Note that this comparison is heavily stacked against SemiUHPE and should not be read as a straightforward ranking: SemiUHPE is trained only on public datasets and has never seen anything like the extremely difficult, purely synthetic yawpose data (full-circle yaw including rear views, extreme pitch, label conventions aligned with our own pipeline), so the table says "our models fit our own domain" rather than "our models are better in general".
 
-![full-range yaw evaluation on the yawpose val set](docs/images/eval_semiuhpe_table.png)
+<img width="1598" height="833" alt="image" src="https://github.com/user-attachments/assets/5b12c6a4-bf8b-4eb4-b221-f1d95f7c46f2" />
 
 ## 4. Models (parameter counts, compute and reference accuracy)
 
