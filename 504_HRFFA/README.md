@@ -13,8 +13,8 @@ A training, distillation and ONNX deployment pipeline for **whole-head face alig
   https://github.com/PINTO0309/High-Angle_Robust_Fast_FaceAlignment
 
 <p align="center">
-  <img src="history/assets/050/teacher_clean_v3_lookup_yawpitchroll_3x3.jpg" width="46%" alt="teacher clean_v3: extreme pitch/yaw tiles with roll 0..320 deg">
-  <img src="history/assets/050/student_vitt256_pitch_extremes_roll_3x3.jpg" width="46%" alt="student vitt-256: measured pitch extremes with roll">
+  <img width="46%" alt="image" src="https://github.com/user-attachments/assets/4ded0896-bf84-4319-9357-e25f6fd1807b" />
+  <img width="46%" alt="image" src="https://github.com/user-attachments/assets/c63c4212-f62c-4f8b-a9fb-19074eb56cc7" />
 </p>
 
 <p align="center"><sub>Left: teacher vitl-320 on nine looking-up × profile tiles with a roll of 0–320° composited onto each tile.<br>Right: student vitt-256 on measured pitch extremes (+86° to −89°) with roll. Predictions only.</sub></p>
