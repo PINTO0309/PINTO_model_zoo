@@ -227,6 +227,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |482|UHD|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/482_UHD)|||||||||||⚫|64x64, Object Detection, Human Detection|
 |485|DEIMv2-Wholebody40|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/485_DEIMv2-Wholebody40)|||||||||||⚫|40 classes|
 |489|489_Glasses-Detector|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/489_Glasses-Detector)|||||||||||⚫|glasses|
+
 ### 3. 3D Object Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -236,6 +237,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |263|EgoNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/263_EgoNet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫||
 |321|DID-M3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/321_DID-M3D)|||||||||||⚫||
 |363|YOLO-6D-Pose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/363_YOLO-6D-Pose)|⚫||||||||⚫||⚫|Texas Instruments ver, PINTO Special ver|
+
 ### 4. 2D/3D Face Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -279,6 +281,9 @@ I have been working on quantization of various models as a hobby, but I have ski
 |436|Peppa_Pig_Face_Landmark|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/436_Peppa_Pig_Face_Landmark)|||||||||||⚫|Face Alignment,128x128,256x256|
 |437|PIPNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/437_PIPNet)|||||||||||⚫|Face Alignment,256x256|
 |443|Opal23_HeadPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/443_Opal23_HeadPose)|||||||||||⚫|6D HeadPose, FullRange, 128x128|
+|504|HRFFA|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/504_HRFFA)|||||||||||⚫|Face Alignment|
+|505|YawNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/505_YawNet)|||||||||||⚫|Head Pose Estimation|
+
 ### 5. 2D/3D Hand Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -288,6 +293,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |403|trt_pose_hand|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/)|||||||||||⚫|2D|
 |420|Gold-YOLO-Hand|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/420_Gold-YOLO-Hand)|||||||||||⚫|2D|
 |438|PeCLR|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/438_PeCLR)|||||||||||⚫|2D+3D|
+
 ### 6. 2D/3D Human/Animal Pose Estimation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -318,6 +324,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |412|pytorch_cpn|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/412_pytorch_cpn)|⚫|⚫|||||||||⚫|2D|
 |427|RTMPose_Hand|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/427_RTMPose_Hand)|||||||||||⚫|2D|
 |440|ViTPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/440_ViTPose)|||||||||||⚫|2D|
+
 ### 7. Depth Estimation from Monocular/Stereo Images
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -373,6 +380,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |397|MiDaSv3.1|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/397_MiDaSv3.1)|||||||||||⚫|Mono|
 |415|High-frequency-Stereo-Matching-Network|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/415_High-frequency-Stereo-Matching-Network)|||||||||||⚫|Stereo|
 |439|Depth-Anything|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/439_Depth-Anything)|||||||||||⚫|Mono|
+
 ### 8. Semantic Segmentation
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -419,11 +427,13 @@ I have been working on quantization of various models as a hobby, but I have ski
 |467|Human_Parsing|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/467_Human_Parsing)|||||||||||⚫||
 |470|RHIS|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/470_RHIS)|||||||||||⚫|UNet+UNet|
 |489|489_Glasses-Detector|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/489_Glasses-Detector)|||||||||||⚫|glasses|
+
 ### 9. Anomaly Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |005|One_Class_Anomaly_Detection|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/005_one_class_anomaly_detection)|⚫||⚫|⚫|⚫|||||||
 |099|Efficientnet_Anomaly_Detection_Segmentation|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/099_efficientnet_anomaly_detection_segmentation)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
+
 ### 10. Artistic
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -438,6 +448,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |113|Anime2Sketch|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/113_Anime2Sketch)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |161|EigenGAN-Tensorflow|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/161_EigenGAN-Tensorflow)|⚫|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫|Anime,CelebA|
 |193|CoCosNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/193_CoCosNet)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫||⚫|RGB,256x256|
+
 ### 11. Super Resolution
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -523,6 +534,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |411|UDR-S2Former_deraining|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/411_UDR-S2Former_deraining)|||||||||||⚫|DeRain|
 |418|Diffusion-Low-Light|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/418_Diffusion-Low-Light)|⚫|⚫|||||||||⚫|Diffusion, Low-light Image Enhancement|
 |469|Face_Deblurring|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/469_Face_Deblurring)|||||||||||⚫|64x64, HxW|
+
 ### 12. Sound Classifier
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -534,24 +546,28 @@ I have been working on quantization of various models as a hobby, but I have ski
 |177|BirdNET-Lite|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/177_BirdNET-Lite)|⚫|⚫|⚫||⚫|⚫||||⚫||non-flex|
 |381|Whisper|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/381_Whisper)||||||||||⚫|||
 |382|Light-SERNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/382_Light-SERNet)|⚫|⚫|⚫||||||||||
+
 ### 13. Natural Language Processing
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |048|Mobile_BERT|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/048_mobile_bert)|⚫|⚫|||⚫|⚫|⚫|⚫||⚫||
 |121|GPT2/DistillGPT2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/121_GPT2_DistillGPT2)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |122|DistillBert|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/122_DistillBert)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
+
 ### 14. Text Recognition
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |052|Handwritten_Text_Recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/052_Handwritten_Text_Recognition)|⚫|⚫|||⚫|||||||
 |055|Handwritten_Japanese_Recognition|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/055_Handwritten_Japanese_Recognition)|⚫|⚫|||⚫|⚫|⚫|⚫|⚫|⚫||
 |093|ocr_japanese|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/093_ocr_japanese)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫|120x160|
+
 ### 15. Action Recognition
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |092|weld-porosity-detection-0001|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/092_weld-porosity-detection-0001)|⚫|⚫|⚫|⚫||⚫|⚫|⚫||⚫|⚫||
 |247|PoseC3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/247_PoseC3D)|||||||||||⚫|Skeleton-based/FineGYM,NTU60_XSub,NTU120_XSub,UCF101,HMDB51/1x20x48x64x64|
 |248|MS-G3D|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/248_MS-G3D)|||||||||||⚫|Skeleton-based/Kinetics,NTU60,NTU120/1x3xTx25x2|
+
 ### 16. Inpainting
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
@@ -559,15 +575,18 @@ I have been working on quantization of various models as a hobby, but I have ski
 |163|MST_inpainting|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/163_MST_inpainting)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫||⚫||
 |273|OPN(Onion-Peel Networks)|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/273_OPN)|||||||||||⚫||
 |274|DeepFillv2|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/274_DeepFillv2)|⚫|⚫|||⚫|⚫|⚫||||⚫||
+
 ### 17. GAN
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |105|MobileStyleGAN|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/105_MobileStyleGAN)|⚫|⚫|⚫||⚫|⚫|⚫|⚫|⚫|⚫||
 |310|attentive-gan-derainnet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/310_attentive-gan-derainnet)|⚫|⚫|⚫||⚫|⚫|⚫|⚫||⚫|DeRain/180x320,240x320,240x360,320x480,360x640,480x640,720x1280|
+
 ### 18. Transformer
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
 |127|dino|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/127_dino)|⚫|⚫|||⚫|⚫|⚫|⚫||⚫|experimental,dino_deits8/dino_deits16|
+
 ### 19. Others
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
 |:-|:-|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-|
