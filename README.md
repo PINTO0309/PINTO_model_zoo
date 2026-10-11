@@ -283,6 +283,7 @@ I have been working on quantization of various models as a hobby, but I have ski
 |443|Opal23_HeadPose|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/443_Opal23_HeadPose)|||||||||||⚫|6D HeadPose, FullRange, 128x128|
 |504|HRFFA|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/504_HRFFA)|||||||||||⚫|Face Alignment|
 |505|YawNet|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/505_YawNet)|||||||||||⚫|Head Pose Estimation|
+|506|HFHPE|[■■■](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/506_HFHPE)|||||||||||⚫|6D Head Pose Estimation|
 
 ### 5. 2D/3D Hand Detection
 |No.|Model Name|Link|FP32|FP16|INT8|TPU|DQ|WQ|OV|CM|TFJS|TF-TRT|ONNX|Remarks|
