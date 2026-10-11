@@ -28,6 +28,12 @@ A training, distillation and ONNX deployment pipeline for **one-pass yaw / pitch
 
   https://github.com/user-attachments/assets/297b3d26-586a-4162-b722-e306480f143f
 
+- Comparison of behavior with implementations from previous papers.
+
+  |6DRepNet360<br>Contains non-commercial data contamination|HFHPE<br>No non-commercial data contamination|
+  |:-:|:-:|
+  |<img width="360" height="270" alt="image" src="https://github.com/user-attachments/assets/2f2ce544-6424-43fe-8a66-0d1e3337168e" />|<img width="360" height="270" alt="image" src="https://github.com/user-attachments/assets/c0094d29-4d6d-4fdf-ac05-00cd8d8ba62d" />|
+
 - ELP-USB500W05G-BL170 (Fisheye) + Tested in an ultra-low-lux environment. Under such adverse conditions, there are too few cues for yaw, causing the system to fail.
 
   <img width="640" height="480" alt="HFHPE ONNX demo_screenshot_10 10 2026" src="https://github.com/user-attachments/assets/6f0458e8-7e95-4ccd-b987-bb51f2d71eb6" />
