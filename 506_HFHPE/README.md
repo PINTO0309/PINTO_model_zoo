@@ -38,9 +38,9 @@ A training, distillation and ONNX deployment pipeline for **one-pass yaw / pitch
 
   <img width="640" height="480" alt="HFHPE ONNX demo_screenshot_10 10 2026" src="https://github.com/user-attachments/assets/6f0458e8-7e95-4ccd-b987-bb51f2d71eb6" />
 
-- VGA USB cam + Exposure time: 205 ms. The pitch is becoming quite unstable. It appears necessary to strengthen the brightness augmentation applied to the training data.
+- VGA USB cam + Exposure time: 205 ms. The test was conducted with all lights turned off, except for the display. Ambient light from the room's windows was completely blocked out using blackout curtains.
 
-  https://github.com/user-attachments/assets/e3c42c74-5f44-42c2-85a5-95729040c338
+  https://github.com/user-attachments/assets/4982db26-7159-47f6-bdc2-2a93336ba703
 
   |Actual brightness|Exposure time: 205 ms|
   |:-:|:-:|
