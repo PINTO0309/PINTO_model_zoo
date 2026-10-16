@@ -20,6 +20,12 @@ A training, distillation and ONNX deployment pipeline for **one-pass yaw / pitch
 
   https://github.com/user-attachments/assets/145bd7ce-e9a9-4e54-b5dc-90e9bc217bb1
 
+- Comparison of behavior with implementations from previous papers.
+
+  |6DRepNet360<br>Contains non-commercial data contamination|HFHPE<br>No non-commercial data contamination|
+  |:-:|:-:|
+  |<img width="360" height="270" alt="image" src="https://github.com/user-attachments/assets/2f2ce544-6424-43fe-8a66-0d1e3337168e" />|<img width="360" height="270" alt="image" src="https://github.com/user-attachments/assets/c0094d29-4d6d-4fdf-ac05-00cd8d8ba62d" />|
+
 - ELP-USB500W05G-BL170 (Fisheye). Tested under brutal conditions: worst-case exposure, intense backlight, and a head size of around 20x20 pixels.
   - ELP cameras have very poor automatic exposure adjustment; consequently, if there are areas with high light levels in the scene, areas with low light levels become extremely dark.
   - The color quality isn't as good as that of the cheap USB camera I bought for $10 five years ago; the image has an overall yellowish tint.
@@ -27,12 +33,6 @@ A training, distillation and ONNX deployment pipeline for **one-pass yaw / pitch
   https://www.amazon.co.jp/dp/B01DEWOOUM
 
   https://github.com/user-attachments/assets/297b3d26-586a-4162-b722-e306480f143f
-
-- Comparison of behavior with implementations from previous papers.
-
-  |6DRepNet360<br>Contains non-commercial data contamination|HFHPE<br>No non-commercial data contamination|
-  |:-:|:-:|
-  |<img width="360" height="270" alt="image" src="https://github.com/user-attachments/assets/2f2ce544-6424-43fe-8a66-0d1e3337168e" />|<img width="360" height="270" alt="image" src="https://github.com/user-attachments/assets/c0094d29-4d6d-4fdf-ac05-00cd8d8ba62d" />|
 
 - ELP-USB500W05G-BL170 (Fisheye) + Tested in an ultra-low-lux environment. Under such adverse conditions, there are too few cues for yaw, causing the system to fail.
 
@@ -50,6 +50,8 @@ A training, distillation and ONNX deployment pipeline for **one-pass yaw / pitch
 
   <img width="640" alt="sheet" src="https://github.com/user-attachments/assets/684efbed-1bd1-4288-88b6-f3e2d7ed3b9e" />
 
+  <img width="640" alt="image" src="https://github.com/user-attachments/assets/4dbae4b8-d1bc-48dd-9e15-0007b838af98" />
+
 ## 1. Results at a glance
 
 Validation MAAE (mean absolute angular error, degrees, lower is better) of the current generation (all four bodies retrained). Params and GMACs are counted on the exported ONNX graphs (`scripts/count_macs_onnx.py`; GFLOPs = 2 × GMACs). CPU ms = average latency of the batch-1 graph on an i9-10900K with onnxruntime 1.22 CPU EP, measured with [sit4onnx](https://github.com/PINTO0309/sit4onnx).
@@ -62,25 +64,79 @@ This is a benchmark based on the SynthYawPitchPose dataset; it does not utilize 
 
 | Body | Backbone | Input | Params<br>(M) | GMACs<br>GFLOPs | CPU<br>(ms) | MAAE<br>yaw | <br>pitch |
 |---|---|--:|--:|--:|--:|--:|--:|
-| dinov3-320 | ViT-L/16 | 320x320 | 304.2 | 130.7<br>261.4 | 352 | 0.29 | 0.23 |
-| [vitt-128](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/vitt_distill_128_yp_unified_v11.tar.gz) | ViT-T/16 | 128x128 | 5.6 | 0.374<br>0.748 | 3.3 | 0.54 | 0.50 |
-| [vitt-064](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/vitt_distill_064_yp_unified_v10.tar.gz) | ViT-T/16 | 64x64 | 5.6 | 0.094<br>0.188 | 1.8 | 0.80 | 0.70 |
-| [hgnetv2-128](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hgnetv2_distill_128_yp_unified_v10.tar.gz) | PP-HGNetV2-B0 | 128x128 | 1.9 | 0.156<br>0.312 | 1.4 | 2.09 | 1.99 |
-| [hgnetv2-064](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hgnetv2_distill_064_yp_unified_v10.tar.gz) | PP-HGNetV2-B0 | 64x64 | 1.9 | 0.039<br>0.078 | 0.7 | 2.60 | 2.13 |
-| [yawnet-128](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/yawnet_distill_128_yp_unified_v10.tar.gz) | MBConv | 128x128 | 0.76 | 0.050<br>0.101 | 1.1 | 5.47 | 7.69 |
-| [yawnet-064](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/yawnet_distill_064_yp_unified_v10.tar.gz) | MBConv | 64x64 | 0.76 | 0.013<br>0.026 | 0.7 | 5.64 | 7.55 |
+| dinov3-320 | ViT-L/16 | 320x320 | 304.2 | 130.7<br>261.4 | 352 | 0.25 | 0.21 |
+| [vitt-128](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/vitt_distill_128_yp_unified_v12.tar.gz) | ViT-T/16 | 128x128 | 5.6 | 0.374<br>0.748 | 3.3 | 0.53 | 0.49 |
+| [vitt-064](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/vitt_distill_064_yp_unified_v12.tar.gz) | ViT-T/16 | 64x64 | 5.6 | 0.094<br>0.188 | 1.8 | 0.76 | 0.67 |
+| [hgnetv2-128](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hgnetv2_distill_128_yp_unified_v12.tar.gz) | PP-HGNetV2-B0 | 128x128 | 1.9 | 0.156<br>0.312 | 1.4 | 1.83 | 1.71 |
+| [hgnetv2-064](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hgnetv2_distill_064_yp_unified_v12.tar.gz) | PP-HGNetV2-B0 | 64x64 | 1.9 | 0.039<br>0.078 | 0.7 | 2.34 | 2.02 |
+| [yawnet-128](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/yawnet_distill_128_yp_unified_v12.tar.gz) | MBConv | 128x128 | 0.76 | 0.050<br>0.101 | 1.1 | 5.22 | 7.54 |
+| [yawnet-064](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/yawnet_distill_064_yp_unified_v12.tar.gz) | MBConv | 64x64 | 0.76 | 0.013<br>0.026 | 0.7 | 5.55 | 7.55 |
 
 **Integrated one-pass HFHPE** (`hfhpe_*.onnx` = roll branch + in-graph derotation + the body above; the roll branch adds 0.77M params):
 
 | Model | Backbone | Input | Params<br>(M) | GMACs<br>GFLOPs | CPU<br>(ms) | MAAE<br>yaw | <br>pitch | <br>roll |
 |---|---|--:|--:|--:|--:|--:|--:|--:|
-| hfhpe_dinov3 | ViT-L/16 | 320x320 | 305.1 | 130.7<br>261.5 | 354 | 0.29 | 0.23 | [2.85](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hfhpe_roll_128_unified_kd_vitl_canvas3_w100.tar.gz) |
-| [hfhpe_vitt](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/vitt_distill_128_yp_unified_v11.tar.gz) | ViT-T/16 | 128x128 | 6.4 | 0.425<br>0.849 | 4.9 | 0.54 | 0.50 | [2.85](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hfhpe_roll_128_unified_kd_vitl_canvas3_w100.tar.gz) |
-| [hfhpe_vitt](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/vitt_distill_064_yp_unified_v10.tar.gz) | ViT-T/16 | 64x64 | 6.4 | 0.107<br>0.214 | 2.5 | 0.80 | 0.70 | [3.29](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hfhpe_roll_064_unified_kd_vitl_canvas3_w100.tar.gz) |
-| [hfhpe_hgnetv2](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hgnetv2_distill_128_yp_unified_v10.tar.gz) | PP-HGNetV2-B0 | 128x128 | 2.6 | 0.207<br>0.413 | 3.2 | 2.09 | 1.99 | [2.85](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hfhpe_roll_128_unified_kd_vitl_canvas3_w100.tar.gz) |
-| [hfhpe_hgnetv2](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hgnetv2_distill_064_yp_unified_v10.tar.gz) | PP-HGNetV2-B0 | 64x64 | 2.6 | 0.052<br>0.104 | 1.4 | 2.60 | 2.13 | [3.29](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hfhpe_roll_064_unified_kd_vitl_canvas3_w100.tar.gz) |
-| [hfhpe_yawnet](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/yawnet_distill_128_yp_unified_v10.tar.gz) | MBConv | 128x128 | 1.6 | 0.101<br>0.202 | 2.6 | 5.47 | 7.69 | [2.85](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hfhpe_roll_128_unified_kd_vitl_canvas3_w100.tar.gz) |
-| [hfhpe_yawnet](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/yawnet_distill_064_yp_unified_v10.tar.gz) | MBConv | 64x64 | 1.5 | 0.026<br>0.051 | 1.4 | 5.64 | 7.55 | [3.29](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hfhpe_roll_064_unified_kd_vitl_canvas3_w100.tar.gz) |
+| hfhpe_dinov3 | ViT-L/16 | 320x320 | 305.1 | 130.7<br>261.5 | 354 | 0.25 | 0.21 | [2.83](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hfhpe_roll_128_unified_kd_vitl_canvas4_w100.tar.gz) |
+| [hfhpe_vitt](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/vitt_distill_128_yp_unified_v12.tar.gz) | ViT-T/16 | 128x128 | 6.4 | 0.425<br>0.849 | 4.9 | 0.53 | 0.49 | [2.83](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hfhpe_roll_128_unified_kd_vitl_canvas4_w100.tar.gz) |
+| [hfhpe_vitt](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/vitt_distill_064_yp_unified_v12.tar.gz) | ViT-T/16 | 64x64 | 6.4 | 0.107<br>0.214 | 2.5 | 0.76 | 0.67 | [3.28](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hfhpe_roll_064_unified_kd_vitl_canvas4_w100.tar.gz) |
+| [hfhpe_hgnetv2](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hgnetv2_distill_128_yp_unified_v12.tar.gz) | PP-HGNetV2-B0 | 128x128 | 2.6 | 0.207<br>0.413 | 3.2 | 1.83 | 1.71 | [2.83](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hfhpe_roll_128_unified_kd_vitl_canvas4_w100.tar.gz) |
+| [hfhpe_hgnetv2](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hgnetv2_distill_064_yp_unified_v12.tar.gz) | PP-HGNetV2-B0 | 64x64 | 2.6 | 0.052<br>0.104 | 1.4 | 2.34 | 2.02 | [3.28](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hfhpe_roll_064_unified_kd_vitl_canvas4_w100.tar.gz) |
+| [hfhpe_yawnet](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/yawnet_distill_128_yp_unified_v12.tar.gz) | MBConv | 128x128 | 1.6 | 0.101<br>0.202 | 2.6 | 5.22 | 7.54 | [2.83](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hfhpe_roll_128_unified_kd_vitl_canvas4_w100.tar.gz) |
+| [hfhpe_yawnet](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/yawnet_distill_064_yp_unified_v12.tar.gz) | MBConv | 64x64 | 1.5 | 0.026<br>0.051 | 1.4 | 5.55 | 7.55 | [3.28](https://github.com/PINTO0309/High-Angle_Robust_Fast_Head_Pose_Estimation/releases/download/weights/hfhpe_roll_064_unified_kd_vitl_canvas4_w100.tar.gz) |
+
+**Accuracy by pose bin (body-only graphs, validation set).** MAAE in degrees, each cell is `yaw / pitch`; the bins are the ground-truth |yaw| (frontal 0° to the back of the head 180°, left and right folded together) and the ground-truth pitch. The last row is the number of validation crops per bin (`scripts/eval_pose_bins.py`).
+
+| Model | \|yaw\|<br>0–30 | <br>30–60 | <br>60–90 | <br>90–120 | <br>120–150 | <br>150–180 |
+|---|--:|--:|--:|--:|--:|--:|
+| dinov3-320 | 0.23 / 0.25 | 0.26 / 0.19 | 0.25 / 0.20 | 0.23 / 0.20 | 0.29 / 0.23 | 0.25 / 0.21 |
+| vitt-128 | 0.53 / 0.54 | 0.53 / 0.44 | 0.57 / 0.45 | 0.44 / 0.44 | 0.56 / 0.54 | 0.50 / 0.47 |
+| vitt-064 | 0.77 / 0.73 | 0.77 / 0.60 | 0.76 / 0.61 | 0.65 / 0.61 | 0.83 / 0.75 | 0.73 / 0.66 |
+| hgnetv2-128 | 2.07 / 1.94 | 1.74 / 1.61 | 1.65 / 1.74 | 1.52 / 1.51 | 2.02 / 1.78 | 1.93 / 1.62 |
+| hgnetv2-064 | 2.39 / 2.22 | 2.22 / 1.74 | 2.16 / 2.03 | 2.03 / 1.79 | 2.56 / 2.16 | 2.58 / 2.00 |
+| yawnet-128 | 3.31 / 7.39 | 6.43 / 8.32 | 5.15 / 7.16 | 5.31 / 7.04 | 5.88 / 7.86 | 5.39 / 7.88 |
+| yawnet-064 | 3.74 / 7.24 | 6.55 / 8.11 | 5.39 / 7.42 | 5.42 / 6.96 | 6.23 / 7.92 | 6.16 / 7.78 |
+| n | 789 | 434 | 1036 | 909 | 1349 | 630 |
+
+| Model | pitch<br>−120..−90 | <br>−90..−60 | <br>−60..−30 | <br>−30..0 | <br>0..30 | <br>30..60 | <br>60..90 | <br>90..120 |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|
+| dinov3-320 | 0.21 / 0.32 | 0.28 / 0.25 | 0.25 / 0.20 | 0.25 / 0.19 | 0.25 / 0.21 | 0.25 / 0.25 | 0.26 / 0.29 | 0.21 / 0.33 |
+| vitt-128 | 0.53 / 0.69 | 0.57 / 0.54 | 0.57 / 0.48 | 0.50 / 0.46 | 0.51 / 0.50 | 0.55 / 0.49 | 0.49 / 0.53 | 0.47 / 0.54 |
+| vitt-064 | 0.82 / 0.95 | 0.86 / 0.70 | 0.74 / 0.65 | 0.73 / 0.66 | 0.77 / 0.68 | 0.77 / 0.63 | 0.66 / 0.85 | 0.71 / 0.83 |
+| hgnetv2-128 | 2.08 / 2.18 | 1.90 / 1.60 | 1.84 / 1.59 | 1.79 / 1.72 | 1.82 / 1.72 | 1.72 / 1.74 | 2.35 / 2.35 | 2.16 / 2.25 |
+| hgnetv2-064 | 2.44 / 2.66 | 2.51 / 2.08 | 2.38 / 1.96 | 2.24 / 2.03 | 2.32 / 1.90 | 2.35 / 2.20 | 2.61 / 2.39 | 2.48 / 2.47 |
+| yawnet-128 | 3.21 / 9.36 | 5.36 / 8.30 | 5.39 / 8.13 | 5.13 / 7.21 | 5.32 / 6.38 | 5.33 / 9.36 | 4.76 / 9.90 | 3.45 / 7.98 |
+| yawnet-064 | 4.92 / 10.37 | 6.01 / 8.21 | 5.65 / 8.17 | 5.52 / 7.13 | 5.53 / 6.31 | 5.52 / 9.65 | 4.98 / 9.92 | 4.19 / 8.48 |
+| n | 36 | 456 | 889 | 1566 | 1471 | 537 | 129 | 63 |
+
+Observations: the ViT-based bodies are flat across the full yaw circle (side and back views cost nothing extra), and their pitch error grows only at the extreme bins beyond ±90°, which hold few samples. The MBConv student is clearly weaker outside the frontal bin for yaw and above 30° / below −30° for pitch, i.e. it is the capacity, not the pose coverage of the data, that limits the smallest model.
+
+**Style shift (body-only graphs, validation set, n=5,147):** The degradation set of HRFFA's Table 7, applied in crop pixels after the resize to the model input: mblur9 / mblur21 = linear motion blur of 9 / 21 px at 30°, warm / cool = channel gains (B,G,R = 0.8,1.0,1.2 and 1.2,1.0,0.8), gamma 0.6 / 1.6, gray, jpeg30 = JPEG quality 30. Because the degradations are applied at the input resolution their strength depends on it (a 21 px blur on a 64 px input corresponds to about 105 px at 320), so the 64 px rows are not comparable with the 128 / 320 px rows. In parentheses: change against clean (`scripts/eval_style_shift.py`).
+
+Yaw MAAE (degrees):
+
+| Model | clean | mblur9 | mblur21 | warm | cool | gamma0.6 | gamma1.6 | gray | jpeg30 |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| dinov3-320 | 0.25 | 0.26 (+4.1%) | 0.35 (+38.5%) | 0.29 (+14.3%) | 0.29 (+14.3%) | 0.26 (+3.0%) | 0.26 (+2.3%) | 0.28 (+10.0%) | 0.27 (+6.0%) |
+| vitt-128 | 0.53 | 0.60 (+14.7%) | 4.75 (+803.8%) | 0.78 (+48.8%) | 0.84 (+60.5%) | 0.61 (+16.1%) | 0.61 (+15.2%) | 0.62 (+17.5%) | 0.61 (+16.1%) |
+| vitt-064 | 0.76 | 2.06 (+172.3%) | 26.12 (+3348.2%) | 1.12 (+47.2%) | 1.25 (+64.5%) | 0.89 (+17.1%) | 0.88 (+16.8%) | 0.93 (+22.5%) | 1.14 (+50.2%) |
+| hgnetv2-128 | 1.83 | 2.70 (+47.6%) | 10.08 (+450.7%) | 2.57 (+40.4%) | 3.03 (+65.5%) | 2.12 (+15.8%) | 2.03 (+10.8%) | 2.34 (+27.7%) | 2.31 (+25.9%) |
+| hgnetv2-064 | 2.34 | 5.73 (+145.4%) | 36.63 (+1468.5%) | 3.11 (+33.4%) | 3.64 (+55.9%) | 2.63 (+12.6%) | 2.57 (+9.9%) | 2.94 (+26.0%) | 3.51 (+50.3%) |
+| yawnet-128 | 5.22 | 5.58 (+6.8%) | 14.83 (+183.8%) | 5.33 (+2.1%) | 5.64 (+8.0%) | 5.28 (+1.1%) | 5.29 (+1.2%) | 5.52 (+5.7%) | 5.44 (+4.1%) |
+| yawnet-064 | 5.55 | 6.86 (+23.6%) | 47.70 (+759.1%) | 5.72 (+3.0%) | 6.05 (+8.9%) | 5.67 (+2.2%) | 5.63 (+1.5%) | 5.97 (+7.6%) | 6.13 (+10.5%) |
+
+Pitch MAAE (degrees):
+
+| Model | clean | mblur9 | mblur21 | warm | cool | gamma0.6 | gamma1.6 | gray | jpeg30 |
+|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|
+| dinov3-320 | 0.21 | 0.22 (+3.6%) | 0.29 (+33.9%) | 0.25 (+18.8%) | 0.26 (+19.8%) | 0.22 (+3.1%) | 0.22 (+2.2%) | 0.24 (+11.6%) | 0.23 (+6.5%) |
+| vitt-128 | 0.49 | 0.55 (+13.7%) | 4.38 (+797.4%) | 0.77 (+58.9%) | 0.84 (+71.8%) | 0.56 (+15.6%) | 0.57 (+16.1%) | 0.60 (+22.5%) | 0.56 (+15.3%) |
+| vitt-064 | 0.67 | 1.95 (+190.5%) | 21.45 (+3097.6%) | 1.11 (+65.0%) | 1.22 (+81.6%) | 0.79 (+17.8%) | 0.79 (+18.1%) | 0.85 (+26.8%) | 0.99 (+47.2%) |
+| hgnetv2-128 | 1.71 | 2.63 (+53.2%) | 9.77 (+470.0%) | 2.77 (+61.7%) | 3.41 (+99.3%) | 2.05 (+19.4%) | 1.94 (+13.0%) | 2.28 (+33.0%) | 2.24 (+31.0%) |
+| hgnetv2-064 | 2.02 | 5.18 (+156.2%) | 26.53 (+1212.6%) | 3.22 (+59.2%) | 3.70 (+82.9%) | 2.34 (+15.9%) | 2.23 (+10.5%) | 2.54 (+25.9%) | 3.11 (+53.8%) |
+| yawnet-128 | 7.54 | 7.64 (+1.2%) | 14.31 (+89.7%) | 7.75 (+2.8%) | 7.91 (+4.8%) | 7.59 (+0.6%) | 7.55 (+0.1%) | 7.63 (+1.2%) | 7.63 (+1.1%) |
+| yawnet-064 | 7.55 | 8.31 (+10.2%) | 36.14 (+378.9%) | 7.80 (+3.4%) | 8.07 (+6.9%) | 7.60 (+0.7%) | 7.61 (+0.8%) | 7.73 (+2.4%) | 7.81 (+3.6%) |
+
+Observations: motion blur is the main weakness; on a 64 px input the 21 px blur spans a third of the crop, hence the extreme rows (as noted above, the degradations are applied in input pixels, so the 64 px rows are not comparable with the 128 / 320 px rows). The color-temperature shifts (warm / cool) cost the ViT-T and PP-HGNetV2 students 35–100 %, while the MBConv student moves by only a few percent; models with small absolute errors naturally show larger relative changes. Gamma, grayscale and JPEG recompression are comparatively mild for every model.
 
 **How to read these numbers (important):** the models are trained with `--unified` (train + validation merged on purpose), so the yaw/pitch values above measure how well each model fits the training distribution and **must not be compared with published benchmark results**. They are selection metrics, useful for comparing the rows against each other. The yaw/pitch columns are the same in both tables because the roll branch does not change the body; the integrated table adds the roll estimate, the derotation and their cost. The roll column is the roll branch — a YawNet w1.0 (0.77M) distilled online from a DINOv3 ViT-L/16 roll teacher trained at 320×320, run at 64×64 for the 64 px students and at 128×128 for hfhpe_dinov3 and the 128 px hfhpe_vitt / hfhpe_hgnetv2 / hfhpe_yawnet — evaluated on **wedge-free canvas rotations** of the validation crops, an honest protocol in which the four corners are filled with real context pixels instead of border replication.
 
@@ -154,6 +210,8 @@ uv sync --frozen --no-group ort --group tensorrt   # alternative: onnxruntime-gp
 - Roll-adaptation crops (optional, `--extra-data` of the roll training): any directory of upright whole-head crops with a `manifest.jsonl` (`{"image": "images/<name>.jpg", ...}` per line). Real photo collections can be converted with the preprocessing tooling in `scripts/`; their pose labels are never used as training targets.
 
 ## 5. Training, evaluation and export
+
+### 5.1 Scripts
 
 ```bash
 # Teacher (DINOv3 ViT-L/16 @320, yaw+pitch, WSD, EMA; ~7 h / 90 epochs on a 96 GB GPU)
@@ -306,30 +364,118 @@ Training logs are written to `runs/<run>/train_log.jsonl` (validation metrics pe
 
 Both checkpoints also store the full argument list (dataset roots, teacher / initial-weight paths, hyperparameters) and, for distilled students, the teacher's path and metrics. Before sharing a checkpoint, run `scripts/sanitize_checkpoint.py runs/<run>` to write a copy under `runs/public/<run>/` that keeps only the weights and the keys the loaders need; `export_onnx.py --ckpt runs/public/<run>` then produces identically named ONNX files.
 
+### 5.2 Training-time augmentation
+
+All augmentation is applied on the fly in the datasets (`scripts/yaw_dataset.py`, `scripts/roll_dataset.py`) with the functions of `scripts/augment.py`; validation uses none of it (a plain INTER_LINEAR resize, or a fixed rotation for the roll branch). The training scripts keep the defaults below.
+
+**Yaw / pitch bodies (teacher and distilled students).** All geometric terms are composed into one 3×3 projective matrix and the crop is warped exactly once (INTER_LINEAR, replicated border), following the single-warp design of HRFFA. The input is the 5 % margin square head crop.
+
+| Augmentation | Probability | Range | Label update |
+|---|---|---|---|
+| Horizontal flip | 0.5 | — | yaw → −yaw (exact), pitch unchanged |
+| Scale | always | 0.85–1.10 | none |
+| Translation | always | ±5 % of the side (x and y) | none |
+| Small in-plane roll | 0.3 | ±8° | none (small-angle approximation) |
+| Camera-rotation homography (azimuth ψ and elevation φ together) | 0.3 | ψ ±10°, φ ±12°, focal ratio 1.2 | yaw += 0.166·ψ (measured coefficient), pitch += −0.166·φ (provisional, mirrored from the yaw measurement) |
+
+The degradations below leave the labels unchanged and run in this order after the warp:
+
+| Augmentation | Probability | Details |
+|---|---|---|
+| Low-resolution jitter | 0.35 | downscale to a random side of 20 px … original, then upscale back (surveillance-camera look) |
+| Brightness / contrast / gamma | 0.8 | gain 0.6–1.4, offset ±25, gamma 0.7–1.4 |
+| Grayscale | 0.2 | — |
+| Gaussian noise | 0.3 | σ 3–12 |
+| Gaussian blur | 0.3 | kernel 3 or 5 |
+| JPEG recompression | 0.3 | quality 35–84 |
+| Motion blur | 0.2 | length 1–6 % of the side, uniform direction |
+| Random erasing | 0.25 | 1–2 rectangles of 10–28 % of the side, filled with noise or the mean color (synthetic occlusion) |
+
+During distillation the whole chain is applied once at the teacher resolution (320 px); the student sees an INTER_LINEAR downscale of that same view, so teacher and student differ only in resolution and the label updates are shared.
+
+**Roll branch.** The in-plane rotation θ ~ U[0°, 360°) is the ground truth itself. It is composed with a horizontal flip (p = 0.5, applied before the rotation), a scale of 0.85–1.10 and a translation of ±5 % into a single affine warp; on the 1.8× canvases the central 1/1.8 is cut out after the rotation, so the corners are real pixels rather than replicated borders. The same degradations as above follow (low-resolution jitter 0.35, photometric chain, motion blur 0.2, random erasing 0.25). The camera-rotation homography and the small roll are not used here. When distilling from the ViT-L roll teacher the view is rendered at the teacher resolution and area-downscaled for the student.
+
+The pitch coefficient of the camera elevation (−0.166) is a mirrored assumption from the measured yaw coefficient and is marked as provisional in the code.
+
 ## 6. ONNX demo
 
 Two-stage inference demo (adapted from the [HRFFA](https://github.com/PINTO0309/High-Angle_Robust_Fast_FaceAlignment) demo; no face alignment or YawNet stage): DEIMv2-Wholebody49 head detection → integrated HFHPE ONNX on every head crop. It draws the head boxes, a 3-axis pose overlay per head (X = red right cheek, Y = green chin, Z = blue nose), the per-head yaw/pitch/roll text, and a top-right yaw ring for the largest head (0 = facing the camera, 90 = viewer's left).
 
 ```bash
 # images
-uv run python demo/demo_hfhpe_onnx.py -i images_dir -o output_dir
+uv run python demo/demo_hfhpe_onnx.py \
+-i images_dir \
+-o output_dir
+
 # video file / camera 0
-uv run python demo/demo_hfhpe_onnx.py -v input.mp4 -o output_dir
-uv run python demo/demo_hfhpe_onnx.py -v 0 -o output_dir
-uv run python demo/demo_hfhpe_onnx.py -pm models/hfhpe_vitt_1x3x64x64.onnx -v 0 -o output_dir --head_score_threshold 0.35
-# TensorRT EP (engine cache under models/trt_cache)
-uv run --no-group ort --group tensorrt python demo/demo_hfhpe_onnx.py -v 0 -o output_dir -d tensorrt --head_score_threshold 0.70
+uv run python demo/demo_hfhpe_onnx.py \
+-v input.mp4 \
+-o output_dir
+
+uv run python demo/demo_hfhpe_onnx.py \
+-v 0 \
+-o output_dir
+
+uv run python demo/demo_hfhpe_onnx.py \
+-pm models/hfhpe_vitt_1x3x64x64.onnx \
+-v 0 \
+-o output_dir \
+--head_score_threshold 0.35
+
+# CUDA detector (default) + TensorRT pose EP (engine cache under models/trt_cache)
+uv run --no-group ort --group tensorrt python demo/demo_hfhpe_onnx.py \
+-v 0 \
+-o output_dir \
+-d tensorrt \
+--head_score_threshold 0.35
+
+# select both EPs explicitly
+uv run --no-group ort --group tensorrt python demo/demo_hfhpe_onnx.py \
+-v 0 \
+-o output_dir \
+--detector_device cuda \
+--pose_device tensorrt
+
+# CPU for both stages
+uv run python demo/demo_hfhpe_onnx.py \
+-v 0 \
+-o output_dir \
+--detector_device cpu \
+--pose_device cpu
+
+# draw bounding boxes for all non-attribute classes (pose estimation remains head-only)
+uv run python demo/demo_hfhpe_onnx.py \
+-v 0 \
+-o output_dir \
+--detect_all_classes \
+--head_score_threshold 0.35
+
 # swap the pose model
-uv run python demo/demo_hfhpe_onnx.py -pm models/hfhpe_hgnetv2_Nx3x64x64.onnx -v 0 -o output_dir
+uv run python demo/demo_hfhpe_onnx.py \
+-pm models/hfhpe_hgnetv2_Nx3x64x64.onnx \
+-v 0 \
+-o output_dir
+
 # N-batch graph of the default model (all heads of a frame in one pass)
-uv run python demo/demo_hfhpe_onnx.py -pm models/hfhpe_vitt_rollgate_Nx3x64x64.onnx -v 0 -o output_dir
+uv run python demo/demo_hfhpe_onnx.py \
+-pm models/hfhpe_vitt_rollgate_Nx3x64x64.onnx \
+-v 0 \
+-o output_dir
+
 # without the kappa gate (same I/O; always derotates by the estimated roll)
-uv run python demo/demo_hfhpe_onnx.py -pm models/hfhpe_vitt_Nx3x64x64.onnx -v 0 -o output_dir
+uv run python demo/demo_hfhpe_onnx.py \
+-pm models/hfhpe_vitt_Nx3x64x64.onnx \
+-v 0 \
+-o output_dir
 ```
 
 Defaults: detector `models/deimv2_dinov3_s_wholebody49_boxes_only.onnx`, pose `models/hfhpe_vitt_rollgate_1x3x64x64.onnx` (the κ-gated ViT-T model, fixed batch-1 graph: heads are processed one by one; N-batch graphs are also accepted and run all heads of a frame in one pass). The crop contract of section 3 (5% per-side expansion, long-side square clamped at the border, resize to S×S) is applied as-is to every head with score ≥ 0.70 (`--head_score_threshold`). Input normalization is detected per model: the pose model from its ONNX metadata (center05, or ImageNet for the dinov3 yaw/pitch-only graph), the detector from its graph (ImageNet mean/std for DINOv3-based detectors, plain /255 for HGNetV2-based ones; `--detector_norm div255|imagenet` overrides it — the training crops were built with `div255`). Keys on video / camera input: ESC = quit, `b` = head boxes, `a` = 3-axis overlay, `t` = angle text, `r` = yaw ring. `--save_raw_predictions` writes one JSON per image / frame (bbox, score, yaw/pitch/roll, κ); `--yaw_smooth_tau 0.15` smooths the ring display with a circular EMA (display only). For camera input the recording (`output.mp4`) is kept in real time: a webcam in low light extends its exposure and delivers far fewer frames per second than its nominal rate (5 to 15 fps instead of 30 on the test camera), so frames are repeated or skipped by wall-clock time instead of being written one per captured frame, which would play back fast-forwarded; the measured camera frame rate is printed at the end.
 
 The detector graph is pruned at load time to the nodes that feed `label_xyxy_score`. The `*_boxes_only.onnx` files still carry the instance-mask branch of the graphs they were derived from (only the `masks` output was removed); its `Einsum` runs over the top-K rows of class 0 (body) and receives zero-size tensors on frames without any such row, e.g. extremely dark frames, which crashes onnxruntime (CUDA EP: `CUBLAS_STATUS_INVALID_VALUE` at `/postprocessor/Einsum`, CPU EP: segmentation fault). The pruned graph produces identical `label_xyxy_score` values and runs about 5% faster.
+
+Execution providers are selected independently with `--detector_device` (default: `cuda`) and `--pose_device` (default: CUDA if available, otherwise CPU). Both accept `cpu`, `cuda`, `cuda:0` or `tensorrt`. The existing `-d` / `--device` flags are aliases for `--pose_device` and now affect only the pose estimator; use `--detector_device tensorrt --pose_device tensorrt` for TensorRT on both stages, or `--detector_device cpu --pose_device cpu` for CPU on both. TensorRT falls back to CUDA (when available), then CPU; CUDA falls back to CPU for unsupported operations. `--inference_type` and `--trt_cache_dir` apply to whichever stages use TensorRT.
+
+`--detect_all_classes` draws bounding boxes for non-attribute detector classes with a score at or above `--head_score_threshold`, except face (16), eyes (17), nose (18), mouth (19) and ears (20), whose boxes are hidden to keep the head-pose axes clear. Age (1–2), gender (3–4), head direction (8–15) and left/right subclasses (23–24, 27–28, 30–31, 33–34, 37–38, 40–41, 43–44, 46–47) are also omitted because they share their parent class's box in the [Wholebody49 annotation definition](https://github.com/PINTO0309/PINTO_model_zoo/tree/main/488_DEIMv2-Wholebody49#2-annotation). Head (7) boxes remain visible and keep their green color; other classes use a fixed palette of bright colors selected by class ID, with a black outline for visibility on light backgrounds. Pose estimation, angle overlays, the yaw ring and saved pose JSON still use only head detections (class 7). `--disable_bbox` and the `b` key hide/show all bounding boxes in this mode. Without the flag, only head boxes are drawn.
 
 ## 7. Repository layout
 
@@ -347,7 +493,8 @@ scripts/
   export_onnx.py export_hfhpe.py add_onnx_metadata.py count_macs_onnx.py
   sanitize_checkpoint.py       distribution copy of a checkpoint without the training-environment details
   # evaluation / previews
-  eval_*.py val_preview.py render_preview.py render_hfhpe_preview.py
+  eval_*.py (eval_style_shift.py / eval_pose_bins.py: the style-shift and pose-bin tables)
+  val_preview.py render_preview.py render_hfhpe_preview.py
   render_roll_preview.py render_hfhpe_roll_preview.py plot_*.py
   render_hfhpe_axes_sheet.py render_hfhpe_axes_heatmap.py   3-axis sheet of nine rotated crops and the teacher's CLS attention on the same cells
   # label auditing (mirror fixes, screening, verification)
@@ -366,6 +513,13 @@ ckpts/ models/ data/ runs/   weights, detector, datasets and training outputs (n
     |<img width="672" height="720" alt="val_preview_best" src="https://github.com/user-attachments/assets/947c747d-1792-4c64-9ac3-b594b9f20aa5" />|<img width="640" height="640" alt="preview_rotcrop" src="https://github.com/user-attachments/assets/39adf5f2-9f06-4cc8-b7a5-bc58a8a106ff" />|
 - The weights for the teacher model are distributed under the MIT License in the article below.
 - [506_HFHPE - Design of a Lightweight and Fast 6D Head Pose Estimation Model](https://note.com/pinto0309/n/n5be2ff7ec873?sub_rt=share_pw)
+- Technical explanation via video (Japanese audio, with subtitles.)
+
+  [![HFHPE Demo](https://github.com/user-attachments/assets/a0262aab-ec68-4a3d-aa54-b53cd96dcc7a)](https://youtu.be/ICwa_ed6vIM)
+
+- Technical explanation via video (English audio)
+
+  [![HFHPE Demo](https://github.com/user-attachments/assets/c1507f17-803c-4fd4-a34b-f1a8cb807b2d)](https://youtu.be/HAuE1da14vk)
 
 ## 9. License
 
