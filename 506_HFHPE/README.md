@@ -50,7 +50,13 @@ A training, distillation and ONNX deployment pipeline for **one-pass yaw / pitch
 
   <img width="640" alt="sheet" src="https://github.com/user-attachments/assets/684efbed-1bd1-4288-88b6-f3e2d7ed3b9e" />
 
+- **[October 17, 2026]** As shown in the figure below, we manually assigned ground-truth labels to approximately 1,000 low-light images of heads and performed fine-tuning for low-light conditions.
+
   <img width="640" alt="image" src="https://github.com/user-attachments/assets/4dbae4b8-d1bc-48dd-9e15-0007b838af98" />
+
+- DEIMv2-S score threshold>=0.35 + ViTT 128x128 - Illuminance variation test. CAMERA: JETAKu c33 VGA
+
+  <img width="3272" height="3268" alt="brightness_extended_5x5" src="https://github.com/user-attachments/assets/c59f6e95-6ac9-4ab9-813e-6056fe148e62" />
 
 ## 1. Results at a glance
 
