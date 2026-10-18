@@ -58,6 +58,12 @@ A training, distillation and ONNX deployment pipeline for **one-pass yaw / pitch
 
   <img width="3272" height="3268" alt="brightness_extended_5x5" src="https://github.com/user-attachments/assets/c59f6e95-6ac9-4ab9-813e-6056fe148e62" />
 
+- DEIMv2-S score threshold>=0.35 + DINOv3 320x320 - Testing using a thermal camera. CAMERA: HIKMICRO Pocket2
+  - Since the training data does not include a single image from a thermal camera, the head orientation estimation becomes highly inaccurate.
+  - Since the object detection component is functioning correctly, it is likely that the head orientation estimation model could also achieve high accuracy if fine-tuned using additional training data consisting of thermal camera footage.
+
+  https://github.com/user-attachments/assets/30357e8a-0323-409e-9b1f-7bd2014d134c
+
 ## 1. Results at a glance
 
 Validation MAAE (mean absolute angular error, degrees, lower is better) of the current generation (all four bodies retrained). Params and GMACs are counted on the exported ONNX graphs (`scripts/count_macs_onnx.py`; GFLOPs = 2 × GMACs). CPU ms = average latency of the batch-1 graph on an i9-10900K with onnxruntime 1.22 CPU EP, measured with [sit4onnx](https://github.com/PINTO0309/sit4onnx).
@@ -404,6 +410,12 @@ During distillation the whole chain is applied once at the teacher resolution (3
 The pitch coefficient of the camera elevation (−0.166) is a mirrored assumption from the measured yaw coefficient and is marked as provisional in the code.
 
 ## 6. ONNX demo
+
+Camera input (`-v 0`) requests MJPEG (`MJPG`) at 640×480, matching `simpcamcap`,
+and prints the negotiated capture format at startup. Some UVC cameras support VGA
+only in MJPEG; leaving the format unspecified can select a YUYV mode that produces
+`VIDEOIO(V4L2): select() timeout`. A failed camera read is reported as an error;
+video files still stop normally at the end of the stream.
 
 Two-stage inference demo (adapted from the [HRFFA](https://github.com/PINTO0309/High-Angle_Robust_Fast_FaceAlignment) demo; no face alignment or YawNet stage): DEIMv2-Wholebody49 head detection → integrated HFHPE ONNX on every head crop. It draws the head boxes, a 3-axis pose overlay per head (X = red right cheek, Y = green chin, Z = blue nose), the per-head yaw/pitch/roll text, and a top-right yaw ring for the largest head (0 = facing the camera, 90 = viewer's left).
 
