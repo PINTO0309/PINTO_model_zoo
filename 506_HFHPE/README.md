@@ -42,6 +42,10 @@ A training, distillation and ONNX deployment pipeline for **one-pass yaw / pitch
 
   https://github.com/user-attachments/assets/4982db26-7159-47f6-bdc2-2a93336ba703
 
+- **[October 23, 2026]** Tested with improvements to estimation stability under strong backlighting and in even darker environments. The room is completely dark, with the only light coming from the display of the PC I am using for work. At the 00:12 mark in the video, all the lights in the room are turned off.
+
+  https://github.com/user-attachments/assets/44dbddbb-1222-4608-8471-ee2c35ea4e72
+
   |Actual brightness|Exposure time: 205 ms|
   |:-:|:-:|
   |<img width="640" height="480" alt="mpv-shot0005" src="https://github.com/user-attachments/assets/bca402d9-da2a-4021-bab8-92191098876c" />|<img width="640" height="480" alt="mpv-shot0006" src="https://github.com/user-attachments/assets/17bac940-66db-4b82-bd9a-7082c2d85cb9" />|
@@ -59,10 +63,22 @@ A training, distillation and ONNX deployment pipeline for **one-pass yaw / pitch
   <img width="3272" height="3268" alt="brightness_extended_5x5" src="https://github.com/user-attachments/assets/c59f6e95-6ac9-4ab9-813e-6056fe148e62" />
 
 - DEIMv2-S score threshold>=0.35 + DINOv3 320x320 - Testing using a thermal camera. CAMERA: HIKMICRO Pocket2
-  - Since the training data does not include a single image from a thermal camera, the head orientation estimation becomes highly inaccurate.
-  - Since the object detection component is functioning correctly, it is likely that the head orientation estimation model could also achieve high accuracy if fine-tuned using additional training data consisting of thermal camera footage.
+  - **[October 18, 2026]**
+    - The thermal camera footage shown in the figure below was added to the training data, and fine-tuning was performed.
+    - RGB texture information that could serve as a clue—such as the eyes, nose, or mouth—has been completely lost.
+    - The weights are currently being trained; they will be made public once the training process is complete.
 
-  https://github.com/user-attachments/assets/30357e8a-0323-409e-9b1f-7bd2014d134c
+    <img width="865" height="900" alt="image" src="https://github.com/user-attachments/assets/d97b609a-d2de-487c-811d-621344ffbaaf" />
+
+    https://github.com/user-attachments/assets/bec52857-7f8e-4aa7-be9d-f4c4f1772ff0
+
+- DEIMv2-X score threshold>=0.25 + DINOv3 320x320 - Testing simultaneous recognition in multi-person videos. 640x360
+
+  https://github.com/user-attachments/assets/38bbe79c-f2ad-4652-b3d0-f49ca08331f2
+
+  https://github.com/user-attachments/assets/f71151a6-b2e6-4687-9a11-ee9d25240046
+
+  https://github.com/user-attachments/assets/1cd52805-002a-4cc3-9c00-048721d60595
 
 ## 1. Results at a glance
 
@@ -192,7 +208,7 @@ Angle convention (also written into every ONNX file as metadata):
 - **pitch**: positive = looking up, negative = seen from above; range about −120…+120°, values beyond +90° describe the back-tilt band.
 - **roll**: positive = image counter-clockwise (top of the head moves toward the viewer's left), full 360°.
 
-Crop contract (identical in training, evaluation and deployment): DEIMv2-Wholebody49 head box (class 7; score ≥ 0.30 when building the training and evaluation crops, ≥ 0.70 by default in the demo) → expand each side by 5% → square of the longer side, clamped at the image border → resize to S×S. Two files are written per export: fixed batch-1 `*_1x3xSxS.onnx` and `*_Nx3xSxS.onnx` with a symbolic batch axis, verified to agree at batch 1/2/3.
+Crop contract (identical in training, evaluation and deployment): DEIMv2-Wholebody49 head box (class 7; score ≥ 0.30 when building the training and evaluation crops, ≥ 0.70 by default in the demo) → expand each side by 5% → square of the longer side → resize to S×S. At the image border the dataset and evaluation builds clamp the square inside the image; the demo instead keeps the head centered and fills the missing area by replicating the border pixels (`--crop_border shift` restores the clamping), because an off-center head lets a neighbor's head take the crop center in crowded frames. Two files are written per export: fixed batch-1 `*_1x3xSxS.onnx` and `*_Nx3xSxS.onnx` with a symbolic batch axis, verified to agree at batch 1/2/3.
 
 ## 4. Setup
 
@@ -487,7 +503,7 @@ uv run python demo/demo_hfhpe_onnx.py \
 -o output_dir
 ```
 
-Defaults: detector `models/deimv2_dinov3_s_wholebody49_boxes_only.onnx`, pose `models/hfhpe_vitt_rollgate_1x3x64x64.onnx` (the κ-gated ViT-T model, fixed batch-1 graph: heads are processed one by one; N-batch graphs are also accepted and run all heads of a frame in one pass). The crop contract of section 3 (5% per-side expansion, long-side square clamped at the border, resize to S×S) is applied as-is to every head with score ≥ 0.70 (`--head_score_threshold`). Input normalization is detected per model: the pose model from its ONNX metadata (center05, or ImageNet for the dinov3 yaw/pitch-only graph), the detector from its graph (ImageNet mean/std for DINOv3-based detectors, plain /255 for HGNetV2-based ones; `--detector_norm div255|imagenet` overrides it — the training crops were built with `div255`). Keys on video / camera input: ESC = quit, `b` = head boxes, `a` = 3-axis overlay, `t` = angle text, `r` = yaw ring. `--save_raw_predictions` writes one JSON per image / frame (bbox, score, yaw/pitch/roll, κ); `--yaw_smooth_tau 0.15` smooths the ring display with a circular EMA (display only). For camera input the recording (`output.mp4`) is kept in real time: a webcam in low light extends its exposure and delivers far fewer frames per second than its nominal rate (5 to 15 fps instead of 30 on the test camera), so frames are repeated or skipped by wall-clock time instead of being written one per captured frame, which would play back fast-forwarded; the measured camera frame rate is printed at the end.
+Defaults: detector `models/deimv2_dinov3_s_wholebody49_boxes_only.onnx`, pose `models/hfhpe_vitt_rollgate_1x3x64x64.onnx` (the κ-gated ViT-T model, fixed batch-1 graph: heads are processed one by one; N-batch graphs are also accepted and run all heads of a frame in one pass). The crop contract of section 3 (5% per-side expansion, long-side square, resize to S×S) is applied to every head with score ≥ 0.70 (`--head_score_threshold`); where the square leaves the frame, the head stays centered and the outside is filled with replicated border pixels (`--crop_border shift` reverts to shifting the square inside the frame). Input normalization is detected per model: the pose model from its ONNX metadata (center05, or ImageNet for the dinov3 yaw/pitch-only graph), the detector from its graph (ImageNet mean/std for DINOv3-based detectors, plain /255 for HGNetV2-based ones; `--detector_norm div255|imagenet` overrides it — the training crops were built with `div255`). Keys on video / camera input: ESC = quit, `b` = head boxes, `a` = 3-axis overlay, `t` = angle text, `r` = yaw ring. `--save_raw_predictions` writes one JSON per image / frame (bbox, score, yaw/pitch/roll, κ); `--yaw_smooth_tau 0.15` smooths the ring display with a circular EMA (display only). For camera input the recording (`output.mp4`) is kept in real time: a webcam in low light extends its exposure and delivers far fewer frames per second than its nominal rate (5 to 15 fps instead of 30 on the test camera), so frames are repeated or skipped by wall-clock time instead of being written one per captured frame, which would play back fast-forwarded; the measured camera frame rate is printed at the end.
 
 The detector graph is pruned at load time to the nodes that feed `label_xyxy_score`. The `*_boxes_only.onnx` files still carry the instance-mask branch of the graphs they were derived from (only the `masks` output was removed); its `Einsum` runs over the top-K rows of class 0 (body) and receives zero-size tensors on frames without any such row, e.g. extremely dark frames, which crashes onnxruntime (CUDA EP: `CUBLAS_STATUS_INVALID_VALUE` at `/postprocessor/Einsum`, CPU EP: segmentation fault). The pruned graph produces identical `label_xyxy_score` values and runs about 5% faster.
 
